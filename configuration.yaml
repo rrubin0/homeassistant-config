@@ -1,0 +1,26 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude_loc_home
+  longitude: !secret longitude_loc_home
+  elevation: 387
+  unit_system: imperial
+  time_zone: America/Phoenix
+  packages: !include_dir_named packages
+
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
+
+config:
+#hassio:
+#conversation:
+#discovery:
+
+sun:
+#updater:
+history:
+
+alexa:
+#python_script:
+group: !include groups.yaml
+#automation: !include automations.yaml

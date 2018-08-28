@@ -1,0 +1,11 @@
+*
+!*.yaml
+!*.md
+!.gitignore
+secrets.yaml
+known_devices.yaml
+proximity.yaml
+ip_bans.yaml
+zwave_device_config.yaml
+ftvconfig.yaml
+entity_registry.yaml
