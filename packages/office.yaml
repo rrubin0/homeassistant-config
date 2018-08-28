@@ -1,0 +1,523 @@
+#####################################################################
+#    @package          :     office
+#    @description      :     office and associated automations, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'office'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Light
+    ################################################
+    light.office_desk_lamp:
+      friendly_name: "Desk Lamp"
+      icon: mdi:lamp
+
+    ################################################
+    ## Media Player
+    ################################################
+#    media_player.kodi_office:
+#      <<: *contained
+#      friendly_name: "Office Kodi"
+
+    ################################################
+    ## Sensor Node
+    ################################################
+    sensor.sn1_humidity:
+      friendly_name: "Humidor Humidity"
+      icon: mdi:water-percent
+
+    sensor.sn1_temperature:
+      friendly_name: "Humidor Temperature"
+      icon: mdi:thermometer
+
+    sensor.sn1_pir:
+      <<: *contained
+      friendly_name: "Humidor Motion"
+      icon: mdi:run
+
+    sensor.sn1_ldr:
+      <<: *contained
+      friendly_name: "Humidor Light Sensor"
+      icon: mdi:white-balance-sunny
+
+    light.sn1_led:
+      <<: *contained
+      friendly_name: "Humidor Indicator Light"
+      icon: mdi:alarm-light
+
+    ################################################
+    ## Script
+    ################################################
+    script.desk_lamp:
+      <<: *contained
+      friendly_name: "Desk Lamp Test"
+      icon: mdi:play-circle
+
+
+#####################################################################
+###  Group
+#####################################################################
+group:
+  Office:
+    control: hidden
+    entities:
+      - light.office_desk_lamp
+      - input_select.rgb_light
+      - sensor.sn1_temperature
+      - sensor.sn1_humidity
+      - sensor.sn1_ldr
+      - sensor.sn1_pir
+      - light.sn1_led
+      - media_player.kodi_office
+
+
+#####################################################################
+### Media Player
+#####################################################################
+#media_player:
+#  - platform: kodi
+#    host: !secret kodi_office
+#    port: !secret kodi_port
+#    name: kodi_office
+#    username: !secret kodi_user
+#    password: !secret kodi_password
+
+
+#####################################################################
+### Input Select
+#####################################################################
+input_select:
+  ### Desk Lamp RGB Bulb
+  rgb_light:
+    name: RGB Light
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Off"
+      - "Random"
+      - "Cool"
+      - "Warm"
+      - "Warm Dim"
+      - "Red"
+      - "Blue"
+      - "Green"
+      - "Cyan"
+      - "Pink"
+      - "Violet"
+      - "Yellow"
+
+
+#####################################################################
+### Light
+#####################################################################
+light:
+  ### office desk lamp
+  - platform: flux_led
+    devices:
+      !secret office_desk_lamp_host:
+        name: office_desk_lamp
+#        protocol: ledenet
+        mode: rgbw
+
+
+  ### humidor sensor light
+  - platform: mqtt_json
+    name: "SN1 LED"
+    state_topic: "home/sensornode1"
+    command_topic: "home/sensornode1/set"
+    rgb: true
+    brightness: true
+    optimistic: false
+
+
+#####################################################################
+### Sensor
+#####################################################################
+sensor:
+  ### Humidity Sensor
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  ### Light Sensitivity
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
+
+  ### Motion Detection
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 PIR"
+    value_template: '{{ value_json.motion }}'
+
+  ### Temperature
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 Temperature"
+    unit_of_measurement: "F"
+    value_template: '{{ value_json.temperature | round(1) }}'
+
+
+#script:
+### see scripts folder
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Humidor is low - notify to refill
+  - alias: Office Humidor Low
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.sn1_humidity
+        below: 65
+
+    action:
+      - service: light.turn_on
+        entity_id: light.sn1_led
+        data:
+          brightness: 255
+          color_name: "red"
+
+      - service: notify.ios_i8plus
+        data:
+          title: "Refill Humidor"
+          message: "Humidor is {{ states.sensor.sn1_humidity.state|round }}% refill soon!"
+
+
+  ### Humidor OK - reset notification and indicator
+  - alias: Office Humidor OK
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.sn1_humidity
+        above: 66
+
+    action:
+      - service: light.turn_on
+        entity_id: light.sn1_led
+        data:
+          brightness: 255
+          color_name: "green"
+
+      - delay: '00:30:00'
+
+      - service: light.turn_off
+        entity_id: light.sn1_led
+
+
+  ### Turn off the lamp when OFF is selected
+  - alias: RGB Select Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Off"
+
+    action:
+      - service: light.turn_off
+        entity_id: light.office_desk_lamp
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### Reset input selection when lamp is turned off
+  - alias: RGB Reset Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: light.office_desk_lamp
+        from: 'on'
+        to: 'off'
+
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.rgb_light
+          option: "Off"
+
+
+  ### RGB Select Cool
+  - alias: RGB Cool
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Cool"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [255,255,255]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Warm
+  - alias: RGB Warm
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Warm"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          white_value: 255
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Warm Dim
+  - alias: RGB Warm Dim
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Warm Dim"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 25
+          white_value: 25
+
+       ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Blue
+  - alias: RGB Blue
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Blue"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [0,0,255]
+
+       ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Cyan
+  - alias: RGB Cyan
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Cyan"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [0,255,255]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Green
+  - alias: RGB Green
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Green"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [0,225,0]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Pink
+  - alias: RGB Pink
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Pink"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [255,0,255]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Red
+  - alias: RGB Red
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Red"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [255,0,0]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Violet
+  - alias: RGB Violet
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Violet"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [125,0,255]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Yellow
+  - alias: RGB Yellow
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Yellow"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          brightness: 255
+          rgb_color: [255,255,0]
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### RGB Select Random
+  - alias: random_flux_rgb
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.rgb_light
+      to: "Random"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.office_desk_lamp
+          effect: random
+
+      ### Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

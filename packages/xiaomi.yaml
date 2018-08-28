@@ -1,0 +1,202 @@
+############################################################################
+#    @package          :     Xiaomi
+#    @description      :     Xiaomi hub automations, scenes, etc.
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'xiaomi'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Light
+    ################################################
+    light.gateway_light_7811dcb7da52:
+      <<: *contained
+      friendly_name: "Alert Light"
+
+
+    ################################################
+    ## Switch
+    ################################################
+
+
+    ################################################
+    ## Sensor
+    ################################################
+    binary_sensor.switch_158d00026b8505:
+      <<: *contained
+      friendly_name: "Smart Button"
+
+    ################################################
+    ## Script
+    ################################################
+
+
+    ################################################
+    ## Automation
+    ################################################
+
+
+
+#####################################################################
+### Gateway
+#####################################################################
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac:
+      key: !secret xkey
+
+
+#####################################################################
+### Script
+#####################################################################
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Nightlight On
+  - alias: Kitchen Nightlight On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:15:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcb7da52
+          brightness: 60
+          hs_color: [180,100]
+
+
+  ### Nightlight Off
+  - alias: Kitchen Nightlight Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '00:15:00'
+
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcb7da52
+
+
+  ### Doorbell
+  - alias: Doorbell Pressed
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.ring_front_door_ding
+        to: 'on'
+
+    action:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room
+          message: "You've got a visitor at the front door."
+
+#      - service: xiaomi_aqara.play_ringtone
+#        data:
+#          gw_mac: 7811dcb7da52
+#          ringtone_id: 10
+#          ringtone_vol: 20
+
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.gateway_light_7811dcb7da52
+#          brightness: 255
+#          hs_color: [360,100]
+#
+#      - delay: '00:03:00'
+#
+#      - service: light.turn_off
+#        data:
+#          entity_id: light.gateway_light_7811dcb7da52
+
+
+  ### Smart Button Single Press
+  - alias: Smart Button Single Press
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00026b8505
+        click_type: single
+
+    action:
+      - service: timer.start
+        entity_id: timer.bedtime
+
+
+  ### Smart Button Double Press
+  - alias: Smart Button Double Press
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: click
+      event_data:
+        entity_id: binary_sensor.switch_158d00026b8505
+        click_type: double
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.bedtime
+
+
+  ### Smart Button other press examples
+#  - alias: Toggle couch light on double click
+#    trigger:
+#      platform: event
+#      event_type: click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d000xxxxxc2
+#        click_type: double
+#    action:
+#      service: switch.toggle
+#      entity_id: switch.wall_switch_right_158d000xxxxx01
+#  - alias: Let a dog bark on long press
+#    trigger:
+#      platform: event
+#      event_type: click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d000xxxxxc2
+#        click_type: long_click_press
+#    action:
+#      service: xiaomi_aqara.play_ringtone
+#      data:
+#        gw_mac: xxxxxxxxxxxx
+#        ringtone_id: 8
+#        ringtone_vol: 8
+
+

@@ -1,0 +1,321 @@
+#####################################################################
+#    @package          :     device_trackers
+#    @description      :     zones, device trackers and associated automations, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'device_trackers'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Device Trackers
+    ################################################
+    device_tracker.i8plus:
+      <<: *contained
+      friendly_name: "Rick"
+      entity_picture: /local/rick.jpg
+
+    device_tracker.mip8:
+      <<: *contained
+      friendly_name: "Megs"
+      entity_picture: /local/megs.jpg
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.ricks_office_commute:
+      <<: *contained
+      friendly_name: "Ricks Commute to Work"
+      icon: mdi:car
+
+    sensor.ricks_home_commute:
+      <<: *contained
+      friendly_name: "Ricks Commute Home"
+      icon: mdi:car
+
+    sensor.megs_work_commute:
+      <<: *contained
+      friendly_name: "Megs Commute to Work"
+      icon: mdi:car
+
+    sensor.megs_home_commute:
+      <<: *contained
+      friendly_name: "Megs Commute Home"
+      icon: mdi:car
+
+    sensor.ricks_eta_home:
+      <<: *contained
+      friendly_name: "Ricks ETA"
+      icon: mdi:timer
+
+    sensor.ricks_eta:
+      <<: *contained
+      icon: mdi:timer
+
+    sensor.megs_eta_home:
+      <<: *contained
+      friendly_name: "Megs ETA"
+      icon: mdi:timer
+
+    sensor.megs_eta:
+      <<: *contained
+      icon: mdi:timer
+
+
+    ################################################
+    ## Script
+    ################################################
+    script.find_iphone:
+      <<: *exposed
+      icon: mdi:account-location
+
+
+  ################################################
+  ## Customize Domain
+  ################################################
+  customize_domain:
+    device_tracker:
+      <<: *contained
+
+
+################################################################
+## Device Tracker
+################################################################
+device_tracker:
+  - platform: ddwrt
+    host: !secret router_ip
+    username: !secret router_user
+    password: !secret router_pass
+    track_new_devices: no
+    consider_home: 180
+
+  - platform: icloud
+    username: !secret icloud_megs
+    password: !secret icloud_megs_password
+
+
+################################################################
+##  Group
+################################################################
+group:
+  Travel Rick:
+    entities:
+      - device_tracker.i8plus
+      - sensor.i8plus_battery_level
+      - sensor.ricks_eta
+      - sensor.ricks_home_commute
+      - sensor.ricks_office_commute
+
+  Travel Megs:
+    entities:
+      - device_tracker.mip8
+      - script.find_iphone
+      - sensor.mip8_battery_level_2
+      - sensor.megs_eta
+      - sensor.megs_home_commute
+      - sensor.megs_work_commute
+
+
+################################################################
+##  Proximity
+################################################################
+proximity:
+  home:
+    ignored_zones:
+      - ricks_office
+      - megs_work
+    devices:
+      - device_tracker.mip8
+      - device_tracker.i8plus
+    tolerance: 50
+    unit_of_measurement: mi
+
+
+#####################################################################
+###  Sensor
+#####################################################################
+sensor:
+
+  - platform: google_travel_time
+    name: Ricks Office Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Home
+    destination: Office
+
+  - platform: google_travel_time
+    name: Ricks Home Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Office
+    destination: Home
+
+  - platform: google_travel_time
+    name: Megs Work Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Home
+    destination: Arete
+
+  - platform: google_travel_time
+    name: Megs Home Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Arete
+    destination: Home
+
+  - platform: google_travel_time
+    name: Megs ETA Home
+    api_key: !secret google_time_travel_api_key
+    origin: device_tracker.mip8
+    destination: Home
+
+  - platform: google_travel_time
+    name: Ricks ETA Home
+    api_key: !secret google_time_travel_api_key
+    origin: device_tracker.i8plus
+    destination: Home
+
+  - platform: template
+    sensors:
+      ricks_eta:
+        friendly_name: "Rick's ETA"
+        value_template: >-
+          {% if is_state('sensor.ricks_eta_home', '0') %}
+            Home
+          {% else %}
+            {{ states('sensor.ricks_eta_home') }}
+          {% endif %}
+        entity_id: sensor.time
+
+      megs_eta:
+        friendly_name: "Meg's ETA"
+        value_template: >-
+          {% if is_state('sensor.megs_eta_home', '0') %}
+            Home
+          {% else %}
+            {{ states('sensor.megs_eta_home') }}
+          {% endif %}
+        entity_id: sensor.time
+
+
+#####################################################################
+###  Script
+#####################################################################
+script:
+  find_iphone:
+    alias: "Find My iPhone"
+    sequence:
+    - service: device_tracker.icloud_lost_iphone
+
+  ### Away Mode Sequence
+  away:
+    sequence:
+    # lock up
+    - service: lock.lock
+
+    # turn off all lights (except porch) and devices
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.interior_lights
+        - group.exterior_lights
+        - group.downstairs_outlets
+        - group.upstairs_outlets
+
+#    - service: notify.pushbullet
+#      data:
+#        title: "Away Mode ON"
+#        target: "device/Chrome"
+#        message: "It appears nobody's home; away mode activated."
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Away Mode ON"
+        message: "Away mode is ON."
+
+
+#####################################################################
+###  Automation
+#####################################################################
+automation:
+  ### Away Mode Countdown
+  - alias: Away Mode Countdown
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 5
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: timer.start
+        entity_id: timer.away_mode
+
+      - service: notify.ios_i8plus
+        data:
+          title: "Away Detected"
+          message: "Counting down..."
+          data:
+            push:
+              category: cancelaway
+
+
+  ### Away Mode Timer Finish
+  - alias: Away Mode On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.away_mode
+
+    action:
+      - service: script.away
+
+
+  ### Away Mode Cancel
+  - alias: Away Mode Cancel
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: template
+        value_template: "{{ states('timer.away_mode') != 'idle'}}"
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.away_mode
+
+      - service: notify.ios_i8plus
+        data:
+          title: "Away Mode Cancelled"
+          message: "Away mode cancelled."
+

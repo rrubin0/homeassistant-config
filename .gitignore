@@ -1,7 +1,7 @@
 *
+!packages
+!reference
 !*.yaml
-!/packages/*.yaml
-!/reference/*.yaml
 !*.md
 !.gitignore
 secrets.yaml

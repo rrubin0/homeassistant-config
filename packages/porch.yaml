@@ -1,0 +1,63 @@
+#####################################################################
+#    @package          :     porch
+#    @description      :     porch and associated automations, scenes, etc.
+#####################################################################
+homeassistant:
+  customize:
+
+    ################################################
+    ## Group
+    ################################################
+    group.porch:
+      haaska_name: "Porch Lights"
+
+    ################################################
+    ## Switch
+    ################################################
+    switch.south_porch_lights_switch:
+      friendly_name: "South Porch Lights"
+      icon: mdi:white-balance-incandescent
+
+    switch.front_porch_lights_switch:
+      friendly_name: "Front Porch Lights"
+      icon: mdi:white-balance-incandescent
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Porch:
+    entities:
+      - switch.south_porch_lights_switch
+      - switch.front_porch_lights_switch
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+### Turn on the porch lights at sunset
+  - alias: Porch Lights On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:10:00'
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: group.porch
+
+
+  ### Turn off the porch lights
+  - alias: Porch Lights Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '-00:15:00'
+
+    action:
+      - service: homeassistant.turn_off
+        entity_id: group.porch

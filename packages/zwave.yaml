@@ -1,0 +1,37 @@
+#####################################################################
+#    @package          :     zwave
+#    @description      :     zwave configuration
+#####################################################################
+
+#####################################################################
+### ZWave
+#####################################################################
+zwave:
+  usb_path: /dev/ttyACM0
+  network_key: !secret network_key
+
+  ################################################
+  ## Domain Config
+  ################################################
+  device_config_domain:
+    light:
+      refresh_value: true
+      polling_intensity: 1
+      delay: 3
+
+    lock:
+      polling_intensity: 2
+
+    switch:
+      polling_intensity: 1
+
+  ################################################
+  ## Global Config
+  ################################################
+  device_config_glob:
+    "cover.*_level":
+      invert_openclose_buttons: true
+
+#    "zwave.somfy_unknown*":
+#      ignored: true
+

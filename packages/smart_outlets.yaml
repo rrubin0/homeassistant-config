@@ -1,0 +1,106 @@
+#####################################################################
+#    @package          :     smart_outlets
+#    @description      :     smart outlet configs
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'smart_outlets'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Switch - RF. See Broadlink package for more
+    ################################################
+    ## rf_switch_1
+    switch.switch_one:
+      friendly_name: "Upstairs Wipe Warmer"
+      assumed_state: false
+      icon: mdi:power-socket-us
+
+    ## rf_switch_2
+    switch.switch_two:
+      friendly_name: "Baby Monitor"
+      assumed_state: false
+      icon: mdi:baby-buggy
+
+    ## rf_switch_3
+    switch.switch_three:
+      friendly_name: "Downstairs Wipe Warmer"
+      assumed_state: false
+      icon: mdi:power-socket-us
+
+    ## rf_switch_4
+    switch.switch_four:
+      friendly_name: "Stairway Christmas Lights"
+      assumed_state: false
+      icon: mdi:power-socket-us
+
+    ## rf_switch_5
+    switch.switch_five:
+      friendly_name: "Christmas Tree"
+      assumed_state: false
+      icon: mdi:power-socket-us
+
+    ################################################
+    ## Switch - TP-LINK HS110
+    ################################################
+    switch.flower_lamp:
+      friendly_name: "Flower Lamp"
+      icon: mdi:power-socket-us
+
+    switch.outdoor_speakers:
+      friendly_name: "Outdoor Speakers"
+      entity_picture: /local/music.ico
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Downstairs Outlets:
+    control: hidden
+    entities:
+      # rf switch downstairs wipe warmer
+      - switch.switch_three
+      #rf switch staircase christmas lights
+      #- switch.switch_four
+      #rf switch christmas tree
+      #- switch.switch_five
+      #tplink smartplug 1 (flower lamp)
+      #- switch.flower_lamp
+      #tplink outdoor speakers
+      - switch.outdoor_speakers
+
+
+#####################################################################
+### Switch
+#####################################################################
+switch:
+  - platform: tplink
+    host: !secret smartplug_host_1
+
+  - platform: tplink
+    host: !secret smartplug_host_2
+#
+#  - platform: tplink
+#    host: !secret smartplug_host_3
+#
+#  - platform: tplink
+#    host: !secret smartplug_host_4

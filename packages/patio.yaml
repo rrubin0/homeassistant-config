@@ -1,0 +1,103 @@
+#####################################################################
+#    @package          :     patio
+#    @description      :     patio, fountains, and associated automations, scenes, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'patio'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Switch
+    ################################################
+    switch.patio_party_lights_switch:
+      friendly_name: "Christmas Lights"
+      icon: mdi:pine-tree
+
+    switch.patio_lights_switch:
+      friendly_name: "Patio Lights"
+      icon: mdi:white-balance-incandescent
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Yard:
+    control: hidden
+    entities:
+      - switch.patio_lights_switch
+      - switch.patio_party_lights_switch
+      - switch.fountains_switch
+      - switch.outdoor_speakers
+
+
+#####################################################################
+### Automation
+#####################################################################
+#automation:
+#### Turn off the Christmas Lights - Weekdays
+#  - alias: Christmas Lights Off Weekdays
+#    initial_state: 'on'
+#    trigger:
+#      platform: time
+#      at: '00:00:00'
+#
+#    condition:
+#      - condition: time
+#        weekday:
+#          - mon
+#          - tue
+#          - wed
+#          - thu
+#          - fri
+#
+#      - condition: state
+#        entity_id: switch.patio_party_lights_switch
+#        state: 'on'
+#
+#    action:
+#  # outdoor Christmas lights
+#      - service: switch.turn_off
+#        entity_id: switch.patio_party_lights_switch
+#
+#
+#### Turn off the Christmas Lights - Weekends
+#  - alias: Christmas Lights Off Weekends
+#    initial_state: 'on'
+#    trigger:
+#      platform: time
+#      at: '01:30:00'
+#
+#    condition:
+#      - condition: time
+#        weekday:
+#          - sat
+#          - sun
+#
+#      - condition: state
+#        entity_id: switch.patio_party_lights_switch
+#        state: 'on'
+#
+#    action:
+#      - service: switch.turn_off
+#        entity_id: switch.patio_party_lights_switch

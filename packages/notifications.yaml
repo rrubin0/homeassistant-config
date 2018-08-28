@@ -1,0 +1,51 @@
+#####################################################################
+#    @package          :     watchdog
+#    @description      :     watchdog notify on events
+#####################################################################
+#homeassistant:
+#  customize:
+#    ################################################
+#    ## Node Anchors
+#    ################################################
+#    package.node_anchors:
+#      customize: &customize
+#        package: 'watchdog'
+#
+#      contained: &contained
+#        <<: *customize
+#        haaska_hidden: true
+#        homebridge_hidden: true
+#
+#      exposed: &exposed
+#        <<: *customize
+#        haaska_hidden: false
+#        homebridge_hidden: false
+#
+#      hidden: &hidden
+#        <<: *contained
+#        hidden: true
+
+
+#####################################################################
+### Notify on events
+#####################################################################
+
+#####################################################################
+### Automation
+#####################################################################
+#automation:
+#  ## Send notification after home assistant has restarted
+#  - alias: Temp Notification
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      platform: homeassistant
+#      event: start
+#
+#    action:
+#
+#    - service: notify.ios_i8plus
+#      data:
+#        title: "Home Assistant Alert"
+#        message: "ttttt."
+

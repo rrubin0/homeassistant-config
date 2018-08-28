@@ -1,0 +1,105 @@
+#####################################################################
+#    @package          :     light_config
+#    @description      :     configuration for lighting
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'light_config'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Group
+    ################################################
+    group.interior_lights:
+      haaska_name: "Interior Lights"
+
+    group.exterior_lights:
+      haaska_name: "Exterior Lights"
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.time_brightness:
+      <<: *hidden
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Interior Lights:
+    entities:
+      - group.accent_lights
+      - group.mbr_lights
+      - light.foyer_lights_level
+      - light.master_bathroom
+      - light.living_room_lamp
+      - light.lr_ceiling
+      - light.entryway
+      - light.wine_room
+      - light.office_desk_lamp
+      - light.kitchen_lights_level
+      - light.dining_room_chandelier_level
+      - switch.billiards_room_lights_switch
+      - switch.downstairs_bath_lights_switch
+
+  Exterior Lights:
+    entities:
+      - switch.patio_lights_switch
+      - switch.pool_light_switch
+#      - switch.patio_party_lights_switch
+
+
+#####################################################################
+### Light
+#####################################################################
+hue:
+  bridges:
+    - host: !secret hue_host
+      allow_unreachable: true
+      allow_hue_groups: true
+
+
+################################################################
+## Sensor
+################################################################
+sensor:
+  ### Time Based Brightness
+  - platform: template
+    sensors:
+      time_brightness:
+        value_template: >-
+          {%- if now().strftime('%H%M')|int < 600 -%}
+            64
+          {%- elif now().strftime('%H%M')|int < 700 -%}
+            128
+          {%- elif now().strftime('%H%M')|int < 900 -%}
+            192
+          {%- elif now().strftime('%H%M')|int < 2000 -%}
+            255
+          {%- elif now().strftime('%H%M')|int < 2200 -%}
+            192
+          {%- elif now().strftime('%H%M')|int < 2300 -%}
+            128
+          {%- else -%}
+            64
+          {%- endif -%}
+        entity_id: sensor.time

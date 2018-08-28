@@ -1,0 +1,144 @@
+############################################################################
+#    @package          :     rf_switch_states
+#    @description      :     preserve RF switch states across restarts
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'rf_switch_states'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.rf_switch_one:
+      <<: *hidden
+
+    sensor.rf_switch_two:
+      <<: *hidden
+
+    sensor.rf_switch_three:
+      <<: *hidden
+
+    sensor.rf_switch_four:
+      <<: *hidden
+
+    sensor.rf_switch_five:
+      <<: *hidden
+
+
+#####################################################################
+#  Sensor
+#####################################################################
+sensor:
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_one"
+    name: "RF Switch One"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_two"
+    name: "RF Switch Two"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_three"
+    name: "RF Switch Three"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_four"
+    name: "RF Switch Four"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_five"
+    name: "RF Switch Five"
+    value_template: "{{ value }}"
+
+
+#####################################################################
+#  Automation - Saves Switch State to MQTT
+#####################################################################
+automation:
+  - alias: RF Switches State Save
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: switch.switch_one, switch.switch_two, switch.switch_three, switch.switch_four, switch.switch_five
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "/home/rfswitches/{{ trigger.entity_id.split('.')[1] }}"
+        retain: true
+        qos: 1
+        payload: '{{ trigger.to_state.state }}'
+
+
+#####################################################################
+# Startup event - restores states of dropdowns, and RF Switches...etc
+#####################################################################
+  - alias: RF Switch State Restore
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - delay:
+          minutes: 1
+      - service_template: >
+          {%- if states.sensor.rf_switch_one.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.switch_one
+      - service_template: >
+          {%- if states.sensor.rf_switch_two.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.switch_two
+      - service_template: >
+          {%- if states.sensor.rf_switch_three.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.switch_three
+      - service_template: >
+          {%- if states.sensor.rf_switch_four.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.switch_four
+      - service_template: >
+          {%- if states.sensor.rf_switch_five.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}
+        data:
+          entity_id: switch.switch_five

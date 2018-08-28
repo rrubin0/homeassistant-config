@@ -1,0 +1,671 @@
+#####################################################################
+#    @package          :     pool_colors
+#    @description      :     scripts used to change the pool light colors
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'pool_colors'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+#####################################################################
+### Script
+#####################################################################
+
+script:
+  #####################################################################
+  ### Pool Light - Solid Blue; Channel 8
+  pool_blue:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 2
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"
+
+  #####################################################################
+  ### Pool Light - Solid Green; Channel 9
+  pool_green:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 2
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"
+
+  #####################################################################
+  ### Pool Light - Solid Magenta; Channel 12
+  pool_magenta:
+    sequence:
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 2
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 11 - White
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 12 - Magenta
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"
+
+  #####################################################################
+  ### Pool Light - Solid Red; Channel 10
+  pool_red:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 2
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"
+
+  #####################################################################
+  ### Pool Light - Solid White; Channel 11
+  pool_white:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 2
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light_switch
+    - delay:
+        seconds: .3
+
+  ## 11 - White
+    - service: switch.turn_on
+      entity_id: switch.pool_light_switch
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"

@@ -1,0 +1,393 @@
+############################################################################
+#    @package          :     alexa
+#    @description      :     alexa intent_script for home assistant skill (needs work still)
+############################################################################
+  intent_script:
+  ## Ask Alexa to ...
+
+    ################################################
+    ## Query a sensor
+    ################################################
+    GetSensorIntent:
+      speech:
+        text: >
+          {%- if SensorType.lower() == "temperature" or SensorType.lower() == "temp"-%}
+            The average temperature downstairs is {{ states('sensor.ds_avg_temp') }} degrees and upstairs it is {{ states('sensor.us_avg_temp') }} degrees.
+          {%- elif SensorType.lower() == "humidity" -%}
+            Downstairs humidity is at {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states.sensor.upstairs_humidity.state }} percent.
+          {%- elif SensorType.lower() == "traffic" or SensorType.lower() == "commute" -%}
+            If you leave now, you're looking at about {{ states("sensor.ricks_office_commute") }} minutes to Rick's office and it should take Megs {{ states("sensor.megs_work_commute") }} minutes to get to Archway.
+          {%- elif SensorType.lower() == "front door" -%}
+            The {{ SensorType }} is {{ states("sensor.front_door_state") }} and the tamper is {{ states("sensor.front_door_tamper") }}.
+          {%- elif SensorType.lower() == "side door" -%}
+            The {{ SensorType }} is {{ states("sensor.south_door_state") }} and {{ states("lock.south_entry_locked") }} and the tamper is {{ states("sensor.south_door_tamper") }}.
+          {%- elif SensorType.lower() == "kitchen door" -%}
+            The {{ SensorType }} is {{ states("sensor.kitchen_door_state") }} and the tamper is {{ states("sensor.kitchen_door_tamper") }}.
+          {%- elif SensorType.lower() == "bathroom door" -%}
+            The {{ SensorType }} is {{ states("sensor.beach_door_state") }} and {{ states("lock.bathroom_entry_locked") }} and the tamper is {{ states("sensor.beach_door_tamper") }}.
+          {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
+            The Humidor temperature is {{ states("sensor.sn1_temperature") }} degrees and your cigars are currently stored at {{ states("sensor.sn1_humidity") }} percent humidity.
+          {%- endif -%}
+
+      card:
+        type: simple
+        title: Get {{ SensorType }} info
+        content: Tell us about the {{ SensorType }}
+
+
+    ################################################
+    ## Tell us where we are
+    ################################################
+    WhereAreWeIntent:
+      speech:
+        type: plain
+        text: >
+          {%- if is_state('device_tracker.i8plus', 'home') and
+                 is_state('device_tracker.mip8', 'home') -%}
+            You are both home safe!
+          {%- else -%}
+            Rick is at {{ states.device_tracker.i8plus.state.replace('_', ' ') }}.
+            and Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+          {% endif %}
+
+      card:
+        type: simple
+        title: Where are we?
+        content: Tell us where we are
+
+
+    ################################################
+    ## Find us
+    ################################################
+    LocateIntent:
+      speech:
+        type: plain
+        text: >
+          {%- if User.lower() == "rick" -%}
+            Rick is at {{ states.device_tracker.i8plus.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "megan" -%}
+              Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "meg" -%}
+              Meg is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "megs" -%}
+              Megs is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+          {%- else -%}
+            Sorry. I am unable to locate {{ User }} right now. Do you remember the telephone? I suggest maybe trying to call and ask.
+          {%- endif %}
+
+      card:
+        type: simple
+        title: Location
+        content: Tell us a users location
+
+
+    ################################################
+    ## Say Good Night
+    ################################################
+    GoodNightIntent:
+      action:
+        service: timer.start
+        entity_id: timer.bedtime
+
+      speech:
+        type: plain
+        text: > 
+          {{ ["Good night, sleep well. Please double check for diapers!", 
+          "Sweet Dreams! Please double check for diapers!", 
+          "See you in the morning! Please double check for diapers!", 
+          "Please double check for diapers!!",
+          "Goodnight, I'll get the lights. Please double check for diapers!" 
+          ] | random }}
+
+      card:
+        type: simple
+        title: Goodnight!
+        content: Turn on bedtime mode
+
+
+    ################################################
+    ## Tell us a hint
+    ################################################
+    HintIntent:
+      speech:
+        type: plain
+        text: >
+          {{ ["You can say, turn on Living Room Normal to activate normal lighting scene.", 
+          "You can say, turn on Movie Time to dim the lights just like being in a theater.", 
+          "To turn all the lights on or off you can say, turn off the interior lights.", 
+          "To hear temperature information, say, tell us about the temperature", 
+          "To check on the cigars, say, tell us about the humidor", 
+          "To hear each door's status, say, tell us about the kitchen door, front door, or bathroom door", 
+          "For better accuracy say, turn on or turn off and then the name of the device you are trying to control.", 
+          "To turn on bedtime mode, say, tell us goodnight!" 
+          ] | random }}
+
+
+############################################################################
+#    EXPERIMENTS and TESTING
+############################################################################
+
+#    ################################################
+#    ## Activate a Scene
+#    ################################################
+#    ActivateSceneIntent:
+#      action:
+#        service: scene.turn_on
+#        data_template:
+#          entity_id: scene.{{ Scene | replace(" ", "_") }}
+#
+#      speech:
+#        type: plain
+#        text: >
+#          {{ [
+#          "OK",
+#          "Sure",
+#          "If you insist",
+#          "Done",
+#          "No worries",
+#          "I can do that",
+#          "Leave it to me",
+#          "Consider it done",
+#          "As you wish",
+#          "Of course",
+#          "Affirmative",
+#          "Nailed it",
+#          "I will",
+#          "Boom",
+#          "Dilly Dilly!",
+#          "No Problem"
+#          ] | random }}
+#
+#      card:
+#        type: simple
+#        title: Scene Activation
+#        content: Ask Home Assistant to activate a Scene
+#
+#
+#    ################################################
+#    ## Run a Script
+#    ################################################
+#    RunScriptIntent:
+#      action:
+#        service: script.turn_on
+#        data_template:
+#          entity_id: script.{{ Script | replace(" ", "_") }}
+#
+#      speech:
+#        type: plain
+#        text: >
+#          {{ [
+#          "OK",
+#          "Sure",
+#          "If you insist",
+#          "Done",
+#          "No worries",
+#          "I can do that",
+#          "Leave it to me",
+#          "Consider it done",
+#          "As you wish",
+#          "Of course",
+#          "Affirmative",
+#          "Nailed it",
+#          "I will",
+#          "Boom",
+#          "Dilly Dilly!",
+#          "No Problem"
+#          ] | random }}
+#
+#      card:
+#        type: simple
+#        title: Script Activation
+#        content: Ask Home Assistant to run a Script
+
+
+  ## Change the Light Color (may not work with Flux; need to test)
+  #    ColorIntent:
+  #      action:
+  #        service: light.turn_on
+  #        entity_id: light.flux_rgb
+  #        data_template:
+  #          brightness: 100
+  #          rgb_color: >
+  #            {% if {{Color}} == "Red" %} 
+  #              [255, 0, 0]
+  #            {% else if {{Color}} == "Green" %} 
+  #              [0, 255, 0]
+  #            {% else if {{Color}} == "Blue" %} 
+  #              [0, 0, 255]
+  #            {% endif %}
+  #
+  #    speech:
+  #      type: plain
+  #      text: !include alexa_confirm.yaml
+  #
+  #    card:
+  #      type: simple
+  #      title: LED Color
+  #      content: Ask Home Assistant to change the light color
+
+
+  ## Check the Climate
+  #  QueryHeatIntent:
+  #    speech:
+  #      type: plain
+  #      text: >
+  #        {% if is_state('input_boolean.heating', 'on') %}
+  #          the heat is on
+  #        {% else %}
+  #          the heat is off
+  #        {% endif %}
+
+  ## Provide Status of all Sensors
+  #  StatusIntent:
+  #    speech:
+  #      type: plain
+  #      text: >
+  #        {%- for state in states.sensor -%}
+  #          {%- if state.name.lower() == Sensor.lower() -%}
+  #            {{ state.name }} is {{ state.state }} as of {{ relative_time(state.last_updated) }} ago
+  #          {%- endif -%}
+  #          {%- else -%}
+  #            I could not find a sensor named {{ Sensor }}
+  #        {%- endfor -%}
+
+
+  #  ETARickIntent:
+  #    speech:
+  #      type: plain
+  #      text: >
+  #        {%- if is_state('input_select.Rick_status', 'driving') -%}
+  #          Rick is in the car and his estimated arrival time is {{states("sensor.eta_Rick")}}.
+  #        {%- else -%}
+  #          Rick is not in the car. 
+  #        {% endif %}
+
+
+############################################################################
+#    Other TESTING
+############################################################################
+
+#  GetInfofromHASS:
+#    speech:
+#      text: >
+#        {%- if SensorType.lower() == "temperature" -%}
+#          Temperature in the living room is {{ states('sensor.downstairs_temperature') }} degrees and upstairs temperature is {{ states('sensor.upstairs_temperature') }}.
+#        {%- elif SensorType.lower() == "humidity" -%}
+#          Humidity in the living room is {{ states.sensor.downstairs_humidity.state }} degrees and upstairs humidity is {{ states.sensor.upstairs_humidity.state }}.
+#        {%- elif SensorType.lower() == "traffic" or SensorType.lower() == "commute" -%}
+#          The fastest route to office takes about {{ states("sensor.morning_commute") }} minutes.
+#        {%- endif -%}
+#    card:
+#      type: simple
+#      title: Get {{ SensorType }} information
+#      content: Ask Home Assistant about {{ SensorType }}
+
+#
+#  RunScriptIntent:
+#    action:
+#      service: script.turn_on
+#      data_template:
+#        entity_id: script.{{ Script | replace(" ", "_") }}
+#    speech:
+#      type: plain
+#      text: OK
+#    card:
+#      type: simple
+#      title: Run Script
+#      content: Ask Home Assistant to run {{ Script }}.
+#
+#  PlayRadioIntent:
+#    action:
+#      service: script.playradio
+#      data_template:
+#        station: "{{ Station | lower | replace(' ', '_') }}"
+#    speech:
+#      type: plain
+#      text: OK
+#    card:
+#      type: simple
+#      title: Play Music
+#      content: Ask Home Assistant to play music.
+#
+#  TurnLights:
+#    speech:
+#      text: Turning {{ Room }} lights {{ OnOff }}
+#    card:
+#      type: simple
+#      title: Turn lights {{ OnOff }}
+#      content: Ask Home Assistant to turn {{ Room }} lights {{ OnOff }}
+#    action:
+#      - service_template: >
+#          {%- if OnOff == 'on' -%}
+#            homeassistant.turn_on
+#          {%- else -%}
+#            homeassistant.turn_off
+#          {%- endif -%}
+#        data_template:
+#          entity_id: >
+#            {%- if Room.lower() in ['kitchen'] -%}
+#              light.
+#            {%- elif Room.lower() in ['living room'] -%}
+#              group.
+#            {%- elif Room.lower() in ['driveway', 'porch'] -%}
+#              switch.
+#            {%- endif -%}
+#
+#            {%- if Room.lower() in ['kitchen'] -%}
+#              kitchen_lights
+#            {%- elif Room.lower() in ['living room'] -%}
+#              living_room_lights
+#            {%- elif Room.lower() in ['driveway'] -%}
+#              driveway
+#            {%- elif Room.lower() in ['porch'] -%}
+#              wemoporch
+#            {%- endif -%}
+#
+#  TurnDeviceIntent:
+#    speech:
+#      text: Turning {{ Devices }} {{ OnOff }}
+#    card:
+#      type: simple
+#      title: Turn {{ Devices }} {{ OnOff }}
+#      content: Ask Home Assistant to turn {{ Devices }} {{ OnOff }}
+#    action:
+#      - service: remote.turn_on
+#        data_template:
+#          entity_id: remote.livingroom
+#          activity: >
+#            {%- if Devices.lower() in ['television', 'plex', 'shield', 'tv', 'kodi'] and OnOff == 'on'-%}
+#              18032761
+#            {%- elif Devices.lower() in ['apple tv'] and OnOff == 'on' -%}
+#              23043915
+#            {%- elif Devices.lower() in ['fire tv', 'amazon fire', 'amazon fire tv'] and OnOff == 'on' -%}
+#              17230861
+#            {%- elif OnOff == 'off' -%}
+#              -1
+#            {%- endif -%}
+#
+#  GarageDoorIntent:
+#    speech:
+#      text: >
+#        {%- if OpenClose.lower() == "open" and is_state("binary_sensor.garagedoor", "off") -%}
+#          OK, opening the garage door.
+#        {%- elif OpenClose.lower() == "open" and is_state("binary_sensor.garagedoor", "on") -%}
+#          The garage door is already open.
+#        {%- elif OpenClose.lower() == "close" and is_state("binary_sensor.garagedoor", "on") -%}
+#          OK, closing the garage door.
+#        {%- elif OpenClose.lower() == "close" and is_state("binary_sensor.garagedoor", "off") -%}
+#          The garage door is already closed.
+#        {%- endif -%}
+#    card:
+#      type: simple
+#      title: Garage door {{ OpenClose }}
+#      content: Ask Home Assistant to {{ OpenClose }} garage door.
+#    action:
+#      - service_template: >
+#          {%- if OpenClose.lower() == "open" and is_state("binary_sensor.garagedoor", "off") -%}
+#            switch.turn_on
+#          {%- elif OpenClose.lower() == "close" and is_state("binary_sensor.garagedoor", "on") -%}
+#            switch.turn_on
+#          {%- endif -%}
+#        data_template:
+#          entity_id: switch.garage_relay_switch
+

@@ -1,0 +1,125 @@
+#####################################################################
+#    @package          :     baby wipe warmer
+#    @description      :     wipe warmer automation
+#####################################################################
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### downstairs wipe warmer schedule ON
+  - alias: Downstairs Wipe Warmer On
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '07:30:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_three
+
+  ### downstairs wipe warmer schedule OFF
+  - alias: Downstairs Wipe Warmer Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: script.bedtime
+        from: 'off'
+        to: 'on'
+
+      - platform: time
+        at: '20:29:59'
+
+    condition:
+      - condition: state
+        entity_id: switch.switch_three
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.switch_three
+
+
+  ### downstairs wipe warmer return
+  - alias: Downstairs Wipe Warmer Return
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: time
+        before: '20:00:00'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_three
+
+
+  ### upstairs wipe warmer schedule ON
+  - alias: Upstairs Wipe Warmer On
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '19:00:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_one
+
+
+  ### upstairs wipe warmer schedule OFF
+  - alias: Upstairs Wipe Warmer Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '10:00:00'
+
+    condition:
+      - condition: state
+        entity_id: switch.switch_one
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.switch_one
+
+
+  ### upstairs wipe warmer return
+  - alias: Upstairs Wipe Warmer Return
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: time
+        after: '19:00:00'
+
+      - condition: state
+        entity_id: switch.switch_one
+        state: 'off'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_one

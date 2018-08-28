@@ -1,0 +1,211 @@
+#####################################################################
+#    @package          :     locks
+#    @description      :     locks and associated automations, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'locks'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Group
+    ################################################
+#    group.door_locks:
+#      <<: *contained
+#      order: 2
+
+    ################################################
+    ## Lock
+    ################################################
+    lock.bathroom_entry_locked:
+      <<: *contained
+      friendly_name: "Beach Bathroom Door Lock"
+
+    lock.south_entry_locked:
+      <<: *contained
+      friendly_name: "South Entry Door Lock"
+
+    ################################################
+    ## Script
+    ################################################
+    script.unlock_megs:
+      <<: *hidden
+      friendly_name: "Unlock Door for Megan"
+      icon: mdi:play-circle
+
+    ################################################
+    ## Automation
+    ################################################
+    automation.south_door_unlock_arrival:
+      <<: *contained
+      friendly_name: "Unlock Door for Megan"
+
+    automation.south_door_unlock_by_user:
+      <<: *hidden
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Door Locks:
+    entities:
+      - lock.bathroom_entry_locked
+      - sensor.lock_beach_door_status
+      - lock.south_entry_locked
+      - sensor.lock_south_door_status
+
+
+
+
+#####################################################################
+### Sensor
+#####################################################################
+sensor:
+  - platform: template
+    sensors:
+      lock_beach_door_status:
+        friendly_name: "Beach Entry Door Status"
+        value_template: >-
+          {% set state = states('sensor.bathroom_entry_alarm_type') %}
+          {% set user = states('sensor.bathroom_entry_alarm_level') %}
+          
+          {% if state == '19' %}
+            {% if user == '1' %}
+              Unlocked by Rick
+            {% elif user == '2' %}
+              Unlocked by Megs
+            {% elif user == '3' %}
+              Unlocked by Guest
+            {% else %}
+              Unlocked by user {{ user }}
+            {% endif %}
+          {% elif state == '21' %}
+            Manually Locked
+          {% elif state == '22' %}
+            Manually Unlocked
+          {% elif state == '24' %}
+            Auto Locked
+          {% elif state == '25' %}
+            Auto Unlocked
+          {% elif state == '27' %}
+            Auto-Relocked
+          {% elif state == '161' %}
+            Tamper
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      lock_south_door_status:
+        friendly_name: "South Entry Door Status"
+        value_template: >-
+          {% set state = states('sensor.south_entry_alarm_type') %}
+          {% set user = states('sensor.south_entry_alarm_level') %}
+          
+          {% if state == '19' %}
+            {% if user == '1' %}
+              Unlocked by Rick
+            {% elif user == '2' %}
+              Unlocked by Megs
+            {% elif user == '3' %}
+              Unlocked by Housekeeper
+            {% elif user == '4' %}
+              Unlocked by Dog Sitter
+            {% else %}
+              Unlocked by user {{ user }}
+            {% endif %}
+          {% elif state == '21' %}
+            Manually Locked
+          {% elif state == '22' %}
+            Manually Unlocked
+          {% elif state == '24' %}
+            Auto Locked
+          {% elif state == '25' %}
+            Auto Unlocked
+          {% elif state == '27' %}
+            Auto-Relocked
+          {% elif state == '161' %}
+            Tamper
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        entity_id: sensor.time
+
+
+#####################################################################
+### Script
+#####################################################################
+script:
+  unlock_megs:
+    sequence:
+
+    - service: lock.unlock
+      entity_id: lock.south_entry_locked
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Arrived"
+        message: "Megs is home!"
+
+    - delay:
+        minutes: 15
+    - service: lock.lock
+      entity_id: lock.south_entry_locked
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Unlock door when Megs arrives
+  - alias: South Door Unlock On Arrival
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: device_tracker.mip8
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: template
+        value_template: "{{ is_state('lock.south_entry_locked', 'locked') or false }}"
+# "{{(states.device_tracker.mip8.attributes|default({})).source_type|default('unknown') }}"
+
+    action:
+      - service: script.unlock_megs
+
+
+  ### notify if unlocked by code
+  - alias: South Door Unlock By User
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: sensor.south_entry_alarm_type
+      to: '19'
+
+    action:
+      - service: notify.notify
+        data:
+          title: "Door Unlocked"
+          message: "South Door {{ states.sensor.lock_south_door_status.state }}"

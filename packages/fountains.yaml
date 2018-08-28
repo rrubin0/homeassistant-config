@@ -1,0 +1,98 @@
+#####################################################################
+#    @package          :     fountains
+#    @description      :     fountains, and associated automations.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'fountains'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Switch
+    ################################################
+    switch.fountains_switch:
+      friendly_name: "Fountains"
+      icon: mdi:beach
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Turn on the fountains at sunrise
+  - alias: Fountains On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '01:30:00'
+
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.pws_wind_mph
+        below: 10
+
+      - condition: state
+        entity_id: input_boolean.rain
+        state: 'off'
+
+      - condition: sun
+        before: sunset
+
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.fountains_switch
+
+
+### Turn off the fountains at sunset
+  - alias: Fountains Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:05:00'
+
+      - platform: state
+        entity_id: input_boolean.rain
+        from: 'off'
+        to: 'on'
+        for:
+          minutes: 5
+
+    condition:
+      - condition: state
+        entity_id: switch.fountains_switch
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.fountains_switch

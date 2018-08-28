@@ -1,0 +1,317 @@
+#####################################################################
+#    @package          :     living_room_media
+#    @description      :     living room media players and scenes
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'living_room_media'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Media Player
+    ################################################
+    media_player.kodi_living_room:
+      <<: *contained
+      friendly_name: "Living Room Kodi"
+
+    media_player.apple_tv:
+      <<: *contained
+      friendly_name: "Apple TV"
+
+#    media_player.firetv_living_room:
+#      <<: *contained
+#      friendly_name: "FireTV"
+
+#    media_player.rnmcast:
+#      <<: *contained
+#      friendly_name: "Chromecast"
+
+
+    ################################################
+    ## Input Select
+    ################################################
+    input_select.living_room_tv_input:
+      icon: mdi:television
+      <<: *contained
+
+    input_select.onkyo_amp_input:
+      icon: mdi:radio
+      <<: *contained
+
+    ################################################
+    ## Script
+    ################################################
+    script.tv_power_off:
+      friendly_name: "TV Shutdown"
+      icon: mdi:power
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Living Room TV:
+    control: hidden
+    entities:
+      - switch.tv_power
+      - switch.tv_volume
+      - switch.tv_mute
+      - input_select.living_room_tv_input
+
+  DirecTV:
+    control: hidden
+    entities:
+      - switch.directv_power
+      - switch.directv_play
+
+  Onkyo Amp:
+    control: hidden
+    entities:
+      - switch.amp_power
+      - switch.amp_volume
+      - switch.amp_mute
+      - input_select.onkyo_amp_input
+      - switch.amp_movie_mode
+      - switch.amp_music_mode
+
+
+#####################################################################
+### Media Player
+#####################################################################
+media_player:
+  - platform: alexa
+    email: !secret amazon_email
+    password: !secret amazon_pswd
+    url: amazon.com
+
+  - platform: kodi
+    host: !secret kodi_living_room
+    port: !secret kodi_other_port
+    name: kodi_living_room
+    username: !secret kodi_user
+    password: !secret kodi_password
+
+  - platform: apple_tv
+    host: !secret appletv_host
+    name: apple_tv
+    login_id: !secret appletv_login_id
+
+
+#  - platform: firetv
+##    host: !secret firetv_host
+#    name: FireTV
+#    device: firetv_living_room
+
+
+#####################################################################
+### Input Select
+#####################################################################
+input_select:
+  living_room_tv_input:
+    name: Living Room TV Input
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "DirecTV"
+      - "FireTV"
+      - "Chromecast"
+
+
+  onkyo_amp_input:
+    name: Onkyo Amp Input
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "TV"
+      - "Movie"
+      - "DVD"
+      - "iPod"
+
+
+#####################################################################
+### Scene
+#####################################################################
+scene:
+  - name: Movie Time
+    entities:
+      group.entry_lights:
+        state: off
+        transition: 5
+
+      light.living_room_lamp:
+        state: off
+        transition: 15
+
+      light.lr_ceiling:
+        state: off
+        transition: 10
+
+
+  - name: Movie Paused
+    entities:
+      light.kitchen_entry:
+        state: on
+        brightness: 50
+        transition: 10
+
+      light.south_entry:
+        state: on
+        brightness: 75
+        transition: 10
+
+      light.center_entry:
+        state: on
+        brightness: 50
+        transition: 10
+
+      light.living_room_lamp:
+        state: on
+        brightness: 75
+        transition: 10
+
+      light.lr_ceiling:
+        state: on
+        brightness: 50
+        transition: 15
+
+
+  - name: Movie Ended
+    entities:
+      light.kitchen_entry:
+        state: on
+        brightness: 160
+        transition: 30
+
+      light.south_entry:
+        state: on
+        brightness: 100
+        transition: 10
+
+      light.center_entry:
+        state: on
+        brightness: 50
+        transition: 10
+
+      light.living_room_lamp:
+        state: on
+        brightness: 200
+        transition: 60
+
+      light.lr_ceiling:
+        state: on
+        brightness: 100
+        transition: 30
+
+
+#####################################################################
+### Script
+#####################################################################
+script:
+  tv_power_off:
+    sequence:
+
+    - service: switch.turn_off
+      entity_id: switch.tv_power
+
+    - service: switch.turn_off
+      entity_id: switch.directv_power
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Set Kodi scene when media is playing
+  - alias: Kodi Scene Set
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.kodi_living_room
+
+    condition: 
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+      - condition: state
+        entity_id: input_boolean.dinner_time
+        state: 'off'
+
+    action:
+      - service: scene.turn_on
+        data_template:
+          entity_id: >-
+            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
+              scene.movie_time
+            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "idle" %}
+              scene.movie_paused
+            {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
+              scene.movie_ended
+            {% else %}
+              scene.living_room_normal
+            {% endif %}
+
+  ### Living Room TV Input Select
+  - alias: Living Room TV Select Input
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.living_room_tv_input
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.tv_input_{{ trigger.to_state.state|lower }}"
+
+# Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  ### Living Room Onkyo Input Select
+  - alias: Living Room Amp Input Select
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.onkyo_amp_input
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.amp_input_{{ trigger.to_state.state|lower }}"
+
+# Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

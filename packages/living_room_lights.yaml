@@ -1,0 +1,411 @@
+#####################################################################
+#    @package          :     living_room_lights
+#    @description      :     living room lights and automations
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'living_room_lights'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Light
+    ################################################
+    light.living_room_lamp:
+      <<: *contained
+      icon: mdi:lamp
+
+    light.south_entry:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.entryway:
+      <<: *contained
+      friendly_name: "Entryway Lights"
+      icon: mdi:google-circles-communities
+
+    light.kitchen_entry:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.center_entry:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.lr_ceiling:
+      <<: *contained
+      friendly_name: "Living Room Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.northeast_ceiling:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.northwest_ceiling:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.southeast_ceiling:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.southwest_ceiling:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.foyer_lights_level:
+      friendly_name: "Foyer Chandelier"
+      haaska_name: "Foyer Lights"
+      icon: mdi:ceiling-light
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Entry Lights:
+    entities:
+      - light.foyer_lights_level
+      - light.entryway
+      - light.south_entry
+      - light.center_entry
+      - light.kitchen_entry
+
+  Living Room Lights:
+    control: hidden
+    entities:
+      - light.living_room_lamp
+      - light.lr_ceiling
+      - light.northeast_ceiling
+      - light.northwest_ceiling
+      - light.southeast_ceiling
+      - light.southwest_ceiling
+
+
+#####################################################################
+### Switch - future sonoffs
+#####################################################################
+#switch:
+#  ### Sonoff wifi switches
+#  - platform: mqtt
+#    name: "Third Strip Cord"
+#    command_topic: "cmnd/sonoff2/power"
+#    state_topic: "stat/sonoff2/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+#
+#  - platform: mqtt
+#    name: "Fourth Strip Cord"
+#    command_topic: "cmnd/sonoff3/power"
+#    state_topic: "stat/sonoff3/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Always turn on the living room lamp at sunset
+  - alias: Living Room Lamp On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:20:00'
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.living_room_lamp
+          brightness: 255
+          transition: 600
+
+
+  ### Turn off the living room lamp if we leave during the day
+  - alias: Living Room Lamp Away
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.away_mode
+
+    condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'above_horizon'
+
+      - condition: state
+        entity_id: light.living_room_lamp
+        state: 'on'
+
+    action:
+      - delay:
+          minutes: 1
+
+      - service: light.turn_off
+        entity_id: light.living_room_lamp
+
+
+  ### Set the Living Room Normal scene at sunset
+  - alias: Living Room Normal Scene Schedule
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:10:00'
+
+    condition:
+      - condition: template
+        value_template: "{{ states.media_player.kodi_living_room.state != 'playing' }}"
+
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'home'
+
+          - condition: state
+            entity_id: input_boolean.visitor_mode
+            state: 'on'
+
+    action:
+      - service: scene.turn_on
+        entity_id: scene.living_room_normal
+
+## Turn on the Christmas Tree Lights
+#      - service: switch.turn_on
+#        entity_id: switch.switch_five
+
+
+#  ### Brighten up the house in the morning
+#  - alias: Living Room Bright Morning
+#    initial_state: 'on'
+#    trigger:
+#      - platform: numeric_state
+#        entity_id: sun.sun
+#        value_template: '{{ state.attributes.elevation }}'
+#        above: 6
+#
+#    condition:
+#      - condition: state
+#        entity_id: group.all_lights
+#        state: 'on'
+#
+#      - condition: time
+#        before: '08:00:00'
+#
+#    action:
+#
+#      - service: scene.turn_on
+#        entity_id: scene.living_room_bright
+#
+#      - service: light.turn_on
+#        entity_id: light.kitchen_lights_level
+#        data:
+#          brightness: 200
+#
+#      - delay:
+#          minutes: 5
+#
+#      - service: light.turn_off
+#        entity_id: light.master_bedroom_chandelier_level
+#
+#      - delay:
+#          minutes: 10
+#
+#      - service: homeassistant.turn_off
+#        entity_id: group.accent_lights
+
+
+  ### Turn off the lights in the morning once sun is up high enough
+  - alias: Living Room Off Morning
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        above: 10
+        for:
+          minutes: 15
+
+    condition:
+      - condition: state
+        entity_id: group.all_lights
+        state: 'on'
+
+      - condition: time
+        before: '08:00:00'
+
+    action:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Family Room"
+          scene_name: "Bright"
+
+      - delay:
+          minutes: 15
+
+      - service: homeassistant.turn_off
+        entity_id: group.interior_lights
+
+      - service: light.turn_off
+        entity_id: light.gateway_light_7811dcb7da52
+
+      - service: notify.ios_i8plus
+        data:
+          title: "Sun's up. Lights off"
+          message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.floorplan_time.state }}"
+
+
+#  ### Turn on some lights when we arrive home
+#  - alias: Living Room On Arrival
+#    initial_state: 'off'
+#    trigger:
+#      platform: state
+#      entity_id: group.all_devices
+#      from: 'not_home'
+#      to: 'home'
+#
+#    condition:
+#      - condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+#
+#    action:
+#      - service: notify.ios_i8plus
+#        data:
+#          title: "Welcome Home"
+#          message: "Turning on some lights"
+#          data:
+#            push:
+#              sound: "US-EN-Alexa-Welcome-Home.wav"
+#
+#      - service: scene.turn_on
+#        entity_id: scene.living_room_bright
+#
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.kitchen_lights_level
+#          brightness: 255
+#
+#      - delay:
+#          minutes: 3
+#
+#      - service: scene.turn_on
+#        entity_id: scene.living_room_normal
+#
+#      - service: homeassistant.turn_on
+#        entity_id: group.accent_lights
+
+
+  ### Turn on some lights when it is cloudy
+  - alias: Living Room On Cloudy
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: >-
+          {% if is_state('sensor.yweather_current', 'Rain') %}
+            'true'
+          {% elif is_state('sensor.yweather_current', 'Thunderstorm') %}
+            'true'
+          {% elif is_state('sensor.yweather_current', 'Showers') %}
+            'true'
+          {% elif is_state('sensor.yweather_current', 'Drizzle') %}
+            'true'
+          {% elif is_state('sensor.yweather_current', 'Partly Cloudy') %}
+            'true'
+          {% elif is_state('sensor.yweather_current', 'Mostly Cloudy') %}
+            'true'
+          {% else %}
+            'false'
+          {% endif %}
+
+
+      - platform: numeric_state
+        entity_id: sensor.dark_sky_precip_intensity
+        above: 1
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+      - condition: numeric_state
+        entity_id: sensor.dark_sky_cloud_coverage
+        above: 69
+
+      - condition: numeric_state
+        entity_id: sensor.front_entry_fibaro_multisensor_luminance
+        below: 125
+
+      - condition: template
+        value_template: "{{ states.media_player.kodi_living_room.state != 'playing' }}"
+
+      - condition: time
+        after: '08:00:00'
+        before: '17:00:00'
+
+    action:
+      - service: scene.turn_on
+        entity_id: scene.living_room_cloudy
+
+
+  ### Turn off lights after rain has stopped
+  - alias: Living Room Off Cloudy
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dark_sky_precip_intensity
+        below: 1
+
+      - platform: state
+        entity_id: input_boolean.rain
+        from: 'on'
+        to: 'off'
+
+      - platform: numeric_state
+        entity_id: sensor.front_entry_fibaro_multisensor_luminance
+        above: 25
+
+    condition:
+      - condition: state
+        entity_id: group.living_room
+        state: 'on'
+
+      - condition: numeric_state
+        entity_id: sensor.front_entry_fibaro_multisensor_luminance
+        above: 25
+
+      - condition: time
+        before: '17:00:00'
+
+    action:
+      - service: homeassistant.turn_off
+        entity_id: group.living_room_lights
+
+      - service: homeassistant.turn_off
+        entity_id: group.entry_lights

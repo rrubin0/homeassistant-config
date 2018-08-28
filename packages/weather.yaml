@@ -1,0 +1,484 @@
+#####################################################################
+#    @package          :     weather
+#    @description      :     weather sensors and associated automations, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'weather'
+        homebridge_hidden: true
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+#        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+#        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Input Boolean
+    ################################################
+    input_boolean.rain:
+      <<: *contained
+
+    weather.downstairs:
+      friendly_name: "Currently"
+
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.dark_sky_humidity:
+      <<: *contained
+      friendly_name: "Humidity"
+      icon: mdi:water-percent
+
+    sensor.dark_sky_dew_point:
+      <<: *contained
+      friendly_name: "Dew Point"
+      icon: mdi:water
+
+    sensor.dark_sky_daily_summary:
+      <<: *contained
+      friendly_name: "Daily Summary"
+      icon: mdi:calendar-clock
+
+    sensor.dark_sky_pressure:
+      <<: *contained
+      friendly_name: "Pressure"
+      icon: mdi:nature
+
+    sensor.dark_sky_temperature:
+      <<: *contained
+      friendly_name: "Temperature"
+      icon: mdi:thermometer
+
+    sensor.dark_sky_wind_speed:
+      <<: *contained
+      friendly_name: "Wind Speed"
+      icon: mdi:weather-windy
+
+    sensor.dark_sky_summary:
+      <<: *contained
+      friendly_name: "Current Conditions"
+      icon: mdi:map-marker-radius
+
+    sensor.dark_sky_precip_probability:
+      <<: *contained
+      friendly_name: "Chance Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_precip_intensity:
+      <<: *contained
+      friendly_name: "Predicted Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_visibility:
+      <<: *contained
+      friendly_name: "Visibility"
+
+    sensor.dark_sky_cloud_coverage:
+      <<: *contained
+      friendly_name: "Cloud Cover"
+      icon: mdi:weather-partlycloudy
+
+    sensor.dark_sky_wind_bearing:
+      <<: *contained
+      friendly_name: "Wind Bearing"
+      icon: mdi:compass
+
+    sensor.dark_sky_apparent_temperature:
+      <<: *contained
+      friendly_name: "Feels Like"
+
+    sensor.dark_sky_nearest_storm_distance:
+      <<: *contained
+      friendly_name: "Nearest Storm"
+      icon: mdi:weather-lightning-rainy
+
+    sensor.pws_weather:
+      <<: *contained
+      friendly_name: "Current Condition"
+
+    sensor.pws_temp_f:
+      <<: *contained
+      friendly_name: "Temperature"
+
+    sensor.pws_feelslike_f:
+      <<: *contained
+
+    sensor.pws_heat_index:
+      <<: *contained
+
+    sensor.pws_feelslike_string:
+      <<: *contained
+      friendly_name: "Feels Like"
+      icon: mdi:thermometer
+
+    sensor.pws_precip_today_string:
+      <<: *contained
+      friendly_name: "Precipitation"
+      icon: mdi:weather-rainy
+
+    sensor.pws_wind_string:
+      <<: *contained
+      friendly_name: "Wind"
+      icon: mdi:weather-windy
+
+    sensor.pws_heat_index_string:
+      <<: *contained
+      friendly_name: "Heat Index"
+      icon: mdi:weather-sunny
+
+    sensor.pws_relative_humidity:
+      <<: *contained
+      friendly_name: "Humidity"
+      icon: mdi:water-percent
+
+    sensor.pws_dewpoint_string:
+      <<: *contained
+      friendly_name: "Dew Point"
+      icon: mdi:water
+
+    sensor.pws_dewpoint_f:
+      <<: *contained
+
+    sensor.pws_pressure_in:
+      <<: *contained
+      friendly_name: "Pressure Inches"
+      icon: mdi:thermometer-lines
+
+    sensor.pws_pressure_mb:
+      <<: *contained
+      friendly_name: "Pressure Mbar"
+      icon: mdi:nature
+
+    sensor.pws_solarradiation:
+      <<: *contained
+      friendly_name: "Radiation"
+      icon: mdi:radioactive
+
+    sensor.pws_uv:
+      <<: *contained
+      friendly_name: "UV Index"
+      icon: mdi:sunglasses
+
+    sensor.pws_visibility_mi:
+      <<: *contained
+      friendly_name: "Visibility"
+
+    sensor.yw_tomorrow_condition:
+      <<: *contained
+      friendly_name: "Tomorrows Weather"
+
+    sensor.yw_tomorrow_temperature_max:
+      <<: *contained
+      friendly_name: "Tomorrows High"
+
+    sensor.yw_tomorrow_temperature_min:
+      <<: *contained
+      friendly_name: "Tomorrows Low"
+
+    sensor.yw_day2_condition:
+      <<: *contained
+      friendly_name: "Day 2 Conditions"
+
+    sensor.yw_day2_temperature_max:
+      <<: *contained
+      friendly_name: "Day 2 High"
+
+    sensor.yw_day2_temperature_min:
+      <<: *contained
+      friendly_name: "Day 2 Low"
+
+    sensor.yw_day3_condition:
+      <<: *contained
+      friendly_name: "Day 3 Conditions"
+
+    sensor.yw_day3_temperature_max:
+      <<: *contained
+      friendly_name: "Day 3 High"
+
+    sensor.yw_day3_temperature_min:
+      <<: *contained
+      friendly_name: "Day 3 Low"
+
+    sensor.yweather_condition:
+      <<: *contained
+      friendly_name: "Expected Conditions"
+
+    sensor.yweather_current:
+      <<: *contained
+      friendly_name: "Currently"
+
+    sensor.yweather_humidity:
+      <<: *contained
+      friendly_name: "Humidity"
+
+    sensor.yweather_pressure:
+      <<: *contained
+      friendly_name: "Pressure"
+
+    sensor.yweather_temperature:
+      <<: *contained
+      friendly_name: "Temperature"
+
+    sensor.yweather_temperature_max:
+      <<: *contained
+      friendly_name: "Todays High"
+
+    sensor.yweather_temperature_min:
+      <<: *contained
+      friendly_name: "Todays Low"
+
+    sensor.yweather_visibility:
+      <<: *contained
+      friendly_name: "Visibility"
+
+    sensor.yweather_wind_speed:
+      <<: *contained
+      friendly_name: "Wind Speed"
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Weather Summary:
+    entities:
+      - weather.downstairs
+      - sensor.yweather_temperature_max
+      - sensor.yweather_temperature_min
+      - sensor.dark_sky_daily_summary
+      - sensor.pws_wind_string
+      - sensor.season
+      - input_number.season_summer
+      - input_number.season_winter
+#      - sensor.yweather_current
+#      - sensor.yweather_temperature
+#      - sensor.pws_temp_f
+#      - sensor.pws_feelslike_string
+#      - sensor.pws_relative_humidity
+
+
+  Weather Details:
+    entities:
+      - sensor.dark_sky_cloud_coverage
+      - sensor.pws_heat_index_string
+      - sensor.pws_dewpoint_string
+      - sensor.pws_pressure_in
+      - sensor.pws_pressure_mb
+      - sensor.pws_solarradiation
+      - sensor.pws_uv
+      - sensor.pws_visibility_mi
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_precip_intensity
+      - sensor.pws_precip_today_string
+      - sensor.dark_sky_nearest_storm_distance
+      - input_boolean.rain
+      - camera.weather
+
+  3 Day Forecast:
+    entities:
+      - sensor.yweather_condition
+      - sensor.yw_tomorrow_condition
+      - sensor.yw_tomorrow_temperature_max
+      - sensor.yw_tomorrow_temperature_min
+      - sensor.yw_day2_condition
+      - sensor.yw_day2_temperature_max
+      - sensor.yw_day2_temperature_min
+      - sensor.yw_day3_condition
+      - sensor.yw_day3_temperature_max
+      - sensor.yw_day3_temperature_min
+      #- sensor.yweather_humidity
+      #- sensor.yweather_pressure
+      #- sensor.yweather_visibility
+      #- sensor.yweather_wind_speed
+
+
+#####################################################################
+### Input Boolean
+#####################################################################
+input_boolean:
+  rain:
+    name: Rain
+    icon: mdi:weather-rainy
+
+#####################################################################
+### Input Number
+#####################################################################
+input_number:
+  ### Summer Temp Threshold
+  season_summer:
+    name: "Summer"
+    initial: 77
+    min: 60
+    max: 100
+    step: 1
+    mode: slider
+
+  ### Winter Temp Threshold
+  season_winter:
+    name: "Winter"
+    initial: 63
+    min: 40
+    max: 80
+    step: 1
+    mode: slider
+
+
+#####################################################################
+### Weather
+#####################################################################
+weather:
+### Yahoo Weather
+  - platform: yweather
+    woeid: !secret woeid
+
+#####################################################################
+### Sensor
+#####################################################################
+sensor:
+### Seasons
+  - platform: template
+    sensors:
+      season:
+        friendly_name: "Seasonal Condition"
+        value_template: >-
+          {% set temperature = states('sensor.yweather_temperature')|float(none) %}
+          {% set winter_temp = states.input_number.season_winter.state|default(61)|float %}
+          {% set summer_temp = states.input_number.season_summer.state|default(79)|float %}
+          {% if temperature is none %}
+            {{ states('sensor.yweather_temperature') }}
+          {% elif temperature < winter_temp %}
+            Winter
+          {% elif temperature > summer_temp %}
+            Summer
+          {% else %}
+            Awesome
+          {% endif %}
+        entity_id: sensor.time
+
+
+### Moon
+  - platform: moon
+
+### Weather Underground
+  - platform: wunderground
+    api_key: !secret wu_api_key
+    monitored_conditions:
+      - weather
+      - alerts
+      - temp_f
+      - station_id
+      - feelslike_f
+      - feelslike_string
+      - heat_index_f
+      - heat_index_string
+      - dewpoint_f
+      - dewpoint_string
+      - wind_mph
+      - UV
+      - pressure_in
+      - pressure_mb
+      - wind_dir
+      - wind_string
+      - relative_humidity
+      - visibility_mi
+      - precip_today_in
+      - precip_today_string
+      - solarradiation
+      - observation_time
+
+### Darksky
+  - platform: darksky
+    api_key: !secret forecast_api_key
+    monitored_conditions:
+      - nearest_storm_distance
+      - cloud_cover
+      - daily_summary
+      - minutely_summary
+      - precip_intensity
+      - precip_probability
+      - precip_intensity_max
+
+### Yahoo Weather Sensor
+  - platform: yweather
+    woeid: !secret woeid
+    monitored_conditions:
+      - weather
+      - weather_current
+      - temp_min
+      - temp_max
+      - wind_speed
+      - pressure
+      - visibility
+      - humidity
+      - temperature
+
+### Yahoo Forecast
+  - platform: yweather
+    forecast: 1
+    name: yw_tomorrow
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+
+  - platform: yweather
+    forecast: 2
+    name: yw_day2
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+
+  - platform: yweather
+    forecast: 3
+    name: yw_day3
+    monitored_conditions:
+      - weather
+      - temp_min
+      - temp_max
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  - alias: rain sensor
+    initial_state: 'on'
+    hide_entity: True
+    trigger:
+      - platform: state
+        entity_id: weather.downstairs
+
+    action:
+      - service_template: >-
+          {% if is_state('weather.downstairs', 'Rain') %}
+            homeassistant.turn_on
+          {% elif is_state('weather.downstairs', 'Light Rain') %}
+            homeassistant.turn_on
+          {% elif is_state('weather.downstairs', 'Thunderstorm') %}
+            homeassistant.turn_on
+          {% elif is_state('weather.downstairs', 'Showers') %}
+            homeassistant.turn_on
+          {% elif is_state('weather.downstairs', 'Drizzle') %}
+            homeassistant.turn_on
+          {% else %}
+            homeassistant.turn_off
+          {% endif %}
+        data:
+          entity_id: input_boolean.rain

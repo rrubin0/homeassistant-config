@@ -1,0 +1,60 @@
+#####################################################################
+#    @package          :     input_boolean
+#    @description      :     input_boolean configurations
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'input_boolean'
+        homebridge_hidden: true
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+#        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+#        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Input Boolean
+    ################################################
+    input_boolean.visitor_mode:
+      <<: *exposed
+      icon: mdi:account
+
+    input_boolean.holiday:
+      <<: *exposed
+      icon: mdi:snowman
+
+    input_boolean.dinner_time:
+      <<: *exposed
+      icon: mdi:food-fork-drink
+
+
+#####################################################################
+### Input Boolean
+#####################################################################
+input_boolean:
+  visitor_mode:
+    name: Visitor Mode
+    initial: off
+
+  holiday:
+    name: Holiday Mode
+    initial: off
+
+  dinner_time:
+    name: Dinner Time
+    initial: off

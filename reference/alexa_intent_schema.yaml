@@ -1,0 +1,455 @@
+### Built using the Amazon skill builder BETA ###
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "GetSensorIntent",
+      "samples": [
+        "about the {SensorType}",
+        "how is the {SensorType}",
+        "what's the {SensorType}",
+        "how's the {SensorType}",
+        "what is the {SensorType}",
+        "tell me the {SensorType}",
+        "tell me about the {SensorType}",
+        "the status of {SensorType}",
+        "what the {SensorType} status is"
+      ],
+      "slots": [
+        {
+          "name": "SensorType",
+          "type": "SensorType",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "GoodNightIntent",
+      "samples": [
+        "good night",
+        "i'm tired",
+        "see you tomorrow"
+      ],
+      "slots": []
+    },
+    {
+      "name": "LocateIntent",
+      "samples": [
+        "Where is {User}",
+        "Where's {User}",
+        "Where {User} is",
+        "Where did {User} go"
+      ],
+      "slots": [
+        {
+          "name": "User",
+          "type": "AMAZON.US_FIRST_NAME",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "RollerShadeIntent",
+      "samples": [
+        "{OpenClose} the Master Bath Shades",
+        "{OpenClose} the kitchen shade",
+        "{OpenClose} the bathroom shades"
+      ],
+      "slots": [
+        {
+          "name": "OpenClose",
+          "type": "Shades",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "RunScriptIntent",
+      "samples": [
+        "Run {Script}",
+        "Activate {Script}"
+      ],
+      "slots": [
+        {
+          "name": "Script",
+          "type": "Scripts",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "StatusIntent",
+      "samples": [
+        "for a status report",
+        "about the sensors",
+        "tell me about the status",
+        "tell me about all sensors",
+        "what's the status",
+        "to report status",
+        "for a sensor update"
+      ],
+      "slots": []
+    },
+    {
+      "name": "WhereAreWeIntent",
+      "samples": [
+        "where we are",
+        "where we're at"
+      ],
+      "slots": []
+    }
+  ],
+  "types": [
+    {
+      "name": "AMAZON.US_FIRST_NAME",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Rick",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Megan",
+            "synonyms": [
+              "Meg",
+              "Megs"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Devices",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Television",
+            "synonyms": [
+              "TV"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Kodi",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Apple TV",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Fire TV",
+            "synonyms": [
+              "Amazon Fire",
+              "Fire Stick"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Names",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Rick",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Megan",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Meg",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Megs",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "OnOff",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "On",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Off",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "OpenClose",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Open",
+            "synonyms": [
+              "Raise"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Close",
+            "synonyms": [
+              "Lower"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Room",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Dining Room",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Kitchen",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Foyer",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Entry Way",
+            "synonyms": [
+              "Entry"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Living Room",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Master Bedroom",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Porch",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Patio",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scenes",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Normal",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Bright",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Dim",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Movie Time",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Morning",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scripts",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Night Time",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Bedtime",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "SensorType",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Temperature",
+            "synonyms": [
+              "Temp",
+              "Climate"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Humidity",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Traffic",
+            "synonyms": [
+              "Commute"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "front door",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "side door",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "bathroom door",
+            "synonyms": []
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "kitchen door",
+            "synonyms": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shades",
+      "values": [
+        {
+          "id": null,
+          "name": {
+            "value": "Kitchen Shade",
+            "synonyms": [
+              "Kitchen Shades"
+            ]
+          }
+        },
+        {
+          "id": null,
+          "name": {
+            "value": "Master Bath Shades",
+            "synonyms": [
+              "Master Bath Shade",
+              "Bathroom Shades"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

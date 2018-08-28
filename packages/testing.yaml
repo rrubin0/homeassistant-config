@@ -1,0 +1,358 @@
+############################################################################
+#    @package          :     testing
+#    @description      :     test components, automations, triggers, etc.
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'testing'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+        icon: mdi:checkbox-marked-circle
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Input Boolean
+    ################################################
+    input_boolean.state_change:
+      <<: *contained
+
+    input_boolean.condition_1:
+      <<: *contained
+      friendly_name: "Test Condition 1"
+#      icon: mdi:checkbox-marked-circle
+
+    input_boolean.condition_2:
+      <<: *contained
+      friendly_name: "Test Condition 2"
+#      icon: mdi:checkbox-marked-circle
+
+    input_boolean.condition_3:
+      <<: *contained
+      friendly_name: "Test Condition 3"
+#      icon: mdi:checkbox-marked-circle
+
+    input_boolean.condition_4:
+      <<: *contained
+      friendly_name: "Test Condition 4"
+#      icon: mdi:checkbox-marked-circle
+
+    input_boolean.condition_5:
+      <<: *contained
+      friendly_name: "Test Condition 5"
+#      icon: mdi:checkbox-marked-circle
+
+    ################################################
+    ## Script
+    ################################################
+    script.script_test:
+      <<: *contained
+      friendly_name: "Test Script"
+
+    script.rgb_strip_test:
+      <<: *contained
+      friendly_name: "RGB Strip Test"
+
+    script.desk_lamp_test:
+      <<: *contained
+      friendly_name: "Desk Lamp Test"
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Test Triggers:
+    control: hidden
+    entities:
+      - script.script_test
+      - script.rgb_strip_test
+      - script.desk_lamp_test
+      - input_boolean.state_change
+
+  Test Conditions:
+    control: hidden
+    entities:
+      - input_boolean.condition_1
+      - input_boolean.condition_2
+      - input_boolean.condition_3
+      - input_boolean.condition_4
+      - input_boolean.condition_5
+
+
+#####################################################################
+### Input Boolean
+#####################################################################
+input_boolean:
+  condition_1:
+    name: condition_1
+    initial: off
+
+  condition_2:
+    name: condition_2
+    initial: off
+
+  condition_3:
+    name: condition_3
+    initial: off
+
+  condition_4:
+    name: condition_4
+    initial: off
+
+  condition_5:
+    name: condition_5
+    initial: off
+
+### State Change Simulator
+  state_change:
+    name: State Change Test
+    initial: off
+
+
+#####################################################################
+### Script
+#####################################################################
+script:
+  ### A simple script used for testing
+  script_test:
+    sequence:
+    - service: light.turn_on
+      entity_id: light.office_desk_lamp
+
+  ### Testing Flux RGB strip values
+  rgb_strip_test:
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.under_bed_lights
+        xy_color: [0.151, 0.343]
+        brightness: 55
+
+  ### Testing Flux RGB desk lamp
+  desk_lamp_test:
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_desk_lamp
+        xy_color: [0.151, 0.343]
+        brightness: 55
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Test Away Mode Trigger
+  - alias: Test Away Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.state_change
+        from: 'off'
+        to: 'on'
+
+#    condition:
+#      - condition: state
+#        entity_id: input_boolean.condition_3
+#        state: 'on'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_4
+#            state: 'on'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_5
+#            state: 'on'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_1
+#            state: 'on'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_2
+#            state: 'on'
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.state_change
+
+
+#  ### Test Condition 1
+#  - alias: Test Input Boolean Condition 1
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.state_change
+#        from: 'off'
+#        to: 'on'
+#
+#    condition:
+#      - condition: state
+#        entity_id: input_boolean.condition_3
+#        state: 'on'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_4
+#            state: 'on'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_5
+#            state: 'on'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_1
+#            state: 'on'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_2
+#            state: 'on'
+#
+#    action:
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.rgb_light
+#          option: "Red"
+#
+#
+#  ### Test Condition 2
+#  - alias: Test Input Boolean Condition 2
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.state_change
+#        from: 'off'
+#        to: 'on'
+#
+#    condition:
+#      - condition: state
+#        entity_id: input_boolean.condition_1
+#        state: 'on'
+#
+#      - condition: state
+#        entity_id: input_boolean.condition_2
+#        state: 'on'
+#
+#      - condition: state
+#        entity_id: input_boolean.condition_3
+#        state: 'off'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_4
+#            state: 'off'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_5
+#            state: 'off'
+#
+#    action:
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.rgb_light
+#          option: "Blue"
+#
+#
+#  ### Test Condition 3
+#  - alias: Test Input Boolean Condition 3
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: input_boolean.state_change
+#        from: 'off'
+#        to: 'on'
+#
+#    condition:
+#      - condition: state
+#        entity_id: input_boolean.condition_1
+#        state: 'off'
+#
+#      - condition: state
+#        entity_id: input_boolean.condition_2
+#        state: 'off'
+#
+#      - condition: state
+#        entity_id: input_boolean.condition_3
+#        state: 'off'
+#
+#      - condition: or
+#        conditions:
+#          - condition: state
+#            entity_id: input_boolean.condition_4
+#            state: 'on'
+#
+#          - condition: state
+#            entity_id: input_boolean.condition_5
+#            state: 'on'
+#
+#    action:
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.rgb_light
+#          option: "Violet"
+
+
+#  ### TEST --- Turn off the lights in the morning once sun is up high enough
+#  - alias: Test Living Room Off Morning
+#    initial_state: 'on'
+#    trigger:
+#      - platform: numeric_state
+#        entity_id: sun.sun
+#        value_template: '{{ state.attributes.elevation }}'
+#        above: 9
+#        for:
+#          minutes: 5
+#
+#    action:
+#      - service: notify.ios_i8plus
+#        data:
+#          title: "Sun Up Trigger OK"
+#          message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.floorplan_time.state }}"
+
+
+#  ### TEST --- Set away mode when weather is awesome
+#  - alias: Test Climate Upstairs Away if Awesome Weather
+#    initial_state: 'on'
+#    trigger:
+#      - platform: numeric_state
+#        entity_id: sensor.us_avg_temp
+#        above: 68
+#        below: 81
+#
+#        for:
+#          minutes: 15
+#
+#    action:
+#      - service: notify.ios_i8plus
+#        data:
+#          title: "Awesome Weather Trigger OK"
+#          message: "Awesome Weather Trigger OK"

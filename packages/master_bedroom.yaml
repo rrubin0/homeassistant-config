@@ -1,0 +1,214 @@
+############################################################################
+#    @package          :     master_bedroom
+#    @description      :     master bedrrom switches, lights and associated automations, scenes, etc.
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'master_bedroom'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Group
+    ################################################
+    group.master_bedroom:
+      <<: *contained
+
+    group.mbr_lights:
+      friendly_name: "Master Bedroom Lights"
+
+
+    ################################################
+    ## Light
+    ################################################
+    light.master_bedroom_chandelier_level:
+      friendly_name: "Master Bedroom Chandelier"
+      icon: mdi:ceiling-light
+
+    light.master_sitting_lamp:
+      <<: *contained
+      friendly_name: "Master Bedroom Sitting Lamp"
+      icon: mdi:lamp
+
+    light.master_reading_lamp:
+      <<: *contained
+      friendly_name: "Master Bedroom Reading Lamp"
+      icon: mdi:lamp
+
+    light.master_bed_ceiling_level:
+      friendly_name: "Master Bedroom Ceiling Lights"
+      icon: mdi:white-balance-incandescent
+
+    light.master_bed_entry_level:
+      friendly_name: "Master Bedroom Entry Lights"
+      icon: mdi:white-balance-incandescent
+
+    ################################################
+    ## Media Player
+    ################################################
+    media_player.kodi_bedroom:
+      <<: *contained
+      friendly_name: "Bedroom Kodi"
+
+    ################################################
+    ## Script
+    ################################################
+    script.mbr_night_light:
+      icon: mdi:weather-night
+
+    script.master_bedroom_night_time:
+      icon: mdi:weather-night
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Master Bedroom:
+    control: hidden
+    entities:
+      - script.master_bedroom_night_time
+      - script.mbr_night_light
+      - light.master_bedroom_chandelier_level
+      - light.master_sitting_lamp
+      - light.master_reading_lamp
+      - light.master_bed_entry_level
+      - light.master_bed_ceiling_level
+
+
+  MBR Lights:
+    entities:
+      - light.master_bedroom_chandelier_level
+      - light.master_sitting_lamp
+      - light.master_reading_lamp
+      - light.master_bed_entry_level
+      - light.master_bed_ceiling_level
+      - light.under_bed_lights
+
+
+#####################################################################
+### Media Player
+#####################################################################
+media_player:
+  - platform: kodi
+    host: !secret kodi_bedroom
+    port: !secret kodi_port
+    name: kodi_bedroom
+    username: !secret kodi_user
+    password: !secret kodi_password
+
+
+#####################################################################
+### Script
+#####################################################################
+script:
+  ### Master Bedroom Night Time Mode
+  master_bedroom_night_time:
+    alias: "Master Bedroom Night Time"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights_level
+        brightness: 120
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bathroom"
+        scene_name: "Morning"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.under_bed_lights
+        brightness: 55
+        rgb_color: [0,55,55]
+
+#    - service: switch.turn_on
+#      entity_id: switch.master_bedroom_fan
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.master_bedroom_fan_speed
+#        option: 4
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_bedroom_chandelier_level
+#        brightness: 55
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_sitting_lamp
+#        brightness: 50
+#        transition: 3
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_bed_entry_level
+#        brightness: 50
+
+
+  ### Night Light Mode
+  mbr_night_light:
+    alias: "Night Light"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.under_bed_lights
+        brightness: 40
+        rgb_color: [0,60,60]
+
+    - service: light.turn_on
+      data:
+        entity_id: light.master_sitting_lamp
+        brightness: 60
+        transition: 10
+
+    - delay:
+        minutes: 10
+
+    - service: light.turn_off
+      data:
+        entity_id: light.master_sitting_lamp
+        transition: 5
+
+    - delay:
+        minutes: 1
+
+    - service: light.turn_off
+      entity_id: light.under_bed_lights
+
+
+#####################################################################
+### Automation
+#####################################################################
+#automation:
+#  ### Auto set light brightness levels
+#  - alias: Master Bedroom Time Brightness
+#    initial_state: 'on'
+#    trigger:
+#      platform: state
+#      entity_id:
+#        - light.master_bed_ceiling_level
+#        - light.master_bed_entry_level
+#      to: 'on'
+#
+#    action:
+#      - service: light.turn_on
+#        data_template:
+#          entity_id: "{{ trigger.entity_id }}"
+#          brightness: "{{ states.sensor.time_brightness.state }}"

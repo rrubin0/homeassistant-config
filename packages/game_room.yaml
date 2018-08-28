@@ -1,0 +1,50 @@
+#####################################################################
+#    @package          :     billiards_room
+#    @description      :     billiards_room and associated automations, scenes, etc.
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'billiards_room'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Group
+    ################################################
+#    group.billiards_room:
+#      <<: *contained
+#      friendly_name: "Billiards Room"
+#      order: 6
+
+    ################################################
+    ## Switch
+    ################################################
+    switch.billiards_room_lights_switch:
+      friendly_name: "Billiards Room Lights"
+      icon: mdi:ceiling-light
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Billiards Room:
+    entities:
+      - switch.billiards_room_lights_switch

@@ -1,0 +1,236 @@
+#####################################################################
+#    @package          :     system
+#    @description      :     system and associated automations, etc.
+#####################################################################
+homeassistant:
+  customize_domain:
+    automation:
+      icon: mdi:timetable
+
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'system'
+        homebridge_hidden: true
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+#        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+#        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Script
+    ################################################
+    script.restart_ha:
+      <<: *contained
+      friendly_name: "Restart Home Assistant"
+      icon: mdi:recycle
+
+    script.kodi_time_and_temp:
+      <<: *contained
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.speedtest_ping:
+      <<: *contained
+      friendly_name: "Ping"
+      icon: mdi:clock
+
+    sensor.speedtest_download:
+      <<: *contained
+      friendly_name: "Download"
+      icon: mdi:arrow-down
+
+    sensor.speedtest_upload:
+      <<: *contained
+      friendly_name: "Upload"
+      icon: mdi:arrow-up
+
+    sensor.sabnzbd_disk:
+      <<: *contained
+      friendly_name: "Total Storage"
+      icon: mdi:harddisk
+
+    sensor.sabnzbd_disk_free:
+      <<: *contained
+      friendly_name: "Storage Remaining"
+      icon: mdi:chart-pie
+
+    sensor.sabnzbd_queue:
+      <<: *contained
+      friendly_name: "Queued for Download"
+      icon: mdi:clipboard-arrow-down
+
+    sensor.sabnzbd_speed:
+      <<: *contained
+      friendly_name: "DL Speed"
+      icon: mdi:speedometer
+
+    sensor.sabnzbd_status:
+      <<: *contained
+      friendly_name: "Current State"
+      icon: mdi:check
+
+    sensor.uptime:
+      <<: *contained
+      friendly_name: "System Uptime"
+      icon: mdi:clock
+
+    sensor.holiday:
+      <<: *contained
+      icon: mdi:calendar-check
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Speedtest:
+    entities:
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+
+  Downloads:
+    entities:
+      - sensor.sabnzbd_disk
+      - sensor.sabnzbd_disk_free
+      - sensor.sabnzbd_queue
+      - sensor.sabnzbd_speed
+      - sensor.sabnzbd_status
+
+  HA Status:
+    entities:
+      - sensor.holiday
+      - sensor.ha_current_version
+      - sensor.uptime
+      - sensor.ha_last_restart
+      - sensor.last_boot
+      - sensor.disk_free_home
+
+
+#####################################################################
+### Sensor
+#####################################################################
+sensor:
+  ## Home Assistant - Current Version
+  - platform: command_line
+    name: HA Current Version
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+
+  ## Home Assistant - Last Restart
+  - platform: template
+    sensors:
+      ha_last_restart:
+        friendly_name: "HA Last Restart"
+        value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
+        entity_id: sensor.time
+
+  ## Date and Time
+  - platform: time_date
+    display_options:
+      - 'time'
+
+  - platform: template
+    sensors:
+      time_templated_am_pm:
+        friendly_name: 'Time AM/PM'
+        value_template: "{{ now().strftime('%I:%M %p') }}"
+        entity_id: sensor.time
+
+  - platform: template
+    sensors:
+      date_templated_us:
+        friendly_name: 'Date US Style'
+        value_template: "{{ now().strftime('%b %d, %Y') }}"
+        entity_id: sensor.time
+
+  ## Holidays
+  - platform: rest
+    resource: https://raw.githubusercontent.com/skalavala/smarthome/master/holidays.json
+    name: Holiday
+    scan_interval: 14400
+    value_template: >
+      {% set today = now().month  ~ '/' ~ now().day  %}
+      {% set holiday =  value_json.MAJOR_US.static[ today ] %}
+      {% if holiday | trim == "" %}
+        {% set today = now().month  ~ '/' ~ now().day ~ '/' ~ now().year %}
+        {% set holiday =  value_json.MAJOR_US.dynamic[ today ] %}
+      {% endif %}
+      {{ holiday }}
+
+  ## Uptime
+  - platform: uptime
+    unit_of_measurement: hours
+
+  ## Speedtest
+  - platform: speedtest
+    minute:
+      - 0
+      - 30
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+  ## System Resources
+  - platform: systemmonitor
+    resources:
+      - type: disk_free
+        arg: /home
+      - type: memory_free
+      - type: processor_use
+      - type: last_boot
+
+#  ## SABNZBD --- deprecated after 0.68.1
+#  - platform: sabnzbd
+#    name: SABNZBD
+#    api_key: !secret sabnzb_api_key
+#    host: !secret sabnzb_host
+#    port: !secret sabnzb_port
+#    monitored_variables:
+#      - 'current_status'
+#      - 'speed'
+#      - 'queue_size'
+#      - 'queue_remaining'
+#      - 'disk_size'
+#      - 'disk_free'
+
+
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ## Send notification after home assistant has restarted
+  - alias: Startup Notification
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: homeassistant
+      event: start
+
+    action:
+    - service: notify.pushbullet
+      data:
+        title: "Home Assistant Startup"
+        target: "device/Chrome"
+        message: "Home Assistant is up and running."
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Home Assistant Startup"
+        message: "Home Assistant is up and running."

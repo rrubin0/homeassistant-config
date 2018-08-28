@@ -1,0 +1,100 @@
+############################################################################
+#    @package          :     sonoff switch states
+#    @description      :     preserve sonoff switch states across restarts
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'sonoff_switch_states'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.staircase_lamp:
+      <<: *hidden
+
+    sensor.wine_room_lamp:
+      <<: *hidden
+
+
+#####################################################################
+#  Sensor
+#####################################################################
+sensor:
+  - platform: mqtt
+    state_topic: "/home/sonoffs/staircase_lamp"
+    name: "Staircase Lamp"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/sonoffs/wine_room_lamp"
+    name: "Wine Room Lamp"
+    value_template: "{{ value }}"
+
+
+#####################################################################
+#  Automation - Saves Switch State to MQTT
+#####################################################################
+automation:
+  - alias: Sonoff Switches State Save
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: switch.staircase_lamp, switch.wine_room_lamp
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "/home/sonoffs/{{ trigger.entity_id.split('.')[1] }}"
+        retain: true
+        qos: 1
+        payload: '{{ trigger.to_state.state }}'
+
+
+#####################################################################
+# Startup event - restores states of Sonoff Switches
+#####################################################################
+  - alias: Sonoff Switch State Restore
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: homeassistant
+      event: start
+
+    action:
+      - delay:
+          minutes: 1
+      - service_template: >
+          {%- if states.sensor.staircase_lamp.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.staircase_lamp
+
+      - service_template: >
+          {%- if states.sensor.wine_room_lamp.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.wine_room_lamp

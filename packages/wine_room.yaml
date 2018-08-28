@@ -1,0 +1,78 @@
+#####################################################################
+#    @package          :     wine_room
+#    @description      :     wine room lights and automations
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'wine_room'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Group
+    ################################################
+#    group.wine_room_lights:
+#      <<: *contained
+#      order: 4
+
+    ################################################
+    ## Light
+    ################################################
+    light.wine_room:
+      <<: *contained
+      friendly_name: "Wine Room Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.northeast_wine:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.northwest_wine:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.southeast_wine:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+    light.southwest_wine:
+      <<: *contained
+      icon: mdi:white-balance-incandescent
+
+
+#####################################################################
+### Group
+#####################################################################
+group:
+  Wine Room Lights:
+    control: hidden
+    entities:
+      - switch.wine_room_lamp
+      - light.wine_room
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+
+
+#####################################################################
+### Automation
+#####################################################################
+#automation:

@@ -1,0 +1,89 @@
+############################################################################
+#    @package          :     downstairs_bath
+#    @description      :     downstairs bath (aka beach room), and associated automations
+############################################################################
+homeassistant:
+  customize:
+   ################################################
+   ## Node Anchors
+   ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'downstairs_bath'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+
+   ################################################
+   ## Switch
+   ################################################
+    switch.downstairs_bath_lights_switch:
+      friendly_name: "Bathroom Lights"
+      icon: mdi:white-balance-incandescent
+
+   ################################################
+   ## Script
+   ################################################
+
+
+####################################################################
+## Group
+####################################################################
+group:
+  Downstairs Bath:
+    control: hidden
+    entities:
+      - switch.downstairs_bath_lights_switch
+
+
+####################################################################
+## Script
+####################################################################
+
+
+####################################################################
+## Automation
+####################################################################
+automation:
+### Turn on the lights if entering from patio
+  - alias: Bathroom Lights on Entry
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.beach_door_state
+        from: 'Closed'
+        to: 'Open'
+
+    condition:
+      - condition: sun
+        after: sunset
+
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.downstairs_bath_lights_switch
+
+#      - service: media_player.alexa_tts
+#        data_template:
+#          entity_id: media_player.living_room
+#          message: "The {{ trigger.to_state.attributes.friendly_name }} is open."
+
+      - delay:
+          minutes: 15
+
+      - service: switch.turn_off
+        data:
+          entity_id: switch.downstairs_bath_lights_switch
+

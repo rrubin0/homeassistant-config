@@ -1,0 +1,73 @@
+#####################################################################
+#    @package          :     tts
+#    @description      :     text-to-speech (still very beta; not much use for it yet)
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'tts'
+
+      contained: &contained
+        <<: *customize
+        haaska_hidden: true
+        homebridge_hidden: true
+
+      exposed: &exposed
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+      hidden: &hidden
+        <<: *contained
+        hidden: true
+
+    ################################################
+    ## Script
+    ################################################
+    script.time_temp:
+      <<: *hidden
+      friendly_name: "Time and Temp"
+      icon: mdi:play-circle
+
+
+#####################################################################
+### TTS
+#####################################################################
+tts:
+  - platform: google
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 300
+
+
+#####################################################################
+### Script
+#####################################################################
+script:
+  time_temp:
+    alias: "Kodi Time and Temp"
+    sequence:
+      - service: tts.google_say
+        data_template:
+          entity_id: media_player.kodi_living_room
+          message: >-
+            {% if now().strftime("%H")|int < 12 %}
+            Good morning.
+            {% elif now().strftime("%H")|int < 18 %}
+            Good afternoon.
+            {% else %}
+            Good evening.
+            {% endif %}
+            'The temperature is {{states.sensor.pws_temp_f.state|round}} degrees right now in Mesa'
+            {% if now().strftime("%H")|int < 8 %}
+            'Rick's commute to work is {{states.sensor.rick_work_commute.state | int }} minutes if you leave now.'
+            {% endif %}
+
+      - service: tts.google_say
+        data_template:
+          entity_id: media_player.kodi_living_room
+          message: 'the temperature downstairs is about {{states.sensor.ds_avg_temp.state | int }} degrees.'
