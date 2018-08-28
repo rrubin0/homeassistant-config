@@ -1,5 +1,5 @@
 *
-*._*.yaml
+packages/._*.yaml
 !packages
 !reference
 !*.yaml
