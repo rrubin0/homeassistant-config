@@ -72,8 +72,7 @@ homeassistant:
       icon: mdi:white-balance-incandescent
 
     light.foyer_lights_level:
-      friendly_name: "Foyer Chandelier"
-      haaska_name: "Foyer Lights"
+      friendly_name: "Foyer Lights"
       icon: mdi:ceiling-light
 
 
@@ -163,15 +162,12 @@ automation:
         state: 'on'
 
     action:
-      - delay:
-          minutes: 1
-
       - service: light.turn_off
         entity_id: light.living_room_lamp
 
 
-  ### Set the Living Room Normal scene at sunset
-  - alias: Living Room Normal Scene Schedule
+  ### Set the Evening scene at sunset
+  - alias: Evening Scene Schedule
     initial_state: 'on'
     trigger:
       - platform: sun
@@ -194,7 +190,7 @@ automation:
 
     action:
       - service: scene.turn_on
-        entity_id: scene.living_room_normal
+        entity_id: scene.evening
 
 ## Turn on the Christmas Tree Lights
 #      - service: switch.turn_on
@@ -221,7 +217,7 @@ automation:
 #    action:
 #
 #      - service: scene.turn_on
-#        entity_id: scene.living_room_bright
+#        entity_id: scene.bright
 #
 #      - service: light.turn_on
 #        entity_id: light.kitchen_lights_level
@@ -263,7 +259,7 @@ automation:
     action:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Bright"
 
       - delay:
@@ -305,7 +301,7 @@ automation:
 #              sound: "US-EN-Alexa-Welcome-Home.wav"
 #
 #      - service: scene.turn_on
-#        entity_id: scene.living_room_bright
+#        entity_id: scene.bright
 #
 #      - service: light.turn_on
 #        data:
@@ -316,7 +312,7 @@ automation:
 #          minutes: 3
 #
 #      - service: scene.turn_on
-#        entity_id: scene.living_room_normal
+#        entity_id: scene.evening
 #
 #      - service: homeassistant.turn_on
 #        entity_id: group.accent_lights
@@ -371,7 +367,7 @@ automation:
 
     action:
       - service: scene.turn_on
-        entity_id: scene.living_room_cloudy
+        entity_id: scene.cloudy
 
 
   ### Turn off lights after rain has stopped

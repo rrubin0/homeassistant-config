@@ -59,27 +59,6 @@ homeassistant:
     switch.tv_volume:
       <<: *contained
 
-    switch.tv_mute:
-      haaska_name: "Mute"
-
-    switch.tv_power:
-      haaska_name: "TV"
-
-    switch.tv_input_directv:
-      haaska_name: "Input One"
-
-    switch.tv_input_firetv:
-      haaska_name: "Input Two"
-
-    switch.tv_input_chromecast:
-      haaska_name: "Input Three"
-
-    switch.amp_power:
-      haaska_name: "Surround Sound"
-
-    switch.directv_power:
-      haaska_name: "Direct TV"
-
 
 #####################################################################
 ### Broadlink RM Pro
@@ -123,7 +102,7 @@ switch:
 #### Living Room TV
 ######################################################################
       tv_power:
-        friendly_name: "TV Power"
+        friendly_name: "TV"
         command_on: 'JgBQAAABKZIUEBUQFTQVEBUQFBAVEBUQFDUUNhMRFDUVNBU0FTQVNBUQFRAVEBQ2FBAVEBUQFBAVNBU0FTQVEBU1FDUVNBU0FQAFJAABKkcUAA0FAAAAAAAAAAA='
         command_off: 'JgBQAAABKZIUEBUQFTQVEBUQFBAVEBUQFDUUNhMRFDUVNBU0FTQVNBUQFRAVEBQ2FBAVEBUQFBAVNBU0FTQVEBU1FDUVNBU0FQAFJAABKkcUAA0FAAAAAAAAAAA='
 
@@ -133,31 +112,31 @@ switch:
         command_off: 'JgBQAAABKZEVEBUPFjQVEBUQFBEUEBUQFTQVNBUQFDUVNBU1FDUUNRQ1FDUUEBUQFRAVEBUQFRAVEBQQFTQVNBU0FTQVNBY0FQAFJAABKUcWAA0FAAAAAAAAAAA='
 
       tv_mute:
-        friendly_name: "TV Mute"
+        friendly_name: "Mute"
         command_on: 'JgBYAAABKZEVEBQQFTUUERQRFBEUEBUQFTQVNBUQFDUUNRQ2FDUUNRQ1FBAVEBU0FRAVEBQRFBEUERM2FDUUEBU0FTQVNBU1FAAFJQABKUcVAAxMAAEpRxUADQU='
 
       tv_input_directv:
-        friendly_name: "TV Input DirecTV"
+        friendly_name: "Input One"
         command_on: 'JgBQAAABKJIUERQSEzUVEBQRFBAVEBQQFTQVNBURFDUUNRQ1FTQVNBUQFTQVEBQRFBEUERMRFDUVNBURFDQVNBU1FDUUNRUQFQAFJAABKEgVAA0FAAAAAAAAAAA='
 
       tv_input_firetv:
-        friendly_name: "Input FireTV"
+        friendly_name: "Input Two"
         command_on: 'JgBQAAABKZIUEBQRFTQVEBQQFRAVEBUQFDUUNRQRFDUUNRU0FTQVNBU0FREUERMRFBEUEhMRFDUUEBU0FTQVNRQ1FDUVNBUQFQAFJAABKUgUAA0FAAAAAAAAAAA='
 
       tv_input_chromecast:
-        friendly_name: "Input Chromecast"
+        friendly_name: "Input Three"
         command_on: 'JgBQAAABKZEUERQQFTQVEBUQFBEUERQRFDUUNRQRFDUUNRQ1FDUUNhQ1FDUUEBUQFRAUEBUQFTQVEBQRFDYUNRQ1FDUUNRQQFQAFJQABKUcUAA0FAAAAAAAAAAA='
 
 ######################################################################
 #### DirecTV
 ######################################################################
       directv_power:
-        friendly_name: "DirecTV Power"
+        friendly_name: "DirecTV"
         command_on: 'JgBYAMYmKSUWESoRFhIWEhUSKSYoEhYAA9ZkJikmFhIoEhYSFRIWEigmKBIWAAPXZCYpJRYSKBIWEhUSFhIoJigTFQAD12UlKSYVEikSFRIVExUTKCYpEhUADQU='
         command_off: 'JgBYAMYmKSUWEigTFRMVEhUmKSYoJhUAA9dlJigmFRIpEhUSFhIVJigmKSYVAAPXZSUpJhUSKRIVExQTFSYpJigmFQAD12UlKSYWEigSFhIVEhUmKSUpJhUADQU='
 
       directv_play:
-        friendly_name: "DirecTV Play"
+        friendly_name: "Pause"
         command_on: 'JgCEAMglKSYVEhUSKSYVEhYSKCYpJhUAA9dkJignFRMVEiklFhIVEiklKSYVAAPYZCYoJhUSFhIoJhYRFxEpJSolFgAD1mQmKiQXERYRKiUWEhUSKSYoJhUAA9dlJigmFRIWEigmFhIVEigmKSUXAAPXZCUpJhUSFRIqJRYRFxEpJigmFQANBQAAAAA='
 ## pause:
         command_off: 'JgCEAMYmKCYVEhYSKCYVEykSFRIWJhUAA9dkJSknFRIWEigmFRIpEhUSFiUWAAPWZiUpJhUSFRIpJhUSKRIVEhYlFgAD12QmKSUWEhUSKSUWEigTFRIWJhUAA9dkJigmFhIVEikmFhIoEhYSFSYVAAPXZCYoJxQTFRMoJhUSKRIVEhYmFQANBQAAAAA='
@@ -166,7 +145,7 @@ switch:
 #### Onkyo Amp
 ######################################################################
       amp_power:
-        friendly_name: "Amp Power"
+        friendly_name: "Amp"
         command_on: 'JgBgAAABKpEVEBQ1FBAVEBU0FRAUNRU0FRAVEBU0FTQVEBU0FTQVEBU0FTUUEBU0FRAVEBQ1FDUUERQQFTQWEBU0FTQVEBQQFQAFJAABKkcUAAxNAAEoRxUADEwAASlHFQANBQAAAAAAAAAA'
         command_off: 'JgBgAAABKpEVEBQ1FBAVEBU0FRAUNRU0FRAVEBU0FTQVEBU0FTQVEBU0FTUUEBU0FRAVEBQ1FDUUERQQFTQWEBU0FTQVEBQQFQAFJAABKkcUAAxNAAEoRxUADEwAASlHFQANBQAAAAAAAAAA'
 

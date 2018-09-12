@@ -12,9 +12,30 @@ homeassistant:
         package: 'pool_scenes'
 
 
-#####################################################################
-### Script
-#####################################################################
+    ################################################
+    ## Script
+    ################################################
+    script.pool_cycle:
+      friendly_name: "Pool Colors"
+
+    script.pool_caribbean:
+      friendly_name: "Pool Caribbean"
+
+    script.pool_party:
+      friendly_name: "Pool Party"
+
+    script.pool_patriotic:
+      friendly_name: "Pool Patriotic"
+
+    script.pool_romance:
+      friendly_name: "Pool Romance"
+      
+    script.pool_royal:
+      friendly_name: "Pool Royal"
+      
+    script.pool_sunset:
+      friendly_name: "Pool Sunset"
+
 
 script:
   #####################################################################

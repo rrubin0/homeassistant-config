@@ -102,13 +102,13 @@ homeassistant:
     scene.morning:
       icon: mdi:weather-sunset-up
 
-    scene.living_room_normal:
-      friendly_name: "Living Room Normal"
+    scene.evening:
+      friendly_name: "Evening"
       icon: mdi:play-circle
 
-    scene.living_room_cloudy:
+    scene.cloudy:
       <<: *hidden
-      friendly_name: "Living Room Cloudy"
+      friendly_name: "Cloudy"
       icon: mdi:play-circle
 
     scene.movie_time:
@@ -143,10 +143,10 @@ group:
       - input_boolean.dinner_time
       - script.bedtime
       - scene.movie_time
-      - scene.living_room_dim
-      - scene.living_room_cloudy
-      - scene.living_room_normal
-      - scene.living_room_bright
+      - scene.dim
+      - scene.cloudy
+      - scene.evening
+      - scene.bright
       - script.shutdown_lights
 
   Hue Scenes:
@@ -255,7 +255,7 @@ script:
 
     - service: hue.hue_activate_scene
       data:
-        group_name: "Family Room"
+        group_name: "Living Room"
         scene_name: "Sunrise"
 
     - service: light.turn_on
@@ -277,7 +277,7 @@ script:
   nap_time:
     sequence:
     - service: light.turn_off
-      entity_id: light.family_room
+      entity_id: light.living_room
       data:
         transition: 5
 
@@ -301,7 +301,7 @@ script:
 
 #      - service: hue.hue_activate_scene
 #        data:
-#          group_name: "Family Room"
+#          group_name: "Living Room"
 #          scene_name: "Nap Time"
 #
 #      - service: hue.hue_activate_scene
@@ -357,11 +357,11 @@ script:
     - service: switch.turn_on
       entity_id: 
         - switch.outdoor_speakers
-        - switch.billiards_room_lights_switch
+        - switch.game_room_lights_switch
         - switch.pool_light_switch
 
     - service: scene.turn_on
-      entity_id: scene.living_room_bright
+      entity_id: scene.bright
 
     - service: lock.unlock
 
@@ -383,63 +383,63 @@ script:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Dimmed"
 
   hue_lr_nightlight:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Nightlight"
 
   hue_lr_bright:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Bright"
 
   hue_lr_christmas:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Christmas"
 
   hue_lr_movie:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Movie"
 
   hue_lr_sunrise:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Sunrise"
 
   hue_lr_sunset:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Sunset"
 
   hue_lr_minty:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Minty"
 
   hue_lr_daybreak:
     sequence:
       - service: hue.hue_activate_scene
         data:
-          group_name: "Family Room"
+          group_name: "Living Room"
           scene_name: "Daybreak"
 
   hue_mbath_morning:
@@ -490,7 +490,6 @@ automation:
 
     action:
       - service: script.bedtime
-
 
   ### Bedtime Timer Reset
   - alias: Bedtime Timer Reset

@@ -37,7 +37,7 @@ homeassistant:
     ################################################
     light.master_bathroom:
       <<: *contained
-      friendly_name: "Master Bathroom Ceiling"
+      friendly_name: "Master Bathroom Lights"
       icon: mdi:google-circles-communities
 
     light.master_bath_entry:

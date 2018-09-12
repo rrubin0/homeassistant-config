@@ -45,8 +45,7 @@ homeassistant:
       icon: mdi:white-balance-incandescent
 
     light.dining_room_chandelier_level:
-      friendly_name: "Dining Room Chandelier"
-      haaska_name: "Dining Room Light"
+      friendly_name: "Dining Room Light"
       icon: mdi:ceiling-light
 
 

@@ -9,6 +9,7 @@ logbook:
       - media_player
       - zwave
       - weather
+      - group
 
     entities:
       - automation.rain_sensor
@@ -179,6 +180,36 @@ logbook:
       - sensor.yweather_visibility
       - sensor.yweather_wind_speed
 
+      - binary_sensor.beach_door_contact_sensor
+      - binary_sensor.door_window_sensor_158d00022f803b
+      - binary_sensor.door_window_sensor_158d0002332a6b
+      - binary_sensor.front_door_contact_sensor
+      - binary_sensor.front_entry_fibaro_multisensor_sensor
+      - binary_sensor.kitchen_door_contact_sensor
+      - binary_sensor.south_door_contact_sensor
+      - binary_sensor.switch_158d00026b8505
+      - binary_sensor.workday_sensor
+
+      - light.center_entry
+      - light.kitchen_entry
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
+      - light.master_bedroom
+      - light.northeast_ceiling
+      - light.northeast_wine
+      - light.northwest_ceiling
+      - light.northwest_wine
+      - light.sn1_led
+      - light.south_entry
+      - light.southeast_ceiling
+      - light.southeast_wine
+      - light.southwest_ceiling
+      - light.southwest_wine
+
+      - switch.tv_power
+      - switch.amp_power
+      - switch.directv_power
 
 ### REFERENCE ###
 ## the complete list of domains ##

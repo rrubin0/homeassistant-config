@@ -131,8 +131,8 @@ group:
       - script.find_iphone
       - sensor.mip8_battery_level_2
       - sensor.megs_eta
-      - sensor.megs_home_commute
-      - sensor.megs_work_commute
+#      - sensor.megs_home_commute
+#      - sensor.megs_work_commute
 
 
 ################################################################
@@ -149,6 +149,14 @@ proximity:
     tolerance: 50
     unit_of_measurement: mi
 
+  rick:
+    ignored_zones:
+      - megs_work
+    devices:
+      - device_tracker.i8plus
+    tolerance: 50
+    unit_of_measurement: mi
+
 
 #####################################################################
 ###  Sensor
@@ -156,36 +164,42 @@ proximity:
 sensor:
 
   - platform: google_travel_time
+    scan_interval: 900
     name: Ricks Office Commute
     api_key: !secret google_time_travel_api_key
     origin: Home
     destination: Office
 
   - platform: google_travel_time
+    scan_interval: 900
     name: Ricks Home Commute
     api_key: !secret google_time_travel_api_key
     origin: Office
     destination: Home
 
-  - platform: google_travel_time
-    name: Megs Work Commute
-    api_key: !secret google_time_travel_api_key
-    origin: Home
-    destination: Arete
+#  - platform: google_travel_time
+#    scan_interval: 420
+#    name: Megs Work Commute
+#    api_key: !secret google_time_travel_api_key
+#    origin: Home
+#    destination: Arete
+
+#  - platform: google_travel_time
+#    scan_interval: 420
+#    name: Megs Home Commute
+#    api_key: !secret google_time_travel_api_key
+#    origin: Arete
+#    destination: Home
 
   - platform: google_travel_time
-    name: Megs Home Commute
-    api_key: !secret google_time_travel_api_key
-    origin: Arete
-    destination: Home
-
-  - platform: google_travel_time
+    scan_interval: 300
     name: Megs ETA Home
     api_key: !secret google_time_travel_api_key
     origin: device_tracker.mip8
     destination: Home
 
   - platform: google_travel_time
+    scan_interval: 600
     name: Ricks ETA Home
     api_key: !secret google_time_travel_api_key
     origin: device_tracker.i8plus
@@ -319,3 +333,52 @@ automation:
           title: "Away Mode Cancelled"
           message: "Away mode cancelled."
 
+
+  ### Cancel Visitor Mode
+  - alias: Cancel Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.visitor_mode
+
+
+  ### Announce Rick's arrival
+  - alias: Announce Rick On Arrival
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: proximity.rick
+        below: 5
+
+    condition:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+
+      - condition: time
+        before: '00:19:00'
+        after: '00:15:00'
+
+      - condition: state
+        entity_id: device_tracker.i8plus
+        state: 'not_home'
+
+
+    action:
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room
+          message: "Good news, Rick is less than 10 minutes away and will be home soon"

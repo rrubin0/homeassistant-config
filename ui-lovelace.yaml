@@ -39,8 +39,8 @@ views:
           - script.find_iphone
           - sensor.mip8_battery_level_2
           - sensor.megs_eta
-          - sensor.megs_home_commute
-          - sensor.megs_work_commute
+#          - sensor.megs_home_commute
+#          - sensor.megs_work_commute
 
       - type: entities
         title: Travel Rick
@@ -95,6 +95,7 @@ views:
           - sensor.south_door_state
           - sensor.kitchen_door_state
           - sensor.beach_door_state
+          - sensor.kegerator_door_state
         state_filter:
           - 'open'
         show_empty: false
@@ -133,7 +134,7 @@ views:
             name: Flower Lamp
           - entity: light.office_desk_lamp
             name: Office Desk
-          - entity: switch.billiards_room_lights_switch
+          - entity: switch.game_room_lights_switch
             name: Game Room
 
         state_filter:
@@ -475,6 +476,7 @@ views:
           - sensor.south_door_state
           - sensor.kitchen_door_state
           - sensor.beach_door_state
+          - sensor.kegerator_door_state
 
 
 ####################################################################
@@ -537,10 +539,10 @@ views:
           - cover.kitchen_roller_shade_level
 
       - type: entities
-        title: Billiards Room
+        title: Game Room
         show_header_toggle: false
         entities:
-          - switch.billiards_room_lights_switch
+          - switch.game_room_lights_switch
 
 
       - type: vertical-stack
@@ -668,10 +670,10 @@ views:
         title: Lighting Scenes
         entities:
           - script.bedtime
-          - scene.living_room_dim
-          - scene.living_room_cloudy
-          - scene.living_room_normal
-          - scene.living_room_bright
+          - scene.dim
+          - scene.cloudy
+          - scene.evening
+          - scene.bright
           - scene.morning
           - input_boolean.dinner_time
           - scene.movie_time
@@ -1088,7 +1090,7 @@ views:
               zoom: 110%
 
           - type: state-badge
-            entity: light.family_room
+            entity: light.living_room
             tap_action: toggle
             style:
               top: 64%
@@ -1120,7 +1122,7 @@ views:
               zoom: 110%
 
           - type: state-icon
-            entity: switch.billiards_room_lights_switch
+            entity: switch.game_room_lights_switch
             tap_action: toggle
             style:
               top: 63%

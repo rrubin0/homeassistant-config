@@ -40,13 +40,10 @@ homeassistant:
       icon: mdi:fan
 
     switch.living_room_fan_low:
-      haaska_name: "Living Room Fan Low"
+      friendly_name: "Living Room Fan Low"
 
     switch.living_room_fan_medium:
-      haaska_name: "Living Room Fan Medium"
-
-    switch.living_room_fan_high:
-      haaska_name: "Living Room Fan High"
+      friendly_name: "Living Room Fan Medium"
 
     switch.living_room_fan_light:
       assumed_state: false

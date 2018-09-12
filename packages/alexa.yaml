@@ -14,9 +14,7 @@
           {%- if SensorType.lower() == "temperature" or SensorType.lower() == "temp"-%}
             The average temperature downstairs is {{ states('sensor.ds_avg_temp') }} degrees and upstairs it is {{ states('sensor.us_avg_temp') }} degrees.
           {%- elif SensorType.lower() == "humidity" -%}
-            Downstairs humidity is at {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states.sensor.upstairs_humidity.state }} percent.
-          {%- elif SensorType.lower() == "traffic" or SensorType.lower() == "commute" -%}
-            If you leave now, you're looking at about {{ states("sensor.ricks_office_commute") }} minutes to Rick's office and it should take Megs {{ states("sensor.megs_work_commute") }} minutes to get to Archway.
+            Downstairs humidity is {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states.sensor.upstairs_humidity.state }} percent.
           {%- elif SensorType.lower() == "front door" -%}
             The {{ SensorType }} is {{ states("sensor.front_door_state") }} and the tamper is {{ states("sensor.front_door_tamper") }}.
           {%- elif SensorType.lower() == "side door" -%}
@@ -112,7 +110,7 @@
       speech:
         type: plain
         text: >
-          {{ ["You can say, turn on Living Room Normal to activate normal lighting scene.", 
+          {{ ["You can say, turn on Evening to activate the evening lighting scene.", 
           "You can say, turn on Movie Time to dim the lights just like being in a theater.", 
           "To turn all the lights on or off you can say, turn off the interior lights.", 
           "To hear temperature information, say, tell us about the temperature", 

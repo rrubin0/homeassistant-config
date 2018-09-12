@@ -56,6 +56,11 @@ homeassistant:
     ################################################
     ## Sensor
     ################################################
+    climate.downstairs:
+      <<: *contained
+      friendly_name: "Downstairs Thermostat"
+      icon: mdi:thermostat
+
     sensor.ds_avg_temp:
       <<: *contained
       icon: mdi:chart-areaspline

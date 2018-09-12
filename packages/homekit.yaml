@@ -7,15 +7,6 @@ homekit:
   ip_address: !secret homekit_ip
 
   filter:
-#    include_domains:
-#      - light
-#      - switch
-#      - climate
-#      - binary_sensor
-#      - sensor
-#      - input_boolean
-#      - script
-
     include_entities:
 #################################
 # Device Tracker
@@ -33,7 +24,7 @@ homekit:
 # Lights - enabled
 #################################
       - light.entryway
-      - light.family_room
+      - light.living_room
       - light.foyer_lights_level
       - light.dining_room_chandelier_level
       - light.kitchen_lights_level
@@ -52,8 +43,7 @@ homekit:
 #################################
 # Switches - enabled
 #################################
-      - switch.billiards_room_lights_switch
-      - switch.directv_play
+      - switch.game_room_lights_switch
       - switch.directv_power
       - switch.flower_lamp
       - switch.fountains_switch
@@ -75,7 +65,7 @@ homekit:
       - script.ecobee_us_resume
       - script.ecobee_ds_home
       - script.ecobee_ds_resume
-      - script.bedtime
+      - script.start_bedtime_timer
       - script.hue_lr_bright
       - script.hue_lr_christmas
       - script.hue_lr_daybreak
@@ -155,8 +145,6 @@ automation:
 #      - light.porch_light_northwest
 #      - light.northwest_wine
 #      - light.sn1_led
-#      - light.billiards_light_south
-#      - light.billiards_light_north
 #      - light.south_entry
 #      - light.master_br_entry_south
 #      - light.patio_light_south

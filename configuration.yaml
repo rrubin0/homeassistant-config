@@ -20,7 +20,6 @@ sun:
 #updater:
 history:
 
-alexa:
 #python_script:
 group: !include groups.yaml
 #automation: !include automations.yaml

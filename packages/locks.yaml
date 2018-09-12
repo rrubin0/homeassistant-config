@@ -37,11 +37,11 @@ homeassistant:
     ################################################
     lock.bathroom_entry_locked:
       <<: *contained
-      friendly_name: "Beach Bathroom Door Lock"
+      friendly_name: "Bathroom Door"
 
     lock.south_entry_locked:
       <<: *contained
-      friendly_name: "South Entry Door Lock"
+      friendly_name: "South Entry Door"
 
     ################################################
     ## Script
@@ -72,8 +72,6 @@ group:
       - sensor.lock_beach_door_status
       - lock.south_entry_locked
       - sensor.lock_south_door_status
-
-
 
 
 #####################################################################
@@ -113,7 +111,6 @@ sensor:
           {% else %}
             {{ state|title }}
           {% endif %}
-        entity_id: sensor.time
 
 
       lock_south_door_status:
@@ -149,7 +146,6 @@ sensor:
           {% else %}
             {{ state|title }}
           {% endif %}
-        entity_id: sensor.time
 
 
 #####################################################################

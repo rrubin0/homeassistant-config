@@ -158,6 +158,11 @@ automation:
       - service: timer.start
         entity_id: timer.bedtime
 
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room
+          message: "Goodnight. See you in the morning."
+
 
   ### Smart Button Double Press
   - alias: Smart Button Double Press

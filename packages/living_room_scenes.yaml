@@ -4,7 +4,7 @@
 #####################################################################
 
 scene:
-  - name: Living Room Bright
+  - name: Bright
     entities:
       light.foyer_lights_level:
         state: on
@@ -31,7 +31,7 @@ scene:
         brightness: 255
 
 
-  - name: Living Room Normal
+  - name: Evening
     entities:
       light.foyer_lights_level:
         state: on
@@ -63,7 +63,7 @@ scene:
         transition: 10
 
 
-  - name: Living Room Dim
+  - name: Dim
     entities:
       light.foyer_lights_level:
         state: on
@@ -96,7 +96,7 @@ scene:
         transition: 20
 
 
-  - name: Living Room Cloudy
+  - name: Cloudy
     entities:
       light.foyer_lights_level:
         state: on

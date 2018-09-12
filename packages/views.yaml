@@ -129,7 +129,7 @@ homeassistant:
 #    group.wine_room_lights:
 ##      order: 7
 #
-#    group.billiards_room:
+#    group.game_room:
 #      <<: *contained
 ##      order: 8
 #
@@ -373,7 +373,7 @@ group:
 #      - group.entry_lights
 #      - group.kitchen
 #      - group.dining_room
-#      - group.billiards_room
+#      - group.game_room
 #      - group.office
 #      - group.downstairs_bath
 #      - group.downstairs_outlets

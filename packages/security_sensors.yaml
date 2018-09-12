@@ -141,6 +141,8 @@ homeassistant:
       <<: *contained
 
 
+
+
 #####################################################################
 ### Group
 #####################################################################
@@ -153,6 +155,7 @@ group:
       - binary_sensor.upstairs_occupancy
       - binary_sensor.nursery_occupancy
       - binary_sensor.guest_room_occupancy
+      - sensor.kegerator_door_state
       - sensor.front_entry_motion
       - sensor.nursery_ptz_motion_detected
       - sensor.nw_ptz_motion_detected
@@ -369,6 +372,33 @@ sensor:
           {% endif %}
 
 
+### Kegerator Door Status
+  - platform: template
+    sensors:
+      kegerator_door_state:
+        value_template: >-
+          {% set state = states('binary_sensor.door_window_sensor_158d0002332a6b') %}
+          {% if state == 'on' %}
+            Open
+          {% elif state == 'off' %}
+            Closed
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        friendly_name: "Kegerator Door"
+        icon_template: >-
+          {% set state = states('sensor.kegerator_door_state')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi:door
+          {% else %}
+            {% if state == 'Open' %}
+              mdi:door-open
+            {% else %}
+              mdi:door-closed
+            {% endif %}
+          {% endif %}
+
+
 ### Downstairs HVAC Leak Detector
   - platform: template
     sensors:
@@ -404,7 +434,7 @@ sensor:
 ### Automation
 #####################################################################
 automation:
-  ### 
+  ### AC Leak Detector Alarm
   - alias: Downstairs AC Leak Detector Alarm
     initial_state: 'on'
     hide_entity: true
@@ -423,3 +453,33 @@ automation:
         data:
           title: "Leak Detected"
           message: "HVAC overflow detected - AC turned off!"
+
+
+  ### Kegerator Door Alarm
+  - alias: Kegerator Door Held Open
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.kegerator_door_state
+        to: 'Open'
+        for:
+          minutes: 1
+
+    action:
+#      - service: climate.set_operation_mode
+#        data:
+#          entity_id: climate.downstairs
+#          operation_mode: 'off'
+
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.kitchen
+          message: "Attention! Please close the beer fridge door."
+
+      - service: notify.notify
+        data:
+          title: "Kegerator"
+          message: "The Kegerator door is held open!"
+
+

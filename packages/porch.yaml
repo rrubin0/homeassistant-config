@@ -9,7 +9,7 @@ homeassistant:
     ## Group
     ################################################
     group.porch:
-      haaska_name: "Porch Lights"
+      friendly_name: "Porch Lights"
 
     ################################################
     ## Switch

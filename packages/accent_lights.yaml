@@ -30,11 +30,11 @@ homeassistant:
     ## Switch
     ################################################
     switch.staircase_lamp:
-      haaska_name: "Staircase Lamp"
+      friendly_name: "Staircase Lamp"
       icon: mdi:lamp
 
     switch.wine_room_lamp:
-      haaska_name: "Wine Room Lamp"
+      friendly_name: "Wine Room Lamp"
       icon: mdi:lamp
 
 

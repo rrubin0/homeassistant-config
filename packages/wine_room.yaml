@@ -25,19 +25,13 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-#    group.wine_room_lights:
-#      <<: *contained
-#      order: 4
 
     ################################################
     ## Light
     ################################################
     light.wine_room:
       <<: *contained
-      friendly_name: "Wine Room Ceiling"
+      friendly_name: "Wine Room Lights"
       icon: mdi:google-circles-communities
 
     light.northeast_wine:

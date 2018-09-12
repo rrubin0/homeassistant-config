@@ -267,7 +267,7 @@ automation:
             {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
               scene.movie_ended
             {% else %}
-              scene.living_room_normal
+              scene.evening
             {% endif %}
 
   ### Living Room TV Input Select

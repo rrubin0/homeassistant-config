@@ -12,8 +12,8 @@ automation:
   ### Aeotec zwave Minimote #1: zwave.family_room_minimote
   #####
   ###    short                       long
-  ###  1 scene.living_room_normal    scene.living_room_bright
-  ###  2 scene.movie_time            scene.living_room_dim
+  ###  1 scene.evening    scene.bright
+  ###  2 scene.movie_time            scene.dim
   ###  3 kitchen_lights on 50%       kitchen_lights on 100%
   ###  4 kitchen_lights off          script.bedtime
   ###################################################################
@@ -30,7 +30,7 @@ automation:
 
     action:
       - service: scene.turn_on
-        entity_id: scene.living_room_normal
+        entity_id: scene.evening
 
   ###
   - alias: Minimote 1 Button 1 Long
@@ -45,7 +45,7 @@ automation:
 
     action:
       - service: scene.turn_on
-        entity_id: scene.living_room_bright
+        entity_id: scene.bright
 
   ###
   - alias: Minimote 1 Button 2 Short
@@ -78,7 +78,7 @@ automation:
 
     action:
       - service: scene.turn_on
-        entity_id: scene.living_room_dim
+        entity_id: scene.dim
 
   ###
   - alias: Minimote 1 Button 3 Short

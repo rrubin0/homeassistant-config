@@ -1,6 +1,6 @@
 #####################################################################
-#    @package          :     billiards_room
-#    @description      :     billiards_room and associated automations, scenes, etc.
+#    @package          :     game_room
+#    @description      :     game_room and associated automations, scenes, etc.
 #####################################################################
 homeassistant:
   customize:
@@ -9,7 +9,7 @@ homeassistant:
     ################################################
     package.node_anchors:
       customize: &customize
-        package: 'billiards_room'
+        package: 'game_room'
 
       contained: &contained
         <<: *customize
@@ -28,16 +28,16 @@ homeassistant:
     ################################################
     ## Group
     ################################################
-#    group.billiards_room:
+#    group.game_room:
 #      <<: *contained
-#      friendly_name: "Billiards Room"
+#      friendly_name: "Game Room"
 #      order: 6
 
     ################################################
     ## Switch
     ################################################
-    switch.billiards_room_lights_switch:
-      friendly_name: "Billiards Room Lights"
+    switch.game_room_lights_switch:
+      friendly_name: "Game Room Lights"
       icon: mdi:ceiling-light
 
 
@@ -45,6 +45,6 @@ homeassistant:
 ### Group
 #####################################################################
 group:
-  Billiards Room:
+  Game Room:
     entities:
-      - switch.billiards_room_lights_switch
+      - switch.game_room_lights_switch

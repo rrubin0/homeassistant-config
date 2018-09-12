@@ -44,8 +44,7 @@ homeassistant:
 
     switch.master_bedroom_fan_light:
       assumed_state: false
-      friendly_name: "Master Bedroom Fan Light"
-      haaska_name: "Bedroom Fan Light"
+      friendly_name: "Bedroom Fan Light"
       icon: mdi:ceiling-light
 
     switch.master_bedroom_fan_1:
