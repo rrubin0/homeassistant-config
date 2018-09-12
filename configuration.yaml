@@ -12,14 +12,10 @@ homeassistant:
    - type: legacy_api_password
 
 config:
-#hassio:
-#conversation:
 #discovery:
 
 sun:
-#updater:
 history:
 
 #python_script:
 group: !include groups.yaml
-#automation: !include automations.yaml

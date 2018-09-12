@@ -5,6 +5,10 @@
 !*.md
 !.gitignore
 secrets.yaml
+automations.yaml
+customize.yaml
+groups.yaml
+scripts.yaml
 known_devices.yaml
 proximity.yaml
 ip_bans.yaml
