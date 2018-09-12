@@ -14,14 +14,18 @@ I use Philips Hue for the following use cases:
 
 The switch problem with Hue can be solved by adding one of their wall switches to control, or using automations to control the lights in anticipation of your household users
 
-**Software & Addons in use:**
-* [Dasher](https://github.com/stjohnjohnson/mqtt-dasher)
-* [Haaska](https://github.com/auchter/haaska)
-* [Homebridge](https://github.com/nfarina/homebridge)
-* [FloorPlan](https://github.com/pkozul/ha-floorplan)
-* [Lets Encrypt](https://home-assistant.io/addons/lets_encrypt/)
-* [Mosquitto](https://home-assistant.io/addons/mosquitto/)
-* [Terminal](https://github.com/hassio-addons/addon-terminal)
+
+**My Docker Container Setup**
+* Home Assistant:
+`sudo docker run -d --name="home-assistant" --restart=always -v /home/hauser/hass_data/config:/config -v /usr/share/ssl:/ssl --device /dev/ttyACM0 -e "TZ=America/Phoenix" --net=host homeassistant/home-assistant`
+
+* [Dasher] (https://github.com/Nekmo/amazon-dash)
+`sudo docker run -itd --name=dasher --net=host -v /home/hauser/dasher/config/amazon-dash.yml:/config/amazon-dash.yml nekmo/amazon-dash:latest amazon-dash run --ignore-perms --root-allowed --config /config/amazon-dash.yml`
+
+* [Mosquitto] (https://hub.docker.com/_/eclipse-mosquitto/)
+`sudo docker run -itd --name="mosquitto" --restart=always -p 1883:1883 -p 9001:9001 -v /home/hauser/mqtt/config:/mosquitto/config -v /home/hauser/mqtt/data:/mosquitto/data -v /home/hauser/mqtt/logs:/mosquitto/logs eclipse-mosquitto`
+
+* Other component (non-docker): [Haaska] (https://github.com/mike-grant/haaska)
 
 
 **Devices I Use:**
@@ -39,7 +43,7 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * Pentair 5G LED Pool Light
 * Etekcity 433MHz RF Switches
 * Broadlink RM2/Pro
-* HUSBZB-1 ZigBee/Z-Wave Stick
+* HUSBZB-1 ZigBee/Z-Wave Stick (not in use; using Aeotec Z-stick)
 * GE Z-Wave Wall Switches & Dimmers
 * Flux LED strips and bulb
 * Sonoff WiFi DIY power strips
