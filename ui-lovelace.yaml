@@ -963,18 +963,6 @@ views:
           - input_boolean.condition_5
 
 
-#  - title: Camera Test
-#    icon: mdi:cctv
-#    cards:
-      - type: picture-glance
-        title: Front Door
-        image:
-        camera_image: camera.front_door
-        entities:
-          - camera.front_door
-          - switch.front_porch_lights_switch
-          - sensor.front_door_state
-
       - type: vertical-stack
         cards:
          - type: custom:gauge-card
@@ -990,21 +978,21 @@ views:
            max: 90
 
 
-      - type: entities
-        title: Away Timer
-        show_header_toggle: false
-        entities:
-          - timer.away_mode
-#          - type: custom:entity-attributes-card
-#            entity: timer.away_mode
-#            filter:
-#              include:
-#                - timer.away_mode.duration
-#                - timer.away_mode.remaining
-          - script.start_away_timer
-          - script.pause_away_timer
-          - script.cancel_away_timer
-          - script.finish_away_timer
+#      - type: entities
+#        title: Away Timer
+#        show_header_toggle: false
+#        entities:
+#          - timer.away_mode
+##          - type: custom:entity-attributes-card
+##            entity: timer.away_mode
+##            filter:
+##              include:
+##                - timer.away_mode.duration
+##                - timer.away_mode.remaining
+#          - script.start_away_timer
+#          - script.pause_away_timer
+#          - script.cancel_away_timer
+#          - script.finish_away_timer
 
 
 ####################################################################

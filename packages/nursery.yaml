@@ -34,22 +34,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Nursery:
-    control: hidden
-    entities:
-      - light.nursery_wall_light
-      - input_select.nursery_wall_color
-      - input_select.nursery_wall_effect
-      - input_select.nursery_wall_strobe
-      # rf switch upstairs wipe warmer
-      - switch.switch_one
-      # rf switch baby monitor
-      - switch.switch_two
-
-#####################################################################
 ### Input Select
 #####################################################################
 input_select:

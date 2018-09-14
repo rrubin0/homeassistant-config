@@ -25,15 +25,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-    group.master_bedroom_fan:
-      <<: *contained
-      order: 2
-
-    group.mbr_fan_speed:
-      <<: *hidden
 
     ################################################
     ## Switch
@@ -144,37 +135,6 @@ homeassistant:
       <<: *contained
       friendly_name: "Master Bedroom Fan Auto"
       icon: mdi:fan
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Master Bedroom Fan:
-    control: hidden
-    entities:
-      - switch.master_bedroom_fan
-      - switch.master_bedroom_fan_light
-      - input_select.master_bedroom_fan_speed
-      - script.mbr_fan_speed_step_low
-      - script.mbr_fan_speed_step_high
-
-  MBR Fan Speed:
-    entities:
-      - switch.master_bedroom_fan_1
-      - switch.master_bedroom_fan_2
-      - switch.master_bedroom_fan_3
-      - switch.master_bedroom_fan_4
-      - switch.master_bedroom_fan_5
-      - switch.master_bedroom_fan_6
-      - switch.master_bedroom_fan_7
-      - switch.master_bedroom_fan_8
-      - switch.master_bedroom_fan_9
-      - switch.master_bedroom_fan_10
-      - switch.master_bedroom_fan_11
-      - switch.master_bedroom_fan_12
-
-
 
 
 #####################################################################

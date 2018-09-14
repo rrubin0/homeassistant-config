@@ -141,43 +141,6 @@ homeassistant:
       <<: *contained
 
 
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Sensors:
-    entities:
-      - binary_sensor.living_room_occupancy
-      - binary_sensor.entryway_occupancy
-      - binary_sensor.office_occupancy
-      - binary_sensor.upstairs_occupancy
-      - binary_sensor.nursery_occupancy
-      - binary_sensor.guest_room_occupancy
-      - sensor.kegerator_door_state
-      - sensor.front_entry_motion
-      - sensor.nursery_ptz_motion_detected
-      - sensor.nw_ptz_motion_detected
-      - sensor.front_entry_fibaro_multisensor_luminance
-      - sensor.downstairs_ac_leak_detector
-#      - sensor.crime
-
-  Door Sensors:
-    entities:
-      - sensor.front_door_state
-      - sensor.south_door_state
-      - sensor.kitchen_door_state
-      - sensor.beach_door_state
-
-  Door Alarm Points:
-    entities:
-      - sensor.front_door_tamper
-      - sensor.south_door_tamper
-      - sensor.kitchen_door_tamper
-      - sensor.beach_door_tamper
-
-
 #####################################################################
 ### Sensor
 #####################################################################

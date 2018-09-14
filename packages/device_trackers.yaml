@@ -81,14 +81,6 @@ homeassistant:
       icon: mdi:timer
 
 
-    ################################################
-    ## Script
-    ################################################
-    script.find_iphone:
-      <<: *exposed
-      icon: mdi:account-location
-
-
   ################################################
   ## Customize Domain
   ################################################
@@ -111,28 +103,6 @@ device_tracker:
   - platform: icloud
     username: !secret icloud_megs
     password: !secret icloud_megs_password
-
-
-################################################################
-##  Group
-################################################################
-group:
-  Travel Rick:
-    entities:
-      - device_tracker.i8plus
-      - sensor.i8plus_battery_level
-      - sensor.ricks_eta
-      - sensor.ricks_home_commute
-      - sensor.ricks_office_commute
-
-  Travel Megs:
-    entities:
-      - device_tracker.mip8
-      - script.find_iphone
-      - sensor.mip8_battery_level_2
-      - sensor.megs_eta
-#      - sensor.megs_home_commute
-#      - sensor.megs_work_commute
 
 
 ################################################################
@@ -229,41 +199,6 @@ sensor:
 
 
 #####################################################################
-###  Script
-#####################################################################
-script:
-  find_iphone:
-    alias: "Find My iPhone"
-    sequence:
-    - service: device_tracker.icloud_lost_iphone
-
-  ### Away Mode Sequence
-  away:
-    sequence:
-    # lock up
-    - service: lock.lock
-
-    # turn off all lights (except porch) and devices
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.interior_lights
-        - group.exterior_lights
-        - group.downstairs_outlets
-        - group.upstairs_outlets
-
-#    - service: notify.pushbullet
-#      data:
-#        title: "Away Mode ON"
-#        target: "device/Chrome"
-#        message: "It appears nobody's home; away mode activated."
-
-    - service: notify.ios_i8plus
-      data:
-        title: "Away Mode ON"
-        message: "Away mode is ON."
-
-
-#####################################################################
 ###  Automation
 #####################################################################
 automation:
@@ -334,6 +269,29 @@ automation:
           message: "Away mode cancelled."
 
 
+  ### Turn on Visitor Mode if we foget to
+  - alias: Enable Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.lock_south_door_status') == 'Unlocked by Dog Sitter' }}"
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.visitor_mode
+
+
   ### Cancel Visitor Mode
   - alias: Cancel Visitor Mode
     initial_state: 'on'
@@ -369,8 +327,8 @@ automation:
         state: 'on'
 
       - condition: time
-        before: '00:19:00'
-        after: '00:15:00'
+        before: '19:00:00'
+        after: '14:00:00'
 
       - condition: state
         entity_id: device_tracker.i8plus

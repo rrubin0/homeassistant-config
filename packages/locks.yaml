@@ -25,12 +25,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-#    group.door_locks:
-#      <<: *contained
-#      order: 2
 
     ################################################
     ## Lock
@@ -43,13 +37,6 @@ homeassistant:
       <<: *contained
       friendly_name: "South Entry Door"
 
-    ################################################
-    ## Script
-    ################################################
-    script.unlock_megs:
-      <<: *hidden
-      friendly_name: "Unlock Door for Megan"
-      icon: mdi:play-circle
 
     ################################################
     ## Automation
@@ -60,18 +47,6 @@ homeassistant:
 
     automation.south_door_unlock_by_user:
       <<: *hidden
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Door Locks:
-    entities:
-      - lock.bathroom_entry_locked
-      - sensor.lock_beach_door_status
-      - lock.south_entry_locked
-      - sensor.lock_south_door_status
 
 
 #####################################################################
@@ -146,27 +121,6 @@ sensor:
           {% else %}
             {{ state|title }}
           {% endif %}
-
-
-#####################################################################
-### Script
-#####################################################################
-script:
-  unlock_megs:
-    sequence:
-
-    - service: lock.unlock
-      entity_id: lock.south_entry_locked
-
-    - service: notify.ios_i8plus
-      data:
-        title: "Arrived"
-        message: "Megs is home!"
-
-    - delay:
-        minutes: 15
-    - service: lock.lock
-      entity_id: lock.south_entry_locked
 
 
 #####################################################################

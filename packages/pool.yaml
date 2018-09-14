@@ -25,20 +25,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-    group.pool:
-      <<: *contained
-
-    ################################################
-    ## Input_Select
-    ################################################
-    input_select.pool_scene:
-      <<: *contained
-
-    input_select.pool_color:
-      <<: *contained
 
     ################################################
     ## Switch
@@ -53,17 +39,6 @@ homeassistant:
   customize_glob:
     "script.pool_*":
       <<: *hidden
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Pool:
-    entities:
-      - switch.pool_light_switch
-      - input_select.pool_scene
-      - input_select.pool_color
 
 
 #####################################################################

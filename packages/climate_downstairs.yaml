@@ -109,35 +109,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Downstairs Climate:
-    entities:
-      - climate.downstairs
-      - sensor.ds_avg_temp
-      - sensor.downstairs_temperature
-      - sensor.living_room_temperature
-      - sensor.entryway_temperature
-      - sensor.office_temperature
-      - sensor.front_entry_fibaro_multisensor_temperature
-      - sensor.broadlink_sensor_temperature
-      - sensor.downstairs_humidity
-
-  Downstairs Ecobee:
-    control: hidden
-    entities:
-      - sensor.ds_climate_mode
-      - sensor.ds_climate_hold
-      - sensor.ds_climate_away
-      - sensor.ds_fan_state
-      - script.ecobee_ds_home
-      - script.ecobee_ds_away
-      - script.ecobee_ds_sleep
-      - script.ecobee_ds_resume
-
-
-#####################################################################
 ### Sensor
 #####################################################################
 sensor:

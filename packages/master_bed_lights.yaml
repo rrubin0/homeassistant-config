@@ -35,18 +35,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Bedframe Lights:
-    control: hidden
-    entities:
-      - light.under_bed_lights
-      - input_select.mbr_under_bed_color
-      - input_select.mbr_under_bed_effect
-      - input_select.mbr_under_bed_strobe
-
-#####################################################################
 ### Input Select
 #####################################################################
 input_select:

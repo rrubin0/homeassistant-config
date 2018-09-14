@@ -34,33 +34,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Interior Lights:
-    entities:
-      - group.accent_lights
-      - group.mbr_lights
-      - light.foyer_lights_level
-      - light.master_bathroom
-      - light.living_room_lamp
-      - light.lr_ceiling
-      - light.entryway
-      - light.wine_room
-      - light.office_desk_lamp
-      - light.kitchen_lights_level
-      - light.dining_room_chandelier_level
-      - switch.game_room_lights_switch
-      - switch.downstairs_bath_lights_switch
-
-  Exterior Lights:
-    entities:
-      - switch.patio_lights_switch
-      - switch.pool_light_switch
-#      - switch.patio_party_lights_switch
-
-
-#####################################################################
 ### Light
 #####################################################################
 hue:

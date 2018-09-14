@@ -26,16 +26,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-#    group.kitchen:
-#      <<: *contained
-#      order: 4
-#
-#    group.dining_room:
-#      <<: *contained
-#      order: 5
 
     ################################################
     ## Light
@@ -47,21 +37,6 @@ homeassistant:
     light.dining_room_chandelier_level:
       friendly_name: "Dining Room Light"
       icon: mdi:ceiling-light
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Kitchen:
-    control: hidden
-    entities:
-      - light.kitchen_lights_level
-      - cover.kitchen_roller_shade_level
-
-  Dining Room:
-    entities:
-      - light.dining_room_chandelier_level
 
 
 #####################################################################

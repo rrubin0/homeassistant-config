@@ -82,24 +82,6 @@ rachio:
 
 
 ####################################################################
-## Group
-####################################################################
-group:
-  Irrigation:
-    control: hidden
-    entities:
-      - sensor.rachio_status
-      - switch.rubino_in_standby_mode
-      - switch.north_sprinklers_z1
-      - switch.northwest_sprinklers_z2
-      - switch.northeast_sprinklers_z3
-      - switch.east_sprinklers_z5
-      - switch.southeast_sprinklers_z6
-      - switch.southwest_sprinklers_z7
-      - switch.drip_and_citrus_trees_z4
-
-
-####################################################################
 ## Switch
 ####################################################################
 switch:

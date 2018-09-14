@@ -95,32 +95,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Upstairs Climate:
-    entities:
-      - climate.upstairs
-      - sensor.us_avg_temp
-      - sensor.upstairs_temperature
-      - sensor.nursery_temperature
-      - sensor.guest_room_temperature
-      - sensor.upstairs_humidity
-
-  Upstairs Ecobee:
-    control: hidden
-    entities:
-      - sensor.us_climate_mode
-      - sensor.us_climate_hold
-      - sensor.us_climate_away
-      - sensor.us_fan_state
-      - script.ecobee_us_home
-      - script.ecobee_us_away
-      - script.ecobee_us_sleep
-      - script.ecobee_us_resume
-
-
-#####################################################################
 ### Sensor
 #####################################################################
 sensor:

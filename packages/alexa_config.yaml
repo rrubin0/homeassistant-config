@@ -41,7 +41,7 @@ alexa:
         - group.entry_lights
         - group.exterior_lights
         - group.interior_lights
-        - group.mbr_lights
+        - group.master_bedroom_lights
         - group.porch
 
         - climate.downstairs

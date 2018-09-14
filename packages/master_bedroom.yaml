@@ -25,15 +25,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-    group.master_bedroom:
-      <<: *contained
-
-    group.mbr_lights:
-      friendly_name: "Master Bedroom Lights"
-
 
     ################################################
     ## Light
@@ -75,31 +66,6 @@ homeassistant:
 
     script.master_bedroom_night_time:
       icon: mdi:weather-night
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Master Bedroom:
-    control: hidden
-    entities:
-      - script.master_bedroom_night_time
-      - script.mbr_night_light
-      - light.master_bedroom_chandelier_level
-      - light.master_sitting_lamp
-      - light.master_reading_lamp
-      - light.master_bed_entry_level
-      - light.master_bed_ceiling_level
-
-
-  MBR Lights:
-    entities:
-      - light.master_bedroom_chandelier_level
-      - light.master_sitting_lamp
-      - light.master_reading_lamp
-      - light.master_bed_entry_level
-      - light.master_bed_ceiling_level
-      - light.under_bed_lights
 
 
 #####################################################################

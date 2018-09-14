@@ -25,13 +25,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-#    group.game_room:
-#      <<: *contained
-#      friendly_name: "Game Room"
-#      order: 6
 
     ################################################
     ## Switch
@@ -41,10 +34,4 @@ homeassistant:
       icon: mdi:ceiling-light
 
 
-#####################################################################
-### Group
-#####################################################################
-group:
-  Game Room:
-    entities:
-      - switch.game_room_lights_switch
+

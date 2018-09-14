@@ -6,12 +6,6 @@ homeassistant:
   customize:
 
     ################################################
-    ## Group
-    ################################################
-    group.porch:
-      friendly_name: "Porch Lights"
-
-    ################################################
     ## Switch
     ################################################
     switch.south_porch_lights_switch:
@@ -21,16 +15,6 @@ homeassistant:
     switch.front_porch_lights_switch:
       friendly_name: "Front Porch Lights"
       icon: mdi:white-balance-incandescent
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Porch:
-    entities:
-      - switch.south_porch_lights_switch
-      - switch.front_porch_lights_switch
 
 
 #####################################################################

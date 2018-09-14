@@ -26,12 +26,6 @@ homeassistant:
         <<: *contained
         hidden: true
 
-    ################################################
-    ## Group
-    ################################################
-#    group.living_room_fan:
-#      <<: *contained
-#      order: 1
 
     ################################################
     ## Switch
@@ -55,18 +49,6 @@ homeassistant:
     input_select.living_room_fan_speed:
       icon: mdi:fan
       <<: *contained
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Living Room Fan:
-    control: hidden
-    entities:
-      - switch.living_room_fan
-      - input_select.living_room_fan_speed
-      - switch.living_room_fan_light
 
 
 #####################################################################

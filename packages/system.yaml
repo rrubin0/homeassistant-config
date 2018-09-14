@@ -14,33 +14,19 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'system'
-        homebridge_hidden: true
 
       contained: &contained
         <<: *customize
         haaska_hidden: true
-#        homebridge_hidden: true
 
       exposed: &exposed
         <<: *customize
         haaska_hidden: false
-#        homebridge_hidden: false
 
       hidden: &hidden
         <<: *contained
         hidden: true
 
-
-    ################################################
-    ## Script
-    ################################################
-    script.restart_ha:
-      <<: *contained
-      friendly_name: "Restart Home Assistant"
-      icon: mdi:recycle
-
-    script.kodi_time_and_temp:
-      <<: *contained
 
     ################################################
     ## Sensor
@@ -93,34 +79,6 @@ homeassistant:
     sensor.holiday:
       <<: *contained
       icon: mdi:calendar-check
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Speedtest:
-    entities:
-      - sensor.speedtest_ping
-      - sensor.speedtest_download
-      - sensor.speedtest_upload
-
-  Downloads:
-    entities:
-      - sensor.sabnzbd_disk
-      - sensor.sabnzbd_disk_free
-      - sensor.sabnzbd_queue
-      - sensor.sabnzbd_speed
-      - sensor.sabnzbd_status
-
-  HA Status:
-    entities:
-      - sensor.holiday
-      - sensor.ha_current_version
-      - sensor.uptime
-      - sensor.ha_last_restart
-      - sensor.last_boot
-      - sensor.disk_free_home
 
 
 #####################################################################
@@ -195,20 +153,6 @@ sensor:
       - type: memory_free
       - type: processor_use
       - type: last_boot
-
-#  ## SABNZBD --- deprecated after 0.68.1
-#  - platform: sabnzbd
-#    name: SABNZBD
-#    api_key: !secret sabnzb_api_key
-#    host: !secret sabnzb_host
-#    port: !secret sabnzb_port
-#    monitored_variables:
-#      - 'current_status'
-#      - 'speed'
-#      - 'queue_size'
-#      - 'queue_remaining'
-#      - 'disk_size'
-#      - 'disk_free'
 
 
 #####################################################################

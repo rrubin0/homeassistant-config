@@ -75,28 +75,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Test Triggers:
-    control: hidden
-    entities:
-      - script.script_test
-      - script.rgb_strip_test
-      - script.desk_lamp_test
-      - input_boolean.state_change
-
-  Test Conditions:
-    control: hidden
-    entities:
-      - input_boolean.condition_1
-      - input_boolean.condition_2
-      - input_boolean.condition_3
-      - input_boolean.condition_4
-      - input_boolean.condition_5
-
-
-#####################################################################
 ### Input Boolean
 #####################################################################
 input_boolean:

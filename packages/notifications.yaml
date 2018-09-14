@@ -23,7 +23,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: state
-        entity_id: group.mbr_lights
+        entity_id: group.master_bedroom_lights
         to: 'on'
 
     condition:

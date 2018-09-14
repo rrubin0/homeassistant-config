@@ -52,21 +52,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Wine Room Lights:
-    control: hidden
-    entities:
-      - switch.wine_room_lamp
-      - light.wine_room
-      - light.northeast_wine
-      - light.northwest_wine
-      - light.southeast_wine
-      - light.southwest_wine
-
-
-#####################################################################
 ### Automation
 #####################################################################
 #automation:

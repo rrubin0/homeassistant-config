@@ -39,19 +39,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Yard:
-    control: hidden
-    entities:
-      - switch.patio_lights_switch
-      - switch.patio_party_lights_switch
-      - switch.fountains_switch
-      - switch.outdoor_speakers
-
-
-#####################################################################
 ### Automation
 #####################################################################
 #automation:

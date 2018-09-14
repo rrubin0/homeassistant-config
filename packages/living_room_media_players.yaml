@@ -66,35 +66,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Living Room TV:
-    control: hidden
-    entities:
-      - switch.tv_power
-      - switch.tv_volume
-      - switch.tv_mute
-      - input_select.living_room_tv_input
-
-  DirecTV:
-    control: hidden
-    entities:
-      - switch.directv_power
-      - switch.directv_play
-
-  Onkyo Amp:
-    control: hidden
-    entities:
-      - switch.amp_power
-      - switch.amp_volume
-      - switch.amp_mute
-      - input_select.onkyo_amp_input
-      - switch.amp_movie_mode
-      - switch.amp_music_mode
-
-
-#####################################################################
 ### Media Player
 #####################################################################
 media_player:

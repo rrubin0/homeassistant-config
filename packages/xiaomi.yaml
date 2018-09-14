@@ -46,10 +46,6 @@ homeassistant:
       <<: *contained
       friendly_name: "Smart Button"
 
-    ################################################
-    ## Script
-    ################################################
-
 
     ################################################
     ## Automation
@@ -65,11 +61,6 @@ xiaomi_aqara:
   gateways:
     - mac:
       key: !secret xkey
-
-
-#####################################################################
-### Script
-#####################################################################
 
 
 #####################################################################
@@ -93,8 +84,8 @@ automation:
       - service: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcb7da52
-          brightness: 60
-          hs_color: [180,100]
+          brightness: 125
+          hs_color: [225,15]
 
 
   ### Nightlight Off

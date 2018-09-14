@@ -70,24 +70,6 @@ homeassistant:
       friendly_name: "Outdoor Speakers"
       entity_picture: /local/music.ico
 
-#####################################################################
-### Group
-#####################################################################
-group:
-  Downstairs Outlets:
-    control: hidden
-    entities:
-      # rf switch downstairs wipe warmer
-      - switch.switch_three
-      #rf switch staircase christmas lights
-      #- switch.switch_four
-      #rf switch christmas tree
-      #- switch.switch_five
-      #tplink smartplug 1 (flower lamp)
-      #- switch.flower_lamp
-      #tplink outdoor speakers
-      - switch.outdoor_speakers
-
 
 #####################################################################
 ### Switch

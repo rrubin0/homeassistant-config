@@ -11,20 +11,6 @@ homeassistant:
       customize: &customize
         package: 'accent_lights'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
-      hidden: &hidden
-        <<: *contained
-        hidden: true
-
 
     ################################################
     ## Switch
@@ -36,23 +22,6 @@ homeassistant:
     switch.wine_room_lamp:
       friendly_name: "Wine Room Lamp"
       icon: mdi:lamp
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Accent Lights:
-    entities:
-      - switch.staircase_lamp
-      - switch.wine_room_lamp
-      - switch.flower_lamp
-
-# Holiday Lights / RF Spares
-      ## staircase christmas lights
-#      - switch.switch_four
-      ## christmas tree
-#      - switch.switch_five
 
 
 #####################################################################

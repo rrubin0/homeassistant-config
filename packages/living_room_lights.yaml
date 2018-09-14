@@ -77,29 +77,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Entry Lights:
-    entities:
-      - light.foyer_lights_level
-      - light.entryway
-      - light.south_entry
-      - light.center_entry
-      - light.kitchen_entry
-
-  Living Room Lights:
-    control: hidden
-    entities:
-      - light.living_room_lamp
-      - light.lr_ceiling
-      - light.northeast_ceiling
-      - light.northwest_ceiling
-      - light.southeast_ceiling
-      - light.southwest_ceiling
-
-
-#####################################################################
 ### Switch - future sonoffs
 #####################################################################
 #switch:

@@ -26,13 +26,6 @@ homeassistant:
         hidden: true
 
     ################################################
-    ## Group
-    ################################################
-    group.master_bath:
-      <<: *contained
-      order: 4
-
-    ################################################
     ## Light
     ################################################
     light.master_bathroom:
@@ -74,27 +67,6 @@ homeassistant:
       friendly_name: "Master Bath Shades"
       homebridge_cover_type: rollershutter
       icon: mdi:blinds
-
-
-#####################################################################
-### Group
-#####################################################################
-group:
-  Master Bath:
-    control: hidden
-    entities:
-      - script.hue_mbath_morning
-      - light.master_bathroom
-      - light.master_bath_entry
-      - light.master_bath_sink
-      - light.master_bathtub
-      - cover.master_bath_roller_shades_level
-
-  Master Bath Lights:
-    entities:
-      - light.master_bath_entry
-      - light.master_bath_sink
-      - light.master_bathtub
 
 
 #####################################################################

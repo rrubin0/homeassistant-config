@@ -99,24 +99,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Device Status:
-    entities:
-      - sensor.ring_front_door_last_motion
-      - sensor.ring_front_door_last_ding
-      - sensor.dc_front_door_battery
-      - sensor.dc_kitchen_door_battery
-      - sensor.lock_south_battery
-      - sensor.south_door_battery
-      - sensor.lock_beach_battery
-      - sensor.dc_beach_battery
-      - sensor.entry_multisensor_battery
-      - sensor.downstairs_ac_leak_detector_battery
-
-
-#####################################################################
 ### Sensor
 #####################################################################
 sensor:

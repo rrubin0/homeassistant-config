@@ -76,23 +76,6 @@ homeassistant:
 
 
 #####################################################################
-###  Group
-#####################################################################
-group:
-  Office:
-    control: hidden
-    entities:
-      - light.office_desk_lamp
-      - input_select.rgb_light
-      - sensor.sn1_temperature
-      - sensor.sn1_humidity
-      - sensor.sn1_ldr
-      - sensor.sn1_pir
-      - light.sn1_led
-      - media_player.kodi_office
-
-
-#####################################################################
 ### Media Player
 #####################################################################
 #media_player:

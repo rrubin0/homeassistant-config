@@ -253,62 +253,6 @@ homeassistant:
 
 
 #####################################################################
-### Group
-#####################################################################
-group:
-  Weather Summary:
-    entities:
-      - weather.downstairs
-      - sensor.yweather_temperature_max
-      - sensor.yweather_temperature_min
-      - sensor.dark_sky_daily_summary
-      - sensor.pws_wind_string
-      - sensor.season
-      - input_number.season_summer
-      - input_number.season_winter
-#      - sensor.yweather_current
-#      - sensor.yweather_temperature
-#      - sensor.pws_temp_f
-#      - sensor.pws_feelslike_string
-#      - sensor.pws_relative_humidity
-
-
-  Weather Details:
-    entities:
-      - sensor.dark_sky_cloud_coverage
-      - sensor.pws_heat_index_string
-      - sensor.pws_dewpoint_string
-      - sensor.pws_pressure_in
-      - sensor.pws_pressure_mb
-      - sensor.pws_solarradiation
-      - sensor.pws_uv
-      - sensor.pws_visibility_mi
-      - sensor.dark_sky_precip_probability
-      - sensor.dark_sky_precip_intensity
-      - sensor.pws_precip_today_string
-      - sensor.dark_sky_nearest_storm_distance
-      - input_boolean.rain
-      - camera.weather
-
-  3 Day Forecast:
-    entities:
-      - sensor.yweather_condition
-      - sensor.yw_tomorrow_condition
-      - sensor.yw_tomorrow_temperature_max
-      - sensor.yw_tomorrow_temperature_min
-      - sensor.yw_day2_condition
-      - sensor.yw_day2_temperature_max
-      - sensor.yw_day2_temperature_min
-      - sensor.yw_day3_condition
-      - sensor.yw_day3_temperature_max
-      - sensor.yw_day3_temperature_min
-      #- sensor.yweather_humidity
-      #- sensor.yweather_pressure
-      #- sensor.yweather_visibility
-      #- sensor.yweather_wind_speed
-
-
-#####################################################################
 ### Input Boolean
 #####################################################################
 input_boolean:

@@ -25,7 +25,7 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * [Mosquitto] (https://hub.docker.com/_/eclipse-mosquitto/)
 `sudo docker run -itd --name="mosquitto" --restart=always -p 1883:1883 -p 9001:9001 -v /home/hauser/mqtt/config:/mosquitto/config -v /home/hauser/mqtt/data:/mosquitto/data -v /home/hauser/mqtt/logs:/mosquitto/logs eclipse-mosquitto`
 
-* Other component (non-docker): [Haaska] (https://github.com/mike-grant/haaska)
+* Other 3rd-party component (non-docker): [Haaska] (https://github.com/mike-grant/haaska)
 
 
 **Devices I Use:**
@@ -54,6 +54,9 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * Aeon Labs Z-Wave Siren
 * GoControl Z-Wave Siren
 * Yale Real Living Z-Wave Touchscreen Lever Lock
+* Xiaomi Aqara Hub
+* Xiaomi Door Sensor
+* Xiaomi Smart Button
 
 (coming soon):
 * IKEA Tradfri Bridge
