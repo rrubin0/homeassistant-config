@@ -1,0 +1,382 @@
+#####################################################################
+#    @package          :     scripts
+#    @description      :     stand alone scripts for easy access
+#####################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'scripts'
+
+    ################################################
+    ## Script Customizations
+    ################################################
+    script.find_iphone:
+      icon: mdi:account-location
+
+    script.unlock_megs:
+      friendly_name: "Unlock Door for Megan"
+      hidden: true
+      icon: mdi:play-circle
+
+    script.morning_sequence:
+      hidden: true
+
+    script.away:
+      hidden: true
+
+    script.company_mode:
+      friendly_name: "Company Mode"
+      icon: mdi:play-circle
+
+    script.bedtime:
+      friendly_name: "Bedtime"
+      icon: mdi:hotel
+
+    script.shutdown_lights:
+      friendly_name: "Shutdown"
+      icon: mdi:play-circle
+
+    script.hue_lr_dimmed:
+      friendly_name: "Dimmed"
+      icon: mdi:play-circle
+
+    script.hue_lr_nightlight:
+      friendly_name: "Night Mode"
+      icon: mdi:play-circle
+
+    script.hue_lr_bright:
+      friendly_name: "Bright"
+      icon: mdi:play-circle
+
+    script.hue_lr_christmas:
+      friendly_name: "Christmas Time"
+      icon: mdi:stocking
+
+    script.hue_lr_movie:
+      friendly_name: "Movie"
+      icon: mdi:play-circle
+
+    script.hue_lr_sunrise:
+      friendly_name: "Sunrise"
+      icon: mdi:play-circle
+
+    script.hue_lr_sunset:
+      friendly_name: "Sunset"
+      icon: mdi:play-circle
+
+    script.hue_lr_minty:
+      friendly_name: "Minty"
+      icon: mdi:play-circle
+
+    script.hue_lr_daybreak:
+      friendly_name: "Daybreak"
+      icon: mdi:play-circle
+
+    script.nap_time:
+      friendly_name: "Nap Time"
+      icon: mdi:play-circle
+
+    script.hue_mbath_morning:
+      friendly_name: "Bathroom Morning"
+      icon: mdi:play-circle
+
+
+script:
+  #####################################################################
+  ###  Find My iPhone
+  #####################################################################
+  find_iphone:
+    alias: "Find My iPhone"
+    sequence:
+    - service: device_tracker.icloud_lost_iphone
+
+
+  #####################################################################
+  ###  Away Mode
+  #####################################################################
+  away:
+    alias: "Away Mode"
+    sequence:
+    - service: lock.lock
+    # turn off all lights (except porch) and devices
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.interior_lights
+        - group.exterior_lights
+        - group.downstairs_outlets
+        - group.upstairs_outlets
+
+#    - service: notify.pushbullet
+#      data:
+#        title: "Away Mode ON"
+#        target: "device/Chrome"
+#        message: "It appears nobody's home; away mode activated."
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Away Mode ON"
+        message: "Away mode is ON."
+
+
+  #####################################################################
+  ###  Unlock Door for Megs
+  #####################################################################
+  unlock_megs:
+    alias: "Unlock for Megs"
+    sequence:
+    - service: lock.unlock
+      entity_id: lock.south_entry_locked
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Arrived"
+        message: "Megs is home!"
+
+    - delay:
+        minutes: 15
+    - service: lock.lock
+      entity_id: lock.south_entry_locked
+
+
+  #####################################################################
+  ### Morning Sequence
+  #####################################################################
+  morning_sequence:
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights_level
+        brightness: 155
+        transition: 30
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bathroom"
+        scene_name: "Morning"
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_bedroom_chandelier_level
+#        brightness: 40
+#        transition: 30
+
+    - service: homeassistant.turn_on
+      entity_id: group.accent_lights
+
+    - delay:
+        minutes: 7
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.living_room_lamp
+#        brightness: 255
+#        transition: 30
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Sunrise"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 140
+        transition: 30
+
+    - delay:
+        minutes: 7
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights_level
+        brightness: 170
+
+
+  #####################################################################
+  ### Nap Time
+  #####################################################################
+  nap_time:
+    sequence:
+    - service: light.turn_off
+      entity_id: light.living_room
+      data:
+        transition: 5
+
+    - service: light.turn_off
+      entity_id: light.entryway
+      data:
+        transition: 5
+
+    - delay: '00:00:05'
+
+    - service: light.turn_on
+      entity_id: light.living_room_lamp
+      data:
+        brightness: 50
+        transition: 10
+
+    - service: light.turn_on
+      entity_id: light.kitchen_entry
+      data:
+        brightness: 80
+
+#      - service: hue.hue_activate_scene
+#        data:
+#          group_name: "Living Room"
+#          scene_name: "Nap Time"
+#
+#      - service: hue.hue_activate_scene
+#        data:
+#          group_name: "Entryway"
+#          scene_name: "Nightlight"
+
+
+  #####################################################################
+  ### Bedtime Sequence
+  #####################################################################
+  bedtime:
+    sequence:
+    # lock up
+    - service: lock.lock
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.gateway_light_7811dcb7da52
+#        brightness: 50
+#        hs_color: [180,100]
+
+    # turn off the "outdoor speakers and downstairs wipe warmer"
+    - service: switch.turn_off
+      entity_id:
+        - switch.outdoor_speakers
+        - switch.switch_three
+
+    - service: switch.turn_off
+      entity_id: switch.living_room_fan
+
+    - delay:
+        minutes: 3
+
+    - service: homeassistant.turn_off
+      entity_id: group.interior_lights
+
+    - delay:
+        minutes: 2
+
+    - service: light.turn_off
+      entity_id: light.under_bed_lights
+
+    - delay:
+        seconds: 10
+
+## hit the flux led strip light again ... flaky behavior
+    - service: light.turn_off
+      entity_id: light.under_bed_lights
+
+
+  #####################################################################
+  ### Company Mode
+  #####################################################################
+  company_mode:
+    sequence:
+    - service: switch.turn_on
+      entity_id: 
+        - switch.outdoor_speakers
+        - switch.game_room_lights_switch
+        - switch.pool_light_switch
+
+    - service: scene.turn_on
+      entity_id: scene.bright
+
+    - service: lock.unlock
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights_level
+        brightness: 130
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_room_chandelier_level
+        brightness: 130
+
+
+  #####################################################################
+  ### Philips Hue Scenes
+  #####################################################################
+  hue_lr_dimmed:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Dimmed"
+
+  hue_lr_nightlight:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Nightlight"
+
+  hue_lr_bright:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Bright"
+
+  hue_lr_christmas:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Christmas"
+
+  hue_lr_movie:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Movie"
+
+  hue_lr_sunrise:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunrise"
+
+  hue_lr_sunset:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunset"
+
+  hue_lr_minty:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Minty"
+
+  hue_lr_daybreak:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Daybreak"
+
+  hue_mbath_morning:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bathroom"
+          scene_name: "Morning"
+
+
+

@@ -1,0 +1,740 @@
+############################################################################
+#    @package          :     groups
+#    @description      :     groups visible on UI
+############################################################################
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'views'
+
+      hidden: &hidden
+        <<: *customize
+        hidden: true
+
+
+group:
+  #####################################################################
+  ### Accent Lights
+  #####################################################################
+  Accent Lights:
+    entities:
+      - switch.staircase_lamp
+      - switch.wine_room_lamp
+      - switch.flower_lamp
+
+# Holiday Lights / RF Spares
+      ## staircase christmas lights
+#      - switch.switch_four
+      ## christmas tree
+#      - switch.switch_five
+
+
+  #####################################################################
+  ### Alexa TTS
+  #####################################################################
+  Alexa TTS:
+    entities:
+      - input_number.alexa_volume
+      - input_text.alexa_tts
+      - input_select.alexa
+
+
+  #####################################################################
+  ### Device Status (and batteries)
+  #####################################################################
+  Device Status:
+    entities:
+      - sensor.ring_front_door_last_motion
+      - sensor.ring_front_door_last_ding
+      - sensor.dc_front_door_battery
+      - sensor.dc_kitchen_door_battery
+      - sensor.lock_south_battery
+      - sensor.south_door_battery
+      - sensor.lock_beach_battery
+      - sensor.dc_beach_battery
+      - sensor.entry_multisensor_battery
+      - sensor.downstairs_ac_leak_detector_battery
+
+
+  #####################################################################
+  ### Cameras
+  #####################################################################
+#  camera_front_porch:
+#    name: Front Porch Camera
+#    entities:
+#      - camera.front_porch
+#
+#  camera_north_gate:
+#    name: North Gate Camera
+#    entities:
+#      - camera.north_gate
+#
+#  camera_nw_ptz:
+#    name: NW PTZ Camera
+#    entities:
+#      - camera.nw_ptz
+#
+#  camera_nursery_ptz:
+#    name: Nursery PTZ Camera
+#    entities:
+#      - camera.nursery_ptz
+#
+#  camera_ring_doorbell:
+#    name: Front Door Camera
+#    entities:
+#      - camera.front_door
+#
+#  Camera Status:
+#    entities:
+#      - sensor.nursery_ptz_preset
+#      - sensor.nw_ptz_preset
+#      - sensor.nursery_ptz_sd_used
+#      - sensor.nw_ptz_sd_used
+#
+#  Traffic Report:
+#    entities:
+##      - camera.east_valley_traffic
+##      - camera.inbound_traffic
+##      - camera.downtown_traffic
+#      - camera.ramp_traffic
+
+
+  #####################################################################
+  ### Climate - Downstairs
+  #####################################################################
+  Downstairs Climate:
+    entities:
+      - climate.downstairs
+      - sensor.ds_avg_temp
+      - sensor.downstairs_temperature
+      - sensor.living_room_temperature
+      - sensor.entryway_temperature
+      - sensor.office_temperature
+      - sensor.front_entry_fibaro_multisensor_temperature
+      - sensor.broadlink_sensor_temperature
+      - sensor.downstairs_humidity
+
+  Downstairs Ecobee:
+    control: hidden
+    entities:
+      - sensor.ds_climate_mode
+      - sensor.ds_climate_hold
+      - sensor.ds_climate_away
+      - sensor.ds_fan_state
+      - script.ecobee_ds_home
+      - script.ecobee_ds_away
+      - script.ecobee_ds_sleep
+      - script.ecobee_ds_resume
+
+
+  #####################################################################
+  ### Climate - Upstairs
+  #####################################################################
+  Upstairs Climate:
+    entities:
+      - climate.upstairs
+      - sensor.us_avg_temp
+      - sensor.upstairs_temperature
+      - sensor.nursery_temperature
+      - sensor.guest_room_temperature
+      - sensor.upstairs_humidity
+
+  Upstairs Ecobee:
+    control: hidden
+    entities:
+      - sensor.us_climate_mode
+      - sensor.us_climate_hold
+      - sensor.us_climate_away
+      - sensor.us_fan_state
+      - script.ecobee_us_home
+      - script.ecobee_us_away
+      - script.ecobee_us_sleep
+      - script.ecobee_us_resume
+
+
+  #####################################################################
+  ### Device Trackers
+  #####################################################################
+  Travel Rick:
+    entities:
+      - device_tracker.i8plus
+      - sensor.i8plus_battery_level
+      - sensor.ricks_eta
+      - sensor.ricks_home_commute
+      - sensor.ricks_office_commute
+
+  Travel Megs:
+    entities:
+      - device_tracker.mip8
+      - script.find_iphone
+      - sensor.mip8_battery_level_2
+      - sensor.megs_eta
+#      - sensor.megs_home_commute
+#      - sensor.megs_work_commute
+
+
+  #####################################################################
+  ### Downstairs Bathroom
+  #####################################################################
+  Downstairs Bath:
+    control: hidden
+    entities:
+      - switch.downstairs_bath_lights_switch
+
+
+  #####################################################################
+  ### Game Room
+  #####################################################################
+  Game Room:
+    entities:
+      - switch.game_room_lights_switch
+
+
+  #####################################################################
+  ### Kitchen & Dining Room
+  #####################################################################
+  Kitchen:
+    control: hidden
+    entities:
+      - light.kitchen_lights_level
+      - cover.kitchen_roller_shade_level
+
+  Dining Room:
+    entities:
+      - light.dining_room_chandelier_level
+
+
+  #####################################################################
+  ### Interior & Exterior Lights
+  #####################################################################
+  Interior Lights:
+    entities:
+      - group.accent_lights
+      - group.mbr_lights
+      - light.foyer_lights_level
+      - light.master_bathroom
+      - light.living_room_lamp
+      - light.lr_ceiling
+      - light.entryway
+      - light.wine_room
+      - light.office_desk_lamp
+      - light.kitchen_lights_level
+      - light.dining_room_chandelier_level
+      - switch.game_room_lights_switch
+      - switch.downstairs_bath_lights_switch
+
+  Exterior Lights:
+    entities:
+      - switch.patio_lights_switch
+      - switch.pool_light_switch
+#      - switch.patio_party_lights_switch
+
+
+  #####################################################################
+  ### Living Room Fan
+  #####################################################################
+  Living Room Fan:
+    control: hidden
+    entities:
+      - switch.living_room_fan
+      - input_select.living_room_fan_speed
+      - switch.living_room_fan_light
+
+
+  #####################################################################
+  ### Living Room Lights
+  #####################################################################
+  Entry Lights:
+    entities:
+      - light.foyer_lights_level
+      - light.entryway
+      - light.south_entry
+      - light.center_entry
+      - light.kitchen_entry
+
+  Living Room Lights:
+    control: hidden
+    entities:
+      - light.living_room_lamp
+      - light.lr_ceiling
+      - light.northeast_ceiling
+      - light.northwest_ceiling
+      - light.southeast_ceiling
+      - light.southwest_ceiling
+
+
+  #####################################################################
+  ### Living Room Media
+  #####################################################################
+  Living Room TV:
+    control: hidden
+    entities:
+      - switch.tv_power
+      - switch.tv_volume
+      - switch.tv_mute
+      - input_select.living_room_tv_input
+
+  DirecTV:
+    control: hidden
+    entities:
+      - switch.directv_power
+      - switch.directv_play
+
+  Onkyo Amp:
+    control: hidden
+    entities:
+      - switch.amp_power
+      - switch.amp_volume
+      - switch.amp_mute
+      - input_select.onkyo_amp_input
+      - switch.amp_movie_mode
+      - switch.amp_music_mode
+
+
+  #####################################################################
+  ### Locks
+  #####################################################################
+  Door Locks:
+    entities:
+      - lock.bathroom_entry_locked
+      - sensor.lock_beach_door_status
+      - lock.south_entry_locked
+      - sensor.lock_south_door_status
+
+
+  #####################################################################
+  ### Master Bath
+  #####################################################################
+  Master Bath:
+    control: hidden
+    entities:
+      - script.hue_mbath_morning
+      - light.master_bathroom
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
+      - cover.master_bath_roller_shades_level
+
+  Master Bath Lights:
+    entities:
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
+
+
+  #####################################################################
+  ### Master Bedroom Bedframe Lights
+  #####################################################################
+  Bedframe Lights:
+    control: hidden
+    entities:
+      - light.under_bed_lights
+      - input_select.mbr_under_bed_color
+      - input_select.mbr_under_bed_effect
+      - input_select.mbr_under_bed_strobe
+
+
+  #####################################################################
+  ### Master Bedroom Lights
+  #####################################################################
+  Master Bedroom:
+    control: hidden
+    entities:
+      - script.master_bedroom_night_time
+      - script.mbr_night_light
+      - light.master_bedroom_chandelier_level
+      - light.master_sitting_lamp
+      - light.master_reading_lamp
+      - light.master_bed_entry_level
+      - light.master_bed_ceiling_level
+
+
+  Master Bedroom Lights:
+    entities:
+      - light.master_bedroom_chandelier_level
+      - light.master_sitting_lamp
+      - light.master_reading_lamp
+      - light.master_bed_entry_level
+      - light.master_bed_ceiling_level
+      - light.under_bed_lights
+
+
+  #####################################################################
+  ### Master Bedroom Fan
+  #####################################################################
+  Master Bedroom Fan:
+    control: hidden
+    entities:
+      - switch.master_bedroom_fan
+      - switch.master_bedroom_fan_light
+      - input_select.master_bedroom_fan_speed
+      - script.mbr_fan_speed_step_low
+      - script.mbr_fan_speed_step_high
+
+  MBR Fan Speed:
+    entities:
+      - switch.master_bedroom_fan_1
+      - switch.master_bedroom_fan_2
+      - switch.master_bedroom_fan_3
+      - switch.master_bedroom_fan_4
+      - switch.master_bedroom_fan_5
+      - switch.master_bedroom_fan_6
+      - switch.master_bedroom_fan_7
+      - switch.master_bedroom_fan_8
+      - switch.master_bedroom_fan_9
+      - switch.master_bedroom_fan_10
+      - switch.master_bedroom_fan_11
+      - switch.master_bedroom_fan_12
+
+
+  #####################################################################
+  ### Nursery
+  #####################################################################
+  Nursery:
+    control: hidden
+    entities:
+      - light.nursery_wall_light
+      - input_select.nursery_wall_color
+      - input_select.nursery_wall_effect
+      - input_select.nursery_wall_strobe
+      # rf switch upstairs wipe warmer
+      - switch.switch_one
+      # rf switch baby monitor
+      - switch.switch_two
+
+
+  #####################################################################
+  ### Office
+  #####################################################################
+  Office:
+    control: hidden
+    entities:
+      - light.office_desk_lamp
+      - input_select.rgb_light
+      - sensor.sn1_temperature
+      - sensor.sn1_humidity
+      - sensor.sn1_ldr
+      - sensor.sn1_pir
+      - light.sn1_led
+      - media_player.kodi_office
+
+
+  #####################################################################
+  ### Yard / Patio
+  #####################################################################
+  Yard:
+    control: hidden
+    entities:
+      - switch.patio_lights_switch
+      - switch.patio_party_lights_switch
+      - switch.fountains_switch
+      - switch.outdoor_speakers
+
+
+  #####################################################################
+  ### Pool
+  #####################################################################
+  Pool:
+    entities:
+      - switch.pool_light_switch
+      - input_select.pool_scene
+      - input_select.pool_color
+
+
+  #####################################################################
+  ### Porch
+  #####################################################################
+  Porch:
+    entities:
+      - switch.south_porch_lights_switch
+      - switch.front_porch_lights_switch
+
+
+  #####################################################################
+  ### Rachio
+  #####################################################################
+  Irrigation:
+    control: hidden
+    entities:
+      - sensor.rachio_status
+      - switch.rubino_in_standby_mode
+      - switch.north_sprinklers_z1
+      - switch.northwest_sprinklers_z2
+      - switch.northeast_sprinklers_z3
+      - switch.east_sprinklers_z5
+      - switch.southeast_sprinklers_z6
+      - switch.southwest_sprinklers_z7
+      - switch.drip_and_citrus_trees_z4
+
+
+  #####################################################################
+  ### Modes / Scenes / Overrides
+  #####################################################################
+  Operational Modes:
+    control: hidden
+    entities:
+      - input_boolean.visitor_mode
+      - input_boolean.holiday
+      - script.company_mode
+
+  Lighting Scenes:
+    control: hidden
+    entities:
+      - scene.morning
+      - script.nap_time
+      - input_boolean.dinner_time
+      - script.bedtime
+      - scene.movie_time
+      - scene.dim
+      - scene.cloudy
+      - scene.evening
+      - scene.bright
+      - script.shutdown_lights
+
+  Hue Scenes:
+    control: hidden
+    entities:
+      - script.hue_lr_dimmed
+      - script.hue_lr_nightlight
+      - script.hue_lr_bright
+      - script.hue_lr_christmas
+      - script.hue_lr_movie
+      - script.hue_lr_sunrise
+      - script.hue_lr_sunset
+      - script.hue_lr_minty
+      - script.hue_lr_daybreak
+
+
+  Automation Override:
+    control: hidden
+    entities:
+      - automation.away_mode_on
+      - automation.south_door_unlock_on_arrival
+      - automation.accent_lights_auto_off
+      - automation.living_room_off_morning
+      - automation.living_room_on_cloudy
+      - automation.living_room_bright_morning
+
+
+  #####################################################################
+  ### Security Sensors
+  #####################################################################
+  Sensors:
+    entities:
+      - binary_sensor.living_room_occupancy
+      - binary_sensor.entryway_occupancy
+      - binary_sensor.office_occupancy
+      - binary_sensor.upstairs_occupancy
+      - binary_sensor.nursery_occupancy
+      - binary_sensor.guest_room_occupancy
+      - sensor.kegerator_door_state
+      - sensor.front_entry_motion
+      - sensor.nursery_ptz_motion_detected
+      - sensor.nw_ptz_motion_detected
+      - sensor.front_entry_fibaro_multisensor_luminance
+      - sensor.downstairs_ac_leak_detector
+#      - sensor.crime
+
+  Door Sensors:
+    entities:
+      - sensor.front_door_state
+      - sensor.south_door_state
+      - sensor.kitchen_door_state
+      - sensor.beach_door_state
+
+  Door Alarm Points:
+    entities:
+      - sensor.front_door_tamper
+      - sensor.south_door_tamper
+      - sensor.kitchen_door_tamper
+      - sensor.beach_door_tamper
+
+
+  #####################################################################
+  ### Smart Outlets
+  #####################################################################
+  Downstairs Outlets:
+    control: hidden
+    entities:
+      # rf switch downstairs wipe warmer
+      - switch.switch_three
+      #rf switch staircase christmas lights
+      #- switch.switch_four
+      #rf switch christmas tree
+      #- switch.switch_five
+      #tplink smartplug 1 (flower lamp)
+      #- switch.flower_lamp
+      #tplink outdoor speakers
+      - switch.outdoor_speakers
+
+
+  #####################################################################
+  ### System
+  #####################################################################
+  Speedtest:
+    entities:
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+
+  Downloads:
+    entities:
+      - sensor.sabnzbd_disk
+      - sensor.sabnzbd_disk_free
+      - sensor.sabnzbd_queue
+      - sensor.sabnzbd_speed
+      - sensor.sabnzbd_status
+
+  HA Status:
+    entities:
+      - sensor.holiday
+      - sensor.ha_current_version
+      - sensor.uptime
+      - sensor.ha_last_restart
+      - sensor.last_boot
+      - sensor.disk_free_home
+
+
+  #####################################################################
+  ### Test Lab
+  #####################################################################
+  Test Triggers:
+    control: hidden
+    entities:
+      - script.script_test
+      - script.rgb_strip_test
+      - script.desk_lamp_test
+      - input_boolean.state_change
+
+  Test Conditions:
+    control: hidden
+    entities:
+      - input_boolean.condition_1
+      - input_boolean.condition_2
+      - input_boolean.condition_3
+      - input_boolean.condition_4
+      - input_boolean.condition_5
+
+
+  #####################################################################
+  ### Weather
+  #####################################################################
+  Weather Summary:
+    entities:
+      - weather.downstairs
+      - sensor.yweather_temperature_max
+      - sensor.yweather_temperature_min
+      - sensor.dark_sky_daily_summary
+      - sensor.pws_wind_string
+      - sensor.season
+      - input_number.season_summer
+      - input_number.season_winter
+#      - sensor.yweather_current
+#      - sensor.yweather_temperature
+#      - sensor.pws_temp_f
+#      - sensor.pws_feelslike_string
+#      - sensor.pws_relative_humidity
+
+
+  Weather Details:
+    entities:
+      - sensor.dark_sky_cloud_coverage
+      - sensor.pws_heat_index_string
+      - sensor.pws_dewpoint_string
+      - sensor.pws_pressure_in
+      - sensor.pws_pressure_mb
+      - sensor.pws_solarradiation
+      - sensor.pws_uv
+      - sensor.pws_visibility_mi
+      - sensor.dark_sky_precip_probability
+      - sensor.dark_sky_precip_intensity
+      - sensor.pws_precip_today_string
+      - sensor.dark_sky_nearest_storm_distance
+      - input_boolean.rain
+      - camera.weather
+
+  3 Day Forecast:
+    entities:
+      - sensor.yweather_condition
+      - sensor.yw_tomorrow_condition
+      - sensor.yw_tomorrow_temperature_max
+      - sensor.yw_tomorrow_temperature_min
+      - sensor.yw_day2_condition
+      - sensor.yw_day2_temperature_max
+      - sensor.yw_day2_temperature_min
+      - sensor.yw_day3_condition
+      - sensor.yw_day3_temperature_max
+      - sensor.yw_day3_temperature_min
+      #- sensor.yweather_humidity
+      #- sensor.yweather_pressure
+      #- sensor.yweather_visibility
+      #- sensor.yweather_wind_speed
+
+
+  #####################################################################
+  ### Wine Room
+  #####################################################################
+  Wine Room Lights:
+    control: hidden
+    entities:
+      - switch.wine_room_lamp
+      - light.wine_room
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
