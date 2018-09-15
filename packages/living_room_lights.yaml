@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'living_room_lights'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,45 +20,35 @@ homeassistant:
     ## Light
     ################################################
     light.living_room_lamp:
-      <<: *contained
       icon: mdi:lamp
 
     light.south_entry:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.entryway:
-      <<: *contained
       friendly_name: "Entryway Lights"
       icon: mdi:google-circles-communities
 
     light.kitchen_entry:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.center_entry:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.lr_ceiling:
-      <<: *contained
       friendly_name: "Living Room Ceiling"
       icon: mdi:google-circles-communities
 
     light.northeast_ceiling:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.northwest_ceiling:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.southeast_ceiling:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.southwest_ceiling:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.foyer_lights_level:

@@ -12,18 +12,8 @@ homeassistant:
         package: 'living_room_fan'
         homebridge_hidden: true
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-#        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-#        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -48,7 +38,6 @@ homeassistant:
     ################################################
     input_select.living_room_fan_speed:
       icon: mdi:fan
-      <<: *contained
 
 
 #####################################################################

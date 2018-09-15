@@ -11,6 +11,10 @@ homeassistant:
       customize: &customize
         package: 'cameras'
 
+      hidden: &hidden
+        <<: *customize
+        hidden: true
+
 
 #####################################################################
 ### Camera

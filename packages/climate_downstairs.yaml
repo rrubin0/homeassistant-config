@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'climate_downstairs'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -34,12 +24,10 @@ homeassistant:
       entity_picture: /local/ecobee.png
 
     script.ecobee_ds_away:
-      <<: *contained
       friendly_name: "Ecobee Downstairs Away"
       entity_picture: /local/ecobee.png
 
     script.ecobee_ds_sleep:
-      <<: *contained
       friendly_name: "Ecobee Downstairs Sleep"
       entity_picture: /local/ecobee.png
 
@@ -48,7 +36,6 @@ homeassistant:
       entity_picture: /local/ecobee.png
 
     script.ecobee_ds_resume:
-      <<: *contained
       friendly_name: "Ecobee Downstairs Resume"
       entity_picture: /local/ecobee.png
 
@@ -57,53 +44,41 @@ homeassistant:
     ## Sensor
     ################################################
     climate.downstairs:
-      <<: *contained
       friendly_name: "Downstairs Thermostat"
       icon: mdi:thermostat
 
     sensor.ds_avg_temp:
-      <<: *contained
       icon: mdi:chart-areaspline
 
     sensor.ds_climate_current_temp:
-      <<: *contained
       icon: mdi:thermometer
 
     sensor.ds_fan_state:
-      <<: *contained
       icon: mdi:fan
 
     sensor.downstairs_humidity:
-      <<: *contained
       icon: mdi:water-percent
 
     sensor.ds_climate_mode:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.ds_climate_hold:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.ds_climate_away:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.ds_climate_target_low:
-      <<: *contained
       icon: mdi:thermometer
 
     sensor.ds_climate_target_high:
-      <<: *contained
       icon: mdi:thermometer
 
     sensor.front_entry_fibaro_multisensor_temperature:
-      <<: *contained
       friendly_name: "Front Entry Temperature"
       icon: mdi:thermometer
 
     sensor.broadlink_sensor_temperature:
-      <<: *contained
       friendly_name: "Stairway Temperature"
       icon: mdi:thermometer
 

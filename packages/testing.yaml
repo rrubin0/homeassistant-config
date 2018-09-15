@@ -11,19 +11,8 @@ homeassistant:
       customize: &customize
         package: 'testing'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-        icon: mdi:checkbox-marked-circle
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -31,30 +20,24 @@ homeassistant:
     ## Input Boolean
     ################################################
     input_boolean.state_change:
-      <<: *contained
 
     input_boolean.condition_1:
-      <<: *contained
       friendly_name: "Test Condition 1"
 #      icon: mdi:checkbox-marked-circle
 
     input_boolean.condition_2:
-      <<: *contained
       friendly_name: "Test Condition 2"
 #      icon: mdi:checkbox-marked-circle
 
     input_boolean.condition_3:
-      <<: *contained
       friendly_name: "Test Condition 3"
 #      icon: mdi:checkbox-marked-circle
 
     input_boolean.condition_4:
-      <<: *contained
       friendly_name: "Test Condition 4"
 #      icon: mdi:checkbox-marked-circle
 
     input_boolean.condition_5:
-      <<: *contained
       friendly_name: "Test Condition 5"
 #      icon: mdi:checkbox-marked-circle
 
@@ -62,15 +45,12 @@ homeassistant:
     ## Script
     ################################################
     script.script_test:
-      <<: *contained
       friendly_name: "Test Script"
 
     script.rgb_strip_test:
-      <<: *contained
       friendly_name: "RGB Strip Test"
 
     script.desk_lamp_test:
-      <<: *contained
       friendly_name: "Desk Lamp Test"
 
 

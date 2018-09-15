@@ -11,6 +11,7 @@ homeassistant:
       customize: &customize
         package: 'scripts'
 
+
     ################################################
     ## Script Customizations
     ################################################

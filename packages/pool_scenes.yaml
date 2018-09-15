@@ -11,6 +11,10 @@ homeassistant:
       customize: &customize
         package: 'pool_scenes'
 
+      hidden: &hidden
+        <<: *customize
+        hidden: true
+
 
     ################################################
     ## Script

@@ -11,53 +11,9 @@ homeassistant:
       customize: &customize
         package: 'broadlink'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
-
-
-    ################################################
-    ## Switch
-    ################################################
-    switch.amp_input_dvd:
-      <<: *contained
-
-    switch.amp_input_ipod:
-      <<: *contained
-
-    switch.amp_input_movie:
-      <<: *contained
-
-    switch.amp_input_tv:
-      <<: *contained
-
-    switch.amp_movie_mode:
-      <<: *contained
-
-    switch.amp_music_mode:
-      <<: *contained
-
-    switch.amp_mute:
-      <<: *contained
-
-    switch.amp_volume:
-      <<: *contained
-
-    switch.directv_play:
-      <<: *contained
-
-    switch.tv_volume:
-      <<: *contained
 
 
 #####################################################################

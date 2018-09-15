@@ -15,16 +15,8 @@ homeassistant:
       customize: &customize
         package: 'system'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -32,52 +24,42 @@ homeassistant:
     ## Sensor
     ################################################
     sensor.speedtest_ping:
-      <<: *contained
       friendly_name: "Ping"
       icon: mdi:clock
 
     sensor.speedtest_download:
-      <<: *contained
       friendly_name: "Download"
       icon: mdi:arrow-down
 
     sensor.speedtest_upload:
-      <<: *contained
       friendly_name: "Upload"
       icon: mdi:arrow-up
 
     sensor.sabnzbd_disk:
-      <<: *contained
       friendly_name: "Total Storage"
       icon: mdi:harddisk
 
     sensor.sabnzbd_disk_free:
-      <<: *contained
       friendly_name: "Storage Remaining"
       icon: mdi:chart-pie
 
     sensor.sabnzbd_queue:
-      <<: *contained
       friendly_name: "Queued for Download"
       icon: mdi:clipboard-arrow-down
 
     sensor.sabnzbd_speed:
-      <<: *contained
       friendly_name: "DL Speed"
       icon: mdi:speedometer
 
     sensor.sabnzbd_status:
-      <<: *contained
       friendly_name: "Current State"
       icon: mdi:check
 
     sensor.uptime:
-      <<: *contained
       friendly_name: "System Uptime"
       icon: mdi:clock
 
     sensor.holiday:
-      <<: *contained
       icon: mdi:calendar-check
 
 

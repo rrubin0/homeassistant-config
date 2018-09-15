@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'device_trackers'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,12 +20,10 @@ homeassistant:
     ## Device Trackers
     ################################################
     device_tracker.i8plus:
-      <<: *contained
       friendly_name: "Rick"
       entity_picture: /local/rick.jpg
 
     device_tracker.mip8:
-      <<: *contained
       friendly_name: "Megs"
       entity_picture: /local/megs.jpg
 
@@ -43,50 +31,34 @@ homeassistant:
     ## Sensor
     ################################################
     sensor.ricks_office_commute:
-      <<: *contained
       friendly_name: "Ricks Commute to Work"
       icon: mdi:car
 
     sensor.ricks_home_commute:
-      <<: *contained
       friendly_name: "Ricks Commute Home"
       icon: mdi:car
 
     sensor.megs_work_commute:
-      <<: *contained
       friendly_name: "Megs Commute to Work"
       icon: mdi:car
 
     sensor.megs_home_commute:
-      <<: *contained
       friendly_name: "Megs Commute Home"
       icon: mdi:car
 
     sensor.ricks_eta_home:
-      <<: *contained
       friendly_name: "Ricks ETA"
       icon: mdi:timer
 
     sensor.ricks_eta:
-      <<: *contained
       icon: mdi:timer
 
     sensor.megs_eta_home:
-      <<: *contained
       friendly_name: "Megs ETA"
       icon: mdi:timer
 
     sensor.megs_eta:
-      <<: *contained
       icon: mdi:timer
-
-
-  ################################################
-  ## Customize Domain
-  ################################################
-  customize_domain:
-    device_tracker:
-      <<: *contained
 
 
 ################################################################

@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'xiaomi'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,7 +20,6 @@ homeassistant:
     ## Light
     ################################################
     light.gateway_light_7811dcb7da52:
-      <<: *contained
       friendly_name: "Alert Light"
 
 
@@ -43,7 +32,6 @@ homeassistant:
     ## Sensor
     ################################################
     binary_sensor.switch_158d00026b8505:
-      <<: *contained
       friendly_name: "Smart Button"
 
 

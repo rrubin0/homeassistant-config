@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'batteries'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,39 +20,30 @@ homeassistant:
     ## Sensor
     ################################################
     sensor.lock_beach_battery:
-      <<: *contained
       friendly_name: "Beach Bathroom Lock Battery"
 
     sensor.dc_beach_battery:
-      <<: *contained
       friendly_name: "Beach Bathroom Door Battery"
 
     sensor.dc_front_door_battery:
-      <<: *contained
       friendly_name: "Front Door Battery"
 
     sensor.dc_kitchen_door_battery:
-      <<: *contained
       friendly_name: "Kitchen Door Battery"
 
     sensor.dc_south_door_battery:
-      <<: *contained
       friendly_name: "South Door Battery"
 
     sensor.lock_south_battery:
-      <<: *contained
       friendly_name: "South Lock Battery"
 
     sensor.entry_multisensor_battery:
-      <<: *contained
       friendly_name: "Foyer Multisensor Battery"
 
     sensor.downstairs_ac_leak_detector_battery:
-      <<: *contained
       friendly_name: "AC Leak Detector Battery"
 
     sensor.i8plus_battery_level:
-      <<: *contained
       friendly_name: "Rick's Phone Battery"
       icon_template: >-
         {% set battery_level = states('sensor.i8plus_battery_level')|int('unknown') %}
@@ -80,7 +61,6 @@ homeassistant:
         {% endif %}
 
     sensor.mip8_battery_level_2:
-      <<: *contained
       friendly_name: "Meg's Phone Battery"
       icon_template: >-
         {% set battery_level = states('sensor.mip8_battery_level_2')|int('unknown') %}

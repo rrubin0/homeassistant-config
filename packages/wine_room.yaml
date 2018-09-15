@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'wine_room'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,24 +20,19 @@ homeassistant:
     ## Light
     ################################################
     light.wine_room:
-      <<: *contained
       friendly_name: "Wine Room Lights"
       icon: mdi:google-circles-communities
 
     light.northeast_wine:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.northwest_wine:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.southeast_wine:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.southwest_wine:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
 

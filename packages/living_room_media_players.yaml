@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'living_room_media'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,19 +20,17 @@ homeassistant:
     ## Media Player
     ################################################
     media_player.kodi_living_room:
-      <<: *contained
       friendly_name: "Living Room Kodi"
 
     media_player.apple_tv:
-      <<: *contained
       friendly_name: "Apple TV"
 
 #    media_player.firetv_living_room:
-#      <<: *contained
+
 #      friendly_name: "FireTV"
 
 #    media_player.rnmcast:
-#      <<: *contained
+
 #      friendly_name: "Chromecast"
 
 
@@ -51,11 +39,9 @@ homeassistant:
     ################################################
     input_select.living_room_tv_input:
       icon: mdi:television
-      <<: *contained
 
     input_select.onkyo_amp_input:
       icon: mdi:radio
-      <<: *contained
 
     ################################################
     ## Script

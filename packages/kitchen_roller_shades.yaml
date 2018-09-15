@@ -12,18 +12,8 @@ homeassistant:
         package: 'kitchen_roller_shades'
         homebridge_hidden: true
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-#        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-#        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -31,7 +21,6 @@ homeassistant:
     ## Cover
     ################################################
     cover.kitchen_roller_shade_level:
-      <<: *contained
       device_class: garage
       friendly_name: "Kitchen Rollershade"
       homebridge_cover_type: rollershutter
@@ -41,12 +30,6 @@ homeassistant:
       <<: *hidden
       device_class: garage
       friendly_name: "Kitchen Rollershade State"
-      icon: mdi:blinds
-
-    cover.kitchen_shade:
-      device_class: garage
-      friendly_name: "Kitchen Shade"
-      homebridge_cover_type: rollershutter
       icon: mdi:blinds
 
 

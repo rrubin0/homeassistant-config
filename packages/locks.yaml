@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'locks'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,11 +20,9 @@ homeassistant:
     ## Lock
     ################################################
     lock.bathroom_entry_locked:
-      <<: *contained
       friendly_name: "Bathroom Door"
 
     lock.south_entry_locked:
-      <<: *contained
       friendly_name: "South Entry Door"
 
 
@@ -42,7 +30,6 @@ homeassistant:
     ## Automation
     ################################################
     automation.south_door_unlock_arrival:
-      <<: *contained
       friendly_name: "Unlock Door for Megan"
 
     automation.south_door_unlock_by_user:

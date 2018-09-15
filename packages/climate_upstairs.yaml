@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'climate_upstairs'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -34,17 +24,14 @@ homeassistant:
       entity_picture: /local/ecobee.png
 
     script.ecobee_us_away:
-      <<: *contained
       friendly_name: "Ecobee Upstairs Away"
       entity_picture: /local/ecobee.png
 
     script.ecobee_us_sleep:
-      <<: *contained
       friendly_name: "Ecobee Upstairs Sleep"
       entity_picture: /local/ecobee.png
 
     script.ecobee_us_resume:
-      <<: *contained
       friendly_name: "Ecobee Upstairs Resume"
       entity_picture: /local/ecobee.png
 
@@ -53,44 +40,34 @@ homeassistant:
     ## Sensor
     ################################################
     climate.upstairs:
-      <<: *contained
       friendly_name: "Upstairs Thermostat"
       icon: mdi:thermostat
 
     sensor.us_avg_temp:
-      <<: *contained
       icon: mdi:chart-areaspline
 
     sensor.us_climate_current_temp:
-      <<: *contained
       icon: mdi:thermometer
 
     sensor.us_fan_state:
-      <<: *contained
       icon: mdi:fan
 
     sensor.upstairs_humidity:
-      <<: *contained
       icon: mdi:water-percent
 
     sensor.us_climate_mode:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.us_climate_hold:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.us_climate_away:
-      <<: *contained
       icon: mdi:thermostat
 
     sensor.us_climate_target_low:
-      <<: *contained
       icon: mdi:thermometer
 
     sensor.us_climate_target_high:
-      <<: *contained
       icon: mdi:thermometer
 
 

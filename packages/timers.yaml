@@ -11,56 +11,9 @@ homeassistant:
       customize: &customize
         package: 'timers'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
-
-
-    ################################################
-    ## Script
-    ################################################
-    script.start_away_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.pause_away_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.cancel_away_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.finish_away_timer:
-      <<: *contained
-      icon: mdi:timer
-
-
-    script.start_bedtime_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.pause_bedtime_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.cancel_bedtime_timer:
-      <<: *contained
-      icon: mdi:timer
-
-    script.finish_bedtime_timer:
-      <<: *contained
-      icon: mdi:timer
 
 
   ################################################
@@ -68,7 +21,6 @@ homeassistant:
   ################################################
   customize_glob:
     "timer.*":
-      <<: *contained
       icon: mdi:timer
 
 

@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'master_bedroom_fan'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -38,52 +28,6 @@ homeassistant:
       friendly_name: "Bedroom Fan Light"
       icon: mdi:ceiling-light
 
-    switch.master_bedroom_fan_1:
-      <<: *contained
-
-    switch.master_bedroom_fan_2:
-      <<: *contained
-
-    switch.master_bedroom_fan_3:
-      <<: *contained
-
-    switch.master_bedroom_fan_4:
-      <<: *contained
-
-    switch.master_bedroom_fan_5:
-      <<: *contained
-
-    switch.master_bedroom_fan_6:
-      <<: *contained
-
-
-    ### WINTER SPEEDS
-    switch.master_bedroom_fan_7:
-      <<: *contained
-
-    switch.master_bedroom_fan_8:
-      <<: *contained
-
-    switch.master_bedroom_fan_9:
-      <<: *contained
-
-    switch.master_bedroom_fan_10:
-      <<: *contained
-
-    switch.master_bedroom_fan_11:
-      <<: *contained
-
-    switch.master_bedroom_fan_12:
-      <<: *contained
-
-    switch.master_bedroom_fan_random:
-      <<: *contained
-
-    switch.master_bedroom_fan_vacation:
-      <<: *contained
-
-    switch.master_bedroom_fan_delay:
-      <<: *contained
 
     ################################################
     ## Sensor
@@ -132,7 +76,6 @@ homeassistant:
     ## Script
     ################################################
     script.mbr_fan_speed_step:
-      <<: *contained
       friendly_name: "Master Bedroom Fan Auto"
       icon: mdi:fan
 

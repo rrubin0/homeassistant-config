@@ -16,18 +16,8 @@ homeassistant:
         package: 'zones'
         homebridge_hidden: true
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-#        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-#        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
     ################################################
@@ -38,12 +28,10 @@ homeassistant:
 #        friendly_name: "Home"
 
     zone.megs_work:
-        <<: *contained
         friendly_name: "Arete"
         icon: mdi:school
 
     zone.ricks_office:
-        <<: *contained
         friendly_name: "Office"
         icon: mdi:briefcase
 

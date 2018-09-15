@@ -12,16 +12,8 @@ homeassistant:
         package: 'rachio'
         homebridge_hidden: true
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 

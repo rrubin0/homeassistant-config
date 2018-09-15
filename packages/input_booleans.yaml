@@ -12,18 +12,8 @@ homeassistant:
         package: 'input_boolean'
         homebridge_hidden: true
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-#        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-#        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -31,15 +21,12 @@ homeassistant:
     ## Input Boolean
     ################################################
     input_boolean.visitor_mode:
-      <<: *exposed
       icon: mdi:account
 
     input_boolean.holiday:
-      <<: *exposed
       icon: mdi:snowman
 
     input_boolean.dinner_time:
-      <<: *exposed
       icon: mdi:food-fork-drink
 
 

@@ -11,325 +11,95 @@ homeassistant:
       customize: &customize
         package: 'views'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
+
 
     ################################################
     ## UI HOME VIEW
     ################################################
 #    group.default_view:
-#      <<: *contained
 ##      icon: mdi:account-location
 #
-#    group.travel_megs:
-#      <<: *contained
-##      order: 1
-#
-#    group.travel_rick:
-#      <<: *contained
-##      order: 2
-#
-#    group.device_status:
-#      <<: *contained
-##      order: 3
 #
 #    ################################################
 #    ## UI SECURITY VIEW
 #    ################################################
 #    group.security:
-#      <<: *contained
 ##      icon: mdi:security-home
 #
-#    group.door_locks:
-#      <<: *contained
-##      order: 1
-#
-#    group.sensors:
-#      <<: *contained
-##      order: 2
-#
-#    group.door_sensors:
-#      <<: *contained
-#      #order: 3
-#
-#    group.door_alarm_points:
-#      <<: *contained
-##      order: 4
 #
 #    ################################################
 #    ## UI CAMERAS VIEW
 #    ################################################
 #    group.cameras:
-#      <<: *contained
 ##      icon: mdi:cctv
 #
-#    group.camera_status:
-#      <<: *contained
-#
-#    group.camera_front_door:
-#      <<: *contained
-##      order: 1
-#
-#    group.camera_north_gate:
-#      <<: *contained
-##      order: 2
-#
-#    group.camera_nw_ptz:
-#      <<: *contained
-##      order: 3
-#
-#    group.camera_nursery_ptz:
-#      <<: *contained
-##      order: 4
-#
-#    group.traffic_report:
-#      <<: *contained
 #
 #    ################################################
 #    ## UI DOWNSTAIRS VIEW
 #    ################################################
 #    group.downstairs:
-#      <<: *contained
 ##      icon: mdi:arrow-down-bold-circle-outline
-#
-#    group.living_room_lights:
-#      <<: *contained
-##      order: 1
-#
-#    group.entry_lights:
-#      <<: *contained
-##      order: 2
-#
-#    group.living_room_fan:
-#      <<: *contained
-##      order: 3
-#
-#    group.accent_lights:
-##      order: 4
-#
-#    group.kitchen:
-#      <<: *contained
-##      order: 5
-#
-#    group.dining_room:
-#      <<: *contained
-##      order: 6
-#
-#    group.wine_room_lights:
-##      order: 7
-#
-#    group.game_room:
-#      <<: *contained
-##      order: 8
-#
-#    group.downstairs_bath:
-#      <<: *contained
-##      order: 9
-#
-#    group.office:
-#      <<: *contained
-##      order: 10
-#
-#    group.downstairs_outlets:
-#      <<: *contained
-##      order: 11
 #
 #
 #    ################################################
 #    ## UI UPSTAIRS VIEW
 #    ################################################
 #    group.upstairs:
-#      <<: *contained
 ##      icon: mdi:arrow-up-bold-circle-outline
-#
-#    group.master_bedroom:
-#      <<: *contained
-##      order: 1
-#
-#    group.master_bedroom_fan:
-#      <<: *contained
-##      order: 2
-#
-#    group.bedframe_lights:
-#      <<: *contained
-##      order: 3
-#
-#    group.master_bath:
-#      <<: *contained
-##      order: 2
-#
-#    media_player.kodi_bedroom:
-#      <<: *contained
-##      order: 5
-#
-#    group.nursery:
-#      <<: *contained
-##      order: 6
-#
-##    group.upstairs_outlets:
-##      <<: *contained
-##      order: 7
 #
 #
 #    ################################################
 #    ## UI CLIMATE VIEW
 #    ################################################
 #    group.climate:
-#      <<: *contained
 ##      icon: mdi:air-conditioner
-#
-#    group.downstairs_climate:
-#      <<: *contained
-##      order: 1
-#
-#    group.downstairs_ecobee:
-#      <<: *contained
-##      order: 2
-#
-#    group.upstairs_climate:
-#      <<: *contained
-##      order: 3
-#
-#    group.upstairs_ecobee:
-#      <<: *contained
-##      order: 4
 #
 #
 #    ################################################
 #    ## UI SCENES VIEW
 #    ################################################
 #    group.scenes:
-#      <<: *contained
 ##      icon: mdi:creation
-#
-#    group.operational_modes:
-#      <<: *contained
-##      order: 1
-#
-#    group.lighting_scenes:
-#      <<: *contained
-##      order: 2
-#
-#    group.hue_scenes:
-#      <<: *contained
-##      order: 3
-#
-#    group.automation_override:
-#      <<: *contained
-##      order: 4
 #
 #
 #    ################################################
 #    ## UI EXTERIOR VIEW
 #    ################################################
 #    group.exterior:
-#      <<: *contained
 ##      icon: mdi:tree
-#
-#    group.yard:
-#      <<: *exposed
-#      
-##      order: 1
-#
-#    group.irrigation:
-#      <<: *contained
-##      order: 2
 #
 #
 #    ################################################
 #    ## UI WEATHER VIEW
 #    ################################################
 #    group.weather:
-#      <<: *contained
 ##      icon: mdi:weather-sunny
-#
-#    group.weather_summary:
-#      <<: *contained
-##      order: 1
-#
-#    group.weather_details:
-#      <<: *contained
-##      order: 2
-#
-#    group.precipitation:
-#      <<: *contained
-##      order: 3
-#
-#    group.3_day_forecast:
-#      <<: *contained
 #
 #
 #    ################################################
 #    ## UI MEDIA VIEW
 #    ################################################
 #    group.media:
-#      <<: *contained
 ##      icon: mdi:theater
-#
-#    group.living_room_tv:
-#      <<: *contained
-##      order: 1
-#
-#    group.directv:
-#      <<: *contained
-##      order: 2
-#
-#    group.onkyo_amp:
-#      <<: *contained
-##      order: 3
 #
 #
 #    ################################################
 #    ## UI SYSTEM VIEW
 #    ################################################
 #    group.system:
-#      <<: *contained
 ##      icon: mdi:server
-#
-#    group.ha_status:
-#      <<: *contained
-##      order: 1
-#
-#    group.downloads:
-#      <<: *contained
-#
-#    group.speedtest:
-#      <<: *contained
 #
 #
 #    ################################################
 #    ## UI TEST LAB VIEW
 #    ################################################
 #    group.lab:
-#      <<: *contained
 ##      icon: mdi:test-tube
 #
-#    group.test_triggers:
-#      <<: *contained
 #
-#    group.test_conditions:
-#      <<: *contained
-#
-#
-#  ################################################
-#  ## Customize Global
-#  ################################################
-  customize_glob:
-    "group.all_*":
-      <<: *contained
-
-
 #####################################################################
 ### Group (comment out default_view and enable home for all entities
 #####################################################################

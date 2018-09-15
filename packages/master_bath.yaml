@@ -11,45 +11,30 @@ homeassistant:
       customize: &customize
         package: 'master_bath'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
     ################################################
     ## Light
     ################################################
     light.master_bathroom:
-      <<: *contained
       friendly_name: "Master Bathroom Lights"
       icon: mdi:google-circles-communities
 
     light.master_bath_entry:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.master_bath_sink:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     light.master_bathtub:
-      <<: *contained
       icon: mdi:white-balance-incandescent
 
     ################################################
     ## Cover
     ################################################
     cover.master_bath_roller_shades_level:
-      <<: *contained
       device_class: garage
       friendly_name: "Master Bath Rollershades"
       homebridge_cover_type: rollershutter
@@ -62,7 +47,6 @@ homeassistant:
       icon: mdi:blinds
 
     cover.master_bath_shade:
-      <<: *contained
       device_class: garage
       friendly_name: "Master Bath Shades"
       homebridge_cover_type: rollershutter

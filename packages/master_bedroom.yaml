@@ -11,20 +11,9 @@ homeassistant:
       customize: &customize
         package: 'master_bedroom'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
-
 
     ################################################
     ## Light
@@ -34,12 +23,10 @@ homeassistant:
       icon: mdi:ceiling-light
 
     light.master_sitting_lamp:
-      <<: *contained
       friendly_name: "Master Bedroom Sitting Lamp"
       icon: mdi:lamp
 
     light.master_reading_lamp:
-      <<: *contained
       friendly_name: "Master Bedroom Reading Lamp"
       icon: mdi:lamp
 
@@ -55,7 +42,6 @@ homeassistant:
     ## Media Player
     ################################################
     media_player.kodi_bedroom:
-      <<: *contained
       friendly_name: "Bedroom Kodi"
 
     ################################################

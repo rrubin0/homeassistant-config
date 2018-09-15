@@ -11,18 +11,8 @@ homeassistant:
       customize: &customize
         package: 'security_sensors'
 
-      contained: &contained
-        <<: *customize
-        haaska_hidden: true
-        homebridge_hidden: true
-
-      exposed: &exposed
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
       hidden: &hidden
-        <<: *contained
+        <<: *customize
         hidden: true
 
 
@@ -30,89 +20,57 @@ homeassistant:
     ## Sensor
     ################################################
     sensor.front_entry_motion:
-      <<: *contained
       friendly_name: "Front Entry Motion"
       icon: mdi:run
 
     sensor.front_entry_fibaro_multisensor_luminance:
-      <<: *contained
       friendly_name: "Front Entry Light Sensor"
       icon: mdi:white-balance-sunny
 
     sensor.front_door_tamper:
-      <<: *contained
       friendly_name: "Front Door Tamper"
       #icon: mdi:home-outline
 
     sensor.south_door_tamper:
-      <<: *contained
       friendly_name: "South Door Tamper"
       #icon: mdi:home-outline
 
     sensor.kitchen_door_tamper:
-      <<: *contained
       friendly_name: "Kitchen Door Tamper"
       #icon: mdi:home-outline
 
     sensor.beach_door_tamper:
-      <<: *contained
       friendly_name: "Beach Door Tamper"
       #icon: mdi:home-outline
 
     sensor.nursery_ptz_motion_detected:
-      <<: *contained
       friendly_name: "Nursery PTZ Motion"
       icon: mdi:run
 
     sensor.nw_ptz_motion_detected:
-      <<: *contained
       friendly_name: "NW PTZ Motion"
       icon: mdi:run
 
     sensor.nursery_ptz_preset:
-      <<: *contained
       friendly_name: "Nursery PTZ Preset"
       icon: mdi:arrow-expand-all
 
     sensor.nw_ptz_preset:
-      <<: *contained
       friendly_name: "NW PTZ Preset"
       icon: mdi:arrow-expand-all
 
     sensor.nursery_ptz_sd_used:
-      <<: *contained
       friendly_name: "Nursery PTZ SD Card"
       icon: mdi:sd
 
     sensor.nw_ptz_sd_used:
-      <<: *contained
       friendly_name: "NW PTZ SD Card"
       icon: mdi:sd
 
 #    sensor.crime:
-#      <<: *contained
 #      icon: mdi:bomb
 
-    sensor.entryway_occupancy:
-      <<: *contained
-
-    sensor.living_room_occupancy:
-      <<: *contained
-
-    sensor.office_occupancy:
-      <<: *contained
-
-    sensor.upstairs_occupancy:
-      <<: *contained
-
-    sensor.nursery_occupancy:
-      <<: *contained
-
-    sensor.guest_room_occupancy:
-      <<: *contained
-
     sensor.downstairs_ac_leak_detector:
-      <<: *contained
       friendly_name: "Downstairs AC Leak Detector"
 
     sensor.everspring_st812_flood_detector_flood:
@@ -123,22 +81,6 @@ homeassistant:
 
     sensor.everspring_st812_flood_detector_alarm_type:
       ignored: true
-
-
-    ################################################
-    ## Door State Icons
-    ################################################
-    sensor.front_door_state:
-      <<: *contained
-
-    sensor.kitchen_door_state:
-      <<: *contained
-
-    sensor.south_door_state:
-      <<: *contained
-
-    sensor.beach_door_state:
-      <<: *contained
 
 
 #####################################################################
