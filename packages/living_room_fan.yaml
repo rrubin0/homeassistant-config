@@ -10,7 +10,6 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'living_room_fan'
-        homebridge_hidden: true
 
       hidden: &hidden
         <<: *customize

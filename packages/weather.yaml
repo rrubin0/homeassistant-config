@@ -10,7 +10,6 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'weather'
-        homebridge_hidden: true
 
       hidden: &hidden
         <<: *customize

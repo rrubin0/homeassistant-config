@@ -133,7 +133,7 @@ sensor:
   - platform: template
     sensors:
       us_fan_state:
-        friendly_name: "Fan State"
+        friendly_name: "Upstairs HVAC Fan"
         value_template: "{{ (states.climate.upstairs.attributes|default({})).fan|default('unknown') }}"
         entity_id: sensor.time
 

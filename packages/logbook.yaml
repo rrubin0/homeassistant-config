@@ -155,6 +155,8 @@ logbook:
       - sensor.time
       - sensor.time_brightness
       - sensor.time_templated_am_pm
+      - sensor.us_fan_state
+      - sensor.ds_fan_state
       - sensor.upstairs_humidity
       - sensor.upstairs_temperature
       - sensor.uptime
@@ -210,6 +212,10 @@ logbook:
       - switch.tv_power
       - switch.amp_power
       - switch.directv_power
+
+      - cover.kitchen_roller_shade_switch
+      - cover.master_bath_roller_shades_switch
+
 
 ### REFERENCE ###
 ## the complete list of domains ##

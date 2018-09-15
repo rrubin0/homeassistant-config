@@ -14,7 +14,6 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'zones'
-        homebridge_hidden: true
 
       hidden: &hidden
         <<: *customize

@@ -10,7 +10,6 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'rachio'
-        homebridge_hidden: true
 
       hidden: &hidden
         <<: *customize

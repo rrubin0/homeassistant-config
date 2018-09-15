@@ -145,7 +145,7 @@ sensor:
   - platform: template
     sensors:
       ds_fan_state:
-        friendly_name: "Fan State"
+        friendly_name: "Downstairs HVAC Fan"
         value_template: "{{ (states.climate.downstairs.attributes|default({})).fan|default('unknown') }}"
         entity_id: sensor.time
 
