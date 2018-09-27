@@ -152,7 +152,7 @@ automation:
 
   #####################################################################
   ### Default to Crystal if turned on with no selection
-  - alias: Nursery Wall Default Crystal
+  - alias: Nursery Wall Default
     initial_state: 'on'
     hide_entity: true
     trigger:
@@ -167,10 +167,11 @@ automation:
       state: "Select an option..."
 
     action:
-      - service: input_select.select_option
+      - service: light.turn_on
         data:
-          entity_id: input_select.nursery_wall_color
-          option: "Crystal"
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [255,163,132]
 
       # Reset the Input Select to "Select an option..."
       - service: input_select.select_option

@@ -184,12 +184,12 @@ logbook:
 
       - binary_sensor.beach_door_contact_sensor
       - binary_sensor.door_window_sensor_158d00022f803b
-      - binary_sensor.door_window_sensor_158d0002332a6b
+      - binary_sensor.kegerator_door
       - binary_sensor.front_door_contact_sensor
       - binary_sensor.front_entry_fibaro_multisensor_sensor
       - binary_sensor.kitchen_door_contact_sensor
       - binary_sensor.south_door_contact_sensor
-      - binary_sensor.switch_158d00026b8505
+      - binary_sensor.xiaomi_smart_button
       - binary_sensor.workday_sensor
 
       - light.center_entry

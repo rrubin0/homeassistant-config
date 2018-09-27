@@ -35,6 +35,10 @@ homeassistant:
       friendly_name: "South Door Tamper"
       #icon: mdi:home-outline
 
+    sensor.office_door_tamper:
+      friendly_name: "Office Door Tamper"
+      #icon: mdi:home-outline
+
     sensor.kitchen_door_tamper:
       friendly_name: "Kitchen Door Tamper"
       #icon: mdi:home-outline
@@ -277,12 +281,54 @@ sensor:
           {% endif %}
 
 
+### Office Door Status
+  - platform: template
+    sensors:
+      office_door_state:
+        value_template: >-
+          {% set state = states('sensor.office_door_contact_access_control') %}
+          {% if state == '22' %}
+            Open
+          {% elif state == '23' %}
+            Closed
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        friendly_name: "Office Door"
+        icon_template: >-
+          {% set state = states('sensor.office_door_state')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi:door
+          {% else %}
+            {% if state == 'Open' %}
+              mdi:door-open
+            {% else %}
+              mdi:door-closed
+            {% endif %}
+          {% endif %}
+
+
+### Office Door Tamper
+  - platform: template
+    sensors:
+      office_door_tamper:
+        value_template: >-
+          {% set state = states('sensor.office_door_contact_burglar') %}
+          {% if state == '0' %}
+            OK
+          {% elif state == '3' %}
+            Tamper
+          {% else %}
+            {{ state }}
+          {% endif %}
+
+
 ### Kegerator Door Status
   - platform: template
     sensors:
       kegerator_door_state:
         value_template: >-
-          {% set state = states('binary_sensor.door_window_sensor_158d0002332a6b') %}
+          {% set state = states('binary_sensor.kegerator_door') %}
           {% if state == 'on' %}
             Open
           {% elif state == 'off' %}

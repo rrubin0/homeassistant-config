@@ -234,45 +234,43 @@ automation:
           message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.floorplan_time.state }}"
 
 
-#  ### Turn on some lights when we arrive home
-#  - alias: Living Room On Arrival
-#    initial_state: 'off'
-#    trigger:
-#      platform: state
-#      entity_id: group.all_devices
-#      from: 'not_home'
-#      to: 'home'
-#
-#    condition:
-#      - condition: state
-#        entity_id: sun.sun
-#        state: 'below_horizon'
-#
-#    action:
-#      - service: notify.ios_i8plus
-#        data:
-#          title: "Welcome Home"
-#          message: "Turning on some lights"
-#          data:
-#            push:
-#              sound: "US-EN-Alexa-Welcome-Home.wav"
-#
-#      - service: scene.turn_on
-#        entity_id: scene.bright
-#
-#      - service: light.turn_on
-#        data:
-#          entity_id: light.kitchen_lights_level
-#          brightness: 255
-#
-#      - delay:
-#          minutes: 3
-#
-#      - service: scene.turn_on
-#        entity_id: scene.evening
-#
-#      - service: homeassistant.turn_on
-#        entity_id: group.accent_lights
+  ### Turn on some lights when we arrive home after sundown
+  - alias: On Arrival Turn On Lights
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      from: 'not_home'
+      to: 'home'
+
+    condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+    action:
+      - service: notify.ios_i8plus
+        data:
+          title: "Welcome Home"
+          message: "Turning on some lights"
+          data:
+            push:
+              sound: "US-EN-Alexa-Welcome-Home.wav"
+
+      - service: scene.turn_on
+        entity_id: scene.bright
+
+      - service: homeassistant.turn_on
+        entity_id: group.accent_lights
+
+      - delay:
+          minutes: 3
+
+      - service: scene.turn_on
+        entity_id: scene.evening
+
+      - service: light.turn_off
+        entity_id: light.kitchen_lights_level
 
 
   ### Turn on some lights when it is cloudy

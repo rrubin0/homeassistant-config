@@ -112,7 +112,6 @@ homeassistant:
       friendly_name: "Dew Point"
       icon: mdi:water
 
-
     sensor.pws_pressure_in:
       friendly_name: "Pressure Inches"
       icon: mdi:thermometer-lines
@@ -137,27 +136,33 @@ homeassistant:
 
     sensor.yw_tomorrow_temperature_max:
       friendly_name: "Tomorrows High"
+      icon: mdi:thermometer
 
     sensor.yw_tomorrow_temperature_min:
       friendly_name: "Tomorrows Low"
+      icon: mdi:thermometer
 
     sensor.yw_day2_condition:
       friendly_name: "Day 2 Conditions"
 
     sensor.yw_day2_temperature_max:
       friendly_name: "Day 2 High"
+      icon: mdi:thermometer
 
     sensor.yw_day2_temperature_min:
       friendly_name: "Day 2 Low"
+      icon: mdi:thermometer
 
     sensor.yw_day3_condition:
       friendly_name: "Day 3 Conditions"
 
     sensor.yw_day3_temperature_max:
       friendly_name: "Day 3 High"
+      icon: mdi:thermometer
 
     sensor.yw_day3_temperature_min:
       friendly_name: "Day 3 Low"
+      icon: mdi:thermometer
 
     sensor.yweather_condition:
       friendly_name: "Expected Conditions"
@@ -173,12 +178,15 @@ homeassistant:
 
     sensor.yweather_temperature:
       friendly_name: "Temperature"
+      icon: mdi:thermometer
 
     sensor.yweather_temperature_max:
       friendly_name: "Todays High"
+      icon: mdi:thermometer
 
     sensor.yweather_temperature_min:
       friendly_name: "Todays Low"
+      icon: mdi:thermometer
 
     sensor.yweather_visibility:
       friendly_name: "Visibility"

@@ -61,49 +61,6 @@ group:
 
 
   #####################################################################
-  ### Cameras
-  #####################################################################
-#  camera_front_porch:
-#    name: Front Porch Camera
-#    entities:
-#      - camera.front_porch
-#
-#  camera_north_gate:
-#    name: North Gate Camera
-#    entities:
-#      - camera.north_gate
-#
-#  camera_nw_ptz:
-#    name: NW PTZ Camera
-#    entities:
-#      - camera.nw_ptz
-#
-#  camera_nursery_ptz:
-#    name: Nursery PTZ Camera
-#    entities:
-#      - camera.nursery_ptz
-#
-#  camera_ring_doorbell:
-#    name: Front Door Camera
-#    entities:
-#      - camera.front_door
-#
-#  Camera Status:
-#    entities:
-#      - sensor.nursery_ptz_preset
-#      - sensor.nw_ptz_preset
-#      - sensor.nursery_ptz_sd_used
-#      - sensor.nw_ptz_sd_used
-#
-#  Traffic Report:
-#    entities:
-##      - camera.east_valley_traffic
-##      - camera.inbound_traffic
-##      - camera.downtown_traffic
-#      - camera.ramp_traffic
-
-
-  #####################################################################
   ### Climate - Downstairs
   #####################################################################
   Downstairs Climate:
@@ -307,39 +264,7 @@ group:
 
 
   #####################################################################
-  ### Master Bath
-  #####################################################################
-  Master Bath:
-    control: hidden
-    entities:
-      - script.hue_mbath_morning
-      - light.master_bathroom
-      - light.master_bath_entry
-      - light.master_bath_sink
-      - light.master_bathtub
-      - cover.master_bath_roller_shades_level
-
-  Master Bath Lights:
-    entities:
-      - light.master_bath_entry
-      - light.master_bath_sink
-      - light.master_bathtub
-
-
-  #####################################################################
-  ### Master Bedroom Bedframe Lights
-  #####################################################################
-  Bedframe Lights:
-    control: hidden
-    entities:
-      - light.under_bed_lights
-      - input_select.mbr_under_bed_color
-      - input_select.mbr_under_bed_effect
-      - input_select.mbr_under_bed_strobe
-
-
-  #####################################################################
-  ### Master Bedroom Lights
+  ### Master Bedroom
   #####################################################################
   Master Bedroom:
     control: hidden
@@ -363,9 +288,15 @@ group:
       - light.under_bed_lights
 
 
-  #####################################################################
-  ### Master Bedroom Fan
-  #####################################################################
+  Bedframe Lights:
+    control: hidden
+    entities:
+      - light.under_bed_lights
+      - input_select.mbr_under_bed_color
+      - input_select.mbr_under_bed_effect
+      - input_select.mbr_under_bed_strobe
+
+
   Master Bedroom Fan:
     control: hidden
     entities:
@@ -389,6 +320,26 @@ group:
       - switch.master_bedroom_fan_10
       - switch.master_bedroom_fan_11
       - switch.master_bedroom_fan_12
+
+
+  #####################################################################
+  ### Master Bath
+  #####################################################################
+  Master Bath:
+    control: hidden
+    entities:
+      - script.hue_mbath_morning
+      - light.master_bathroom
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
+      - cover.master_bath_roller_shades_level
+
+  Master Bath Lights:
+    entities:
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
 
 
   #####################################################################

@@ -12,7 +12,6 @@ alexa:
         - script.ecobee_us_home
         - script.ecobee_us_resume
         - script.find_iphone
-        - script.hue_lr_bright
         - script.hue_lr_christmas
         - script.hue_lr_daybreak
         - script.hue_lr_dimmed

@@ -31,7 +31,7 @@ homeassistant:
     ################################################
     ## Sensor
     ################################################
-    binary_sensor.switch_158d00026b8505:
+    binary_sensor.xiaomi_smart_button:
       friendly_name: "Smart Button"
 
 
@@ -130,7 +130,7 @@ automation:
       platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.switch_158d00026b8505
+        entity_id: binary_sensor.xiaomi_smart_button
         click_type: single
 
     action:
@@ -150,7 +150,7 @@ automation:
       platform: event
       event_type: click
       event_data:
-        entity_id: binary_sensor.switch_158d00026b8505
+        entity_id: binary_sensor.xiaomi_smart_button
         click_type: double
 
     action:

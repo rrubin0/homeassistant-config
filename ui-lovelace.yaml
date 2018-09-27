@@ -83,6 +83,7 @@ views:
           - 'on'
         show_empty: false
 
+
       ################################################
       ## Open Doors & Windows
       ################################################
@@ -94,16 +95,17 @@ views:
           - sensor.front_door_state
           - sensor.south_door_state
           - sensor.kitchen_door_state
+          - sensor.office_door_state
           - sensor.beach_door_state
           - sensor.kegerator_door_state
         state_filter:
           - 'open'
         show_empty: false
 
+
       ################################################
       ## Lights In Use
       ################################################
-
       ### DOWNSTAIRS ###
       - type: entity-filter
         card:
@@ -141,6 +143,7 @@ views:
           - 'on'
         show_empty: false
 
+
       ### UPSTAIRS ###
       - type: entity-filter
         card:
@@ -167,6 +170,7 @@ views:
           - 'on'
         show_empty: false
 
+
       ### EXTERIOR ###
       - type: entity-filter
         card:
@@ -186,6 +190,7 @@ views:
         state_filter:
           - 'on'
         show_empty: false
+
 
       ################################################
       ## Devices In Use
@@ -211,6 +216,7 @@ views:
         state_filter:
           - 'on'
         show_empty: false
+
 
       ################################################
       ## Low Battery
@@ -475,6 +481,7 @@ views:
           - sensor.front_door_state
           - sensor.south_door_state
           - sensor.kitchen_door_state
+          - sensor.office_door_state
           - sensor.beach_door_state
           - sensor.kegerator_door_state
 
@@ -697,6 +704,8 @@ views:
           - automation.accent_lights_auto_off
           - automation.living_room_off_morning
           - automation.living_room_on_cloudy
+          - automation.climate_downstairs_door_left_open
+          - automation.climate_upstairs_door_left_open
           - script.pause_away_timer
           - script.cancel_away_timer
           - script.pause_bedtime_timer
@@ -716,6 +725,21 @@ views:
           - script.hue_lr_sunset
           - script.hue_lr_minty
           - script.hue_lr_daybreak
+
+
+      ################################################
+      ## Diabled Automations
+      ################################################
+      - type: custom:monster-card
+        card:
+          type: entities
+          title: Disabled Automations
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "automation.*"
+              state: 'off'
+        show_empty: false
 
 
 ####################################################################
@@ -926,6 +950,7 @@ views:
           - sensor.dc_kitchen_door_battery
           - sensor.lock_south_battery
           - sensor.dc_south_door_battery
+          - sensor.dc_office_door_battery
           - sensor.lock_beach_battery
           - sensor.dc_beach_battery
           - sensor.entry_multisensor_battery
