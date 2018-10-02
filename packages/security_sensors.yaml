@@ -77,13 +77,13 @@ homeassistant:
     sensor.downstairs_ac_leak_detector:
       friendly_name: "Downstairs AC Leak Detector"
 
-    sensor.everspring_st812_flood_detector_flood:
+    sensor.downstairs_ac_leak_detector_flood:
       <<: *hidden
 
-    sensor.everspring_st812_flood_detector_alarm_level:
+    sensor.downstairs_ac_leak_detector_alarm_level:
       ignored: true
 
-    sensor.everspring_st812_flood_detector_alarm_type:
+    sensor.downstairs_ac_leak_detector_alarm_type:
       ignored: true
 
 
@@ -355,7 +355,7 @@ sensor:
     sensors:
       downstairs_ac_leak_detector:
         value_template: >-
-          {% set state = states('sensor.everspring_st812_flood_detector_flood') %}
+          {% set state = states('sensor.downstairs_ac_leak_detector_flood') %}
           {% if state == '0' %}
             OK
           {% elif state == '255' %}

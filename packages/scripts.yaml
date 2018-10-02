@@ -287,7 +287,7 @@ script:
     - service: switch.turn_on
       entity_id: 
         - switch.outdoor_speakers
-        - switch.game_room_lights_switch
+        - switch.game_room_lights
         - switch.pool_light_switch
 
     - service: scene.turn_on

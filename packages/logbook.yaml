@@ -62,7 +62,7 @@ logbook:
       - sensor.guest_room_temperature
       - sensor.ha_current_version
       - sensor.holiday
-      - sensor.i8plus_battery_level
+      - sensor.rip8plus_battery_level
       - sensor.i8plus_battery_state
       - sensor.illumination_7811dcb7da52
       - sensor.kitchen_door_contact_access_control
@@ -92,7 +92,7 @@ logbook:
       - sensor.megs_home_commute
       - sensor.megs_work_commute
       - sensor.memory_free
-      - sensor.mip8_battery_level_2
+      - sensor.mip8_battery_level
       - sensor.mip8_battery_state_2
       - sensor.moon
       - sensor.nursery_temperature
@@ -186,7 +186,7 @@ logbook:
       - binary_sensor.door_window_sensor_158d00022f803b
       - binary_sensor.kegerator_door
       - binary_sensor.front_door_contact_sensor
-      - binary_sensor.front_entry_fibaro_multisensor_sensor
+      - binary_sensor.front_entry_fibaro_multisensor
       - binary_sensor.kitchen_door_contact_sensor
       - binary_sensor.south_door_contact_sensor
       - binary_sensor.xiaomi_smart_button

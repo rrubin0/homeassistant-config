@@ -260,7 +260,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: state
-        entity_id: binary_sensor.front_entry_fibaro_multisensor_sensor
+        entity_id: binary_sensor.front_entry_fibaro_multisensor
         to: 'on'
 
     condition:

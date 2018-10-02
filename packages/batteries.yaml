@@ -46,10 +46,10 @@ homeassistant:
     sensor.downstairs_ac_leak_detector_battery:
       friendly_name: "AC Leak Detector Battery"
 
-    sensor.i8plus_battery_level:
+    sensor.rip8plus_battery_level:
       friendly_name: "Rick's Phone Battery"
       icon_template: >-
-        {% set battery_level = states('sensor.i8plus_battery_level')|int('unknown') %}
+        {% set battery_level = states('sensor.rip8plus_battery_level')|int('unknown') %}
         {% if battery_level == 'unknown' %}
           mdi:battery-unknown
         {% else %}
@@ -63,10 +63,10 @@ homeassistant:
           {% endif %}
         {% endif %}
 
-    sensor.mip8_battery_level_2:
+    sensor.mip8_battery_level:
       friendly_name: "Meg's Phone Battery"
       icon_template: >-
-        {% set battery_level = states('sensor.mip8_battery_level_2')|int('unknown') %}
+        {% set battery_level = states('sensor.mip8_battery_level')|int('unknown') %}
         {% if battery_level == 'unknown' %}
           mdi:battery-unknown
         {% else %}
@@ -267,7 +267,7 @@ sensor:
 
       ### Downstairs AC Leak Detector Battery
       downstairs_ac_leak_detector_battery:
-        value_template: "{{ (states.zwave.everspring_st812_flood_detector.attributes|default).battery_level|default|int('unknown') }}"
+        value_template: "{{ (states.zwave.downstairs_ac_leak_detector.attributes|default).battery_level|default|int('unknown') }}"
         unit_of_measurement: '%'
         icon_template: >-
           {% set battery_level = states('sensor.downstairs_ac_leak_detector_battery')|int('unknown') %}

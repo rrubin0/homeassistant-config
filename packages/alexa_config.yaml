@@ -78,7 +78,7 @@ alexa:
         - switch.downstairs_bath_lights_switch
         - switch.flower_lamp
         - switch.fountains_switch
-        - switch.game_room_lights_switch
+        - switch.game_room_lights
         - switch.living_room_fan
         - switch.living_room_fan_high
         - switch.living_room_fan_light

@@ -19,8 +19,6 @@ homeassistant:
     ################################################
     ## Input Boolean
     ################################################
-    input_boolean.state_change:
-
     input_boolean.condition_1:
       friendly_name: "Test Condition 1"
 #      icon: mdi:checkbox-marked-circle

@@ -119,7 +119,7 @@ group:
   Travel Rick:
     entities:
       - device_tracker.i8plus
-      - sensor.i8plus_battery_level
+      - sensor.rip8plus_battery_level
       - sensor.ricks_eta
       - sensor.ricks_home_commute
       - sensor.ricks_office_commute
@@ -128,7 +128,7 @@ group:
     entities:
       - device_tracker.mip8
       - script.find_iphone
-      - sensor.mip8_battery_level_2
+      - sensor.mip8_battery_level
       - sensor.megs_eta
 #      - sensor.megs_home_commute
 #      - sensor.megs_work_commute
@@ -148,7 +148,7 @@ group:
   #####################################################################
   Game Room:
     entities:
-      - switch.game_room_lights_switch
+      - switch.game_room_lights
 
 
   #####################################################################
@@ -181,7 +181,7 @@ group:
       - light.office_desk_lamp
       - light.kitchen_lights_level
       - light.dining_room_chandelier_level
-      - switch.game_room_lights_switch
+      - switch.game_room_lights
       - switch.downstairs_bath_lights_switch
 
   Exterior Lights:

@@ -37,7 +37,7 @@ views:
         entities:
           - device_tracker.mip8
           - script.find_iphone
-          - sensor.mip8_battery_level_2
+          - sensor.mip8_battery_level
           - sensor.megs_eta
 #          - sensor.megs_home_commute
 #          - sensor.megs_work_commute
@@ -47,7 +47,7 @@ views:
         show_header_toggle: false
         entities:
           - device_tracker.i8plus
-          - sensor.i8plus_battery_level
+          - sensor.rip8plus_battery_level
           - sensor.ricks_eta
           - sensor.ricks_home_commute
           - sensor.ricks_office_commute
@@ -136,7 +136,7 @@ views:
             name: Flower Lamp
           - entity: light.office_desk_lamp
             name: Office Desk
-          - entity: switch.game_room_lights_switch
+          - entity: switch.game_room_lights
             name: Game Room
 
         state_filter:
@@ -549,7 +549,7 @@ views:
         title: Game Room
         show_header_toggle: false
         entities:
-          - switch.game_room_lights_switch
+          - switch.game_room_lights
 
 
       - type: vertical-stack
@@ -791,9 +791,8 @@ views:
   - title: Weather
     icon: mdi:weather-sunny
     cards:
-      - type: custom:weather-card
-        entity_weather: weather.yweather
-        entity_sun: sun.sun
+      - type: weather-forecast
+        entity: weather.dark_sky
 
       - type: entities
         title: Weather Summary
@@ -1135,7 +1134,7 @@ views:
               zoom: 110%
 
           - type: state-icon
-            entity: switch.game_room_lights_switch
+            entity: switch.game_room_lights
             tap_action: toggle
             style:
               top: 63%
@@ -1250,8 +1249,11 @@ resources:
   - url: /local/lovelace_cards/gauge-card.js?v=0.1.0
     type: js
 
-  - url: /local/lovelace_cards/weather-card.js?v=0.1.0
-    type: js
+#  - url: /local/lovelace_cards/weather-card.js?v=0.1.2
+#    type: js
+
+#  - url: /local/lovelace_cards/dark-sky-weather-card.js?v=0.1.0
+#    type: js
 
   - url: /local/lovelace_cards/entity-attributes-card.js?v=0.1.0
     type: js

@@ -19,8 +19,6 @@ homeassistant:
     ################################################
     ## Input Boolean
     ################################################
-    input_boolean.rain:
-
     weather.downstairs:
       friendly_name: "Currently"
 
@@ -233,6 +231,9 @@ weather:
 ### Yahoo Weather
   - platform: yweather
     woeid: !secret woeid
+
+  - platform: darksky
+    api_key: !secret darksky_key
 
 #####################################################################
 ### Sensor
