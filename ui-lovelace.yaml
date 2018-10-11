@@ -87,19 +87,15 @@ views:
       ################################################
       ## Open Doors & Windows
       ################################################
-      - type: entity-filter
+      - type: custom:monster-card
         card:
-          title: "Open Doors & Windows"
-          type: glance
-        entities:
-          - sensor.front_door_state
-          - sensor.south_door_state
-          - sensor.kitchen_door_state
-          - sensor.office_door_state
-          - sensor.beach_door_state
-          - sensor.kegerator_door_state
-        state_filter:
-          - 'open'
+          type: entities
+          title: Open Doors & Windows
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.*_state"
+              state: 'Open'
         show_empty: false
 
 
@@ -124,6 +120,10 @@ views:
             name: Downstairs Bath
           - entity: light.kitchen_lights_level
             name: Kitchen
+          - entity: light.pantry
+            name: Pantry
+          - entity: light.billiards
+            name: Billiards
           - entity: light.dining_room_chandelier_level
             name: Dining Room
           - entity: light.wine_room
@@ -482,7 +482,7 @@ views:
           - sensor.south_door_state
           - sensor.kitchen_door_state
           - sensor.office_door_state
-          - sensor.beach_door_state
+          - sensor.bathroom_door_state
           - sensor.kegerator_door_state
 
 
@@ -515,10 +515,10 @@ views:
         entities:
           - switch.wine_room_lamp
           - light.wine_room
-          - light.northeast_wine
-          - light.northwest_wine
-          - light.southeast_wine
-          - light.southwest_wine
+          - light.hue_color_lamp_1
+          - light.hue_color_lamp_4
+          - light.hue_color_lamp_2
+          - light.hue_color_lamp_3
 
       - type: entities
         title: Accent Lights
@@ -541,6 +541,7 @@ views:
         show_header_toggle: false
         entities:
           - light.kitchen_lights_level
+          - light.pantry
           - light.gateway_light_7811dcb7da52
           - light.dining_room_chandelier_level
           - cover.kitchen_roller_shade_level
@@ -550,6 +551,7 @@ views:
         show_header_toggle: false
         entities:
           - switch.game_room_lights
+          - light.billiards
 
 
       - type: vertical-stack
@@ -706,6 +708,7 @@ views:
           - automation.living_room_on_cloudy
           - automation.climate_downstairs_door_left_open
           - automation.climate_upstairs_door_left_open
+          - automation.pantry_light_off
           - script.pause_away_timer
           - script.cancel_away_timer
           - script.pause_bedtime_timer
@@ -951,7 +954,7 @@ views:
           - sensor.dc_south_door_battery
           - sensor.dc_office_door_battery
           - sensor.lock_beach_battery
-          - sensor.dc_beach_battery
+          - sensor.dc_bathroom_battery
           - sensor.entry_multisensor_battery
           - sensor.downstairs_ac_leak_detector_battery
 

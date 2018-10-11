@@ -342,17 +342,21 @@ automation:
         to: 'Awesome'
 
     condition:
-      - condition: template
-        value_template: "{{ states.climate.downstairs.attributes.hold_mode != 'away' }}"
-
       - condition: time
         after: '08:00:00'
 
+      - condition: template
+        value_template: "{{ states.climate.downstairs.attributes.current_temperature <= 80 }}"
+
     action:
-      - service: climate.set_hold_mode
+      - service: climate.set_away_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'away'
+          away_mode: 'on'
+#      - service: climate.set_hold_mode
+#        data:
+#          entity_id: climate.downstairs
+#          hold_mode: 'away'
 
       - service: notify.ios_i8plus
         data:

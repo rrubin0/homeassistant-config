@@ -302,25 +302,25 @@ automation:
           fan_min_on_time: '5'
 
 
-#  ### Set away mode when weather is awesome
-#  - alias: Climate Upstairs Away if Awesome Weather
-#    initial_state: 'on'
-#    trigger:
-#      - platform: state
-#        entity_id: sensor.season
-#        to: 'Awesome'
-#        for:
-#          minutes: 30
-#
-#    condition:
-#      - condition: template
-#        value_template: "{{ states.climate.upstairs.attributes.hold_mode != 'away' }}"
-#
-#    action:
-#      - service: climate.set_away_mode
-#        data:
-#          entity_id: climate.upstairs
-#          away_mode: 'on'
+  ### Set away mode when weather is awesome
+  - alias: Climate Upstairs Away if Awesome Weather
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.season
+        to: 'Awesome'
+        for:
+          minutes: 30
+
+    condition:
+      - condition: template
+        value_template: "{{ states.climate.upstairs.attributes.current_temperature <= 82 }}"
+
+    action:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.upstairs
+          away_mode: 'on'
 
 
 #  ### Climate Resume

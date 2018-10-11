@@ -269,12 +269,12 @@ automation:
 #################################
 #      - sensor.bathroom_entry_alarm_level
 #      - sensor.bathroom_entry_alarm_type
-#      - sensor.beach_door_contact_access_control
+#      - sensor.bathroom_door_contact_access_control
 #      - sensor.beach_door_contact_alarm_level
 #      - sensor.beach_door_contact_alarm_type
 #      - sensor.beach_door_contact_burglar
 #      - sensor.beach_door_contact_sourcenodeid
-#      - sensor.beach_door_state
+#      - sensor.bathroom_door_state
 #      - sensor.beach_door_tamper
 #      - sensor.broadlink_sensor_temperature
 #      - sensor.clock_am_pm
@@ -325,11 +325,11 @@ automation:
 #      - sensor.mip8_battery_state_2
 #      - sensor.iphwn666_battery_level
 #      - sensor.iphwn666_battery_state
-#      - sensor.kitchen_door_contact_access_control
-#      - sensor.kitchen_door_contact_alarm_level
-#      - sensor.kitchen_door_contact_alarm_type
-#      - sensor.kitchen_door_contact_burglar
-#      - sensor.kitchen_door_contact_sourcenodeid
+#      - sensor.kitchen_door_access_control
+#      - sensor.kitchen_door_alarm_level
+#      - sensor.kitchen_door_alarm_type
+#      - sensor.kitchen_door_burglar
+#      - sensor.kitchen_door_sourcenodeid
 #      - sensor.kitchen_door_state
 #      - sensor.kitchen_door_tamper
 #      - sensor.last_boot

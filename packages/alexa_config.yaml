@@ -46,6 +46,7 @@ alexa:
         - climate.downstairs
         - climate.upstairs
 
+        - light.billiards
         - light.dining_room_chandelier_level
         - light.entryway
         - light.living_room

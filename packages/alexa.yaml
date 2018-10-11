@@ -22,7 +22,7 @@
           {%- elif SensorType.lower() == "kitchen door" -%}
             The {{ SensorType }} is {{ states("sensor.kitchen_door_state") }} and the tamper is {{ states("sensor.kitchen_door_tamper") }}.
           {%- elif SensorType.lower() == "bathroom door" -%}
-            The {{ SensorType }} is {{ states("sensor.beach_door_state") }} and {{ states("lock.bathroom_entry_locked") }} and the tamper is {{ states("sensor.beach_door_tamper") }}.
+            The {{ SensorType }} is {{ states("sensor.bathroom_door_state") }} and {{ states("lock.bathroom_entry_locked") }} and the tamper is {{ states("sensor.beach_door_tamper") }}.
           {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
             The Humidor temperature is {{ states("sensor.sn1_temperature") }} degrees and your cigars are currently stored at {{ states("sensor.sn1_humidity") }} percent humidity.
           {%- endif -%}

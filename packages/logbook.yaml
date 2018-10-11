@@ -15,11 +15,11 @@ logbook:
       - automation.rain_sensor
       - sensor.bathroom_entry_alarm_level
       - sensor.bathroom_entry_alarm_type
-      - sensor.beach_door_contact_access_control
-      - sensor.beach_door_contact_alarm_level
-      - sensor.beach_door_contact_alarm_type
-      - sensor.beach_door_contact_burglar
-      - sensor.beach_door_contact_sourcenodeid
+      - sensor.bathroom_door_contact_access_control
+      - sensor.bathroom_door_contact_alarm_level
+      - sensor.bathroom_door_contact_alarm_type
+      - sensor.bathroom_door_contact_burglar
+      - sensor.bathroom_door_contact_sourcenodeid
       - sensor.broadlink_sensor_temperature
       - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_daily_max_precip_intensity
@@ -29,7 +29,7 @@ logbook:
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_precip_probability
       - sensor.date_templated_us
-      - sensor.dc_beach_battery
+      - sensor.dc_bathroom_battery
       - sensor.dc_front_door_battery
       - sensor.dc_kitchen_door_battery
       - sensor.dc_south_door_battery
@@ -65,11 +65,11 @@ logbook:
       - sensor.rip8plus_battery_level
       - sensor.i8plus_battery_state
       - sensor.illumination_7811dcb7da52
-      - sensor.kitchen_door_contact_access_control
-      - sensor.kitchen_door_contact_alarm_level
-      - sensor.kitchen_door_contact_alarm_type
-      - sensor.kitchen_door_contact_burglar
-      - sensor.kitchen_door_contact_sourcenodeid
+      - sensor.kitchen_door_access_control
+      - sensor.kitchen_door_alarm_level
+      - sensor.kitchen_door_alarm_type
+      - sensor.kitchen_door_burglar
+      - sensor.kitchen_door_sourcenodeid
       - sensor.last_boot
       - sensor.living_room_temperature
       - sensor.lock_beach_battery
@@ -182,14 +182,11 @@ logbook:
       - sensor.yweather_visibility
       - sensor.yweather_wind_speed
 
-      - binary_sensor.beach_door_contact_sensor
-      - binary_sensor.door_window_sensor_158d00022f803b
       - binary_sensor.kegerator_door
       - binary_sensor.front_door_contact_sensor
       - binary_sensor.front_entry_fibaro_multisensor
       - binary_sensor.kitchen_door_contact_sensor
       - binary_sensor.south_door_contact_sensor
-      - binary_sensor.xiaomi_smart_button
       - binary_sensor.workday_sensor
 
       - light.center_entry

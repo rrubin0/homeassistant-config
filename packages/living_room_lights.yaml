@@ -249,7 +249,7 @@ automation:
         state: 'below_horizon'
 
     action:
-      - service: notify.ios_i8plus
+      - service: notify.notify
         data:
           title: "Welcome Home"
           message: "Turning on some lights"

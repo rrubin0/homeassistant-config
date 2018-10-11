@@ -20,10 +20,10 @@ homeassistant:
     ## Sensor
     ################################################
     sensor.lock_beach_battery:
-      friendly_name: "Beach Bathroom Lock Battery"
+      friendly_name: "Bathroom Lock Battery"
 
-    sensor.dc_beach_battery:
-      friendly_name: "Beach Bathroom Door Battery"
+    sensor.dc_bathroom_battery:
+      friendly_name: "Bathroom Door Battery"
 
     sensor.dc_front_door_battery:
       friendly_name: "Front Door Battery"
@@ -153,11 +153,11 @@ sensor:
       ### Beach Bathroom Door Contact Battery
   - platform: template
     sensors:
-      dc_beach_battery:
-        value_template: "{{ (states.zwave.beach_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+      dc_bathroom_battery:
+        value_template: "{{ (states.zwave.bathroom_door_contact.attributes|default).battery_level|default|int('unknown') }}"
         unit_of_measurement: '%'
         icon_template: >-
-          {% set battery_level = states('sensor.dc_beach_battery')|int('unknown') %}
+          {% set battery_level = states('sensor.dc_bathroom_battery')|int('unknown') %}
           {% if battery_level == 'unknown' %}
             mdi:battery-unknown
           {% else %}

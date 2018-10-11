@@ -43,8 +43,8 @@ homeassistant:
       friendly_name: "Kitchen Door Tamper"
       #icon: mdi:home-outline
 
-    sensor.beach_door_tamper:
-      friendly_name: "Beach Door Tamper"
+    sensor.bathroom_door_tamper:
+      friendly_name: "Bathroom Door Tamper"
       #icon: mdi:home-outline
 
     sensor.nursery_ptz_motion_detected:
@@ -79,12 +79,6 @@ homeassistant:
 
     sensor.downstairs_ac_leak_detector_flood:
       <<: *hidden
-
-    sensor.downstairs_ac_leak_detector_alarm_level:
-      ignored: true
-
-    sensor.downstairs_ac_leak_detector_alarm_type:
-      ignored: true
 
 
 #####################################################################
@@ -202,7 +196,7 @@ sensor:
     sensors:
       kitchen_door_state:
         value_template: >-
-          {% set state = states('sensor.kitchen_door_contact_access_control') %}
+          {% set state = states('sensor.kitchen_door_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -229,7 +223,7 @@ sensor:
     sensors:
       kitchen_door_tamper:
         value_template: >-
-          {% set state = states('sensor.kitchen_door_contact_burglar') %}
+          {% set state = states('sensor.kitchen_door_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}
@@ -239,12 +233,12 @@ sensor:
           {% endif %}
 
 
-### Beach Door Status
+### Bathroom Door Status
   - platform: template
     sensors:
-      beach_door_state:
+      bathroom_door_state:
         value_template: >-
-          {% set state = states('sensor.beach_door_contact_access_control') %}
+          {% set state = states('sensor.bathroom_door_contact_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -252,9 +246,9 @@ sensor:
           {% else %}
             {{ state|title }}
           {% endif %}
-        friendly_name: "Beach Door"
+        friendly_name: "Bathroom Door"
         icon_template: >-
-          {% set state = states('sensor.beach_door_state')|default('unknown') %}
+          {% set state = states('sensor.bathroom_door_state')|default('unknown') %}
           {% if state == 'unknown' %}
             mdi:door
           {% else %}
@@ -266,12 +260,12 @@ sensor:
           {% endif %}
 
 
-### Beach Door Tamper
+### Bathroom Door Tamper
   - platform: template
     sensors:
-      beach_door_tamper:
+      bathroom_door_tamper:
         value_template: >-
-          {% set state = states('sensor.beach_door_contact_burglar') %}
+          {% set state = states('sensor.bathroom_door_contact_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}
@@ -415,14 +409,9 @@ automation:
         entity_id: sensor.kegerator_door_state
         to: 'Open'
         for:
-          minutes: 1
+          seconds: 45
 
     action:
-#      - service: climate.set_operation_mode
-#        data:
-#          entity_id: climate.downstairs
-#          operation_mode: 'off'
-
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.kitchen
@@ -430,7 +419,7 @@ automation:
 
       - service: notify.notify
         data:
-          title: "Kegerator"
+          title: "Kegerator Door"
           message: "The Kegerator door is held open!"
 
 

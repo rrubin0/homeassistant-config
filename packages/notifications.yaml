@@ -48,7 +48,7 @@ automation:
           - sensor.front_door_state
           - sensor.south_door_state
           - sensor.kitchen_door_state
-          - sensor.beach_door_state
+          - sensor.bathroom_door_state
         to: 'Open'
 
     condition:

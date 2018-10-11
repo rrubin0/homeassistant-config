@@ -178,6 +178,8 @@ group:
       - light.lr_ceiling
       - light.entryway
       - light.wine_room
+      - light.pantry
+      - light.billiards
       - light.office_desk_lamp
       - light.kitchen_lights_level
       - light.dining_room_chandelier_level
@@ -495,7 +497,7 @@ group:
       - sensor.front_door_state
       - sensor.south_door_state
       - sensor.kitchen_door_state
-      - sensor.beach_door_state
+      - sensor.bathroom_door_state
 
   Door Alarm Points:
     entities:

@@ -102,17 +102,46 @@ homeassistant:
 ### Automation
 #####################################################################
 automation:
-  ### master bath shade raised schedule
-  - alias: Master Bath Shade Up
+  ### master bath shade schedule weekdays
+  - alias: Master Bath Shade Up Weekday
     initial_state: 'on'
     hide_entity: True
     trigger:
       - platform: time
-        at: '11:00:00'
+        at: '09:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
 
     action:
       - service: cover.open_cover
         entity_id: cover.master_bath_roller_shades_level
+
+
+  ### master bath shade schedule weekends
+  - alias: Master Bath Shade Up Weekend
+    initial_state: 'on'
+    hide_entity: True
+    trigger:
+      - platform: time
+        at: '12:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - sat
+          - sun
+
+    action:
+      - service: cover.open_cover
+        entity_id: cover.master_bath_roller_shades_level
+
 
   ### master bath shade lowered schedule
   - alias: Master Bath Shade Down
@@ -121,7 +150,7 @@ automation:
     trigger:
       - platform: sun
         event: sunset
-        offset: '00:15:00'
+        offset: '00:10:00'
 
     action:
       - service: cover.close_cover
