@@ -709,6 +709,7 @@ views:
           - automation.climate_downstairs_door_left_open
           - automation.climate_upstairs_door_left_open
           - automation.pantry_light_off
+          - automation.fountains_on
           - script.pause_away_timer
           - script.cancel_away_timer
           - script.pause_bedtime_timer
