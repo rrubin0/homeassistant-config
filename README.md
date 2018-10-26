@@ -22,7 +22,10 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * [Portainer](https://portainer.io)
 * [Influxdb](https://www.influxdb.com)
 * [Grafana](https://grafana.com)
-* [HA Dockermon] (https://github.com/philhawthorne/ha-dockermon)
+* [HA Dockermon](https://github.com/philhawthorne/ha-dockermon)
+
+
+My Docker Compose File:
 ```
 version: '2.1'
 
@@ -173,9 +176,3 @@ services:
 * Xiaomi Door Sensor
 * Xiaomi Smart Button
 
-(coming soon):
-* IKEA Tradfri Bridge
-* IKEA Tradfri Motion
-* IKEA Tradfri Dimmer
-* IKEA Tradfri Remote
-* IKEA Tradfri Light
