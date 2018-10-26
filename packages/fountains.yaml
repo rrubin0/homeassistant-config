@@ -29,8 +29,9 @@ homeassistant:
 #####################################################################
 automation:
   ### Turn on the fountains at sunrise
+  # disabled
   - alias: Fountains On
-    initial_state: 'on'
+    initial_state: 'off'
     trigger:
       - platform: sun
         event: sunrise

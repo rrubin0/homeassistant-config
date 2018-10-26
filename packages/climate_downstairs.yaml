@@ -94,7 +94,6 @@ sensor:
         unit_of_measurement: "°F"
         value_template: >-
           {{ ((float(states.sensor.downstairs_temperature.state) + float(states.sensor.living_room_temperature.state) + float(states.sensor.entryway_temperature.state) + float(states.sensor.office_temperature.state) + float(states.sensor.front_entry_fibaro_multisensor_temperature.state) + float(states.sensor.broadlink_sensor_temperature.state)) / 6) | round(1) }}
-        entity_id: sensor.time
 
 
   - platform: template
@@ -342,9 +341,6 @@ automation:
         to: 'Awesome'
 
     condition:
-      - condition: time
-        after: '08:00:00'
-
       - condition: template
         value_template: "{{ states.climate.downstairs.attributes.current_temperature <= 80 }}"
 
@@ -353,11 +349,22 @@ automation:
         data:
           entity_id: climate.downstairs
           away_mode: 'on'
-#      - service: climate.set_hold_mode
-#        data:
-#          entity_id: climate.downstairs
-#          hold_mode: 'away'
 
+
+  ### Notify if awesome weather
+  - alias: Notify if Awesome Weather
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.season
+        to: 'Awesome'
+
+    condition:
+      - condition: time
+        after: '08:00:00'
+        before: '21:00:00'
+
+    action:
       - service: notify.ios_i8plus
         data:
           title: "Awesome Weather"

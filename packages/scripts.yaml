@@ -265,3 +265,20 @@ script:
         entity_id: light.dining_room_chandelier_level
         brightness: 130
 
+
+  #####################################################################
+  ### Play Baby Playlist on Alexa Dot in Nursery
+  #####################################################################
+  baby_playlist:
+    sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.nursery
+        volume_level: .6
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.nursery
+        media_content_id : my_baby_playlist
+        media_content_type: AMAZON_MUSIC
+

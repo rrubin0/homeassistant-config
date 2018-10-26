@@ -192,6 +192,10 @@ homeassistant:
     sensor.yweather_wind_speed:
       friendly_name: "Wind Speed"
 
+    sensor.pws_alerts:
+      friendly_name: "Weather Alerts"
+      icon: mdi:alert-circle-outline
+
 
 #####################################################################
 ### Input Boolean
@@ -208,7 +212,7 @@ input_number:
   ### Summer Temp Threshold
   season_summer:
     name: "Summer"
-    initial: 77
+    initial: 76
     min: 60
     max: 100
     step: 1
@@ -217,7 +221,7 @@ input_number:
   ### Winter Temp Threshold
   season_winter:
     name: "Winter"
-    initial: 63
+    initial: 62
     min: 40
     max: 80
     step: 1
@@ -246,8 +250,8 @@ sensor:
         friendly_name: "Seasonal Condition"
         value_template: >-
           {% set temperature = states('sensor.yweather_temperature')|float(none) %}
-          {% set winter_temp = states.input_number.season_winter.state|default(61)|float %}
-          {% set summer_temp = states.input_number.season_summer.state|default(79)|float %}
+          {% set winter_temp = states.input_number.season_winter.state|default(62)|float %}
+          {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
           {% if temperature is none %}
             {{ states('sensor.yweather_temperature') }}
           {% elif temperature < winter_temp %}
@@ -257,7 +261,14 @@ sensor:
           {% else %}
             Awesome
           {% endif %}
-        entity_id: sensor.time
+
+
+### Weather Alert
+#  - platform: template
+#    sensors:
+#      weather_alert:
+#        friendly_name: "Weather Alert"
+#        value_template: "{{ (states.sensor.pws_alerts.attributes|default({})).Message|default('unknown') }}"
 
 
 ### Moon

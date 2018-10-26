@@ -16,16 +16,131 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 
 
 **My Docker Container Setup**
-* Home Assistant:
-`sudo docker run -d --name="home-assistant" --restart=always -v /home/hauser/hass_data/config:/config -v /usr/share/ssl:/ssl --device /dev/ttyACM0 -e "TZ=America/Phoenix" --net=host homeassistant/home-assistant`
+* [Home Assistant](https://home-assistant.io)
+* [Dasher](https://github.com/Nekmo/amazon-dash)
+* [Mosquitto](https://hub.docker.com/_/eclipse-mosquitto/)
+* [Portainer](https://portainer.io)
+* [Influxdb](https://www.influxdb.com)
+* [Grafana](https://grafana.com)
+* [HA Dockermon] (https://github.com/philhawthorne/ha-dockermon)
+```
+version: '2.1'
 
-* [Dasher] (https://github.com/Nekmo/amazon-dash)
-`sudo docker run -itd --name=dasher --net=host -v /home/hauser/dasher/config/amazon-dash.yml:/config/amazon-dash.yml nekmo/amazon-dash:latest amazon-dash run --ignore-perms --root-allowed --config /config/amazon-dash.yml`
+services:
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: "MQTT"
+    restart: always
+    network_mode: "host"
+    environment:
+      - TZ=America/Phoenix
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - /home/hauser/mqtt/data:/mosquitto/data
+      - /home/hauser/mqtt/config:/mosquitto/config
+      - /home/hauser/mqtt/logs:/mosquitto/logs
 
-* [Mosquitto] (https://hub.docker.com/_/eclipse-mosquitto/)
-`sudo docker run -itd --name="mosquitto" --restart=always -p 1883:1883 -p 9001:9001 -v /home/hauser/mqtt/config:/mosquitto/config -v /home/hauser/mqtt/data:/mosquitto/data -v /home/hauser/mqtt/logs:/mosquitto/logs eclipse-mosquitto`
 
-* Other 3rd-party component (non-docker): [Haaska] (https://github.com/mike-grant/haaska)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: "grafana"
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    network_mode: "host"
+    environment:
+      - TZ=America/Phoenix
+    ports:
+      - 3000:3000
+    restart: on-failure
+    volumes:
+      - /home/hauser/grafana:/var/lib/grafana
+
+
+  influxdb:
+    image: influxdb:latest
+    container_name: "influxdb"
+    healthcheck: 
+      test: ["CMD", "curl", "-sI", "http://127.0.0.1:8086/ping"]
+      interval: 30s
+      timeout: 1s
+      retries: 24
+    network_mode: host
+    environment:
+      - TZ=America/Phoenix
+    ports:
+      - 8083:8083
+      - 8086:8086
+    restart: on-failure
+    volumes:
+      - /home/hauser/influxdb:/var/lib/influxdb
+
+
+  home-assistant:
+    #image: homeassistant/home-assistant:0.78.3
+    image: homeassistant/home-assistant:latest
+    container_name: "home-assistant"
+    restart: always
+    depends_on:
+      influxdb:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://my-fqdn.com:8123"]
+      interval: 30s
+      timeout: 10s
+      retries: 6
+    network_mode: "host"
+    environment:
+      - TZ=America/Phoenix
+    ports:
+      - 8123:8123
+    volumes:
+      - /home/hauser/hass_data/config:/config
+      - /usr/share/ssl:/ssl
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+
+
+  dasher:
+    command: amazon-dash run --ignore-perms --root-allowed --config /config/amazon-dash.yml
+    image: nekmo/amazon-dash:latest
+    container_name: "dasher"
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      -  /home/hauser/dasher/config/amazon-dash.yml:/config/amazon-dash.yml
+
+
+  ha-dockermon:
+    image: philhawthorne/ha-dockermon
+    container_name: "ha-dockermon"
+    restart: always
+    ports:
+      - 8126:8126
+    volumes:
+      -  /var/run/docker.sock:/var/run/docker.sock
+      -  /home/hauser/dockermon:/config
+
+
+  portainer:
+    image: portainer/portainer
+    container_name: "portainer"
+    restart: on-failure
+    network_mode: "host"
+    ports:
+      - 9000:9000
+    volumes:
+      -  /var/run/docker.sock:/var/run/docker.sock
+      -  /home/hauser/portainer:/data
+
+
+```
+
+* Other 3rd-party component (non-docker): [Haaska](https://github.com/mike-grant/haaska)
 
 
 **Devices I Use:**

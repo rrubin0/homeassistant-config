@@ -444,6 +444,27 @@ views:
       - type: picture-entity
         entity: camera.ramp_traffic
 
+
+####################################################################
+## Cameras v2
+####################################################################
+#  - title: Surveillance
+#    icon: mdi:cctv
+#    panel: true
+#    cards:
+#      - type: custom:surveillance-card
+#        thumb_interval: 15
+#        update_interval: 2
+#        cameras:
+#          - entity: camera.front_door
+#            motion_entity: binary_sensor.ring_front_door_motion
+#          - entity: camera.front_porch
+#          - entity: camera.nw_ptz
+#          - entity: camera.north_gate
+#          - entity: camera.nursery_ptz
+#          - entity: camera.ramp_traffic
+
+
 ####################################################################
 ## Security
 ####################################################################
@@ -855,6 +876,13 @@ views:
           - sun.sun
           - sensor.moon
 
+      - type: entities
+        title: Weather Alert
+        show_header_toggle: false
+        entities:
+          - sensor.pws_alerts
+
+
 ####################################################################
 ## Media
 ####################################################################
@@ -1006,6 +1034,13 @@ views:
            max: 90
 
 
+         - type: sensor
+           entity: sensor.ds_avg_temp
+           name: Downstairs Average Temp
+           height: 75
+           line_color: "#3498db"
+
+
 #      - type: entities
 #        title: Away Timer
 #        show_header_toggle: false
@@ -1021,6 +1056,26 @@ views:
 #          - script.pause_away_timer
 #          - script.cancel_away_timer
 #          - script.finish_away_timer
+
+
+####################################################################
+## Lab - Testing 2
+####################################################################
+#  - title: Settings
+#    icon: mdi:settings
+#    panel: true
+#    cards:
+#      - type: vertical-stack
+#        cards:
+#          - type: horizontal-stack
+#            cards: [ {{ mode_button('home') }}, {{ mode_button('away') }}, {{ mode_button('night') }}, {{ mode_button('nap') }} ]
+#          - type: custom:state-switch
+#            entity: input_select.house_mode
+#            states:
+#              home: !include dashboard/home.yaml
+#              away: !include dashboard/away.yaml
+#              night: !include dashboard/night.yaml
+#              nap: !include dashboard/nap.yaml
 
 
 ####################################################################
@@ -1274,5 +1329,5 @@ resources:
   - url: /local/lovelace_cards/state-element.js?v=0.0.1
     type: js
 
-#  - url: /local/lovelace_cards/tracker-card.js?v=1.0.1
-#    type: js
+  - url: /local/lovelace_cards/surveillance-card.js?v=0
+    type: module

@@ -24,6 +24,7 @@ homekit:
 # Lights - enabled
 #################################
       - light.entryway
+      - light.billiards
       - light.living_room
       - light.foyer_lights_level
       - light.dining_room_chandelier_level
@@ -101,6 +102,15 @@ homekit:
 
     switch.outdoor_speakers:
       type: outlet
+
+    switch.tv_power:
+      name: TV
+
+    switch.tv_mute:
+      name: Mute
+
+    switch.directv_power:
+      name: DirecTV
 
 
 ################################################

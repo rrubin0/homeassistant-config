@@ -14,6 +14,7 @@ automation:
       - service: timer.start
         entity_id: timer.bedtime
 
+
   ### Turn on the nightlight when Laundress Dash button is pressed
   - alias: Dasher Night Time
     initial_state: 'on'
@@ -24,3 +25,15 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.master_bedroom_night_time
+
+
+  ### Turn on the Baby Playlist in the Nursery when Puracy Dash button is pressed
+  - alias: Dasher Baby Playlist
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: script_baby_playlist
+
+    action:
+      - service: script.turn_on
+        entity_id: script.baby_playlist

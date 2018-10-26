@@ -99,6 +99,11 @@ automation:
         to: 'on'
 
     action:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.living_room
+          volume_level: .5
+
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.living_room
@@ -136,6 +141,11 @@ automation:
     action:
       - service: timer.start
         entity_id: timer.bedtime
+
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.living_room
+          volume_level: .4
 
       - service: media_player.alexa_tts
         data_template:

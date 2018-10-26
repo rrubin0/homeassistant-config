@@ -409,9 +409,14 @@ automation:
         entity_id: sensor.kegerator_door_state
         to: 'Open'
         for:
-          seconds: 45
+          seconds: 30
 
     action:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.kitchen
+          volume_level: .7
+
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.kitchen

@@ -27,7 +27,7 @@ homeassistant:
     ## Input Select
     ################################################
     input_select.alexa:
-      icon: mdi:format-list-bulleted
+      icon: mdi:amazon-alexa
 
 
     ################################################
@@ -42,7 +42,7 @@ homeassistant:
 #####################################################################
 input_text:
   alexa_tts:
-    name: Alexa TTS
+    name: Message
     initial: Hello
 
 
