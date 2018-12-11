@@ -179,7 +179,7 @@ automation:
       - service: notify.ios_i8plus
         data:
           title: "Refill Humidor"
-          message: "Humidor is {{ states.sensor.sn1_humidity.state|round }}% refill soon!"
+          message: "Humidor is {{ states.sensor.sn1_humidity.state }}% refill soon!"
 
 
   ### Humidor OK - reset notification and indicator

@@ -33,6 +33,9 @@ automation:
       - service: homeassistant.turn_on
         entity_id: group.porch
 
+      - service: switch.turn_on
+        entity_id: switch.back_yard_outlet, switch.front_yard_outlet, switch.switch_four
+
 
   ### Turn off the porch lights
   - alias: Porch Lights Off

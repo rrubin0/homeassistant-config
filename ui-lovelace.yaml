@@ -54,6 +54,21 @@ views:
 
 
       ################################################
+      ## Open Doors & Windows
+      ################################################
+      - type: custom:monster-card
+        card:
+          type: entities
+          title: Open Doors & Windows
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.*_state"
+              state: 'Open'
+        show_empty: false
+
+
+      ################################################
       ## Presence
       ################################################
       - type: entity-filter
@@ -83,20 +98,25 @@ views:
           - 'on'
         show_empty: false
 
+      - type: vertical-stack
+        cards:
+          - type: gauge
+            title: Upstairs Avg Temp
+            entity: sensor.us_avg_temp
+            severity:
+              red: 84
+              yellow: 81
+              green: 69
+#              blue: 65
 
-      ################################################
-      ## Open Doors & Windows
-      ################################################
-      - type: custom:monster-card
-        card:
-          type: entities
-          title: Open Doors & Windows
-          show_header_toggle: false
-        filter:
-          include:
-            - entity_id: "sensor.*_state"
-              state: 'Open'
-        show_empty: false
+          - type: gauge
+            title: Downstairs Avg Temp
+            entity: sensor.ds_avg_temp
+            severity:
+              red: 82
+              yellow: 80
+              green: 69
+#              blue: 65
 
 
       ################################################
@@ -138,6 +158,8 @@ views:
             name: Office Desk
           - entity: switch.game_room_lights
             name: Game Room
+          - entity: switch.switch_five
+            name: Christmas Tree
 
         state_filter:
           - 'on'
@@ -183,10 +205,14 @@ views:
             name: South Porch
           - entity: switch.patio_lights_switch
             name: Patio
-          - entity: switch.patio_party_lights_switch
-            name: Party
+          - entity: switch.back_yard_outlet
+            name: Back Yard Christmas Lights
+          - entity: switch.front_yard_outlet
+            name: Front Yard Christmas Lights
           - entity: switch.pool_light_switch
             name: Pool
+          - entity: switch.switch_four
+            name: Porch Christmas Lights
         state_filter:
           - 'on'
         show_empty: false
@@ -208,11 +234,10 @@ views:
           - switch.living_room_fan
           - switch.master_bedroom_fan
           - switch.master_bedroom_fan_light
-          - switch.switch_five
-          - switch.switch_four
           - switch.switch_one
-          - switch.switch_three
           - switch.switch_two
+          - switch.switch_three
+
         state_filter:
           - 'on'
         show_empty: false
@@ -330,12 +355,12 @@ views:
 #              ################################################
 #              - type: vertical-stack
 #                cards:
-#                - type: custom:thermostat-card
+#                - type: thermostat
 #                  title: Upstairs
 #                  entity: climate.upstairs
 #                  pending: 5
 #
-#                - type: custom:thermostat-card
+#                - type: thermostat
 #                  title: Downstairs
 #                  entity: climate.downstairs
 #                  pending: 5
@@ -369,23 +394,6 @@ views:
                     - sensor.guest_room_temperature
                     - sensor.upstairs_humidity
 
-                - type: custom:gauge-card
-                  title: Upstairs Avg Temp
-                  entity: sensor.us_avg_temp
-                  severity:
-                    red: 84
-                    amber: 81
-                    green: 69
-                    blue: 65
-
-                - type: custom:gauge-card
-                  title: Downstairs Avg Temp
-                  entity: sensor.ds_avg_temp
-                  severity:
-                    red: 82
-                    amber: 80
-                    green: 69
-                    blue: 65
 
                 - type: entities
                   title: Upstairs Ecobee
@@ -547,6 +555,7 @@ views:
           - switch.staircase_lamp
           - switch.wine_room_lamp
           - switch.flower_lamp
+          - switch.switch_five
 
       - type: entities
         title: Entry Lights
@@ -585,21 +594,21 @@ views:
             - light.office_desk_lamp
             - input_select.rgb_light
 
-        - type: custom:gauge-card
+        - type: gauge
           title: Humidor Temp
           entity: sensor.sn1_temperature
           severity:
             red: 80
-            amber: 77
+            yellow: 77
             green: 69
 
-        - type: custom:gauge-card
+        - type: gauge
           title: Humidor Humidity
           entity: sensor.sn1_humidity
           severity:
-            green: 69
-            amber: 67
-            red: 50
+            green: 68
+            yellow: 67
+            red: 65.5
 
 
 
@@ -642,6 +651,9 @@ views:
           - input_select.nursery_wall_strobe
           - switch.switch_one
           - switch.switch_two
+          - script.baby_playlist
+          - script.play_white_noise
+          - script.stop_white_noise
 
       - type: entities
         title: Master Bedroom
@@ -715,7 +727,7 @@ views:
         show_header_toggle: false
         entities:
           - input_boolean.visitor_mode
-#          - input_boolean.holiday
+          - input_boolean.vacation_mode
           - script.company_mode
 
       - type: entities
@@ -725,6 +737,7 @@ views:
           - automation.away_mode_countdown
           - automation.south_door_unlock_on_arrival
           - automation.accent_lights_auto_off
+          - automation.morning_sequence
           - automation.living_room_off_morning
           - automation.living_room_on_cloudy
           - automation.climate_downstairs_door_left_open
@@ -780,11 +793,13 @@ views:
           - switch.front_porch_lights_switch
 
       - type: entities
-        title: Backyard
+        title: Back Yard
         show_header_toggle: false
         entities:
           - switch.patio_lights_switch
-          - switch.patio_party_lights_switch
+          - switch.front_yard_outlet
+          - switch.back_yard_outlet
+          - switch.switch_four
           - switch.fountains_switch
           - switch.outdoor_speakers
 
@@ -999,6 +1014,13 @@ views:
   - title: Lab
     icon: mdi:test-tube
     cards:
+#      - type: custom:ecobee-card
+#        entity: climate.downstairs
+#
+#      - type: custom:ecobee-card
+#        entity: climate.upstairs
+
+
       - type: entities
         title: Test Triggers
         show_header_toggle: false
@@ -1007,6 +1029,7 @@ views:
           - script.rgb_strip_test
           - script.desk_lamp_test
           - input_boolean.state_change
+
 
       - type: entities
         title: Test Conditions
@@ -1021,13 +1044,13 @@ views:
 
       - type: vertical-stack
         cards:
-         - type: custom:gauge-card
+         - type: gauge
            title: Downstairs Setpoint
            entity: sensor.ds_climate_target_high
            min: 60
            max: 90
 
-         - type: custom:gauge-card
+         - type: gauge
            title: Upstairs Setpoint
            entity: sensor.us_climate_target_high
            min: 60
@@ -1217,87 +1240,6 @@ views:
               zoom: 200%
 
 
-
-
-
-
-#          - type: service-button
-#            title: Kitchen
-#            style:
-#              top: 27%
-#              left: 50%
-#              font-size: 250%
-#              padding: 0px
-#            service: light.toggle
-#            data:
-#              entity_id: light.kitchen_lights_level
-#
-#          - type: service-button
-#            title: Dining Room
-#            style:
-#              top: 27%
-#              left: 30%
-#              font-size: 250%
-#              padding: 0px
-#            service: light.toggle
-#            service_data:
-#              entity_id: light.dining_room_chandelier_level
-
-#          - type: service-button
-#            title: All Lights
-#            style:
-#              top: 95%
-#              left: 10%
-#              padding: 0px
-#            service: light.toggle
-#            service_data:
-#              entity_id: group.interior_lights
-
-
-
-
-
-
-
-      ################################################
-      ## Scratch - playing with images
-      ################################################
-#          - type: image
-#            entity: light.kitchen_lights
-#            tap_action: toggle
-#            image: /local/icons/light_bulb_off.png
-#            state_image:
-#              'on': /local/icons/light_bulb_on.png
-#            state_filter:
-#              'on': brightness(130%) saturate(1.5) drop-shadow(0px 0px 10px gold)
-#              'off': brightness(80%) saturate(0.8)
-#            style:
-#              top: 48%
-#              left: 11%
-#              width: 7%
-#              padding: 50px 50px 100px 50px
-
-
-
-
-
-#
-#      - type: horizontal-stack
-#        cards:
-#         - type: custom:gauge-card
-#           title: Downstairs Temp
-#           entity: sensor.downstairs_temperature
-#           min: 60
-#           max: 90
-#
-#         - type: custom:gauge-card
-#           title: Upstairs Temp
-#           entity: sensor.upstairs_temperature
-#           severity:
-#             red: 84
-#             green: 82
-#             amber: 83
-
 ####################################################################
 ## Card Config
 ####################################################################
@@ -1305,8 +1247,8 @@ resources:
   - url: /local/lovelace_cards/monster-card.js?v=0.2.3
     type: js
 
-  - url: /local/lovelace_cards/gauge-card.js?v=0.1.0
-    type: js
+#  - url: /local/lovelace_cards/gauge-card.js?v=0.1.0
+#    type: js
 
 #  - url: /local/lovelace_cards/weather-card.js?v=0.1.2
 #    type: js
@@ -1317,8 +1259,8 @@ resources:
   - url: /local/lovelace_cards/entity-attributes-card.js?v=0.1.0
     type: js
 
-  - url: /local/lovelace_cards/thermostat-card.js?v=0.0.2
-    type: module
+#  - url: /local/lovelace_cards/thermostat-card.js?v=0.0.2
+#    type: module
 
   - url: /local/lovelace_cards/bignumber-card.js?v=0.0.1
     type: js
@@ -1331,3 +1273,6 @@ resources:
 
   - url: /local/lovelace_cards/surveillance-card.js?v=0
     type: module
+
+#  - url: /local/lovelace_cards/ecobee-card.js?v=0.1
+#    type: js

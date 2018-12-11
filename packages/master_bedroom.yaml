@@ -77,7 +77,7 @@ script:
     - service: light.turn_on
       data:
         entity_id: light.foyer_lights_level
-        brightness: 120
+        brightness: 50
 
     - service: hue.hue_activate_scene
       data:

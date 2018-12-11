@@ -149,9 +149,9 @@ automation:
       - service: scene.turn_on
         entity_id: scene.evening
 
-## Turn on the Christmas Tree Lights
-#      - service: switch.turn_on
-#        entity_id: switch.switch_five
+# Turn on the Christmas Tree Lights
+      - service: switch.turn_on
+        entity_id: switch.switch_five
 
 
 #  ### Brighten up the house in the morning
@@ -202,36 +202,42 @@ automation:
         entity_id: sun.sun
         value_template: '{{ state.attributes.elevation }}'
         above: 10
-        for:
-          minutes: 15
 
     condition:
       - condition: state
         entity_id: group.all_lights
         state: 'on'
 
-      - condition: time
-        before: '08:00:00'
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
 
     action:
-      - service: hue.hue_activate_scene
-        data:
-          group_name: "Living Room"
-          scene_name: "Bright"
-
-      - delay:
-          minutes: 15
-
-      - service: homeassistant.turn_off
-        entity_id: group.interior_lights
-
-      - service: light.turn_off
-        entity_id: light.gateway_light_7811dcb7da52
+      - service: timer.start
+        entity_id: timer.sun_up
 
       - service: notify.ios_i8plus
         data:
-          title: "Sun's up. Lights off"
-          message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.floorplan_time.state }}"
+          title: "Suns Up"
+          message: "Lights off in 15 min..."
+
+
+  ### Sun Up Timer Finish
+  - alias: Sun Up Timer Finish
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.sun_up
+
+    action:
+      - service: script.sun_up
 
 
   ### Turn on some lights when we arrive home after sundown

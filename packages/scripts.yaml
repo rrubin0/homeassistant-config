@@ -45,6 +45,18 @@ homeassistant:
       friendly_name: "Nap Time"
       icon: mdi:play-circle
 
+    script.baby_playlist:
+      friendly_name: "Play Baby Playlist"
+      icon: mdi:sleep
+
+    script.play_white_noise:
+      friendly_name: "Play White Noise"
+      icon: mdi:sleep
+
+    script.stop_white_noise:
+      friendly_name: "Stop White Noise"
+      icon: mdi:stop-circle
+
 
 script:
   #####################################################################
@@ -155,6 +167,31 @@ script:
       data:
         entity_id: light.kitchen_lights_level
         brightness: 170
+
+
+  #####################################################################
+  ### Sun Up - lights off
+  #####################################################################
+  sun_up:
+    sequence:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Bright"
+
+    - delay:
+        minutes: 10
+
+    - service: homeassistant.turn_off
+      entity_id: group.interior_lights
+
+    - service: light.turn_off
+      entity_id: light.gateway_light_7811dcb7da52
+
+    - service: notify.ios_i8plus
+      data:
+        title: "Sun's up. Lights off"
+        message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.time_templated_am_pm.state }}"
 
 
   #####################################################################
@@ -281,4 +318,37 @@ script:
         entity_id: media_player.nursery
         media_content_id : my_baby_playlist
         media_content_type: AMAZON_MUSIC
+
+
+  #####################################################################
+  ### Play White Noise on Alexa Dot in Nursery
+  #####################################################################
+  play_white_noise:
+    sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.nursery
+        volume_level: .7
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.nursery
+        media_content_id : my_white_noise_playlist
+        media_content_type: AMAZON_MUSIC
+
+
+  stop_white_noise:
+    sequence:
+    - service: media_player.media_play_pause
+      data:
+        entity_id: media_player.nursery
+
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.nursery
+        volume_level: .6
+
+
+
+
 

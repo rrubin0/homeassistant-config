@@ -4,15 +4,7 @@ This is my [Home Assistant](https://home-assistant.io/) configuration.
 
 I run Home Assistant in a Docker Container on a re-purposed [ASUS Chromebox M004U](https://amzn.to/1rdaB85) running Ubuntu Server 18.04
 
-My primary control method is Z-Wave. I chose Z-Wave for its performance and fit, but also have adjusted per use case. For example, I use Z-Wave for instances where I need to control many lights from a switch at once and fine control over dimming or color LED is less important. My kitchen is a good example of this, as there are 6 can lights here and it would be quite expensive to use Philips Hue.
 
-I use Philips Hue for the following use cases:
-- Color LED (although there are other options)
-- Fine control over dimming is a requirement
-- I have a single or just a couple of bulbs
-- The area is not one where it is natural for others to hit the wall switch
-
-The switch problem with Hue can be solved by adding one of their wall switches to control, or using automations to control the lights in anticipation of your household users
 
 
 **My Docker Container Setup**
@@ -25,7 +17,7 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * [HA Dockermon](https://github.com/philhawthorne/ha-dockermon)
 
 
-My Docker Compose File:
+**My Docker Compose File**
 ```
 version: '2.1'
 
@@ -145,8 +137,21 @@ services:
 
 * Other 3rd-party component (non-docker): [Haaska](https://github.com/mike-grant/haaska)
 
+**Approach**
+My primary control method is Z-Wave. I chose Z-Wave for its performance and fit, but also have adjusted per use case. 
+For example, I use Z-Wave for instances where I need to control many lights from a switch at once and fine control over dimming or color LED is less important. 
+My kitchen is a good example of this, as there are 6 can lights here and it would be quite expensive to use Philips Hue.
 
-**Devices I Use:**
+I do use Philips Hue for the following use cases:
+- Color LED (although there are other options)
+- Fine control over dimming is a requirement
+- I have a single or just a couple of bulbs
+- The area is not one where it is natural for others to hit the wall switch
+
+The switch problem with Hue can be solved by adding one of their wall switches to control, or using automations to control the lights in anticipation of your household users
+
+
+**Other Devices Used:**
 * [ecobee3 Thermostat](http://amzn.to/2iD0v0z) with [ecobee3 Remote Sensors](http://amzn.to/2iCZFRw)
 * ecobee3 Lite Thermostat
 * [Amazon Echo Dot Gen 2](http://amzn.to/2hvCexj)
@@ -172,7 +177,7 @@ services:
 * Aeon Labs Z-Wave Siren
 * GoControl Z-Wave Siren
 * Yale Real Living Z-Wave Touchscreen Lever Lock
-* Xiaomi Aqara Hub
-* Xiaomi Door Sensor
-* Xiaomi Smart Button
+* Xiaomi Mijia Hub
+* Xiaomi Door Sensors
+* Xiaomi Smart Buttons
 

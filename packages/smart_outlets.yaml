@@ -39,7 +39,7 @@ homeassistant:
 
     ## rf_switch_4
     switch.switch_four:
-      friendly_name: "Stairway Christmas Lights"
+      friendly_name: "Porch Christmas Lights"
       assumed_state: false
       icon: mdi:power-socket-us
 
@@ -47,7 +47,7 @@ homeassistant:
     switch.switch_five:
       friendly_name: "Christmas Tree"
       assumed_state: false
-      icon: mdi:power-socket-us
+      icon: mdi:pine-tree
 
     ################################################
     ## Switch - TP-LINK HS110

@@ -25,12 +25,11 @@ group:
       - switch.staircase_lamp
       - switch.wine_room_lamp
       - switch.flower_lamp
-
-# Holiday Lights / RF Spares
-      ## staircase christmas lights
-#      - switch.switch_four
-      ## christmas tree
-#      - switch.switch_five
+ ## Holiday Lights
+     ## staircase christmas lights
+      - switch.switch_four
+     ## christmas tree
+      - switch.switch_five
 
 
   #####################################################################
@@ -195,7 +194,15 @@ group:
     entities:
       - switch.patio_lights_switch
       - switch.pool_light_switch
-#      - switch.patio_party_lights_switch
+      - switch.back_yard_outlet
+      - switch.front_yard_outlet
+      - switch.switch_four
+
+  Christmas Lights:
+    entities:
+      - switch.back_yard_outlet
+      - switch.front_yard_outlet
+      - switch.switch_four
 
 
   #####################################################################
@@ -387,7 +394,8 @@ group:
     control: hidden
     entities:
       - switch.patio_lights_switch
-      - switch.patio_party_lights_switch
+      - switch.back_yard_outlet
+      - switch.front_yard_outlet
       - switch.fountains_switch
       - switch.outdoor_speakers
 
@@ -496,19 +504,19 @@ group:
       - sensor.downstairs_ac_leak_detector
 #      - sensor.crime
 
-  Door Sensors:
-    entities:
-      - sensor.front_door_state
-      - sensor.south_door_state
-      - sensor.kitchen_door_state
-      - sensor.bathroom_door_state
-
-  Door Alarm Points:
-    entities:
-      - sensor.front_door_tamper
-      - sensor.south_door_tamper
-      - sensor.kitchen_door_tamper
-      - sensor.beach_door_tamper
+#  Door Sensors:
+#    entities:
+#      - sensor.front_door_state
+#      - sensor.south_door_state
+#      - sensor.kitchen_door_state
+#      - sensor.bathroom_door_state
+#
+#  Door Alarm Points:
+#    entities:
+#      - sensor.front_door_tamper
+#      - sensor.south_door_tamper
+#      - sensor.kitchen_door_tamper
+#      - sensor.beach_door_tamper
 
 
   #####################################################################
@@ -519,13 +527,13 @@ group:
     entities:
       # rf switch downstairs wipe warmer
       - switch.switch_three
-      #rf switch staircase christmas lights
-      #- switch.switch_four
-      #rf switch christmas tree
-      #- switch.switch_five
-      #tplink smartplug 1 (flower lamp)
+      ##rf switch staircase christmas lights
+      - switch.switch_four
+      ##rf switch christmas tree
+      - switch.switch_five
+      ##tplink smartplug 1 (flower lamp)
       #- switch.flower_lamp
-      #tplink outdoor speakers
+      ##tplink outdoor speakers
       - switch.outdoor_speakers
 
 

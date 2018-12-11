@@ -42,6 +42,7 @@ alexa:
         - group.interior_lights
         - group.master_bedroom_lights
         - group.porch
+        - group.christmas_lights
 
         - climate.downstairs
         - climate.upstairs
@@ -89,7 +90,8 @@ alexa:
         - switch.master_bedroom_fan_light
         - switch.outdoor_speakers
         - switch.patio_lights_switch
-        - switch.patio_party_lights_switch
+        - switch.back_yard_outlet
+        - switch.front_yard_outlet
         - switch.pool_light_switch
         - switch.staircase_lamp
         - switch.switch_five

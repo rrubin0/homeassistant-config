@@ -58,6 +58,11 @@ homekit:
       - switch.south_porch_lights_switch
       - switch.downstairs_bath_lights_switch
       - switch.outdoor_speakers
+      - switch.switch_five
+      - switch.switch_four
+      - switch.switch_three
+      - switch.switch_two
+      - switch.switch_one
 
 #################################
 # Scripts - enabled
@@ -207,17 +212,13 @@ automation:
 #      - switch.master_bedroom_fan_delay
 #      - switch.master_bedroom_fan_light
 #      - switch.master_bedroom_fan_random
-#      - switch.patio_party_lights_switch
+#      - switch.back_yard_outlet
 #      - switch.staircase_lamp
 #      - switch.tv_input_chromecast
 #      - switch.tv_input_directv
 #      - switch.tv_input_firetv
 #      - switch.tv_volume
-#      - switch.switch_five
-#      - switch.switch_four
-#      - switch.switch_one
-#      - switch.switch_three
-#      - switch.switch_two
+
 
 #################################
 # Scripts - disabled

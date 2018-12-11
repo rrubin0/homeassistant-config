@@ -22,11 +22,14 @@ homeassistant:
     input_boolean.visitor_mode:
       icon: mdi:account
 
-    input_boolean.holiday:
-      icon: mdi:snowman
+    input_boolean.vacation_mode:
+      icon: mdi:beach
 
     input_boolean.dinner_time:
       icon: mdi:food-fork-drink
+
+    input_boolean.door_held_open:
+      icon: mdi:door-open
 
 
 #####################################################################
@@ -37,10 +40,14 @@ input_boolean:
     name: Visitor Mode
     initial: off
 
-  holiday:
-    name: Holiday Mode
+  vacation_mode:
+    name: Vacation Mode
     initial: off
 
   dinner_time:
     name: Dinner Time
+    initial: off
+
+  door_held_open:
+    name: Door Held Open
     initial: off

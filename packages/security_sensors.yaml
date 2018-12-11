@@ -428,3 +428,18 @@ automation:
           message: "The Kegerator door is held open!"
 
 
+  ### Door Held Open
+  - alias: Entry Door Held Open
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.front_door_state, sensor.south_door_state, sensor.kitchen_door_state, sensor.bathroom_door_state
+        to: 'Open'
+        for:
+          minutes: 5
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.door_held_open
+

@@ -9,7 +9,7 @@
 automation:
   ### downstairs wipe warmer schedule ON
   - alias: Downstairs Wipe Warmer On
-    initial_state: 'off'
+    initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: time
@@ -49,7 +49,7 @@ automation:
 
   ### downstairs wipe warmer return
   - alias: Downstairs Wipe Warmer Return
-    initial_state: 'off'
+    initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: state
@@ -68,7 +68,7 @@ automation:
 
   ### upstairs wipe warmer schedule ON
   - alias: Upstairs Wipe Warmer On
-    initial_state: 'off'
+    initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: time
@@ -104,7 +104,7 @@ automation:
 
   ### upstairs wipe warmer return
   - alias: Upstairs Wipe Warmer Return
-    initial_state: 'off'
+    initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: state
