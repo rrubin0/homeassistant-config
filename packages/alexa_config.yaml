@@ -6,6 +6,9 @@ alexa:
   smart_home:
     filter:
       include_entities:
+      ################################################
+      ## Scripts
+      ################################################
         - script.company_mode
         - script.ecobee_ds_home
         - script.ecobee_ds_resume
@@ -28,6 +31,9 @@ alexa:
         - script.pool_party
         - script.start_bedtime_timer
 
+      ################################################
+      ## Scenes
+      ################################################
         - scene.bright
         - scene.cloudy
         - scene.dim
@@ -35,18 +41,28 @@ alexa:
         - scene.morning
         - scene.movie_time
 
+      ################################################
+      ## Groups
+      ################################################
         - group.accent_lights
-        - group.downstairs_outlets
         - group.entry_lights
         - group.exterior_lights
         - group.interior_lights
+        - group.game_room_lights
         - group.master_bedroom_lights
-        - group.porch
+        - group.master_bathroom_lights
+        - group.porch_lights
         - group.christmas_lights
 
+      ################################################
+      ## Climate
+      ################################################
         - climate.downstairs
         - climate.upstairs
 
+      ################################################
+      ## Lights
+      ################################################
         - light.billiards
         - light.dining_room_chandelier_level
         - light.entryway
@@ -57,6 +73,7 @@ alexa:
         - light.living_room_lamp
         - light.lr_ceiling
         - light.master_bathroom
+        - light.master_bath_vanity
         - light.master_bed_ceiling_level
         - light.master_bed_entry_level
         - light.master_bedroom_chandelier_level
@@ -67,6 +84,9 @@ alexa:
         - light.under_bed_lights
         - light.wine_room
 
+      ################################################
+      ## Switches
+      ################################################
 #        - switch.amp_input_dvd
 #        - switch.amp_input_ipod
 #        - switch.amp_input_movie
@@ -80,7 +100,7 @@ alexa:
         - switch.downstairs_bath_lights_switch
         - switch.flower_lamp
         - switch.fountains_switch
-        - switch.game_room_lights
+        - switch.game_room_floodlights
         - switch.living_room_fan
         - switch.living_room_fan_high
         - switch.living_room_fan_light
@@ -88,6 +108,7 @@ alexa:
         - switch.living_room_fan_medium
         - switch.master_bedroom_fan
         - switch.master_bedroom_fan_light
+        - switch.nursery_lamp
         - switch.outdoor_speakers
         - switch.patio_lights_switch
         - switch.back_yard_outlet
@@ -105,15 +126,25 @@ alexa:
         - switch.tv_mute
         - switch.tv_power
         - switch.wine_room_lamp
+        - switch.mini_fridge
 
+      ################################################
+      ## Input_Booleans
+      ################################################
         - input_boolean.dinner_time
         - input_boolean.holiday
         - input_boolean.rain
         - input_boolean.visitor_mode
 
+      ################################################
+      ## Locks
+      ################################################
         - lock.bathroom_entry_locked
         - lock.south_entry_locked
 
+      ################################################
+      ## Sensors
+      ################################################
         - sensor.broadlink_sensor_temperature
         - sensor.downstairs_temperature
         - sensor.entryway_temperature
@@ -124,15 +155,24 @@ alexa:
         - sensor.office_temperature
         - sensor.upstairs_temperature
 
+      ################################################
+      ## Covers
+      ################################################
         - cover.master_bath_shade
         - cover.kitchen_shade
 
+      ################################################
+      ## Automations
+      ################################################
         - automation.climate_downstairs_door_left_open
         - automation.doorbell_pressed
         - automation.fountains_on
         - automation.south_door_unlock_on_arrival
 
 
+################################################
+## Custom Names
+################################################
     entity_config:
       automation.climate_downstairs_door_left_open:
         name: Open Door Schedule
@@ -149,3 +189,4 @@ alexa:
       automation.south_door_unlock_on_arrival:
         name: Auto Unlock Schedule
         description: Automation for arrival unlock
+

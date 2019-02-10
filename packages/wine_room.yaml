@@ -20,7 +20,7 @@ homeassistant:
     ## Light
     ################################################
     light.wine_room:
-      friendly_name: "Wine Room Lights"
+      friendly_name: "Wine Room Ceiling"
       icon: mdi:google-circles-communities
 
     light.northeast_wine:

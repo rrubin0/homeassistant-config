@@ -51,6 +51,9 @@ homeassistant:
     script.desk_lamp_test:
       friendly_name: "Desk Lamp Test"
 
+    script.baby_playlist_test:
+      friendly_name: "Playlist Test"
+
 
 #####################################################################
 ### Input Boolean
@@ -109,6 +112,29 @@ script:
         entity_id: light.office_desk_lamp
         xy_color: [0.151, 0.343]
         brightness: 55
+
+
+  #####################################################################
+  ### Play Baby Playlist (test using office)
+  #####################################################################
+  baby_playlist_test:
+    sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.office
+        volume_level: .6
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.office
+        media_content_id : my_baby_playlist
+        media_content_type: AMAZON_MUSIC
+
+#    - service: media_player.play_media
+#      data:
+#        entity_id: media_player.office
+#        media_content_id : my_white_noise_playlist
+#        media_content_type: AMAZON_MUSIC
 
 
 #####################################################################

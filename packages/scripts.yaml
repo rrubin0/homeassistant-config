@@ -3,6 +3,13 @@
 #    @description      :     stand alone scripts for easy access
 #####################################################################
 homeassistant:
+  ################################################
+  ## Customize Global - script icon
+  ################################################
+  customize_glob:
+    "script.*":
+      icon: mdi:play-circle
+
   customize:
     ################################################
     ## Node Anchors
@@ -21,7 +28,7 @@ homeassistant:
     script.unlock_megs:
       friendly_name: "Unlock Door for Megan"
       hidden: true
-      icon: mdi:play-circle
+#      icon: mdi:play-circle
 
     script.morning_sequence:
       hidden: true
@@ -31,7 +38,7 @@ homeassistant:
 
     script.company_mode:
       friendly_name: "Company Mode"
-      icon: mdi:play-circle
+#      icon: mdi:play-circle
 
     script.bedtime:
       friendly_name: "Bedtime"
@@ -39,11 +46,11 @@ homeassistant:
 
     script.shutdown_lights:
       friendly_name: "Shutdown"
-      icon: mdi:play-circle
+#      icon: mdi:play-circle
 
     script.nap_time:
       friendly_name: "Nap Time"
-      icon: mdi:play-circle
+#      icon: mdi:play-circle
 
     script.baby_playlist:
       friendly_name: "Play Baby Playlist"
@@ -53,8 +60,8 @@ homeassistant:
       friendly_name: "Play White Noise"
       icon: mdi:sleep
 
-    script.stop_white_noise:
-      friendly_name: "Stop White Noise"
+    script.stop_playing:
+      friendly_name: "Stop Playing"
       icon: mdi:stop-circle
 
 
@@ -75,13 +82,14 @@ script:
     alias: "Away Mode"
     sequence:
     - service: lock.lock
+      entity_id: all
+
     # turn off all lights (except porch) and devices
     - service: homeassistant.turn_off
       entity_id:
         - group.interior_lights
         - group.exterior_lights
-        - group.downstairs_outlets
-        - group.upstairs_outlets
+        - group.outlets
 
 #    - service: notify.pushbullet
 #      data:
@@ -123,8 +131,7 @@ script:
     - service: light.turn_on
       data:
         entity_id: light.foyer_lights_level
-        brightness: 155
-        transition: 30
+        brightness: 60
 
     - service: hue.hue_activate_scene
       data:
@@ -240,6 +247,7 @@ script:
     sequence:
     # lock up
     - service: lock.lock
+      entity_id: all
 
 #    - service: light.turn_on
 #      data:
@@ -282,15 +290,16 @@ script:
   company_mode:
     sequence:
     - service: switch.turn_on
-      entity_id: 
+      entity_id:
         - switch.outdoor_speakers
-        - switch.game_room_lights
+        - switch.game_room_floodlights
         - switch.pool_light_switch
 
     - service: scene.turn_on
       entity_id: scene.bright
 
     - service: lock.unlock
+      entity_id: all
 
     - service: light.turn_on
       data:
@@ -337,7 +346,10 @@ script:
         media_content_type: AMAZON_MUSIC
 
 
-  stop_white_noise:
+  #####################################################################
+  ### Stop Playing in Nursery
+  #####################################################################
+  stop_playing:
     sequence:
     - service: media_player.media_play_pause
       data:

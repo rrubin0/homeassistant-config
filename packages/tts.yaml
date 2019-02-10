@@ -52,7 +52,7 @@
 #            {% else %}
 #            Good evening.
 #            {% endif %}
-#            'The temperature is {{states.sensor.pws_temp_f.state|round}} degrees right now in Mesa'
+#            'The temperature is {{states.sensor.dark_sky_temperature.state|round}} degrees right now in Mesa'
 #            {% if now().strftime("%H")|int < 8 %}
 #            'Rick's commute to work is {{states.sensor.rick_work_commute.state | int }} minutes if you leave now.'
 #            {% endif %}

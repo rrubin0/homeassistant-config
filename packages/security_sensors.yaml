@@ -412,6 +412,9 @@ automation:
           seconds: 30
 
     action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.keg_door_open
+
       - service: media_player.volume_set
         data:
           entity_id: media_player.kitchen
@@ -420,12 +423,42 @@ automation:
       - service: media_player.alexa_tts
         data_template:
           entity_id: media_player.kitchen
-          message: "Attention! Please close the beer fridge door."
+          message: "Attention, Please close the Kegerator door!"
 
       - service: notify.notify
         data:
-          title: "Kegerator Door"
+          title: "Kegerator Door Alarm!"
           message: "The Kegerator door is held open!"
+
+
+  ### Kegerator Door Restoral
+  - alias: Kegerator Door Restoral
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.kegerator_door_state
+        from: 'Open'
+        to: 'Closed'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.keg_door_open
+        state: 'on'
+
+    action:
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.keg_door_open
+
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.kitchen
+          volume_level: .5
+
+      - service: notify.notify
+        data:
+          title: "Kegerator Restored"
+          message: "Thank you for closing the Kegerator door."
 
 
   ### Door Held Open
@@ -442,4 +475,18 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id: input_boolean.door_held_open
+
+
+  ### All Secure
+  - alias: All Secure
+    initial_state: 'on'
+#    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.front_door_state, sensor.south_door_state, sensor.kitchen_door_state, sensor.bathroom_door_state
+        to: 'Closed'
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.all_secure
 

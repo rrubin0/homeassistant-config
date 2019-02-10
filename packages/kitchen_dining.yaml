@@ -53,6 +53,7 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.pantry_door_contact
+        from: 'on'
         to: 'off'
         for:
           seconds: 15

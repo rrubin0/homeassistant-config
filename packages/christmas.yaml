@@ -1,0 +1,93 @@
+#####################################################################
+#    @package          :     christmas
+#    @description      :     christmas lights and scenes
+#####################################################################
+#homeassistant:
+#  customize:
+#    ################################################
+#    ## Node Anchors
+#    ################################################
+#    package.node_anchors:
+#      customize: &customize
+#        package: 'christmas'
+#
+#      hidden: &hidden
+#        <<: *customize
+#        hidden: true
+#
+#
+#    ################################################
+#    ## Switch
+#    ################################################
+#    switch.front_yard_outlet:
+#      friendly_name: "Front Christmas Lights"
+#      icon: mdi:stocking
+#
+##    switch.back_yard_outlet:
+##      friendly_name: "Party Lights"
+##      icon: mdi:white-balance-incandescent
+#
+#
+######################################################################
+#### Automation
+######################################################################
+#automation:
+#### Turn on the christmas lights after porch
+#  - alias: Christmas Lights On
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: switch.front_porch_lights_switch
+#        to: 'on'
+#        
+#    action:
+#      - service: homeassistant.turn_on
+#        entity_id: group.christmas_lights
+#
+#
+#### Turn off the Christmas Lights - Weekdays
+#  - alias: Christmas Lights Off Weekdays
+#    initial_state: 'on'
+#    trigger:
+#      platform: time
+#      at: '00:00:00'
+#
+#    condition:
+#      - condition: time
+#        weekday:
+#          - mon
+#          - tue
+#          - wed
+#          - thu
+#          - fri
+#
+#      - condition: state
+#        entity_id: group.christmas_lights
+#        state: 'on'
+#
+#    action:
+#  # outdoor Christmas lights
+#      - service: homeassistant.turn_off
+#        entity_id: group.christmas_lights
+#
+#
+#### Turn off the Christmas Lights - Weekends
+#  - alias: Christmas Lights Off Weekends
+#    initial_state: 'on'
+#    trigger:
+#      platform: time
+#      at: '01:30:00'
+#
+#    condition:
+#      - condition: time
+#        weekday:
+#          - sat
+#          - sun
+#
+#      - condition: state
+#        entity_id: group.christmas_lights
+#        state: 'on'
+#
+#    action:
+#      - service: homeassistant.turn_off
+#        entity_id: group.christmas_lights

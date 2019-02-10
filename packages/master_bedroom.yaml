@@ -90,6 +90,10 @@ script:
         brightness: 55
         rgb_color: [0,55,55]
 
+    - service: switch.turn_on
+      data:
+        entity_id: switch.mini_fridge
+
 #    - service: switch.turn_on
 #      entity_id: switch.master_bedroom_fan
 #    - service: input_select.select_option

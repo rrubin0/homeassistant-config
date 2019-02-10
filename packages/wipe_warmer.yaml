@@ -24,6 +24,7 @@ automation:
       - service: switch.turn_on
         entity_id: switch.switch_three
 
+
   ### downstairs wipe warmer schedule OFF
   - alias: Downstairs Wipe Warmer Off
     initial_state: 'on'

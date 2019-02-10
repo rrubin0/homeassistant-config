@@ -3,6 +3,13 @@
 #    @description      :     input_boolean configurations
 #####################################################################
 homeassistant:
+  ################################################
+  ## Customize Global - input_boolean icon
+  ################################################
+  customize_glob:
+    "input_boolean.*":
+      icon: mdi:toggle-switch
+
   customize:
     ################################################
     ## Node Anchors
@@ -31,6 +38,9 @@ homeassistant:
     input_boolean.door_held_open:
       icon: mdi:door-open
 
+    input_boolean.keg_door_open:
+      icon: mdi:door-open
+
 
 #####################################################################
 ### Input Boolean
@@ -50,4 +60,12 @@ input_boolean:
 
   door_held_open:
     name: Door Held Open
+    initial: off
+
+  keg_door_open:
+    name: Keg Door Open
+    initial: off
+
+  all_secure:
+    name: All Secure
     initial: off

@@ -390,5 +390,5 @@ automation:
       - service: notify.ios_i8plus
         data:
           title: "Awesome Weather"
-          message: "It's {{ states.sensor.yweather_temperature.state }} degrees outside. Time to open up the house!"
+          message: "It's {{ states.sensor.dark_sky_temperature.state|round }} degrees outside. Time to open up the house!"
 

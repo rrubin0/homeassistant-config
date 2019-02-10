@@ -1,0 +1,47 @@
+Color_Chart:
+  # Main Stuff #
+  primary-color: "#848482" # Grey
+  light-primary-color: "#ff1493" # Pink
+  primary-background-color: "#89cff0" # Baby Blue
+  secondary-background-color: "#bf94e4" # Lavendar
+  paper-card-background-color: "#915b25" # Brown
+  paper-item-icon-color: "#ff4f00" # Orange
+ 
+  # Text #
+  primary-text-color: "#fdee00" # Bright Yellow
+  text-primary-color: "#00ff00" # Bright Green
+  secondary-text-color: "#0000ff" # Dark Blue
+  disabled-text-color: "#ff0038" # Bright Red
+  label-badge-text-color: "#ff00ff" # Magenta
+  
+  # Header and Divider#
+  divider-color: "#ffffff" # White
+  paper-card-header-color: "#fbceb1" # Tan - This is the text at the top of some cards in the config menu
+
+  # Sidebar Menu (pop-out menu on side) #
+  paper-listbox-background-color: "#8a2be2" # Purple
+  paper-listbox-color: "#000000" # Black - This only shows up in a few drop down menus
+  paper-grey-200: "#e7feff" # Very Light Blue
+  sidebar-icon-color: "#30d5c8" #Greenish Blue
+  sidebar-selected-icon-color: "#00ffff" # Aqua
+  sidebar-text-color: "#c7cad7" # Light Grey
+  sidebar-selected-text-color: "#00ffff" # Aqua
+  sidebar-selected-background-color: "#fffff0" # Ivory White   
+ 
+  # Switches (toggle switches) #
+  paper-toggle-button-checked-ink-color: "#5d8aa8" # Not sure about this
+  paper-toggle-button-checked-button-color: "#03c03c" # The button color when to the right "on"
+  paper-toggle-button-checked-bar-color: "#8fbc8f" # This is the bar color when in on position
+  paper-toggle-button-unchecked-bar-color: "#8b0000" # This is the bar when to the left "off"
+  paper-toggle-button-unchecked-button-color: "#560319" # This is the button when to the left "off"
+  
+  # Sliders (for brightness, volume levels etc) #
+  paper-slider-knob-color: "#daa520" # Color of the Knob when in any "on" position
+  paper-slider-knob-start-color: "#996515" # Color of the know only when all the way off
+  paper-slider-pin-color: "#b2beb5" # Not sure about this
+  paper-slider-active-color: "#00ff00" # Line to the left of the knob
+  paper-slider-secondary-color: "#6699cc" # Line to the right of the knob
+  
+  ### Table row ###
+  table-row-background-color: "#efdecd" # Almond
+  table-row-alternative-background-color: "#fbceb1" # Apricot

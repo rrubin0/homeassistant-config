@@ -31,10 +31,7 @@ automation:
 
     action:
       - service: homeassistant.turn_on
-        entity_id: group.porch
-
-      - service: switch.turn_on
-        entity_id: switch.back_yard_outlet, switch.front_yard_outlet, switch.switch_four
+        entity_id: group.porch_lights
 
 
   ### Turn off the porch lights
@@ -47,4 +44,4 @@ automation:
 
     action:
       - service: homeassistant.turn_off
-        entity_id: group.porch
+        entity_id: group.porch_lights

@@ -87,7 +87,7 @@ switch:
 #### DirecTV
 ######################################################################
       directv_power:
-        friendly_name: "DirecTV"
+        friendly_name: "Direct TV"
         command_on: 'JgBYAMYmKSUWESoRFhIWEhUSKSYoEhYAA9ZkJikmFhIoEhYSFRIWEigmKBIWAAPXZCYpJRYSKBIWEhUSFhIoJigTFQAD12UlKSYVEikSFRIVExUTKCYpEhUADQU='
         command_off: 'JgBYAMYmKSUWEigTFRMVEhUmKSYoJhUAA9dlJigmFRIpEhUSFhIVJigmKSYVAAPXZSUpJhUSKRIVExQTFSYpJigmFQAD12UlKSYWEigSFhIVEhUmKSUpJhUADQU='
 

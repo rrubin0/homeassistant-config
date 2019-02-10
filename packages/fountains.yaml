@@ -44,7 +44,7 @@ automation:
 
     condition:
       - condition: numeric_state
-        entity_id: sensor.pws_wind_mph
+        entity_id: sensor.dark_sky_wind_speed
         below: 10
 
       - condition: state

@@ -19,7 +19,7 @@ homeassistant:
     ## Light
     ################################################
     light.master_bathroom:
-      friendly_name: "Master Bathroom Lights"
+      friendly_name: "Master Bathroom Ceiling"
       icon: mdi:google-circles-communities
 
     light.master_bath_entry:
@@ -29,6 +29,10 @@ homeassistant:
       icon: mdi:white-balance-incandescent
 
     light.master_bathtub:
+      icon: mdi:white-balance-incandescent
+
+    light.master_bath_vanity:
+      friendly_name: "Master Bathroom Vanity"
       icon: mdi:white-balance-incandescent
 
     ################################################
@@ -102,6 +106,24 @@ homeassistant:
 ### Automation
 #####################################################################
 automation:
+  ### mini fridge OFF schedule
+  - alias: Mini Fridge OFF
+    initial_state: 'on'
+    hide_entity: True
+    trigger:
+      - platform: time
+        at: '09:45:00'
+
+    condition:
+      - condition: state
+        entity_id: switch.mini_fridge
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.mini_fridge
+
+
   ### master bath shade schedule weekdays
   - alias: Master Bath Shade Up Weekday
     initial_state: 'on'

@@ -19,8 +19,8 @@ homeassistant:
     ################################################
     ## Switch
     ################################################
-    switch.game_room_lights:
-      friendly_name: "Game Room Lights"
+    switch.game_room_floodlights:
+      friendly_name: "Game Room Floodlights"
       icon: mdi:ceiling-light
 
 

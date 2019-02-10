@@ -16,6 +16,23 @@ homeassistant:
         hidden: true
 
 
+  ################################################
+  ## Customize Global
+  ################################################
+  customize_glob:
+    "sensor.*_amps":
+      icon: mdi:flash-circle
+
+    "sensor.*_watts":
+      icon: mdi:flash-circle
+
+    "sensor.*_kwh":
+      icon: mdi:flash-circle
+
+    "sensor.*_volts":
+      icon: mdi:flash-circle
+
+
     ################################################
     ## Switch - RF. See Broadlink package for more
     ################################################
@@ -29,7 +46,7 @@ homeassistant:
     switch.switch_two:
       friendly_name: "Baby Monitor"
       assumed_state: false
-      icon: mdi:baby-buggy
+      icon: mdi:power-socket-us
 
     ## rf_switch_3
     switch.switch_three:
@@ -39,15 +56,15 @@ homeassistant:
 
     ## rf_switch_4
     switch.switch_four:
-      friendly_name: "Porch Christmas Lights"
+      friendly_name: "Aquarium"
       assumed_state: false
       icon: mdi:power-socket-us
 
     ## rf_switch_5
     switch.switch_five:
-      friendly_name: "Christmas Tree"
+      friendly_name: "Humidifier"
       assumed_state: false
-      icon: mdi:pine-tree
+      icon: mdi:cup-water
 
     ################################################
     ## Switch - TP-LINK HS110
@@ -60,6 +77,10 @@ homeassistant:
       friendly_name: "Outdoor Speakers"
       entity_picture: /local/music.ico
 
+    switch.mini_fridge:
+      friendly_name: "Mini Fridge"
+      icon: mdi:power-socket-us
+
 
 #####################################################################
 ### Switch
@@ -70,9 +91,115 @@ switch:
 
   - platform: tplink
     host: !secret smartplug_host_2
-#
-#  - platform: tplink
-#    host: !secret smartplug_host_3
-#
-#  - platform: tplink
-#    host: !secret smartplug_host_4
+
+  - platform: tplink
+    host: !secret smartplug_host_3
+
+  - platform: tplink
+    host: !secret smartplug_host_4
+
+
+#####################################################################
+### Sensor
+#####################################################################
+sensor:
+## TP-LINK Outlet Usage: Outdoor Speakers
+  - platform: template
+    sensors:
+      outdoor_speakers_amps:
+        friendly_name_template: "{{ states.switch.outdoor_speakers.name}} Current"
+        value_template: '{{ states.switch.outdoor_speakers.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      outdoor_speakers_watts:
+        friendly_name_template: "{{ states.switch.outdoor_speakers.name}} Current Consumption"
+        value_template: '{{ states.switch.outdoor_speakers.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      outdoor_speakers_total_kwh:
+        friendly_name_template: "{{ states.switch.outdoor_speakers.name}} Total Consumption"
+        value_template: '{{ states.switch.outdoor_speakers.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      outdoor_speakers_volts:
+        friendly_name_template: "{{ states.switch.outdoor_speakers.name}} Voltage"
+        value_template: '{{ states.switch.outdoor_speakers.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      outdoor_speakers_today_kwh:
+        friendly_name_template: "{{ states.switch.outdoor_speakers.name}} Today's Consumption"
+        value_template: '{{ states.switch.outdoor_speakers.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+
+## TP-LINK Outlet Usage: Flower Lamp
+  - platform: template
+    sensors:
+      flower_lamp_amps:
+        friendly_name_template: "{{ states.switch.flower_lamp.name}} Current"
+        value_template: '{{ states.switch.flower_lamp.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      flower_lamp_watts:
+        friendly_name_template: "{{ states.switch.flower_lamp.name}} Current Consumption"
+        value_template: '{{ states.switch.flower_lamp.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      flower_lamp_total_kwh:
+        friendly_name_template: "{{ states.switch.flower_lamp.name}} Total Consumption"
+        value_template: '{{ states.switch.flower_lamp.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      flower_lamp_volts:
+        friendly_name_template: "{{ states.switch.flower_lamp.name}} Voltage"
+        value_template: '{{ states.switch.flower_lamp.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+      flower_lamp_today_kwh:
+        friendly_name_template: "{{ states.switch.flower_lamp.name}} Today's Consumption"
+        value_template: '{{ states.switch.flower_lamp.attributes["today_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+
+
+## TP-LINK Outlet Usage: Mini Fridge
+  - platform: template
+    sensors:
+      mini_fridge_amps:
+        friendly_name_template: "{{ states.switch.mini_fridge.name}} Current"
+        value_template: '{{ states.switch.mini_fridge.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      mini_fridge_watts:
+        friendly_name_template: "{{ states.switch.mini_fridge.name}} Current Consumption"
+        value_template: '{{ states.switch.mini_fridge.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      mini_fridge_total_kwh:
+        friendly_name_template: "{{ states.switch.mini_fridge.name}} Total Consumption"
+        value_template: '{{ states.switch.mini_fridge.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      mini_fridge_volts:
+        friendly_name_template: "{{ states.switch.mini_fridge.name}} Voltage"
+        value_template: '{{ states.switch.mini_fridge.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+#      mini_fridge_today_kwh:
+#        friendly_name_template: "{{ states.switch.mini_fridge.name}} Today's Consumption"
+#        value_template: '{{ states.switch.mini_fridge.attributes["today_energy_kwh"] | float }}'
+#        unit_of_measurement: 'kWh'
+
+
+## TP-LINK Outlet Usage: Nursery Lamp
+  - platform: template
+    sensors:
+      nursery_lamp_amps:
+        friendly_name_template: "{{ states.switch.nursery_lamp.name}} Current"
+        value_template: '{{ states.switch.nursery_lamp.attributes["current_a"] | float }}'
+        unit_of_measurement: 'A'
+      nursery_lamp_watts:
+        friendly_name_template: "{{ states.switch.nursery_lamp.name}} Current Consumption"
+        value_template: '{{ states.switch.nursery_lamp.attributes["current_power_w"] | float }}'
+        unit_of_measurement: 'W'
+      nursery_lamp_total_kwh:
+        friendly_name_template: "{{ states.switch.nursery_lamp.name}} Total Consumption"
+        value_template: '{{ states.switch.nursery_lamp.attributes["total_energy_kwh"] | float }}'
+        unit_of_measurement: 'kWh'
+      nursery_lamp_volts:
+        friendly_name_template: "{{ states.switch.nursery_lamp.name}} Voltage"
+        value_template: '{{ states.switch.nursery_lamp.attributes["voltage"] | float }}'
+        unit_of_measurement: 'V'
+#      nursery_lamp_today_kwh:
+#        friendly_name_template: "{{ states.switch.nursery_lamp.name}} Today's Consumption"
+#        value_template: '{{ states.switch.nursery_lamp.attributes["today_energy_kwh"] | float }}'
+#        unit_of_measurement: 'kWh'
+
+

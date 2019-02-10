@@ -179,7 +179,7 @@ automation:
       - service: light.turn_on
         data:
           entity_id: light.foyer_lights_level
-          brightness: 40
+          brightness: 50
 
   ###
   - alias: Minimote 3 Button 1 Long

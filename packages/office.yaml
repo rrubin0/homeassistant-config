@@ -111,7 +111,8 @@ light:
 
 
   ### humidor sensor light
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: "SN1 LED"
     state_topic: "home/sensornode1"
     command_topic: "home/sensornode1/set"

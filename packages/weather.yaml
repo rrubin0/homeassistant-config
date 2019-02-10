@@ -17,14 +17,14 @@ homeassistant:
 
 
     ################################################
-    ## Input Boolean
+    ## Weather - ecobee
     ################################################
     weather.downstairs:
       friendly_name: "Currently"
 
 
     ################################################
-    ## Sensor
+    ## Sensor - Darksky weather
     ################################################
     sensor.dark_sky_humidity:
       friendly_name: "Humidity"
@@ -35,8 +35,10 @@ homeassistant:
       icon: mdi:water
 
     sensor.dark_sky_daily_summary:
-      friendly_name: "Daily Summary"
-      icon: mdi:calendar-clock
+      friendly_name: "Outlook"
+
+    sensor.dark_sky_hourly_summary:
+      friendly_name: "Today"
 
     sensor.dark_sky_pressure:
       friendly_name: "Pressure"
@@ -55,7 +57,7 @@ homeassistant:
       icon: mdi:map-marker-radius
 
     sensor.dark_sky_precip_probability:
-      friendly_name: "Chance Rain"
+      friendly_name: "Chance of Rain"
       icon: mdi:weather-rainy
 
     sensor.dark_sky_precip_intensity:
@@ -80,121 +82,71 @@ homeassistant:
       friendly_name: "Nearest Storm"
       icon: mdi:weather-lightning-rainy
 
-    sensor.pws_weather:
-      friendly_name: "Current Condition"
+    sensor.dark_sky_daytime_high_temperature_0:
+      friendly_name: "Today's High"
 
-    sensor.pws_temp_f:
-      friendly_name: "Temperature"
+    sensor.dark_sky_overnight_low_temperature_0:
+      friendly_name: "Tonight's Low"
 
-    sensor.pws_feelslike_string:
-      friendly_name: "Feels Like"
-      icon: mdi:thermometer
+    ## Tomorrow
+    sensor.dark_sky_summary_1:
+      friendly_name: "Tomorrow"
 
-    sensor.pws_precip_today_string:
-      friendly_name: "Precipitation"
+    sensor.dark_sky_daytime_high_temperature_1:
+      friendly_name: "Tomorrow's High"
+
+    sensor.dark_sky_overnight_low_temperature_1:
+      friendly_name: "Tomorrow's Low"
+
+    sensor.dark_sky_precip_probability_1:
+      friendly_name: "Chance of Rain"
       icon: mdi:weather-rainy
 
-    sensor.pws_wind_string:
+    sensor.dark_sky_wind_speed_1:
       friendly_name: "Wind"
-      icon: mdi:weather-windy
 
-    sensor.pws_heat_index_string:
-      friendly_name: "Heat Index"
-      icon: mdi:weather-sunny
+    sensor.dark_sky_wind_gust_1:
+      friendly_name: "Wind Gusts"
 
-    sensor.pws_relative_humidity:
-      friendly_name: "Humidity"
-      icon: mdi:water-percent
+    ## Day After
+    sensor.dark_sky_summary_2:
+      friendly_name: "Day 2"
 
-    sensor.pws_dewpoint_string:
-      friendly_name: "Dew Point"
-      icon: mdi:water
-
-    sensor.pws_pressure_in:
-      friendly_name: "Pressure Inches"
-      icon: mdi:thermometer-lines
-
-    sensor.pws_pressure_mb:
-      friendly_name: "Pressure Mbar"
-      icon: mdi:nature
-
-    sensor.pws_solarradiation:
-      friendly_name: "Radiation"
-      icon: mdi:radioactive
-
-    sensor.pws_uv:
-      friendly_name: "UV Index"
-      icon: mdi:sunglasses
-
-    sensor.pws_visibility_mi:
-      friendly_name: "Visibility"
-
-    sensor.yw_tomorrow_condition:
-      friendly_name: "Tomorrows Weather"
-
-    sensor.yw_tomorrow_temperature_max:
-      friendly_name: "Tomorrows High"
-      icon: mdi:thermometer
-
-    sensor.yw_tomorrow_temperature_min:
-      friendly_name: "Tomorrows Low"
-      icon: mdi:thermometer
-
-    sensor.yw_day2_condition:
-      friendly_name: "Day 2 Conditions"
-
-    sensor.yw_day2_temperature_max:
+    sensor.dark_sky_daytime_high_temperature_2:
       friendly_name: "Day 2 High"
-      icon: mdi:thermometer
 
-    sensor.yw_day2_temperature_min:
+    sensor.dark_sky_overnight_low_temperature_2:
       friendly_name: "Day 2 Low"
-      icon: mdi:thermometer
 
-    sensor.yw_day3_condition:
-      friendly_name: "Day 3 Conditions"
+    sensor.dark_sky_precip_probability_2:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
 
-    sensor.yw_day3_temperature_max:
+    sensor.dark_sky_wind_speed_2:
+      friendly_name: "Wind"
+
+    sensor.dark_sky_wind_gust_2:
+      friendly_name: "Wind Gusts"
+
+    ## Next Day
+    sensor.dark_sky_summary_3:
+      friendly_name: "Day 3"
+
+    sensor.dark_sky_daytime_high_temperature_3:
       friendly_name: "Day 3 High"
-      icon: mdi:thermometer
 
-    sensor.yw_day3_temperature_min:
+    sensor.dark_sky_overnight_low_temperature_3:
       friendly_name: "Day 3 Low"
-      icon: mdi:thermometer
 
-    sensor.yweather_condition:
-      friendly_name: "Expected Conditions"
+    sensor.dark_sky_precip_probability_3:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
 
-    sensor.yweather_current:
-      friendly_name: "Currently"
+    sensor.dark_sky_wind_speed_3:
+      friendly_name: "Wind"
 
-    sensor.yweather_humidity:
-      friendly_name: "Humidity"
-
-    sensor.yweather_pressure:
-      friendly_name: "Pressure"
-
-    sensor.yweather_temperature:
-      friendly_name: "Temperature"
-      icon: mdi:thermometer
-
-    sensor.yweather_temperature_max:
-      friendly_name: "Todays High"
-      icon: mdi:thermometer
-
-    sensor.yweather_temperature_min:
-      friendly_name: "Todays Low"
-      icon: mdi:thermometer
-
-    sensor.yweather_visibility:
-      friendly_name: "Visibility"
-
-    sensor.yweather_wind_speed:
-      friendly_name: "Wind Speed"
-
-    sensor.pws_alerts:
-      friendly_name: "Weather Alerts"
-      icon: mdi:alert-circle-outline
+    sensor.dark_sky_wind_gust_3:
+      friendly_name: "Wind Gusts"
 
 
 #####################################################################
@@ -229,13 +181,9 @@ input_number:
 
 
 #####################################################################
-### Weather
+### Weather - Darksky
 #####################################################################
 weather:
-### Yahoo Weather
-  - platform: yweather
-    woeid: !secret woeid
-
   - platform: darksky
     api_key: !secret darksky_key
 
@@ -249,11 +197,11 @@ sensor:
       season:
         friendly_name: "Seasonal Condition"
         value_template: >-
-          {% set temperature = states('sensor.yweather_temperature')|float(none) %}
+          {% set temperature = states('sensor.dark_sky_temperature')|float(none) %}
           {% set winter_temp = states.input_number.season_winter.state|default(62)|float %}
           {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
           {% if temperature is none %}
-            {{ states('sensor.yweather_temperature') }}
+            {{ states('sensor.sensor.dark_sky_temperature') }}
           {% elif temperature < winter_temp %}
             Winter
           {% elif temperature > summer_temp %}
@@ -263,94 +211,42 @@ sensor:
           {% endif %}
 
 
-### Weather Alert
-#  - platform: template
-#    sensors:
-#      weather_alert:
-#        friendly_name: "Weather Alert"
-#        value_template: "{{ (states.sensor.pws_alerts.attributes|default({})).Message|default('unknown') }}"
-
-
 ### Moon
   - platform: moon
 
-### Weather Underground
-  - platform: wunderground
-    api_key: !secret wu_api_key
-    monitored_conditions:
-      - weather
-      - alerts
-      - temp_f
-      - station_id
-      - feelslike_f
-      - feelslike_string
-      - heat_index_f
-      - heat_index_string
-      - dewpoint_f
-      - dewpoint_string
-      - wind_mph
-      - UV
-      - pressure_in
-      - pressure_mb
-      - wind_dir
-      - wind_string
-      - relative_humidity
-      - visibility_mi
-      - precip_today_in
-      - precip_today_string
-      - solarradiation
-      - observation_time
 
 ### Darksky
   - platform: darksky
     api_key: !secret forecast_api_key
+    forecast:
+      - 0
+      - 1
+      - 2
+      - 3
+
     monitored_conditions:
+      - summary
+      - icon
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - dew_point
+      - wind_speed
+      - wind_gust
+      - wind_bearing
+      - humidity
+      - pressure
+      - uv_index
       - nearest_storm_distance
       - cloud_cover
       - daily_summary
+      - hourly_summary
       - minutely_summary
-      - precip_intensity
       - precip_probability
-      - precip_intensity_max
-
-### Yahoo Weather Sensor
-  - platform: yweather
-    woeid: !secret woeid
-    monitored_conditions:
-      - weather
-      - weather_current
-      - temp_min
-      - temp_max
-      - wind_speed
-      - pressure
-      - visibility
-      - humidity
-      - temperature
-
-### Yahoo Forecast
-  - platform: yweather
-    forecast: 1
-    name: yw_tomorrow
-    monitored_conditions:
-      - weather
-      - temp_min
-      - temp_max
-
-  - platform: yweather
-    forecast: 2
-    name: yw_day2
-    monitored_conditions:
-      - weather
-      - temp_min
-      - temp_max
-
-  - platform: yweather
-    forecast: 3
-    name: yw_day3
-    monitored_conditions:
-      - weather
-      - temp_min
-      - temp_max
+      - precip_intensity
 
 
 #####################################################################
@@ -366,15 +262,15 @@ automation:
 
     action:
       - service_template: >-
-          {% if is_state('weather.downstairs', 'Rain') %}
+          {% if is_state('sensor.dark_sky_summary', 'Rain') %}
             homeassistant.turn_on
-          {% elif is_state('weather.downstairs', 'Light Rain') %}
+          {% elif is_state('sensor.dark_sky_summary', 'Light Rain') %}
             homeassistant.turn_on
-          {% elif is_state('weather.downstairs', 'Thunderstorm') %}
+          {% elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}
             homeassistant.turn_on
-          {% elif is_state('weather.downstairs', 'Showers') %}
+          {% elif is_state('sensor.dark_sky_summary', 'Showers') %}
             homeassistant.turn_on
-          {% elif is_state('weather.downstairs', 'Drizzle') %}
+          {% elif is_state('sensor.dark_sky_summary', 'Drizzle') %}
             homeassistant.turn_on
           {% else %}
             homeassistant.turn_off

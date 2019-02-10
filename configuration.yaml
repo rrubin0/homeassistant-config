@@ -25,7 +25,10 @@ http:
 #    - !secret network_4
 
   ip_ban_enabled: true
-  login_attempts_threshold: 25
+  login_attempts_threshold: 5
+
+lovelace:
+  mode: yaml
 
 config:
 #discovery:
