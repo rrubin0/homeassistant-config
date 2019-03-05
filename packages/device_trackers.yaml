@@ -273,6 +273,8 @@ automation:
         entity_id: group.all_devices
         from: 'not_home'
         to: 'home'
+        for:
+          minutes: 15
 
     condition:
       - condition: state

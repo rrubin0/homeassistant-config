@@ -5,7 +5,7 @@ views:
 ## Home
 ####################################################################
   - title: Home
-    icon: mdi:account-location
+    icon: mdi:home-heart
     cards:
       - type: custom:monster-card
         show_empty: false
@@ -141,13 +141,20 @@ views:
 
 
       ################################################
-      ## Lights on Downstairs
+      ## Things on Downstairs
       ################################################
       - type: entity-filter
         card:
-          title: "Lights On Downstairs"
+          title: "Things On Downstairs"
           type: entities
         entities:
+          - switch.tv_power
+          - switch.amp_power
+          - switch.directv_power
+          - switch.living_room_fan
+          - switch.master_bedroom_fan
+          - switch.master_bedroom_fan_light
+          - switch.switch_three
           - entity: light.foyer_lights_level
             name: Foyer
           - entity: light.entryway
@@ -186,13 +193,18 @@ views:
 
 
       ################################################
-      ## Lights on Upstairs
+      ## Things on Upstairs
       ################################################
       - type: entity-filter
         card:
-          title: "Lights On Upstairs"
+          title: "Things On Upstairs"
           type: entities
         entities:
+          - switch.mini_fridge
+          - switch.switch_one
+          - switch.switch_two
+          - switch.switch_four
+          - switch.switch_five
           - entity: light.master_bed_entry_level
             name: Master Entry
           - entity: light.master_bed_ceiling_level
@@ -211,6 +223,10 @@ views:
             name: Master Bath Vanity
           - entity: light.nursery_wall_light
             name: Nursery Wall
+          - entity: light.nursery_light
+            name: Nursery Light
+          - entity: fan.nursery_fan
+            name: Nursery Fan
           - entity: switch.nursery_lamp
             name: Nursery Lamp
         state_filter:
@@ -220,19 +236,23 @@ views:
 
       ### EXTERIOR ###
       ################################################
-      ## Lights on Outside
+      ## Things on Outside
       ################################################
       - type: entity-filter
         card:
-          title: "Lights On Outside"
+          title: "Things On Outside"
           type: entities
         entities:
+          - switch.outdoor_speakers
+          - switch.fountains_switch
           - entity: switch.front_porch_lights_switch
             name: Front Porch
           - entity: switch.south_porch_lights_switch
             name: South Porch
           - entity: switch.patio_lights_switch
-            name: Patio
+            name: Patio Lights
+          - entity: fan.patio_fan
+            name: Patio Fan
           - entity: switch.back_yard_outlet
             name: Party Lights
 #          - entity: switch.front_yard_outlet
@@ -249,28 +269,28 @@ views:
       ################################################
       ## Devices In Use
       ################################################
-      - type: entity-filter
-        card:
-          title: "Devices In Use"
-          type: entities
-        entities:
-          - switch.tv_power
-          - switch.amp_power
-          - switch.directv_power
-          - switch.outdoor_speakers
-          - switch.fountains_switch
-          - switch.living_room_fan
-          - switch.master_bedroom_fan
-          - switch.master_bedroom_fan_light
-          - switch.switch_one
-          - switch.switch_two
-          - switch.switch_three
-          - switch.switch_five
-          - switch.mini_fridge
-
-        state_filter:
-          - 'on'
-        show_empty: false
+#      - type: entity-filter
+#        card:
+#          title: "In Use"
+#          type: entities
+#        entities:
+#          - switch.tv_power
+#          - switch.amp_power
+#          - switch.directv_power
+#          - switch.outdoor_speakers
+#          - switch.fountains_switch
+#          - switch.living_room_fan
+#          - switch.master_bedroom_fan
+#          - switch.master_bedroom_fan_light
+#          - switch.switch_one
+#          - switch.switch_two
+#          - switch.switch_three
+#          - switch.switch_five
+#          - switch.mini_fridge
+#
+#        state_filter:
+#          - 'on'
+#        show_empty: false
 
 
       ################################################
@@ -509,13 +529,13 @@ views:
 ## Security
 ####################################################################
   - title: Security
-    icon: mdi:security-home
+    icon: mdi:shield-home
     cards:
       ################################################
       ## Door Locks
       ################################################
       - type: entities
-        title: Door Locks
+        title: Locks
         show_header_toggle: false
         entities:
           - lock.bathroom_entry_locked
@@ -546,7 +566,7 @@ views:
       ## Door Sensors
       ################################################
       - type: entities
-        title: Door Sensors
+        title: Doors
         show_header_toggle: false
         entities:
           - sensor.ring_front_door_last_motion
@@ -557,6 +577,15 @@ views:
           - sensor.office_door_state
           - sensor.bathroom_door_state
           - sensor.kegerator_door_state
+
+      ################################################
+      ## Window Sensors
+      ################################################
+      - type: entities
+        title: Windows
+        show_header_toggle: false
+        entities:
+          - sensor.living_room_north_window_state
 
 
 ####################################################################
@@ -715,6 +744,8 @@ views:
         show_header_toggle: false
         entities:
           - group.nursery_lights
+          - light.nursery_light
+          - fan.nursery_fan
           - light.nursery_wall_light
           - switch.nursery_lamp
           - input_select.nursery_wall_color
@@ -727,6 +758,9 @@ views:
           - script.baby_playlist
           - script.play_white_noise
           - script.stop_playing
+
+      - type: media-control
+        entity: media_player.nursery
 
       ################################################
       ## Master Bedroom
@@ -885,9 +919,9 @@ views:
         show_header_toggle: false
         entities:
           - switch.patio_lights_switch
+          - fan.patio_fan
           - switch.front_yard_outlet
           - switch.back_yard_outlet
-          - switch.switch_four
           - switch.fountains_switch
           - switch.outdoor_speakers
 
@@ -1069,16 +1103,17 @@ views:
       ## Kodi
       ################################################
       - type: media-control
-        entity: media_player.kodi_living_room
+        entity: media_player.apple_tv
+
+#      - type: media-control
+#        entity: media_player.kodi_living_room
 
       - type: media-control
         entity: media_player.living_room
-#
+
 #      - type: media-control
 #        entity: media_player.firetv
 #
-#      - type: media-control
-#        entity: media_player.apple_tv
 
 
 ####################################################################
@@ -1092,6 +1127,7 @@ views:
       ################################################
       - type: entities
         title: HA Status
+        show_header_toggle: false
         entities:
 #          - sensor.date__time
           - sensor.holiday
@@ -1106,6 +1142,7 @@ views:
       ################################################
       - type: entities
         title: Speedtest
+        show_header_toggle: false
         entities:
           - sensor.speedtest_ping
           - sensor.speedtest_download
@@ -1116,6 +1153,7 @@ views:
       ################################################
       - type: entities
         title: Downloads
+        show_header_toggle: false
         entities:
           - sensor.sabnzbd_disk
           - sensor.sabnzbd_disk_free
@@ -1128,6 +1166,7 @@ views:
       ################################################
       - type: entities
         title: Device Status
+        show_header_toggle: false
         entities:
           - sensor.dc_front_door_battery
           - sensor.dc_kitchen_door_battery
@@ -1145,6 +1184,7 @@ views:
       ################################################
       - type: entities
         title: Device Usage
+        show_header_toggle: false
         entities:
           - sensor.mini_fridge_amps
           - sensor.mini_fridge_watts

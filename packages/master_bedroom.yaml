@@ -38,11 +38,6 @@ homeassistant:
       friendly_name: "Master Bedroom Entry Lights"
       icon: mdi:white-balance-incandescent
 
-    ################################################
-    ## Media Player
-    ################################################
-    media_player.kodi_bedroom:
-      friendly_name: "Bedroom Kodi"
 
     ################################################
     ## Script
@@ -52,18 +47,6 @@ homeassistant:
 
     script.master_bedroom_night_time:
       icon: mdi:weather-night
-
-
-#####################################################################
-### Media Player
-#####################################################################
-media_player:
-  - platform: kodi
-    host: !secret kodi_bedroom
-    port: !secret kodi_port
-    name: kodi_bedroom
-    username: !secret kodi_user
-    password: !secret kodi_password
 
 
 #####################################################################

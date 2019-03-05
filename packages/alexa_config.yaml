@@ -2,6 +2,29 @@
 #    @package          :     alexa_config
 #    @description      :     alexa smarthome config for haaska
 ############################################################################
+alexa_media:
+  accounts:
+    - email: !secret amazon_email
+      password: !secret amazon_pswd
+      url: amazon.com
+      include_devices:
+        - "Fire Stick"
+        - "Richard's 3rd Fire"
+        - "Richard's 4th Fire"
+        - "Living Room"
+        - "Game Room"
+        - "Master Bedroom"
+        - FireTV
+        - Nursery
+        - Office
+        - Downstairs
+        - Kitchen
+        - firetv_living_room
+
+
+#####################################################################
+### Alexa Smarthome Integration
+#####################################################################
 alexa:
   smart_home:
     filter:
@@ -79,6 +102,7 @@ alexa:
         - light.master_bedroom_chandelier_level
         - light.master_reading_lamp
         - light.master_sitting_lamp
+        - light.nursery_light
         - light.nursery_wall_light
         - light.office_desk_lamp
         - light.under_bed_lights
@@ -127,6 +151,12 @@ alexa:
         - switch.tv_power
         - switch.wine_room_lamp
         - switch.mini_fridge
+
+      ################################################
+      ## Fans
+      ################################################
+        - fan.patio_fan
+        - fan.nursery_fan
 
       ################################################
       ## Input_Booleans

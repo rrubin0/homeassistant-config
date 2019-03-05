@@ -33,7 +33,6 @@ camera:
     password: !secret camera_password
 
   - platform: ring
-    name: Front Door
 
   - platform: generic
     still_image_url: !secret 10_ramp_url

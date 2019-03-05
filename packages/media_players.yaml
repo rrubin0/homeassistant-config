@@ -1,6 +1,6 @@
 #####################################################################
-#    @package          :     living_room_media
-#    @description      :     living room media players and scenes
+#    @package          :     media_players
+#    @description      :     media players
 #####################################################################
 homeassistant:
   customize:
@@ -22,17 +22,20 @@ homeassistant:
     media_player.kodi_living_room:
       friendly_name: "Living Room Kodi"
 
+    media_player.kodi_bedroom:
+      friendly_name: "Bedroom Kodi"
+
     media_player.apple_tv:
       friendly_name: "Apple TV"
 
 #    media_player.firetv_living_room:
-
 #      friendly_name: "FireTV"
 
 #    media_player.rnmcast:
-
 #      friendly_name: "Chromecast"
 
+#    media_player.kodi_office:
+#      friendly_name: "Office Kodi"
 
     ################################################
     ## Input Select
@@ -55,11 +58,6 @@ homeassistant:
 ### Media Player
 #####################################################################
 media_player:
-  - platform: alexa
-    email: !secret amazon_email
-    password: !secret amazon_pswd
-    url: amazon.com
-
   - platform: kodi
     host: !secret kodi_living_room
     port: !secret kodi_other_port
@@ -67,16 +65,31 @@ media_player:
     username: !secret kodi_user
     password: !secret kodi_password
 
+  - platform: kodi
+    host: !secret kodi_bedroom
+    port: !secret kodi_port
+    name: kodi_bedroom
+    username: !secret kodi_user
+    password: !secret kodi_password
+
   - platform: apple_tv
     host: !secret appletv_host
-    name: apple_tv
     login_id: !secret appletv_login_id
-
+    name: "Apple TV"
+    start_off: false
+    credentials: !secret appletv_creds
 
 #  - platform: firetv
 ##    host: !secret firetv_host
 #    name: FireTV
 #    device: firetv_living_room
+
+#  - platform: kodi
+#    host: !secret kodi_office
+#    port: !secret kodi_port
+#    name: kodi_office
+#    username: !secret kodi_user
+#    password: !secret kodi_password
 
 
 #####################################################################
@@ -92,7 +105,6 @@ input_select:
       - "FireTV"
       - "Chromecast"
 
-
   onkyo_amp_input:
     name: Onkyo Amp Input
     initial: "Select an option..."
@@ -102,81 +114,6 @@ input_select:
       - "Movie"
       - "DVD"
       - "iPod"
-
-
-#####################################################################
-### Scene
-#####################################################################
-scene:
-  - name: Movie Time
-    entities:
-      light.entryway:
-        state: off
-        transition: 5
-
-      light.living_room_lamp:
-        state: off
-        transition: 15
-
-      light.lr_ceiling:
-        state: off
-        transition: 10
-
-
-  - name: Movie Paused
-    entities:
-      light.kitchen_entry:
-        state: on
-        brightness: 50
-        transition: 10
-
-      light.south_entry:
-        state: on
-        brightness: 75
-        transition: 10
-
-      light.center_entry:
-        state: on
-        brightness: 50
-        transition: 10
-
-      light.living_room_lamp:
-        state: on
-        brightness: 75
-        transition: 10
-
-      light.lr_ceiling:
-        state: on
-        brightness: 50
-        transition: 15
-
-
-  - name: Movie Ended
-    entities:
-      light.kitchen_entry:
-        state: on
-        brightness: 160
-        transition: 30
-
-      light.south_entry:
-        state: on
-        brightness: 100
-        transition: 10
-
-      light.center_entry:
-        state: on
-        brightness: 50
-        transition: 10
-
-      light.living_room_lamp:
-        state: on
-        brightness: 200
-        transition: 30
-
-      light.lr_ceiling:
-        state: on
-        brightness: 100
-        transition: 30
 
 
 #####################################################################
@@ -197,12 +134,42 @@ script:
 ### Automation
 #####################################################################
 automation:
-  ### Set Kodi scene when media is playing
-  - alias: Kodi Scene Set
+#  ### Set Kodi scene when media is playing
+#  - alias: Kodi Scene Set
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: media_player.kodi_living_room
+#
+#    condition: 
+#      - condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+#
+#      - condition: state
+#        entity_id: input_boolean.dinner_time
+#        state: 'off'
+#
+#    action:
+#      - service: scene.turn_on
+#        data_template:
+#          entity_id: >-
+#            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
+#              scene.movie_time
+#            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "idle" %}
+#              scene.movie_paused
+#            {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
+#              scene.movie_ended
+#            {% else %}
+#              scene.evening
+#            {% endif %}
+
+  ### Set Lighting scene when media is playing on Apple TV
+  - alias: AppleTV Scene Set
     initial_state: 'on'
     trigger:
       - platform: state
-        entity_id: media_player.kodi_living_room
+        entity_id: media_player.apple_tv
 
     condition: 
       - condition: state
@@ -219,10 +186,6 @@ automation:
           entity_id: >-
             {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
               scene.movie_time
-            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "idle" %}
-              scene.movie_paused
-            {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
-              scene.movie_ended
             {% else %}
               scene.evening
             {% endif %}

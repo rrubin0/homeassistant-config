@@ -81,6 +81,14 @@ homekit:
       - switch.wine_room_lamp
       - switch.mini_fridge
 
+
+#################################
+# Fans - enabled
+#################################
+      - fan.patio_fan
+      - fan.nursery_fan
+
+
 #################################
 # Scripts - enabled
 #################################

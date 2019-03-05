@@ -35,6 +35,7 @@ group:
       - light.master_bed_entry_level
       - light.master_bedroom_chandelier_level
       - light.master_bedroom
+      - light.nursery_light
       - light.nursery_wall_light
       - light.office_desk_lamp
       - light.pantry
@@ -43,6 +44,7 @@ group:
       - group.accent_lights
       - group.game_room_lights
       - switch.nursery_lamp
+      - light.nursery_light
       - switch.downstairs_bath_lights_switch
 
 
@@ -119,6 +121,7 @@ group:
   #####################################################################
   Nursery Lights:
     entities:
+      - light.nursery_light
       - light.nursery_wall_light
       - switch.nursery_lamp
 

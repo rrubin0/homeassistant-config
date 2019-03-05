@@ -22,6 +22,9 @@ homeassistant:
     light.nursery_wall_light:
       icon: mdi:led-on
 
+    light.nursery_light:
+      icon: mdi:white-balance-incandescent
+
 
     ################################################
     ## Switch
@@ -142,6 +145,25 @@ automation:
     action:
       - service: light.turn_off
         entity_id: light.nursery_wall_light
+
+
+  ### Turn off Nursery Fan when it's too cold
+  - alias: Nursery Fan Off
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.nursery_temperature
+        below: 71
+
+    condition:
+      - condition: state
+        entity_id: fan.nursery_fan
+        state: 'on'
+
+    action:
+      - service: fan.turn_off
+        entity_id: fan.nursery_fan
+
 
       # Reset the Input Select to "Select an option..."
       - service: input_select.select_option

@@ -64,6 +64,18 @@ homeassistant:
 
 
 #####################################################################
+### Speedtest
+#####################################################################
+speedtestdotnet:
+  scan_interval:
+    hours: 6
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+
+#####################################################################
 ### Sensor
 #####################################################################
 sensor:
@@ -117,15 +129,6 @@ sensor:
   - platform: uptime
     unit_of_measurement: hours
 
-  ## Speedtest
-  - platform: speedtest
-    minute:
-      - 0
-      - 30
-    monitored_conditions:
-      - ping
-      - download
-      - upload
 
   ## System Resources
   - platform: systemmonitor

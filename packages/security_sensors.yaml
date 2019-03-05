@@ -47,6 +47,10 @@ homeassistant:
       friendly_name: "Bathroom Door Tamper"
       #icon: mdi:home-outline
 
+    sensor.living_room_north_window_tamper:
+      friendly_name: "Living Room N. Window Tamper"
+      #icon: mdi:home-outline
+
     sensor.nursery_ptz_motion_detected:
       friendly_name: "Nursery PTZ Motion"
       icon: mdi:run
@@ -317,6 +321,48 @@ sensor:
           {% endif %}
 
 
+### Living Room North Window Status
+  - platform: template
+    sensors:
+      living_room_north_window_state:
+        value_template: >-
+          {% set state = states('sensor.living_room_north_window') %}
+          {% if state == '22' %}
+            Open
+          {% elif state == '23' %}
+            Closed
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        friendly_name: "Living Room N. Window"
+        icon_template: >-
+          {% set state = states('sensor.living_room_north_window_state')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi: window-closed
+          {% else %}
+            {% if state == 'Open' %}
+              mdi:window-open
+            {% else %}
+              mdi:window-closed
+            {% endif %}
+          {% endif %}
+
+
+### Living Room North Window Tamper
+  - platform: template
+    sensors:
+      living_room_north_window_tamper:
+        value_template: >-
+          {% set state = states('sensor.living_room_north_window_burglar') %}
+          {% if state == '0' %}
+            OK
+          {% elif state == '3' %}
+            Tamper
+          {% else %}
+            {{ state }}
+          {% endif %}
+
+
 ### Kegerator Door Status
   - platform: template
     sensors:
@@ -490,3 +536,23 @@ automation:
       - service: homeassistant.turn_on
         entity_id: input_boolean.all_secure
 
+
+  ### Door Open Event Workaround
+  - alias: Record Door Open Events
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.front_door_contact_access_control
+          - sensor.south_door_contact_access_control
+          - sensor.office_door_contact_access_control
+          - sensor.bathroom_door_contact_access_control
+          - sensor.kitchen_door_access_control
+        to: '22'
+
+    action:
+      - service: logbook.log
+        data_template:
+          name: "{{ trigger.to_state.attributes.friendly_name }}"
+          message: " changed to open."

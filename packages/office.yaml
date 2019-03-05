@@ -23,15 +23,9 @@ homeassistant:
       friendly_name: "Desk Lamp"
       icon: mdi:lamp
 
-    ################################################
-    ## Media Player
-    ################################################
-#    media_player.kodi_office:
-
-#      friendly_name: "Office Kodi"
 
     ################################################
-    ## Sensor Node
+    ## Sensor
     ################################################
     sensor.sn1_humidity:
       friendly_name: "Humidor Humidity"
@@ -53,24 +47,13 @@ homeassistant:
       friendly_name: "Humidor Indicator Light"
       icon: mdi:alarm-light
 
+
     ################################################
     ## Script
     ################################################
     script.desk_lamp:
       friendly_name: "Desk Lamp Test"
       icon: mdi:play-circle
-
-
-#####################################################################
-### Media Player
-#####################################################################
-#media_player:
-#  - platform: kodi
-#    host: !secret kodi_office
-#    port: !secret kodi_port
-#    name: kodi_office
-#    username: !secret kodi_user
-#    password: !secret kodi_password
 
 
 #####################################################################

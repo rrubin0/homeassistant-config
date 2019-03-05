@@ -90,6 +90,8 @@ script:
         - group.interior_lights
         - group.exterior_lights
         - group.outlets
+        - fan.patio_fan
+        - fan.nursery_fan
 
 #    - service: notify.pushbullet
 #      data:
@@ -268,7 +270,9 @@ script:
         minutes: 3
 
     - service: homeassistant.turn_off
-      entity_id: group.interior_lights
+      entity_id:
+        - group.interior_lights
+        - fan.patio_fan
 
     - delay:
         minutes: 2

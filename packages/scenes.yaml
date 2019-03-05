@@ -93,10 +93,10 @@ scene:
 
   - name: Bright
     entities:
-      light.foyer_lights_level:
-        state: on
-        brightness: 255
-        transition: 5
+#      light.foyer_lights_level:
+#        state: on
+#        brightness: 255
+#        transition: 5
 
       group.entry_lights:
         state: on
@@ -113,9 +113,9 @@ scene:
         brightness: 255
         transition: 5
 
-      light.kitchen_lights_level:
-        state: on
-        brightness: 255
+#      light.kitchen_lights_level:
+#        state: on
+#        brightness: 255
 
 
   - name: Evening
@@ -177,33 +177,70 @@ scene:
     entities:
       light.foyer_lights_level:
         state: on
-        brightness: 255
+        brightness: 250
+        transition: 30
+
+      light.entryway:
+        state: on
+        brightness: 90
+        transition: 15
+
+      light.living_room:
+        state: on
+        brightness: 200
+        transition: 15
+
+
+  - name: Movie Time
+    entities:
+      light.entryway:
+        state: off
         transition: 5
 
-      light.kitchen_entry:
+      light.living_room:
+        state: off
+        transition: 15
+
+      light.foyer_lights_level:
         state: on
-        brightness: 90
+        brightness: 20
         transition: 10
 
-      light.south_entry:
-        state: on
-        brightness: 90
-        transition: 10
 
-      light.center_entry:
+  - name: Movie Paused
+    entities:
+      light.entryway:
         state: on
-        brightness: 90
-        transition: 10
+        brightness: 50
+        transition: 5
 
       light.living_room_lamp:
         state: on
-        brightness: 254
-        transition: 30
+        brightness: 75
+        transition: 10
 
       light.lr_ceiling:
         state: on
-        brightness: 75
+        brightness: 50
+        transition: 15
+
+
+  - name: Movie Ended
+    entities:
+      light.entryway:
+        state: on
+        brightness: 180
+        transition: 30
+
+      light.living_room_lamp:
+        state: on
+        brightness: 225
         transition: 10
+
+      light.lr_ceiling:
+        state: on
+        brightness: 100
+        transition: 30
 
 
 #####################################################################

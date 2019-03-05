@@ -27,11 +27,15 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 5
 
+system_health:
+
 lovelace:
   mode: yaml
 
 config:
-#discovery:
+discovery:
+  ignore:
+    - directv
 
 sun:
 history:

@@ -3,14 +3,21 @@
 #####################################################################
 recorder:
 #  db_url: !secret recorder_db_url
-  purge_interval: 1
-  purge_keep_days: 7
+  purge_interval: 10
+  purge_keep_days: 14
   exclude:
     domains:
       - camera
       - media_player
       - notify
       - automation
+      - weblink
+      - updater
+      - input_boolean
+      - input_number
+      - input_select
+      - weather
+      - zone
 
     entities:
       - automation.rain_sensor

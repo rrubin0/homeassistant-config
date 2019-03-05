@@ -33,16 +33,16 @@ homeassistant:
 #####################################################################
 automation:
 ### Turn on the pantry light when door opens
-  - alias: Pantry Light Toggle
+  - alias: Pantry Light On
     initial_state: 'on'
     trigger:
       - platform: state
         entity_id: binary_sensor.pantry_door_contact
-#        from: 'off'
-#        to: 'on'
+        from: 'off'
+        to: 'on'
 
     action:
-      - service: light.toggle
+      - service: light.turn_on
         data:
           entity_id: light.pantry
 
@@ -55,13 +55,6 @@ automation:
         entity_id: binary_sensor.pantry_door_contact
         from: 'on'
         to: 'off'
-        for:
-          seconds: 15
-
-    condition:
-      - condition: state
-        entity_id: light.pantry
-        state: 'on'
 
     action:
       - service: light.turn_off
