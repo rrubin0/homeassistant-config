@@ -15,6 +15,7 @@ I run Home Assistant in a Docker Container on a re-purposed [ASUS Chromebox M004
 * [Influxdb](https://www.influxdb.com)
 * [Grafana](https://grafana.com)
 * [HA Dockermon](https://github.com/philhawthorne/ha-dockermon)
+* [ESP Home] (https://esphome.io/)
 
 
 **My Docker Compose File**
@@ -49,7 +50,7 @@ services:
       - TZ=America/Phoenix
     ports:
       - 3000:3000
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - /home/hauser/grafana:/var/lib/grafana
 
@@ -68,7 +69,7 @@ services:
     ports:
       - 8083:8083
       - 8086:8086
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - /home/hauser/influxdb:/var/lib/influxdb
 
@@ -84,7 +85,7 @@ services:
       mqtt:
         condition: service_started
     healthcheck:
-      test: ["CMD", "curl", "-f", "https://my-fqdn.com:8123"]
+      test: ["CMD", "curl", "-f", "https://hassio.rrubino.com:8123"]
       interval: 30s
       timeout: 10s
       retries: 6
@@ -113,7 +114,7 @@ services:
   ha-dockermon:
     image: philhawthorne/ha-dockermon
     container_name: "ha-dockermon"
-    restart: always
+    restart: unless-stopped
     ports:
       - 8126:8126
     volumes:
@@ -124,7 +125,7 @@ services:
   portainer:
     image: portainer/portainer
     container_name: "portainer"
-    restart: on-failure
+    restart: unless-stopped
     network_mode: "host"
     ports:
       - 9000:9000
@@ -133,7 +134,66 @@ services:
       -  /home/hauser/portainer:/data
 
 
+  esphomeyaml:
+    command: config/ dashboard
+    image: ottowinter/esphomeyaml
+    container_name: "esphomeyaml"
+    restart: unless-stopped
+    network_mode: "host"
+    ports:
+      - 6052:6052
+      - 6123:6123
+    volumes:
+      -  /home/hauser/esphome_data:/config
+
+
+########################
+### RESERVED FUTURE ###
+########################
+#  unifi:
+#    image: jacobalberty/unifi:latest
+#    container_name: "unifi"
+#    restart: always
+#    volumes:
+#      - ./unifi/data:/unifi/data
+#    ports:
+#      - 3478:3478/udp
+#      - 10001:10001/udp
+#      - 6789:6789/tcp
+#      - 8080:8080/tcp
+#      - 8880:8880/tcp
+#      - 8443:8443/tcp
+#      - 8843:8843/tcp
+#    environment:
+#      - TZ=America/Phoenix
+#    network_mode: "host"
+
+
+#  watchtower:
+#    image: v2tec/watchtower
+#    container_name: "watchtower"
+#    command: watchtower grafana ha-dockermon portainer dasher --cleanup --interval 30
+#    restart: unless-stopped
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      #- ./watchtower/config.json:/config.json:ro
+
+
+#################################
+### EXPLORE to see if better ...
+#################################
+#  dasher_ccostan (unused):
+#    image: clemenstyp/dasher-docker:latest
+#    container_name: "dasher"
+#    restart: always
+#    depends_on:
+#      homebridge:
+#        condition: service_started
+#    volumes:
+#      - ./dasher/config:/root/dasher/config
+#    network_mode: "host"
 ```
+
 
 * Other 3rd-party component (non-docker): [Haaska](https://github.com/mike-grant/haaska)
 

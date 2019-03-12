@@ -1,5 +1,5 @@
 #####################################################################
-### Camera
+### Camera - Generic
 #####################################################################
 camera:
   - platform: generic
@@ -13,8 +13,6 @@ camera:
     name: North Gate
     username: !secret camera_user
     password: !secret camera_password
-
-  - platform: ring
 
   - platform: generic
     still_image_url: !secret 10_ramp_url
