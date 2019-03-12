@@ -1,5 +1,6 @@
 *
 !reference
+!packages
 !*.yaml
 !*.md
 !.gitignore
