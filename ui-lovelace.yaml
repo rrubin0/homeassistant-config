@@ -205,6 +205,7 @@ views:
           - switch.switch_two
           - switch.switch_four
           - switch.switch_five
+          - switch.master_bedroom_fan
           - entity: light.master_bed_entry_level
             name: Master Entry
           - entity: light.master_bed_ceiling_level
@@ -225,10 +226,11 @@ views:
             name: Nursery Wall
           - entity: light.nursery_light
             name: Nursery Light
-          - entity: fan.nursery_fan
-            name: Nursery Fan
           - entity: switch.nursery_lamp
             name: Nursery Lamp
+          - entity: fan.nursery_fan
+            name: Nursery Fan
+
         state_filter:
           - 'on'
         show_empty: false
@@ -261,6 +263,7 @@ views:
             name: Pool
 #          - entity: switch.switch_four
 #            name: Porch Christmas Lights
+
         state_filter:
           - 'on'
         show_empty: false
@@ -576,6 +579,7 @@ views:
           - sensor.kitchen_door_state
           - sensor.office_door_state
           - sensor.bathroom_door_state
+          - sensor.guest_room_balcony_door_state
           - sensor.kegerator_door_state
 
       ################################################
@@ -586,6 +590,7 @@ views:
         show_header_toggle: false
         entities:
           - sensor.living_room_north_window_state
+          - sensor.guest_room_window_state
 
 
 ####################################################################
@@ -833,6 +838,7 @@ views:
           - scene.evening
           - scene.bright
           - scene.morning
+          - scene.game_time
           - input_boolean.dinner_time
           - scene.movie_time
           - script.nap_time
@@ -1161,22 +1167,36 @@ views:
           - sensor.sabnzbd_speed
           - sensor.sabnzbd_status
 
+#      ################################################
+#      ## Device Status
+#      ################################################
+#      - type: entities
+#        title: Device Status
+#        show_header_toggle: false
+#        entities:
+#          - sensor.dc_front_door_battery
+#          - sensor.dc_kitchen_door_battery
+#          - sensor.lock_south_battery
+#          - sensor.dc_south_door_battery
+#          - sensor.dc_office_door_battery
+#          - sensor.lock_beach_battery
+#          - sensor.dc_bathroom_battery
+#          - sensor.entry_multisensor_battery
+#          - sensor.ws_living_room_north_window_battery
+#          - sensor.downstairs_ac_leak_detector_battery
+
       ################################################
-      ## Device Status
+      ## Battery Levels
       ################################################
-      - type: entities
-        title: Device Status
-        show_header_toggle: false
-        entities:
-          - sensor.dc_front_door_battery
-          - sensor.dc_kitchen_door_battery
-          - sensor.lock_south_battery
-          - sensor.dc_south_door_battery
-          - sensor.dc_office_door_battery
-          - sensor.lock_beach_battery
-          - sensor.dc_bathroom_battery
-          - sensor.entry_multisensor_battery
-          - sensor.downstairs_ac_leak_detector_battery
+      - type: custom:monster-card
+        card:
+          type: entities
+          title: Battery Levels
+          show_header_toggle: false
+        filter:
+          include:
+            - entity_id: "sensor.*_battery"
+        show_empty: false
 
 
       ################################################

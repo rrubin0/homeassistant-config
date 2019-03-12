@@ -3,8 +3,21 @@
 You can use this code to quickly create files from the template editor in HA.  I use it mainly for `emulated_hue` and to quickly add in new Customize options to all things HA!
 
 
-For the sandbox. 
-{% set trigger = {'entity_id':'sensor.downstairs_thermostat_hvac_state','to_state':'cooling'} %}
+### Quickly List all entities which support an "all" group and sort them for use in a list 
+{{ states.group.all_lights.attributes.entity_id }}
+{%- for light in states.group.all_lights.attributes.entity_id %}
+   {{ light }}
+{% endfor %}
+
+
+
+### Quickly List all entities of a particular type
+{% for state in states.binary_sensor -%} {% if loop.first %} {% elif loop.last %} {% else %} {% endif %} 
+{{- state.entity_id }}
+{% endfor -%}
+
+
+
 
 #########################################################
 Create fast Customize for groups, sensors, covers etc...

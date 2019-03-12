@@ -20,9 +20,6 @@ http:
 
   trusted_networks:
     - !secret network_1
-#    - !secret network_2
-#    - !secret network_3
-#    - !secret network_4
 
   ip_ban_enabled: true
   login_attempts_threshold: 5
@@ -41,4 +38,3 @@ sun:
 history:
 
 #python_script:
-group: !include groups.yaml
