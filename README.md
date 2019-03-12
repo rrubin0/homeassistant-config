@@ -15,7 +15,7 @@ I run Home Assistant in a Docker Container on a re-purposed [ASUS Chromebox M004
 * [Influxdb](https://www.influxdb.com)
 * [Grafana](https://grafana.com)
 * [HA Dockermon](https://github.com/philhawthorne/ha-dockermon)
-* [ESP Home] (https://esphome.io/)
+* [ESP Home](https://esphome.io/)
 
 
 **My Docker Compose File**
