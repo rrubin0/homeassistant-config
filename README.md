@@ -195,7 +195,7 @@ services:
 ```
 
 
-** Other 3rd-party component **
+**Other 3rd-party component**
 [Haaska](https://github.com/mike-grant/haaska) (Alexa Lambda Function)
 
 **Approach**
