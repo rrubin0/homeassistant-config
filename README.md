@@ -195,7 +195,8 @@ services:
 ```
 
 
-* Other 3rd-party component (non-docker): [Haaska](https://github.com/mike-grant/haaska)
+** Other 3rd-party component **
+[Haaska](https://github.com/mike-grant/haaska) (Alexa Lambda Function)
 
 **Approach**
 My primary control method is Z-Wave. I chose Z-Wave for its performance and fit, but also have adjusted per use case. 
