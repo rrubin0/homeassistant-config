@@ -1,0 +1,65 @@
+#####################################################################
+#   Downstairs Climate Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+
+    sensor.ds_avg_temp:
+      icon: mdi:chart-areaspline
+
+    sensor.ds_climate_current_temp:
+      icon: mdi:thermometer
+
+    sensor.ds_fan_state:
+      icon: mdi:fan
+
+    sensor.downstairs_humidity:
+      icon: mdi:water-percent
+
+    sensor.ds_climate_mode:
+      icon: mdi:thermostat
+
+    sensor.ds_climate_hold:
+      icon: mdi:thermostat
+
+    sensor.ds_climate_away:
+      icon: mdi:thermostat
+
+    sensor.ds_climate_target_low:
+      icon: mdi:thermometer
+
+    sensor.ds_climate_target_high:
+      icon: mdi:thermometer
+
+    sensor.front_entry_fibaro_multisensor_temperature:
+      friendly_name: "Front Entry Temperature"
+      icon: mdi:thermometer
+
+    sensor.broadlink_sensor_temperature:
+      friendly_name: "Stairway Temperature"
+      icon: mdi:thermometer
+
+    ### Office ###
+    sensor.sn1_humidity:
+      friendly_name: "Humidor Humidity"
+      icon: mdi:water-percent
+
+    sensor.sn1_temperature:
+      friendly_name: "Humidor Temperature"
+      icon: mdi:thermometer
+
+    sensor.sn1_pir:
+      friendly_name: "Humidor Motion"
+      icon: mdi:run
+
+    sensor.sn1_ldr:
+      friendly_name: "Humidor Light Sensor"
+      icon: mdi:white-balance-sunny
+
+    light.sn1_led:
+      friendly_name: "Humidor Indicator Light"
+      icon: mdi:alarm-light
+
+    sensor.rachio_status:
+      friendly_name: "Rachio Status"
+      entity_picture: /local/rachio.png

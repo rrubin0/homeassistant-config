@@ -1,0 +1,36 @@
+#####################################################################
+### Locks - Automations
+#####################################################################
+automation:
+  ### Unlock door when Megs arrives
+  - alias: South Door Unlock On Arrival
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: device_tracker.mip8
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: template
+        value_template: "{{ is_state('lock.south_entry_locked', 'locked') or false }}"
+# "{{(states.device_tracker.mip8.attributes|default({})).source_type|default('unknown') }}"
+
+    action:
+      - service: script.unlock_megs
+
+
+  ### notify if unlocked by code
+  - alias: South Door Unlock By User
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: sensor.south_entry_alarm_type
+      to: '19'
+
+    action:
+      - service: notify.notify
+        data:
+          title: "Door Unlocked"
+          message: "South Door {{ states.sensor.lock_south_door_status.state }}"

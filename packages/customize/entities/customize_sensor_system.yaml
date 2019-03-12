@@ -1,0 +1,43 @@
+#####################################################################
+#   System Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.speedtest_ping:
+      friendly_name: "Ping"
+      icon: mdi:clock
+
+    sensor.speedtest_download:
+      friendly_name: "Download"
+      icon: mdi:arrow-down
+
+    sensor.speedtest_upload:
+      friendly_name: "Upload"
+      icon: mdi:arrow-up
+
+    sensor.sabnzbd_disk:
+      friendly_name: "Total Storage"
+      icon: mdi:harddisk
+
+    sensor.sabnzbd_disk_free:
+      friendly_name: "Storage Remaining"
+      icon: mdi:chart-pie
+
+    sensor.sabnzbd_queue:
+      friendly_name: "Queued for Download"
+      icon: mdi:clipboard-arrow-down
+
+    sensor.sabnzbd_speed:
+      friendly_name: "DL Speed"
+      icon: mdi:speedometer
+
+    sensor.sabnzbd_status:
+      friendly_name: "Current State"
+      icon: mdi:check
+
+    sensor.uptime:
+      friendly_name: "System Uptime"
+      icon: mdi:clock
+
+    sensor.holiday:
+      icon: mdi:calendar-check

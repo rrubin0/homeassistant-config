@@ -1,0 +1,131 @@
+#####################################################################
+#   Weather Customizations
+#####################################################################
+homeassistant:
+  customize:
+    weather.downstairs:
+      friendly_name: "Currently"
+
+
+    ### Weather Sensors ###
+    sensor.dark_sky_humidity:
+      friendly_name: "Humidity"
+      icon: mdi:water-percent
+
+    sensor.dark_sky_dew_point:
+      friendly_name: "Dew Point"
+      icon: mdi:water
+
+    sensor.dark_sky_daily_summary:
+      friendly_name: "Outlook"
+
+    sensor.dark_sky_hourly_summary:
+      friendly_name: "Today"
+
+    sensor.dark_sky_pressure:
+      friendly_name: "Pressure"
+      icon: mdi:nature
+
+    sensor.dark_sky_temperature:
+      friendly_name: "Temperature"
+      icon: mdi:thermometer
+
+    sensor.dark_sky_wind_speed:
+      friendly_name: "Wind Speed"
+      icon: mdi:weather-windy
+
+    sensor.dark_sky_summary:
+      friendly_name: "Current Conditions"
+      icon: mdi:map-marker-radius
+
+    sensor.dark_sky_precip_probability:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_precip_intensity:
+      friendly_name: "Predicted Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_visibility:
+      friendly_name: "Visibility"
+
+    sensor.dark_sky_cloud_coverage:
+      friendly_name: "Cloud Cover"
+      icon: mdi:weather-partlycloudy
+
+    sensor.dark_sky_wind_bearing:
+      friendly_name: "Wind Bearing"
+      icon: mdi:compass
+
+    sensor.dark_sky_apparent_temperature:
+      friendly_name: "Feels Like"
+
+    sensor.dark_sky_nearest_storm_distance:
+      friendly_name: "Nearest Storm"
+      icon: mdi:weather-lightning-rainy
+
+    sensor.dark_sky_daytime_high_temperature_0:
+      friendly_name: "Today's High"
+
+    sensor.dark_sky_overnight_low_temperature_0:
+      friendly_name: "Tonight's Low"
+
+    ## Tomorrow
+    sensor.dark_sky_summary_1:
+      friendly_name: "Tomorrow"
+
+    sensor.dark_sky_daytime_high_temperature_1:
+      friendly_name: "Tomorrow's High"
+
+    sensor.dark_sky_overnight_low_temperature_1:
+      friendly_name: "Tomorrow's Low"
+
+    sensor.dark_sky_precip_probability_1:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_wind_speed_1:
+      friendly_name: "Wind"
+
+    sensor.dark_sky_wind_gust_1:
+      friendly_name: "Wind Gusts"
+
+    ## Day After
+    sensor.dark_sky_summary_2:
+      friendly_name: "Day 2"
+
+    sensor.dark_sky_daytime_high_temperature_2:
+      friendly_name: "Day 2 High"
+
+    sensor.dark_sky_overnight_low_temperature_2:
+      friendly_name: "Day 2 Low"
+
+    sensor.dark_sky_precip_probability_2:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_wind_speed_2:
+      friendly_name: "Wind"
+
+    sensor.dark_sky_wind_gust_2:
+      friendly_name: "Wind Gusts"
+
+    ## Next Day
+    sensor.dark_sky_summary_3:
+      friendly_name: "Day 3"
+
+    sensor.dark_sky_daytime_high_temperature_3:
+      friendly_name: "Day 3 High"
+
+    sensor.dark_sky_overnight_low_temperature_3:
+      friendly_name: "Day 3 Low"
+
+    sensor.dark_sky_precip_probability_3:
+      friendly_name: "Chance of Rain"
+      icon: mdi:weather-rainy
+
+    sensor.dark_sky_wind_speed_3:
+      friendly_name: "Wind"
+
+    sensor.dark_sky_wind_gust_3:
+      friendly_name: "Wind Gusts"

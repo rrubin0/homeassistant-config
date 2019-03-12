@@ -1,0 +1,8 @@
+#####################################################################
+### Media Player - FireTV
+#####################################################################
+#media_player:
+#  - platform: firetv
+##    host: !secret firetv_host
+#    name: FireTV
+#    device: firetv_living_room

@@ -1,0 +1,20 @@
+#####################################################################
+### SCENES
+#####################################################################
+scene:
+  - name: Movie Ended
+    entities:
+      light.entryway:
+        state: on
+        brightness: 180
+        transition: 30
+
+      light.living_room_lamp:
+        state: on
+        brightness: 225
+        transition: 10
+
+      light.lr_ceiling:
+        state: on
+        brightness: 100
+        transition: 30

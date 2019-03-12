@@ -1,0 +1,12 @@
+################################################
+## Automation - wait for z-wave network
+################################################
+automation:
+  - alias: "Start HomeKit"
+    trigger:
+      - platform: event
+        event_type: zwave.network_ready
+
+    action:
+#      - delay: 00:05
+      - service: homekit.start

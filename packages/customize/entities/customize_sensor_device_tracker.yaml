@@ -1,0 +1,35 @@
+#####################################################################
+#   Device Tracker Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+
+    sensor.ricks_office_commute:
+      friendly_name: "Ricks Commute to Work"
+      icon: mdi:car
+
+    sensor.ricks_home_commute:
+      friendly_name: "Ricks Commute Home"
+      icon: mdi:car
+
+    sensor.megs_work_commute:
+      friendly_name: "Megs Commute to Work"
+      icon: mdi:car
+
+    sensor.megs_home_commute:
+      friendly_name: "Megs Commute Home"
+      icon: mdi:car
+
+    sensor.ricks_eta_home:
+      friendly_name: "Ricks ETA"
+      icon: mdi:timer
+
+    sensor.ricks_eta:
+      icon: mdi:timer
+
+    sensor.megs_eta_home:
+      friendly_name: "Megs ETA"
+      icon: mdi:timer
+
+    sensor.megs_eta:
+      icon: mdi:timer

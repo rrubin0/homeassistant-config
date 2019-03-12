@@ -1,0 +1,10 @@
+################################################################
+## Device Tracker - DDWRT Router
+################################################################
+device_tracker:
+  - platform: ddwrt
+    host: !secret router_ip
+    username: !secret router_user
+    password: !secret router_pass
+    track_new_devices: no
+    consider_home: 180

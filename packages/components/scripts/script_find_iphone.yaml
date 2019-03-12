@@ -1,0 +1,8 @@
+#####################################################################
+###  Find My iPhone
+#####################################################################
+script:
+  find_iphone:
+    alias: "Find My iPhone"
+    sequence:
+    - service: device_tracker.icloud_lost_iphone

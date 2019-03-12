@@ -1,0 +1,42 @@
+#####################################################################
+### Accent Lights
+#####################################################################
+switch:
+  ### Sonoff wifi switches
+  - platform: mqtt
+    name: "Staircase Lamp"
+    command_topic: "cmnd/sonoff0/power"
+    state_topic: "stat/sonoff0/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+  - platform: mqtt
+    name: "Wine Room Lamp"
+    command_topic: "cmnd/sonoff1/power"
+    state_topic: "stat/sonoff1/POWER"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    retain: true
+
+
+#  ### Future Sonoff wifi switches
+#  - platform: mqtt
+#    name: "Third Strip Cord"
+#    command_topic: "cmnd/sonoff2/power"
+#    state_topic: "stat/sonoff2/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true
+#
+#  - platform: mqtt
+#    name: "Fourth Strip Cord"
+#    command_topic: "cmnd/sonoff3/power"
+#    state_topic: "stat/sonoff3/POWER"
+#    qos: 1
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    retain: true

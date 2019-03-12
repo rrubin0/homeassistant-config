@@ -1,0 +1,40 @@
+#####################################################################
+### Automation for my timers
+#####################################################################
+automation:
+  ### Bedtime Timer Finish
+  - alias: Bedtime Timer Finish
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.bedtime
+
+    action:
+      - service: script.bedtime
+
+
+  ### Bedtime Timer Reset
+  - alias: Bedtime Timer Reset
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_entry_fibaro_multisensor
+        to: 'on'
+
+    condition:
+      - condition: template
+        value_template: "{{ states('timer.bedtime') != 'idle'}}"
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.bedtime
+
+      - delay:
+          seconds: 30
+    ### reset the timer after short delay
+      - service: timer.start
+        entity_id: timer.bedtime

@@ -1,0 +1,31 @@
+#####################################################################
+### Home Assistant System Sensors
+#####################################################################
+sensor:
+  ## Home Assistant - Current Version
+  - platform: command_line
+    name: HA Current Version
+    command: python3 -c "import requests; print(requests.get('https://pypi.python.org/pypi/homeassistant/json').json()['info']['version'])"
+
+  ## Home Assistant - Last Restart
+  - platform: template
+    sensors:
+      ha_last_restart:
+        friendly_name: "HA Last Restart"
+        value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
+        entity_id: sensor.time
+
+
+  ## Uptime
+  - platform: uptime
+    unit_of_measurement: hours
+
+
+  ## System Resources
+  - platform: systemmonitor
+    resources:
+      - type: disk_free
+        arg: /home
+      - type: memory_free
+      - type: processor_use
+      - type: last_boot

@@ -1,0 +1,119 @@
+  ################################################
+  ## Customize Lights
+  ################################################
+homeassistant:
+  customize:
+    light.kitchen_lights_level:
+      friendly_name: "Kitchen Lights"
+      icon: mdi:white-balance-incandescent
+
+    light.dining_room_chandelier_level:
+      friendly_name: "Dining Room Light"
+      icon: mdi:ceiling-light
+
+    light.living_room_lamp:
+      icon: mdi:lamp
+
+    light.south_entry:
+      icon: mdi:white-balance-incandescent
+
+    light.entryway:
+      friendly_name: "Entryway Lights"
+      icon: mdi:google-circles-communities
+
+    light.kitchen_entry:
+      icon: mdi:white-balance-incandescent
+
+    light.center_entry:
+      icon: mdi:white-balance-incandescent
+
+    light.lr_ceiling:
+      friendly_name: "Living Room Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.northeast_ceiling:
+      icon: mdi:white-balance-incandescent
+
+    light.northwest_ceiling:
+      icon: mdi:white-balance-incandescent
+
+    light.southeast_ceiling:
+      icon: mdi:white-balance-incandescent
+
+    light.southwest_ceiling:
+      icon: mdi:white-balance-incandescent
+
+    light.foyer_lights_level:
+      friendly_name: "Foyer Lights"
+      icon: mdi:ceiling-light
+
+    light.master_bathroom:
+      friendly_name: "Master Bathroom Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.master_bath_entry:
+      icon: mdi:white-balance-incandescent
+
+    light.master_bath_sink:
+      icon: mdi:white-balance-incandescent
+
+    light.master_bathtub:
+      icon: mdi:white-balance-incandescent
+
+    light.master_bath_vanity:
+      friendly_name: "Master Bathroom Vanity"
+      icon: mdi:white-balance-incandescent
+
+    light.under_bed_lights:
+      friendly_name: "Bedframe Lights"
+      icon: mdi:led-on
+
+    light.master_bedroom_chandelier_level:
+      friendly_name: "Master Bedroom Chandelier"
+      icon: mdi:ceiling-light
+
+    light.master_sitting_lamp:
+      friendly_name: "Master Bedroom Sitting Lamp"
+      icon: mdi:lamp
+
+    light.master_reading_lamp:
+      friendly_name: "Master Bedroom Reading Lamp"
+      icon: mdi:lamp
+
+    light.master_bed_ceiling_level:
+      friendly_name: "Master Bedroom Ceiling Lights"
+      icon: mdi:white-balance-incandescent
+
+    light.master_bed_entry_level:
+      friendly_name: "Master Bedroom Entry Lights"
+      icon: mdi:white-balance-incandescent
+
+    light.nursery_wall_light:
+      icon: mdi:led-on
+
+    light.nursery_light:
+      icon: mdi:white-balance-incandescent
+
+    light.office_desk_lamp:
+      friendly_name: "Desk Lamp"
+      icon: mdi:lamp
+
+    light.wine_room:
+      friendly_name: "Wine Room Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.northeast_wine:
+      icon: mdi:white-balance-incandescent
+
+    light.northwest_wine:
+      icon: mdi:white-balance-incandescent
+
+    light.southeast_wine:
+      icon: mdi:white-balance-incandescent
+
+    light.southwest_wine:
+      icon: mdi:white-balance-incandescent
+
+    light.gateway_light_7811dcb7da52:
+      friendly_name: "Alert Light"
+

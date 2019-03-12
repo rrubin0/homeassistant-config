@@ -1,0 +1,64 @@
+#####################################################################
+### Fountain Automation: this controls the fountains by the pool
+#####################################################################
+automation:
+  ### Turn on the fountains at sunrise
+  # disabled
+  - alias: Fountains On
+    initial_state: 'off'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '01:30:00'
+
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.dark_sky_wind_speed
+        below: 10
+
+      - condition: state
+        entity_id: input_boolean.rain
+        state: 'off'
+
+      - condition: sun
+        before: sunset
+
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.fountains_switch
+
+
+### Turn off the fountains at sunset
+  - alias: Fountains Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:05:00'
+
+      - platform: state
+        entity_id: input_boolean.rain
+        from: 'off'
+        to: 'on'
+        for:
+          minutes: 5
+
+    condition:
+      - condition: state
+        entity_id: switch.fountains_switch
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.fountains_switch

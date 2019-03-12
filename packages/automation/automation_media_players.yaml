@@ -1,0 +1,106 @@
+#####################################################################
+### Automations for Media Players
+#####################################################################
+automation:
+#  ### This automation works, but I switched to AppleTV for now
+#  ### Set Kodi scene when media is playing
+#  - alias: Kodi Scene Set
+#    initial_state: 'on'
+#    trigger:
+#      - platform: state
+#        entity_id: media_player.kodi_living_room
+#
+#    condition: 
+#      - condition: state
+#        entity_id: sun.sun
+#        state: 'below_horizon'
+#
+#      - condition: state
+#        entity_id: input_boolean.dinner_time
+#        state: 'off'
+#
+#    action:
+#      - service: scene.turn_on
+#        data_template:
+#          entity_id: >-
+#            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
+#              scene.movie_time
+#            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "idle" %}
+#              scene.movie_paused
+#            {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
+#              scene.movie_ended
+#            {% else %}
+#              scene.evening
+#            {% endif %}
+
+  ### Set Lighting scene when media is playing on Apple TV
+  - alias: AppleTV Scene Set
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.apple_tv
+
+    condition: 
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+      - condition: state
+        entity_id: input_boolean.dinner_time
+        state: 'off'
+
+    action:
+      - service: scene.turn_on
+        data_template:
+          entity_id: >-
+            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
+              scene.movie_time
+            {% else %}
+              scene.evening
+            {% endif %}
+
+  ### Living Room TV Input Select
+  - alias: Living Room TV Select Input
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.living_room_tv_input
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.tv_input_{{ trigger.to_state.state|lower }}"
+
+# Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  ### Living Room Onkyo Input Select
+  - alias: Living Room Amp Input Select
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.onkyo_amp_input
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.amp_input_{{ trigger.to_state.state|lower }}"
+
+# Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

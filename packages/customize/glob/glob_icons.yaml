@@ -1,0 +1,25 @@
+  ################################################
+  ## Customize Global Icons
+  ################################################
+homeassistant:
+  customize_glob:
+    "input_boolean.*":
+      icon: mdi:toggle-switch
+
+    "script.*":
+      icon: mdi:play-circle
+
+    "sensor.*_amps":
+      icon: mdi:flash-circle
+
+    "sensor.*_watts":
+      icon: mdi:flash-circle
+
+    "sensor.*_kwh":
+      icon: mdi:flash-circle
+
+    "sensor.*_volts":
+      icon: mdi:flash-circle
+
+    "timer.*":
+      icon: mdi:timer

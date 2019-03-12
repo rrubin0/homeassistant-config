@@ -1,0 +1,31 @@
+#####################################################################
+#   Upstairs Climate Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.us_avg_temp:
+      icon: mdi:chart-areaspline
+
+    sensor.us_climate_current_temp:
+      icon: mdi:thermometer
+
+    sensor.us_fan_state:
+      icon: mdi:fan
+
+    sensor.upstairs_humidity:
+      icon: mdi:water-percent
+
+    sensor.us_climate_mode:
+      icon: mdi:thermostat
+
+    sensor.us_climate_hold:
+      icon: mdi:thermostat
+
+    sensor.us_climate_away:
+      icon: mdi:thermostat
+
+    sensor.us_climate_target_low:
+      icon: mdi:thermometer
+
+    sensor.us_climate_target_high:
+      icon: mdi:thermometer

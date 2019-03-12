@@ -1,0 +1,29 @@
+#####################################################################
+### Input_Select
+#####################################################################
+input_select:
+  pool_scene:
+    name: Pool Scene
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Cycle"
+      - "Party"
+      - "Romance"
+      - "Caribbean"
+      - "Patriotic"
+      - "Sunset"
+      - "Royal"
+
+  pool_color:
+    name: Pool Color
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Blue"
+      - "Green"
+      - "Red"
+      - "White"
+      - "Magenta"
+
+

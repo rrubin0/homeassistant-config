@@ -1,0 +1,15 @@
+####################################################################
+## Rachio Irrigation System Sensor
+####################################################################
+sensor:
+  - platform: template
+    sensors:
+      rachio_status:
+        friendly_name: "Rachio Status"
+        value_template: >-
+          {% if is_state('binary_sensor.rubino_online', 'on') %}
+            Online
+          {% else %}
+            Offline
+          {% endif %}
+        entity_id: sensor.time

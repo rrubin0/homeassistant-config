@@ -1,0 +1,67 @@
+#####################################################################
+###  Google Maps API Travel Time Sensors
+#####################################################################
+sensor:
+  - platform: google_travel_time
+    scan_interval: 900
+    name: Ricks Office Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Home
+    destination: Office
+
+  - platform: google_travel_time
+    scan_interval: 900
+    name: Ricks Home Commute
+    api_key: !secret google_time_travel_api_key
+    origin: Office
+    destination: Home
+
+#  - platform: google_travel_time
+#    scan_interval: 420
+#    name: Megs Work Commute
+#    api_key: !secret google_time_travel_api_key
+#    origin: Home
+#    destination: Arete
+
+#  - platform: google_travel_time
+#    scan_interval: 420
+#    name: Megs Home Commute
+#    api_key: !secret google_time_travel_api_key
+#    origin: Arete
+#    destination: Home
+
+  - platform: google_travel_time
+    scan_interval: 300
+    name: Megs ETA Home
+    api_key: !secret google_time_travel_api_key
+    origin: device_tracker.mip8
+    destination: Home
+
+  - platform: google_travel_time
+    scan_interval: 600
+    name: Ricks ETA Home
+    api_key: !secret google_time_travel_api_key
+    origin: device_tracker.i8plus
+    destination: Home
+
+  - platform: template
+    sensors:
+      ricks_eta:
+        friendly_name: "Rick's ETA"
+        value_template: >-
+          {% if is_state('sensor.ricks_eta_home', '0') %}
+            Home
+          {% else %}
+            {{ states('sensor.ricks_eta_home') }}
+          {% endif %}
+        entity_id: sensor.time
+
+      megs_eta:
+        friendly_name: "Meg's ETA"
+        value_template: >-
+          {% if is_state('sensor.megs_eta_home', '0') %}
+            Home
+          {% else %}
+            {{ states('sensor.megs_eta_home') }}
+          {% endif %}
+        entity_id: sensor.time

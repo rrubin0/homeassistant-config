@@ -1,0 +1,9 @@
+#####################################################################
+### Nursery Wall Light LED strip - Flux
+#####################################################################
+light:
+  - platform: flux_led
+    devices:
+      !secret nursery_wall_light:
+        name: "Nursery Wall Light"
+        mode: rgb

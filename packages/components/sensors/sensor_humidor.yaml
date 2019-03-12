@@ -1,0 +1,31 @@
+#####################################################################
+### Humidor Sensors
+#####################################################################
+sensor:
+  ### Humidity Sensor
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 Humidity"
+    unit_of_measurement: "%"
+    value_template: '{{ value_json.humidity | round(1) }}'
+
+  ### Light Sensitivity
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 LDR"
+    ##This sensor is not calibrated to actual LUX. Rather, this a map of the input voltage ranging from 0 - 1023.
+    unit_of_measurement: "LUX"
+    value_template: '{{ value_json.ldr }}'
+
+  ### Motion Detection
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 PIR"
+    value_template: '{{ value_json.motion }}'
+
+  ### Temperature
+  - platform: mqtt
+    state_topic: "home/sensornode1"
+    name: "SN1 Temperature"
+    unit_of_measurement: "F"
+    value_template: '{{ value_json.temperature | round(1) }}'

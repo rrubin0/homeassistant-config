@@ -1,0 +1,9 @@
+#####################################################################
+### Notify - Ecobee
+#####################################################################
+notify:
+  - platform: ecobee
+    name: downstairs_ecobee
+
+  - platform: ecobee
+    name: upstairs_ecobee

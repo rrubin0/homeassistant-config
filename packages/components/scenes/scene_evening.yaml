@@ -1,0 +1,34 @@
+#####################################################################
+### SCENES
+#####################################################################
+scene:
+  - name: Evening
+    entities:
+      light.foyer_lights_level:
+        state: on
+        brightness: 160
+        transition: 5
+
+      light.kitchen_entry:
+        state: on
+        brightness: 200
+        transition: 30
+
+      light.south_entry:
+        state: on
+        brightness: 160
+        transition: 10
+
+      light.center_entry:
+        state: on
+        brightness: 50
+        transition: 10
+
+      light.living_room_lamp:
+        state: on
+        brightness: 255
+        transition: 10
+
+      light.lr_ceiling:
+        state: off
+        transition: 10

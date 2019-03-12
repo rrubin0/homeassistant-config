@@ -1,0 +1,12 @@
+#####################################################################
+#   Climate Customizations
+#####################################################################
+homeassistant:
+  customize:
+    climate.downstairs:
+      friendly_name: "Downstairs Thermostat"
+      icon: mdi:thermostat
+
+    climate.upstairs:
+      friendly_name: "Upstairs Thermostat"
+      icon: mdi:thermostat

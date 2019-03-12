@@ -1,0 +1,10 @@
+  ################################################
+  ## Customize Locks
+  ################################################
+homeassistant:
+  customize:
+    lock.bathroom_entry_locked:
+      friendly_name: "Bathroom Door"
+
+    lock.south_entry_locked:
+      friendly_name: "South Entry Door"

@@ -1,0 +1,34 @@
+#####################################################################
+#   Input Boolean Customizations
+#####################################################################
+homeassistant:
+  customize:
+    input_boolean.visitor_mode:
+      icon: mdi:account
+
+    input_boolean.vacation_mode:
+      icon: mdi:beach
+
+    input_boolean.dinner_time:
+      icon: mdi:food-fork-drink
+
+    input_boolean.door_held_open:
+      icon: mdi:door-open
+
+    input_boolean.keg_door_open:
+      icon: mdi:door-open
+
+    input_boolean.condition_1:
+      friendly_name: "Test Condition 1"
+
+    input_boolean.condition_2:
+      friendly_name: "Test Condition 2"
+
+    input_boolean.condition_3:
+      friendly_name: "Test Condition 3"
+
+    input_boolean.condition_4:
+      friendly_name: "Test Condition 4"
+
+    input_boolean.condition_5:
+      friendly_name: "Test Condition 5"

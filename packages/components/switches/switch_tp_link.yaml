@@ -1,0 +1,15 @@
+#####################################################################
+### TP-LINK Outlets
+#####################################################################
+switch:
+  - platform: tplink
+    host: !secret smartplug_host_1
+
+  - platform: tplink
+    host: !secret smartplug_host_2
+
+  - platform: tplink
+    host: !secret smartplug_host_3
+
+  - platform: tplink
+    host: !secret smartplug_host_4

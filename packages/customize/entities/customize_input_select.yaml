@@ -1,0 +1,13 @@
+  ################################################
+  ## Customize Input Select
+  ################################################
+homeassistant:
+  customize:
+    input_select.living_room_fan_speed:
+      icon: mdi:fan
+
+    input_select.living_room_tv_input:
+      icon: mdi:television
+
+    input_select.onkyo_amp_input:
+      icon: mdi:radio

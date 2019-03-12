@@ -1,0 +1,77 @@
+#####################################################################
+#   Security Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.front_entry_motion:
+      friendly_name: "Front Entry Motion"
+      icon: mdi:run
+
+    sensor.front_entry_fibaro_multisensor_luminance:
+      friendly_name: "Front Entry Light Sensor"
+      icon: mdi:white-balance-sunny
+
+    sensor.front_door_tamper:
+      friendly_name: "Front Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.south_door_tamper:
+      friendly_name: "South Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.office_door_tamper:
+      friendly_name: "Office Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.kitchen_door_tamper:
+      friendly_name: "Kitchen Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.bathroom_door_tamper:
+      friendly_name: "Bathroom Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.guest_room_balcony_door_tamper:
+      friendly_name: "Guest Room Balcony Door Tamper"
+      #icon: mdi:home-outline
+
+    sensor.living_room_north_window_tamper:
+      friendly_name: "Living Room N. Window Tamper"
+      #icon: mdi:home-outline
+
+    sensor.guest_room_window_tamper:
+      friendly_name: "Guest Room Window Tamper"
+      #icon: mdi:home-outline
+
+    sensor.nursery_ptz_motion_detected:
+      friendly_name: "Nursery PTZ Motion"
+      icon: mdi:run
+
+    sensor.nw_ptz_motion_detected:
+      friendly_name: "NW PTZ Motion"
+      icon: mdi:run
+
+    sensor.nursery_ptz_preset:
+      friendly_name: "Nursery PTZ Preset"
+      icon: mdi:arrow-expand-all
+
+    sensor.nw_ptz_preset:
+      friendly_name: "NW PTZ Preset"
+      icon: mdi:arrow-expand-all
+
+    sensor.nursery_ptz_sd_used:
+      friendly_name: "Nursery PTZ SD Card"
+      icon: mdi:sd
+
+    sensor.nw_ptz_sd_used:
+      friendly_name: "NW PTZ SD Card"
+      icon: mdi:sd
+
+#    sensor.crime:
+#      icon: mdi:bomb
+
+    sensor.downstairs_ac_leak_detector:
+      friendly_name: "Downstairs AC Leak Detector"
+
+    sensor.downstairs_ac_leak_detector_flood:
+      hidden: true

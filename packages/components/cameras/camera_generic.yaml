@@ -1,0 +1,25 @@
+#####################################################################
+### Camera
+#####################################################################
+camera:
+  - platform: generic
+    still_image_url: !secret front_door_url
+    name: Front Porch
+    username: !secret camera_user
+    password: !secret camera_password
+
+  - platform: generic
+    still_image_url: !secret north_gate_url
+    name: North Gate
+    username: !secret camera_user
+    password: !secret camera_password
+
+  - platform: ring
+
+  - platform: generic
+    still_image_url: !secret 10_ramp_url
+    name: Ramp Traffic
+
+  - platform: generic
+    still_image_url: !secret doppler_url
+    name: Weather

@@ -1,0 +1,23 @@
+#####################################################################
+### Master Bedroom Celing Fan Speed Control
+#####################################################################
+input_select:
+  master_bedroom_fan_speed:
+    name: Master Bedroom Fan Speed
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Off"
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+      - "11"
+      - "12"
+      - "Random"

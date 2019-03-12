@@ -1,0 +1,33 @@
+#####################################################################
+### Upstairs Ecobee Thermostat Scripts
+#####################################################################
+script:
+  ecobee_us_home:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'home'
+
+  ecobee_us_away:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'away'
+
+  ecobee_us_sleep:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'sleep'
+
+  ecobee_us_resume:
+    sequence:
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+
+

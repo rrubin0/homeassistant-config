@@ -1,0 +1,22 @@
+#####################################################################
+#   Media Player Customizations
+#####################################################################
+homeassistant:
+  customize:
+    media_player.kodi_living_room:
+      friendly_name: "Living Room Kodi"
+
+    media_player.kodi_bedroom:
+      friendly_name: "Bedroom Kodi"
+
+    media_player.apple_tv:
+      friendly_name: "Apple TV"
+
+#    media_player.firetv_living_room:
+#      friendly_name: "FireTV"
+
+#    media_player.rnmcast:
+#      friendly_name: "Chromecast"
+
+#    media_player.kodi_office:
+#      friendly_name: "Office Kodi"

@@ -1,0 +1,9 @@
+#####################################################################
+### Master Bedroom under the bed LED strip 
+#####################################################################
+light:
+  - platform: flux_led
+    devices:
+      !secret under_bed_light_master:
+        name: "under_bed_lights"
+        mode: rgb

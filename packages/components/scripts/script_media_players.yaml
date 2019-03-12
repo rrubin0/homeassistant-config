@@ -1,0 +1,12 @@
+#####################################################################
+### Script
+#####################################################################
+script:
+  tv_power_off:
+    sequence:
+
+    - service: switch.turn_off
+      entity_id: switch.tv_power
+
+    - service: switch.turn_off
+      entity_id: switch.directv_power

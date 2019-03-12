@@ -1,0 +1,22 @@
+#####################################################################
+### Office Lights
+#####################################################################
+light:
+  ### office desk lamp
+  - platform: flux_led
+    devices:
+      !secret office_desk_lamp_host:
+        name: office_desk_lamp
+#        protocol: ledenet
+        mode: rgbw
+
+
+  ### humidor sensor light
+  - platform: mqtt
+    schema: json
+    name: "SN1 LED"
+    state_topic: "home/sensornode1"
+    command_topic: "home/sensornode1/set"
+    rgb: true
+    brightness: true
+    optimistic: false

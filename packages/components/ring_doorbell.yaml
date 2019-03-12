@@ -1,0 +1,7 @@
+#####################################################################
+#    @package          :     Ring Doorbell
+#    @description      :     Ring Doorbell Config
+#####################################################################
+ring:
+  username: !secret ring_username
+  password: !secret ring_password

@@ -1,0 +1,88 @@
+#####################################################################
+### Window Sensors
+#####################################################################
+sensor:
+### Living Room North Window Status
+  - platform: template
+    sensors:
+      living_room_north_window_state:
+        value_template: >-
+          {% set state = states('sensor.living_room_north_window') %}
+          {% if state == '22' %}
+            Open
+          {% elif state == '23' %}
+            Closed
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        friendly_name: "Living Room N. Window"
+        icon_template: >-
+          {% set state = states('sensor.living_room_north_window_state')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi: window-closed
+          {% else %}
+            {% if state == 'Open' %}
+              mdi:window-open
+            {% else %}
+              mdi:window-closed
+            {% endif %}
+          {% endif %}
+
+
+### Living Room North Window Tamper
+  - platform: template
+    sensors:
+      living_room_north_window_tamper:
+        value_template: >-
+          {% set state = states('sensor.living_room_north_window_burglar') %}
+          {% if state == '0' %}
+            OK
+          {% elif state == '3' %}
+            Tamper
+          {% else %}
+            {{ state }}
+          {% endif %}
+
+
+### Guest Room Window Status
+  - platform: template
+    sensors:
+      guest_room_window_state:
+        value_template: >-
+          {% set state = states('sensor.guest_room_window') %}
+          {% if state == '22' %}
+            Open
+          {% elif state == '23' %}
+            Closed
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+        friendly_name: "Guest Room Window"
+        icon_template: >-
+          {% set state = states('sensor.guest_room_window_state')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi: window-closed
+          {% else %}
+            {% if state == 'Open' %}
+              mdi:window-open
+            {% else %}
+              mdi:window-closed
+            {% endif %}
+          {% endif %}
+
+
+### Guest Room Window Tamper
+  - platform: template
+    sensors:
+      guest_room_window_tamper:
+        value_template: >-
+          {% set state = states('sensor.guest_room_window_sensor_burglar') %}
+          {% if state == '0' %}
+            OK
+          {% elif state == '3' %}
+            Tamper
+          {% else %}
+            {{ state }}
+          {% endif %}
+
+

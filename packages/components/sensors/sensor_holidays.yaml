@@ -1,0 +1,16 @@
+#####################################################################
+### Holiday Sensor
+#####################################################################
+sensor:
+  - platform: rest
+    resource: https://raw.githubusercontent.com/skalavala/smarthome/master/holidays.json
+    name: Holiday
+    scan_interval: 14400
+    value_template: >
+      {% set today = now().month  ~ '/' ~ now().day  %}
+      {% set holiday =  value_json.MAJOR_US.static[ today ] %}
+      {% if holiday | trim == "" %}
+        {% set today = now().month  ~ '/' ~ now().day ~ '/' ~ now().year %}
+        {% set holiday =  value_json.MAJOR_US.dynamic[ today ] %}
+      {% endif %}
+      {{ holiday }}

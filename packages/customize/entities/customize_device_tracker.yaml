@@ -1,0 +1,12 @@
+#####################################################################
+#   Device Tracker Customizations
+#####################################################################
+homeassistant:
+  customize:
+    device_tracker.i8plus:
+      friendly_name: "Rick"
+      entity_picture: /local/rick.jpg
+
+    device_tracker.mip8:
+      friendly_name: "Megs"
+      entity_picture: /local/megs.jpg

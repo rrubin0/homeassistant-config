@@ -1,0 +1,10 @@
+#####################################################################
+### Media Player - APPLE TV
+#####################################################################
+media_player:
+  - platform: apple_tv
+    host: !secret appletv_host
+    login_id: !secret appletv_login_id
+    name: "Apple TV"
+    start_off: false
+    credentials: !secret appletv_creds

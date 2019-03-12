@@ -1,0 +1,66 @@
+#####################################################################
+#   Battery Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.lock_beach_battery:
+      friendly_name: "Bathroom Lock Battery"
+
+    sensor.dc_bathroom_battery:
+      friendly_name: "Bathroom Door Battery"
+
+    sensor.dc_front_door_battery:
+      friendly_name: "Front Door Battery"
+
+    sensor.dc_kitchen_door_battery:
+      friendly_name: "Kitchen Door Battery"
+
+    sensor.dc_south_door_battery:
+      friendly_name: "South Door Battery"
+
+    sensor.dc_office_door_battery:
+      friendly_name: "Office Door Battery"
+
+    sensor.lock_south_battery:
+      friendly_name: "South Lock Battery"
+
+    sensor.entry_multisensor_battery:
+      friendly_name: "Foyer Multisensor Battery"
+
+    sensor.downstairs_ac_leak_detector_battery:
+      friendly_name: "AC Leak Detector Battery"
+
+    sensor.rip8plus_battery_level:
+      friendly_name: "Rick's Phone Battery"
+      icon_template: >-
+        {% set battery_level = states('sensor.rip8plus_battery_level')|int('unknown') %}
+        {% if battery_level == 'unknown' %}
+          mdi:battery-unknown
+        {% else %}
+          {% set battery_round = (battery_level|int / 10)|int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+        {% endif %}
+
+    sensor.mip8_battery_level:
+      friendly_name: "Meg's Phone Battery"
+      icon_template: >-
+        {% set battery_level = states('sensor.mip8_battery_level')|int('unknown') %}
+        {% if battery_level == 'unknown' %}
+          mdi:battery-unknown
+        {% else %}
+          {% set battery_round = (battery_level|int / 10)|int * 10 %}
+          {% if battery_round >= 100 %}
+            mdi:battery
+          {% elif battery_round > 0 %}
+            mdi:battery-{{ battery_round }}
+          {% else %}
+            mdi:battery-alert
+          {% endif %}
+        {% endif %}
+

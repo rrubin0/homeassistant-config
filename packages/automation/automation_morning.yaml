@@ -1,0 +1,27 @@
+automation:
+  ### Weekday Wakeup
+  - alias: Morning Sequence
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '06:40:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: 'off'
+
+    action:
+      - service: script.morning_sequence

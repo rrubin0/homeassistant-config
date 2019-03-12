@@ -1,0 +1,20 @@
+#####################################################################
+### Sensor - Fibaro Motion Detector status
+#####################################################################
+sensor:
+  - platform: template
+    sensors:
+      front_entry_motion:
+        value_template: >-
+          {% set state = states('sensor.front_entry_fibaro_multisensor_burglar') %}
+          {% if state == '0' %}
+            Clear
+          {% elif state == '8' %}
+            Detected
+          {% elif state == '3' %}
+            Tamper
+          {% elif state == '254' %}
+            Sleeping
+          {% else %}
+            {{ state|title }}
+          {% endif %}

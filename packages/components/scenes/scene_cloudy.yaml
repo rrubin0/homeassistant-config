@@ -1,0 +1,20 @@
+#####################################################################
+### SCENES
+#####################################################################
+scene:
+  - name: Cloudy
+    entities:
+      light.foyer_lights_level:
+        state: on
+        brightness: 250
+        transition: 30
+
+      light.entryway:
+        state: on
+        brightness: 90
+        transition: 15
+
+      light.living_room:
+        state: on
+        brightness: 200
+        transition: 15

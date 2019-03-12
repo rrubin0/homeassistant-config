@@ -1,0 +1,13 @@
+#####################################################################
+#   Alexa Customizations
+#####################################################################
+homeassistant:
+  customize:
+    input_text.alexa_tts:
+      icon: mdi:textbox
+
+    input_select.alexa:
+      icon: mdi:amazon-alexa
+
+    input_number.alexa_volume:
+      icon: mdi:volume-high

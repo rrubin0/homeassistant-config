@@ -1,0 +1,22 @@
+#####################################################################
+### Date & Time Sensors
+#####################################################################
+sensor:
+  ## Date and Time
+  - platform: time_date
+    display_options:
+      - 'time'
+
+  - platform: template
+    sensors:
+      time_templated_am_pm:
+        friendly_name: 'Time AM/PM'
+        value_template: "{{ now().strftime('%I:%M %p') }}"
+        entity_id: sensor.time
+
+  - platform: template
+    sensors:
+      date_templated_us:
+        friendly_name: 'Date US Style'
+        value_template: "{{ now().strftime('%b %d, %Y') }}"
+        entity_id: sensor.time

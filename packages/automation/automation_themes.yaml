@@ -1,0 +1,26 @@
+###############################################################################
+# Theme Automations: automatically apply "dark theme" at startup
+###############################################################################
+automation:
+  - alias: Darker Theme As Default
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: homeassistant
+      event: start
+
+    action:
+      - service: frontend.set_theme
+        data:
+          name: midnight
+#
+#  - alias: Random Lighter Theme At Sunrise
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      platform: sun
+#      event: sunrise
+#    action:
+#      - service: frontend.set_theme
+#        data_template:
+#          name: '{{ ["light_beach", "light_green", "light_pink", "default"] | random  }}'

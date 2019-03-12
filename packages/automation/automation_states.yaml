@@ -1,0 +1,133 @@
+#####################################################################
+### "States" Automation; could be replaced by 'time of day' sensor?
+#####################################################################
+automation:
+  - alias: Peak Hours On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '15:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+      - condition: state
+        entity_id: input_boolean.holiday
+        state: 'off'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.peak_hours
+
+
+  - alias: Peak Hours Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '18:00:00'
+
+      - platform: state
+        entity_id: input_boolean.holiday
+        from: 'off'
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.peak_hours
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.peak_hours
+
+
+  - alias: After Hours On Weekdays
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '23:30:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - sun
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.after_hours
+
+
+  - alias: After Hours Off Weekdays
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '04:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.after_hours
+
+
+  - alias: After Hours On Weekends
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '01:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - sat
+          - sun
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.after_hours
+
+
+  - alias: After Hours Off Weekends
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '08:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - sat
+          - sun
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.after_hours

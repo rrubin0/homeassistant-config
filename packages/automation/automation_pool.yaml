@@ -1,0 +1,95 @@
+#####################################################################
+### Pool Light Controls
+#####################################################################
+automation:
+### Turn off the Pool Light and Reset Selection
+  - alias: Pool Light Reset Selection
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: switch.pool_light_switch
+        to: 'off'
+        for:
+          seconds: 30
+
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.pool_scene
+          option: Select an option...
+
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.pool_color
+          option: Select an option...
+
+
+### Pool Light Scene Selection
+  - alias: 'Pool Scene'
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.pool_scene
+
+    action:
+      - service: script.turn_on
+        data_template:
+          entity_id: >-
+            {% if is_state('input_select.pool_scene', 'Cycle') %}
+              script.pool_cycle
+            {% elif is_state('input_select.pool_scene', 'Party') %}
+              script.pool_party
+            {% elif is_state('input_select.pool_scene', 'Romance') %}
+              script.pool_romance
+            {% elif is_state('input_select.pool_scene', 'Caribbean') %}
+              script.pool_caribbean
+            {% elif is_state('input_select.pool_scene', 'Patriotic') %}
+              script.pool_patriotic
+            {% elif is_state('input_select.pool_scene', 'Sunset') %}
+              script.pool_sunset
+            {% elif is_state('input_select.pool_scene', 'Royal') %}
+              script.pool_royal
+            {% else %}
+              script.pool_cycle
+            {% endif %}
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+### Pool Light Color Selection
+  - alias: 'Pool Color'
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.pool_color
+
+    action:
+      - service: script.turn_on
+        data_template:
+          entity_id: >-
+            {% if is_state('input_select.pool_color', 'Blue') %}
+              script.pool_blue
+            {% elif is_state('input_select.pool_color', 'Green') %}
+              script.pool_green
+            {% elif is_state('input_select.pool_color', 'Red') %}
+              script.pool_red
+            {% elif is_state('input_select.pool_color', 'White') %}
+              script.pool_white
+            {% elif is_state('input_select.pool_color', 'Magenta') %}
+              script.pool_magenta
+            {% else %}
+              script.pool_cycle
+            {% endif %}
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

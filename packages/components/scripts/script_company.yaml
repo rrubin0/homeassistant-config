@@ -1,0 +1,27 @@
+#####################################################################
+### Company Mode
+#####################################################################
+script:
+  company_mode:
+    sequence:
+    - service: switch.turn_on
+      entity_id:
+        - switch.outdoor_speakers
+        - switch.game_room_floodlights
+        - switch.pool_light_switch
+
+    - service: scene.turn_on
+      entity_id: scene.bright
+
+    - service: lock.unlock
+      entity_id: all
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights_level
+        brightness: 130
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_room_chandelier_level
+        brightness: 130

@@ -1,0 +1,17 @@
+#####################################################################
+### Leak Detector Sensors
+#####################################################################
+sensor:
+### Downstairs HVAC Leak Detector
+  - platform: template
+    sensors:
+      downstairs_ac_leak_detector:
+        value_template: >-
+          {% set state = states('sensor.downstairs_ac_leak_detector_flood') %}
+          {% if state == '0' %}
+            OK
+          {% elif state == '255' %}
+            Leak Detected!
+          {% else %}
+            {{ state|title }}
+          {% endif %}

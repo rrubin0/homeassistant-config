@@ -1,0 +1,74 @@
+#####################################################################
+### Door Lock Sensors; state changes and reporting
+#####################################################################
+sensor:
+  - platform: template
+    sensors:
+      lock_beach_door_status:
+        friendly_name: "Beach Entry Door Status"
+        value_template: >-
+          {% set state = states('sensor.bathroom_entry_alarm_type') %}
+          {% set user = states('sensor.bathroom_entry_alarm_level') %}
+          
+          {% if state == '19' %}
+            {% if user == '1' %}
+              Unlocked by Rick
+            {% elif user == '2' %}
+              Unlocked by Megs
+            {% elif user == '3' %}
+              Unlocked by Guest
+            {% else %}
+              Unlocked by user {{ user }}
+            {% endif %}
+          {% elif state == '21' %}
+            Manually Locked
+          {% elif state == '22' %}
+            Manually Unlocked
+          {% elif state == '24' %}
+            Auto Locked
+          {% elif state == '25' %}
+            Auto Unlocked
+          {% elif state == '27' %}
+            Auto-Relocked
+          {% elif state == '161' %}
+            Tamper
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+
+
+      lock_south_door_status:
+        friendly_name: "South Entry Door Status"
+        value_template: >-
+          {% set state = states('sensor.south_entry_alarm_type') %}
+          {% set user = states('sensor.south_entry_alarm_level') %}
+          
+          {% if state == '19' %}
+            {% if user == '1' %}
+              Unlocked by Rick
+            {% elif user == '2' %}
+              Unlocked by Megs
+            {% elif user == '3' %}
+              Unlocked by Housekeeper
+            {% elif user == '4' %}
+              Unlocked by Dog Sitter
+            {% else %}
+              Unlocked by user {{ user }}
+            {% endif %}
+          {% elif state == '21' %}
+            Manually Locked
+          {% elif state == '22' %}
+            Manually Unlocked
+          {% elif state == '24' %}
+            Auto Locked
+          {% elif state == '25' %}
+            Auto Unlocked
+          {% elif state == '27' %}
+            Auto-Relocked
+          {% elif state == '161' %}
+            Tamper
+          {% else %}
+            {{ state|title }}
+          {% endif %}
+
+

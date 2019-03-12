@@ -1,0 +1,30 @@
+#####################################################################
+#  Sensor for saving 433MHz Switch States to MQTT
+#####################################################################
+sensor:
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_one"
+    name: "RF Switch One"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_two"
+    name: "RF Switch Two"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_three"
+    name: "RF Switch Three"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_four"
+    name: "RF Switch Four"
+    value_template: "{{ value }}"
+
+  - platform: mqtt
+    state_topic: "/home/rfswitches/switch_five"
+    name: "RF Switch Five"
+    value_template: "{{ value }}"
+
+

@@ -1,0 +1,45 @@
+#####################################################################
+### Bedtime Sequence
+#####################################################################
+script:
+  bedtime:
+    sequence:
+    # lock up
+    - service: lock.lock
+      entity_id: all
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.gateway_light_7811dcb7da52
+#        brightness: 50
+#        hs_color: [180,100]
+
+    # turn off the "outdoor speakers and downstairs wipe warmer"
+    - service: switch.turn_off
+      entity_id:
+        - switch.outdoor_speakers
+        - switch.switch_three
+
+    - service: switch.turn_off
+      entity_id: switch.living_room_fan
+
+    - delay:
+        minutes: 3
+
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.interior_lights
+        - fan.patio_fan
+
+    - delay:
+        minutes: 2
+
+    - service: light.turn_off
+      entity_id: light.under_bed_lights
+
+    - delay:
+        seconds: 10
+
+## hit the flux led strip light again ... flaky behavior
+    - service: light.turn_off
+      entity_id: light.under_bed_lights

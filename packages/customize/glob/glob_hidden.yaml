@@ -1,0 +1,19 @@
+  ################################################
+  ## Customize Global - Hide Pool Script
+  ################################################
+homeassistant:
+  customize_glob:
+    "script.pool_*":
+      hidden: true
+
+    "sensor.rf_switch_*":
+      hidden: true
+
+    "sensor.*_lamp":
+      hidden: true
+
+    "sensor.master_bedroom_fan*":
+      hidden: true
+
+    "input_boolean.*_hours":
+      hidden: true

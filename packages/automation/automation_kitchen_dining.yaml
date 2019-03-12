@@ -1,0 +1,91 @@
+#####################################################################
+### Kitchen and Dining Room Automations
+#####################################################################
+automation:
+  ### Nightlight On
+  - alias: Kitchen Nightlight On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:15:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcb7da52
+          brightness: 125
+          hs_color: [225,15]
+
+
+  ### Nightlight Off
+  - alias: Kitchen Nightlight Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '00:15:00'
+
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcb7da52
+
+
+  ### Turn on the pantry light when door opens
+  - alias: Pantry Light On
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.pantry_door_contact
+        from: 'off'
+        to: 'on'
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.pantry
+
+
+  ### Turn off the pantry light when door is closed
+  - alias: Pantry Light Off
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.pantry_door_contact
+        from: 'on'
+        to: 'off'
+
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.pantry
+
+
+  ### Raise the kitchen shade
+  - alias: Kitchen Shade Up
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '-00:15:00'
+
+    action:
+      - service: cover.open_cover
+        entity_id: cover.kitchen_roller_shade_level
+
+  ### Lower the kitchen shade
+  - alias: Kitchen Shade Down
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '19:30:00'
+
+    action:
+      - service: cover.stop_cover
+        entity_id: cover.kitchen_roller_shade_level

@@ -1,0 +1,15 @@
+#####################################################################
+### Living Room Ceiling Fan - Input Select
+#####################################################################
+input_select:
+  ### Living Room Ceiling Fan Speed
+  living_room_fan_speed:
+    name: Living Room Fan
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Low"
+      - "Medium"
+      - "High"
+
+

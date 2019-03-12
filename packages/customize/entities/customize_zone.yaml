@@ -1,0 +1,12 @@
+#####################################################################
+#   Zone Customizations
+#####################################################################
+homeassistant:
+  customize:
+    zone.megs_work:
+        friendly_name: "Arete"
+        icon: mdi:school
+
+    zone.ricks_office:
+        friendly_name: "Office"
+        icon: mdi:briefcase

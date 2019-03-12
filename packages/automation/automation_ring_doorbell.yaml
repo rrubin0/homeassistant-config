@@ -1,0 +1,41 @@
+#####################################################################
+### Announce via Alexa when someone presses the Ring Doorbell
+#####################################################################
+automation:
+  ### Doorbell
+  - alias: Doorbell Pressed
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.ring_front_door_ding
+        to: 'on'
+
+    action:
+      - service: media_player.volume_set
+        data:
+          entity_id: media_player.living_room
+          volume_level: .5
+
+      - service: media_player.alexa_tts
+        data_template:
+          entity_id: media_player.living_room
+          message: "You've got a visitor at the front door."
+
+### optionally, ring the xiaomi light/gateway 
+#      - service: xiaomi_aqara.play_ringtone
+#        data:
+#          gw_mac: 7811dcb7da52
+#          ringtone_id: 10
+#          ringtone_vol: 20
+
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.gateway_light_7811dcb7da52
+#          brightness: 255
+#          hs_color: [360,100]
+#
+#      - delay: '00:03:00'
+#
+#      - service: light.turn_off
+#        data:
+#          entity_id: light.gateway_light_7811dcb7da52

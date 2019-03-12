@@ -1,0 +1,38 @@
+#####################################################################
+### Nap Time
+#####################################################################
+script:
+  nap_time:
+    sequence:
+    - service: light.turn_off
+      entity_id: light.living_room
+      data:
+        transition: 5
+
+    - service: light.turn_off
+      entity_id: light.entryway
+      data:
+        transition: 5
+
+    - delay: '00:00:05'
+
+    - service: light.turn_on
+      entity_id: light.living_room_lamp
+      data:
+        brightness: 50
+        transition: 10
+
+    - service: light.turn_on
+      entity_id: light.kitchen_entry
+      data:
+        brightness: 80
+
+#      - service: hue.hue_activate_scene
+#        data:
+#          group_name: "Living Room"
+#          scene_name: "Nap Time"
+#
+#      - service: hue.hue_activate_scene
+#        data:
+#          group_name: "Entryway"
+#          scene_name: "Nightlight"

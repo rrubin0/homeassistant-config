@@ -1,0 +1,272 @@
+#####################################################################
+### Battery Sensors
+#####################################################################
+sensor:
+  - platform: template
+    sensors:
+      ### Beach Lock Battery
+      lock_beach_battery:
+        value_template: "{{ (states.zwave.bathroom_entry.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.lock_beach_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### South Lock Battery
+      lock_south_battery:
+        value_template: "{{ (states.zwave.south_entry.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.lock_south_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Front entry Fibaro Multisensor Battery
+      entry_multisensor_battery:
+        value_template: "{{ (states.zwave.front_entry_fibaro_multisensor.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.entry_multisensor_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Beach Bathroom Door Contact Battery
+  - platform: template
+    sensors:
+      dc_bathroom_battery:
+        value_template: "{{ (states.zwave.bathroom_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_bathroom_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Front Door Contact Battery
+  - platform: template
+    sensors:
+      dc_front_door_battery:
+        value_template: "{{ (states.zwave.front_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_front_door_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Kitchen Door Contact Battery
+  - platform: template
+    sensors:
+      dc_kitchen_door_battery:
+        value_template: "{{ (states.zwave.kitchen_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_kitchen_door_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### South Door Contact Battery
+  - platform: template
+    sensors:
+      dc_south_door_battery:
+        value_template: "{{ (states.zwave.south_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_south_door_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Office Door Contact Battery
+  - platform: template
+    sensors:
+      dc_office_door_battery:
+        value_template: "{{ (states.zwave.office_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_office_door_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Guest Room Balcony Door Battery
+  - platform: template
+    sensors:
+      dc_guest_balcony_door_battery:
+        value_template: "{{ (states.zwave.guest_room_balcony_door_contact.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.dc_guest_balcony_door_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Guest Room Window Battery
+  - platform: template
+    sensors:
+      ws_guest_room_window_battery:
+        value_template: "{{ (states.zwave.guest_room_window_sensor.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.ws_guest_room_window_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Living Room North Window Battery
+  - platform: template
+    sensors:
+      ws_living_room_north_window_battery:
+        value_template: "{{ (states.zwave.living_room_north_window_sensor.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.ws_living_room_north_window_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time
+
+
+      ### Downstairs AC Leak Detector Battery
+      downstairs_ac_leak_detector_battery:
+        value_template: "{{ (states.zwave.downstairs_ac_leak_detector.attributes|default).battery_level|default|int('unknown') }}"
+        unit_of_measurement: '%'
+        icon_template: >-
+          {% set battery_level = states('sensor.downstairs_ac_leak_detector_battery')|int('unknown') %}
+          {% if battery_level == 'unknown' %}
+            mdi:battery-unknown
+          {% else %}
+            {% set battery_round = (battery_level|int / 10)|int * 10 %}
+            {% if battery_round >= 100 %}
+              mdi:battery
+            {% elif battery_round > 0 %}
+              mdi:battery-{{ battery_round }}
+            {% else %}
+              mdi:battery-alert
+            {% endif %}
+          {% endif %}
+        entity_id: sensor.time

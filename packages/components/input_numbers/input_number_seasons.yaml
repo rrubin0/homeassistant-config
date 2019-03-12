@@ -1,0 +1,21 @@
+#####################################################################
+### Input Number - Season Selections
+#####################################################################
+input_number:
+  ### Summer Temp Threshold
+  season_summer:
+    name: "Summer"
+    initial: 76
+    min: 60
+    max: 100
+    step: 1
+    mode: slider
+
+  ### Winter Temp Threshold
+  season_winter:
+    name: "Winter"
+    initial: 62
+    min: 40
+    max: 80
+    step: 1
+    mode: slider

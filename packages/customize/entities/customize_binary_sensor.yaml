@@ -1,0 +1,10 @@
+  ################################################
+  ## Customize Binary Sensors
+  ################################################
+homeassistant:
+  customize:
+    binary_sensor.rubino_online:
+      friendly_name: "Rachio Station"
+
+    binary_sensor.xiaomi_smart_button:
+      friendly_name: "Smart Button"

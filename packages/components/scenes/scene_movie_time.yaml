@@ -1,0 +1,18 @@
+#####################################################################
+### SCENES
+#####################################################################
+scene:
+  - name: Movie Time
+    entities:
+      light.entryway:
+        state: off
+        transition: 5
+
+      light.living_room:
+        state: off
+        transition: 15
+
+      light.foyer_lights_level:
+        state: on
+        brightness: 20
+        transition: 10

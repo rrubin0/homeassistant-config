@@ -1,0 +1,98 @@
+#####################################################################
+### RECORDER
+#####################################################################
+recorder:
+#  db_url: !secret recorder_db_url
+  purge_interval: 10
+  purge_keep_days: 14
+  exclude:
+    domains:
+      - camera
+      - media_player
+      - notify
+      - automation
+      - weblink
+      - updater
+      - input_boolean
+      - input_number
+      - input_select
+      - weather
+      - zone
+
+    entities:
+      - automation.rain_sensor
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_daily_max_precip_intensity
+      - sensor.dark_sky_daily_summary
+      - sensor.dark_sky_minutely_summary
+      - sensor.dark_sky_nearest_storm_distance
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+      - sensor.date_templated_us
+      - sensor.disk_free_home
+      - sensor.ds_fan_state
+      - sensor.ha_current_version
+      - sensor.holiday
+      - sensor.illumination_7811dcb7da52
+      - sensor.master_bedroom_fan
+      - sensor.master_bedroom_fan_1
+      - sensor.master_bedroom_fan_10
+      - sensor.master_bedroom_fan_11
+      - sensor.master_bedroom_fan_12
+      - sensor.master_bedroom_fan_2
+      - sensor.master_bedroom_fan_3
+      - sensor.master_bedroom_fan_4
+      - sensor.master_bedroom_fan_5
+      - sensor.master_bedroom_fan_6
+      - sensor.master_bedroom_fan_7
+      - sensor.master_bedroom_fan_8
+      - sensor.master_bedroom_fan_9
+      - sensor.megs_eta
+      - sensor.megs_eta_home
+      - sensor.megs_home_commute
+      - sensor.megs_work_commute
+      - sensor.mip8_battery_level
+      - sensor.mip8_battery_state_2
+      - sensor.moon
+      - sensor.processor_use
+      - sensor.ricks_eta
+      - sensor.ricks_eta_home
+      - sensor.ricks_home_commute
+      - sensor.ricks_office_commute
+      - sensor.ring_front_door_wifi_signal_strength
+      - sensor.sabnzbd_left
+      - sensor.sabnzbd_queue
+      - sensor.sabnzbd_speed
+      - sensor.season
+      - sensor.speedtest_download
+      - sensor.speedtest_ping
+      - sensor.speedtest_upload
+      - sensor.time
+      - sensor.time_brightness
+      - sensor.time_templated_am_pm
+      - binary_sensor.workday_sensor
+
+### REFERENCE ###
+## the complete list of domains ##
+#      - automation
+#      - climate
+#      - conversation
+#      - device_tracker
+#      - group
+#      - homeassistant
+#      - ifttt
+#      - input_boolean
+#      - input_select
+#      - input_number
+#      - light
+#      - lock
+#      - logbook
+#      - media_player
+#      - mqtt
+#      - notify
+#      - persistent_notification
+#      - scene
+#      - script
+#      - sensor
+#      - switch
+#      - zwave

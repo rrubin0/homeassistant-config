@@ -1,0 +1,38 @@
+#####################################################################
+### Downstairs Ecobee Thermostat Scripts
+#####################################################################
+script:
+  ecobee_ds_home:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: 'home'
+
+  ecobee_ds_away:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: 'away'
+
+  ecobee_ds_sleep:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: 'sleep'
+
+  ecobee_ds_normal:
+    sequence:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: smart1'
+
+  ecobee_ds_resume:
+    sequence:
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.downstairs
+          resume_all: 'true'

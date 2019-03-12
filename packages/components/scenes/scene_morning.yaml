@@ -1,0 +1,41 @@
+#####################################################################
+### SCENES
+#####################################################################
+scene:
+  - name: Morning
+    entities:
+      light.foyer_lights_level:
+        state: on
+        brightness: 60
+        transition: 5
+
+  # turn on the master bedroom chandelier
+      light.master_bedroom_chandelier_level:
+        state: on
+        brightness: 50
+
+  # turn on the accent_lights
+      group.accent_lights: on
+
+  # turn on the living room lamp
+      light.living_room_lamp:
+        state: on
+        brightness: 254
+        transition: 600
+
+  # turn on the hue entry_lights
+      light.entryway:
+        state: on
+        brightness: 140
+        transition: 600
+
+  # turn on the hue living_room_ceiling lights
+      light.lr_ceiling:
+        state: on
+        brightness: 140
+        transition: 900
+
+  # turn on the kitchen lights
+      light.kitchen_lights_level:
+        state: on
+        brightness: 170

@@ -1,0 +1,186 @@
+############################################################################
+#    @package          :     groups
+#    @description      :     groups to be controlled 
+#############################################################################
+#homeassistant:
+#  customize:
+#    ################################################
+#    ## Node Anchors
+#    ################################################
+#    package.node_anchors:
+#      customize: &customize
+#        package: 'views'
+#
+#      hidden: &hidden
+#        <<: *customize
+#        hidden: true
+
+
+group:
+  #####################################################################
+  ### Interior Lights
+  #####################################################################
+  Interior Lights:
+    entities:
+      - light.billiards
+      - light.dining_room_chandelier_level
+      - light.entryway
+      - light.foyer_lights_level
+      - light.kitchen_lights_level
+      - light.living_room
+      - light.living_room_lamp
+      - light.master_bathroom
+      - light.master_bath_vanity
+      - light.master_bed_ceiling_level
+      - light.master_bed_entry_level
+      - light.master_bedroom_chandelier_level
+      - light.master_bedroom
+      - light.nursery_light
+      - light.nursery_wall_light
+      - light.office_desk_lamp
+      - light.pantry
+      - light.under_bed_lights
+      - light.wine_room
+      - group.accent_lights
+      - group.game_room_lights
+      - switch.nursery_lamp
+      - light.nursery_light
+      - switch.downstairs_bath_lights_switch
+
+
+  #####################################################################
+  ### Exterior Lights
+  #####################################################################
+  Exterior Lights:
+    entities:
+      - switch.patio_lights_switch
+      - switch.back_yard_outlet
+      - switch.pool_light_switch
+
+
+  #####################################################################
+  ### Living Room Lights
+  #####################################################################
+  Entry Lights:
+    entities:
+      - light.foyer_lights_level
+      - light.entryway
+      - light.south_entry
+      - light.center_entry
+      - light.kitchen_entry
+
+  Living Room Lights:
+    control: hidden
+    entities:
+      - light.living_room_lamp
+      - light.lr_ceiling
+
+
+  #####################################################################
+  ### Wine Room Lights
+  #####################################################################
+  Wine Room Lights:
+    control: hidden
+    entities:
+      - switch.wine_room_lamp
+      - light.wine_room
+
+
+  #####################################################################
+  ### Game Room Lights
+  #####################################################################
+  Game Room Lights:
+    entities:
+      - switch.game_room_floodlights
+      - light.billiards
+
+
+  #####################################################################
+  ### Master Bedroom Lights
+  #####################################################################
+  Master Bedroom Lights:
+    entities:
+      - light.master_bedroom_chandelier_level
+      - light.master_bedroom
+      - light.master_bed_entry_level
+      - light.master_bed_ceiling_level
+      - light.under_bed_lights
+
+
+  #####################################################################
+  ### Master Bathroom Lights
+  #####################################################################
+  Master Bathroom Lights:
+    entities:
+      - light.master_bathroom
+      - light.master_bath_vanity
+
+
+  #####################################################################
+  ### Nursery Lights
+  #####################################################################
+  Nursery Lights:
+    entities:
+      - light.nursery_light
+      - light.nursery_wall_light
+      - switch.nursery_lamp
+
+
+  #####################################################################
+  ### Accent Lights
+  #####################################################################
+  Accent Lights:
+    entities:
+      - switch.staircase_lamp
+      - switch.wine_room_lamp
+      - switch.flower_lamp
+ ## Holiday Lights
+     ## christmas tree
+      #- switch.switch_five
+
+
+  #####################################################################
+  ### Yard / Patio
+  #####################################################################
+  Yard:
+    control: hidden
+    entities:
+      - switch.patio_lights_switch
+      - switch.back_yard_outlet
+      - switch.front_yard_outlet
+      - switch.fountains_switch
+      - switch.outdoor_speakers
+
+
+  #####################################################################
+  ### Porch Lights
+  #####################################################################
+  Porch Lights:
+    entities:
+      - switch.south_porch_lights_switch
+      - switch.front_porch_lights_switch
+
+
+  #####################################################################
+  ### Christmas Lights
+  #####################################################################
+#  Christmas Lights:
+#    entities:
+#      - switch.back_yard_outlet
+#      - switch.front_yard_outlet
+#      - switch.switch_four
+#
+  #####################################################################
+  ### Smart Outlets - non-light devices controlled by smart outlets
+  #####################################################################
+  Outlets:
+    control: hidden
+    entities:
+      # rf switch upstairs wipe warmer
+      - switch.switch_one
+      ## rf switch downstairs wipe warmer
+      - switch.switch_three
+      ## upstairs mini fridge (TP-LINK)
+      - switch.mini_fridge
+
+

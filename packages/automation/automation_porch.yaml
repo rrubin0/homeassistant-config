@@ -1,0 +1,28 @@
+#####################################################################
+### Porch Lights Automation
+#####################################################################
+automation:
+### Turn on the porch lights at sunset
+  - alias: Porch Lights On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:10:00'
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: group.porch_lights
+
+
+  ### Turn off the porch lights
+  - alias: Porch Lights Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '-00:15:00'
+
+    action:
+      - service: homeassistant.turn_off
+        entity_id: group.porch_lights

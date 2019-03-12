@@ -1,0 +1,61 @@
+#####################################################################
+### Input Select
+#####################################################################
+input_select:
+  ### Under Master Bed RGB Colors
+  nursery_wall_color:
+    name: Nursery Wall Color
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Off"
+      - "Crystal"
+      - "White"
+      - "Red"
+      - "Blue"
+      - "Green"
+      - "Cyan"
+      - "Pink"
+      - "Violet"
+      - "Yellow"
+
+  ### Under Master Bed RGB Effects
+  nursery_wall_effect:
+    name: Nursery Wall Effect
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Off"
+      - "Color Loop"
+      - "Color Jump"
+      - "Random"
+      - "Red Fade"
+      - "Green Fade"
+      - "Blue Fade"
+      - "Yellow Fade"
+      - "Cyan Fade"
+      - "Purple Fade"
+      - "White Fade"
+      - "RG Cross Fade"
+      - "RB Cross Fade"
+      - "GB Cross Fade"
+
+  ### Under Master Bed RGB Strobe
+  nursery_wall_strobe:
+    name: Nursery Wall Strobe
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Off"
+      - "Color Strobe"
+      - "Red"
+      - "Green"
+      - "Blue"
+      - "Yellow"
+      - "Cyan"
+      - "Purple"
+      - "White"
+
+
+
+
