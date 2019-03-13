@@ -10,6 +10,7 @@ icloud
 panels
 tts
 www
+*.gitignore
 *.conf
 *.db
 *.HA_VERSION

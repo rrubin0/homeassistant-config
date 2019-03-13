@@ -61,6 +61,7 @@ alexa:
         - scene.cloudy
         - scene.dim
         - scene.evening
+        - scene.game_time
         - scene.morning
         - scene.movie_time
 
