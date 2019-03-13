@@ -9,10 +9,9 @@ icloud
 .storage
 panels
 www
-tts
-*.gitignore
 *.conf
 *.db
+*.gitignore
 *.HA_VERSION
 *.homekit.state
 *.log
