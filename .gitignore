@@ -8,9 +8,9 @@ icloud
 .git
 .storage
 panels
-tts
 www
-.gitignore
+tts
+*.gitignore
 *.conf
 *.db
 *.HA_VERSION
