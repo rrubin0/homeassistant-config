@@ -8,10 +8,10 @@ amcrest:
     username: !secret camera_user
     password: !secret camera_password
     port: !secret north_ptz_port
-    resolution: high
+    resolution: low
     stream_source: rtsp
-    sensors:
-      - motion_detector
+    binary_sensors:
+      - motion_detected
 
   ### NURSERY PTZ
   - host: !secret nursery_ptz_host
@@ -19,7 +19,18 @@ amcrest:
     username: !secret camera_user
     password: !secret camera_password
     port: !secret nursery_ptz_port
+    resolution: low
+    stream_source: rtsp
+    binary_sensors:
+      - motion_detected
+
+  ### CRIB PTZ
+  - host: !secret nursery_crib_host
+    name: Nursery Crib
+    username: !secret camera_user
+    password: !secret camera_password
+    port: !secret nursery_crib_port
     resolution: high
     stream_source: rtsp
-    sensors:
-      - motion_detector
+    binary_sensors:
+      - motion_detected

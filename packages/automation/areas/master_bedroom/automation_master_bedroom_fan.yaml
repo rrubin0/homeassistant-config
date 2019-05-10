@@ -1,0 +1,176 @@
+#####################################################################
+### Master Bedroom Ceiling Fan Automation
+### Automatically select the best speed based on temperature
+### Speed is set via sensor based on the room temperature
+### Related Components:
+###   - sensor.master_bedroom_fan_control
+###   - input_select.master_bedroom_fan
+###
+automation:
+#####################################################################
+# Turn on the master bedroom fan if off and conditions are met
+#####################################################################
+  - alias: Master Bedroom Fan On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.master_bedroom_presence
+        from: 'off'
+        to: 'on'
+
+      - platform: state
+        entity_id: script.master_bedroom_night_time
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: switch.master_bedroom_fan
+        state: 'off'
+
+      - condition: state
+        entity_id: input_boolean.master_fan_hold
+        state: 'off'
+
+      - condition: template
+        value_template: "{{ states.sensor.master_bedroom_fan_speed.state != 'Off' }}"
+
+    action:
+      # Turn the fan on
+      - service: switch.turn_on
+        entity_id: switch.master_bedroom_fan
+
+
+#####################################################################
+# Set master bedroom fan speed automatically
+#####################################################################
+  - alias: Master Bedroom Fan Auto
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: switch.master_bedroom_fan
+        from: 'off'
+        to: 'on'
+
+      - platform: time_pattern
+        minutes: '/15'
+
+    condition:
+      - condition: state
+        entity_id: switch.master_bedroom_fan
+        state: 'on'
+    ## add condition for occupancy/night time once new detectors are here
+
+      - condition: state
+        entity_id: input_boolean.master_fan_hold
+        state: 'off'
+
+    action:
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.master_bedroom_fan_speed
+          option: "{{ states.sensor.master_bedroom_fan_speed.state }}"
+
+      - service: logbook.log
+        data_template:
+          name: "Master Bedroom Fan Speed"
+          message: "changed to {{ states.sensor.master_bedroom_fan_speed.state }}."
+
+
+#####################################################################
+# Set master bedroom fan speed manually via the user interface
+#####################################################################
+  - alias: Master Bedroom Fan Speed Select
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.master_bedroom_fan_speed
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Off' }}"
+
+    action:
+      # Reset fan switch states
+      - service: homeassistant.turn_off
+        entity_id: group.master_bedroom_fan
+
+      - delay:
+          seconds: 1
+
+      # Set the fan speed
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.master_bedroom_fan_{{ trigger.to_state.state|lower|replace(' ', '_') }}"
+
+      # Set the Input Selection to current option
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.master_bedroom_fan_speed
+          option: "{{ states.trigger.to_state.state }}"
+
+
+#####################################################################
+# Turn off the master bedroom fan if 'Off' is selected
+#####################################################################
+  - alias: Master Bedroom Fan Off Selected
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.master_bedroom_fan_speed
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state == 'Off' }}"
+
+      - condition: state
+        entity_id: switch.master_bedroom_fan
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.master_bedroom_fan
+
+      # Reset fan switch states
+      - service: homeassistant.turn_off
+        entity_id: group.master_bedroom_fan
+
+      - delay:
+          seconds: 1
+
+      ### Reset the Input Selection to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+#####################################################################
+# Turn off the master bedroom fan via schedule
+#####################################################################
+  - alias: Master Bedroom Fan Off Triggered
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '11:30:00'
+
+      - platform: state
+        entity_id: binary_sensor.master_bedroom_presence
+        to: 'off'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.sleeping
+        state: 'off'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.master_bedroom_fan
+

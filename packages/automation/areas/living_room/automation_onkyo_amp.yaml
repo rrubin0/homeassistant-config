@@ -1,0 +1,26 @@
+#####################################################################
+### Automations for Onkyo Amp
+#####################################################################
+automation:
+  ### Living Room Onkyo Input Select
+  - alias: Living Room Amp Input Select
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.onkyo_amp_input
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.amp_input_{{ trigger.to_state.state|lower }}"
+
+# Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

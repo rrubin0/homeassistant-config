@@ -1,0 +1,8 @@
+#####################################################################
+#   Security Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.front_entry_motion:
+      friendly_name: "Front Entry Motion"
+      icon: mdi:run

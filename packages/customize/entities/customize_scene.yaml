@@ -3,34 +3,6 @@
 #####################################################################
 homeassistant:
   customize:
-    domain.node_anchors:
-      customize: &customize
-        domain: 'scene'
-
-      hidden: &hidden
-        <<: *customize
-        hidden: true
-
 
     scene.morning:
       icon: mdi:weather-sunset-up
-
-    scene.evening:
-      friendly_name: "Evening"
-      icon: mdi:play-circle
-
-    scene.cloudy:
-      friendly_name: "Cloudy"
-      icon: mdi:play-circle
-
-    scene.movie_time:
-      friendly_name: "Movie Time"
-      icon: mdi:play-circle
-
-    scene.movie_paused:
-      <<: *hidden
-      icon: mdi:play-circle
-
-    scene.movie_ended:
-      <<: *hidden
-      icon: mdi:play-circle

@@ -1,0 +1,21 @@
+#####################################################################
+### Binary Sensor: if any window is open, turn on
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      all_windows:
+        friendly_name: "All Windows"
+        value_template: >-
+          {{ not is_state('sensor.guest_room_window', '23')
+             or not is_state('sensor.living_room_north_window', '23')
+             or not is_state('binary_sensor.master_window_northwest', 'off')
+             or not is_state('binary_sensor.master_window_southwest', 'off') }}
+        entity_picture_template: >-
+          {% if is_state('binary_sensor.all_windows', 'on') %}
+            /local/red_shield.png
+          {% else %}
+            /local/green_shield.png
+          {% endif %}
+        delay_off:
+          seconds: 10

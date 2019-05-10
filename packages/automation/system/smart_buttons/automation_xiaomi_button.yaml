@@ -1,0 +1,78 @@
+#####################################################################
+### Automation
+#####################################################################
+automation:
+  ### Smart Button Single Press
+  - alias: Smart Button Single Press
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.xiaomi_smart_button
+        click_type: single
+
+    action:
+      - service: timer.start
+        entity_id: timer.bedtime
+
+      - service: media_player.volume_set
+        entity_id: media_player.living_room
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+      - service: notify.alexa_media
+        data:
+          target: media_player.living_room
+          message: "Goodnight. See you in the morning."
+          data:
+            type: tts
+
+### Preserve old setting prior to 1.2.3 update
+#      - service: media_player.alexa_tts
+#        data_template:
+#          entity_id: media_player.living_room
+#          message: "Goodnight. See you in the morning."
+
+
+  ### Smart Button Double Press
+  - alias: Smart Button Double Press
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.xiaomi_smart_button
+        click_type: double
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.bedtime
+
+
+  ### Smart Button other press examples
+#  - alias: Toggle couch light on double click
+#    trigger:
+#      platform: event
+#      event_type: xiaomi_aqara.click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d000xxxxxc2
+#        click_type: double
+#    action:
+#      service: switch.toggle
+#      entity_id: switch.wall_switch_right_158d000xxxxx01
+#  - alias: Let a dog bark on long press
+#    trigger:
+#      platform: event
+#      event_type: xiaomi_aqara.click
+#      event_data:
+#        entity_id: binary_sensor.switch_158d000xxxxxc2
+#        click_type: long_click_press
+#    action:
+#      service: xiaomi_aqara.play_ringtone
+#      data:
+#        gw_mac: xxxxxxxxxxxx
+#        ringtone_id: 8
+#        ringtone_vol: 8
+
+

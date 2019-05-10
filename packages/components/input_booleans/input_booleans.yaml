@@ -1,0 +1,60 @@
+#####################################################################
+### Input Booleans
+#####################################################################
+input_boolean:
+  visitor_mode:
+    name: Visitor Mode
+    initial: off
+
+  vacation_mode:
+    name: Vacation Mode
+    initial: off
+
+  dinner_time:
+    name: Dinner Time
+    initial: off
+
+  door_held_open:
+    name: Door Held Open
+    initial: off
+
+  keg_door_open:
+    name: Keg Door Open
+    initial: off
+
+  all_secure:
+    name: All Secure
+    initial: off
+
+  sleeping:
+    name: Sleeping
+    initial: off
+
+  nursery_presence:
+    name: Nursery Presence
+    initial: off
+
+  peak_hours:
+    name: Peak Hours
+    icon: mdi:clock
+
+  after_hours:
+    name: After Hours
+    icon: mdi:clock
+
+  rain:
+    name: Rain Sensor
+    icon: mdi:weather-rainy
+
+  announce:
+    name: Alexa Announcements
+    initial: off
+
+  master_fan_hold:
+    name: Master Bedroom Fan Hold
+    initial: off
+
+  nursery_fan_hold:
+    name: Nursery Fan Hold
+    initial: off
+

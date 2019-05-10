@@ -42,11 +42,11 @@
       speech:
         type: plain
         text: >
-          {%- if is_state('device_tracker.i8plus', 'home') and
+          {%- if is_state('device_tracker.rip8plus', 'home') and
                  is_state('device_tracker.mip8', 'home') -%}
             You are both home safe!
           {%- else -%}
-            Rick is at {{ states.device_tracker.i8plus.state.replace('_', ' ') }}.
+            Rick is at {{ states.device_tracker.rip8plus.state.replace('_', ' ') }}.
             and Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
           {% endif %}
 
@@ -64,7 +64,7 @@
         type: plain
         text: >
           {%- if User.lower() == "rick" -%}
-            Rick is at {{ states.device_tracker.i8plus.state.replace('_', ' ') }}.
+            Rick is at {{ states.device_tracker.rip8plus.state.replace('_', ' ') }}.
             {%- elif User.lower() == "megan" -%}
               Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
             {%- elif User.lower() == "meg" -%}

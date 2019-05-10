@@ -1,8 +1,7 @@
 #####################################################################
-### Sensor
+### Sensor: Kegerator Door Status
 #####################################################################
 sensor:
-### Kegerator Door Status
   - platform: template
     sensors:
       kegerator_door_state:

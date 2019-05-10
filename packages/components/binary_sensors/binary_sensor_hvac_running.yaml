@@ -1,0 +1,14 @@
+#####################################################################
+### Binary Sensor - HVAC Status
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      hvac_running:
+        friendly_name: "HVAC Running"
+        value_template: >-
+          {{ states.climate.upstairs.attributes.operation != 'idle' or
+             states.climate.downstairs.attributes.operation != 'idle' }}
+
+        delay_off:
+          minutes: 1

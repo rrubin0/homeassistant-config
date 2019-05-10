@@ -1,0 +1,126 @@
+#####################################################################
+#  Automation - Save Master Bedroom Fan Speed State to MQTT
+#####################################################################
+automation:
+  - alias: Master Bedroom Fan Speed State Save
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: switch.master_bedroom_fan, switch.master_bedroom_fan_1, switch.master_bedroom_fan_2, switch.master_bedroom_fan_3, switch.master_bedroom_fan_4, switch.master_bedroom_fan_5, switch.master_bedroom_fan_6, switch.master_bedroom_fan_7, switch.master_bedroom_fan_8, switch.master_bedroom_fan_9, switch.master_bedroom_fan_10, switch.master_bedroom_fan_11, switch.master_bedroom_fan_12
+
+    action:
+      service: mqtt.publish
+      data_template:
+        topic: "/home/mbrfanspeed/{{ trigger.entity_id.split('.')[1] }}"
+        retain: true
+        qos: 1
+        payload: '{{ trigger.to_state.state }}'
+
+
+#####################################################################
+# Startup event - Restore Master Bedroom Fan Speed
+#####################################################################
+  - alias: Master Bedroom Fan Speed State Restore
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: homeassistant
+      event: start
+
+    action:
+      - delay:
+          minutes: 1
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_1.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_1
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_2.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_2
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_3.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_3
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_4.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_4
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_5.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_5
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_6.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_6
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_7.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_7
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_8.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_8
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_9.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_9
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_10.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_10
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_11.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}    
+        entity_id: switch.master_bedroom_fan_11
+      - service_template: >
+          {%- if states.sensor.master_bedroom_fan_12.state | lower == "on" -%}
+              homeassistant.turn_on
+          {%- else  -%}
+              homeassistant.turn_off
+          {%- endif -%}
+        data:
+          entity_id: switch.master_bedroom_fan_12
+

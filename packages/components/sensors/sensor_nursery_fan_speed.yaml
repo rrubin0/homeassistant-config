@@ -1,0 +1,20 @@
+#####################################################################
+### Nursery Ceiling Fan Control via temperature
+#####################################################################
+sensor:
+  ### Nursery Fan Temp Setting
+  - platform: template
+    sensors:
+      nursery_fan_speed:
+        friendly_name: "Nursery Fan Speed"
+        value_template: >-
+          {% set temperature = states('sensor.nursery_temperature')|float(none) %}
+          {% if 74.0 <= temperature <=76.0 %}
+            low
+          {% elif 76.1 <= temperature <=79.0 %}
+            medium
+          {% elif temperature > 79.0 %}
+            high
+          {% else %}
+            off
+          {% endif %}

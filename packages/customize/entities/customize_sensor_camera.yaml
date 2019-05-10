@@ -1,0 +1,35 @@
+#####################################################################
+#   Security Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+
+    sensor.nursery_crib_motion_detected:
+      friendly_name: "Nursery Crib Motion"
+      icon: mdi:run
+
+    sensor.nursery_ptz_motion_detected:
+      friendly_name: "Nursery PTZ Motion"
+      icon: mdi:run
+
+    sensor.nw_ptz_motion_detected:
+      friendly_name: "NW PTZ Motion"
+      icon: mdi:run
+
+    sensor.nursery_ptz_preset:
+      friendly_name: "Nursery PTZ Preset"
+      icon: mdi:arrow-expand-all
+      
+
+    sensor.nw_ptz_preset:
+      friendly_name: "NW PTZ Preset"
+      icon: mdi:arrow-expand-all
+
+    sensor.nursery_ptz_sd_used:
+      friendly_name: "Nursery PTZ SD Card"
+      icon: mdi:sd
+
+    sensor.nw_ptz_sd_used:
+      friendly_name: "NW PTZ SD Card"
+      icon: mdi:sd
+

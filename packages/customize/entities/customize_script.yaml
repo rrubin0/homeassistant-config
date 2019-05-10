@@ -83,9 +83,9 @@ homeassistant:
     script.master_bedroom_night_time:
       icon: mdi:weather-night
 
-    script.mbr_fan_speed_step:
-      friendly_name: "Master Bedroom Fan Auto"
-      icon: mdi:fan
+#    script.mbr_fan_speed_step:
+#      friendly_name: "Master Bedroom Fan Auto"
+#      icon: mdi:fan
 
     script.tv_power_off:
       friendly_name: "TV Shutdown"
@@ -135,6 +135,10 @@ homeassistant:
 
     script.hue_lr_nightlight:
       friendly_name: "Night Mode"
+      icon: mdi:play-circle
+
+    script.hue_lr_normal:
+      friendly_name: "Normal"
       icon: mdi:play-circle
 
     script.hue_lr_bright:

@@ -1,0 +1,14 @@
+#####################################################################
+#   Security Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+
+    sensor.living_room_north_window_tamper:
+      friendly_name: "Living Room N. Window Tamper"
+      #icon: mdi:home-outline
+
+    sensor.guest_room_window_tamper:
+      friendly_name: "Guest Room Window Tamper"
+      #icon: mdi:home-outline
+

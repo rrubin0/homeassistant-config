@@ -6,5 +6,5 @@ media_player:
     host: !secret appletv_host
     login_id: !secret appletv_login_id
     name: "Apple TV"
-    start_off: false
+    start_off: true
     credentials: !secret appletv_creds

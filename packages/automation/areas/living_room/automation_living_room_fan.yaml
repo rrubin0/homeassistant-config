@@ -1,0 +1,49 @@
+#####################################################################
+### Living Room Fan Controls
+#####################################################################
+automation:
+  ### Living Room Ceiling Fan
+  - alias: Living Room Ceiling Fan Speed Select
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_select.living_room_fan_speed
+
+    condition:
+      - condition: template
+        value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
+
+    action:
+      ### Turn the corresponding switch on to send the fan speed command
+      - service: switch.turn_on
+        entity_id: switch.living_room_fan
+
+      - delay:
+          seconds: 2
+
+      - service: switch.turn_on
+        data_template:
+          entity_id: "switch.living_room_fan_{{ trigger.to_state.state|lower|replace(' ', '_') }}"
+
+      ### Reset the Input Selection to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  ### Default Living Room Ceiling Fan to High
+  - alias: Living Room Ceiling Fan Default Speed
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: switch.living_room_fan
+        from: 'off'
+        to: 'on'
+
+    action:
+      ### Turn the corresponding switch on to send the fan speed command
+      - service: input_select.select_option
+        data_template:
+          entity_id: input_select.living_room_fan_speed
+          option: High

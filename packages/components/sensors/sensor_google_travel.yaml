@@ -41,7 +41,7 @@ sensor:
     scan_interval: 600
     name: Ricks ETA Home
     api_key: !secret google_time_travel_api_key
-    origin: device_tracker.i8plus
+    origin: device_tracker.rip8plus
     destination: Home
 
   - platform: template

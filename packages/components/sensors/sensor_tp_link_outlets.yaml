@@ -52,28 +52,28 @@ sensor:
         unit_of_measurement: 'kWh'
 
 
-## TP-LINK Outlet Usage: Mini Fridge
+## TP-LINK Outlet Usage: Kegerator
   - platform: template
     sensors:
-      mini_fridge_amps:
-        friendly_name_template: "{{ states.switch.mini_fridge.name}} Current"
-        value_template: '{{ states.switch.mini_fridge.attributes["current_a"] | float }}'
+      kegerator_amps:
+        friendly_name_template: "{{ states.switch.kegerator.name}} Current"
+        value_template: '{{ states.switch.kegerator.attributes["current_a"] | float }}'
         unit_of_measurement: 'A'
-      mini_fridge_watts:
-        friendly_name_template: "{{ states.switch.mini_fridge.name}} Current Consumption"
-        value_template: '{{ states.switch.mini_fridge.attributes["current_power_w"] | float }}'
+      kegerator_watts:
+        friendly_name_template: "{{ states.switch.kegerator.name}} Current Consumption"
+        value_template: '{{ states.switch.kegerator.attributes["current_power_w"] | float }}'
         unit_of_measurement: 'W'
-      mini_fridge_total_kwh:
-        friendly_name_template: "{{ states.switch.mini_fridge.name}} Total Consumption"
-        value_template: '{{ states.switch.mini_fridge.attributes["total_energy_kwh"] | float }}'
+      kegerator_total_kwh:
+        friendly_name_template: "{{ states.switch.kegerator.name}} Total Consumption"
+        value_template: '{{ states.switch.kegerator.attributes["total_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
-      mini_fridge_volts:
-        friendly_name_template: "{{ states.switch.mini_fridge.name}} Voltage"
-        value_template: '{{ states.switch.mini_fridge.attributes["voltage"] | float }}'
+      kegerator_volts:
+        friendly_name_template: "{{ states.switch.kegerator.name}} Voltage"
+        value_template: '{{ states.switch.kegerator.attributes["voltage"] | float }}'
         unit_of_measurement: 'V'
-#      mini_fridge_today_kwh:
-#        friendly_name_template: "{{ states.switch.mini_fridge.name}} Today's Consumption"
-#        value_template: '{{ states.switch.mini_fridge.attributes["today_energy_kwh"] | float }}'
+#      kegerator_today_kwh:
+#        friendly_name_template: "{{ states.switch.kegerator.name}} Today's Consumption"
+#        value_template: '{{ states.switch.kegerator.attributes["today_energy_kwh"] | float }}'
 #        unit_of_measurement: 'kWh'
 
 

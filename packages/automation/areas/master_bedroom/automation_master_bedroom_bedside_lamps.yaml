@@ -1,0 +1,248 @@
+#####################################################################
+### Master Bedroom Bedside Lamp Switches
+#####################################################################
+automation:
+  #################################################
+  ### Bedside Lamp Rick's Switches
+  #################################################
+
+  ### Rick's Bedside Button Left Toggles Rick's Lamp
+  - alias: Ricks Left Toggles Ricks Lamp
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_rick
+        click_type: single
+
+    action:
+      - service: light.toggle
+        data:
+          entity_id: light.master_bedside_lamp_rick
+
+
+  ### Rick's Bedside Button Right Toggles Meg's Lamp
+  - alias: Ricks Right Toggles Megs Lamp
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_right_rick
+        click_type: single
+
+    action:
+      - service: light.toggle
+        data:
+          entity_id: light.master_bedside_lamp_megs
+
+
+  ### Rick's Bedside Button Both Toggles Both Lamps
+  - alias: Ricks Both Toggles Both Lamps
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_both_rick
+        click_type: both
+
+    action: # this is a smarter toggle since it checks the state of the hue light group first and controls both lights
+      - service_template: >-
+          {% if is_state('light.master_bedside_lamps', 'off') %}
+            homeassistant.turn_on
+          {% else %}
+            homeassistant.turn_off
+          {% endif %}
+        data:
+          entity_id: light.master_bedside_lamps
+
+
+  ### Rick's Bedside Button Left Double-Click Turns on the fan
+  - alias: Ricks Left Double Turns On Fan
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_rick
+        click_type: double
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.master_bedroom_fan
+
+
+  ### Rick's Bedside Button Right Double-Click Turns off the fan
+  - alias: Ricks Right Double Turns Off Fan
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_right_rick
+        click_type: double
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.master_bedroom_fan
+
+
+  # Rick's Bedside Button Left Hold - Dim
+  - alias: Ricks Left Hold Dim
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_rick
+        click_type: long
+
+
+    action:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Dimmed"
+
+
+  # Rick's Bedside Button Right Hold - Bright
+  - alias: Ricks Right Hold Bright
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_right_rick
+        click_type: long
+
+    action:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Bright"
+
+
+  #################################################
+  ### Bedside Lamp Meg's Switches
+  #################################################
+
+  ### Meg's Bedside Button Left Toggles Meg's Lamp
+  - alias: Ricks Left Toggles Megs Lamp
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_megs
+        click_type: single
+
+    action:
+      - service: light.toggle
+        data:
+          entity_id: light.master_bedside_lamp_megs
+
+
+  ### Meg's Bedside Button Right Toggles Rick's Lamp
+  - alias: Megs Right Toggles Ricks Lamp
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_right_megs
+        click_type: single
+
+    action:
+      - service: light.toggle
+        data:
+          entity_id: light.master_bedside_lamp_rick
+
+
+  ### Meg's Bedside Button Both Toggles Both Lamps
+  - alias: Megs Both Toggles Both Lamps
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_both_megs
+        click_type: both
+
+    action: # this is a smarter toggle since it checks the state of the hue light group first and controls both lights
+      - service_template: >-
+          {% if is_state('light.master_bedside_lamps', 'off') %}
+            homeassistant.turn_on
+          {% else %}
+            homeassistant.turn_off
+          {% endif %}
+        data:
+          entity_id: light.master_bedside_lamps
+
+
+  ### Megs's Bedside Button Left Double-Click Turns on the fan
+  - alias: Megs Left Double Turns On Fan
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_megs
+        click_type: double
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.master_bedroom_fan
+
+
+  ### Megs's Bedside Button Right Double-Click Turns off the fan
+  - alias: Megs Right Double Turns Off Fan
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_megs
+        click_type: double
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.master_bedroom_fan
+
+
+  # Meg's Bedside Button Left Hold - Dim
+  - alias: Megs Left Hold Dim
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_left_megs
+        click_type: long
+
+
+    action:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Dimmed"
+
+
+  # Meg's Bedside Button Right Hold - Bright
+  - alias: Megs Right Hold Bright
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.master_bedside_right_megs
+        click_type: long
+
+
+    action:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Bright"
+

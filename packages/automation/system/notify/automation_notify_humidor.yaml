@@ -1,0 +1,55 @@
+#####################################################################
+### Automation Humidor
+#####################################################################
+automation:
+  ### Humidor is low - notify to refill
+  - alias: Humidor Low
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.sn1_humidity
+        below: 65
+        for:
+          minutes: 30
+
+    action:
+      - service: light.turn_on
+        entity_id: light.sn1_led
+        data:
+          brightness: 255
+          color_name: "red"
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Refill Humidor"
+          message: "Humidor is {{ states.sensor.sn1_humidity.state }}% refill soon!"
+          data:
+            push:
+              sound:
+                name: default
+
+      - delay:
+          minutes: 60
+
+
+  ### Humidor OK - reset notification and indicator
+  - alias: Humidor OK
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.sn1_humidity
+        above: 66
+
+    action:
+      - service: light.turn_on
+        entity_id: light.sn1_led
+        data:
+          brightness: 255
+          color_name: "green"
+
+      - delay:
+          minutes: 30
+
+      - service: light.turn_off
+        entity_id: light.sn1_led
+

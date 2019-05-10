@@ -1,6 +1,6 @@
-  ################################################
-  ## Customize Binary Sensors
-  ################################################
+################################################
+## Customize Binary Sensors
+################################################
 homeassistant:
   customize:
     binary_sensor.rubino_online:
@@ -8,3 +8,25 @@ homeassistant:
 
     binary_sensor.xiaomi_smart_button:
       friendly_name: "Smart Button"
+
+#    binary_sensor.all_windows:
+#      friendly_name: "All Windows"
+#      entity_picture_template: >-
+#        {% if is_state('binary_sensor.all_windows', 'on') %}
+#          /local/red_shield.png
+#        {% else %}
+#          /local/green_shield.png
+#        {% endif %}
+#
+#    binary_sensor.all_doors:
+#      friendly_name: "All Doors"
+#      entity_picture_template: >-
+#        {% if is_state('binary_sensor.all_doors', 'on') %}
+#           /local/red_shield.png
+#        {% else %}
+#           /local/green_shield.png
+#        {% endif %}
+
+
+
+

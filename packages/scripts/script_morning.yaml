@@ -1,0 +1,61 @@
+#####################################################################
+### Morning Sequence
+#####################################################################
+script:
+  morning_sequence:
+    sequence:
+    ### 06:35
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bathroom"
+        scene_name: "Morning"
+
+    - delay:
+        minutes: 10
+    ### 06:45
+    - service: light.turn_on
+      data:
+        entity_id: light.master_bath_vanity
+        brightness: 50
+        transition: 60
+
+    - service: homeassistant.turn_on
+      entity_id: group.accent_lights
+
+    - delay:
+        minutes: 10
+    ### 06:55
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights_level
+        brightness: 60
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 140
+        transition: 30
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Sunrise"
+
+    - delay:
+        minutes: 15
+    ### 07:10
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights_level
+        brightness: 200
+
+    - delay:
+        minutes: 15
+    ### 07:25
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Normal"
+
+    - service: light.turn_off
+      entity_id: light.kitchen_lights_level

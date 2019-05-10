@@ -86,3 +86,51 @@ sensor:
           {% endif %}
 
 
+### Master Bedroom Northwest Window
+  - platform: template
+    sensors:
+      master_bedroom_northwest_window_state:
+        value_template: >-
+          {% set state = states('binary_sensor.master_window_northwest') %}
+          {% if state == 'on' %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+        friendly_name: "Master Bedroom Northwest Window"
+        icon_template: >-
+          {% set state = states('binary_sensor.master_window_northwest')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi: window-closed
+          {% else %}
+            {% if state == 'on' %}
+              mdi:window-open
+            {% else %}
+              mdi:window-closed
+            {% endif %}
+          {% endif %}
+
+
+### Master Bedroom Southwest Window
+  - platform: template
+    sensors:
+      master_bedroom_southwest_window_state:
+        value_template: >-
+          {% set state = states('binary_sensor.master_window_southwest') %}
+          {% if state == 'on' %}
+            Open
+          {% else %}
+            Closed
+          {% endif %}
+        friendly_name: "Master Bedroom Southwest Window"
+        icon_template: >-
+          {% set state = states('binary_sensor.master_window_southwest')|default('unknown') %}
+          {% if state == 'unknown' %}
+            mdi: window-closed
+          {% else %}
+            {% if state == 'on' %}
+              mdi:window-open
+            {% else %}
+              mdi:window-closed
+            {% endif %}
+          {% endif %}

@@ -10,9 +10,7 @@ scene:
 
       light.living_room:
         state: off
-        transition: 15
+        transition: 10
 
       light.foyer_lights_level:
-        state: on
-        brightness: 20
-        transition: 10
+        state: off

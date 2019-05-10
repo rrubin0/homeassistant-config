@@ -1,0 +1,174 @@
+#####################################################################
+###  Device Tracker automations for presence detection
+#####################################################################
+automation:
+  ### Away Mode Countdown
+  - alias: Away Mode Countdown
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 5
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: timer.start
+        entity_id: timer.away_mode
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Away Detected"
+          message: "Counting down..."
+          data:
+            push:
+              category: cancelaway
+
+
+  ### Away Mode Timer Finish
+  - alias: Away Mode On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.away_mode
+
+    action:
+      - service: script.away
+
+
+  ### Away Mode Cancel
+  - alias: Away Mode Cancel
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: template
+        value_template: "{{ states('timer.away_mode') != 'idle'}}"
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.away_mode
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Away Mode Cancelled"
+          message: "Away mode cancelled."
+
+
+  ### Turn on Visitor Mode if we forget to
+  - alias: Enable Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.lock_south_door_status') == 'Unlocked by Dog Sitter' }}"
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.visitor_mode
+
+
+  ### Cancel Visitor Mode
+  - alias: Cancel Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+        for:
+          minutes: 15
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.visitor_mode
+
+
+  ### Announce Rick's arrival
+  - alias: Announce Rick On Arrival
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: proximity.rick
+        below: 5
+
+    condition:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+
+      - condition: time
+        before: '19:00:00'
+        after: '14:00:00'
+
+      - condition: state
+        entity_id: device_tracker.rip8plus
+        state: 'not_home'
+
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.living_room
+        data:
+          entity_id: media_player.living_room
+          volume_level: .5
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+      - service: notify.alexa_media
+        data:
+          target: media_player.living_room
+          message: "Good news, Rick is less than 10 minutes away and will be home soon."
+          data:
+            type: tts
+
+      - delay:
+          seconds: 3
+
+      - service: media_player.volume_set
+        entity_id: media_player.living_room
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+### Preserve old setting prior to 1.2.3 component update
+#    action:
+#      - service: media_player.volume_set
+#        data:
+#          entity_id: media_player.living_room
+#          volume_level: .5
+#
+#      - service: media_player.alexa_tts
+#        data_template:
+#          entity_id: media_player.living_room
+#          message: "Good news, Rick is less than 10 minutes away and will be home soon"

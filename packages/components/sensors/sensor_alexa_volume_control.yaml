@@ -1,0 +1,17 @@
+################################################################
+## Sensor - Time based volume control for Alexa
+################################################################
+sensor:
+  ### Time Based Volume Control for Alexa
+  - platform: template
+    sensors:
+      alexa_volume:
+        value_template: >-
+          {% if 7 <= now().strftime('%H')|int <= 11 %}
+            0.4
+          {% elif 11 <= now().strftime('%H')|int <= 19 %}
+            0.6
+          {% else %}
+            0.3
+          {% endif %}
+        entity_id: sensor.time

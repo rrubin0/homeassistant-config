@@ -1,0 +1,51 @@
+#####################################################################
+### Automation - Peak Hours
+#####################################################################
+automation:
+  - alias: Peak Hours On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '15:00:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+      - condition: state
+        entity_id: input_boolean.holiday
+        state: 'off'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.peak_hours
+
+
+  - alias: Peak Hours Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '18:00:00'
+
+      - platform: state
+        entity_id: input_boolean.holiday
+        from: 'off'
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.peak_hours
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.peak_hours

@@ -1,0 +1,59 @@
+#####################################################################
+### Automations to notify us when conditions change to save energy
+### 
+### 
+### Related Components:
+###   - automation_ecobee_downstairs.yaml
+###   - automation_ecobee_upstairs.yaml
+###   - script.tts_warm_weather.yaml
+###   - notify/ios.yaml
+###
+automation:
+#####################################################################
+### Reminder to Close Doors and Windows
+#####################################################################
+  - alias: Reminder Close Doors When Weather is Warm
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.dark_sky_temperature
+        above: 84.5
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.door_held_open
+        state: 'on'
+
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: script.tts_warm_weather
+
+
+#####################################################################
+### Notify if awesome weather
+#####################################################################
+  - alias: Notify if Awesome Weather
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.season
+        to: 'Awesome'
+
+    condition:
+      - condition: time
+        after: '08:00:00'
+        before: '21:00:00'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Awesome Weather"
+          message: "It's {{ states.sensor.dark_sky_temperature.state|round }} degrees outside. Time to open up the house!"
+          data:
+            push:
+              sound:
+                name: default
+

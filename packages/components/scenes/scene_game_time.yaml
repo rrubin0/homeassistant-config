@@ -4,8 +4,11 @@
 scene:
   - name: Game Time
     entities:
-      group.game_room_lights:
+      light.billiards:
         state: on
         brightness: 170
         transition: 5
+
+      switch.game_room_floodlights:
+        state: on
 

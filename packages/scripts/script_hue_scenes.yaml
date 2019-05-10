@@ -1,0 +1,88 @@
+#####################################################################
+### Philips Hue Scenes
+#####################################################################
+script:
+  hue_lr_dimmed:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Dimmed"
+
+  hue_lr_nightlight:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Nightlight"
+
+  hue_lr_normal:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Normal"
+
+  hue_lr_bright:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Bright"
+
+  hue_lr_christmas:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Christmas"
+
+  hue_lr_movie:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Movie"
+
+  hue_lr_sunrise:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunrise"
+
+  hue_lr_sunset:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunset"
+
+  hue_lr_minty:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Minty"
+
+  hue_lr_daybreak:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Daybreak"
+
+  hue_mbath_morning:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bathroom"
+          scene_name: "Morning"
+
+  hue_master_bedside_dimmed:
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Dimmed"
+

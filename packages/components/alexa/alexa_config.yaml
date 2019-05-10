@@ -27,6 +27,8 @@ alexa_media:
 #####################################################################
 alexa:
   smart_home:
+    client_id: !secret amazon_client_id
+    client_secret: !secret amazon_client_secret
     filter:
       include_entities:
       ################################################
@@ -44,6 +46,7 @@ alexa:
         - script.hue_lr_minty
         - script.hue_lr_movie
         - script.hue_lr_nightlight
+        - script.hue_lr_normal
         - script.hue_lr_sunrise
         - script.hue_lr_sunset
         - script.hue_mbath_morning
@@ -61,6 +64,7 @@ alexa:
         - scene.cloudy
         - scene.dim
         - scene.evening
+        - scene.late_evening
         - scene.game_time
         - scene.morning
         - scene.movie_time
@@ -124,6 +128,7 @@ alexa:
         - switch.directv_power
         - switch.downstairs_bath_lights_switch
         - switch.flower_lamp
+        - switch.floor_vase
         - switch.fountains_switch
         - switch.game_room_floodlights
         - switch.living_room_fan
@@ -195,7 +200,7 @@ alexa:
       ################################################
       ## Automations
       ################################################
-        - automation.climate_downstairs_door_left_open
+        - automation.climate_downstairs_door_held_open
         - automation.doorbell_pressed
         - automation.fountains_on
         - automation.south_door_unlock_on_arrival
@@ -205,7 +210,7 @@ alexa:
 ## Custom Names
 ################################################
     entity_config:
-      automation.climate_downstairs_door_left_open:
+      automation.climate_downstairs_door_held_open:
         name: Open Door Schedule
         description: Automation for door held open
 

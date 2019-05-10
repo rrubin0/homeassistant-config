@@ -6,6 +6,9 @@ homeassistant:
     "input_boolean.*":
       icon: mdi:toggle-switch
 
+    "scene.*":
+      icon: mdi:play-circle
+
     "script.*":
       icon: mdi:play-circle
 
@@ -23,3 +26,6 @@ homeassistant:
 
     "timer.*":
       icon: mdi:timer
+
+    "sensor.*illumination*":
+      icon: mdi:white-balance-sunny

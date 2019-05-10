@@ -7,4 +7,4 @@ device_tracker:
     username: !secret router_user
     password: !secret router_pass
     track_new_devices: no
-    consider_home: 180
+    consider_home: 120

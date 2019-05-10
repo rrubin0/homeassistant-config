@@ -1,0 +1,157 @@
+#####################################################################
+### Schedule the baby wipe warmers
+#####################################################################
+automation:
+  ### downstairs wipe warmer schedule ON
+  - alias: Downstairs Wipe Warmer On
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '07:30:00'
+
+      - platform: template
+        value_template: "{{ states.sensor.living_room_temperature.state <= '78.5' }}"
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+      - condition: template
+        value_template: "{{ states.sensor.living_room_temperature.state < '79' }}"
+
+      - condition: time
+        before: '19:30:00'
+        after: '07:29:58'
+
+      - condition: state
+        entity_id: switch.switch_three
+        state: 'off'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_three
+
+
+  ### downstairs wipe warmer schedule OFF
+  - alias: Downstairs Wipe Warmer Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: script.bedtime
+        from: 'off'
+        to: 'on'
+
+      - platform: template
+        value_template: "{{ states.sensor.living_room_temperature.state >= '79' }}"
+
+      - platform: time
+        at: '20:30:00'
+
+    condition:
+      - condition: state
+        entity_id: switch.switch_three
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.switch_three
+
+
+#  ### downstairs wipe warmer return
+#  - alias: Downstairs Wipe Warmer Return
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: group.all_devices
+#        from: 'not_home'
+#        to: 'home'
+#
+#    condition:
+#      - condition: time
+#        before: '19:00:00'
+#
+#      - condition: template
+#        value_template: "{{ states.sensor.living_room_temperature.state < '78.5' }}"
+#
+#    action:
+#      - service: switch.turn_on
+#        entity_id: switch.switch_three
+
+
+  ### upstairs wipe warmer schedule ON
+  - alias: Upstairs Wipe Warmer On
+    initial_state: 'off'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '19:00:00'
+
+      - platform: template
+        value_template: "{{ states.sensor.nursery_temperature.state <= '78.5' }}"
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+      - condition: template
+        value_template: "{{ states.sensor.nursery_temperature.state < '79' }}"
+
+      - condition: state
+        entity_id: switch.switch_one
+        state: 'off'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.switch_one
+
+
+  ### upstairs wipe warmer schedule OFF
+  - alias: Upstairs Wipe Warmer Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '08:00:00'
+
+      - platform: template
+        value_template: "{{ states.sensor.nursery_temperature.state >= '78.6' }}"
+
+    condition:
+      - condition: state
+        entity_id: switch.switch_one
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.switch_one
+
+
+#  ### upstairs wipe warmer return
+#  - alias: Upstairs Wipe Warmer Return
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: group.all_devices
+#        from: 'not_home'
+#        to: 'home'
+#
+#    condition:
+#      - condition: time
+#        after: '18:30:00'
+#
+#      - condition: state
+#        entity_id: switch.switch_one
+#        state: 'off'
+#
+#      - condition: template
+#        value_template: "{{ states.sensor.nursery_temperature.state < '79' }}"
+#
+#    action:
+#      - service: switch.turn_on
+#        entity_id: switch.switch_one

@@ -3,7 +3,7 @@
 #####################################################################
 homeassistant:
   customize:
-    device_tracker.i8plus:
+    device_tracker.rip8plus:
       friendly_name: "Rick"
       entity_picture: /local/rick.jpg
 

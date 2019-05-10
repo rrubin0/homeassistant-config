@@ -2,13 +2,13 @@
 ### Office Lights
 #####################################################################
 light:
-  ### office desk lamp
-  - platform: flux_led
-    devices:
-      !secret office_desk_lamp_host:
-        name: office_desk_lamp
-#        protocol: ledenet
-        mode: rgbw
+#  ### office desk lamp
+#  - platform: flux_led
+#    devices:
+#      !secret office_desk_lamp_host:
+#        name: office_desk_lamp
+##        protocol: ledenet
+#        mode: rgbw
 
 
   ### humidor sensor light

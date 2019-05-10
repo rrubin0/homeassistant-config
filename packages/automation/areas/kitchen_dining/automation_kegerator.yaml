@@ -1,0 +1,26 @@
+#####################################################################
+### Kegerator Power Outlet (cut power at peak usage times)
+#####################################################################
+automation:
+  ### Kegerator On
+  - alias: Kegerator On
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '18:00:00'
+
+    action:
+      - service: switch.turn_on
+        entity_id: switch.kegerator
+
+
+  ### Kegerator Off
+  - alias: Kegerator Off
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '15:00:00'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.kegerator

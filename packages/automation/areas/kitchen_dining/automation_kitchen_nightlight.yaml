@@ -1,0 +1,37 @@
+#####################################################################
+### Kitchen Nightlight (Xiamomi Gateway Light)
+#####################################################################
+automation:
+  ### Nightlight On
+  - alias: Kitchen Nightlight On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '00:15:00'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcb7da52
+          brightness: 125
+          hs_color: [225,15]
+
+
+  ### Nightlight Off
+  - alias: Kitchen Nightlight Off
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: '00:15:00'
+
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcb7da52

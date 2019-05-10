@@ -1,0 +1,21 @@
+#####################################################################
+### Master Bathroom - mini fridge automations for baby bottles
+#####################################################################
+automation:
+  ### mini fridge OFF schedule
+  - alias: Mini Fridge OFF
+    initial_state: 'on'
+    hide_entity: True
+    trigger:
+      - platform: time
+        at: '09:45:00'
+
+    condition:
+      - condition: state
+        entity_id: switch.mini_fridge
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.mini_fridge
+

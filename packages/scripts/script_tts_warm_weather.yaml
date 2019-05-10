@@ -1,0 +1,37 @@
+#####################################################################
+### Warm Weather announcement via Alexa TTS
+#####################################################################
+script:
+  ### Warm Weather while door is open
+  tts_warm_weather:
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Warm Weather"
+        message: "Please close doors and windows"
+        data:
+          push:
+            sound:
+              name: default
+
+    - condition: state
+      entity_id: input_boolean.announce
+      state: 'on'
+
+#    - service: media_player.volume_set
+#      data:
+#        entity_id: media_player.living_room
+#        volume_level: .6
+
+    - service: media_player.volume_set
+      entity_id: media_player.living_room
+      data_template:
+        volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+    - service: notify.alexa_media
+      data:
+        target: media_player.living_room
+        message: "You Guys? The weather is warming up. Please close all doors and windows, for the air-conditioner."
+        data:
+          type: tts
+

@@ -1,0 +1,22 @@
+#####################################################################
+### Binary Sensor: if any door is not closed, turn on
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      all_doors:
+        friendly_name: "All Doors"
+        value_template: >-
+          {{ not is_state('sensor.bathroom_door_contact_access_control', '23')
+             or not is_state('sensor.front_door_contact_access_control', '23')
+             or not is_state('sensor.kitchen_door_access_control', '23')
+             or not is_state('sensor.office_door_contact_access_control', '23')
+             or not is_state('sensor.south_door_contact_access_control', '23') }}
+        entity_picture_template: >-
+          {% if is_state('binary_sensor.all_doors', 'on') %}
+            /local/red_shield.png
+          {% else %}
+            /local/green_shield.png
+          {% endif %}
+        delay_off:
+          seconds: 7

@@ -130,10 +130,18 @@ homeassistant:
       friendly_name: "Flower Lamp"
       icon: mdi:power-socket-us
 
+    switch.floor_vase:
+      friendly_name: "Floor Vase Lamp"
+      icon: mdi:power-socket-us
+
     switch.outdoor_speakers:
       friendly_name: "Outdoor Speakers"
       entity_picture: /local/music.ico
 
     switch.mini_fridge:
       friendly_name: "Mini Fridge"
+      icon: mdi:power-socket-us
+
+    switch.kegerator:
+      friendly_name: "Kegerator"
       icon: mdi:power-socket-us

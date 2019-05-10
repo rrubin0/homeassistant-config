@@ -1,0 +1,15 @@
+#####################################################################
+### Binary Sensor
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      nursery_presence:
+        friendly_name: "Nursery Presence"
+        value_template: >-
+          {{ is_state('binary_sensor.nursery_crib_motion_detected', 'on')
+             or is_state('binary_sensor.nursery_ptz_motion_detected', 'on')
+             or is_state('binary_sensor.nursery_occupancy', 'on')
+             or is_state('binary_sensor.motion_nursery', 'on') }}
+        delay_off:
+          minutes: 40

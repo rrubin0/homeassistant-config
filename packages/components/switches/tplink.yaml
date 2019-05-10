@@ -1,0 +1,16 @@
+#####################################################################
+### TP-LINK Switches (WiFi Outlets)
+#####################################################################
+tplink:
+  discovery: true
+## light examples
+#  light:
+#    - host: 192.168.xx.xx
+#    - host: 127.0.0.1
+  switch:
+    - host: !secret smartplug_host_1
+    - host: !secret smartplug_host_2
+    - host: !secret smartplug_host_3
+    - host: !secret smartplug_host_4
+    - host: !secret smartplug_host_5
+    - host: !secret smartplug_host_6

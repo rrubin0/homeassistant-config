@@ -16,6 +16,88 @@ views:
           include:
             - domain: configurator
 
+
+      ################################################
+      ## Security Glance
+      ################################################
+      - type: vertical-stack
+        cards:
+        - type: horizontal-stack
+          cards:
+          - type: picture-entity
+            entity: binary_sensor.all_doors
+            show_state: false
+#            aspect_ratio: 16:9
+            state_image:
+              "on": /local/shield_red.png
+              "off": /local/shield_green.png
+        
+          - type: picture-entity
+            entity: binary_sensor.all_windows
+            show_state: false
+            state_image:
+              "on": /local/shield_red.png
+              "off": /local/shield_green.png
+
+
+        ################################################
+        ## Open Doors & Windows
+        ################################################
+        - type: custom:monster-card
+          card:
+            type: entities
+            title: Open Doors & Windows
+            show_header_toggle: false
+          filter:
+            include:
+              - entity_id: "sensor.*_state"
+                state: 'Open'
+          show_empty: false
+
+
+        ################################################
+        ## Presence
+        ################################################
+        - type: entity-filter
+          card:
+            title: "Presence Detected"
+            type: glance
+          entities:
+            - entity: sensor.front_entry_motion
+              name: Front Entry
+            - entity: binary_sensor.entryway_occupancy
+              name: Entryway
+            - entity: binary_sensor.living_room_occupancy
+              name: Living Room
+            - entity: binary_sensor.motion_game_room
+              name: Game Room
+            - entity: binary_sensor.motion_downstairs_bath
+              name: Downstairs Bathroom
+            - entity: binary_sensor.nw_ptz_motion_detected
+              name: NW Camera
+            - entity: binary_sensor.office_occupancy
+              name: Office
+            - entity: binary_sensor.upstairs_occupancy
+              name: Master Bedroom
+            - entity: binary_sensor.motion_master_bedroom
+              name: Master Bedroom
+            - entity: binary_sensor.motion_master_bedroom_bed
+              name: Master Bedroom Bed
+            - entity: binary_sensor.guest_room_occupancy
+              name: Guest Room
+            - entity: binary_sensor.nursery_occupancy
+              name: Nursery
+            - entity: binary_sensor.motion_nursery
+              name: Nursery
+            - entity: binary_sensor.nursery_ptz_motion_detected
+              name: Nursery Camera
+            - entity: binary_sensor.nursery_crib_motion_detected
+              name: Crib Camera
+          state_filter:
+            - 'on'
+          show_empty: false
+
+
       ################################################
       ## Active Timers
       ################################################
@@ -25,6 +107,8 @@ views:
           title: Active Timers
           show_header_toggle: false
         filter:
+          exclude:
+            - entity_id: timer.nursery_presence
           include:
             - entity_id: "timer.*"
               state: 'active'
@@ -34,239 +118,200 @@ views:
       ################################################
       ## Weather
       ################################################
-      - type: entities
-        title: Today's Weather
-        show_header_toggle: false
-        entities:
-          - sensor.dark_sky_hourly_summary
-          - sensor.dark_sky_apparent_temperature
-          - sensor.dark_sky_daytime_high_temperature_0
-          - sensor.dark_sky_overnight_low_temperature_0
-          - sensor.dark_sky_precip_probability
+      - type: vertical-stack
+        cards:
+        - type: entities
+          title: Today's Weather
+          show_header_toggle: false
+          entities:
+            - sensor.dark_sky_hourly_summary
+            - sensor.dark_sky_apparent_temperature
+            - sensor.dark_sky_daytime_high_temperature_0d
+            - sensor.dark_sky_overnight_low_temperature_0d
+            - sensor.dark_sky_precip_probability
+
+
+        ################################################
+        ## Average Temp
+        ################################################
+        - type: vertical-stack
+          cards:
+            - type: gauge
+              title: Upstairs Avg Temp
+              entity: sensor.us_avg_temp
+              severity:
+                red: 84
+                yellow: 81
+                green: 69
+#                blue: 65
+        
+            - type: gauge
+              title: Downstairs Avg Temp
+              entity: sensor.ds_avg_temp
+              severity:
+                red: 82
+                yellow: 80
+                green: 69
+#                blue: 65
 
 
       ################################################
       ## Trackers
       ################################################
-      - type: entities
-        title: Travel Megs
-        show_header_toggle: false
-        entities:
-          - device_tracker.mip8
-          - script.find_iphone
-          - sensor.mip8_battery_level
-          - sensor.megs_eta
-#          - sensor.megs_home_commute
-#          - sensor.megs_work_commute
-
-      - type: entities
-        title: Travel Rick
-        show_header_toggle: false
-        entities:
-          - device_tracker.i8plus
-          - sensor.rip8plus_battery_level
-          - sensor.ricks_eta
-          - sensor.ricks_home_commute
-          - sensor.ricks_office_commute
-
-
-      ################################################
-      ## Open Doors & Windows
-      ################################################
-      - type: custom:monster-card
-        card:
-          type: entities
-          title: Open Doors & Windows
-          show_header_toggle: false
-        filter:
-          include:
-            - entity_id: "sensor.*_state"
-              state: 'Open'
-        show_empty: false
-
-
-      ################################################
-      ## Presence
-      ################################################
-      - type: entity-filter
-        card:
-          title: "Presence Detected"
-          type: glance
-        entities:
-          - entity: sensor.front_entry_motion
-            name: Front Entry
-          - entity: binary_sensor.entryway_occupancy
-            name: Entryway
-          - entity: binary_sensor.living_room_occupancy
-            name: Living Room
-          - entity: sensor.nw_ptz_motion_detected
-            name: NW Camera
-          - entity: binary_sensor.office_occupancy
-            name: Office
-          - entity: binary_sensor.upstairs_occupancy
-            name: Master Bedroom
-          - entity: binary_sensor.guest_room_occupancy
-            name: Guest Room
-          - entity: binary_sensor.nursery_occupancy
-            name: Nursery
-          - entity: sensor.nursery_ptz_motion_detected
-            name: Nursery Camera
-        state_filter:
-          - 'on'
-        show_empty: false
-
-
-      ################################################
-      ## Average Temp
-      ################################################
       - type: vertical-stack
         cards:
-          - type: gauge
-            title: Upstairs Avg Temp
-            entity: sensor.us_avg_temp
-            severity:
-              red: 84
-              yellow: 81
-              green: 69
-#              blue: 65
-
-          - type: gauge
-            title: Downstairs Avg Temp
-            entity: sensor.ds_avg_temp
-            severity:
-              red: 82
-              yellow: 80
-              green: 69
-#              blue: 65
+        - type: entities
+          title: Travel Megs
+          show_header_toggle: false
+          entities:
+            - device_tracker.mip8
+            - script.find_iphone
+            - sensor.mip8_battery_level
+            - sensor.megs_eta
+#            - sensor.megs_home_commute
+#            - sensor.megs_work_commute
+        
+        - type: entities
+          title: Travel Rick
+          show_header_toggle: false
+          entities:
+            - device_tracker.rip8plus
+            - sensor.rip8plus_battery_level
+            - sensor.ricks_eta
+            - sensor.ricks_home_commute
+            - sensor.ricks_office_commute
 
 
       ################################################
       ## Things on Downstairs
       ################################################
-      - type: entity-filter
-        card:
-          title: "Things On Downstairs"
-          type: entities
-        entities:
-          - switch.tv_power
-          - switch.amp_power
-          - switch.directv_power
-          - switch.living_room_fan
-          - switch.master_bedroom_fan
-          - switch.master_bedroom_fan_light
-          - switch.switch_three
-          - entity: light.foyer_lights_level
-            name: Foyer
-          - entity: light.entryway
-            name: Entryway
-          - entity: light.living_room_lamp
-            name: Living Room Lamp
-          - entity: light.lr_ceiling
-            name: Living Room Ceiling
-          - entity: switch.downstairs_bath_lights_switch
-            name: Downstairs Bath
-          - entity: light.kitchen_lights_level
-            name: Kitchen
-          - entity: light.pantry
-            name: Pantry
-          - entity: light.billiards
-            name: Billiards Table
-          - entity: light.dining_room_chandelier_level
-            name: Dining Room
-          - entity: light.wine_room
-            name: Wine Room Ceiling
-          - entity: switch.wine_room_lamp
-            name: Wine Room Lamp
-          - entity: switch.staircase_lamp
-            name: Staircase Lamp
-          - entity: switch.flower_lamp
-            name: Flower Lamp
-          - entity: light.office_desk_lamp
-            name: Office Desk
-          - entity: switch.game_room_floodlights
-            name: Game Room
-#          - entity: switch.switch_five
-#            name: Christmas Tree
-        state_filter:
-          - 'on'
-        show_empty: false
-
-
-      ################################################
-      ## Things on Upstairs
-      ################################################
-      - type: entity-filter
-        card:
-          title: "Things On Upstairs"
-          type: entities
-        entities:
-          - switch.mini_fridge
-          - switch.switch_one
-          - switch.switch_two
-          - switch.switch_four
-          - switch.switch_five
-          - switch.master_bedroom_fan
-          - entity: light.master_bed_entry_level
-            name: Master Entry
-          - entity: light.master_bed_ceiling_level
-            name: Master Ceiling
-          - entity: light.master_bedroom_chandelier_level
-            name: Master Chandelier
-          - entity: light.master_reading_lamp
-            name: Master Reading Lamp
-          - entity: light.master_sitting_lamp
-            name: Master Sitting Area
-          - entity: light.under_bed_lights
-            name: Master Bed
-          - entity: light.master_bathroom
-            name: Master Bath Ceiling
-          - entity: light.master_bath_vanity
-            name: Master Bath Vanity
-          - entity: light.nursery_wall_light
-            name: Nursery Wall
-          - entity: light.nursery_light
-            name: Nursery Light
-          - entity: switch.nursery_lamp
-            name: Nursery Lamp
-          - entity: fan.nursery_fan
-            name: Nursery Fan
-
-        state_filter:
-          - 'on'
-        show_empty: false
-
-
-      ### EXTERIOR ###
-      ################################################
-      ## Things on Outside
-      ################################################
-      - type: entity-filter
-        card:
-          title: "Things On Outside"
-          type: entities
-        entities:
-          - switch.outdoor_speakers
-          - switch.fountains_switch
-          - entity: switch.front_porch_lights_switch
-            name: Front Porch
-          - entity: switch.south_porch_lights_switch
-            name: South Porch
-          - entity: switch.patio_lights_switch
-            name: Patio Lights
-          - entity: fan.patio_fan
-            name: Patio Fan
-          - entity: switch.back_yard_outlet
-            name: Party Lights
-#          - entity: switch.front_yard_outlet
-#            name: Front Yard Christmas Lights
-          - entity: switch.pool_light_switch
-            name: Pool
-#          - entity: switch.switch_four
-#            name: Porch Christmas Lights
-
-        state_filter:
-          - 'on'
-        show_empty: false
+      - type: vertical-stack
+        cards:
+        - type: entity-filter
+          card:
+            title: "Things On Downstairs"
+            type: entities
+          entities:
+            - switch.tv_power
+            - switch.amp_power
+            - switch.directv_power
+            - switch.living_room_fan
+            - switch.switch_three
+#            - switch.kegerator
+            - switch.floor_vase
+            - entity: light.foyer_lights_level
+              name: Foyer
+            - entity: light.entryway
+              name: Entryway
+            - entity: light.living_room_lamp
+              name: Living Room Lamp
+            - entity: light.lr_ceiling
+              name: Living Room Ceiling
+            - entity: switch.downstairs_bath_lights_switch
+              name: Downstairs Bath
+            - entity: light.kitchen_lights_level
+              name: Kitchen
+            - entity: light.pantry
+              name: Pantry
+            - entity: light.billiards
+              name: Billiards Table
+            - entity: light.dining_room_chandelier_level
+              name: Dining Room
+            - entity: light.wine_room
+              name: Wine Room Ceiling
+            - entity: switch.wine_room_lamp
+              name: Wine Room Lamp
+            - entity: switch.staircase_lamp
+              name: Staircase Lamp
+            - entity: light.office_desk_lamp
+              name: Office Desk
+            - entity: switch.game_room_floodlights
+              name: Game Room
+#            - entity: switch.switch_five
+#              name: Christmas Tree
+          state_filter:
+            - 'on'
+          show_empty: false
+        
+        
+        ################################################
+        ## Things on Upstairs
+        ################################################
+        - type: entity-filter
+          card:
+            title: "Things On Upstairs"
+            type: entities
+          entities:
+            - switch.mini_fridge
+            - switch.switch_one
+            - switch.switch_two
+            - switch.switch_four
+            - switch.switch_five
+            - switch.master_bedroom_fan
+            - switch.master_bedroom_fan_light
+            - light.master_bedside_lamp_rick
+            - light.master_bedside_lamp_megs
+            - entity: light.master_bed_entry_level
+              name: Master Entry
+            - entity: light.master_bed_ceiling_level
+              name: Master Ceiling
+            - entity: light.master_bedroom_chandelier_level
+              name: Master Chandelier
+            - entity: light.master_reading_lamp
+              name: Master Reading Lamp
+            - entity: light.master_sitting_lamp
+              name: Master Sitting Area
+            - entity: light.under_bed_lights
+              name: Master Bed
+            - entity: light.master_bathroom
+              name: Master Bath Ceiling
+            - entity: light.master_bath_vanity
+              name: Master Bath Vanity
+            - entity: light.nursery_wall_light
+              name: Nursery Wall
+            - entity: light.nursery_light
+              name: Nursery Light
+            - entity: switch.nursery_lamp
+              name: Nursery Lamp
+            - entity: fan.nursery_fan
+              name: Nursery Fan
+        
+          state_filter:
+            - 'on'
+          show_empty: false
+        
+        
+        ### EXTERIOR ###
+        ################################################
+        ## Things on Outside
+        ################################################
+        - type: entity-filter
+          card:
+            title: "Things On Outside"
+            type: entities
+          entities:
+            - switch.outdoor_speakers
+            - switch.fountains_switch
+            - entity: switch.front_porch_lights_switch
+              name: Front Porch
+            - entity: switch.south_porch_lights_switch
+              name: South Porch
+            - entity: switch.patio_lights_switch
+              name: Patio Lights
+            - entity: fan.patio_fan
+              name: Patio Fan
+            - entity: switch.back_yard_outlet
+              name: Party Lights
+#            - entity: switch.front_yard_outlet
+#              name: Front Yard Christmas Lights
+            - entity: switch.pool_light_switch
+              name: Pool
+#            - entity: switch.switch_four
+#              name: Porch Christmas Lights
+        
+          state_filter:
+            - 'on'
+          show_empty: false
 
 
       ################################################
@@ -297,17 +342,17 @@ views:
 
 
       ################################################
-      ## Low Battery
+      ## Check Battery
       ################################################
       - type: custom:monster-card
         card:
           type: entities
-          title: Low Battery
+          title: Check Battery
           show_header_toggle: false
         filter:
           include:
             - entity_id: "sensor.*_battery"
-              state: '< 50'
+              state: '< 40'
         show_empty: false
 
 
@@ -502,10 +547,21 @@ views:
         entity: camera.nw_ptz
       - type: picture-entity
         entity: camera.north_gate
-      - type: picture-entity
-        entity: camera.nursery_ptz
+#      - type: picture-entity
+#        entity: camera.nursery_ptz
+#      - type: picture-entity
+#        entity: camera.nursery_crib
+#      - type: picture-entity
+#        entity: camera.baby_monitor
       - type: picture-entity
         entity: camera.ramp_traffic
+
+      - type: entities
+        title: Baby Monitor
+        show_header_toggle: false
+        entities:
+          - camera.nursery_crib
+          - camera.nursery_ptz
 
 
 ####################################################################
@@ -547,25 +603,6 @@ views:
           - sensor.lock_south_door_status
 
       ################################################
-      ## Sensors
-      ################################################
-      - type: entities
-        title: Sensors
-        show_header_toggle: false
-        entities:
-          - binary_sensor.living_room_occupancy
-          - binary_sensor.entryway_occupancy
-          - binary_sensor.office_occupancy
-          - binary_sensor.upstairs_occupancy
-          - binary_sensor.nursery_occupancy
-          - binary_sensor.guest_room_occupancy
-          - sensor.front_entry_motion
-          - sensor.nursery_ptz_motion_detected
-          - sensor.nw_ptz_motion_detected
-          - sensor.front_entry_fibaro_multisensor_luminance
-          - sensor.downstairs_ac_leak_detector
-
-      ################################################
       ## Door Sensors
       ################################################
       - type: entities
@@ -591,6 +628,64 @@ views:
         entities:
           - sensor.living_room_north_window_state
           - sensor.guest_room_window_state
+          - sensor.master_bedroom_southwest_window_state
+          - sensor.master_bedroom_northwest_window_state
+
+      ################################################
+      ## Occupancy Sensors
+      ################################################
+      - type: entities
+        title: Occupancy
+        show_header_toggle: false
+        entities:
+          - binary_sensor.living_room_occupancy
+          - binary_sensor.entryway_occupancy
+          - binary_sensor.office_occupancy
+          - binary_sensor.upstairs_occupancy
+          - binary_sensor.nursery_occupancy
+          - binary_sensor.guest_room_occupancy
+
+      ################################################
+      ## Motion Sensors
+      ################################################
+      - type: entities
+        title: Motion
+        show_header_toggle: false
+        entities:
+          - sensor.front_entry_motion
+          - binary_sensor.motion_game_room
+          - binary_sensor.motion_downstairs_bath
+          - binary_sensor.motion_master_bedroom
+          - binary_sensor.motion_master_bedroom_bed
+          - binary_sensor.motion_nursery
+          - sensor.nursery_ptz_motion_detected
+          - sensor.nursery_crib_motion_detected
+          - sensor.nw_ptz_motion_detected
+
+      ################################################
+      ## Illumination Sensors
+      ################################################
+      - type: entities
+        title: Illumination
+        show_header_toggle: false
+        entities:
+          - sensor.illumination_front_entry
+          - sensor.illumination_game_room
+          - sensor.illumination_master_bedroom
+          - sensor.illumination_nursery
+
+      ################################################
+      ## Safety Sensors
+      ################################################
+      - type: entities
+        title: Safety Detectors
+        show_header_toggle: false
+        entities:
+          - sensor.smoke_upstairs_north
+#          - sensor.smoke_upstairs_south
+          - sensor.smoke_downstairs_north
+#          - sensor.smoke_downstairs_south
+          - sensor.downstairs_ac_leak_detector
 
 
 ####################################################################
@@ -628,10 +723,10 @@ views:
         entities:
           - switch.wine_room_lamp
           - light.wine_room
-          - light.hue_color_lamp_1
-          - light.hue_color_lamp_4
-          - light.hue_color_lamp_2
-          - light.hue_color_lamp_3
+          - light.northeast_wine
+          - light.northwest_wine
+          - light.southeast_wine
+          - light.southwest_wine
 
       ################################################
       ## Accent Lighting
@@ -641,7 +736,7 @@ views:
         entities:
           - switch.staircase_lamp
           - switch.wine_room_lamp
-          - switch.flower_lamp
+          - switch.floor_vase
 
       ################################################
       ## Entry Lighting
@@ -664,6 +759,7 @@ views:
         entities:
           - light.kitchen_lights_level
           - light.pantry
+          - switch.kegerator
           - light.gateway_light_7811dcb7da52
           - light.dining_room_chandelier_level
           - cover.kitchen_roller_shade_level
@@ -687,8 +783,8 @@ views:
           title: Office
           show_header_toggle: false
           entities:
-            - light.office_desk_lamp
-            - input_select.rgb_light
+            - light.office_desk
+#            - input_select.rgb_light
 
         - type: gauge
           title: Humidor Temp
@@ -751,6 +847,7 @@ views:
           - group.nursery_lights
           - light.nursery_light
           - fan.nursery_fan
+          - input_boolean.nursery_fan_hold
           - light.nursery_wall_light
           - switch.nursery_lamp
           - input_select.nursery_wall_color
@@ -763,6 +860,8 @@ views:
           - script.baby_playlist
           - script.play_white_noise
           - script.stop_playing
+#          - input_boolean.nursery_presence
+          - binary_sensor.nursery_presence
 
       - type: media-control
         entity: media_player.nursery
@@ -781,6 +880,8 @@ views:
           - light.master_reading_lamp
           - light.master_bed_entry_level
           - light.master_bed_ceiling_level
+          - light.master_bedside_lamp_rick
+          - light.master_bedside_lamp_megs
 
       - type: entities
         title: Master Bedroom Fan
@@ -789,6 +890,7 @@ views:
           - switch.master_bedroom_fan
           - switch.master_bedroom_fan_light
           - input_select.master_bedroom_fan_speed
+          - input_boolean.master_fan_hold
 #          - script.mbr_fan_speed_step_low
 #          - script.mbr_fan_speed_step_high
 
@@ -836,6 +938,7 @@ views:
           - scene.dim
           - scene.cloudy
           - scene.evening
+          - scene.late_evening
           - scene.bright
           - scene.morning
           - scene.game_time
@@ -850,6 +953,7 @@ views:
         entities:
           - input_boolean.visitor_mode
           - input_boolean.vacation_mode
+          - input_boolean.announce
           - script.company_mode
 
       - type: entities
@@ -862,9 +966,10 @@ views:
           - automation.morning_sequence
           - automation.living_room_off_morning
           - automation.living_room_on_cloudy
-          - automation.climate_downstairs_door_left_open
-          - automation.climate_upstairs_door_left_open
-          - automation.pantry_light_off
+          - automation.climate_downstairs_door_held_open
+          - automation.climate_upstairs_door_held_open
+          - automation.downstairs_wipe_warmer_on
+          - automation.upstairs_wipe_warmer_on
           - automation.fountains_on
           - script.pause_away_timer
           - script.cancel_away_timer
@@ -878,6 +983,7 @@ views:
         entities:
           - script.hue_lr_dimmed
           - script.hue_lr_nightlight
+          - script.hue_lr_normal
           - script.hue_lr_bright
 #          - script.hue_lr_christmas
           - script.hue_lr_movie
@@ -976,8 +1082,8 @@ views:
         show_header_toggle: false
         entities:
           - sensor.dark_sky_daily_summary
-          - sensor.dark_sky_daytime_high_temperature_0
-          - sensor.dark_sky_overnight_low_temperature_0
+          - sensor.dark_sky_daytime_high_temperature_0d
+          - sensor.dark_sky_overnight_low_temperature_0d
           - sensor.dark_sky_precip_probability
           - sensor.dark_sky_wind_speed
           - sensor.dark_sky_wind_gust
@@ -1011,26 +1117,26 @@ views:
         show_header_toggle: false
         entities:
         ## Tomorrow
-          - sensor.dark_sky_summary_1
-          - sensor.dark_sky_daytime_high_temperature_1
-          - sensor.dark_sky_overnight_low_temperature_1
-          - sensor.dark_sky_precip_probability_1
-          - sensor.dark_sky_wind_speed_1
-          - sensor.dark_sky_wind_gust_1
+          - sensor.dark_sky_summary_1d
+          - sensor.dark_sky_daytime_high_temperature_1d
+          - sensor.dark_sky_overnight_low_temperature_1d
+          - sensor.dark_sky_precip_probability_1d
+          - sensor.dark_sky_wind_speed_1d
+          - sensor.dark_sky_wind_gust_1d
         ## Day After
-          - sensor.dark_sky_summary_2
-          - sensor.dark_sky_daytime_high_temperature_2
-          - sensor.dark_sky_overnight_low_temperature_2
-          - sensor.dark_sky_precip_probability_2
-          - sensor.dark_sky_wind_speed_2
-          - sensor.dark_sky_wind_gust_2
+          - sensor.dark_sky_summary_2d
+          - sensor.dark_sky_daytime_high_temperature_2d
+          - sensor.dark_sky_overnight_low_temperature_2d
+          - sensor.dark_sky_precip_probability_2d
+          - sensor.dark_sky_wind_speed_2d
+          - sensor.dark_sky_wind_gust_2d
         ## Day 3
-          - sensor.dark_sky_summary_3
-          - sensor.dark_sky_daytime_high_temperature_3
-          - sensor.dark_sky_overnight_low_temperature_3
-          - sensor.dark_sky_precip_probability_3
-          - sensor.dark_sky_wind_speed_3
-          - sensor.dark_sky_wind_gust_3
+          - sensor.dark_sky_summary_3d
+          - sensor.dark_sky_daytime_high_temperature_3d
+          - sensor.dark_sky_overnight_low_temperature_3d
+          - sensor.dark_sky_precip_probability_3d
+          - sensor.dark_sky_wind_speed_3d
+          - sensor.dark_sky_wind_gust_3d
 
 
       ################################################
@@ -1167,23 +1273,6 @@ views:
           - sensor.sabnzbd_speed
           - sensor.sabnzbd_status
 
-#      ################################################
-#      ## Device Status
-#      ################################################
-#      - type: entities
-#        title: Device Status
-#        show_header_toggle: false
-#        entities:
-#          - sensor.dc_front_door_battery
-#          - sensor.dc_kitchen_door_battery
-#          - sensor.lock_south_battery
-#          - sensor.dc_south_door_battery
-#          - sensor.dc_office_door_battery
-#          - sensor.lock_beach_battery
-#          - sensor.dc_bathroom_battery
-#          - sensor.entry_multisensor_battery
-#          - sensor.ws_living_room_north_window_battery
-#          - sensor.downstairs_ac_leak_detector_battery
 
       ################################################
       ## Battery Levels
@@ -1206,11 +1295,11 @@ views:
         title: Device Usage
         show_header_toggle: false
         entities:
-          - sensor.mini_fridge_amps
-          - sensor.mini_fridge_watts
-          - sensor.mini_fridge_total_kwh
-          - sensor.mini_fridge_volts
-#          - sensor.mini_fridge_today_kwh
+          - sensor.kegerator_amps
+          - sensor.kegerator_watts
+          - sensor.kegerator_total_kwh
+          - sensor.kegerator_volts
+#          - sensor.kegerator_today_kwh
           - sensor.outdoor_speakers_amps
           - sensor.outdoor_speakers_watts
           - sensor.outdoor_speakers_total_kwh
@@ -1234,11 +1323,22 @@ views:
   - title: Lab
     icon: mdi:test-tube
     cards:
-#      - type: custom:ecobee-card
-#        entity: climate.downstairs
-#
-#      - type: custom:ecobee-card
-#        entity: climate.upstairs
+      - type: custom:ecobee-card
+        entity: climate.downstairs
+
+      - type: custom:ecobee-card
+        entity: climate.upstairs
+
+
+      ################################################
+      ## Test Security Sensors
+      ################################################
+      - type: entities
+        title: Perimeter Security
+        show_header_toggle: false
+        entities:
+          - binary_sensor.all_doors
+          - binary_sensor.all_windows
 
       ################################################
       ## Test Triggers
@@ -1250,7 +1350,7 @@ views:
           - script.script_test
           - script.baby_playlist_test
           - script.rgb_strip_test
-          - script.desk_lamp_test
+#          - script.desk_lamp_test
           - input_boolean.state_change
 
       ################################################
@@ -1497,4 +1597,6 @@ resources:
 
   - url: /local/lovelace_cards/surveillance-card.js?v=0
     type: module
-
+    
+  - url: /local/lovelace_cards/ecobee-card.js?v=0.0.3
+    type: js

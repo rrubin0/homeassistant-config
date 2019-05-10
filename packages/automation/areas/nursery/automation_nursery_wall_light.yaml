@@ -1,0 +1,710 @@
+#####################################################################
+### Nursery Wall Light Automations
+#####################################################################
+automation:
+  ### Turn off the wall light when OFF is selected
+  - alias: Nursery Wall Select Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_select.nursery_wall_color
+        to: "Off"
+
+      - platform: state
+        entity_id: input_select.nursery_wall_effect
+        to: "Off"
+
+      - platform: state
+        entity_id: input_select.nursery_wall_strobe
+        to: "Off"
+
+    action:
+      - service: light.turn_off
+        entity_id: light.nursery_wall_light
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+
+  #####################################################################
+  ### Reset input selection when lamp is turned off
+  - alias: Nursery Wall Reset Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: light.nursery_wall_light
+        from: 'on'
+        to: 'off'
+
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.nursery_wall_color
+          option: Select an option...
+
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.nursery_wall_effect
+          option: Select an option...
+
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.nursery_wall_strobe
+          option: Select an option...
+
+  #####################################################################
+  ### Default to Crystal if turned on with no selection
+  - alias: Nursery Wall Default
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: light.nursery_wall_light
+        from: 'off'
+        to: 'on'
+
+    condition:
+      condition: state
+      entity_id: input_select.nursery_wall_color
+      state: "Select an option..."
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [255,163,132]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Blue
+  - alias: Nursery Wall Blue
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Blue"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [0,0,255]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Cyan
+  - alias: Nursery Wall Cyan
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Cyan"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [0,255,255]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Crystal
+  - alias: Nursery Wall Crystal
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Crystal"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          rgb_color: [0,55,55]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Green
+  - alias: Nursery Wall Green
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Green"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [0,225,0]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Pink
+  - alias: Nursery Wall Pink
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Pink"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [255,0,255]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Red
+  - alias: Nursery Wall Red
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Red"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [255,0,0]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Violet
+  - alias: Nursery Wall Violet
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Violet"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [125,0,255]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Select Yellow
+  - alias: Nursery Wall Yellow
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_color
+      to: "Yellow"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          brightness: 255
+          rgb_color: [255,255,0]
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Color Loop
+  - alias: Nursery Wall Color Loop
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Color Loop"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: colorloop
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Color Jump
+  - alias: Nursery Wall Color Jump
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Color Jump"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: colorjump
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Random
+  - alias: Nursery Wall Random
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Random"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: random
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Red Fade
+  - alias: Nursery Wall Red Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Red Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: red_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Green Fade
+  - alias: Nursery Wall Green Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Green Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: green_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Blue Fade
+  - alias: Nursery Wall Blue Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Blue Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: blue_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Yellow Fade
+  - alias: Nursery Wall Yellow Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Yellow Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: yellow_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Purple Fade
+  - alias: Nursery Wall Purple Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "Purple Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: purple_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  White Fade
+  - alias: Nursery Wall Cyan Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "White Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: white_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Red/Green Cross Fade
+  - alias: Nursery Wall RG Cross Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "RG Cross Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: rg_cross_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Red/Blue Cross Fade
+  - alias: Nursery Wall RB Cross Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "RB Cross Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: rb_cross_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Effects -  Green/Blue Cross Fade
+  - alias: Nursery Wall GB Cross Fade
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_effect
+      to: "GB Cross Fade"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: gb_cross_fade
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Color Strobe
+  - alias: Nursery Wall Color Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Color Strobe"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: colorstrobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Red Strobe
+  - alias: Nursery Wall Red Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Red"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: red_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Green Strobe
+  - alias: Nursery Wall Color Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Green"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: green_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Blue Strobe
+  - alias: Nursery Wall Blue Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Blue"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: blue_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Yellow Strobe
+  - alias: Nursery Wall Yellow Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Yellow"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: yellow_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Cyan Strobe
+  - alias: Nursery Wall Cyan Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Cyan"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: cyan_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  Purple Strobe
+  - alias: Nursery Wall Purple Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "Purple"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: purple_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...
+
+  #####################################################################
+  ### Nursery Wall Strobe -  White Strobe
+  - alias: Nursery Wall White Strobe
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.nursery_wall_strobe
+      to: "White"
+
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nursery_wall_light
+          effect: white_strobe
+
+      # Reset the Input Select to "Select an option..."
+      - service: input_select.select_option
+        data_template:
+          entity_id: "{{ trigger.to_state.entity_id }}"
+          option: Select an option...

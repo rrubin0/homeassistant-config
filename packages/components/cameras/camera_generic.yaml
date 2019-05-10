@@ -2,6 +2,11 @@
 ### Camera - Generic
 #####################################################################
 camera:
+#  - platform: generic
+#    name: Baby Monitor
+#    still_image_url: !secret nursery_crib_still
+#    stream_source: !secret nursery_crib_stream
+
   - platform: generic
     still_image_url: !secret front_door_url
     name: Front Porch

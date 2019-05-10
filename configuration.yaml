@@ -9,32 +9,47 @@ homeassistant:
 
   auth_providers:
    - type: homeassistant
+
    - type: trusted_networks
+     trusted_networks:
+       - !secret network_1
+
    - type: legacy_api_password
-
-http:
-  api_password: !secret http_password
-  ssl_certificate: !secret ssl_cert
-  ssl_key: !secret ssl_key
-  cors_allowed_origins: !secret cors
-
-  trusted_networks:
-    - !secret network_1
-
-  ip_ban_enabled: true
-  login_attempts_threshold: 5
-
-system_health:
-
-lovelace:
-  mode: yaml
+     api_password: !secret http_password
 
 config:
 discovery:
   ignore:
     - directv
 
-sun:
 history:
+http:
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+  cors_allowed_origins: !secret cors
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
+
+lovelace:
+  mode: yaml
+
+mobile_app:
+person:
+  - name: Rick
+    id: rick
+    device_trackers:
+      - device_tracker.rip8plus
+      - device_tracker.i8plus
+
+  - name: Megs
+    id: megs
+    device_trackers:
+      - device_tracker.mip8
 
 #python_script:
+stream:
+sun:
+system_health:
+zeroconf:
+
+

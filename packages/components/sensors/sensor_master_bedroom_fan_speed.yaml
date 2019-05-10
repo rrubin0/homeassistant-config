@@ -1,0 +1,22 @@
+#####################################################################
+### Master Bedroom Ceiling Fan Control via temperature
+#####################################################################
+sensor:
+  ### Master Bedroom Fan Temp Setting
+  - platform: template
+    sensors:
+      master_bedroom_fan_speed:
+        friendly_name: "Master Bedroom Fan Speed"
+        value_template: >-
+          {% set temperature = states('sensor.upstairs_temperature')|float(none) %}
+          {% if 73 <= temperature <=75.9 %}
+            1
+          {% elif 76 <= temperature <=78.9 %}
+            2
+          {% elif 79 <= temperature <=80.9 %}
+            4
+          {% elif temperature > 81 %}
+            5
+          {% else %}
+            Off
+          {% endif %}

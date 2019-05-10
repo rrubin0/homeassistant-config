@@ -1,0 +1,14 @@
+#####################################################################
+### Binary Sensor: Master Bedroom Presence
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      master_bedroom_presence:
+        friendly_name: "Master Bedroom Presence"
+        value_template: >-
+          {{ is_state('binary_sensor.motion_master_bedroom', 'on')
+             or is_state('binary_sensor.motion_master_bedroom_bed', 'on')
+             or is_state('binary_sensor.upstairs_occupancy', 'on') }}
+        delay_off:
+          minutes: 15
