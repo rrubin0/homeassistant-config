@@ -658,9 +658,9 @@ views:
           - binary_sensor.motion_master_bedroom
           - binary_sensor.motion_master_bedroom_bed
           - binary_sensor.motion_nursery
-          - sensor.nursery_ptz_motion_detected
-          - sensor.nursery_crib_motion_detected
-          - sensor.nw_ptz_motion_detected
+          - binary_sensor.nursery_ptz_motion_detected
+          - binary_sensor.nursery_crib_motion_detected
+          - binary_sensor.nw_ptz_motion_detected
 
       ################################################
       ## Illumination Sensors
@@ -874,6 +874,7 @@ views:
         show_header_toggle: false
         entities:
           - script.master_bedroom_night_time
+          - input_boolean.sleeping
           - script.mbr_night_light
           - light.master_bedroom_chandelier_level
           - light.master_sitting_lamp

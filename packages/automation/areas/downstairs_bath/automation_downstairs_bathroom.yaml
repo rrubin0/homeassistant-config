@@ -2,21 +2,25 @@
 ## Downstairs Bathroom Lights
 ####################################################################
 automation:
-### Turn on the lights if entering from patio
+### Turn on the bathroom lights
   - alias: Downstairs Bathroom Lights On
     initial_state: 'on'
     trigger:
       - platform: state
-        entity_id: sensor.bathroom_door_state
-        to: 'Open'
-
-      - platform: state
         entity_id: binary_sensor.motion_downstairs_bath
         to: 'on'
 
+#      - platform: state
+#        entity_id: sensor.bathroom_door_state
+#        to: 'Open'
+
     condition:
-      - condition: sun
-        after: sunset
+#      - condition: sun
+#        after: sunset
+
+      - condition: time
+        after: '16:30:00'
+        before: '12:00:00'
 
       - condition: state
         entity_id: switch.downstairs_bath_lights_switch
@@ -35,6 +39,8 @@ automation:
       - platform: state
         entity_id: binary_sensor.downstairs_bath_presence
         to: 'off'
+        for:
+          minutes: 3
 
     condition:
       - condition: state
