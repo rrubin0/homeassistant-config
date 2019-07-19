@@ -104,6 +104,7 @@ alexa:
         - light.master_bath_vanity
         - light.master_bed_ceiling_level
         - light.master_bed_entry_level
+        - light.master_bedside_lamps
         - light.master_bedroom_chandelier_level
         - light.master_reading_lamp
         - light.master_sitting_lamp
@@ -171,6 +172,7 @@ alexa:
         - input_boolean.holiday
         - input_boolean.rain
         - input_boolean.visitor_mode
+        - input_boolean.bbq_monitor
 
       ################################################
       ## Locks

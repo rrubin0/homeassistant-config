@@ -1,0 +1,72 @@
+#####################################################################
+### Away Mode Control for Device Trackers
+#####################################################################
+automation:
+  ### Start Away Mode Countdown
+  - alias: Away Mode Countdown
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'home'
+        to: 'not_home'
+        for:
+          minutes: 5
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: timer.start
+        entity_id: timer.away_mode
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Away Detected"
+          message: "Counting down..."
+          data:
+            push:
+              category: cancelaway
+              sound:
+                name: default
+
+
+  ### Turn on Away Mode when the timer finishes
+  - alias: Away Mode On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.away_mode
+
+    action:
+      - service: script.away
+
+
+  ### Cancel Away Mode if we have to run home real quick
+  - alias: Away Mode Cancel
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+
+    condition:
+      - condition: template
+        value_template: "{{ states('timer.away_mode') != 'idle'}}"
+
+    action:
+      - service: timer.cancel
+        entity_id: timer.away_mode
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Away Mode Canceled"
+          message: "Away mode canceled."
+

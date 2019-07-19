@@ -16,6 +16,13 @@ script:
           entity_id: climate.downstairs
           hold_mode: 'away'
 
+  ecobee_ds_set_away_mode:
+    sequence:
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.downstairs
+          away_mode: 'on'
+
   ecobee_ds_sleep:
     sequence:
       - service: climate.set_hold_mode
@@ -28,7 +35,7 @@ script:
       - service: climate.set_hold_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: smart1'
+          hold_mode: 'smart1'
 
   ecobee_ds_resume:
     sequence:

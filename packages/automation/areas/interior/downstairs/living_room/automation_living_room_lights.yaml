@@ -93,12 +93,12 @@ automation:
         before: '09:00:00'
 
       - condition: state
-        entity_id: input_boolean.vacation_mode
-        state: 'off'
-
-      - condition: state
         entity_id: binary_sensor.workday_sensor
         state: 'on'
+
+      - condition: state
+        entity_id: input_boolean.holiday
+        state: 'off'
 
     action:
       - service: timer.start

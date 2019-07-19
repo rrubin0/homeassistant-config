@@ -1,0 +1,105 @@
+#####################################################################
+### Set BBQ Temp Thresholds
+#####################################################################
+automation:
+  ### Grill too hot
+  - alias: BBQ Grill Alarm High Temp
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.grill_temperature
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.bbq_monitor
+        state: 'on'
+
+      - condition: template
+        value_template: "{{ states.sensor.grill_temperature.state >= ('states.input_number.bbq_high_temp.state') }}"
+### this evaluates in Template Editor but doesn't work here:    value_template: "{{ states("sensor.grill_temperature") >= states("input_number.bbq_high_temp") }}"
+
+## add this piece to script condition...
+#      - condition: state
+#        entity_id: input_boolean.announce
+#        state: 'on'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Grill Temp"
+          message: "The grill is {{ states.sensor.grill_temperature.state }} degrees. That's too hot!"
+          data:
+            push:
+              sound:
+                name: default
+
+### reference; to do a custom notify:
+### {% if states('sensor.grill_temperature') >= states('input_number.bbq_high_temp') %} "OMGLOLBBQ" {% endif %}
+#      - service: script.do alexa announce thing here
+
+
+  ### Grill too cold
+  - alias: BBQ Grill Alarm Low Temp
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: sensor.grill_temperature
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.bbq_monitor
+        state: 'on'
+
+      - condition: template
+        value_template: "{{ states.sensor.grill_temperature.state <= ('states.input_number.bbq_low_temp.state') }}"
+
+## add this piece to script condition...
+#      - condition: state
+#        entity_id: input_boolean.announce
+#        state: 'on'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Grill Temp"
+          message: "The grill is {{ states.sensor.grill_temperature.state }} degrees. That's too low!"
+          data:
+            push:
+              sound:
+                name: default
+
+
+  ### Food target temperature reached
+  - alias: BBQ Food Target Temp
+    initial_state: 'on'
+    trigger:
+      - platform: template
+        value_template: "{{ states.sensor.food_temperature.state >= ('states.input_number.bbq_food_temp.state') }}"
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.bbq_monitor
+        state: 'on'
+
+## add this piece to script condition...
+#      - condition: state
+#        entity_id: input_boolean.announce
+#        state: 'on'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Food Target Temp"
+          message: "Food is at {{ states.input_number.bbq_food_temp.state }} degrees. Go check it!"
+          data:
+            push:
+              sound:
+                name: default
+
+#      - service: script.do alexa announce thing here
+
+
+#  use case 3: Periodic alerting/announcements of the temperature ios/alexa 
+
+
+

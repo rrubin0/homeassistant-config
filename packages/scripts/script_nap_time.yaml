@@ -4,35 +4,20 @@
 script:
   nap_time:
     sequence:
-    - service: light.turn_off
-      entity_id: light.living_room
-      data:
-        transition: 5
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'home'
 
-    - service: light.turn_off
-      entity_id: light.entryway
-      data:
-        transition: 5
+      - service: homeassistant.turn_off
+        entity_id: group.interior_lights
 
-    - delay: '00:00:05'
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.sleeping
 
-    - service: light.turn_on
-      entity_id: light.living_room_lamp
-      data:
-        brightness: 50
-        transition: 10
+      - delay:
+          minutes: 90
 
-    - service: light.turn_on
-      entity_id: light.kitchen_entry
-      data:
-        brightness: 80
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.sleeping
 
-#      - service: hue.hue_activate_scene
-#        data:
-#          group_name: "Living Room"
-#          scene_name: "Nap Time"
-#
-#      - service: hue.hue_activate_scene
-#        data:
-#          group_name: "Entryway"
-#          scene_name: "Nightlight"

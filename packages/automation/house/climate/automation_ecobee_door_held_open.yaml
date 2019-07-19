@@ -1,0 +1,50 @@
+#####################################################################
+### Set Climate to Away Mode if Door held open too long
+#####################################################################
+automation:
+  - alias: Climate Away Door Held Open
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_held_open
+        to: 'on'
+        for:
+          minutes: 2
+
+    action:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: 'away'
+
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'away'
+
+      - service: script.tts_door_held_open
+
+
+#####################################################################
+### Set Climate to Resume when Door Held Open Restores
+#####################################################################
+  - alias: Climate Resume Door Restore
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.door_held_open
+        to: 'off'
+        for:
+          minutes: 1
+
+    action:
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.downstairs
+          resume_all: 'true'
+

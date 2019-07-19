@@ -3,7 +3,7 @@
 #    @description      :     themes
 #####################################################################
 frontend:
-  javascript_version: latest
+#  javascript_version: latest
 
   themes:
     midnight:

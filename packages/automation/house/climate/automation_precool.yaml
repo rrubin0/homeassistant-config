@@ -1,0 +1,39 @@
+#####################################################################
+### Precool for Summer heat - only needed if you live in the desert
+#####################################################################
+automation:
+  - alias: Climate Precool
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '14:00:00'
+
+    condition:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'home'
+
+          - condition: state
+            entity_id: input_boolean.visitor_mode
+            state: 'on'
+
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+    action:
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.downstairs
+          hold_mode: 'smart2'
+
+      - service: climate.set_hold_mode
+        data:
+          entity_id: climate.upstairs
+          hold_mode: 'smart2'

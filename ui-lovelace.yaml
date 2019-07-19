@@ -176,7 +176,8 @@ views:
           show_header_toggle: false
           entities:
             - device_tracker.rip8plus
-            - sensor.rip8plus_battery_level
+#            - sensor.rip8plus_battery_level
+            - sensor.battery_level_2
             - sensor.ricks_eta
             - sensor.ricks_home_commute
             - sensor.ricks_office_commute
@@ -223,7 +224,7 @@ views:
               name: Wine Room Lamp
             - entity: switch.staircase_lamp
               name: Staircase Lamp
-            - entity: light.office_desk_lamp
+            - entity: light.office_desk
               name: Office Desk
             - entity: switch.game_room_floodlights
               name: Game Room
@@ -484,6 +485,19 @@ views:
                     - sensor.downstairs_humidity
 
                 - type: entities
+                  title: Downstairs Ecobee
+                  show_header_toggle: false
+                  entities:
+                    - sensor.ds_climate_mode
+                    - sensor.ds_climate_hold
+                    - sensor.ds_climate_away
+                    - sensor.ds_fan_state
+                    - script.ecobee_ds_home
+                    - script.ecobee_ds_away
+                    - script.ecobee_ds_sleep
+                    - script.ecobee_ds_resume
+
+                - type: entities
                   title: Upstairs Climate
                   show_header_toggle: false
                   entities:
@@ -493,7 +507,6 @@ views:
                     - sensor.nursery_temperature
                     - sensor.guest_room_temperature
                     - sensor.upstairs_humidity
-
 
                 - type: entities
                   title: Upstairs Ecobee
@@ -507,19 +520,6 @@ views:
                     - script.ecobee_us_away
                     - script.ecobee_us_sleep
                     - script.ecobee_us_resume
-
-                - type: entities
-                  title: Downstairs Ecobee
-                  show_header_toggle: false
-                  entities:
-                    - sensor.ds_climate_mode
-                    - sensor.ds_climate_hold
-                    - sensor.ds_climate_away
-                    - sensor.ds_fan_state
-                    - script.ecobee_ds_home
-                    - script.ecobee_ds_away
-                    - script.ecobee_ds_sleep
-                    - script.ecobee_ds_resume
 
 
 ####################################################################
@@ -855,7 +855,8 @@ views:
           - input_select.nursery_wall_strobe
           - switch.switch_one
           - switch.switch_two
-          - switch.switch_four
+          ## aquarium
+#          - switch.switch_four
           - switch.switch_five
           - script.baby_playlist
           - script.play_white_noise
@@ -953,7 +954,7 @@ views:
         show_header_toggle: false
         entities:
           - input_boolean.visitor_mode
-          - input_boolean.vacation_mode
+          - input_boolean.holiday
           - input_boolean.announce
           - script.company_mode
 
@@ -967,8 +968,7 @@ views:
           - automation.morning_sequence
           - automation.living_room_off_morning
           - automation.living_room_on_cloudy
-          - automation.climate_downstairs_door_held_open
-          - automation.climate_upstairs_door_held_open
+          - automation.climate_away_door_held_open
           - automation.downstairs_wipe_warmer_on
           - automation.upstairs_wipe_warmer_on
           - automation.fountains_on
@@ -976,7 +976,6 @@ views:
           - script.cancel_away_timer
           - script.pause_bedtime_timer
           - script.cancel_bedtime_timer
-#          - automation.living_room_bright_morning
 
       - type: entities
         title: Hue Scenes
@@ -1048,6 +1047,39 @@ views:
           - switch.pool_light_switch
           - input_select.pool_scene
           - input_select.pool_color
+
+      ################################################
+      ## BBQ
+      ################################################
+      - type: vertical-stack
+        cards:
+         - type: entities
+           title: BBQ Control
+           show_header_toggle: false
+           entities:
+             - input_boolean.bbq_monitor
+             - input_number.bbq_high_temp
+             - input_number.bbq_low_temp
+             - input_number.bbq_food_temp
+
+         - type: sensor
+           entity: sensor.grill_temperature
+           icon: mdi:fire
+           name: Grill Temperature
+           graph: line
+#           detail: 2
+           height: 100
+           line_color: "#3498db"
+
+         - type: sensor
+           entity: sensor.food_temperature
+           icon: mdi:pig
+           name: Food Temperature
+           graph: line
+#           detail: 2
+           height: 100
+           line_color: "#3498db"
+
 
       ################################################
       ## Irrigation
@@ -1296,6 +1328,7 @@ views:
         title: Device Usage
         show_header_toggle: false
         entities:
+          - sensor.srp_energy
           - sensor.kegerator_amps
           - sensor.kegerator_watts
           - sensor.kegerator_total_kwh
@@ -1329,6 +1362,15 @@ views:
 
       - type: custom:ecobee-card
         entity: climate.upstairs
+
+      - type: entities
+        title: Ecobee Testing
+        show_header_toggle: false
+        entities:
+          - script.ecobee_ds_set_away_mode
+          - script.ecobee_ds_away
+          - script.ecobee_ds_resume
+
 
 
       ################################################
@@ -1561,7 +1603,7 @@ views:
               zoom: 300%
 
           - type: state-badge
-            entity: light.office_desk_lamp
+            entity: light.office_desk
             tap_action: toggle
             style:
               top: 30%

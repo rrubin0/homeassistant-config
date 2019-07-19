@@ -23,7 +23,7 @@ automation:
         state: 'off'
 
       - condition: state
-        entity_id: input_boolean.vacation_mode
+        entity_id: input_boolean.holiday
         state: 'off'
 
     action:

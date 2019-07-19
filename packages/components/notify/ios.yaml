@@ -1,15 +1,22 @@
 #####################################################################
 ### iOS
 #####################################################################
-ios:
-  push:
-    categories:
-      - name: cancel_away
-        identifier: 'cancelaway'
-        actions:
-          - identifier: 'CANCEL_AWAY'
-            title: 'Cancel Away'
-            authenticationRequired: false
+#ios:
+#  push:
+#    categories:
+#      - name: cancel_away
+#        identifier: 'cancelaway'
+#        actions:
+#          - identifier: 'CANCEL_AWAY'
+#            title: 'Cancel Away'
+#            authenticationRequired: false
+#
+#      - name: test_action
+#        identifier: 'testing'
+#        actions:
+#          - identifier: 'TEST_ACTION'
+#            title: 'Test Action'
+#            authenticationRequired: false
 
       ### EXAMPLE ###
 #      - name: Alarm

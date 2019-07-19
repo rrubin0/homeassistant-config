@@ -1,0 +1,48 @@
+#####################################################################
+### Control Visitor Mode for dog sitter
+#####################################################################
+automation:
+  - alias: Enable Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.lock_south_door_status') == 'Unlocked by Dog Sitter' }}"
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.visitor_mode
+
+
+  ### Cancel Visitor Mode when we return home
+  - alias: Cancel Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        from: 'not_home'
+        to: 'home'
+        for:
+          minutes: 15
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.visitor_mode
+

@@ -5,25 +5,37 @@ script:
   away:
     alias: "Away Mode"
     sequence:
+    ### lock the doors
     - service: lock.lock
       entity_id: all
 
-    # turn off all lights (except porch) and devices
+    ### turn off all lights (except porch) and devices
     - service: homeassistant.turn_off
       entity_id:
         - group.interior_lights
         - group.exterior_lights
         - group.outlets
         - fan.patio_fan
-        - input_boolean.nursery_presence
+
+    ### set climate away mode
+    - service: climate.set_away_mode
+      data:
+        entity_id: climate.downstairs
+        away_mode: 'on'
+
+    - service: climate.set_away_mode
+      data:
+        entity_id: climate.upstairs
+        away_mode: 'on'
+
+    ### send notification
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Away Mode ON"
+        message: "Away mode is ON."
 
 #    - service: notify.pushbullet
 #      data:
 #        title: "Away Mode ON"
 #        target: "device/Chrome"
 #        message: "It appears nobody's home; away mode activated."
-
-    - service: notify.mobile_app_rip8plus
-      data:
-        title: "Away Mode ON"
-        message: "Away mode is ON."

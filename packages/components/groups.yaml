@@ -11,7 +11,6 @@ group:
       - light.billiards
       - light.dining_room_chandelier_level
       - light.entryway
-      - light.foyer_lights_level
       - light.kitchen_lights_level
       - light.living_room
       - light.living_room_lamp
@@ -21,17 +20,49 @@ group:
       - light.master_bed_entry_level
       - light.master_bedroom_chandelier_level
       - light.master_bedroom
+      - light.master_bedside_lamps
       - light.nursery_light
       - light.nursery_wall_light
       - light.office_desk_lamp
-      - light.pantry
       - light.under_bed_lights
       - light.wine_room
       - group.accent_lights
+      - group.entry_lights
       - group.game_room_lights
       - switch.nursery_lamp
       - light.nursery_light
       - switch.downstairs_bath_lights_switch
+
+
+  Downstairs Lights:
+    entities:
+      - light.billiards
+      - light.dining_room_chandelier_level
+      - light.entryway
+      - light.kitchen_lights_level
+      - light.living_room
+      - light.living_room_lamp
+      - light.office_desk_lamp
+      - light.wine_room
+      - group.accent_lights
+      - group.entry_lights
+      - group.game_room_lights
+      - switch.downstairs_bath_lights_switch
+
+  Upstairs Lights:
+    entities:
+      - light.master_bathroom
+      - light.master_bath_vanity
+      - light.master_bed_ceiling_level
+      - light.master_bed_entry_level
+      - light.master_bedroom_chandelier_level
+      - light.master_bedroom
+      - light.master_bedside_lamps
+      - light.nursery_light
+      - light.nursery_wall_light
+      - light.under_bed_lights
+      - switch.nursery_lamp
+      - light.nursery_light
 
 
   #####################################################################
@@ -47,13 +78,14 @@ group:
   #####################################################################
   ### Living Room Lights
   #####################################################################
+  ### note: consider if this is needed, long term
   Entry Lights:
     entities:
       - light.foyer_lights_level
       - light.entryway
-      - light.south_entry
-      - light.center_entry
-      - light.kitchen_entry
+#      - light.south_entry
+#      - light.center_entry
+#      - light.kitchen_entry
 
   Living Room Lights:
     control: hidden

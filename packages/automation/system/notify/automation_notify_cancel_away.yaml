@@ -10,6 +10,7 @@ automation:
       event_type: ios.notification_action_fired
       event_data:
         actionName: CANCEL_AWAY
+
     action:
       service: timer.cancel
       entity_id: timer.away_mode

@@ -6,17 +6,11 @@ homeassistant:
     input_boolean.visitor_mode:
       icon: mdi:account
 
-    input_boolean.vacation_mode:
+    input_boolean.holiday:
       icon: mdi:beach
 
     input_boolean.dinner_time:
       icon: mdi:food-fork-drink
-
-    input_boolean.door_held_open:
-      icon: mdi:door-open
-
-    input_boolean.keg_door_open:
-      icon: mdi:door-open
 
     input_boolean.condition_1:
       friendly_name: "Test Condition 1"

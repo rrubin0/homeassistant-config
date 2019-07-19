@@ -1,0 +1,53 @@
+#####################################################################
+### Automatically reset Alexa's volume when she goes idle
+#####################################################################
+automation:
+  ### Living Room
+  - alias: Reset Alexa Volume Living Room
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.living_room
+        to: 'idle'
+        for:
+          minutes: 2
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.living_room
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+
+  ### Game Room
+  - alias: Reset Alexa Volume Game Room
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.game_room
+        to: 'idle'
+        for:
+          minutes: 2
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.game_room
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+
+  ### Nursery
+  - alias: Reset Alexa Volume Nursery
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.nursery
+        to: 'idle'
+        for:
+          minutes: 1
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.nursery
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"

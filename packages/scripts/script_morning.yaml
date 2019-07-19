@@ -50,12 +50,24 @@ script:
         brightness: 200
 
     - delay:
-        minutes: 15
-    ### 07:25
+        minutes: 20
+    ### 07:30
     - service: hue.hue_activate_scene
       data:
         group_name: "Living Room"
         scene_name: "Normal"
 
+    - service: homeassistant.turn_off
+      entity_id: group.accent_lights
+
     - service: light.turn_off
       entity_id: light.kitchen_lights_level
+
+    - delay:
+        minutes: 15
+    ### 07:45
+    - service: homeassistant.turn_off
+      entity_id: group.living_room_lights
+
+    - service: homeassistant.turn_off
+      entity_id: group.entry_lights

@@ -42,7 +42,7 @@ homekit:
       - light.master_reading_lamp
       - light.master_sitting_lamp
       - light.nursery_wall_light
-      - light.office_desk_lamp
+      - light.office_desk
       - light.under_bed_lights
       - light.wine_room
 
@@ -99,8 +99,8 @@ homekit:
       - scene.cloudy
       - scene.dim
       - scene.evening
-      - scene.late_evening
       - scene.game_time
+      - scene.late_evening
       - scene.morning
       - scene.movie_time
 

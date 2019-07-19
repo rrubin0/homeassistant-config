@@ -2,7 +2,43 @@
 #####################################################################
 ### Automation
 #####################################################################
-#automation:
+automation:
+  ### Test iOS
+  - alias: Test ios action
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.state_change
+        from: 'off'
+        to: 'on'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Test Message"
+          message: "This is a test"
+          data:
+            push:
+              category: testing
+              sound:
+                name: default
+
+
+  - alias: test action desk light
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TEST_ACTION
+
+    action:
+      service: light.turn_on
+      entity_id: light.office_desk
+
+
 #  ### Test Away Mode Trigger
 #  - alias: Test Away Mode
 #    initial_state: 'on'

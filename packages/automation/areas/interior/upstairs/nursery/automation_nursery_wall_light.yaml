@@ -57,34 +57,34 @@ automation:
           entity_id: input_select.nursery_wall_strobe
           option: Select an option...
 
-  #####################################################################
-  ### Default to Crystal if turned on with no selection
-  - alias: Nursery Wall Default
-    initial_state: 'on'
-    hide_entity: true
-    trigger:
-      - platform: state
-        entity_id: light.nursery_wall_light
-        from: 'off'
-        to: 'on'
-
-    condition:
-      condition: state
-      entity_id: input_select.nursery_wall_color
-      state: "Select an option..."
-
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.nursery_wall_light
-          brightness: 255
-          rgb_color: [255,163,132]
-
-      # Reset the Input Select to "Select an option..."
-      - service: input_select.select_option
-        data_template:
-          entity_id: "{{ trigger.to_state.entity_id }}"
-          option: Select an option...
+#  #####################################################################
+#  ### Default to Crystal if turned on with no selection
+#  - alias: Nursery Wall Default
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      - platform: state
+#        entity_id: light.nursery_wall_light
+#        from: 'off'
+#        to: 'on'
+#
+#    condition:
+#      condition: state
+#      entity_id: input_select.nursery_wall_color
+#      state: "Select an option..."
+#
+#    action:
+#      - service: light.turn_on
+#        data:
+#          entity_id: light.nursery_wall_light
+#          brightness: 255
+#          rgb_color: [255,163,132]
+#
+#      # Reset the Input Select to "Select an option..."
+#      - service: input_select.select_option
+#        data_template:
+#          entity_id: "{{ trigger.to_state.entity_id }}"
+#          option: Select an option...
 
   #####################################################################
   ### Nursery Wall Select Blue

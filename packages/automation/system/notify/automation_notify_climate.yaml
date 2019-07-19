@@ -21,7 +21,7 @@ automation:
 
     condition:
       - condition: state
-        entity_id: input_boolean.door_held_open
+        entity_id: binary_sensor.door_held_open
         state: 'on'
 
       - condition: state
@@ -45,7 +45,7 @@ automation:
     condition:
       - condition: time
         after: '08:00:00'
-        before: '21:00:00'
+        before: '22:00:00'
 
     action:
       - service: notify.mobile_app_rip8plus

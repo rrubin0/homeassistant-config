@@ -44,6 +44,6 @@ automation:
     action:
       ### Turn the corresponding switch on to send the fan speed command
       - service: input_select.select_option
-        data_template:
+        data:
           entity_id: input_select.living_room_fan_speed
           option: High

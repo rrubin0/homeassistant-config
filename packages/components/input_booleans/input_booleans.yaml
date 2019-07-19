@@ -6,32 +6,16 @@ input_boolean:
     name: Visitor Mode
     initial: off
 
-  vacation_mode:
-    name: Vacation Mode
+  holiday:
+    name: Holiday
     initial: off
 
   dinner_time:
     name: Dinner Time
     initial: off
 
-  door_held_open:
-    name: Door Held Open
-    initial: off
-
-  keg_door_open:
-    name: Keg Door Open
-    initial: off
-
-  all_secure:
-    name: All Secure
-    initial: off
-
   sleeping:
     name: Sleeping
-    initial: off
-
-  nursery_presence:
-    name: Nursery Presence
     initial: off
 
   peak_hours:
@@ -57,4 +41,13 @@ input_boolean:
   nursery_fan_hold:
     name: Nursery Fan Hold
     initial: off
+
+  downstairs_bath_presence:
+    name: Downstairs Bath Presence
+    initial: off
+
+  bbq_monitor:
+    name: BBQ Monitor
+    initial: off
+
 

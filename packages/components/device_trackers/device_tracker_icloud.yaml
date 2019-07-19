@@ -1,7 +1,7 @@
 ################################################################
 ## Device Tracker - iCloud
 ################################################################
-device_tracker:
-  - platform: icloud
-    username: !secret icloud_megs
-    password: !secret icloud_megs_password
+#device_tracker:
+#  - platform: icloud
+#    username: !secret icloud_megs
+#    password: !secret icloud_megs_password

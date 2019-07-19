@@ -20,3 +20,29 @@ input_number:
     step: 1
     mode: slider
 
+  ### BBQ Low Temp
+  bbq_low_temp:
+    name: "BBQ Low Temp"
+    initial: 200
+    min: 100
+    max: 400
+    step: 1
+    mode: box
+
+  ### BBQ High Temp
+  bbq_high_temp:
+    name: "BBQ High Temp"
+    initial: 340
+    min: 200
+    max: 600
+    step: 1
+    mode: box
+
+  ### BBQ Food Temp
+  bbq_food_temp:
+    name: "Food Target Temp"
+    initial: 202
+    min: 100
+    max: 300
+    step: 1
+    mode: box

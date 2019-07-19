@@ -1,0 +1,20 @@
+#####################################################################
+### Patio Lights Automation
+#####################################################################
+automation:
+  ### Turn off the patio lights if left on
+  - alias: Patio Lights Off
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.after_hours
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: switch.patio_lights_switch
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        entity_id: switch.patio_lights_switch

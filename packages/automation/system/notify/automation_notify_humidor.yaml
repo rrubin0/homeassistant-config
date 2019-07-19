@@ -9,8 +9,6 @@ automation:
       - platform: numeric_state
         entity_id: sensor.sn1_humidity
         below: 65
-        for:
-          minutes: 30
 
     action:
       - service: light.turn_on
@@ -29,7 +27,7 @@ automation:
                 name: default
 
       - delay:
-          minutes: 60
+          minutes: 90
 
 
   ### Humidor OK - reset notification and indicator

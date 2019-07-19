@@ -1,0 +1,7 @@
+#####################################################################
+#   Energy Sensor Customizations
+#####################################################################
+homeassistant:
+  customize:
+    sensor.srp_energy:
+      icon: mdi:power-plug

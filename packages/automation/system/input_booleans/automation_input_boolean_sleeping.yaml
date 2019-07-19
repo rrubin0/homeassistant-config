@@ -2,14 +2,43 @@
 ### Automation - Sleeping
 #####################################################################
 automation:
-  - alias: Sleeping Off
+  - alias: Sleeping Off Weekday
     initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: time
-        at: '06:45:00'
+        at: '9:45:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
 
     action:
       - service: input_boolean.turn_off
         data:
           entity_id: input_boolean.sleeping
+
+
+  - alias: Sleeping Off Weekend
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: time
+        at: '11:30:00'
+
+    condition:
+      - condition: time
+        weekday:
+          - sat
+          - sun
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.sleeping
+

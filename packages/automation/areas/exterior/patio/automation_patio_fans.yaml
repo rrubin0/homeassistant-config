@@ -1,0 +1,20 @@
+#####################################################################
+### Patio Fans Automation
+#####################################################################
+automation:
+  ### Turn off the patio fans if left on
+  - alias: Patio Fans Off
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.after_hours
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: fan.patio_fan
+        state: 'on'
+
+    action:
+      - service: fan.turn_off
+        entity_id: fan.patio_fan

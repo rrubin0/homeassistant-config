@@ -1,0 +1,26 @@
+#####################################################################
+### Downstairs HVAC Leak Detector Alarm
+#####################################################################
+automation:
+  - alias: Downstairs AC Leak Detector Alarm
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.downstairs_ac_leak_detector
+        to: 'Leak Detected!'
+
+    action:
+      - service: climate.set_operation_mode
+        data:
+          entity_id: climate.downstairs
+          operation_mode: 'off'
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Leak Detected"
+          message: "HVAC overflow detected - AC turned off!"
+          data:
+            push:
+              sound:
+                name: default

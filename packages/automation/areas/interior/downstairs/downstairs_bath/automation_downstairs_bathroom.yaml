@@ -1,0 +1,91 @@
+####################################################################
+## Downstairs Bathroom Lights
+####################################################################
+automation:
+  ### Set Presence Detection to ON
+  - alias: Downstairs Bathroom Presence Detected
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.motion_downstairs_bath
+        to: 'on'
+
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.downstairs_bath_presence
+
+
+### Turn on the bathroom lights
+  - alias: Downstairs Bathroom Lights On
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.motion_downstairs_bath
+        to: 'on'
+
+      - platform: state
+        entity_id: sensor.bathroom_door_state
+        to: 'Open'
+
+    condition:
+      - condition: time
+### summertime schedule
+        after: '18:00:00'
+        before: '01:20:00'
+
+      - condition: state
+        entity_id: switch.downstairs_bath_lights_switch
+        state: 'off'
+
+    action:
+      - service: switch.turn_on
+        data:
+          entity_id: switch.downstairs_bath_lights_switch
+
+
+  ### Set Presence Detection to OFF
+  - alias: Downstairs Bathroom Vacant
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.downstairs_bath_presence
+        to: 'off'
+        for:
+          minutes: 3
+
+      - platform: state
+        entity_id: switch.downstairs_bath_lights_switch
+        to: 'off'
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.downstairs_bath_presence
+        state: 'on'
+
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.downstairs_bath_presence
+
+
+### Turn off the downstairs bathroom lights
+  - alias: Downstairs Bathroom Lights Off
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_boolean.downstairs_bath_presence
+        to: 'off'
+
+    condition:
+      - condition: state
+        entity_id: switch.downstairs_bath_lights_switch
+        state: 'on'
+
+    action:
+      - service: switch.turn_off
+        data:
+          entity_id: switch.downstairs_bath_lights_switch
+

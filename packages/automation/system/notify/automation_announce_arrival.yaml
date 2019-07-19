@@ -1,0 +1,40 @@
+#####################################################################
+### Announce arrival when proximity is below 5 miles
+#####################################################################
+automation:
+  - alias: Announce Rick On Arrival
+    initial_state: 'on'
+    trigger:
+      - platform: numeric_state
+        entity_id: proximity.rick
+        below: 5
+
+    condition:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+
+      - condition: state
+        entity_id: input_boolean.holiday
+        state: 'off'
+
+      - condition: time
+        before: '19:00:00'
+        after: '14:00:00'
+
+      - condition: state
+        entity_id: device_tracker.rip8plus
+        state: 'not_home'
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.living_room
+        data_template:
+          volume_level: "{{ states.sensor.alexa_volume.state }}"
+
+      - service: notify.alexa_media
+        data:
+          target: media_player.living_room
+          message: "Good news, Rick is less than 10 minutes away and will be home soon."
+          data:
+            type: tts

@@ -1,0 +1,12 @@
+#####################################################################
+### Binary Sensor: Kegerator Door
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      keg_door_held_open:
+        friendly_name: "Kegerator Door Held Open"
+        value_template: >-
+          {{ is_state('binary_sensor.kegerator_door', 'on') }}
+        delay_on:
+          seconds: 30
