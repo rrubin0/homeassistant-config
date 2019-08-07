@@ -2,7 +2,7 @@
 ### Set Away Mode when weather is Awesome
 #####################################################################
 automation:
-  - alias: Climate Downstairs Away if Awesome Weather
+  - alias: Set Away Mode if weather is nice
     initial_state: 'on'
     trigger:
       - platform: state
@@ -27,21 +27,14 @@ automation:
           entity_id: climate.upstairs
           hold_mode: 'away'
 
-
-
-#      ### changed to simple hold_mode instead of away on; preserving previous config here while testing...
-#      - service: climate.set_away_mode
+### prep for 0.96.x
+#      - service: climate.set_preset_mode
 #        data:
 #          entity_id: climate.downstairs
-#          away_mode: 'on'
+#          preset_mode: 'away'
 #
-#      - service: climate.set_away_mode
+#      - service: climate.set_preset_mode
 #        data:
 #          entity_id: climate.upstairs
-#          away_mode: 'on'
-
-
-
-
-
+#          preset_mode: 'away'
 

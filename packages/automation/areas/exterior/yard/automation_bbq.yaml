@@ -15,19 +15,13 @@ automation:
         state: 'on'
 
       - condition: template
-        value_template: "{{ states.sensor.grill_temperature.state >= ('states.input_number.bbq_high_temp.state') }}"
-### this evaluates in Template Editor but doesn't work here:    value_template: "{{ states("sensor.grill_temperature") >= states("input_number.bbq_high_temp") }}"
-
-## add this piece to script condition...
-#      - condition: state
-#        entity_id: input_boolean.announce
-#        state: 'on'
+        value_template: "{{ states('sensor.grill_temperature') >= states('input_number.bbq_high_temp') }}"
 
     action:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Grill Temp"
-          message: "The grill is {{ states.sensor.grill_temperature.state }} degrees. That's too hot!"
+          message: "The grill is {{ states('sensor.grill_temperature') }} degrees. That's too hot!"
           data:
             push:
               sound:
@@ -51,18 +45,13 @@ automation:
         state: 'on'
 
       - condition: template
-        value_template: "{{ states.sensor.grill_temperature.state <= ('states.input_number.bbq_low_temp.state') }}"
-
-## add this piece to script condition...
-#      - condition: state
-#        entity_id: input_boolean.announce
-#        state: 'on'
+        value_template: "{{ states('sensor.grill_temperature') <= states('input_number.bbq_low_temp') }}"
 
     action:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Grill Temp"
-          message: "The grill is {{ states.sensor.grill_temperature.state }} degrees. That's too low!"
+          message: "The grill is {{ states('sensor.grill_temperature') }} degrees. That's too low!"
           data:
             push:
               sound:
@@ -74,23 +63,18 @@ automation:
     initial_state: 'on'
     trigger:
       - platform: template
-        value_template: "{{ states.sensor.food_temperature.state >= ('states.input_number.bbq_food_temp.state') }}"
+        value_template: "{{ states('sensor.food_temperature')|int >= states('input_number.bbq_food_temp') }}"
 
     condition:
       - condition: state
-        entity_id: input_boolean.bbq_monitor
+        entity_id: input_boolean.food_monitor
         state: 'on'
-
-## add this piece to script condition...
-#      - condition: state
-#        entity_id: input_boolean.announce
-#        state: 'on'
 
     action:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Food Target Temp"
-          message: "Food is at {{ states.input_number.bbq_food_temp.state }} degrees. Go check it!"
+          message: "Food is at {{ states('input_number.bbq_food_temp') }} degrees. Go check it!"
           data:
             push:
               sound:
@@ -98,8 +82,12 @@ automation:
 
 #      - service: script.do alexa announce thing here
 
+## add this piece to script condition...
+#      - condition: state
+#        entity_id: input_boolean.announce
+#        state: 'on'
 
-#  use case 3: Periodic alerting/announcements of the temperature ios/alexa 
+##  use case 3: Periodic alerting/announcements of the temperature ios/alexa 
 
 
 

@@ -11,8 +11,10 @@ homekit:
 #################################
 # Device Tracker
 #################################
-      - device_tracker.rip8plus
-      - device_tracker.mip8
+#      - device_tracker.rip8plus
+#      - device_tracker.mip8
+      - person.rick
+      - person.megs
 
 
 #################################
@@ -100,7 +102,7 @@ homekit:
       - scene.dim
       - scene.evening
       - scene.game_time
-      - scene.late_evening
+      - scene.tv_time
       - scene.morning
       - scene.movie_time
 

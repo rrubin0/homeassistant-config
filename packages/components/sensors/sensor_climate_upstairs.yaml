@@ -7,6 +7,7 @@ sensor:
       us_avg_temp:
         friendly_name: "Upstairs Average Temperature"
         unit_of_measurement: "°F"
+        device_class: temperature
         value_template: >-
           {{ ((float(states.sensor.upstairs_temperature.state) + float(states.sensor.nursery_temperature.state) + float(states.sensor.guest_room_temperature.state)) / 3) | round(1) }}
         entity_id: sensor.time
@@ -17,6 +18,7 @@ sensor:
       us_climate_current_temp:
         friendly_name: "Upstairs AC Temperature"
         unit_of_measurement: "°F"
+        device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).current_temperature|default('unknown') }}"
         entity_id: sensor.time
 
@@ -46,6 +48,7 @@ sensor:
       us_climate_target_high:
         friendly_name: "Upstairs AC Setpoint"
         unit_of_measurement: "°F"
+        device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_high|default('unknown') }}"
         entity_id: sensor.time
 
@@ -54,6 +57,7 @@ sensor:
       us_climate_target_low:
         friendly_name: "Upstairs Heat Setpoint"
         unit_of_measurement: "°F"
+        device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_low|default('unknown') }}"
         entity_id: sensor.time
 

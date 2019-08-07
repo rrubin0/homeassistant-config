@@ -35,7 +35,8 @@ automation:
         before: '20:00:00'
 
       - condition: template
-        value_template: "{{ states.media_player.apple_tv != 'playing' }}"
+        value_template: "{{ states('media_player.apple_tv') != 'playing' }}"
+## this syntax is recommended to avoid but keeping for test ## value_template: "{{ states.media_player.apple_tv != 'playing' }}"
 
       - condition: or
         conditions:

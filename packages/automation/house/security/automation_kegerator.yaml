@@ -49,7 +49,7 @@ automation:
       - service: media_player.volume_set
         entity_id: media_player.kitchen
         data_template:
-          volume_level: "{{ states.sensor.alexa_volume.state }}"
+          volume_level: "{{ states('sensor.alexa_volume') }}"
 
       - service: notify.mobile_app_rip8plus
         data:

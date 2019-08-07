@@ -42,6 +42,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Living Room N. Window Tamper"
 
 
 ### Guest Room Window Status
@@ -84,6 +85,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Guest Room Window Tamper"
 
 
 ### Master Bedroom Northwest Window

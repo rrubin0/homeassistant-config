@@ -9,7 +9,7 @@ sensor:
         value_template: >-
           {% set state = states('sensor.bathroom_entry_alarm_type') %}
           {% set user = states('sensor.bathroom_entry_alarm_level') %}
-          
+
           {% if state == '19' %}
             {% if user == '1' %}
               Unlocked by Rick
@@ -42,7 +42,7 @@ sensor:
         value_template: >-
           {% set state = states('sensor.south_entry_alarm_type') %}
           {% set user = states('sensor.south_entry_alarm_level') %}
-          
+
           {% if state == '19' %}
             {% if user == '1' %}
               Unlocked by Rick

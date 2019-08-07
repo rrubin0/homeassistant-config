@@ -11,7 +11,7 @@ automation:
         at: '07:30:00'
 
       - platform: template
-        value_template: "{{ states.sensor.living_room_temperature.state <= '78.5' }}"
+        value_template: "{{ states('sensor.living_room_temperature') <= '78.5' }}"
 
     condition:
       - condition: state
@@ -19,7 +19,7 @@ automation:
         state: 'home'
 
       - condition: template
-        value_template: "{{ states.sensor.living_room_temperature.state < '79' }}"
+        value_template: "{{ states('sensor.living_room_temperature') < '79' }}"
 
       - condition: time
         before: '19:30:00'
@@ -45,7 +45,7 @@ automation:
         to: 'on'
 
       - platform: template
-        value_template: "{{ states.sensor.living_room_temperature.state >= '79' }}"
+        value_template: "{{ states('sensor.living_room_temperature') >= '79' }}"
 
       - platform: time
         at: '20:30:00'
@@ -75,7 +75,7 @@ automation:
 #        before: '19:00:00'
 #
 #      - condition: template
-#        value_template: "{{ states.sensor.living_room_temperature.state < '78.5' }}"
+#        value_template: "{{ states('sensor.living_room_temperature') < '78.5' }}"
 #
 #    action:
 #      - service: switch.turn_on
@@ -91,7 +91,7 @@ automation:
         at: '19:00:00'
 
       - platform: template
-        value_template: "{{ states.sensor.nursery_temperature.state <= '78.5' }}"
+        value_template: "{{ states('sensor.nursery_temperature') <= '78.5' }}"
 
     condition:
       - condition: state
@@ -99,7 +99,7 @@ automation:
         state: 'home'
 
       - condition: template
-        value_template: "{{ states.sensor.nursery_temperature.state < '79' }}"
+        value_template: "{{ states('sensor.nursery_temperature') < '79' }}"
 
       - condition: state
         entity_id: switch.switch_one
@@ -119,7 +119,7 @@ automation:
         at: '08:00:00'
 
       - platform: template
-        value_template: "{{ states.sensor.nursery_temperature.state >= '78.6' }}"
+        value_template: "{{ states('sensor.nursery_temperature') >= '78.6' }}"
 
     condition:
       - condition: state
@@ -150,7 +150,7 @@ automation:
 #        state: 'off'
 #
 #      - condition: template
-#        value_template: "{{ states.sensor.nursery_temperature.state < '79' }}"
+#        value_template: "{{ states('sensor.nursery_temperature') < '79' }}"
 #
 #    action:
 #      - service: switch.turn_on

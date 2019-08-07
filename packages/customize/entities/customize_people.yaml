@@ -1,12 +1,12 @@
 #####################################################################
-#   Device Tracker Customizations
+#   Person Customizations
 #####################################################################
 homeassistant:
   customize:
-    device_tracker.rip8plus:
+    person.rick:
       friendly_name: "Rick"
       entity_picture: /local/rick.jpg
 
-    device_tracker.mip8:
+    person.megs:
       friendly_name: "Megs"
       entity_picture: /local/megs.jpg

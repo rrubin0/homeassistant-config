@@ -17,7 +17,7 @@ automation:
         state: 'off'
 
       - condition: template
-        value_template: "{{ states.sensor.nursery_fan_speed.state != 'off' }}"
+        value_template: "{{ states('sensor.nursery_fan_speed') != 'off' }}"
 
     action:
       ## may be able to simplify and remove this first one...test.
@@ -27,7 +27,7 @@ automation:
       - service: fan.set_speed
         entity_id: fan.nursery_fan
         data_template:
-          speed: "{{ states.sensor.nursery_fan_speed.state }}"
+          speed: "{{ states('sensor.nursery_fan_speed') }}"
 
 
   ### Set Nursery Fan Speed Automatically
@@ -57,12 +57,12 @@ automation:
       - service: fan.set_speed
         entity_id: fan.nursery_fan
         data_template:
-          speed: "{{ states.sensor.nursery_fan_speed.state }}"
+          speed: "{{ states('sensor.nursery_fan_speed') }}"
 
 #      - service: logbook.log
 #        data_template:
 #          name: "Nursery Fan Speed"
-#          message: "changed to {{ states.sensor.nursery_fan_speed.state }}."
+#          message: "changed to {{ states('sensor.nursery_fan_speed') }}."
 
 
 

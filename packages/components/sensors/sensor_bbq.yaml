@@ -6,12 +6,14 @@ sensor:
   - platform: mqtt
     state_topic: "bbq"
     name: "Grill Temperature"
-    unit_of_measurement: "F"
-    value_template: '{{ value_json.temperature_1_F | round(1) }}'
+    unit_of_measurement: "°F"
+    device_class: temperature
+    value_template: '{{ value_json.temperature_2_F | round(1) }}'
 
   ### BBQ Food Probe Temperature
   - platform: mqtt
     state_topic: "bbq"
     name: "Food Temperature"
-    unit_of_measurement: "F"
-    value_template: '{{ value_json.temperature_2_F | round(1) }}'
+    unit_of_measurement: "°F"
+    device_class: temperature
+    value_template: '{{ value_json.temperature_1_F | round(1) }}'

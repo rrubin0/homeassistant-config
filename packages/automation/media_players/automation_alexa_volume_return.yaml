@@ -16,7 +16,7 @@ automation:
       - service: media_player.volume_set
         entity_id: media_player.living_room
         data_template:
-          volume_level: "{{ states.sensor.alexa_volume.state }}"
+          volume_level: "{{ states('sensor.alexa_volume') }}"
 
 
   ### Game Room
@@ -33,7 +33,7 @@ automation:
       - service: media_player.volume_set
         entity_id: media_player.game_room
         data_template:
-          volume_level: "{{ states.sensor.alexa_volume.state }}"
+          volume_level: "{{ states('sensor.alexa_volume') }}"
 
 
   ### Nursery
@@ -50,4 +50,4 @@ automation:
       - service: media_player.volume_set
         entity_id: media_player.nursery
         data_template:
-          volume_level: "{{ states.sensor.alexa_volume.state }}"
+          volume_level: "{{ states('sensor.alexa_volume') }}"

@@ -18,38 +18,35 @@ homeassistant:
      api_password: !secret http_password
 
 config:
+
 discovery:
   ignore:
     - directv
 
 history:
+
 http:
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   cors_allowed_origins: !secret cors
   ip_ban_enabled: true
-  login_attempts_threshold: 5
+  login_attempts_threshold: 3
 
 lovelace:
   mode: yaml
 
 mobile_app:
-person:
-  - name: Rick
-    id: rick
-    device_trackers:
-      - device_tracker.rip8plus
-      - device_tracker.i8plus
 
-  - name: Megs
-    id: megs
-    device_trackers:
-      - device_tracker.mip8
+ios:
 
 #python_script:
+
 stream:
+
 sun:
+
 system_health:
+
 zeroconf:
 
 

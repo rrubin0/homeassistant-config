@@ -8,15 +8,17 @@ sensor:
       master_bedroom_fan_speed:
         friendly_name: "Master Bedroom Fan Speed"
         value_template: >-
-          {% set temperature = states('sensor.upstairs_temperature')|float(none) %}
-          {% if 72 <= temperature <=74.9 %}
+          {% set temperature = states('sensor.us_avg_temp')|float(none) %}
+          {% if 74 <= temperature <=76.9 %}
             1
-          {% elif 75 <= temperature <=78.5 %}
+          {% elif 77.0 <= temperature <=78.9 %}
             2
-          {% elif 78.6 <= temperature <=80.9 %}
+          {% elif 79.0 <= temperature <=82.0 %}
             4
-          {% elif temperature > 81 %}
+          {% elif temperature > 82.0 %}
             5
           {% else %}
             Off
           {% endif %}
+
+## for sensor.upstairs_temperature the trigger for speed 4 should be 77.5

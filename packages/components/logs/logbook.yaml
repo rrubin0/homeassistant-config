@@ -91,7 +91,7 @@ logbook:
       - switch.north_sprinklers_z1
       - switch.northeast_sprinklers_z3
       - switch.northwest_sprinklers_z2
-      - switch.rubino_in_standby_mode
+      - switch.rachio_standby_mode
       - switch.southeast_sprinklers_z6
       - switch.southwest_sprinklers_z7
 

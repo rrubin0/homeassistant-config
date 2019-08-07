@@ -8,11 +8,11 @@ alexa_media:
       password: !secret amazon_pswd
       url: amazon.com
       include_devices:
-        - "Fire Stick"
-        - "Richard's 3rd Fire"
-        - "Richard's 4th Fire"
+#        - "Richard's 3rd Fire"
+#        - "Richard's 4th Fire"
         - "Living Room"
         - "Game Room"
+        - "Harmon Kardon Allure"
         - "Master Bedroom"
         - FireTV
         - Nursery
@@ -64,7 +64,7 @@ alexa:
         - scene.cloudy
         - scene.dim
         - scene.evening
-        - scene.late_evening
+        - scene.tv_time
         - scene.game_time
         - scene.morning
         - scene.movie_time

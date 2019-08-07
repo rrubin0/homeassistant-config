@@ -2,23 +2,23 @@
 ### Late Evening Scene ... low lighting
 #####################################################################
 scene:
-  - name: Late Evening
+  - name: TV Time
     entities:
       light.foyer_lights_level:
         state: on
-        brightness: 70
+        brightness: 50
+        transition: 5
+
+      light.lr_ceiling:
+        state: off
         transition: 5
 
       light.entryway:
         state: on
-        brightness: 40
-        transition: 30
+        brightness: 30
+        transition: 10
 
       light.living_room_lamp:
         state: on
-        brightness: 100
-        transition: 20
-
-      light.lr_ceiling:
-        state: off
-        transition: 10
+        brightness: 65
+        transition: 15

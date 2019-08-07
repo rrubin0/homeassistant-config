@@ -1,38 +1,38 @@
 #####################################################################
 #   Security Sensor Customizations
 #####################################################################
-homeassistant:
-  customize:
+#homeassistant:
+#  customize:
 
-    sensor.front_door_tamper:
-      friendly_name: "Front Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.south_door_tamper:
-      friendly_name: "South Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.office_door_tamper:
-      friendly_name: "Office Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.kitchen_door_tamper:
-      friendly_name: "Kitchen Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.bathroom_door_tamper:
-      friendly_name: "Bathroom Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.guest_room_balcony_door_tamper:
-      friendly_name: "Guest Room Balcony Door Tamper"
-      #icon: mdi:home-outline
-
-    sensor.living_room_north_window_tamper:
-      friendly_name: "Living Room N. Window Tamper"
-      #icon: mdi:home-outline
-
-    sensor.guest_room_window_tamper:
-      friendly_name: "Guest Room Window Tamper"
-      #icon: mdi:home-outline
+#    sensor.front_door_tamper:
+#      friendly_name: "Front Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.south_door_tamper:
+#      friendly_name: "South Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.office_door_tamper:
+#      friendly_name: "Office Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.kitchen_door_tamper:
+#      friendly_name: "Kitchen Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.bathroom_door_tamper:
+#      friendly_name: "Bathroom Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.guest_room_balcony_door_tamper:
+#      friendly_name: "Guest Room Balcony Door Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.living_room_north_window_tamper:
+#      friendly_name: "Living Room N. Window Tamper"
+#      #icon: mdi:home-outline
+#
+#    sensor.guest_room_window_tamper:
+#      friendly_name: "Guest Room Window Tamper"
+#      #icon: mdi:home-outline
 

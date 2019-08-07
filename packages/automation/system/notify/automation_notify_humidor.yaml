@@ -9,6 +9,8 @@ automation:
       - platform: numeric_state
         entity_id: sensor.sn1_humidity
         below: 65
+        for:
+          minutes: 60
 
     action:
       - service: light.turn_on
@@ -20,14 +22,11 @@ automation:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Refill Humidor"
-          message: "Humidor is {{ states.sensor.sn1_humidity.state }}% refill soon!"
+          message: "Humidor is at {{ states('sensor.sn1_humidity') }}% refill soon!"
           data:
             push:
               sound:
                 name: default
-
-      - delay:
-          minutes: 90
 
 
   ### Humidor OK - reset notification and indicator
@@ -37,6 +36,8 @@ automation:
       - platform: numeric_state
         entity_id: sensor.sn1_humidity
         above: 66
+        for:
+          minutes: 5
 
     action:
       - service: light.turn_on

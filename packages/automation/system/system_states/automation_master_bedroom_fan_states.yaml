@@ -32,91 +32,91 @@ automation:
       - delay:
           minutes: 1
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan') | lower == "on" -%}
               homeassistant.turn_on
           {%- else -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_1.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_1') | lower == "on" -%}
               homeassistant.turn_on
           {%- else -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_1
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_2.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_2') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_2
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_3.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_3') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_3
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_4.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_4') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_4
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_5.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_5') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_5
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_6.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_6') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_6
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_7.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_7') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_7
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_8.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_8') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_8
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_9.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_9') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_9
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_10.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_10') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_10
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_11.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_11') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.master_bedroom_fan_11
       - service_template: >
-          {%- if states.sensor.master_bedroom_fan_12.state | lower == "on" -%}
+          {%- if states('sensor.master_bedroom_fan_12')  | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off

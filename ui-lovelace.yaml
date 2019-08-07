@@ -164,7 +164,7 @@ views:
           title: Travel Megs
           show_header_toggle: false
           entities:
-            - device_tracker.mip8
+            - person.megs
             - script.find_iphone
             - sensor.mip8_battery_level
             - sensor.megs_eta
@@ -175,9 +175,8 @@ views:
           title: Travel Rick
           show_header_toggle: false
           entities:
-            - device_tracker.rip8plus
-#            - sensor.rip8plus_battery_level
-            - sensor.battery_level_2
+            - person.rick
+            - sensor.battery_level_rick
             - sensor.ricks_eta
             - sensor.ricks_home_commute
             - sensor.ricks_office_commute
@@ -772,6 +771,7 @@ views:
         entities:
           - switch.game_room_floodlights
           - light.billiards
+          - switch.switch_four
 
       ################################################
       ## Office
@@ -940,7 +940,7 @@ views:
           - scene.dim
           - scene.cloudy
           - scene.evening
-          - scene.late_evening
+          - scene.tv_time
           - scene.bright
           - scene.morning
           - scene.game_time
@@ -1060,6 +1060,7 @@ views:
              - input_boolean.bbq_monitor
              - input_number.bbq_high_temp
              - input_number.bbq_low_temp
+             - input_boolean.food_monitor
              - input_number.bbq_food_temp
 
          - type: sensor
@@ -1088,8 +1089,8 @@ views:
         title: Irrigation
         show_header_toggle: false
         entities:
-          - sensor.rachio_status
-          - switch.rubino_in_standby_mode
+          - binary_sensor.rachio_status
+          - switch.rachio_standby_mode
           - switch.north_sprinklers_z1
           - switch.northwest_sprinklers_z2
           - switch.northeast_sprinklers_z3
@@ -1393,6 +1394,7 @@ views:
           - script.script_test
           - script.baby_playlist_test
           - script.rgb_strip_test
+          - script.alexa_media_test
 #          - script.desk_lamp_test
           - input_boolean.state_change
 
@@ -1641,5 +1643,5 @@ resources:
   - url: /local/lovelace_cards/surveillance-card.js?v=0
     type: module
     
-  - url: /local/lovelace_cards/ecobee-card.js?v=0.0.3
+  - url: /local/lovelace_cards/ecobee-card.js?v=0.0.4
     type: js

@@ -117,7 +117,7 @@ homeassistant:
       icon: mdi:power-socket-us
 
     switch.switch_four:
-      friendly_name: "Aquarium"
+      friendly_name: "Power Wheels Charger"
       assumed_state: false
       icon: mdi:power-socket-us
 

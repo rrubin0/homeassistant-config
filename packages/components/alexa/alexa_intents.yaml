@@ -11,24 +11,44 @@
     GetSensorIntent:
       speech:
         text: >
+          {# A cheerful greeting #}
+          {%- macro greeting() -%}
+            {%- set closings = [
+              "'Absolutely,'",
+              "'Sure thing,'",
+              "'You got it,'",
+              "'Word,'",
+              "'OK,'",
+              "'Of course,'",
+              "'Roger that,'",
+              "'I was just thinking about that,'",
+              "'Querying the system,'",
+              "'According to my sources,'",
+              "'Sure,'"
+            ] -%}
+            {{closings|random}}
+          {%- endmacro -%}
+
+          {{ greeting() }}
+
           {%- if SensorType.lower() == "temperature" or SensorType.lower() == "temp"-%}
             The average temperature downstairs is {{ states('sensor.ds_avg_temp') }} degrees and upstairs it is {{ states('sensor.us_avg_temp') }} degrees.
           {%- elif SensorType.lower() == "humidity" -%}
-            Downstairs humidity is {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states.sensor.upstairs_humidity.state }} percent.
+            Downstairs humidity is {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states('sensor.upstairs_humidity') }} percent.
           {%- elif SensorType.lower() == "front door" -%}
-            The {{ SensorType }} is {{ states("sensor.front_door_state") }} and the tamper is {{ states("sensor.front_door_tamper") }}.
+            The {{ SensorType }} is {{ states('sensor.front_door_state') }} and the tamper is {{ states('sensor.front_door_tamper') }}.
           {%- elif SensorType.lower() == "side door" -%}
-            The {{ SensorType }} is {{ states("sensor.south_door_state") }} and {{ states("lock.south_entry_locked") }} and the tamper is {{ states("sensor.south_door_tamper") }}.
+            The {{ SensorType }} is {{ states('sensor.south_door_state') }} and {{ states('lock.south_entry_locked') }} and the tamper is {{ states('sensor.south_door_tamper') }}.
           {%- elif SensorType.lower() == "kitchen door" -%}
-            The {{ SensorType }} is {{ states("sensor.kitchen_door_state") }} and the tamper is {{ states("sensor.kitchen_door_tamper") }}.
+            The {{ SensorType }} is {{ states('sensor.kitchen_door_state') }} and the tamper is {{ states('sensor.kitchen_door_tamper') }}.
           {%- elif SensorType.lower() == "bathroom door" -%}
-            The {{ SensorType }} is {{ states("sensor.bathroom_door_state") }} and {{ states("lock.bathroom_entry_locked") }} and the tamper is {{ states("sensor.beach_door_tamper") }}.
+            The {{ SensorType }} is {{ states('sensor.bathroom_door_state') }} and {{ states('lock.bathroom_entry_locked') }} and the tamper is {{ states('sensor.beach_door_tamper') }}.
           {%- elif SensorType.lower() == "guest room balcony door" -%}
-            The {{ SensorType }} is {{ states("sensor.guest_room_balcony_door_state") }} and the tamper is {{ states("sensor.guest_room_balcony_door_tamper") }}.
+            The {{ SensorType }} is {{ states('sensor.guest_room_balcony_door_state') }} and the tamper is {{ states('sensor.guest_room_balcony_door_tamper') }}.
           {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
-            The Humidor temperature is {{ states("sensor.sn1_temperature") }} degrees and your cigars are currently stored at {{ states("sensor.sn1_humidity") }} percent humidity.
+            The Humidor temperature is {{ states('sensor.sn1_temperature') }} degrees and your cigars are currently stored at {{ states('sensor.sn1_humidity') }} percent humidity.
           {%- elif SensorType.lower() == "grill" or SensorType.lower() == "barbecue" or SensorType.lower() == "cook" or SensorType.lower() == "smoker"-%}
-            The grill temperature is {{ states("sensor.grill_temperature") }} degrees and the food probe is reading {{ states("sensor.food_temperature") }} degrees.
+            The grill temperature is {{ states('sensor.grill_temperature') }} degrees and the food probe is reading {{ states('sensor.food_temperature') }} degrees.
           {%- endif -%}
 
       card:
@@ -44,12 +64,12 @@
       speech:
         type: plain
         text: >
-          {%- if is_state('device_tracker.rip8plus', 'home') and
-                 is_state('device_tracker.mip8', 'home') -%}
+          {%- if is_state('person.rick', 'home') and
+                 is_state('person.megs', 'home') -%}
             You are both home safe!
           {%- else -%}
-            Rick is at {{ states.device_tracker.rip8plus.state.replace('_', ' ') }}.
-            and Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
+            and Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
           {% endif %}
 
       card:
@@ -66,13 +86,13 @@
         type: plain
         text: >
           {%- if User.lower() == "rick" -%}
-            Rick is at {{ states.device_tracker.rip8plus.state.replace('_', ' ') }}.
+            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
             {%- elif User.lower() == "megan" -%}
-              Megan is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+              Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
             {%- elif User.lower() == "meg" -%}
-              Meg is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+              Meg is at {{ states.person.megs.state.replace('_', ' ') }}.
             {%- elif User.lower() == "megs" -%}
-              Megs is at {{ states.device_tracker.mip8.state.replace('_', ' ') }}.
+              Megs is at {{ states.person.megs.state.replace('_', ' ') }}.
           {%- else -%}
             Sorry. I am unable to locate {{ User }} right now. Do you remember the telephone? I suggest maybe trying to call and ask.
           {%- endif %}
@@ -94,12 +114,21 @@
       speech:
         type: plain
         text: > 
-          {{ ["Good night, sleep well. Please double check for diapers!", 
-          "Sweet Dreams! Please double check for diapers!", 
-          "See you in the morning! Please double check for diapers!", 
-          "Please double check for diapers!!",
-          "Goodnight, I'll get the lights. Please double check for diapers!" 
-          ] | random }}
+          {# A cheerful greeting #}
+          {%- macro greeting() -%}
+            {%- set closings = [
+              "'Good night, sleep tight,'",
+              "'Sleep well,'",
+              "'Sweet Dreams,'",
+              "'Pleasant Dreams,'",
+              "'See you in the morning,'",
+              "'Goodnight, I'll get the lights,'",
+              "'Sure, have a great night,'"
+            ] -%}
+            {{closings|random}}
+          {%- endmacro -%}
+
+          {{ greeting() }}
 
       card:
         type: simple
@@ -114,6 +143,22 @@
       speech:
         type: plain
         text: >
+          {# A cheerful greeting #}
+          {%- macro greeting() -%}
+            {%- set closings = [
+              "'Absolutely,'",
+              "'Sure thing,'",
+              "'You got it,'",
+              "'Word,'",
+              "'OK,'",
+              "'Of course,'",
+              "'Sure,'"
+            ] -%}
+            {{closings|random}}
+          {%- endmacro -%}
+
+          {{ greeting() }}
+
           {{ ["You can say, turn on Evening to activate the evening lighting scene.", 
           "You can say, turn on Movie Time to dim the lights just like being in a theater.", 
           "To turn all the lights on or off you can say, turn off the interior lights.", 
@@ -123,6 +168,15 @@
           "For better accuracy say, turn on or turn off and then the name of the device you are trying to control.", 
           "To turn on bedtime mode, say, tell us goodnight!" 
           ] | random }}
+
+
+
+
+
+
+
+
+
 
 
 ############################################################################

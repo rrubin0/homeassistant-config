@@ -25,10 +25,10 @@ script:
     - delay:
         minutes: 10
     ### 06:55
-    - service: light.turn_on
-      data:
-        entity_id: light.foyer_lights_level
-        brightness: 60
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.foyer_lights_level
+#        brightness: 60
 
     - service: light.turn_on
       data:

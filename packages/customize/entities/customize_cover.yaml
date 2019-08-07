@@ -4,31 +4,21 @@
 homeassistant:
   customize:
     cover.kitchen_roller_shade_level:
-      device_class: garage
+      device_class: shade
       friendly_name: "Kitchen Rollershade"
-      homebridge_cover_type: rollershutter
-      icon: mdi:blinds
+#      homebridge_cover_type: rollershutter
 
     cover.kitchen_roller_shade_switch:
       hidden: true
-      device_class: garage
+      device_class: shade
       friendly_name: "Kitchen Rollershade State"
-      icon: mdi:blinds
 
     cover.master_bath_roller_shades_level:
-      device_class: garage
+      device_class: shade
       friendly_name: "Master Bath Rollershades"
-      homebridge_cover_type: rollershutter
-      icon: mdi:blinds
+#      homebridge_cover_type: rollershutter
 
     cover.master_bath_roller_shades_switch:
       hidden: true
-      device_class: garage
+      device_class: shade
       friendly_name: "Master Bath Rollershade State"
-      icon: mdi:blinds
-
-    cover.master_bath_shade:
-      device_class: garage
-      friendly_name: "Master Bath Shades"
-      homebridge_cover_type: rollershutter
-      icon: mdi:blinds

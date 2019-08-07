@@ -42,6 +42,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Front Door Tamper"
 
 
 ### South Door Status
@@ -84,6 +85,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "South Door Tamper"
 
 
 ### Kitchen Door Status
@@ -126,6 +128,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Kitchen Door Tamper"
 
 
 ### Bathroom Door Status
@@ -168,6 +171,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Bathroom Door Tamper"
 
 
 ### Office Door Status
@@ -210,6 +214,7 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Office Door Tamper"
 
 
 ### Guest Room Balcony Door Status
@@ -252,5 +257,6 @@ sensor:
           {% else %}
             {{ state }}
           {% endif %}
+        friendly_name: "Guest Room Balcony Door Tamper"
 
 

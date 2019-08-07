@@ -40,7 +40,7 @@ automation:
             {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "stopped" %}
               scene.movie_paused
             {% elif trigger.to_state.state == "idle" and now().strftime('%H%M')|int > 2000 %}
-              scene.late_evening
+              scene.tv_time
             {% else %}
               scene.evening
             {% endif %}

@@ -50,4 +50,8 @@ input_boolean:
     name: BBQ Monitor
     initial: off
 
+  food_monitor:
+    name: Food Monitor
+    initial: off
+
 
