@@ -38,3 +38,13 @@ automation:
             push:
               sound:
                 name: default
+
+      - service: notify.mobile_app_mip8
+        data:
+          title: "Door Unlocked"
+          message: "South Door {{ states('sensor.lock_south_door_status') }}"
+          data:
+            push:
+              sound:
+                name: default
+

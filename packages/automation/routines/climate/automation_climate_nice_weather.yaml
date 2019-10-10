@@ -2,7 +2,7 @@
 ### Set Away Mode when weather is Awesome
 #####################################################################
 automation:
-  - alias: Set Away Mode if weather is nice
+  - alias: Set Eco Mode if weather is nice
     initial_state: 'on'
     trigger:
       - platform: state
@@ -17,24 +17,16 @@ automation:
         value_template: "{{ states.climate.upstairs.attributes.current_temperature <= 82 }}"
 
     action:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'away'
+          preset_mode: 'Eco'
 
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.upstairs
-          hold_mode: 'away'
+          preset_mode: 'Eco'
 
-### prep for 0.96.x
-#      - service: climate.set_preset_mode
-#        data:
-#          entity_id: climate.downstairs
-#          preset_mode: 'away'
-#
-#      - service: climate.set_preset_mode
-#        data:
-#          entity_id: climate.upstairs
-#          preset_mode: 'away'
+
+
 

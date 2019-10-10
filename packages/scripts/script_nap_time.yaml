@@ -4,10 +4,16 @@
 script:
   nap_time:
     sequence:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.upstairs
-          hold_mode: 'home'
+          preset_mode: 'Home'
+
+      - delay:
+          seconds: 10
+
+      - service: light.turn_off
+        entity_id: light.nursery_lights
 
       - service: homeassistant.turn_off
         entity_id: group.interior_lights

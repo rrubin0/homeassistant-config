@@ -4,7 +4,7 @@
 scene:
   - name: TV Time
     entities:
-      light.foyer_lights_level:
+      light.foyer_lights:
         state: on
         brightness: 50
         transition: 5

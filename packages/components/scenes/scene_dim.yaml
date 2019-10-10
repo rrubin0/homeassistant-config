@@ -4,7 +4,7 @@
 scene:
   - name: Dim
     entities:
-      light.foyer_lights_level:
+      light.foyer_lights:
         state: on
         brightness: 60
         transition: 5

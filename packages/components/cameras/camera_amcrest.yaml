@@ -30,7 +30,18 @@ amcrest:
     username: !secret camera_user
     password: !secret camera_password
     port: !secret nursery_crib_port
-    resolution: high
+    resolution: low
+    stream_source: rtsp
+    binary_sensors:
+      - motion_detected
+
+  ### TEST PTZ
+  - host: !secret test_ptz_host
+    name: Test PTZ
+    username: !secret camera_user
+    password: !secret camera_password
+#    port: !secret test_ptz_port
+    resolution: low
     stream_source: rtsp
     binary_sensors:
       - motion_detected

@@ -4,13 +4,13 @@
 scene:
   - name: Morning
     entities:
-      light.foyer_lights_level:
+      light.foyer_lights:
         state: on
         brightness: 60
         transition: 5
 
   # turn on the master bedroom chandelier
-      light.master_bedroom_chandelier_level:
+      light.master_bedroom_chandelier:
         state: on
         brightness: 50
 
@@ -36,6 +36,6 @@ scene:
         transition: 900
 
   # turn on the kitchen lights
-      light.kitchen_lights_level:
+      light.kitchen_lights:
         state: on
         brightness: 170

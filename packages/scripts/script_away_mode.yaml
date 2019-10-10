@@ -18,15 +18,15 @@ script:
         - fan.patio_fan
 
     ### set climate away mode
-    - service: climate.set_away_mode
+    - service: climate.set_preset_mode
       data:
         entity_id: climate.downstairs
-        away_mode: 'on'
+        preset_mode: 'Away'
 
-    - service: climate.set_away_mode
+    - service: climate.set_preset_mode
       data:
         entity_id: climate.upstairs
-        away_mode: 'on'
+        preset_mode: 'Away'
 
     ### send notification
     - service: notify.mobile_app_rip8plus

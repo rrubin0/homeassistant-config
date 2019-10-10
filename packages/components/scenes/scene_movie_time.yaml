@@ -12,5 +12,5 @@ scene:
         state: off
         transition: 10
 
-      light.foyer_lights_level:
+      light.foyer_lights:
         state: off

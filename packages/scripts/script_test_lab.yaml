@@ -25,6 +25,39 @@ script:
         media_content_id: "Door Bell Playlist"
         media_content_type: "SPOTIFY"
 
+  alexa_announce_test:
+    sequence:
+    - service: notify.alexa_media_office
+      data:
+        message: "This is just a test, 1, 2, 3"
+        data:
+          type: announce
+
+
+  #####################################################################
+  ### Master Bedroom Fan Tests
+  #####################################################################
+  master_br_fan_group_off_test:
+    sequence:
+    - service: homeassistant.turn_off
+      entity_id: group.master_bedroom_fan
+
+  master_br_fan_switch_on_test:
+    sequence:
+    - service: homeassistant.turn_on
+      entity_id: switch.master_bedroom_fan
+
+
+
+#  alexa_sound_test:
+#    sequence:
+#    - service: notify.alexa_media_office
+#      data:
+#        message: "<audio src="soundbank://soundlibrary/horror/horror_07"/>"
+#        data:
+#          type: announce
+
+
   ### Testing Flux RGB desk lamp
 #  desk_lamp_test:
 #    sequence:

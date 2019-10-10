@@ -15,6 +15,7 @@ www
 *.HA_VERSION
 *.homekit.state
 *.log
+*.old
 *.pickle
 *.sqlite
 *.uuid

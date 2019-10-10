@@ -11,7 +11,7 @@ automation:
         to: 'Leak Detected!'
 
     action:
-      - service: climate.set_operation_mode
+      - service: climate.set_hvac_mode
         data:
           entity_id: climate.downstairs
           operation_mode: 'off'

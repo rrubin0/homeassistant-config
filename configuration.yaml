@@ -23,6 +23,12 @@ discovery:
   ignore:
     - directv
 
+hacs:
+  token: !secret hacs_token
+  appdaemon: true
+  python_script: true
+  theme: true
+
 history:
 
 http:
@@ -32,12 +38,14 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 3
 
-lovelace:
-  mode: yaml
+breaking_changes:
+
+#lovelace:
+#  mode: yaml
 
 mobile_app:
 
-ios:
+#ios:
 
 #python_script:
 

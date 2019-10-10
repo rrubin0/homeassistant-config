@@ -4,39 +4,55 @@
 #####################################################################
 automation:
   ### Test iOS
-  - alias: Test ios action
+  - alias: Test notifications
     initial_state: 'on'
     hide_entity: true
     trigger:
       - platform: state
         entity_id: input_boolean.state_change
-        from: 'off'
-        to: 'on'
+#        from: 'off'
+#        to: 'on'
 
     action:
-      - service: notify.mobile_app_rip8plus
-        data:
-          title: "Test Message"
-          message: "This is a test"
+### working 0.97.2 ###
+#      - service: notify.alexa_media_office
+#        data:
+#          message: "This is a test"
+#          data:
+#            type: announce
+
+### working 0.97.2 ###
+      - service: notify.alexa_media
+        data_template:
+          target: media_player.office
+          message: "The {{ trigger.to_state.attributes.friendly_name }} has triggered."
           data:
-            push:
-              category: testing
-              sound:
-                name: default
+            type: announce
+
+### working 0.97.2 ###
+#      - service: notify.mobile_app_rip8plus
+#        data:
+#          title: "Test Message"
+#          message: "This is a test"
+#          data:
+#            push:
+#              category: testing
+#              sound:
+#                name: default
 
 
-  - alias: test action desk light
-    initial_state: 'on'
-    hide_entity: true
-    trigger:
-      platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: TEST_ACTION
-
-    action:
-      service: light.turn_on
-      entity_id: light.office_desk
+#  - alias: test action desk light
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      platform: event
+#      event_type: ios.notification_action_fired
+#      event_data:
+#        actionName: TEST_ACTION
+#
+#    action:
+#      service: light.turn_on
+#      entity_id: light.office_desk
 
 
 #  ### Test Away Mode Trigger

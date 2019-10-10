@@ -23,24 +23,17 @@ sensor:
 
   - platform: template
     sensors:
-      ds_climate_hold:
-        friendly_name: "Manual Override"
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).hold_mode | default('unknown') }}"
+      ds_climate_preset:
+        friendly_name: "Active Preset"
+        value_template: "{{ (states.climate.downstairs.attributes|default({})).preset_mode | default('unknown') }}"
         entity_id: sensor.time
 
-  - platform: template
-    sensors:
-      ds_climate_away:
-        friendly_name: "Away Mode"
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).away_mode | default('unknown') }}"
-        entity_id: sensor.time
-
-  - platform: template
-    sensors:
-      ds_climate_mode:
-        friendly_name: "Active Schedule"
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).climate_mode | default('unknown') }}"
-        entity_id: sensor.time
+#  - platform: template
+#    sensors:
+#      ds_climate_mode:
+#        friendly_name: "Active Schedule"
+#        value_template: "{{ (states.climate.downstairs.attributes|default({})).climate_mode | default('unknown') }}"
+#        entity_id: sensor.time
 
   - platform: template
     sensors:

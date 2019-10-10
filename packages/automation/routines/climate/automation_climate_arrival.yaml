@@ -1,0 +1,79 @@
+#####################################################################
+### Set Climate to Resume when we return home
+#####################################################################
+automation:
+  ###################################
+  ### On Peak Resume
+  ###################################
+  - alias: Climate Resume On Peak
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      from: 'not_home'
+      to: 'home'
+      for:
+        minutes: 2
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.peak_hours
+        state: 'on'
+
+      - condition: template
+        value_template: "{{ states.climate.downstairs.attributes.current_temperature >= 79 }}"
+
+    action:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Home'
+
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Home'
+
+      - delay:
+          minutes: 60
+
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.downstairs
+          resume_all: 'true'
+
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+
+
+  ###################################
+  ### Off Peak Resume
+  ###################################
+  - alias: Climate Resume Off Peak
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      from: 'not_home'
+      to: 'home'
+      for:
+        minutes: 2
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.peak_hours
+        state: 'off'
+
+    action:
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.downstairs
+          resume_all: 'true'
+
+      - service: climate.ecobee_resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+

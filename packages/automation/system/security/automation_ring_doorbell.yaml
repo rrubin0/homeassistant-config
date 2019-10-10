@@ -21,18 +21,13 @@ automation:
 #          entity_id: media_player.living_room
 #          volume_level: .5
 
-      - service: notify.alexa_media
+      - service: notify.alexa_media_living_room
         data:
-          target: media_player.living_room
           message: "You've got a visitor at the front door."
           data:
-            type: tts
+            type: announce
 
-### Preserve old setting prior to update to 1.2.3
-#      - service: media_player.alexa_tts
-#        data_template:
-#          entity_id: media_player.living_room
-#          message: "You've got a visitor at the front door."
+
 
 ### disabled due to low WAF - saved for reference.
 ### optionally, ring the xiaomi light/gateway 
@@ -44,7 +39,7 @@ automation:
 
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.gateway_light_7811dcb7da52
+#          entity_id: light.kitchen_night_light
 #          brightness: 255
 #          hs_color: [360,100]
 #
@@ -52,4 +47,4 @@ automation:
 #
 #      - service: light.turn_off
 #        data:
-#          entity_id: light.gateway_light_7811dcb7da52
+#          entity_id: light.kitchen_night_light

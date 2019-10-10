@@ -1,0 +1,40 @@
+#####################################################################
+### Turn off the lights in the morning once sun is up high enough
+#####################################################################
+automation:
+  - alias: Living Room Off Morning
+    initial_state: 'off'
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: '{{ state.attributes.elevation }}'
+        above: 12
+
+    condition:
+      - condition: state
+        entity_id: group.all_lights
+        state: 'on'
+
+      - condition: time
+        before: '09:00:00'
+
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+
+      - condition: state
+        entity_id: input_boolean.holiday
+        state: 'off'
+
+    action:
+      - service: timer.start
+        entity_id: timer.sun_up
+
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Suns Up"
+          message: "Lights off in 15 min..."
+          data:
+            push:
+              sound:
+                name: default

@@ -23,7 +23,7 @@ automation:
             - media_player.living_room
           message: "Attention, Please close the Kegerator door!"
           data:
-            type: tts
+            type: announce
 
       - service: notify.mobile_app_rip8plus
         data:
@@ -54,5 +54,9 @@ automation:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Kegerator Restored"
-          message: "The Kegerator door is closed."
+          message: "Thanks for closing the door."
+          data:
+            push:
+              sound:
+                name: default
 

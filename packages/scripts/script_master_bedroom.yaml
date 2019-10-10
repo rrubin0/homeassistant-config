@@ -8,7 +8,7 @@ script:
     sequence:
     - service: light.turn_on
       data:
-        entity_id: light.foyer_lights_level
+        entity_id: light.foyer_lights
         brightness: 50
 
     - service: hue.hue_activate_scene
@@ -44,7 +44,7 @@ script:
 
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.master_bedroom_chandelier_level
+#        entity_id: light.master_bedroom_chandelier
 #        brightness: 55
 
 #    - service: light.turn_on
@@ -55,7 +55,7 @@ script:
 
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.master_bed_entry_level
+#        entity_id: light.master_bed_entry
 #        brightness: 50
 
 

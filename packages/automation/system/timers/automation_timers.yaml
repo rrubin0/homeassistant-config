@@ -38,3 +38,17 @@ automation:
     ### reset the timer after short delay
       - service: timer.start
         entity_id: timer.bedtime
+
+
+  ### Sun Up Timer Finish
+  - alias: Sun Up Timer Finish
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.sun_up
+
+    action:
+      - service: script.sun_up

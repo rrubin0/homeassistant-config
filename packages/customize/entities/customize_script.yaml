@@ -45,6 +45,10 @@ homeassistant:
       friendly_name: "Ecobee Downstairs Home"
       entity_picture: /local/ecobee.png
 
+    script.ecobee_ds_eco:
+      friendly_name: "Ecobee Downstairs Economy"
+      entity_picture: /local/ecobee.png
+
     script.ecobee_ds_away:
       friendly_name: "Ecobee Downstairs Away"
       entity_picture: /local/ecobee.png
@@ -63,6 +67,10 @@ homeassistant:
 
     script.ecobee_us_home:
       friendly_name: "Ecobee Upstairs Home"
+      entity_picture: /local/ecobee.png
+
+    script.ecobee_us_eco:
+      friendly_name: "Ecobee Upstairs Economy"
       entity_picture: /local/ecobee.png
 
     script.ecobee_us_away:

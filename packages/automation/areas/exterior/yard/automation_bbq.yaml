@@ -11,11 +11,12 @@ automation:
 
     condition:
       - condition: state
-        entity_id: input_boolean.bbq_monitor
+        entity_id: binary_sensor.bbq_grill_high
         state: 'on'
 
-      - condition: template
-        value_template: "{{ states('sensor.grill_temperature') >= states('input_number.bbq_high_temp') }}"
+      - condition: state
+        entity_id: input_boolean.bbq_alert_high
+        state: 'on'
 
     action:
       - service: notify.mobile_app_rip8plus
@@ -27,10 +28,6 @@ automation:
               sound:
                 name: default
 
-### reference; to do a custom notify:
-### {% if states('sensor.grill_temperature') >= states('input_number.bbq_high_temp') %} "OMGLOLBBQ" {% endif %}
-#      - service: script.do alexa announce thing here
-
 
   ### Grill too cold
   - alias: BBQ Grill Alarm Low Temp
@@ -41,11 +38,12 @@ automation:
 
     condition:
       - condition: state
-        entity_id: input_boolean.bbq_monitor
+        entity_id: binary_sensor.bbq_grill_low
         state: 'on'
 
-      - condition: template
-        value_template: "{{ states('sensor.grill_temperature') <= states('input_number.bbq_low_temp') }}"
+      - condition: state
+        entity_id: input_boolean.bbq_alert_low
+        state: 'on'
 
     action:
       - service: notify.mobile_app_rip8plus
@@ -62,32 +60,26 @@ automation:
   - alias: BBQ Food Target Temp
     initial_state: 'on'
     trigger:
-      - platform: template
-        value_template: "{{ states('sensor.food_temperature')|int >= states('input_number.bbq_food_temp') }}"
+      - platform: state
+        entity_id: binary_sensor.bbq_food_ready
+        to: 'on'
 
     condition:
       - condition: state
-        entity_id: input_boolean.food_monitor
+        entity_id: input_boolean.bbq_alert_food
         state: 'on'
 
     action:
       - service: notify.mobile_app_rip8plus
         data:
           title: "Food Target Temp"
-          message: "Food is at {{ states('input_number.bbq_food_temp') }} degrees. Go check it!"
+          message: "Food is at {{ states('sensor.food_temperature') }} degrees. Go check it!"
           data:
             push:
               sound:
                 name: default
 
+
+### reference; to do a custom notify:
+### {% if states('sensor.grill_temperature') >= states('input_number.bbq_high_temp') %} "OMGLOLBBQ" {% endif %}
 #      - service: script.do alexa announce thing here
-
-## add this piece to script condition...
-#      - condition: state
-#        entity_id: input_boolean.announce
-#        state: 'on'
-
-##  use case 3: Periodic alerting/announcements of the temperature ios/alexa 
-
-
-

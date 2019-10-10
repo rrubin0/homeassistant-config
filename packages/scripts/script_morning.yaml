@@ -27,7 +27,7 @@ script:
     ### 06:55
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.foyer_lights_level
+#        entity_id: light.foyer_lights
 #        brightness: 60
 
     - service: light.turn_on
@@ -46,7 +46,7 @@ script:
     ### 07:10
     - service: light.turn_on
       data:
-        entity_id: light.kitchen_lights_level
+        entity_id: light.kitchen_lights
         brightness: 200
 
     - delay:
@@ -61,7 +61,7 @@ script:
       entity_id: group.accent_lights
 
     - service: light.turn_off
-      entity_id: light.kitchen_lights_level
+      entity_id: light.kitchen_lights
 
     - delay:
         minutes: 15

@@ -8,8 +8,8 @@
 #    trigger:
 #      platform: state
 #      entity_id:
-#        - light.master_bed_ceiling_level
-#        - light.master_bed_entry_level
+#        - light.master_bed_ceiling
+#        - light.master_bed_entry
 #      to: 'on'
 #
 #    action:

@@ -54,7 +54,7 @@ automation:
         entity_id: scene.movie_time
 
       - service: light.turn_off
-        entity_id: light.kitchen_lights_level
+        entity_id: light.kitchen_lights
 
   ###
   - alias: Minimote 1 Button 2 Long
@@ -85,7 +85,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.kitchen_lights_level
+          entity_id: light.kitchen_lights
           transition: 5
           brightness: 150
 
@@ -103,7 +103,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.kitchen_lights_level
+          entity_id: light.kitchen_lights
           transition: 5
           brightness: 255
 
@@ -121,7 +121,7 @@ automation:
     action:
       - service: light.turn_off
         data:
-          entity_id: light.kitchen_lights_level
+          entity_id: light.kitchen_lights
 
   ###
   - alias: Minimote 1 Button 4 Long
@@ -169,7 +169,7 @@ automation:
 
       - service: light.turn_on
         data:
-          entity_id: light.foyer_lights_level
+          entity_id: light.foyer_lights
           brightness: 50
 
   ###
@@ -186,7 +186,7 @@ automation:
     action:
       - service: light.turn_off
         data:
-          entity_id: light.master_bedroom_chandelier_level
+          entity_id: light.master_bedroom_chandelier
 
       - service: light.turn_off
         data:

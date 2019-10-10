@@ -16,12 +16,12 @@ automation:
         to: 'on'
 
     action:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'sleep'
+          preset_mode: 'Sleep'
 
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.upstairs
-          hold_mode: 'sleep'
+          preset_mode: 'Sleep'

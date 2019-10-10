@@ -4,7 +4,7 @@
 scene:
   - name: Evening
     entities:
-      light.foyer_lights_level:
+      light.foyer_lights:
         state: on
         brightness: 160
         transition: 5

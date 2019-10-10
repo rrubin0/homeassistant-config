@@ -18,7 +18,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.gateway_light_7811dcb7da52
+          entity_id: light.kitchen_night_light
           brightness: 125
           hs_color: [225,15]
 
@@ -34,4 +34,4 @@ automation:
     action:
       - service: light.turn_off
         data:
-          entity_id: light.gateway_light_7811dcb7da52
+          entity_id: light.kitchen_night_light

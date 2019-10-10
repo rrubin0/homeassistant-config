@@ -28,23 +28,25 @@ homekit:
 # Lights - enabled
 #################################
       - light.billiards
-      - light.dining_room_chandelier_level
+      - light.dining_room_chandelier
       - light.entryway
       - light.living_room
-      - light.foyer_lights_level
-      - light.gateway_light_7811dcb7da52
-      - light.kitchen_lights_level
+      - light.foyer_lights
+      - light.kitchen_night_light
+      - light.kitchen_lights
       - light.living_room_lamp
       - light.lr_ceiling
       - light.master_bathroom
       - light.master_bath_vanity
-      - light.master_bed_ceiling_level
-      - light.master_bed_entry_level
-      - light.master_bedroom_chandelier_level
+      - light.master_bed_ceiling
+      - light.master_bed_entry
+      - light.master_bedside_lamps
+      - light.master_bedroom_chandelier
       - light.master_reading_lamp
       - light.master_sitting_lamp
+      - light.nursery_light
       - light.nursery_wall_light
-      - light.office_desk
+      - light.office_desk_lamp
       - light.under_bed_lights
       - light.wine_room
 
@@ -54,19 +56,12 @@ homekit:
 #################################
       - switch.amp_power
       - switch.directv_play
-      - switch.directv_power
       - switch.downstairs_bath_lights_switch
       - switch.flower_lamp
-      - switch.floor_vase
-      - switch.fountains_switch
+#      - switch.fountains_switch
       - switch.game_room_floodlights
       - switch.living_room_fan
-      - switch.living_room_fan_high
-      - switch.living_room_fan_light
-      - switch.living_room_fan_low
-      - switch.living_room_fan_medium
       - switch.master_bedroom_fan
-      - switch.master_bedroom_fan_light
       - switch.nursery_lamp
       - switch.outdoor_speakers
       - switch.patio_lights_switch
@@ -74,11 +69,11 @@ homekit:
       - switch.front_yard_outlet
       - switch.pool_light_switch
       - switch.staircase_lamp
-      - switch.switch_one
-      - switch.switch_two
-      - switch.switch_three
-      - switch.switch_four
       - switch.switch_five
+      - switch.switch_four
+      - switch.switch_one
+      - switch.switch_three
+      - switch.switch_two
       - switch.tv_input_chromecast
       - switch.tv_input_directv
       - switch.tv_input_firetv
@@ -94,6 +89,7 @@ homekit:
       - fan.patio_fan
       - fan.nursery_fan
 
+
 #################################
 # Scenes - enabled
 #################################
@@ -101,8 +97,8 @@ homekit:
       - scene.cloudy
       - scene.dim
       - scene.evening
-      - scene.game_time
       - scene.tv_time
+      - scene.game_time
       - scene.morning
       - scene.movie_time
 
@@ -122,6 +118,7 @@ homekit:
       - script.hue_lr_minty
       - script.hue_lr_movie
       - script.hue_lr_nightlight
+      - script.hue_lr_normal
       - script.hue_lr_sunrise
       - script.hue_lr_sunset
       - script.hue_mbath_morning
@@ -145,6 +142,18 @@ homekit:
       - sensor.nursery_temperature
       - sensor.office_temperature
       - sensor.upstairs_temperature
+
+
+#################################
+# Input_Boolean - enabled
+#################################
+      - input_boolean.dinner_time
+      - input_boolean.holiday
+      - input_boolean.rain
+      - input_boolean.visitor_mode
+      - input_boolean.bbq_alert_high
+      - input_boolean.bbq_alert_low
+      - input_boolean.bbq_alert_food
 
 
 ################################################

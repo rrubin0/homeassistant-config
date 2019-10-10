@@ -1,35 +1,82 @@
   ################################################
-  ## Customize Lights
+  ## Customize Light Icons and Names
   ################################################
 homeassistant:
   customize:
-    light.kitchen_lights_level:
-      friendly_name: "Kitchen Lights"
-      icon: mdi:white-balance-incandescent
-
-    light.dining_room_chandelier_level:
-      friendly_name: "Dining Room Light"
-      icon: mdi:ceiling-light
-
-    light.living_room_lamp:
-      icon: mdi:lamp
-
-    light.south_entry:
-      icon: mdi:white-balance-incandescent
-
+  ################################################
+  ## Light Groups
+  ################################################
     light.entryway:
       friendly_name: "Entryway Lights"
       icon: mdi:google-circles-communities
+
+    light.lr_ceiling:
+      friendly_name: "Living Room Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.master_bathroom:
+      friendly_name: "Master Bathroom Ceiling"
+      icon: mdi:google-circles-communities
+
+    light.wine_room:
+      friendly_name: "Wine Room Ceiling"
+      icon: mdi:google-circles-communities
+
+
+  ################################################
+  ## Chandeliers
+  ################################################
+    light.dining_room_chandelier:
+      icon: mdi:ceiling-light
+
+    light.foyer_lights:
+      icon: mdi:ceiling-light
+
+    light.master_bedroom_chandelier:
+      icon: mdi:ceiling-light
+
+
+  ################################################
+  ##  LED Strips
+  ################################################
+    light.under_bed_lights:
+      friendly_name: "Bedframe Lights"
+      icon: mdi:led-on
+
+    light.nursery_wall_light:
+      icon: mdi:led-on
+
+
+  ################################################
+  ## Lamps
+  ################################################
+    light.living_room_lamp:
+      icon: mdi:lamp
+
+    light.master_sitting_lamp:
+      icon: mdi:lamp
+
+    light.master_reading_lamp:
+      icon: mdi:lamp
+
+    light.office_desk_lamp:
+      icon: mdi:lamp
+
+
+  ################################################
+  ## Ceiling Lights
+  ################################################
+    light.kitchen_lights:
+      icon: mdi:white-balance-incandescent
+
+    light.south_entry:
+      icon: mdi:white-balance-incandescent
 
     light.kitchen_entry:
       icon: mdi:white-balance-incandescent
 
     light.center_entry:
       icon: mdi:white-balance-incandescent
-
-    light.lr_ceiling:
-      friendly_name: "Living Room Ceiling"
-      icon: mdi:google-circles-communities
 
     light.northeast_ceiling:
       icon: mdi:white-balance-incandescent
@@ -43,14 +90,6 @@ homeassistant:
     light.southwest_ceiling:
       icon: mdi:white-balance-incandescent
 
-    light.foyer_lights_level:
-      friendly_name: "Foyer Lights"
-      icon: mdi:ceiling-light
-
-    light.master_bathroom:
-      friendly_name: "Master Bathroom Ceiling"
-      icon: mdi:google-circles-communities
-
     light.master_bath_entry:
       icon: mdi:white-balance-incandescent
 
@@ -61,46 +100,16 @@ homeassistant:
       icon: mdi:white-balance-incandescent
 
     light.master_bath_vanity:
-      friendly_name: "Master Bathroom Vanity"
       icon: mdi:white-balance-incandescent
 
-    light.under_bed_lights:
-      friendly_name: "Bedframe Lights"
-      icon: mdi:led-on
-
-    light.master_bedroom_chandelier_level:
-      friendly_name: "Master Bedroom Chandelier"
-      icon: mdi:ceiling-light
-
-    light.master_sitting_lamp:
-      friendly_name: "Master Bedroom Sitting Lamp"
-      icon: mdi:lamp
-
-    light.master_reading_lamp:
-      friendly_name: "Master Bedroom Reading Lamp"
-      icon: mdi:lamp
-
-    light.master_bed_ceiling_level:
-      friendly_name: "Master Bedroom Ceiling Lights"
+    light.master_bed_ceiling:
       icon: mdi:white-balance-incandescent
 
-    light.master_bed_entry_level:
-      friendly_name: "Master Bedroom Entry Lights"
+    light.master_bed_entry:
       icon: mdi:white-balance-incandescent
-
-    light.nursery_wall_light:
-      icon: mdi:led-on
 
     light.nursery_light:
       icon: mdi:white-balance-incandescent
-
-    light.office_desk_lamp:
-      friendly_name: "Desk Lamp"
-      icon: mdi:lamp
-
-    light.wine_room:
-      friendly_name: "Wine Room Ceiling"
-      icon: mdi:google-circles-communities
 
     light.northeast_wine:
       icon: mdi:white-balance-incandescent
@@ -114,6 +123,4 @@ homeassistant:
     light.southwest_wine:
       icon: mdi:white-balance-incandescent
 
-    light.gateway_light_7811dcb7da52:
-      friendly_name: "Alert Light"
 

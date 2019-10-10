@@ -6,7 +6,6 @@
 ###   - automation_ecobee_downstairs.yaml
 ###   - automation_ecobee_upstairs.yaml
 ###   - script.tts_warm_weather.yaml
-###   - notify/ios.yaml
 ###
 automation:
 #####################################################################

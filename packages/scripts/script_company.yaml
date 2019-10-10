@@ -18,10 +18,10 @@ script:
 
     - service: light.turn_on
       data:
-        entity_id: light.kitchen_lights_level
+        entity_id: light.kitchen_lights
         brightness: 130
 
     - service: light.turn_on
       data:
-        entity_id: light.dining_room_chandelier_level
+        entity_id: light.dining_room_chandelier
         brightness: 130

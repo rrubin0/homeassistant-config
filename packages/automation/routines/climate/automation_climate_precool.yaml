@@ -1,0 +1,83 @@
+#####################################################################
+### Precool for Summer heat - only needed if you live in the desert
+#####################################################################
+automation:
+#######################################
+### Precool Downstairs
+#######################################
+  - alias: Climate Precool Downstairs
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '14:00:00'
+
+    condition:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'home'
+
+          - condition: state
+            entity_id: input_boolean.visitor_mode
+            state: 'on'
+
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+      - condition: template
+        value_template: "{{ state_attr('climate.downstairs','preset_mode') != 'Away' }}"
+
+    action:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Precool'
+
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Precool'
+
+
+#######################################
+### Precool Upstairs
+#######################################
+  - alias: Climate Precool Upstairs
+    initial_state: 'on'
+    trigger:
+      - platform: time
+        at: '14:00:00'
+
+    condition:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'home'
+
+          - condition: state
+            entity_id: input_boolean.visitor_mode
+            state: 'on'
+
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+
+      - condition: template
+        value_template: "{{ state_attr('climate.upstairs','preset_mode') != 'Away' }}"
+
+    action:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Precool'

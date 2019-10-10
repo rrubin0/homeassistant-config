@@ -27,7 +27,9 @@ script:
     - service: notify.alexa_media
       data:
         target: media_player.living_room
-        message: "I've detected a door held open for too long so I'm turning off the AC to save energy."
         data:
           type: tts
+        message: "I've detected a door held open for too long so I'm turning off the AC to save energy."
+
+
 

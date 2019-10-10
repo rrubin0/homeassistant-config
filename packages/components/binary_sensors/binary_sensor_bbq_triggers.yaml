@@ -1,0 +1,35 @@
+#####################################################################
+### Binary Sensor BBQ Temp Triggers
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      bbq_grill_high:
+        friendly_name: "BBQ Temp High"
+        value_template: "{{ states('sensor.grill_temperature') | float >= states('input_number.bbq_high_temp') | float }}"
+        delay_on:
+          seconds: 5
+        entity_id: sensor.grill_temperature
+        device_class: heat
+
+  - platform: template
+    sensors:
+      bbq_grill_low:
+        friendly_name: "BBQ Temp Low"
+        value_template: "{{ states('sensor.grill_temperature') | float <= states('input_number.bbq_low_temp') | float }}"
+        delay_on:
+          seconds: 5
+        entity_id: sensor.grill_temperature
+        device_class: cold
+
+  - platform: template
+    sensors:
+      bbq_food_ready:
+        friendly_name: "Food Target Reached"
+        value_template: "{{ states('sensor.food_temperature') | float >= states('input_number.bbq_food_temp') | float }}"
+        delay_on:
+          seconds: 3
+        entity_id: sensor.food_temperature
+        device_class: moving
+
+

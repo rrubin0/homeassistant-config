@@ -2,31 +2,6 @@
 ### Weather Sensors by Darksky
 #####################################################################
 sensor:
-### Seasons
-  - platform: template
-    sensors:
-      season:
-        friendly_name: "Seasonal Condition"
-        value_template: >-
-          {% set temperature = states('sensor.dark_sky_temperature')|float(none) %}
-          {% set winter_temp = states.input_number.season_winter.state|default(62)|float %}
-          {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
-          {% if temperature is none %}
-            {{ states('sensor.sensor.dark_sky_temperature') }}
-          {% elif temperature < winter_temp %}
-            Winter
-          {% elif temperature > summer_temp %}
-            Summer
-          {% else %}
-            Awesome
-          {% endif %}
-
-
-### Moon
-  - platform: moon
-
-
-### Darksky
   - platform: darksky
     api_key: !secret forecast_api_key
     forecast:
@@ -58,33 +33,3 @@ sensor:
       - minutely_summary
       - precip_probability
       - precip_intensity
-
-
-#####################################################################
-### Automation
-#####################################################################
-automation:
-  - alias: rain sensor
-    initial_state: 'on'
-    hide_entity: True
-    trigger:
-      - platform: state
-        entity_id: weather.downstairs
-
-    action:
-      - service_template: >-
-          {% if is_state('sensor.dark_sky_summary', 'Rain') %}
-            homeassistant.turn_on
-          {% elif is_state('sensor.dark_sky_summary', 'Light Rain') %}
-            homeassistant.turn_on
-          {% elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}
-            homeassistant.turn_on
-          {% elif is_state('sensor.dark_sky_summary', 'Showers') %}
-            homeassistant.turn_on
-          {% elif is_state('sensor.dark_sky_summary', 'Drizzle') %}
-            homeassistant.turn_on
-          {% else %}
-            homeassistant.turn_off
-          {% endif %}
-        data:
-          entity_id: input_boolean.rain

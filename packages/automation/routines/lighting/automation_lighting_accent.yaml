@@ -1,0 +1,16 @@
+#####################################################################
+### Accent Lights
+#####################################################################
+automation:
+  ### Turn on the accent_lights at sunset
+  - alias: Accent Lights On
+    initial_state: 'on'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:05:00'
+
+    action:
+      - service: homeassistant.turn_on
+        entity_id: group.accent_lights
+

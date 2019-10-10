@@ -10,7 +10,7 @@ script:
 
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.gateway_light_7811dcb7da52
+#        entity_id: light.kitchen_night_light
 #        brightness: 50
 #        hs_color: [180,100]
 

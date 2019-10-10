@@ -1,8 +1,8 @@
 #####################################################################
 ### SRP Energy Usage
 #####################################################################
-sensor:
-  - platform: srp_energy
-    username: !secret srp_user
-    password: !secret srp_pass
-    id: !secret srp_id
+#sensor:
+#  - platform: srp_energy
+#    username: !secret srp_user
+#    password: !secret srp_pass
+#    id: !secret srp_id

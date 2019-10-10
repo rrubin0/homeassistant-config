@@ -46,12 +46,20 @@ input_boolean:
     name: Downstairs Bath Presence
     initial: off
 
-  bbq_monitor:
-    name: BBQ Monitor
+  bbq_alert_high:
+    name: BBQ High Temp Alert
     initial: off
 
-  food_monitor:
-    name: Food Monitor
+  bbq_alert_food:
+    name: Food Temp Alert
+    initial: off
+
+  bbq_alert_low:
+    name: BBQ Low Temp Alert
+    initial: off
+
+  party_mode:
+    name: Party Mode
     initial: off
 
 

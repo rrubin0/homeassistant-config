@@ -4,38 +4,38 @@
 script:
   ecobee_ds_home:
     sequence:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'home'
+          preset_mode: 'Home'
+
+  ecobee_ds_eco:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Eco'
 
   ecobee_ds_away:
     sequence:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'away'
-
-  ecobee_ds_set_away_mode:
-    sequence:
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.downstairs
-          away_mode: 'on'
+          preset_mode: 'Away'
 
   ecobee_ds_sleep:
     sequence:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'sleep'
+          preset_mode: 'Sleep'
 
   ecobee_ds_normal:
     sequence:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'smart1'
+          preset_mode: 'Normal'
 
   ecobee_ds_resume:
     sequence:

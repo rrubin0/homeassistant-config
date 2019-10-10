@@ -7,7 +7,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: time
-        at: '23:30:00'
+        at: '00:45:00'
 
     condition:
       - condition: time
@@ -16,7 +16,7 @@ automation:
           - tue
           - wed
           - thu
-          - sun
+          - fri
 
     action:
       - service: input_boolean.turn_on
@@ -29,7 +29,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: time
-        at: '04:00:00'
+        at: '05:00:00'
 
     condition:
       - condition: time
@@ -51,7 +51,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: time
-        at: '01:00:00'
+        at: '01:30:00'
 
     condition:
       - condition: time

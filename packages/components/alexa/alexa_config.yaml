@@ -7,19 +7,19 @@ alexa_media:
     - email: !secret amazon_email
       password: !secret amazon_pswd
       url: amazon.com
-      include_devices:
-#        - "Richard's 3rd Fire"
-#        - "Richard's 4th Fire"
-        - "Living Room"
-        - "Game Room"
-        - "Harmon Kardon Allure"
-        - "Master Bedroom"
-        - FireTV
-        - Nursery
-        - Office
-        - Downstairs
-        - Kitchen
-        - firetv_living_room
+#      include_devices:
+##        - "Richard's 3rd Fire"
+##        - "Richard's 4th Fire"
+#        - "Living Room"
+##        - "Game Room"
+#        - "Harmon Kardon Allure"
+#        - "Master Bedroom"
+##        - FireTV
+#        - Nursery
+#        - Office
+##        - Downstairs
+#        - Kitchen
+##        - firetv_living_room
 
 
 #####################################################################
@@ -92,20 +92,20 @@ alexa:
       ## Lights
       ################################################
         - light.billiards
-        - light.dining_room_chandelier_level
+        - light.dining_room_chandelier
         - light.entryway
         - light.living_room
-        - light.foyer_lights_level
-        - light.gateway_light_7811dcb7da52
-        - light.kitchen_lights_level
+        - light.foyer_lights
+        - light.kitchen_night_light
+        - light.kitchen_lights
         - light.living_room_lamp
         - light.lr_ceiling
         - light.master_bathroom
         - light.master_bath_vanity
-        - light.master_bed_ceiling_level
-        - light.master_bed_entry_level
+        - light.master_bed_ceiling
+        - light.master_bed_entry
         - light.master_bedside_lamps
-        - light.master_bedroom_chandelier_level
+        - light.master_bedroom_chandelier
         - light.master_reading_lamp
         - light.master_sitting_lamp
         - light.nursery_light
@@ -129,7 +129,6 @@ alexa:
         - switch.directv_power
         - switch.downstairs_bath_lights_switch
         - switch.flower_lamp
-        - switch.floor_vase
         - switch.fountains_switch
         - switch.game_room_floodlights
         - switch.living_room_fan
@@ -172,7 +171,9 @@ alexa:
         - input_boolean.holiday
         - input_boolean.rain
         - input_boolean.visitor_mode
-        - input_boolean.bbq_monitor
+        - input_boolean.bbq_alert_high
+        - input_boolean.bbq_alert_low
+        - input_boolean.bbq_alert_food
 
       ################################################
       ## Locks

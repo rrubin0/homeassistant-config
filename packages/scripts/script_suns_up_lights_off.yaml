@@ -16,7 +16,7 @@ script:
       entity_id: group.interior_lights
 
     - service: light.turn_off
-      entity_id: light.gateway_light_7811dcb7da52
+      entity_id: light.kitchen_night_light
 
     - service: notify.mobile_app_rip8plus
       data:

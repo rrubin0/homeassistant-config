@@ -12,15 +12,15 @@ automation:
           minutes: 2
 
     action:
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.downstairs
-          hold_mode: 'away'
+          preset_mode: 'Eco'
 
-      - service: climate.set_hold_mode
+      - service: climate.set_preset_mode
         data:
           entity_id: climate.upstairs
-          hold_mode: 'away'
+          preset_mode: 'Eco'
 
       - service: script.tts_door_held_open
 

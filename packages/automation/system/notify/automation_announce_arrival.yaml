@@ -22,9 +22,9 @@ automation:
         before: '19:00:00'
         after: '14:00:00'
 
-      - condition: state
-        entity_id: person.rick
-        state: 'not_home'
+#      - condition: state
+#        entity_id: person.rick
+#        state: 'not_home'
 
     action:
       - service: media_player.volume_set
@@ -32,9 +32,9 @@ automation:
         data_template:
           volume_level: "{{ states('sensor.alexa_volume') }}"
 
-      - service: notify.alexa_media
+      - service: notify.alexa_media_living_room
         data:
-          target: media_player.living_room
           message: "Good news, Rick is less than 10 minutes away and will be home soon."
           data:
-            type: tts
+            type: announce
+
