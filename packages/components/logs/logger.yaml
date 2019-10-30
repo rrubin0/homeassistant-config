@@ -3,10 +3,10 @@
 #####################################################################
 
 logger:
-  default: warn
+  default: warning
   logs:
     root: error
-    py.warnings: error
+    py.warningings: error
     aiohttp.access: critical
     aiohttp.server: critical
     requests.packages.urllib3.connectionpool: critical
@@ -16,34 +16,60 @@ logger:
     pyhap: info
 
 
+
     #######################################
-    ### Home Assistant Components
+    ### Standard Logging
     #######################################
+#    homeassistant.components.alexa: warning
+    homeassistant.components.automation: critical
+    homeassistant.components.binary_sensor: error
     homeassistant.components.camera: critical
-    homeassistant.components.media_player: critical
-    homeassistant.components.hue: critical
-#    homeassistant.components.zwave: warn
-    homeassistant.components.switch: info
-    homeassistant.components.automation: info
-    homeassistant.components.script: info
-    homeassistant.components.light: info
-    homeassistant.components.scene: info
-    homeassistant.components.input_boolean: info
-    homeassistant.components.timer: info
-    homeassistant.components.climate: info
-#    homeassistant.components.climate: debug
-#    homeassistant.components.homekit: debug
-#    homeassistant.components.binary_sensor.switch: debug
-#    homeassistant.components.input_number: debug
+#    homeassistant.components.climate: warning
 #    homeassistant.components.cover: debug
-#    homeassistant.components.mqtt: debug
 #    homeassistant.components.device_tracker: debug
 #    homeassistant.components.group: debug
-#    homeassistant.components.sensor: debug
+#    homeassistant.components.homekit: debug
+#    homeassistant.components.hue: critical
+#    homeassistant.components.input_boolean: critical
+#    homeassistant.components.input_number: debug
+#    homeassistant.components.light: error
+    homeassistant.components.media_player: critical
+#    homeassistant.components.mqtt: debug
 #    homeassistant.components.notify: debug
+#    homeassistant.components.scene: info
+#    homeassistant.components.script: info
+#    homeassistant.components.sensor: debug
+#    homeassistant.components.switch: info
+#    homeassistant.components.timer: info
+#    homeassistant.components.zwave: warning
 
 
 
 
 
-
+    #######################################
+    ### Logging Isolation (troubleshooting)
+    #######################################
+#    homeassistant.components.alexa: critical
+#    homeassistant.components.automation: critical
+#    homeassistant.components.binary_sensor: critical
+#    homeassistant.components.camera: critical
+#    homeassistant.components.climate: critical
+#    homeassistant.components.climate: critical
+#    homeassistant.components.cover: critical
+#    homeassistant.components.device_tracker: critical
+#    homeassistant.components.group: critical
+#    homeassistant.components.homekit: critical
+#    homeassistant.components.hue: critical
+#    homeassistant.components.input_boolean: critical
+#    homeassistant.components.input_number: critical
+#    homeassistant.components.light: critical
+#    homeassistant.components.media_player: critical
+#    homeassistant.components.mqtt: critical
+#    homeassistant.components.notify: critical
+#    homeassistant.components.scene: critical
+#    homeassistant.components.script: critical
+#    homeassistant.components.sensor: critical
+#    homeassistant.components.switch: critical
+#    homeassistant.components.timer: critical
+#    homeassistant.components.zwave: critical

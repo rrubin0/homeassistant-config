@@ -1,8 +1,7 @@
 #####################################################################
-### Game Room Lights
+### This automation protects the kid's car from over-charging
 #####################################################################
 automation:
-  ### Turn off the kid car charger to prevent over charging
   - alias: Car Charger Off
     initial_state: 'on'
     trigger:
@@ -10,7 +9,7 @@ automation:
         entity_id: switch.switch_four
         to: 'on'
         for:
-          minutes: 60
+          hours: 9
 
     action:
       - service: switch.turn_off

@@ -9,7 +9,7 @@ scene:
         brightness: 50
         transition: 5
 
-      light.lr_ceiling:
+      light.living_room_ceiling:
         state: off
         transition: 5
 

@@ -39,7 +39,7 @@ script:
 
   ecobee_ds_resume:
     sequence:
-      - service: climate.ecobee_resume_program
+      - service: ecobee.resume_program
         data:
           entity_id: climate.downstairs
           resume_all: 'true'

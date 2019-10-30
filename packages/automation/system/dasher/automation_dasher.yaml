@@ -36,3 +36,16 @@ automation:
     action:
       - service: script.turn_on
         entity_id: script.baby_playlist
+
+
+  ### Test script when Dude Dash button is pressed
+  - alias: Dasher Test
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: script_test
+
+    action:
+      - service: script.turn_on
+        entity_id: script.script_test
+

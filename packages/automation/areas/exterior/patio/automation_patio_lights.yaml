@@ -12,9 +12,9 @@
 #
 #    condition:
 #      - condition: state
-#        entity_id: switch.patio_lights_switch
+#        entity_id: switch.patio_light
 #        state: 'on'
 #
 #    action:
 #      - service: switch.turn_off
-#        entity_id: switch.patio_lights_switch
+#        entity_id: switch.patio_light

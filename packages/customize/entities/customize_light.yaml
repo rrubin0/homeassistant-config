@@ -7,19 +7,15 @@ homeassistant:
   ## Light Groups
   ################################################
     light.entryway:
-      friendly_name: "Entryway Lights"
       icon: mdi:google-circles-communities
 
-    light.lr_ceiling:
-      friendly_name: "Living Room Ceiling"
+    light.living_room_ceiling:
       icon: mdi:google-circles-communities
 
-    light.master_bathroom:
-      friendly_name: "Master Bathroom Ceiling"
+    light.master_bathroom_ceiling:
       icon: mdi:google-circles-communities
 
-    light.wine_room:
-      friendly_name: "Wine Room Ceiling"
+    light.wine_room_ceiling:
       icon: mdi:google-circles-communities
 
 
@@ -40,7 +36,6 @@ homeassistant:
   ##  LED Strips
   ################################################
     light.under_bed_lights:
-      friendly_name: "Bedframe Lights"
       icon: mdi:led-on
 
     light.nursery_wall_light:
@@ -53,13 +48,19 @@ homeassistant:
     light.living_room_lamp:
       icon: mdi:lamp
 
+    light.master_bedside_lamp_megs:
+      icon: mdi:lamp
+
+    light.master_bedside_lamp_rick:
+      icon: mdi:lamp
+
     light.master_sitting_lamp:
       icon: mdi:lamp
 
     light.master_reading_lamp:
       icon: mdi:lamp
 
-    light.office_desk_lamp:
+    light.office_desk:
       icon: mdi:lamp
 
 

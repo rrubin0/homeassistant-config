@@ -5,5 +5,5 @@ light:
   - platform: flux_led
     devices:
       !secret under_bed_light_master:
-        name: "under_bed_lights"
+        name: "Bedframe Light"
         mode: rgb

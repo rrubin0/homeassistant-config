@@ -36,13 +36,13 @@ automation:
         before: '01:20:00'
 
       - condition: state
-        entity_id: switch.downstairs_bath_lights_switch
+        entity_id: switch.downstairs_bathroom_light
         state: 'off'
 
     action:
       - service: switch.turn_on
         data:
-          entity_id: switch.downstairs_bath_lights_switch
+          entity_id: switch.downstairs_bathroom_light
 
 
   ### Set Presence Detection to OFF
@@ -57,7 +57,7 @@ automation:
           minutes: 3
 
       - platform: state
-        entity_id: switch.downstairs_bath_lights_switch
+        entity_id: switch.downstairs_bathroom_light
         to: 'off'
 
     condition:
@@ -81,11 +81,11 @@ automation:
 
     condition:
       - condition: state
-        entity_id: switch.downstairs_bath_lights_switch
+        entity_id: switch.downstairs_bathroom_light
         state: 'on'
 
     action:
       - service: switch.turn_off
         data:
-          entity_id: switch.downstairs_bath_lights_switch
+          entity_id: switch.downstairs_bathroom_light
 

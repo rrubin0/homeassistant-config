@@ -23,12 +23,12 @@ group:
       - light.master_bedside_lamps
       - light.nursery_light
       - light.nursery_wall_light
-      - light.office_desk_lamp
-      - light.wine_room
+      - light.office_desk
+      - light.wine_room_ceiling
       - light.foyer_lights
       - switch.game_room_floodlights
       - switch.nursery_lamp
-      - switch.downstairs_bath_lights_switch
+      - switch.downstairs_bathroom_light
       - group.accent_lights
 
 
@@ -37,9 +37,9 @@ group:
   #####################################################################
   Exterior Lights:
     entities:
-      - switch.patio_lights_switch
+      - switch.patio_light
       - switch.back_yard_outlet
-      - switch.pool_light_switch
+      - switch.pool_light
 
 
   #####################################################################
@@ -58,7 +58,7 @@ group:
     control: hidden
     entities:
       - light.living_room_lamp
-      - light.lr_ceiling
+      - light.living_room_ceiling
 
 
   #####################################################################
@@ -68,7 +68,7 @@ group:
     control: hidden
     entities:
       - switch.wine_room_lamp
-      - light.wine_room
+      - light.wine_room_ceiling
 
 
   #####################################################################
@@ -85,10 +85,9 @@ group:
   #####################################################################
   Master Bedroom Lights:
     entities:
-      - light.master_bedroom_chandelier
-      - light.master_bedroom
-      - light.master_bed_entry
       - light.master_bed_ceiling
+      - light.master_bed_entry
+      - light.master_bedroom_chandelier
       - light.under_bed_lights
 
 
@@ -116,7 +115,7 @@ group:
   #####################################################################
   Master Bathroom Lights:
     entities:
-      - light.master_bathroom
+      - light.master_bathroom_ceiling
       - light.master_bath_vanity
 
 
@@ -149,7 +148,7 @@ group:
   Yard:
     control: hidden
     entities:
-      - switch.patio_lights_switch
+      - switch.patio_light
       - switch.back_yard_outlet
       - switch.front_yard_outlet
       - switch.fountains_switch

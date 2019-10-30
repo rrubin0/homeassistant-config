@@ -8,7 +8,7 @@ script:
       entity_id:
         - switch.outdoor_speakers
         - switch.game_room_floodlights
-        - switch.pool_light_switch
+        - switch.pool_light
 
     - service: scene.turn_on
       entity_id: scene.bright

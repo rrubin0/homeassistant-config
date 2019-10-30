@@ -35,7 +35,7 @@ homekit:
       - light.kitchen_night_light
       - light.kitchen_lights
       - light.living_room_lamp
-      - light.lr_ceiling
+      - light.living_room_ceiling
       - light.master_bathroom
       - light.master_bath_vanity
       - light.master_bed_ceiling
@@ -46,9 +46,9 @@ homekit:
       - light.master_sitting_lamp
       - light.nursery_light
       - light.nursery_wall_light
-      - light.office_desk_lamp
+      - light.office_desk
       - light.under_bed_lights
-      - light.wine_room
+      - light.wine_room_ceiling
 
 
 #################################
@@ -56,7 +56,7 @@ homekit:
 #################################
       - switch.amp_power
       - switch.directv_play
-      - switch.downstairs_bath_lights_switch
+      - switch.downstairs_bathroom_light
       - switch.flower_lamp
 #      - switch.fountains_switch
       - switch.game_room_floodlights
@@ -64,10 +64,10 @@ homekit:
       - switch.master_bedroom_fan
       - switch.nursery_lamp
       - switch.outdoor_speakers
-      - switch.patio_lights_switch
+      - switch.patio_light
       - switch.back_yard_outlet
       - switch.front_yard_outlet
-      - switch.pool_light_switch
+      - switch.pool_light
       - switch.staircase_lamp
       - switch.switch_five
       - switch.switch_four

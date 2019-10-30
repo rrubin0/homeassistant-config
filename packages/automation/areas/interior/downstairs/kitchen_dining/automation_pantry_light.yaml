@@ -14,7 +14,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.pantry
+          entity_id: light.pantry_light
 
 
   ### Turn off the pantry light when door is closed
@@ -29,4 +29,4 @@ automation:
     action:
       - service: light.turn_off
         data:
-          entity_id: light.pantry
+          entity_id: light.pantry_light

@@ -27,6 +27,7 @@ alexa_media:
 #####################################################################
 alexa:
   smart_home:
+    endpoint: https://api.amazonalexa.com/v3/events
     client_id: !secret amazon_client_id
     client_secret: !secret amazon_client_secret
     filter:
@@ -39,7 +40,7 @@ alexa:
         - script.ecobee_ds_resume
         - script.ecobee_us_home
         - script.ecobee_us_resume
-        - script.find_iphone
+#        - script.find_iphone
         - script.hue_lr_christmas
         - script.hue_lr_daybreak
         - script.hue_lr_dimmed
@@ -94,13 +95,12 @@ alexa:
         - light.billiards
         - light.dining_room_chandelier
         - light.entryway
-        - light.living_room
         - light.foyer_lights
         - light.kitchen_night_light
         - light.kitchen_lights
         - light.living_room_lamp
-        - light.lr_ceiling
-        - light.master_bathroom
+        - light.living_room_ceiling
+        - light.master_bathroom_ceiling
         - light.master_bath_vanity
         - light.master_bed_ceiling
         - light.master_bed_entry
@@ -110,9 +110,9 @@ alexa:
         - light.master_sitting_lamp
         - light.nursery_light
         - light.nursery_wall_light
-        - light.office_desk_lamp
+        - light.office_desk
         - light.under_bed_lights
-        - light.wine_room
+        - light.wine_room_ceiling
 
       ################################################
       ## Switches
@@ -127,7 +127,7 @@ alexa:
         - switch.amp_power
         - switch.directv_play
         - switch.directv_power
-        - switch.downstairs_bath_lights_switch
+        - switch.downstairs_bathroom_light
         - switch.flower_lamp
         - switch.fountains_switch
         - switch.game_room_floodlights
@@ -140,16 +140,16 @@ alexa:
         - switch.master_bedroom_fan_light
         - switch.nursery_lamp
         - switch.outdoor_speakers
-        - switch.patio_lights_switch
+        - switch.patio_light
         - switch.back_yard_outlet
         - switch.front_yard_outlet
-        - switch.pool_light_switch
+        - switch.pool_light
         - switch.staircase_lamp
-        - switch.switch_five
-        - switch.switch_four
         - switch.switch_one
-        - switch.switch_three
         - switch.switch_two
+        - switch.switch_three
+        - switch.switch_four
+        - switch.switch_five
         - switch.tv_input_chromecast
         - switch.tv_input_directv
         - switch.tv_input_firetv
@@ -182,17 +182,17 @@ alexa:
         - lock.south_entry_locked
 
       ################################################
-      ## Sensors
+      ## Sensors (not supported via Alexa Smart Home)
       ################################################
-        - sensor.broadlink_sensor_temperature
-        - sensor.downstairs_temperature
-        - sensor.entryway_temperature
-        - sensor.front_entry_fibaro_multisensor_temperature
-        - sensor.guest_room_temperature
-        - sensor.living_room_temperature
-        - sensor.nursery_temperature
-        - sensor.office_temperature
-        - sensor.upstairs_temperature
+#        - sensor.broadlink_sensor_temperature
+#        - sensor.downstairs_temperature
+#        - sensor.entryway_temperature
+#        - sensor.front_entry_fibaro_multisensor_temperature
+#        - sensor.guest_room_temperature
+#        - sensor.living_room_temperature
+#        - sensor.nursery_temperature
+#        - sensor.office_temperature
+#        - sensor.upstairs_temperature
 
       ################################################
       ## Covers
@@ -228,4 +228,17 @@ alexa:
       automation.south_door_unlock_on_arrival:
         name: Auto Unlock Schedule
         description: Automation for arrival unlock
+
+      input_boolean.bbq_alert_high:
+        name: High Temp Alarm
+        description: High Temp Alarm for BBQ
+
+      input_boolean.bbq_alert_low:
+        name: Low Temp Alarm
+        description: Low Temp Alarm for BBQ
+
+      input_boolean.bbq_alert_food:
+        name: Food Temp Alarm
+        description: Food Target Temp Alarm for BBQ
+
 

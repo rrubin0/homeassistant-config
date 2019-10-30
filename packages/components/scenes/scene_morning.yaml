@@ -30,7 +30,7 @@ scene:
         transition: 600
 
   # turn on the hue living_room_ceiling lights
-      light.lr_ceiling:
+      light.living_room_ceiling:
         state: on
         brightness: 140
         transition: 900

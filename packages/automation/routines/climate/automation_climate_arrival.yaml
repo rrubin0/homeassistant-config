@@ -37,12 +37,12 @@ automation:
       - delay:
           minutes: 60
 
-      - service: climate.ecobee_resume_program
+      - service: ecobee.resume_program
         data:
           entity_id: climate.downstairs
           resume_all: 'true'
 
-      - service: climate.ecobee_resume_program
+      - service: ecobee.resume_program
         data:
           entity_id: climate.upstairs
           resume_all: 'true'
@@ -67,12 +67,12 @@ automation:
         state: 'off'
 
     action:
-      - service: climate.ecobee_resume_program
+      - service: ecobee.resume_program
         data:
           entity_id: climate.downstairs
           resume_all: 'true'
 
-      - service: climate.ecobee_resume_program
+      - service: ecobee.resume_program
         data:
           entity_id: climate.upstairs
           resume_all: 'true'

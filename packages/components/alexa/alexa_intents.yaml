@@ -1,6 +1,6 @@
 ############################################################################
-#    @package          :     alexa
-#    @description      :     alexa intent_script for home assistant skill (needs work still)
+#    @package          :     alexa custom intents
+#    @description      :     alexa intent_script for home assistant skill
 ############################################################################
   intent_script:
   ## Ask Alexa to ...
@@ -58,85 +58,6 @@
 
 
     ################################################
-    ## Tell us where we are
-    ################################################
-    WhereAreWeIntent:
-      speech:
-        type: plain
-        text: >
-          {%- if is_state('person.rick', 'home') and
-                 is_state('person.megs', 'home') -%}
-            You are both home safe!
-          {%- else -%}
-            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
-            and Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
-          {% endif %}
-
-      card:
-        type: simple
-        title: Where are we?
-        content: Tell us where we are
-
-
-    ################################################
-    ## Find us
-    ################################################
-    LocateIntent:
-      speech:
-        type: plain
-        text: >
-          {%- if User.lower() == "rick" -%}
-            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
-            {%- elif User.lower() == "megan" -%}
-              Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
-            {%- elif User.lower() == "meg" -%}
-              Meg is at {{ states.person.megs.state.replace('_', ' ') }}.
-            {%- elif User.lower() == "megs" -%}
-              Megs is at {{ states.person.megs.state.replace('_', ' ') }}.
-          {%- else -%}
-            Sorry. I am unable to locate {{ User }} right now. Do you remember the telephone? I suggest maybe trying to call and ask.
-          {%- endif %}
-
-      card:
-        type: simple
-        title: Location
-        content: Tell us a users location
-
-
-    ################################################
-    ## Say Good Night
-    ################################################
-    GoodNightIntent:
-      action:
-        service: timer.start
-        entity_id: timer.bedtime
-
-      speech:
-        type: plain
-        text: > 
-          {# A cheerful greeting #}
-          {%- macro greeting() -%}
-            {%- set closings = [
-              "'Good night, sleep tight,'",
-              "'Sleep well,'",
-              "'Sweet Dreams,'",
-              "'Pleasant Dreams,'",
-              "'See you in the morning,'",
-              "'Goodnight, I'll get the lights,'",
-              "'Sure, have a great night,'"
-            ] -%}
-            {{closings|random}}
-          {%- endmacro -%}
-
-          {{ greeting() }}
-
-      card:
-        type: simple
-        title: Goodnight!
-        content: Turn on bedtime mode
-
-
-    ################################################
     ## Tell us a hint
     ################################################
     HintIntent:
@@ -170,11 +91,83 @@
           ] | random }}
 
 
+    ################################################
+    ## Find us
+    ################################################
+    LocateIntent:
+      speech:
+        type: plain
+        text: >
+          {%- if User.lower() == "rick" -%}
+            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "megan" -%}
+              Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "meg" -%}
+              Meg is at {{ states.person.megs.state.replace('_', ' ') }}.
+            {%- elif User.lower() == "megs" -%}
+              Megs is at {{ states.person.megs.state.replace('_', ' ') }}.
+          {%- else -%}
+            Sorry. I am unable to locate {{ User }} right now. Do you remember the telephone? I suggest maybe trying to call and ask.
+          {%- endif %}
+
+      card:
+        type: simple
+        title: Location
+        content: Tell us a users location
 
 
+    ################################################
+    ## Say Good Night
+    ################################################
+#    GoodNightIntent:
+#      action:
+#        service: timer.start
+#        entity_id: timer.bedtime
+#
+#      speech:
+#        type: plain
+#        text: > 
+#          {# A cheerful greeting #}
+#          {%- macro greeting() -%}
+#            {%- set closings = [
+#              "'Good night, sleep tight,'",
+#              "'Sleep well,'",
+#              "'Sweet Dreams,'",
+#              "'Pleasant Dreams,'",
+#              "'See you in the morning,'",
+#              "'Goodnight, I'll get the lights,'",
+#              "'Sure, have a great night,'"
+#            ] -%}
+#            {{closings|random}}
+#          {%- endmacro -%}
+#
+#          {{ greeting() }}
+#
+#      card:
+#        type: simple
+#        title: Goodnight!
+#        content: Turn on bedtime mode
 
 
-
+    ################################################
+    ## Tell us where we are
+    ################################################
+#    WhereAreWeIntent:
+#      speech:
+#        type: plain
+#        text: >
+#          {%- if is_state('person.rick', 'home') and
+#                 is_state('person.megs', 'home') -%}
+#            You are both home safe!
+#          {%- else -%}
+#            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
+#            and Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
+#          {% endif %}
+#
+#      card:
+#        type: simple
+#        title: Where are we?
+#        content: Tell us where we are
 
 
 

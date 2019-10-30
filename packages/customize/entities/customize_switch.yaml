@@ -11,7 +11,7 @@ homeassistant:
       friendly_name: "Wine Room Lamp"
       icon: mdi:lamp
 
-    switch.downstairs_bath_lights_switch:
+    switch.downstairs_bathroom_light:
       friendly_name: "Bathroom Lights"
       icon: mdi:white-balance-incandescent
 
@@ -61,11 +61,11 @@ homeassistant:
       friendly_name: "Party Lights"
       icon: mdi:white-balance-incandescent
 
-    switch.patio_lights_switch:
+    switch.patio_light:
       friendly_name: "Patio Lights"
       icon: mdi:white-balance-incandescent
 
-    switch.pool_light_switch:
+    switch.pool_light:
       friendly_name: "Pool Light"
       icon: mdi:pool
 

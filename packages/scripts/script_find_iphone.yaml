@@ -1,8 +1,8 @@
 #####################################################################
-###  Find My iPhone
+###  Find My iPhone (possibly deprecated)
 #####################################################################
-script:
-  find_iphone:
-    alias: "Find My iPhone"
-    sequence:
-    - service: device_tracker.icloud_lost_iphone
+#script:
+#  find_iphone:
+#    alias: "Find My iPhone"
+#    sequence:
+#    - service: device_tracker.icloud_lost_iphone

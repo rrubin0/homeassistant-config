@@ -14,7 +14,7 @@ scene:
         brightness: 225
         transition: 10
 
-      light.lr_ceiling:
+      light.living_room_ceiling:
         state: on
         brightness: 100
         transition: 30

@@ -5,8 +5,8 @@ script:
   ### A simple script used for testing
   script_test:
     sequence:
-    - service: light.turn_on
-      entity_id: light.office_desk_lamp
+    - service: light.toggle
+      entity_id: light.office_desk
 
   ### Testing Flux RGB strip values
   rgb_strip_test:
@@ -63,7 +63,7 @@ script:
 #    sequence:
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.office_desk_lamp
+#        entity_id: light.office_desk
 #        xy_color: [0.151, 0.343]
 #        brightness: 55
 

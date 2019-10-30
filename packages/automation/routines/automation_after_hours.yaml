@@ -18,7 +18,7 @@ automation:
     action:
       - service: homeassistant.turn_off
         entity_id:
-          - switch.patio_lights_switch
-          - switch.pool_light_switch
+          - switch.patio_light
+          - switch.pool_light
           - fan.patio_fan
           - group.accent_lights

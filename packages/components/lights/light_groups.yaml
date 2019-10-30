@@ -1,0 +1,47 @@
+#####################################################################
+### Light Groups (Mostly to Replace Native Philips Hue Groups)
+#####################################################################
+light:
+  - platform: group
+    name: Billiards
+    entities:
+      - light.billiards_1
+      - light.billiards_2
+      - light.billiards_3
+
+  - platform: group
+    name: Entryway
+    entities:
+      - light.south_entry
+      - light.center_entry
+      - light.kitchen_entry
+
+  - platform: group
+    name: Living Room Ceiling
+    entities:
+      - light.northeast_ceiling
+      - light.northwest_ceiling
+      - light.southeast_ceiling
+      - light.southwest_ceiling
+
+  - platform: group
+    name: Master Bathroom Ceiling
+    entities:
+      - light.master_bath_entry
+      - light.master_bath_sink
+      - light.master_bathtub
+
+  - platform: group
+    name: Master Bedside Lamps
+    entities:
+      - light.master_bedside_lamp_megs
+      - light.master_bedside_lamp_rick
+
+  - platform: group
+    name: Wine Room Ceiling
+    entities:
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+

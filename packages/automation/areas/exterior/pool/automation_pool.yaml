@@ -8,7 +8,7 @@ automation:
     hide_entity: true
     trigger:
       - platform: state
-        entity_id: switch.pool_light_switch
+        entity_id: switch.pool_light
         to: 'off'
         for:
           seconds: 15
