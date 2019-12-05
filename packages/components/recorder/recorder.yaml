@@ -32,7 +32,6 @@ recorder:
       - sensor.disk_free_home
       - sensor.ds_fan_state
       - sensor.ha_current_version
-      - sensor.holiday
       - sensor.illumination_7811dcb7da52
       - sensor.master_bedroom_fan
       - sensor.master_bedroom_fan_1

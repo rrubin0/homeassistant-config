@@ -1,20 +1,20 @@
 #####################################################################
 ### SCENES
 #####################################################################
-scene:
-  - name: Movie Paused
-    entities:
-      light.entryway:
-        state: on
-        brightness: 50
-        transition: 5
-
-      light.living_room_lamp:
-        state: on
-        brightness: 75
-        transition: 10
-
-      light.living_room_ceiling:
-        state: on
-        brightness: 50
-        transition: 15
+#scene old:
+#  - name: Movie Paused
+#    entities:
+#      light.entryway:
+#        state: on
+#        brightness: 50
+#        transition: 5
+#
+#      light.living_room_lamp:
+#        state: on
+#        brightness: 75
+#        transition: 10
+#
+#      light.living_room_ceiling:
+#        state: on
+#        brightness: 50
+#        transition: 15

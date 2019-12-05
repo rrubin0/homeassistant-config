@@ -1,14 +1,14 @@
 #####################################################################
 ### SCENES
 #####################################################################
-scene:
-  - name: Game Time
-    entities:
-      light.billiards:
-        state: on
-        brightness: 170
-        transition: 5
-
-      switch.game_room_floodlights:
-        state: on
+#scene old:
+#  - name: Game Time
+#    entities:
+#      light.billiards:
+#        state: on
+#        brightness: 170
+#        transition: 5
+#
+#      switch.game_room_floodlights:
+#        state: on
 

@@ -3,8 +3,8 @@
   ### Aeotec zwave Minimote #1: zwave.family_room_minimote
   #####
   ###    short                       long
-  ###  1 scene.evening    scene.bright
-  ###  2 scene.movie_time            scene.dim
+  ###  1 script.evening    script.bright
+  ###  2 script.movie_time            script.dim
   ###  3 kitchen_lights on 50%       kitchen_lights on 100%
   ###  4 kitchen_lights off          script.bedtime
   ###################################################################
@@ -20,8 +20,8 @@ automation:
           scene_id: 1
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.evening
+      - service: script.turn_on
+        entity_id: script.evening
 
   ###
   - alias: Minimote 1 Button 1 Long
@@ -35,8 +35,8 @@ automation:
           scene_id: 2
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.bright
+      - service: script.turn_on
+        entity_id: script.bright
 
   ###
   - alias: Minimote 1 Button 2 Short
@@ -50,8 +50,8 @@ automation:
           scene_id: 3
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.movie_time
+      - service: script.turn_on
+        entity_id: script.movie_time
 
       - service: light.turn_off
         entity_id: light.kitchen_lights
@@ -68,8 +68,8 @@ automation:
           scene_id: 4
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.dim
+      - service: script.turn_on
+        entity_id: script.dim
 
   ###
   - alias: Minimote 1 Button 3 Short
@@ -160,7 +160,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
 
       - service: hue.hue_activate_scene
         data:
@@ -190,7 +190,7 @@ automation:
 
       - service: light.turn_off
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
 
   ###
   - alias: Minimote 3 Button 2 Short
@@ -282,9 +282,9 @@ automation:
           scene_id: 8
 
     action:
-      - service: scene.turn_on
+      - service: script.turn_on
         data:
-          entity_id: scene.early_morning
+          entity_id: script.morning
 
 
   ### Aeotec zwave Minimote #3: aeotec_dsa03202_Minimote_31

@@ -8,28 +8,19 @@ group:
   #####################################################################
   Interior Lights:
     entities:
-      - light.entryway
-      - light.billiards
+      - group.accent_lights
+      - group.entry_lights
+      - group.game_room_lights
+      - group.living_room_lights
+      - group.master_bathroom_lights
+      - group.master_bedroom_lights
+      - group.nursery_lights
+      - group.wine_room_lights
       - light.dining_room_chandelier
       - light.kitchen_lights
-      - light.living_room
-      - light.living_room_lamp
-      - light.master_bathroom
-      - light.master_bath_vanity
-      - light.master_bed_ceiling
-      - light.master_bed_entry
-      - light.master_bedroom_chandelier
-      - light.master_bedroom
-      - light.master_bedside_lamps
-      - light.nursery_light
-      - light.nursery_wall_light
       - light.office_desk
       - light.wine_room_ceiling
-      - light.foyer_lights
-      - switch.game_room_floodlights
-      - switch.nursery_lamp
       - switch.downstairs_bathroom_light
-      - group.accent_lights
 
 
   #####################################################################
@@ -37,8 +28,9 @@ group:
   #####################################################################
   Exterior Lights:
     entities:
-      - switch.patio_light
       - switch.back_yard_outlet
+      - switch.front_yard_outlet
+      - switch.patio_light
       - switch.pool_light
 
 
@@ -50,9 +42,6 @@ group:
     entities:
       - light.foyer_lights
       - light.entryway
-#      - light.south_entry
-#      - light.center_entry
-#      - light.kitchen_entry
 
   Living Room Lights:
     control: hidden
@@ -88,7 +77,9 @@ group:
       - light.master_bed_ceiling
       - light.master_bed_entry
       - light.master_bedroom_chandelier
-      - light.under_bed_lights
+      - light.master_bedside_lamps
+      - light.master_reading_lamp
+      - light.master_sitting_lamp
 
 
   #####################################################################
@@ -137,22 +128,6 @@ group:
       - switch.staircase_lamp
       - switch.wine_room_lamp
       - switch.floor_vase
- ## Holiday Lights
-     ## christmas tree
-      #- switch.switch_five
-
-
-  #####################################################################
-  ### Yard / Patio
-  #####################################################################
-  Yard:
-    control: hidden
-    entities:
-      - switch.patio_light
-      - switch.back_yard_outlet
-      - switch.front_yard_outlet
-      - switch.fountains_switch
-      - switch.outdoor_speakers
 
 
   #####################################################################
@@ -167,23 +142,30 @@ group:
   #####################################################################
   ### Christmas Lights
   #####################################################################
-#  Christmas Lights:
-#    entities:
+  Christmas Lights:
+    entities:
 #      - switch.back_yard_outlet
-#      - switch.front_yard_outlet
-#      - switch.switch_four
-#
+      - switch.front_yard_outlet
+      - switch.christmas_tree
+
+
   #####################################################################
   ### Smart Outlets - non-light devices controlled by smart outlets
   #####################################################################
   Outlets:
     control: hidden
     entities:
+      - switch.mini_fridge
+      - switch.floor_vase
+      - switch.christmas_tree
       # rf switch upstairs wipe warmer
       - switch.switch_one
-      ## rf switch downstairs wipe warmer
+      # rf switch downstairs wipe warmer
       - switch.switch_three
-      ## upstairs mini fridge (TP-LINK)
-      - switch.mini_fridge
+      # rf switch power wheels charger
+      - switch.switch_four
+      # rf switch nursery humidifier
+      - switch.switch_five
+
 
 

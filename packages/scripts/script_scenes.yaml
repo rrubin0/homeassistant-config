@@ -1,0 +1,270 @@
+#########################################################################
+### Script Based Scenes: Because Scenes don't support transition anymore
+#########################################################################
+script:
+  bright:
+    alias: "Bright"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness: 255
+        transition: 15
+
+######################
+### Cloudy Scene
+######################
+  cloudy:
+    alias: "Cloudy"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 250
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 90
+        transition: 15
+
+    - service: light.turn_on
+      data:
+        entity_id: group.living_room_lights
+        brightness: 200
+        transition: 15
+
+######################
+### Dim Scene
+######################
+  dim:
+    alias: "Dim"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 60
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 75
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 100
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 50
+        transition: 20
+
+
+######################
+### Evening Scene
+######################
+  evening:
+    alias: "Evening"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 160
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_entry
+        brightness: 200
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.south_entry
+        brightness: 160
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.center_entry
+        brightness: 50
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 255
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        transition: 10
+
+
+######################
+### Game Time Scene
+######################
+  game_time:
+    alias: "Game Time"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.billiards
+        brightness: 170
+        transition: 5
+
+    - service: switch.turn_on
+      entity_id: switch.game_room_floodlights
+
+
+######################
+### Morning Scene
+######################
+  morning:
+    alias: "Morning"
+    sequence:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.accent_lights
+
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 60
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.master_bedroom_chandelier
+        brightness: 40
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 254
+        transition: 600
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 140
+        transition: 600
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 140
+        transition: 900
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights
+        brightness: 170
+
+
+######################
+### Movie End Scene
+######################
+  movie_end:
+    alias: "Movie Ended"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 180
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 225
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 100
+        transition: 30
+
+
+######################
+### Movie Paused Scene
+######################
+  movie_paused:
+    alias: "Movie Paused"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 50
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 75
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 50
+        transition: 15
+
+
+######################
+### Movie Time Scene
+######################
+  movie_time:
+    alias: "Movie Time"
+    sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.entryway
+        transition: 5
+
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.living_room_lights
+        transition: 10
+
+    - service: light.turn_off
+      entity_id: light.foyer_lights
+
+
+######################
+### TV Time Scene
+######################
+  tv_time:
+    alias: "TV Time"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 50
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 30
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 65
+        transition: 15
+
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_ceiling
+        transition: 5

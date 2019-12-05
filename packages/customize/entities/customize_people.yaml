@@ -4,9 +4,7 @@
 homeassistant:
   customize:
     person.rick:
-      friendly_name: "Rick"
       entity_picture: /local/rick.jpg
 
     person.megs:
-      friendly_name: "Megs"
       entity_picture: /local/megs.jpg

@@ -32,8 +32,8 @@ automation:
     condition:
       - condition: time
 ### summertime schedule
-        after: '18:00:00'
-        before: '01:20:00'
+        after: '17:00:00'
+        before: '08:00:00'
 
       - condition: state
         entity_id: switch.downstairs_bathroom_light

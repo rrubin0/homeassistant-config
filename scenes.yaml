@@ -1,0 +1,26 @@
+- id: '1575437567405'
+  name: Cozy
+  entities:
+    light.entryway:
+      brightness: 30
+      state: 'on'
+    light.foyer_lights:
+      brightness: 49
+      state: 'on'
+    light.living_room_ceiling:
+      brightness: 89
+      effect: colorloop
+      hs_color:
+      - 92.932
+      - 52.157
+      rgb_color:
+      - 182
+      - 255
+      - 121
+      state: 'on'
+      xy_color:
+      - 0.317
+      - 0.517
+    light.living_room_lamp:
+      brightness: 65
+      state: 'on'

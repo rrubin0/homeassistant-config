@@ -3,31 +3,8 @@
 #####################################################################
 homeassistant:
   customize:
-    script.find_iphone:
-      icon: mdi:account-location
-
-    script.unlock_megs:
-      friendly_name: "Unlock Door for Megan"
-      hidden: true
-
-    script.morning_sequence:
-      hidden: true
-
-    script.away:
-      hidden: true
-
-    script.company_mode:
-      friendly_name: "Company Mode"
-
-    script.bedtime:
-      friendly_name: "Bedtime"
-      icon: mdi:hotel
-
-    script.shutdown_lights:
-      friendly_name: "Shutdown"
-
-    script.nap_time:
-      friendly_name: "Nap Time"
+#    script.find_iphone:
+#      icon: mdi:account-location
 
     script.baby_playlist:
       friendly_name: "Play Baby Playlist"
@@ -91,99 +68,5 @@ homeassistant:
     script.master_bedroom_night_time:
       icon: mdi:weather-night
 
-#    script.mbr_fan_speed_step:
-#      friendly_name: "Master Bedroom Fan Auto"
-#      icon: mdi:fan
-
     script.tv_power_off:
-      friendly_name: "TV Shutdown"
       icon: mdi:power
-
-    script.desk_lamp:
-      friendly_name: "Desk Lamp Test"
-      icon: mdi:play-circle
-
-    script.pool_cycle:
-      friendly_name: "Pool Colors"
-
-    script.pool_caribbean:
-      friendly_name: "Pool Caribbean"
-
-    script.pool_party:
-      friendly_name: "Pool Party"
-
-    script.pool_patriotic:
-      friendly_name: "Pool Patriotic"
-
-    script.pool_romance:
-      friendly_name: "Pool Romance"
-      
-    script.pool_royal:
-      friendly_name: "Pool Royal"
-      
-    script.pool_sunset:
-      friendly_name: "Pool Sunset"
-
-    script.script_test:
-      friendly_name: "Test Script"
-
-    script.rgb_strip_test:
-      friendly_name: "RGB Strip Test"
-
-    script.desk_lamp_test:
-      friendly_name: "Desk Lamp Test"
-
-    script.baby_playlist_test:
-      friendly_name: "Playlist Test"
-
-    ### Hue Scene Scripts ###
-    script.hue_lr_dimmed:
-      friendly_name: "Dimmed"
-      icon: mdi:play-circle
-
-    script.hue_lr_nightlight:
-      friendly_name: "Night Mode"
-      icon: mdi:play-circle
-
-    script.hue_lr_normal:
-      friendly_name: "Normal"
-      icon: mdi:play-circle
-
-    script.hue_lr_bright:
-      friendly_name: "Bright"
-      icon: mdi:play-circle
-
-    script.hue_lr_christmas:
-      friendly_name: "Christmas Time"
-      icon: mdi:stocking
-
-    script.hue_lr_movie:
-      friendly_name: "Movie"
-      icon: mdi:play-circle
-
-    script.hue_lr_sunrise:
-      friendly_name: "Sunrise"
-      icon: mdi:play-circle
-
-    script.hue_lr_sunset:
-      friendly_name: "Sunset"
-      icon: mdi:play-circle
-
-    script.hue_lr_minty:
-      friendly_name: "Minty"
-      icon: mdi:play-circle
-
-    script.hue_lr_daybreak:
-      friendly_name: "Daybreak"
-      icon: mdi:play-circle
-
-    script.hue_mbath_morning:
-      friendly_name: "Bathroom Morning"
-      icon: mdi:play-circle
-
-
-
-
-
-
-

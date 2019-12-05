@@ -4,6 +4,7 @@
 script:
   ### Door held open
   tts_door_held_open:
+    alias: "Door Held Open"
     sequence:
     - service: notify.mobile_app_rip8plus
       data:

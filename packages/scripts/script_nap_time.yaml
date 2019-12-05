@@ -3,6 +3,7 @@
 #####################################################################
 script:
   nap_time:
+    alias: "Nap Time"
     sequence:
       - service: climate.set_preset_mode
         data:
@@ -13,7 +14,7 @@ script:
           seconds: 10
 
       - service: light.turn_off
-        entity_id: light.nursery_lights
+        entity_id: group.nursery_lights
 
       - service: homeassistant.turn_off
         entity_id: group.interior_lights

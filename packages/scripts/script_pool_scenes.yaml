@@ -5,6 +5,7 @@ script:
   #####################################################################
   ### Pool Light - Cycle Mode; Channel 1
   pool_cycle:
+    alias: "Pool Colors"
     sequence:
 
   ## turn on the light

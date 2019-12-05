@@ -6,17 +6,13 @@ homeassistant:
   unit_system: imperial
   time_zone: America/Phoenix
   packages: !include_dir_named packages
-
   auth_providers:
    - type: homeassistant
-
    - type: trusted_networks
      trusted_networks:
        - !secret network_1
 
-#   - type: legacy_api_password
-#     api_password: !secret http_password
-
+breaking_changes:
 config:
 
 discovery:
@@ -42,23 +38,10 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 3
 
-breaking_changes:
-
-#lovelace:
-#  mode: yaml
-
 mobile_app:
-
-#ios:
-
 #python_script:
-
+scene: !include scenes.yaml
 stream:
-
 sun:
-
 system_health:
-
 zeroconf:
-
-

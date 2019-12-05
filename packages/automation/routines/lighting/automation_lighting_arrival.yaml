@@ -28,8 +28,8 @@ automation:
             push:
               sound: "US-EN-Alexa-Welcome-Home.wav"
 
-      - service: scene.turn_on
-        entity_id: scene.bright
+      - service: script.turn_on
+        entity_id: script.bright
 
       - service: homeassistant.turn_on
         entity_id: group.accent_lights
@@ -37,6 +37,6 @@ automation:
       - delay:
           minutes: 5
 
-      - service: scene.turn_on
-        entity_id: scene.evening
+      - service: script.turn_on
+        entity_id: script.evening
 

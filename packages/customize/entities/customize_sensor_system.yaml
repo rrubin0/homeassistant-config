@@ -38,6 +38,3 @@ homeassistant:
     sensor.uptime:
       friendly_name: "System Uptime"
       icon: mdi:clock
-
-    sensor.holiday:
-      icon: mdi:calendar-check

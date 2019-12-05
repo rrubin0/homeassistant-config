@@ -53,8 +53,8 @@ automation:
         value_template: "{{ states.media_player.apple_tv.state != 'playing' }}"
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.cloudy
+      - service: script.turn_on
+        entity_id: script.cloudy
 
 
   ### Turn off lights after rain has stopped

@@ -3,6 +3,7 @@
 #####################################################################
 script:
   sun_up:
+    alias: "Turn off lights if sun is up"
     sequence:
     - service: hue.hue_activate_scene
       data:

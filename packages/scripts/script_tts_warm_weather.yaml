@@ -4,6 +4,7 @@
 script:
   ### Warm Weather while door is open
   tts_warm_weather:
+    alias: "Close the doors when the weather is too warm"
     sequence:
     - service: notify.mobile_app_rip8plus
       data:
@@ -31,7 +32,7 @@ script:
     - service: notify.alexa_media
       data:
         target: media_player.living_room
-        message: "You Guys? The weather is warming up. Please close all doors and windows, for the air-conditioner."
+        message: "'You Guys? The weather is warming up. Please close all doors and windows, for the air-conditioner.'"
         data:
           type: tts
 

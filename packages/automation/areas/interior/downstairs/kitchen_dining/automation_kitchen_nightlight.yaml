@@ -27,9 +27,18 @@ automation:
   - alias: Kitchen Nightlight Off
     initial_state: 'on'
     trigger:
-      - platform: sun
-        event: sunrise
-        offset: '00:15:00'
+      - platform: state
+        entity_id: input_boolean.after_hours
+        to: 'off'
+
+#      - platform: sun
+#        event: sunrise
+#        offset: '00:15:00'
+
+    condition:
+      - condition: state
+        entity_id: light.kitchen_night_light
+        state: 'on'
 
     action:
       - service: light.turn_off

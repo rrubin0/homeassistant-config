@@ -2,8 +2,8 @@
 ### Automations for Media Players
 #####################################################################
 automation:
-  ### Set Lighting scene when media is playing on Apple TV
-  - alias: AppleTV Scene Set
+  ### Set Lighting script when media is playing on Apple TV
+  - alias: AppleTV script Set
     initial_state: 'on'
     trigger:
       - platform: state
@@ -32,25 +32,25 @@ automation:
         state: 'off'
 
     action:
-      - service: scene.turn_on
+      - service: script.turn_on
         data_template:
           entity_id: >-
             {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
-              scene.movie_time
+              script.movie_time
             {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "stopped" %}
-              scene.movie_paused
+              script.movie_paused
             {% elif trigger.to_state.state == "idle" and now().strftime('%H%M')|int > 2000 %}
-              scene.tv_time
+              script.tv_time
             {% else %}
-              scene.evening
+              script.evening
             {% endif %}
 
 #            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
-#              scene.movie_time
+#              script.movie_time
 #            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "stopped" %}
-#              scene.movie_paused
+#              script.movie_paused
 #            {% else %}
-#              scene.evening
+#              script.evening
 #            {% endif %}
 
 
@@ -73,17 +73,17 @@ automation:
 #        state: 'off'
 #
 #    action:
-#      - service: scene.turn_on
+#      - service: script.turn_on
 #        data_template:
 #          entity_id: >-
 #            {% if trigger.to_state.state == "playing" or trigger.to_state.state == "resumed" %}
-#              scene.movie_time
+#              script.movie_time
 #            {% elif trigger.to_state.state == "paused" or trigger.to_state.state == "idle" %}
-#              scene.movie_paused
+#              script.movie_paused
 #            {% elif trigger.to_state.state == "stopped" or trigger.to_state.state == "ended" %}
-#              scene.movie_ended
+#              script.movie_ended
 #            {% else %}
-#              scene.evening
+#              script.evening
 #            {% endif %}
 
 

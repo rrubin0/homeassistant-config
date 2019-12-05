@@ -34,8 +34,10 @@ script:
         title: "Away Mode ON"
         message: "Away mode is ON."
 
-#    - service: notify.pushbullet
-#      data:
-#        title: "Away Mode ON"
-#        target: "device/Chrome"
-#        message: "It appears nobody's home; away mode activated."
+    - condition: state
+      entity_id: switch.tv_power
+      state: 'on'
+
+    - service: switch.turn_off
+      entity_id: switch.tv_power
+      

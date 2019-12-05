@@ -32,14 +32,15 @@ homeassistant:
       icon: mdi:thermometer
 
     sensor.front_entry_fibaro_multisensor_temperature:
-      friendly_name: "Front Entry Temperature"
       icon: mdi:thermometer
 
+    ## name cannot be set via UI
     sensor.broadlink_sensor_temperature:
       friendly_name: "Stairway Temperature"
       icon: mdi:thermometer
 
     ### Office ###
+    ## name cannot be set via UI
     sensor.sn1_humidity:
       friendly_name: "Humidor Humidity"
       icon: mdi:water-percent
@@ -59,7 +60,3 @@ homeassistant:
     light.sn1_led:
       friendly_name: "Humidor Indicator Light"
       icon: mdi:alarm-light
-
-    sensor.rachio_status:
-      friendly_name: "Rachio Status"
-      entity_picture: /local/rachio.png

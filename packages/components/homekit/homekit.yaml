@@ -30,13 +30,12 @@ homekit:
       - light.billiards
       - light.dining_room_chandelier
       - light.entryway
-      - light.living_room
       - light.foyer_lights
       - light.kitchen_night_light
       - light.kitchen_lights
       - light.living_room_lamp
       - light.living_room_ceiling
-      - light.master_bathroom
+      - light.master_bathroom_ceiling
       - light.master_bath_vanity
       - light.master_bed_ceiling
       - light.master_bed_entry
@@ -47,7 +46,7 @@ homekit:
       - light.nursery_light
       - light.nursery_wall_light
       - light.office_desk
-      - light.under_bed_lights
+      - light.bedframe_light
       - light.wine_room_ceiling
 
 
@@ -57,7 +56,7 @@ homekit:
       - switch.amp_power
       - switch.directv_play
       - switch.downstairs_bathroom_light
-      - switch.flower_lamp
+      - switch.christmas_tree
 #      - switch.fountains_switch
       - switch.game_room_floodlights
       - switch.living_room_fan
@@ -160,7 +159,7 @@ homekit:
 ## Entity Configuration - Customize Devices
 ################################################
   entity_config:
-    switch.flower_lamp:
+    switch.christmas_tree:
       type: outlet
 
     switch.floor_vase:

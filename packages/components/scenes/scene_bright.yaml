@@ -1,15 +1,15 @@
-#####################################################################
-### SCENES
-#####################################################################
-scene:
-  - name: Bright
-    entities:
-      light.entryway:
-        state: on
-        brightness: 255
-        transition: 5
-
-      light.living_room:
-        state: on
-        brightness: 255
-        transition: 5
+######################################################################
+#### SCENES
+######################################################################
+#scene old:
+#  - name: Bright
+#    entities:
+#      light.entryway:
+#        state: on
+#        brightness: 255
+#        transition: 5
+#
+#      group.living_room_lights:
+#        state: on
+#        brightness: 255
+#        transition: 5

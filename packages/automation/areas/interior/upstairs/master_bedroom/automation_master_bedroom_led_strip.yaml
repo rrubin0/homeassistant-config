@@ -21,7 +21,7 @@ automation:
 
     action:
       - service: light.turn_off
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
 
       # Reset the Input Select to "Select an option..."
       - service: input_select.select_option
@@ -36,7 +36,7 @@ automation:
     hide_entity: True
     trigger:
       - platform: state
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
         from: 'on'
         to: 'off'
 
@@ -63,7 +63,7 @@ automation:
     hide_entity: True
     trigger:
       - platform: state
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
         from: 'off'
         to: 'on'
 
@@ -97,7 +97,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [0,0,255]
 
@@ -120,7 +120,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [0,255,255]
 
@@ -143,7 +143,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 55
           rgb_color: [0,55,55]
 
@@ -166,7 +166,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [0,225,0]
 
@@ -189,7 +189,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [255,0,255]
 
@@ -212,7 +212,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [255,0,0]
 
@@ -235,7 +235,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [125,0,255]
 
@@ -258,7 +258,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           brightness: 255
           rgb_color: [255,255,0]
 
@@ -281,7 +281,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: colorloop
 
       # Reset the Input Select to "Select an option..."
@@ -303,7 +303,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: colorjump
 
       # Reset the Input Select to "Select an option..."
@@ -325,7 +325,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: random
 
       # Reset the Input Select to "Select an option..."
@@ -347,7 +347,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: red_fade
 
       # Reset the Input Select to "Select an option..."
@@ -369,7 +369,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: green_fade
 
       # Reset the Input Select to "Select an option..."
@@ -391,7 +391,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: blue_fade
 
       # Reset the Input Select to "Select an option..."
@@ -413,7 +413,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: yellow_fade
 
       # Reset the Input Select to "Select an option..."
@@ -435,7 +435,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: purple_fade
 
       # Reset the Input Select to "Select an option..."
@@ -457,7 +457,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: white_fade
 
       # Reset the Input Select to "Select an option..."
@@ -479,7 +479,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: rg_cross_fade
 
       # Reset the Input Select to "Select an option..."
@@ -501,7 +501,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: rb_cross_fade
 
       # Reset the Input Select to "Select an option..."
@@ -523,7 +523,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: gb_cross_fade
 
       # Reset the Input Select to "Select an option..."
@@ -545,7 +545,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: colorstrobe
 
       # Reset the Input Select to "Select an option..."
@@ -567,7 +567,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: red_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -589,7 +589,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: green_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -611,7 +611,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: blue_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -633,7 +633,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: yellow_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -655,7 +655,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: cyan_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -677,7 +677,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: purple_strobe
 
       # Reset the Input Select to "Select an option..."
@@ -699,7 +699,7 @@ automation:
     action:
       - service: light.turn_on
         data:
-          entity_id: light.under_bed_lights
+          entity_id: light.bedframe_light
           effect: white_strobe
 
       # Reset the Input Select to "Select an option..."

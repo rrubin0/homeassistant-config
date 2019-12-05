@@ -10,6 +10,7 @@ script:
       data:
         entity_id: light.foyer_lights
         brightness: 50
+        transition: 5
 
     - service: hue.hue_activate_scene
       data:
@@ -23,7 +24,7 @@ script:
 
     - service: light.turn_on
       data:
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
         brightness: 55
         rgb_color: [0,55,55]
 
@@ -65,7 +66,7 @@ script:
     sequence:
     - service: light.turn_on
       data:
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
         brightness: 40
         rgb_color: [0,60,60]
 
@@ -87,6 +88,6 @@ script:
         minutes: 1
 
     - service: light.turn_off
-      entity_id: light.under_bed_lights
+      entity_id: light.bedframe_light
 
 

@@ -5,7 +5,16 @@ binary_sensor:
 ## Workday Sensor
   - platform: workday
     country: US
-
-
-
-
+    add_holidays:
+      - '2019-12-26'  # pto
+      - '2019-12-27'  # pto
+      - '2020-01-01'  # new years day
+      - '2020-01-02'  # pto
+      - '2020-01-03'  # pto
+      - '2020-01-20'  # mlk day
+      - '2020-02-14'  # valentines day
+      - '2020-07-03'  # pto
+      - '2020-07-06'  # pto
+      - '2020-10-30'  # pto
+      - '2020-11-27'  # day after
+      - '2020-12-24'  # pto

@@ -3,6 +3,7 @@
 #####################################################################
 script:
   company_mode:
+    alias: "Company Mode"
     sequence:
     - service: switch.turn_on
       entity_id:

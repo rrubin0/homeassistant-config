@@ -4,20 +4,23 @@
 script:
   ### A simple script used for testing
   script_test:
+    alias: "Test Script"
     sequence:
     - service: light.toggle
       entity_id: light.office_desk
 
   ### Testing Flux RGB strip values
   rgb_strip_test:
+    alias: "RGB Strip Test"
     sequence:
     - service: light.turn_on
       data:
-        entity_id: light.under_bed_lights
+        entity_id: light.bedframe_light
         xy_color: [0.151, 0.343]
         brightness: 55
 
   alexa_media_test:
+    alias: "Alexa Media Test"
     sequence:
     - service: media_player.play_media
       data:
@@ -26,6 +29,7 @@ script:
         media_content_type: "SPOTIFY"
 
   alexa_announce_test:
+    alias: "Alexa Announce Test"
     sequence:
     - service: notify.alexa_media_office
       data:
@@ -37,15 +41,15 @@ script:
   #####################################################################
   ### Master Bedroom Fan Tests
   #####################################################################
-  master_br_fan_group_off_test:
-    sequence:
-    - service: homeassistant.turn_off
-      entity_id: group.master_bedroom_fan
-
-  master_br_fan_switch_on_test:
-    sequence:
-    - service: homeassistant.turn_on
-      entity_id: switch.master_bedroom_fan
+#  master_br_fan_group_off_test:
+#    sequence:
+#    - service: homeassistant.turn_off
+#      entity_id: group.master_bedroom_fan
+#
+#  master_br_fan_switch_on_test:
+#    sequence:
+#    - service: homeassistant.turn_on
+#      entity_id: switch.master_bedroom_fan
 
 
 
@@ -72,6 +76,7 @@ script:
   ### Play Baby Playlist (test using office)
   #####################################################################
   baby_playlist_test:
+    alias: "Baby Playlist Test"
     sequence:
     - service: media_player.volume_set
       entity_id: media_player.office

@@ -3,7 +3,7 @@
 #####################################################################
 script:
   unlock_megs:
-    alias: "Unlock for Megs"
+    alias: "Unlock Door for Megan"
     sequence:
     - service: lock.unlock
       entity_id: lock.south_entry_locked

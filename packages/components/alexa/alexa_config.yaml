@@ -32,43 +32,43 @@ alexa:
     client_secret: !secret amazon_client_secret
     filter:
       include_entities:
-      ################################################
-      ## Scripts
-      ################################################
-        - script.company_mode
-        - script.ecobee_ds_home
-        - script.ecobee_ds_resume
-        - script.ecobee_us_home
-        - script.ecobee_us_resume
-#        - script.find_iphone
-        - script.hue_lr_christmas
-        - script.hue_lr_daybreak
-        - script.hue_lr_dimmed
-        - script.hue_lr_minty
-        - script.hue_lr_movie
-        - script.hue_lr_nightlight
-        - script.hue_lr_normal
-        - script.hue_lr_sunrise
-        - script.hue_lr_sunset
-        - script.hue_mbath_morning
-        - script.master_bedroom_night_time
-        - script.mbr_night_light
-        - script.nap_time
-        - script.pool_cycle
-        - script.pool_party
-        - script.start_bedtime_timer
-
-      ################################################
-      ## Scenes
-      ################################################
-        - scene.bright
-        - scene.cloudy
-        - scene.dim
-        - scene.evening
-        - scene.tv_time
-        - scene.game_time
-        - scene.morning
-        - scene.movie_time
+#      ################################################
+#      ## Scripts
+#      ################################################
+#        - script.company_mode
+#        - script.ecobee_ds_home
+#        - script.ecobee_ds_resume
+#        - script.ecobee_us_home
+#        - script.ecobee_us_resume
+##        - script.find_iphone
+#        - script.hue_lr_christmas
+#        - script.hue_lr_daybreak
+#        - script.hue_lr_dimmed
+#        - script.hue_lr_minty
+#        - script.hue_lr_movie
+#        - script.hue_lr_nightlight
+#        - script.hue_lr_normal
+#        - script.hue_lr_sunrise
+#        - script.hue_lr_sunset
+#        - script.hue_mbath_morning
+#        - script.master_bedroom_night_time
+#        - script.mbr_night_light
+#        - script.nap_time
+#        - script.pool_cycle
+#        - script.pool_party
+#        - script.start_bedtime_timer
+#
+#      ################################################
+#      ## Scenes
+#      ################################################
+#        - scene.bright
+#        - scene.cloudy
+#        - scene.dim
+#        - scene.evening
+#        - scene.tv_time
+#        - scene.game_time
+#        - scene.morning
+#        - scene.movie_time
 
       ################################################
       ## Groups
@@ -76,11 +76,13 @@ alexa:
         - group.accent_lights
         - group.entry_lights
         - group.exterior_lights
-        - group.interior_lights
         - group.game_room_lights
+        - group.interior_lights
+        - group.living_room_lights
         - group.master_bedroom_lights
         - group.master_bathroom_lights
         - group.porch_lights
+        - group.wine_room_lights
         - group.christmas_lights
 
       ################################################
@@ -100,7 +102,7 @@ alexa:
         - light.kitchen_lights
         - light.living_room_lamp
         - light.living_room_ceiling
-        - light.master_bathroom_ceiling
+        - light.master_bathroom_ceiling_ceiling
         - light.master_bath_vanity
         - light.master_bed_ceiling
         - light.master_bed_entry
@@ -111,7 +113,7 @@ alexa:
         - light.nursery_light
         - light.nursery_wall_light
         - light.office_desk
-        - light.under_bed_lights
+        - light.bedframe_light
         - light.wine_room_ceiling
 
       ################################################
@@ -128,7 +130,7 @@ alexa:
         - switch.directv_play
         - switch.directv_power
         - switch.downstairs_bathroom_light
-        - switch.flower_lamp
+        - switch.christmas_tree
         - switch.fountains_switch
         - switch.game_room_floodlights
         - switch.living_room_fan
@@ -208,7 +210,8 @@ alexa:
         - automation.fountains_on
         - automation.south_door_unlock_on_arrival
 
-
+      include_domains:
+        - script
 ################################################
 ## Custom Names
 ################################################

@@ -3,6 +3,7 @@
 #####################################################################
 script:
   morning_sequence:
+    alias: "Morning Sequence"
     sequence:
     ### 06:35
     - service: hue.hue_activate_scene
@@ -50,8 +51,8 @@ script:
         brightness: 200
 
     - delay:
-        minutes: 20
-    ### 07:30
+        minutes: 30
+    ### 07:40
     - service: hue.hue_activate_scene
       data:
         group_name: "Living Room"
@@ -65,7 +66,7 @@ script:
 
     - delay:
         minutes: 15
-    ### 07:45
+    ### 07:55
     - service: homeassistant.turn_off
       entity_id: group.living_room_lights
 

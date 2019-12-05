@@ -41,10 +41,10 @@ automation:
 
     condition:
       - condition: state
-        entity_id: light.master_bathroom
+        entity_id: light.master_bathroom_ceiling
         state: 'on'
 
     action:
       - service: light.turn_off
-        entity_id: light.master_bathroom
+        entity_id: light.master_bathroom_ceiling
 

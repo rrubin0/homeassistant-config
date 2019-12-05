@@ -9,7 +9,12 @@ automation:
         entity_id: switch.switch_four
         to: 'on'
         for:
-          hours: 9
+          hours: 8
+
+    condition:
+      - condition: state
+        entity_id: switch.switch_four
+        state: 'on'
 
     action:
       - service: switch.turn_off

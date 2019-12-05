@@ -12,6 +12,7 @@ homeassistant:
     input_boolean.dinner_time:
       icon: mdi:food-fork-drink
 
+    ## name cannot be set via UI
     input_boolean.condition_1:
       friendly_name: "Test Condition 1"
 

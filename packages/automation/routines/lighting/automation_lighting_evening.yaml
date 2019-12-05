@@ -1,5 +1,5 @@
 #####################################################################
-### Set the Evening scene at sunset
+### Set the Evening Scene at sunset
 #####################################################################
 automation:
   - alias: Evening Scene Schedule
@@ -27,6 +27,6 @@ automation:
             state: 'on'
 
     action:
-      - service: scene.turn_on
-        entity_id: scene.evening
+      - service: script.turn_on
+        entity_id: script.evening
 

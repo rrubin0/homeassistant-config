@@ -1,0 +1,300 @@
+############################################################################
+#    @package          :     google_home
+#    @description      :     google home smarthome config
+############################################################################
+google_assistant:
+  project_id: !secret google_assistant_project_id
+  api_key: !secret google_assistant_api_key
+#  report_state: true
+  exposed_domains:
+    - group
+    - light
+    - script
+    - switch
+
+  entity_config:
+    ## Scripts
+    script.baby_playlist:
+      expose: true
+    script.company_mode:
+      expose: true
+    script.ecobee_ds_home:
+      expose: true
+    script.ecobee_ds_resume:
+      expose: true
+    script.ecobee_us_home:
+      expose: true
+    script.ecobee_us_resume:
+      expose: true
+    script.hue_lr_bright:
+      expose: true
+    script.hue_lr_christmas:
+      expose: true
+    script.hue_lr_daybreak:
+      expose: true
+    script.hue_lr_dimmed:
+      expose: true
+    script.hue_lr_minty:
+      expose: true
+    script.hue_lr_movie:
+      expose: true
+    script.hue_lr_normal:
+      expose: true
+    script.hue_lr_sunrise:
+      expose: true
+    script.hue_lr_sunset:
+      expose: true
+    script.master_bedroom_night_time:
+      expose: true
+    script.nap_time:
+      expose: true
+    script.play_white_noise:
+      expose: true
+    script.start_away_timer:
+      expose: true
+    script.start_bedtime_timer:
+      expose: true
+    script.stop_playing:
+      expose: true
+
+    ## Groups
+    group.all_automations:
+      expose: false
+    group.all_covers:
+      expose: false
+    group.all_devices:
+      expose: false
+    group.all_fans:
+      expose: false
+    group.all_lights:
+      expose: false
+    group.all_locks:
+      expose: false
+    group.all_scripts:
+      expose: false
+    group.all_switches:
+      expose: false
+    group.home:
+      expose: false
+    group.master_bedroom_fan:
+      expose: false
+    group.outlets:
+      expose: false
+
+    ## Lights
+    light.billiards_1:
+      expose: false
+    light.billiards_2:
+      expose: false
+    light.billiards_3:
+      expose: false
+    light.center_entry:
+      expose: false
+    light.kitchen_entry:
+      expose: false
+    light.kitchen_night_light:
+      expose: false
+    light.master_bath_entry:
+      expose: false
+    light.master_bath_sink:
+      expose: false
+    light.master_bathtub:
+      expose: false
+    light.master_bed_ceiling:
+      expose: false
+    light.master_bed_entry:
+      expose: false
+    light.master_bedroom_chandelier:
+      expose: false
+    light.master_bedside_lamps:
+      expose: false
+    light.master_reading_lamp:
+      expose: false
+    light.master_sitting_lamp:
+      expose: false
+    light.northeast_ceiling:
+      expose: false
+    light.northeast_wine:
+      expose: false
+    light.northwest_ceiling:
+      expose: false
+    light.northwest_wine:
+      expose: false
+    light.sn1_led:
+      expose: false
+    light.south_entry:
+      expose: false
+    light.southeast_ceiling:
+      expose: false
+    light.southeast_wine:
+      expose: false
+    light.southwest_ceiling:
+      expose: false
+    light.southwest_wine:
+      expose: false
+    light.wine_room_ceiling:
+      expose: false
+
+    ## Switches
+    switch.aj_s_fire_tablet_do_not_disturb_switch:
+      expose: false
+    switch.aj_s_fire_tablet_repeat_switch:
+      expose: false
+    switch.aj_s_fire_tablet_shuffle_switch:
+      expose: false
+    switch.amp_input_dvd:
+      expose: false
+    switch.amp_input_ipod:
+      expose: false
+    switch.amp_input_movie:
+      expose: false
+    switch.amp_input_tv:
+      expose: false
+    switch.amp_movie_mode:
+      expose: false
+    switch.amp_music_mode:
+      expose: false
+    switch.amp_mute:
+      expose: false
+    switch.amp_power:
+      expose: false
+    switch.amp_volume:
+      expose: false
+    switch.directv_power:
+      expose: false
+    switch.downstairs_fire_tablet_do_not_disturb_switch:
+      expose: false
+    switch.downstairs_fire_tablet_repeat_switch:
+      expose: false
+    switch.downstairs_fire_tablet_shuffle_switch:
+      expose: false
+    switch.drip_and_citrus_trees_z4:
+      expose: false
+    switch.east_sprinklers_z5:
+      expose: false
+    switch.everywhere_do_not_disturb_switch:
+      expose: false
+    switch.everywhere_repeat_switch:
+      expose: false
+    switch.everywhere_shuffle_switch:
+      expose: false
+    switch.game_room_do_not_disturb_switch:
+      expose: false
+    switch.game_room_floodlights:
+      expose: false
+    switch.game_room_repeat_switch:
+      expose: false
+    switch.game_room_shuffle_switch:
+      expose: false
+    switch.kitchen_do_not_disturb_switch:
+      expose: false
+    switch.kitchen_repeat_switch:
+      expose: false
+    switch.kitchen_shuffle_switch:
+      expose: false
+    switch.living_room_do_not_disturb_switch:
+      expose: false
+    switch.living_room_repeat_switch:
+      expose: false
+    switch.living_room_shuffle_switch:
+      expose: false
+    switch.master_bathroom_do_not_disturb_switch:
+      expose: false
+    switch.master_bathroom_repeat_switch:
+      expose: false
+    switch.master_bathroom_shuffle_switch:
+      expose: false
+    switch.master_bedroom_do_not_disturb_switch:
+      expose: false
+    switch.master_bedroom_fan_1:
+      expose: false
+    switch.master_bedroom_fan_10:
+      expose: false
+    switch.master_bedroom_fan_11:
+      expose: false
+    switch.master_bedroom_fan_12:
+      expose: false
+    switch.master_bedroom_fan_2:
+      expose: false
+    switch.master_bedroom_fan_3:
+      expose: false
+    switch.master_bedroom_fan_4:
+      expose: false
+    switch.master_bedroom_fan_5:
+      expose: false
+    switch.master_bedroom_fan_6:
+      expose: false
+    switch.master_bedroom_fan_7:
+      expose: false
+    switch.master_bedroom_fan_8:
+      expose: false
+    switch.master_bedroom_fan_9:
+      expose: false
+    switch.master_bedroom_fan_delay:
+      expose: false
+    switch.master_bedroom_fan_random:
+      expose: false
+    switch.master_bedroom_repeat_switch:
+      expose: false
+    switch.master_bedroom_shuffle_switch:
+      expose: false
+    switch.master_bedroom_tv_do_not_disturb_switch:
+      expose: false
+    switch.master_bedroom_tv_repeat_switch:
+      expose: false
+    switch.master_bedroom_tv_shuffle_switch:
+      expose: false
+    switch.north_sprinklers_z1:
+      expose: false
+    switch.northeast_sprinklers_z3:
+      expose: false
+    switch.northwest_sprinklers_z2:
+      expose: false
+    switch.nursery_do_not_disturb_switch:
+      expose: false
+    switch.nursery_repeat_switch:
+      expose: false
+    switch.nursery_shuffle_switch:
+      expose: false
+    switch.office_do_not_disturb_switch:
+      expose: false
+    switch.office_repeat_switch:
+      expose: false
+    switch.office_shuffle_switch:
+      expose: false
+    switch.office_tv_do_not_disturb_switch:
+      expose: false
+    switch.office_tv_repeat_switch:
+      expose: false
+    switch.office_tv_shuffle_switch:
+      expose: false
+    switch.rachio_standby_mode:
+      expose: false
+    switch.richard_s_3rd_echo_dot_do_not_disturb_switch:
+      expose: false
+    switch.richard_s_3rd_echo_dot_repeat_switch:
+      expose: false
+    switch.richard_s_3rd_echo_dot_shuffle_switch:
+      expose: false
+    switch.south_porch_lights_switch:
+      expose: false
+    switch.southeast_sprinklers_z6:
+      expose: false
+    switch.southwest_sprinklers_z7:
+      expose: false
+    switch.tv_input_chromecast:
+      expose: false
+    switch.tv_input_directv:
+      expose: false
+    switch.tv_input_firetv:
+      expose: false
+    switch.tv_power:
+      expose: false
+    switch.tv_volume:
+      expose: false
+    switch.upstairs_fire_tablet_do_not_disturb_switch:
+      expose: false
+    switch.upstairs_fire_tablet_repeat_switch:
+      expose: false
+    switch.upstairs_fire_tablet_shuffle_switch:
+      expose: false

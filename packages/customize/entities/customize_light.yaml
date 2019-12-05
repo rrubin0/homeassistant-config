@@ -12,7 +12,7 @@ homeassistant:
     light.living_room_ceiling:
       icon: mdi:google-circles-communities
 
-    light.master_bathroom_ceiling:
+    light.master_bathroom_ceiling_ceiling:
       icon: mdi:google-circles-communities
 
     light.wine_room_ceiling:
@@ -35,7 +35,7 @@ homeassistant:
   ################################################
   ##  LED Strips
   ################################################
-    light.under_bed_lights:
+    light.bedframe_light:
       icon: mdi:led-on
 
     light.nursery_wall_light:

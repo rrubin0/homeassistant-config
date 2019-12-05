@@ -3,6 +3,7 @@
 #####################################################################
 script:
   tv_power_off:
+    alias: "TV Shutdown"
     sequence:
 
     - service: switch.turn_off
