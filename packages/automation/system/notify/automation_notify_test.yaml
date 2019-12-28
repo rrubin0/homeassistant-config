@@ -1,0 +1,49 @@
+####################################################################
+## Notify - action: Test
+####################################################################
+automation:
+  - alias: Test Notify
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TEST_ACTION
+
+    action:
+      service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness: 200
+#      service: timer.cancel
+#      entity_id: timer.away_mode
+
+  - alias: Test Cancel
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: TEST_CANCEL
+
+    action:
+      service: light.turn_on
+      data:
+        entity_id: light.office_desk
+        brightness: 10
+
+## example
+#  - alias: Pause Away
+#    initial_state: 'on'
+#    hide_entity: true
+#    trigger:
+#      platform: event
+#      event_type: ios.notification_action_fired
+#      event_data:
+#        actionName: PAUSE_AWAY
+#
+#    action:
+#      service: timer.pause
+#      entity_id: timer.away_mode

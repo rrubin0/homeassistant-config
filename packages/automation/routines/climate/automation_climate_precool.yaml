@@ -12,6 +12,10 @@ automation:
         at: '14:00:00'
 
     condition:
+      - condition: state
+        entity_id: sensor.season
+        state: 'Summer'
+
       - condition: or
         conditions:
           - condition: state
@@ -39,11 +43,6 @@ automation:
           entity_id: climate.downstairs
           preset_mode: 'Precool'
 
-      - service: climate.set_preset_mode
-        data:
-          entity_id: climate.upstairs
-          preset_mode: 'Precool'
-
 
 #######################################
 ### Precool Upstairs
@@ -55,6 +54,10 @@ automation:
         at: '14:00:00'
 
     condition:
+      - condition: state
+        entity_id: sensor.season
+        state: 'Summer'
+
       - condition: or
         conditions:
           - condition: state

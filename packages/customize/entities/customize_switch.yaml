@@ -10,7 +10,7 @@ homeassistant:
       icon: mdi:power-socket-us
 
     switch.switch_two:
-      friendly_name: "Baby Monitor"
+      friendly_name: "Porch Christmas Lights"
       assumed_state: false
       icon: mdi:power-socket-us
 
@@ -34,7 +34,7 @@ homeassistant:
     switch.christmas_tree:
       icon: mdi:power-socket-us
 
-    switch.floor_vase:
+    switch.staircase_christmas_lights:
       icon: mdi:power-socket-us
 
 

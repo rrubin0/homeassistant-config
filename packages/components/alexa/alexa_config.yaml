@@ -32,43 +32,61 @@ alexa:
     client_secret: !secret amazon_client_secret
     filter:
       include_entities:
-#      ################################################
-#      ## Scripts
-#      ################################################
-#        - script.company_mode
-#        - script.ecobee_ds_home
-#        - script.ecobee_ds_resume
-#        - script.ecobee_us_home
-#        - script.ecobee_us_resume
-##        - script.find_iphone
-#        - script.hue_lr_christmas
-#        - script.hue_lr_daybreak
-#        - script.hue_lr_dimmed
-#        - script.hue_lr_minty
-#        - script.hue_lr_movie
-#        - script.hue_lr_nightlight
-#        - script.hue_lr_normal
-#        - script.hue_lr_sunrise
-#        - script.hue_lr_sunset
-#        - script.hue_mbath_morning
-#        - script.master_bedroom_night_time
-#        - script.mbr_night_light
-#        - script.nap_time
-#        - script.pool_cycle
-#        - script.pool_party
-#        - script.start_bedtime_timer
-#
-#      ################################################
-#      ## Scenes
-#      ################################################
-#        - scene.bright
-#        - scene.cloudy
-#        - scene.dim
-#        - scene.evening
-#        - scene.tv_time
-#        - scene.game_time
-#        - scene.morning
-#        - scene.movie_time
+      ################################################
+      ## Scripts
+      ################################################
+        - script.away
+        - script.baby_playlist
+        - script.bedtime
+        - script.bright
+        - script.company_mode
+        - script.dim
+        - script.evening
+        - script.game_time
+#        - script.hue_lr_bright
+        - script.hue_lr_christmas
+        - script.hue_lr_daybreak
+        - script.hue_lr_dimmed
+        - script.hue_lr_minty
+        - script.hue_lr_movie
+        - script.hue_lr_nightlight
+        - script.hue_lr_normal
+        - script.hue_lr_sunrise
+        - script.hue_lr_sunset
+        - script.hue_mbath_morning
+        - script.master_bedroom_night_time
+        - script.morning_sequence
+        - script.movie_time
+        - script.nap_time
+        - script.pause_away_timer
+        - script.cancel_away_timer
+        - script.start_bedtime_timer
+        - script.pause_bedtime_timer
+        - script.cancel_bedtime_timer
+        - script.play_white_noise
+        - script.pool_blue
+        - script.pool_caribbean
+        - script.pool_cycle
+        - script.pool_green
+        - script.pool_magenta
+        - script.pool_party
+        - script.pool_patriotic
+        - script.pool_red
+        - script.pool_romance
+        - script.pool_royal
+        - script.pool_sunset
+        - script.pool_white
+        - script.stop_playing
+        - script.tv_power_off
+        - script.tv_time
+        - script.unlock_megs
+
+
+      ################################################
+      ## Scenes (created within Home Assistant UI)
+      ################################################
+        - scene.cozy
+
 
       ################################################
       ## Groups
@@ -146,6 +164,7 @@ alexa:
         - switch.back_yard_outlet
         - switch.front_yard_outlet
         - switch.pool_light
+        - switch.staircase_christmas_lights
         - switch.staircase_lamp
         - switch.switch_one
         - switch.switch_two
@@ -210,8 +229,7 @@ alexa:
         - automation.fountains_on
         - automation.south_door_unlock_on_arrival
 
-      include_domains:
-        - script
+
 ################################################
 ## Custom Names
 ################################################

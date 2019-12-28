@@ -162,7 +162,7 @@ homekit:
     switch.christmas_tree:
       type: outlet
 
-    switch.floor_vase:
+    switch.staircase_christmas_lights:
       type: outlet
 
     switch.outdoor_speakers:

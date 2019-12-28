@@ -37,6 +37,24 @@ script:
         data:
           type: announce
 
+  christmas_time:
+    alias: "Christmas Time"
+    sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.cozy
+
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.multiple
+        volume_level: .6
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.multiple
+        media_content_id : christmas_classic_playlist
+        media_content_type: SPOTIFY
+
 
   #####################################################################
   ### Master Bedroom Fan Tests

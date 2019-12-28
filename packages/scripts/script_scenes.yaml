@@ -7,9 +7,21 @@ script:
     sequence:
     - service: light.turn_on
       data:
-        entity_id: light.office_desk
+        entity_id: light.entryway
         brightness: 255
-        transition: 15
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 255
+        transition: 3
+
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.living_room_lights
+        brightness: 255
+        transition: 5
 
 ######################
 ### Cloudy Scene
@@ -102,10 +114,14 @@ script:
         brightness: 255
         transition: 10
 
-    - service: light.turn_on
+    - service: switch.turn_on
+      data:
+        entity_id: switch.christmas_tree
+
+    - service: light.turn_off
       data:
         entity_id: light.living_room_ceiling
-        transition: 10
+        transition: 5
 
 
 ######################

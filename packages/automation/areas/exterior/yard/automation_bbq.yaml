@@ -25,8 +25,11 @@ automation:
           message: "The grill is {{ states('sensor.grill_temperature') }} degrees. That's too hot!"
           data:
             push:
+              thread-id: "bbq"
               sound:
                 name: default
+            apns_headers:
+              'apns-collapse-id': 'bbq_high'
 
 
   ### Grill too cold
@@ -52,8 +55,12 @@ automation:
           message: "The grill is {{ states('sensor.grill_temperature') }} degrees. That's too low!"
           data:
             push:
+              thread-id: "bbq"
               sound:
                 name: default
+            apns_headers:
+              'apns-collapse-id': 'bbq_low'
+
 
 
   ### Food target temperature reached
@@ -76,8 +83,13 @@ automation:
           message: "Food is at {{ states('sensor.food_temperature') }} degrees. Go check it!"
           data:
             push:
+              thread-id: "bbq"
               sound:
                 name: default
+            apns_headers:
+              'apns-collapse-id': 'bbq_food'
+
+
 
 
 ### reference; to do a custom notify:

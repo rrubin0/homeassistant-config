@@ -14,31 +14,38 @@ automation:
 #        to: 'on'
 
     action:
-### working 0.97.2 ###
-#      - service: notify.alexa_media_office
-#        data:
-#          message: "This is a test"
+#      ### WORKS!
+#      - service: notify.alexa_media
+#        data_template:
+#          target: media_player.office
+#          message: "The {{ trigger.to_state.attributes.friendly_name }} has triggered."
 #          data:
 #            type: announce
 
-### working 0.97.2 ###
-      - service: notify.alexa_media
-        data_template:
-          target: media_player.office
-          message: "The {{ trigger.to_state.attributes.friendly_name }} has triggered."
-          data:
-            type: announce
 
-### working 0.97.2 ###
+      ### working 0.97.2
 #      - service: notify.mobile_app_rip8plus
 #        data:
 #          title: "Test Message"
 #          message: "This is a test"
 #          data:
 #            push:
-#              category: testing
+#              category: test
 #              sound:
 #                name: default
+
+### test in progress 0.102.3
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Testing"
+          message: "Test Started..."
+          data:
+            push:
+              thread-id: "test"
+              sound:
+                name: default
+            apns_headers:
+              'apns-collapse-id': 'test'
 
 
 #  - alias: test action desk light

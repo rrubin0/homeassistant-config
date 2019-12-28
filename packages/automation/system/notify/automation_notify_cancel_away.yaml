@@ -1,16 +1,30 @@
 ####################################################################
-## Notify - action: Cancel Away Mode (disabled for ios beta app test
+## Notify - action: Cancel / Pause Away Mode
 ####################################################################
-#automation:
-#  - alias: Cancel Away
-#    initial_state: 'on'
-#    hide_entity: true
-#    trigger:
-#      platform: event
-#      event_type: ios.notification_action_fired
-#      event_data:
-#        actionName: CANCEL_AWAY
-#
-#    action:
-#      service: timer.cancel
-#      entity_id: timer.away_mode
+automation:
+  - alias: Cancel Away
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CANCEL_AWAY
+
+    action:
+      service: timer.cancel
+      entity_id: timer.away_mode
+
+
+  - alias: Pause Away
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: PAUSE_AWAY
+
+    action:
+      service: timer.pause
+      entity_id: timer.away_mode

@@ -2,25 +2,55 @@
   name: Cozy
   entities:
     light.entryway:
-      brightness: 30
+      brightness: 58
       state: 'on'
     light.foyer_lights:
-      brightness: 49
+      brightness: 67
       state: 'on'
-    light.living_room_ceiling:
-      brightness: 89
-      effect: colorloop
+    light.living_room_lamp:
+      brightness: 143
+      state: 'on'
+    light.northeast_ceiling:
+      brightness: 120
+      effect: none
       hs_color:
-      - 92.932
-      - 52.157
+      - 150.273
+      - 86.275
       rgb_color:
-      - 182
+      - 34
       - 255
-      - 121
+      - 146
       state: 'on'
       xy_color:
-      - 0.317
-      - 0.517
-    light.living_room_lamp:
-      brightness: 65
+      - 0.169
+      - 0.548
+    light.northwest_ceiling:
+      brightness: 170
+      effect: none
+      hs_color:
+      - 0
+      - 42.745
+      rgb_color:
+      - 255
+      - 146
+      - 146
       state: 'on'
+      xy_color:
+      - 0.488
+      - 0.316
+    light.southeast_ceiling:
+      state: 'off'
+    light.southwest_ceiling:
+      brightness: 172
+      effect: colorloop
+      hs_color:
+      - 34.101
+      - 54.51
+      rgb_color:
+      - 255
+      - 195
+      - 115
+      state: 'on'
+      xy_color:
+      - 0.473
+      - 0.4

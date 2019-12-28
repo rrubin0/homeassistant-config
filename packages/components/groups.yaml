@@ -21,6 +21,7 @@ group:
       - light.office_desk
       - light.wine_room_ceiling
       - switch.downstairs_bathroom_light
+      - switch.christmas_tree
 
 
   #####################################################################
@@ -127,7 +128,7 @@ group:
     entities:
       - switch.staircase_lamp
       - switch.wine_room_lamp
-      - switch.floor_vase
+      - switch.staircase_christmas_lights
 
 
   #####################################################################
@@ -144,9 +145,10 @@ group:
   #####################################################################
   Christmas Lights:
     entities:
-#      - switch.back_yard_outlet
+      - switch.back_yard_outlet
       - switch.front_yard_outlet
       - switch.christmas_tree
+      - switch.switch_two # porch christmas lights
 
 
   #####################################################################
@@ -156,15 +158,17 @@ group:
     control: hidden
     entities:
       - switch.mini_fridge
-      - switch.floor_vase
+      - switch.staircase_christmas_lights
       - switch.christmas_tree
-      # rf switch upstairs wipe warmer
+    # rf switch upstairs wipe warmer
       - switch.switch_one
-      # rf switch downstairs wipe warmer
+    # rf switch porch christmas lights
+      - switch.switch_two
+    # rf switch downstairs wipe warmer
       - switch.switch_three
-      # rf switch power wheels charger
+    # rf switch power wheels charger
       - switch.switch_four
-      # rf switch nursery humidifier
+    # rf switch nursery humidifier
       - switch.switch_five
 
 

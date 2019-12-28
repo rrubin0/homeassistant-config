@@ -20,8 +20,7 @@ automation:
 
     action:
       - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.visitor_mode
+        entity_id: input_boolean.visitor_mode
 
 
   ### Cancel Visitor Mode when we return home
@@ -43,6 +42,23 @@ automation:
 
     action:
       - service: input_boolean.turn_off
-        data:
-          entity_id: input_boolean.visitor_mode
+        entity_id: input_boolean.visitor_mode
 
+
+  ### Start Away Mode if visitor_mode is turned off
+  - alias: Visitor Away
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: input_boolean.visitor_mode
+        to: 'off'
+
+    condition:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+
+    action:
+      - service: timer.start
+        entity_id: timer.away_mode

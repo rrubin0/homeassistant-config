@@ -1,0 +1,78 @@
+#####################################################################
+### iOS
+#####################################################################
+ios:
+  push:
+    categories:
+      - name: Away
+        identifier: 'away_override'
+        actions:
+          - identifier: 'CANCEL_AWAY'
+            title: 'Cancel Away'
+            authenticationRequired: false
+
+          - identifier: 'PAUSE_AWAY'
+            title: 'Pause Away'
+            authenticationRequired: false
+
+
+      - name: Bedtime
+        identifier: 'bedtime_override'
+        actions:
+          - identifier: 'CANCEL_BEDTIME'
+            title: 'Cancel Bedtime'
+            authenticationRequired: false
+
+          - identifier: 'PAUSE_BEDTIME'
+            title: 'Pause Bedtime'
+            authenticationRequired: false
+
+
+      - name: Test
+        identifier: 'test'
+        actions:
+          - identifier: 'TEST_ACTION'
+            title: 'Fire Action'
+            authenticationRequired: false
+            destructive: true
+
+          - identifier: 'TEST_CANCEL'
+            title: 'Test Cancel'
+            authenticationRequired: false
+
+
+
+#  push:
+#    categories:
+#      - name: cancel_away
+#        identifier: 'cancelaway'
+#        actions:
+#          - identifier: 'CANCEL_AWAY'
+#            title: 'Cancel Away'
+#            authenticationRequired: false
+#
+#      - name: test_action
+#        identifier: 'testing'
+#        actions:
+#          - identifier: 'TEST_ACTION'
+#            title: 'Test Action'
+#            authenticationRequired: false
+
+      ### EXAMPLE ###
+#      - name: Alarm
+#        identifier: 'alarm'
+#        actions:
+#          - identifier: 'SOUND_ALARM'
+#            title: 'Sound Alarm'
+#            activationMode: 'background'
+#            authenticationRequired: yes
+#            destructive: yes
+#            behavior: 'default'
+#          - identifier: 'SILENCE_ALARM'
+#            title: 'Silence Alarm'
+#            activationMode: 'background'
+#            authenticationRequired: yes
+#            destructive: no
+#            behavior: 'textInput'
+#            textInputButtonTitle: 'Silencio!'
+#            textInputPlaceholder: 'Placeholder'
