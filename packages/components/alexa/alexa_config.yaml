@@ -148,7 +148,7 @@ alexa:
         - switch.directv_play
         - switch.directv_power
         - switch.downstairs_bathroom_light
-        - switch.christmas_tree
+        - switch.office_spare
         - switch.fountains_switch
         - switch.game_room_floodlights
         - switch.living_room_fan
@@ -164,7 +164,7 @@ alexa:
         - switch.back_yard_outlet
         - switch.front_yard_outlet
         - switch.pool_light
-        - switch.staircase_christmas_lights
+        - switch.aquarium
         - switch.staircase_lamp
         - switch.switch_one
         - switch.switch_two
@@ -228,6 +228,10 @@ alexa:
         - automation.doorbell_pressed
         - automation.fountains_on
         - automation.south_door_unlock_on_arrival
+
+
+      include_domains:
+        - image_processing
 
 
 ################################################

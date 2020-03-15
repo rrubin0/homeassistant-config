@@ -38,10 +38,3 @@ script:
 
     - service: light.turn_off
       entity_id: light.bedframe_light
-
-    - delay:
-        seconds: 10
-
-## hit the flux led strip light again ... flaky behavior
-    - service: light.turn_off
-      entity_id: light.bedframe_light

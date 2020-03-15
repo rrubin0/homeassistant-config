@@ -19,8 +19,8 @@ script:
         - switch.pool_light
 #        - group.outlets
         - switch.mini_fridge
-        - switch.staircase_christmas_lights
-        - switch.christmas_tree
+        - switch.aquarium
+        - switch.office_spare
       # rf switch upstairs wipe warmer
         - switch.switch_one
       # rf switch downstairs wipe warmer

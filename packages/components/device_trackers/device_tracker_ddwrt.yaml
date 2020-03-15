@@ -6,5 +6,6 @@ device_tracker:
     host: !secret router_ip
     username: !secret router_user
     password: !secret router_pass
-    track_new_devices: no
     consider_home: 120
+    new_device_defaults:
+      track_new_devices: false

@@ -56,6 +56,54 @@ script:
         media_content_type: SPOTIFY
 
 
+  ### Testing Actionable iOS Notifications
+  test_actionable_office_desk:
+    alias: "Test iOS Actionable Desk Lamp"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Testing Desk Lamp"
+        message: "This is a test"
+        data:
+          push:
+            category: "office_lamp"
+            thread-id: "test-notification"
+
+
+  ### Testing Actionable iOS Notifications
+  test_actionable_away:
+    alias: "Test iOS Actionable Away"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Testing Away"
+        message: "Away Detect Test"
+        data:
+          push:
+            category: "away_override"
+            thread-id: "test-notification"
+
+
+
+
+  #####################################################################
+  ### Alexa Media Play Sound Testing
+  #####################################################################
+  test_alexa_alarm_sound:
+    alias: "Test Alexa Media Alarm Sound"
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.office
+          media_content_type: sound
+          media_content_id: box_04
+
+# amzn_sfx_doorbell_chime_01
+# amzn_sfx_cat_meow_1x_02
+# ghosts_demons/ghosts_demons_11
+# sports/box/box_04
+
+
   #####################################################################
   ### Master Bedroom Fan Tests
   #####################################################################

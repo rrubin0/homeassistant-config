@@ -6,6 +6,3 @@ homeassistant:
 
     sensor.downstairs_ac_leak_detector:
       friendly_name: "Downstairs AC Leak Detector"
-
-    sensor.downstairs_ac_leak_detector_flood:
-      hidden: true

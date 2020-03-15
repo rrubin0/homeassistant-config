@@ -56,7 +56,7 @@ homekit:
       - switch.amp_power
       - switch.directv_play
       - switch.downstairs_bathroom_light
-      - switch.christmas_tree
+      - switch.office_spare
 #      - switch.fountains_switch
       - switch.game_room_floodlights
       - switch.living_room_fan
@@ -159,10 +159,10 @@ homekit:
 ## Entity Configuration - Customize Devices
 ################################################
   entity_config:
-    switch.christmas_tree:
+    switch.office_spare:
       type: outlet
 
-    switch.staircase_christmas_lights:
+    switch.aquarium:
       type: outlet
 
     switch.outdoor_speakers:

@@ -28,23 +28,10 @@ automation:
           message: "Counting down..."
           data:
             push:
-              category: "away"
+              category: "away_override"
+              thread-id: "away-notification"
               sound:
                 name: default
-
-
-
-
-
-#      - service: notify.mobile_app_rip8plus
-#        data:
-#          title: "Away Detected"
-#          message: "Counting down..."
-#          data:
-#            push:
-#              category: cancelaway
-#              sound:
-#                name: default
 
 
   ### Turn on Away Mode when the timer finishes

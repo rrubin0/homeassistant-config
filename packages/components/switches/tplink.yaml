@@ -3,10 +3,6 @@
 #####################################################################
 tplink:
   discovery: true
-## light examples
-#  light:
-#    - host: 192.168.xx.xx
-#    - host: 127.0.0.1
   switch:
     - host: !secret smartplug_host_1
     - host: !secret smartplug_host_2

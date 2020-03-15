@@ -8,12 +8,18 @@ automation:
     trigger:
       - platform: sun
         event: sunset
-        offset: '00:15:00'
+        offset: '00:10:00'
 
     condition:
-      - condition: state
-        entity_id: group.all_devices
-        state: 'home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'home'
+
+          - condition: state
+            entity_id: input_boolean.visitor_mode
+            state: 'on'
 
     action:
       - service: light.turn_on
@@ -27,13 +33,13 @@ automation:
   - alias: Kitchen Nightlight Off
     initial_state: 'on'
     trigger:
-      - platform: state
-        entity_id: input_boolean.after_hours
-        to: 'off'
+      - platform: sun
+        event: sunrise
+        offset: '00:10:00'
 
-#      - platform: sun
-#        event: sunrise
-#        offset: '00:15:00'
+#      - platform: state
+#        entity_id: input_boolean.after_hours
+#        to: 'off'
 
     condition:
       - condition: state

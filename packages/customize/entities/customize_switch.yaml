@@ -31,10 +31,10 @@ homeassistant:
 
 
 ## these are subject to change for holidays, etc.
-    switch.christmas_tree:
+    switch.office_spare:
       icon: mdi:power-socket-us
 
-    switch.staircase_christmas_lights:
+    switch.aquarium:
       icon: mdi:power-socket-us
 
 

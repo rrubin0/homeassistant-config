@@ -1,0 +1,33 @@
+#####################################################################
+### Camera PTZ Controls
+#####################################################################
+script:
+  driveway_ptz_1:
+    alias: "Driveway PTZ Preset 1"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_1
+
+  driveway_ptz_2:
+    alias: "Driveway PTZ Preset 2"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_2
+
+  driveway_ptz_3:
+    alias: "Driveway PTZ Preset 3"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_3
+
+  driveway_ptz_4:
+    alias: "Driveway PTZ Preset 4"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_4
+
+  driveway_ptz_5:
+    alias: "Driveway PTZ Preset 5"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_5
+
+  driveway_ptz_6:
+    alias: "Driveway PTZ Preset 6"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_6

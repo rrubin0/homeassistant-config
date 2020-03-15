@@ -144,7 +144,7 @@ automation:
       - service: light.turn_on
         data:
           entity_id: light.bedframe_light
-          brightness: 55
+          brightness: 70
           rgb_color: [0,55,55]
 
       # Reset the Input Select to "Select an option..."

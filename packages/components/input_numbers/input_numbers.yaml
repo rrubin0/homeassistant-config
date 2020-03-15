@@ -14,7 +14,7 @@ input_number:
   ### Winter Temp Threshold
   season_winter:
     name: "Winter"
-    initial: 62
+    initial: 66
     min: 40
     max: 80
     step: 1

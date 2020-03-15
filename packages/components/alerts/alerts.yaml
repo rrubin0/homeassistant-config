@@ -11,7 +11,7 @@ alert:
     state: 'on'
     repeat: 60
     can_acknowledge: true
-#    skip_first: true
+    skip_first: true
     notifiers:
       - mobile_app_rip8plus
 

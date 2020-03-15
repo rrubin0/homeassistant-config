@@ -27,7 +27,7 @@ automation:
             push:
               thread-id: "bbq"
               sound:
-                name: default
+                name: "descent.caf"
             apns_headers:
               'apns-collapse-id': 'bbq_high'
 

@@ -1,0 +1,30 @@
+####################################################################
+## Notify - action: Test
+####################################################################
+automation:
+  - alias: Test iOS Office Desk Off
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OFFICE_LAMP_OFF
+    
+    action:
+      service: light.turn_off
+      entity_id: light.office_desk
+
+
+  - alias: Test iOS Office Desk On
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OFFICE_LAMP_ON
+    
+    action:
+      service: light.turn_on
+      entity_id: light.office_desk

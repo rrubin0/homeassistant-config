@@ -1,7 +1,0 @@
-  ################################################
-  ## Customize Sensor - Light Config
-  ################################################
-homeassistant:
-  customize:
-    sensor.time_brightness:
-      hidden: true

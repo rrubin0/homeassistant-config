@@ -12,6 +12,7 @@ amcrest:
     stream_source: rtsp
     binary_sensors:
       - motion_detected
+    scan_interval: 30
 
   ### NURSERY PTZ
   - host: !secret nursery_ptz_host
@@ -23,6 +24,7 @@ amcrest:
     stream_source: rtsp
     binary_sensors:
       - motion_detected
+    scan_interval: 30
 
   ### CRIB PTZ
   - host: !secret nursery_crib_host
@@ -34,14 +36,16 @@ amcrest:
     stream_source: rtsp
     binary_sensors:
       - motion_detected
+    scan_interval: 30
 
-  ### TEST PTZ
-  - host: !secret test_ptz_host
-    name: Test PTZ
-    username: !secret camera_user
-    password: !secret camera_password
-#    port: !secret test_ptz_port
-    resolution: low
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
+#  ### TEST PTZ
+#  - host: !secret test_ptz_host
+#    name: Test PTZ
+#    username: !secret camera_user
+#    password: !secret camera_password
+##    port: !secret test_ptz_port
+#    resolution: low
+#    stream_source: rtsp
+#    binary_sensors:
+#      - motion_detected
+#    scan_interval: 30

@@ -1,10 +1,10 @@
 #####################################################################
-### Media Player - APPLE TV
+### Media Player - APPLE TV (decommissioned setup in favor of HACS)
 #####################################################################
-media_player:
-  - platform: apple_tv
-    host: !secret appletv_host
-    login_id: !secret appletv_login_id
-    name: "Apple TV"
-    start_off: true
-    credentials: !secret appletv_creds
+#media_player:
+#  - platform: apple_tv
+#    host: !secret appletv_host
+#    login_id: !secret appletv_login_id
+#    name: "Apple TV"
+#    start_off: true
+#    credentials: !secret appletv_creds

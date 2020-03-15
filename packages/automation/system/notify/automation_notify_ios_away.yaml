@@ -2,7 +2,7 @@
 ## Notify - action: Cancel / Pause Away Mode
 ####################################################################
 automation:
-  - alias: Cancel Away
+  - alias: iOS Cancel Away
     initial_state: 'on'
     hide_entity: true
     trigger:
@@ -16,7 +16,7 @@ automation:
       entity_id: timer.away_mode
 
 
-  - alias: Pause Away
+  - alias: iOS Pause Away
     initial_state: 'on'
     hide_entity: true
     trigger:
@@ -28,3 +28,22 @@ automation:
     action:
       service: timer.pause
       entity_id: timer.away_mode
+
+
+  - alias: iOS Visitor Mode
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+      platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: VISITOR
+
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.visitor_mode
+
+      - service: timer.cancel
+        entity_id: timer.away_mode
+
+

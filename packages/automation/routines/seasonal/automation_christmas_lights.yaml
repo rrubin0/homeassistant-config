@@ -4,7 +4,7 @@
 automation:
 ### Turn on the christmas lights after porch
   - alias: Christmas Lights On
-    initial_state: 'on'
+    initial_state: 'off' #disabled
     trigger:
       - platform: state
         entity_id: switch.front_porch_lights_switch
@@ -17,7 +17,7 @@ automation:
 
 ### Turn off the Christmas Lights - Weekdays
   - alias: Christmas Lights Off Weekdays
-    initial_state: 'on'
+    initial_state: 'off' #disabled
     trigger:
       platform: time
       at: '00:00:00'
@@ -43,7 +43,7 @@ automation:
 
 ### Turn off the Christmas Lights - Weekends
   - alias: Christmas Lights Off Weekends
-    initial_state: 'on'
+    initial_state: 'off' #disabled
     trigger:
       platform: time
       at: '01:30:00'

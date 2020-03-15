@@ -12,7 +12,7 @@ automation:
     action:
       - service: frontend.set_theme
         data:
-          name: midnight
+          name: ux_goodie
 #
 #  - alias: Random Lighter Theme At Sunrise
 #    initial_state: 'on'

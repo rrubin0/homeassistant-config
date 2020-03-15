@@ -1,0 +1,18 @@
+#####################################################################
+### Ring Motion (front door) Camera Control
+#####################################################################
+automation:
+  - alias: Ring Doorbell Motion Triggered
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.front_door_motion
+        from: 'off'
+        to: 'on'
+
+    action:
+      - service: shell_command.driveway_ptz_preset_3
+      - delay:
+          seconds: 60
+
+      - service: shell_command.driveway_ptz_preset_2

@@ -5,9 +5,9 @@ light:
   - platform: group
     name: Billiards
     entities:
-      - light.billiards_1
-      - light.billiards_2
-      - light.billiards_3
+      - light.b_table_1
+      - light.b_table_2
+      - light.b_table_3
 
   - platform: group
     name: Entryway

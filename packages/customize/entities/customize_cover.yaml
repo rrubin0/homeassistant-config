@@ -7,12 +7,10 @@ homeassistant:
       device_class: shade
 
     cover.kitchen_roller_shade_switch:
-      hidden: true
       device_class: shade
 
     cover.master_bath_roller_shades_level:
       device_class: shade
 
     cover.master_bath_roller_shades_switch:
-      hidden: true
       device_class: shade

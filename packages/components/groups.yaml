@@ -4,6 +4,15 @@
 #############################################################################
 group:
   #####################################################################
+  ### All Devices
+  #####################################################################
+  All Devices:
+    entities:
+      - device_tracker.rick
+      - device_tracker.megs
+
+
+  #####################################################################
   ### Interior Lights
   #####################################################################
   Interior Lights:
@@ -21,7 +30,6 @@ group:
       - light.office_desk
       - light.wine_room_ceiling
       - switch.downstairs_bathroom_light
-      - switch.christmas_tree
 
 
   #####################################################################
@@ -45,7 +53,6 @@ group:
       - light.entryway
 
   Living Room Lights:
-    control: hidden
     entities:
       - light.living_room_lamp
       - light.living_room_ceiling
@@ -55,7 +62,6 @@ group:
   ### Wine Room Lights
   #####################################################################
   Wine Room Lights:
-    control: hidden
     entities:
       - switch.wine_room_lamp
       - light.wine_room_ceiling
@@ -128,7 +134,6 @@ group:
     entities:
       - switch.staircase_lamp
       - switch.wine_room_lamp
-      - switch.staircase_christmas_lights
 
 
   #####################################################################
@@ -143,23 +148,23 @@ group:
   #####################################################################
   ### Christmas Lights
   #####################################################################
-  Christmas Lights:
-    entities:
-      - switch.back_yard_outlet
-      - switch.front_yard_outlet
-      - switch.christmas_tree
-      - switch.switch_two # porch christmas lights
+#  Christmas Lights:
+#    entities:
+#      - switch.back_yard_outlet
+#      - switch.front_yard_outlet
+#      - switch.office_spare
+#      - switch.aquarium
+#      - switch.switch_two # porch christmas lights
 
 
   #####################################################################
   ### Smart Outlets - non-light devices controlled by smart outlets
   #####################################################################
   Outlets:
-    control: hidden
     entities:
       - switch.mini_fridge
-      - switch.staircase_christmas_lights
-      - switch.christmas_tree
+      - switch.aquarium
+      - switch.office_spare
     # rf switch upstairs wipe warmer
       - switch.switch_one
     # rf switch porch christmas lights

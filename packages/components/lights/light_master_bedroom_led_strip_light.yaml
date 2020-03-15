@@ -2,8 +2,83 @@
 ### Master Bedroom under the bed LED strip 
 #####################################################################
 light:
-  - platform: flux_led
-    devices:
-      !secret under_bed_light_master:
-        name: "Bedframe Light"
-        mode: rgb
+  - platform: mqtt
+    name: "Bedframe Light"
+    command_topic: "cmnd/bedframe_rgb/POWER"
+    state_topic: "stat/bedframe_rgb/RESULT"
+    state_value_template: "{{value_json.POWER}}"
+    payload_on: "ON"
+    payload_off: "OFF"
+    availability_topic: "tele/bedframe_rgb/LWT"
+    brightness_command_topic: "cmnd/bedframe_rgb/Dimmer"
+    brightness_state_topic: "stat/bedframe_rgb/RESULT"
+    brightness_scale: 100
+    on_command_type: "brightness"
+    brightness_value_template: "{{value_json.Dimmer}}"
+    rgb_command_topic: "cmnd/bedframe_rgb/Color2"
+    rgb_state_topic: "stat/bedframe_rgb/RESULT"
+    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+    effect_command_topic: "cmnd/bedframe_rgb/Scheme"
+    effect_state_topic: "tele/bedframe_rgb/RESULT"
+    effect_value_template: "{{value_json.Scheme}}"
+    effect_list:
+      - 2 colorfade up
+      - 3 colorfade down
+      - 12 fire pattern
+      - 4 random colors
+      - 6 candle lights
+      - 8 christmas green/red
+      - 11 short rainbow
+
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+
+
+
+
+
+
+#  - platform: flux_led
+#    devices:
+#      !secret under_bed_light_master:
+#        name: "Bedframe Light"
+#        mode: rgb
+
+
+
+
+#  - platform: mqtt
+#    name: "Bedframe Light"
+#    command_topic: "cmnd/bedframe_rgb/POWER"
+#    state_topic: "tele/bedframe_rgb/STATE"
+#    state_value_template: "{{value_json.POWER}}"
+#    availability_topic: "tele/bedframe_rgb/LWT"
+#    brightness_command_topic: "cmnd/bedframe_rgb/Dimmer"
+#    brightness_state_topic: "tele/bedframe_rgb/STATE"
+#    brightness_scale: 100
+#    on_command_type: "brightness"
+#    brightness_value_template: "{{value_json.Dimmer}}"
+#    rgb_command_topic: "cmnd/bedframe_rgb/Color2"
+#    rgb_state_topic: "tele/bedframe_rgb/STATE"
+#    rgb_value_template: "{{value_json.Color.split(',')[0:3]|join(',')}}"
+#    effect_command_topic: "cmnd/bedframe_rgb/Scheme"
+#    effect_state_topic: "tele/bedframe_rgb/STATE"
+#    effect_value_template: "{{value_json.Scheme}}"
+#    effect_list:
+#      - 0
+#      - 1
+#      - 2
+#      - 3
+#      - 4
+#    payload_on: "ON"
+#    payload_off: "OFF"
+#    payload_available: "Online"
+#    payload_not_available: "Offline"
+#    qos: 1
+#    retain: false
+
+
+

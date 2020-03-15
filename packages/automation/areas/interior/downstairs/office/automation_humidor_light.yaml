@@ -16,15 +16,6 @@ automation:
           brightness: 255
           color_name: "red"
 
-#      - service: notify.mobile_app_rip8plus
-#        data:
-#          title: "Refill Humidor"
-#          message: "Humidor is at {{ states('sensor.sn1_humidity') }}% refill soon!"
-#          data:
-#            push:
-#              sound:
-#                name: default
-
 
   - alias: Humidor OK
     initial_state: 'on'
@@ -39,10 +30,3 @@ automation:
         data:
           brightness: 255
           color_name: "green"
-
-#      - delay:
-#          minutes: 15
-#
-#      - service: light.turn_off
-#        entity_id: light.sn1_led
-

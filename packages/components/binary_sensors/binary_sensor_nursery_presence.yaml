@@ -12,4 +12,4 @@ binary_sensor:
              or is_state('binary_sensor.nursery_occupancy', 'on')
              or is_state('binary_sensor.motion_nursery', 'on') }}
         delay_off:
-          minutes: 40
+          minutes: 30

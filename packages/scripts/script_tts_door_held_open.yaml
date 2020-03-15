@@ -15,11 +15,6 @@ script:
       entity_id: input_boolean.announce
       state: 'on'
 
-#    - service: media_player.volume_set
-#      data:
-#        entity_id: media_player.living_room
-#        volume_level: .6
-
     - service: media_player.volume_set
       entity_id: media_player.living_room
       data_template:

@@ -33,3 +33,11 @@ sensor:
       - minutely_summary
       - precip_probability
       - precip_intensity
+
+    scan_interval:
+      # At least one of these must be specified:
+      days: 0
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0

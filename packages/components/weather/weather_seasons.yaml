@@ -8,7 +8,7 @@ sensor:
         friendly_name: "Seasonal Condition"
         value_template: >-
           {% set temperature = states('sensor.dark_sky_temperature')|float(none) %}
-          {% set winter_temp = states.input_number.season_winter.state|default(62)|float %}
+          {% set winter_temp = states.input_number.season_winter.state|default(66)|float %}
           {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
           {% if temperature is none %}
             {{ states('sensor.sensor.dark_sky_temperature') }}

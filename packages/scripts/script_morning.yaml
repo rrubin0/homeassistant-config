@@ -53,10 +53,6 @@ script:
     - delay:
         minutes: 30
     ### 07:40
-    - service: switch.turn_on
-      data:
-        entity_id: switch.christmas_tree
-
     - service: hue.hue_activate_scene
       data:
         group_name: "Living Room"

@@ -11,6 +11,11 @@ automation:
         for:
           minutes: 2
 
+    condition:
+      - condition: state
+        entity_id: binary_sensor.hvac_running
+        state: 'on'
+        
     action:
       - service: climate.set_preset_mode
         data:
@@ -36,6 +41,11 @@ automation:
         to: 'off'
         for:
           minutes: 1
+
+    condition:
+      - condition: state
+        entity_id: binary_sensor.hvac_running
+        state: 'on'
 
     action:
       - service: ecobee.resume_program

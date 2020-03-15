@@ -8,7 +8,7 @@ binary_sensor:
         friendly_name: "Humidor Low"
         value_template: "{{ states('sensor.sn1_humidity') < '70' }}"
         delay_on:
-          minutes: 7
+          minutes: 10
         delay_off:
           minutes: 1
         entity_id: sensor.sn1_humidity

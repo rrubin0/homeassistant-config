@@ -12,7 +12,7 @@ automation:
 
     condition:
       - condition: state
-        entity_id: group.all_lights
+        entity_id: group.interior_lights
         state: 'on'
 
       - condition: time

@@ -5,6 +5,3 @@ homeassistant:
   customize:
     automation.south_door_unlock_arrival:
       friendly_name: "Unlock Door for Megan"
-
-    automation.south_door_unlock_by_user:
-      hidden: true

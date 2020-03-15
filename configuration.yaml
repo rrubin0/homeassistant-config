@@ -12,7 +12,6 @@ homeassistant:
      trusted_networks:
        - !secret network_1
 
-breaking_changes:
 config:
 
 discovery:
@@ -20,14 +19,13 @@ discovery:
     - directv
 
 frontend:
-#  javascript_version: latest
   themes: !include_dir_merge_named themes
 
 hacs:
   token: !secret hacs_token
   appdaemon: true
-  python_script: true
-  theme: true
+#  python_script: true
+#  theme: true
 
 history:
 
@@ -39,7 +37,6 @@ http:
   login_attempts_threshold: 3
 
 mobile_app:
-#python_script:
 scene: !include scenes.yaml
 stream:
 sun:

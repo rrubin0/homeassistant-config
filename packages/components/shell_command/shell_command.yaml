@@ -1,0 +1,11 @@
+############################################################################
+#    @package          :     shell_command
+#    @description      :     shell_commands for Camera PTZ Control
+############################################################################
+shell_command:
+  driveway_ptz_preset_1: !secret driveway_ptz_1
+  driveway_ptz_preset_2: !secret driveway_ptz_2
+  driveway_ptz_preset_3: !secret driveway_ptz_3
+  driveway_ptz_preset_4: !secret driveway_ptz_4
+  driveway_ptz_preset_5: !secret driveway_ptz_5
+  driveway_ptz_preset_6: !secret driveway_ptz_6

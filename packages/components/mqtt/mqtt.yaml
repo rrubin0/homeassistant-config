@@ -6,7 +6,3 @@ mqtt:
   port: 1883
   username: !secret mqtt_user
   password: !secret mqtt_password
-  #protocol: 3.1
-  #client_id: home-assistant-1
-  #discovery: true
-  #discovery_prefix: homeassistant
