@@ -85,7 +85,7 @@ services:
       mqtt:
         condition: service_started
     healthcheck:
-      test: ["CMD", "curl", "-f", "https://hassio.rrubino.com:8123"]
+      test: ["CMD", "curl", "-f", "https://home_assistant_url.com:8123"]
       interval: 30s
       timeout: 10s
       retries: 6
@@ -111,17 +111,6 @@ services:
       -  /home/hauser/dasher/config/amazon-dash.yml:/config/amazon-dash.yml
 
 
-  ha-dockermon:
-    image: philhawthorne/ha-dockermon
-    container_name: "ha-dockermon"
-    restart: unless-stopped
-    ports:
-      - 8126:8126
-    volumes:
-      -  /var/run/docker.sock:/var/run/docker.sock
-      -  /home/hauser/dockermon:/config
-
-
   portainer:
     image: portainer/portainer
     container_name: "portainer"
@@ -134,10 +123,10 @@ services:
       -  /home/hauser/portainer:/data
 
 
-  esphomeyaml:
+  esphome:
     command: config/ dashboard
-    image: ottowinter/esphomeyaml
-    container_name: "esphomeyaml"
+    image: esphome/esphome
+    container_name: "esphome"
     restart: unless-stopped
     network_mode: "host"
     ports:
@@ -147,28 +136,51 @@ services:
       -  /home/hauser/esphome_data:/config
 
 
-########################
-### RESERVED FUTURE ###
-########################
+  unifi-controller:
+    image: linuxserver/unifi-controller
+    container_name: unifi-controller
+    environment:
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped
+    network_mode: "host"
+    ports:
+      - 3478:3478/udp
+      - 10001:10001/udp
+      - 8080:8080
+      - 8081:8081
+      - 8443:8443
+      - 8843:8843
+      - 8880:8880
+      - 6789:6789
+    volumes:
+      - /home/hauser/unifi/config:/config
+
+
+
 #  unifi:
 #    image: jacobalberty/unifi:latest
 #    container_name: "unifi"
-#    restart: always
+#    restart: unless-stopped
 #    volumes:
 #      - ./unifi/data:/unifi/data
 #    ports:
 #      - 3478:3478/udp
-#      - 10001:10001/udp
 #      - 6789:6789/tcp
 #      - 8080:8080/tcp
-#      - 8880:8880/tcp
 #      - 8443:8443/tcp
 #      - 8843:8843/tcp
+#      - 8880:8880/tcp
+#      - 10001:10001/udp
+
 #    environment:
 #      - TZ=America/Phoenix
 #    network_mode: "host"
 
 
+########################
+### RESERVED FUTURE ###
+########################
 #  watchtower:
 #    image: v2tec/watchtower
 #    container_name: "watchtower"
@@ -179,19 +191,16 @@ services:
 #      #- ./watchtower/config.json:/config.json:ro
 
 
-#################################
-### EXPLORE to see if better ...
-#################################
-#  dasher_ccostan (unused):
-#    image: clemenstyp/dasher-docker:latest
-#    container_name: "dasher"
-#    restart: always
-#    depends_on:
-#      homebridge:
-#        condition: service_started
+#  ha-dockermon:
+#    image: philhawthorne/ha-dockermon
+#    container_name: "ha-dockermon"
+#    restart: unless-stopped
+#    ports:
+#      - 8126:8126
 #    volumes:
-#      - ./dasher/config:/root/dasher/config
-#    network_mode: "host"
+#      -  /var/run/docker.sock:/var/run/docker.sock
+#      -  /home/hauser/dockermon:/config
+#
 ```
 
 
@@ -199,17 +208,18 @@ services:
 [Haaska](https://github.com/mike-grant/haaska) (Alexa Lambda Function)
 
 **Approach**
-My primary control method is Z-Wave. I chose Z-Wave for its performance and fit, but also have adjusted per use case. 
-For example, I use Z-Wave for instances where I need to control many lights from a switch at once and fine control over dimming or color LED is less important. 
-My kitchen is a good example of this, as there are 6 can lights here and it would be quite expensive to use Philips Hue.
+My primary control method is Z-Wave. I chose Z-Wave for its performance and stability, but have made adjustments, depending on the use case. 
+For example, I use Z-Wave for instances where I need to control several lights from a single switch. My kitchen is a good example, as there are 6 recessed lightbulbs in the ceiling and it would be too expensive to use Philips Hue.
+When fine control over dimming or color LED is important, I am using Philips Hue. I have not found a better performing platform for color or granual dimming (transitions, for example). 
+Philips Hue has drawbacks, of course. They must remain on and render the existing wall switches useless. I have found some clear plastic covers that are passable to protect the switches.
 
 I do use Philips Hue for the following use cases:
 - Color LED (although there are other options)
 - Fine control over dimming is a requirement
 - I have a single or just a couple of bulbs
-- The area is not one where it is natural for others to hit the wall switch
+- The area is not one where it is natural for people to want to use a wall switch
 
-The switch problem with Hue can be solved by adding one of their wall switches to control, or using automations to control the lights in anticipation of your household users
+The switch problem with Hues can be solved by adding one of their wall switches to control, using buttons or z-wave remotes, or using automations to control the lights in anticipation of your household users (presence/motion).
 
 
 **Other Devices Used:**
@@ -229,16 +239,12 @@ The switch problem with Hue can be solved by adding one of their wall switches t
 * Broadlink RM2/Pro
 * HUSBZB-1 ZigBee/Z-Wave Stick (not in use; using Aeotec Z-stick)
 * GE Z-Wave Wall Switches & Dimmers
-* Flux LED strips and bulb
+* Flux LED strips (flashed with Tasmota)
 * Sonoff WiFi DIY power strips
 * NodeMCU DIY Multisensor
-* Aeon Labs Z-Wave MultiSensor 6
-* Aeon Labs Z-Wave Door/Window Sensor
 * Aeon Labs Z-Wave Minimote
-* Aeon Labs Z-Wave Siren
-* GoControl Z-Wave Siren
 * Yale Real Living Z-Wave Touchscreen Lever Lock
-* Xiaomi Mijia Hub
+* Xiaomi Mijia (Aqara) Hub
 * Xiaomi Door Sensors
 * Xiaomi Smart Buttons
 
