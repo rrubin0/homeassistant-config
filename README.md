@@ -204,10 +204,11 @@ services:
 ```
 
 
-**Other 3rd-party component**
+**Other 3rd-party components**
 [Haaska](https://github.com/mike-grant/haaska) (Alexa Lambda Function)
 
 **Approach**
+
 My primary control method is Z-Wave. I chose Z-Wave for its performance and stability, but have made adjustments, depending on the use case. 
 For example, I use Z-Wave for instances where I need to control several lights from a single switch. My kitchen is a good example, as there are 6 recessed lightbulbs in the ceiling and it would be too expensive to use Philips Hue.
 When fine control over dimming or color LED is important, I am using Philips Hue. I have not found a better performing platform for color or granual dimming (transitions, for example). 
