@@ -23,7 +23,7 @@ automation:
   ### notify if unlocked by code
   - alias: South Door Unlock By User
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: sensor.south_entry_alarm_type

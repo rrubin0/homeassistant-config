@@ -4,7 +4,7 @@
 automation:
   - alias: RF Switches State Save
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: switch.switch_one, switch.switch_two, switch.switch_three, switch.switch_four, switch.switch_five
@@ -23,7 +23,7 @@ automation:
 #####################################################################
   - alias: RF Switch State Restore
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: homeassistant
       event: start

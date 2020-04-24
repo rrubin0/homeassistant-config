@@ -7,19 +7,20 @@ alexa_media:
     - email: !secret amazon_email
       password: !secret amazon_pswd
       url: amazon.com
-#      include_devices:
-##        - "Richard's 3rd Fire"
-##        - "Richard's 4th Fire"
-#        - "Living Room"
-##        - "Game Room"
-#        - "Harmon Kardon Allure"
-#        - "Master Bedroom"
-##        - FireTV
-#        - Nursery
-#        - Office
-##        - Downstairs
-#        - Kitchen
-##        - firetv_living_room
+      exclude_devices:
+        - "AJ's Fire Tablet Orange"
+        - "Downstairs Fire Tablet"
+        - "Upstairs Fire Tablet Blue"
+        - "Master Bedroom TV"
+        - "Office TV"
+        - "This Device"
+        - "Other TV"
+        - "iPhone 6 Plus Music's Alexa Apps"
+        - "Dash Wand"
+        - "Megan's Alexa Apps"
+        - "Richard's echosim_BETA"
+        - "Richard's Fire TV Stick"
+#        - "Richard's 3rd Fire"
 
 
 #####################################################################

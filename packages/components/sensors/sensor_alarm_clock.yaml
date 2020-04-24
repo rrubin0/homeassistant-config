@@ -1,0 +1,17 @@
+#####################################################################
+### Alarm Clock Sensors
+#####################################################################
+sensor:
+  - platform: template
+    sensors:
+      alarm_clock_time:
+        friendly_name: 'Alarm Time'
+        value_template: >-
+            {{ "%0.02d:%0.02d" | format(states("input_number.alarm_clock_hour") | int, states("input_number.alarm_clock_minutes") | int) }}
+
+  - platform: template
+    sensors:
+      alarm_clock_time_minus_offset:
+           friendly_name: 'Offset Time'
+           value_template: >-
+               {{ '%0.02d:%0.02d' | format( ((((states('input_number.alarm_clock_hour') | int)*60 + (states('input_number.alarm_clock_minutes') | int) - (states('input_number.alarm_clock_offset'))| int)/60)| int),(((((((((states('input_number.alarm_clock_hour') | int)*60 + (states('input_number.alarm_clock_minutes') | int) - (states('input_number.alarm_clock_offset')) | int)/60)) - ((((states('input_number.alarm_clock_hour') | int)*60 + (states('input_number.alarm_clock_minutes') | int) - (states('input_number.alarm_clock_offset')) | int)/60)| int))*100) | int)*60/100) | round) ) }}

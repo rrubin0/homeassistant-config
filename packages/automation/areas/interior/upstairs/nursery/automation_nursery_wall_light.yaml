@@ -5,7 +5,7 @@ automation:
   ### Turn off the wall light when OFF is selected
   - alias: Nursery Wall Select Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: input_select.nursery_wall_color
@@ -14,10 +14,11 @@ automation:
       - platform: state
         entity_id: input_select.nursery_wall_effect
         to: "Off"
-
-      - platform: state
-        entity_id: input_select.nursery_wall_strobe
-        to: "Off"
+     
+       ## not supported in tasmota
+#      - platform: state
+#        entity_id: input_select.nursery_wall_strobe
+#        to: "Off"
 
     action:
       - service: light.turn_off
@@ -34,7 +35,7 @@ automation:
   ### Reset input selection when lamp is turned off
   - alias: Nursery Wall Reset Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: light.nursery_wall_light
@@ -52,16 +53,16 @@ automation:
           entity_id: input_select.nursery_wall_effect
           option: Select an option...
 
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.nursery_wall_strobe
-          option: Select an option...
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.nursery_wall_strobe
+#          option: Select an option...
 
 #  #####################################################################
 #  ### Default to Crystal if turned on with no selection
 #  - alias: Nursery Wall Default
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: light.nursery_wall_light
@@ -90,7 +91,7 @@ automation:
   ### Nursery Wall Select Blue
   - alias: Nursery Wall Blue
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -113,7 +114,7 @@ automation:
   ### Nursery Wall Select Cyan
   - alias: Nursery Wall Cyan
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -136,7 +137,7 @@ automation:
   ### Nursery Wall Select Crystal
   - alias: Nursery Wall Crystal
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -158,7 +159,7 @@ automation:
   ### Nursery Wall Select Green
   - alias: Nursery Wall Green
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -181,7 +182,7 @@ automation:
   ### Nursery Wall Select Pink
   - alias: Nursery Wall Pink
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -204,7 +205,7 @@ automation:
   ### Nursery Wall Select Red
   - alias: Nursery Wall Red
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -227,7 +228,7 @@ automation:
   ### Nursery Wall Select Violet
   - alias: Nursery Wall Violet
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -250,7 +251,7 @@ automation:
   ### Nursery Wall Select Yellow
   - alias: Nursery Wall Yellow
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_color
@@ -273,7 +274,7 @@ automation:
   ### Nursery Wall Effects -  Color Loop
   - alias: Nursery Wall Color Loop
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -295,7 +296,7 @@ automation:
   ### Nursery Wall Effects -  Color Jump
   - alias: Nursery Wall Color Jump
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -317,7 +318,7 @@ automation:
   ### Nursery Wall Effects -  Random
   - alias: Nursery Wall Random
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -339,7 +340,7 @@ automation:
   ### Nursery Wall Effects -  Red Fade
   - alias: Nursery Wall Red Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -361,7 +362,7 @@ automation:
   ### Nursery Wall Effects -  Green Fade
   - alias: Nursery Wall Green Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -383,7 +384,7 @@ automation:
   ### Nursery Wall Effects -  Blue Fade
   - alias: Nursery Wall Blue Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -405,7 +406,7 @@ automation:
   ### Nursery Wall Effects -  Yellow Fade
   - alias: Nursery Wall Yellow Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -427,7 +428,7 @@ automation:
   ### Nursery Wall Effects -  Purple Fade
   - alias: Nursery Wall Purple Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -449,7 +450,7 @@ automation:
   ### Nursery Wall Effects -  White Fade
   - alias: Nursery Wall Cyan Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -471,7 +472,7 @@ automation:
   ### Nursery Wall Effects -  Red/Green Cross Fade
   - alias: Nursery Wall RG Cross Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -493,7 +494,7 @@ automation:
   ### Nursery Wall Effects -  Red/Blue Cross Fade
   - alias: Nursery Wall RB Cross Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -515,7 +516,7 @@ automation:
   ### Nursery Wall Effects -  Green/Blue Cross Fade
   - alias: Nursery Wall GB Cross Fade
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_effect
@@ -537,7 +538,7 @@ automation:
   ### Nursery Wall Strobe -  Color Strobe
   - alias: Nursery Wall Color Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -559,7 +560,7 @@ automation:
   ### Nursery Wall Strobe -  Red Strobe
   - alias: Nursery Wall Red Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -581,7 +582,7 @@ automation:
   ### Nursery Wall Strobe -  Green Strobe
   - alias: Nursery Wall Color Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -603,7 +604,7 @@ automation:
   ### Nursery Wall Strobe -  Blue Strobe
   - alias: Nursery Wall Blue Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -625,7 +626,7 @@ automation:
   ### Nursery Wall Strobe -  Yellow Strobe
   - alias: Nursery Wall Yellow Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -647,7 +648,7 @@ automation:
   ### Nursery Wall Strobe -  Cyan Strobe
   - alias: Nursery Wall Cyan Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -669,7 +670,7 @@ automation:
   ### Nursery Wall Strobe -  Purple Strobe
   - alias: Nursery Wall Purple Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe
@@ -691,7 +692,7 @@ automation:
   ### Nursery Wall Strobe -  White Strobe
   - alias: Nursery Wall White Strobe
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: input_select.nursery_wall_strobe

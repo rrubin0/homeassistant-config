@@ -37,7 +37,7 @@ automation:
   ### Turn on Away Mode when the timer finishes
   - alias: Away Mode On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: event
         event_type: timer.finished
@@ -51,7 +51,7 @@ automation:
   ### Cancel Away Mode if we have to run home real quick
   - alias: Away Mode Cancel
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: group.all_devices

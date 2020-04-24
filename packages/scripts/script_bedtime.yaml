@@ -9,11 +9,9 @@ script:
     - service: lock.lock
       entity_id: all
 
-#    - service: light.turn_on
-#      data:
-#        entity_id: light.kitchen_night_light
-#        brightness: 50
-#        hs_color: [180,100]
+    # reset lighting overrides
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.dinner_time
 
     # turn off the "outdoor speakers and downstairs wipe warmer"
     - service: switch.turn_off
@@ -32,9 +30,8 @@ script:
         - group.exterior_lights
         - group.interior_lights
 
-
     - delay:
-        minutes: 2
+        minutes: 5
 
     - service: light.turn_off
       entity_id: light.bedframe_light

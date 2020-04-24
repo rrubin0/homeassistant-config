@@ -5,7 +5,6 @@ automation:
   ### Living Room TV Input Select
   - alias: Living Room TV Select Input
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: input_select.living_room_tv_input

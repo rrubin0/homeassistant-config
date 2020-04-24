@@ -5,7 +5,6 @@ automation:
   ### mini fridge OFF schedule
   - alias: Mini Fridge OFF
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: time
         at: '09:45:00'

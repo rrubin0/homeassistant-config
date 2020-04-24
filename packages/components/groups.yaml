@@ -9,7 +9,9 @@ group:
   All Devices:
     entities:
       - device_tracker.rick
+      - device_tracker.rip8plus
       - device_tracker.megs
+      - device_tracker.mip8
 
 
   #####################################################################
@@ -88,6 +90,20 @@ group:
       - light.master_reading_lamp
       - light.master_sitting_lamp
 
+
+  #####################################################################
+  ### Master Bedroom Alarm Clock
+  #####################################################################
+  Alarm Clock:
+    entities:
+      - sensor.time
+      - sensor.alarm_clock_time
+      - sensor.alarm_clock_time_minus_offset
+      - input_number.alarm_clock_hour
+      - input_number.alarm_clock_minutes
+      - input_number.alarm_clock_offset
+      - input_boolean.alarm_clock_weekday
+      - input_boolean.alarm_clock_weekend
 
   #####################################################################
   ### Master Bedroom Ceiling Fan

@@ -11,7 +11,6 @@
 automation:
   - alias: Minimote 1 Button 1 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -26,7 +25,6 @@ automation:
   ###
   - alias: Minimote 1 Button 1 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -41,7 +39,6 @@ automation:
   ###
   - alias: Minimote 1 Button 2 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -59,7 +56,6 @@ automation:
   ###
   - alias: Minimote 1 Button 2 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -74,7 +70,6 @@ automation:
   ###
   - alias: Minimote 1 Button 3 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -92,7 +87,6 @@ automation:
   ###
   - alias: Minimote 1 Button 3 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -110,7 +104,6 @@ automation:
   ###
   - alias: Minimote 1 Button 4 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -126,7 +119,6 @@ automation:
   ###
   - alias: Minimote 1 Button 4 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -149,7 +141,6 @@ automation:
   ###################################################################
   - alias: Minimote 3 Button 1 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -175,7 +166,6 @@ automation:
   ###
   - alias: Minimote 3 Button 1 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -195,7 +185,6 @@ automation:
   ###
   - alias: Minimote 3 Button 2 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -209,7 +198,6 @@ automation:
   ###
   - alias: Minimote 3 Button 2 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -223,7 +211,6 @@ automation:
   ###
   - alias: Minimote 3 Button 3 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -239,7 +226,6 @@ automation:
   ###
   - alias: Minimote 3 Button 3 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -257,7 +243,6 @@ automation:
   ###
   - alias: Minimote 3 Button 4 Short
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated
@@ -273,7 +258,6 @@ automation:
   ###
   - alias: Minimote 3 Button 4 Long
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: event
         event_type: zwave.scene_activated

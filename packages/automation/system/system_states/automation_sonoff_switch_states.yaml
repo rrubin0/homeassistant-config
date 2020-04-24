@@ -4,7 +4,7 @@
 automation:
   - alias: Sonoff Switches State Save
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: switch.staircase_lamp, switch.wine_room_lamp
@@ -23,7 +23,7 @@ automation:
 #####################################################################
   - alias: Sonoff Switch State Restore
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: homeassistant
       event: start

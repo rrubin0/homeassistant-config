@@ -62,4 +62,13 @@ input_boolean:
     name: Party Mode
     initial: off
 
+  alarm_clock_weekday:
+    name: Weekdays
+    initial: on
+    icon: mdi:calendar
+
+  alarm_clock_weekend:
+    name: Weekends
+    initial: off
+    icon: mdi:calendar
 

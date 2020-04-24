@@ -4,7 +4,7 @@
 automation:
   - alias: Peak Hours On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '15:00:00'
@@ -30,7 +30,7 @@ automation:
 
   - alias: Peak Hours Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '18:00:00'

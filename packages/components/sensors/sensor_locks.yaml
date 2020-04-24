@@ -4,8 +4,8 @@
 sensor:
   - platform: template
     sensors:
-      lock_beach_door_status:
-        friendly_name: "Beach Entry Door Status"
+      lock_bathroom_door_status:
+        friendly_name: "Bathroom Entry Door Status"
         value_template: >-
           {% set state = states('sensor.bathroom_entry_alarm_type') %}
           {% set user = states('sensor.bathroom_entry_alarm_level') %}

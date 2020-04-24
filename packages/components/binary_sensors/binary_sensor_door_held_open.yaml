@@ -7,11 +7,11 @@ binary_sensor:
       door_held_open:
         friendly_name: "Door Held Open"
         value_template: >-
-          {{ is_state('sensor.bathroom_door_contact_access_control', '22')
-             or is_state('sensor.front_door_contact_access_control', '22')
+          {{ is_state('sensor.bathroom_door_access_control', '22')
+             or is_state('sensor.front_door_access_control', '22')
              or is_state('sensor.kitchen_door_access_control', '22')
-             or is_state('sensor.office_door_contact_access_control', '22')
-             or is_state('sensor.south_door_contact_access_control', '22') }}
+             or is_state('sensor.office_door_access_control', '22')
+             or is_state('sensor.south_door_access_control', '22') }}
 #        entity_picture_template: >-
 #          {% if is_state('binary_sensor.all_doors', 'on') %}
 #            /local/red_shield.png

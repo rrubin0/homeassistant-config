@@ -4,7 +4,6 @@
 automation:
   - alias: rain sensor
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: state
         entity_id: weather.downstairs

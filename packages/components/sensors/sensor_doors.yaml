@@ -7,7 +7,7 @@ sensor:
     sensors:
       front_door_state:
         value_template: >-
-          {% set state = states('sensor.front_door_contact_access_control') %}
+          {% set state = states('sensor.front_door_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -34,7 +34,7 @@ sensor:
     sensors:
       front_door_tamper:
         value_template: >-
-          {% set state = states('sensor.front_door_contact_burglar') %}
+          {% set state = states('sensor.front_door_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}
@@ -50,7 +50,7 @@ sensor:
     sensors:
       south_door_state:
         value_template: >-
-          {% set state = states('sensor.south_door_contact_access_control') %}
+          {% set state = states('sensor.south_door_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -77,7 +77,7 @@ sensor:
     sensors:
       south_door_tamper:
         value_template: >-
-          {% set state = states('sensor.south_door_contact_burglar') %}
+          {% set state = states('sensor.south_door_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}
@@ -136,7 +136,7 @@ sensor:
     sensors:
       bathroom_door_state:
         value_template: >-
-          {% set state = states('sensor.bathroom_door_contact_access_control') %}
+          {% set state = states('sensor.bathroom_door_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -163,7 +163,7 @@ sensor:
     sensors:
       bathroom_door_tamper:
         value_template: >-
-          {% set state = states('sensor.bathroom_door_contact_burglar') %}
+          {% set state = states('sensor.bathroom_door_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}
@@ -179,7 +179,7 @@ sensor:
     sensors:
       office_door_state:
         value_template: >-
-          {% set state = states('sensor.office_door_contact_access_control') %}
+          {% set state = states('sensor.office_door_access_control') %}
           {% if state == '22' %}
             Open
           {% elif state == '23' %}
@@ -206,7 +206,7 @@ sensor:
     sensors:
       office_door_tamper:
         value_template: >-
-          {% set state = states('sensor.office_door_contact_burglar') %}
+          {% set state = states('sensor.office_door_burglar') %}
           {% if state == '0' %}
             OK
           {% elif state == '3' %}

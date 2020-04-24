@@ -5,7 +5,7 @@ automation:
   ### assume the nursery is vacant after 45 min of inactivity
   - alias: Nursery Unoccupied
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: binary_sensor.nursery_presence

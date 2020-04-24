@@ -7,7 +7,7 @@ automation:
   ## Notify if master bedroom lights turned on
   - alias: Notify if away and bedroom lights turn on
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: group.master_bedroom_lights
@@ -32,7 +32,7 @@ automation:
   ## Notify if an exterior door is opened
   - alias: Notify if away and door is opened
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: sensor.front_door_state, sensor.south_door_state, sensor.kitchen_door_state, sensor.bathroom_door_state, sensor.office_door_state

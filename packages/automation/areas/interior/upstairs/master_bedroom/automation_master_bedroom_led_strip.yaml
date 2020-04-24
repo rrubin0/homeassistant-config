@@ -4,8 +4,7 @@
 automation:
   ### Turn off the lights when OFF is selected
   - alias: Under Bed Select Off
-    initial_state: 'on'
-    hide_entity: True
+    initial_state: 'on' 
     trigger:
       - platform: state
         entity_id: input_select.mbr_under_bed_color
@@ -33,7 +32,6 @@ automation:
   ### Reset input selection when lamp is turned off
   - alias: Under Bed Reset Off
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: state
         entity_id: light.bedframe_light
@@ -60,7 +58,6 @@ automation:
   ### Default to Crystal if turned on with no selection
   - alias: Under Bed Default Crystal
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: state
         entity_id: light.bedframe_light
@@ -88,7 +85,6 @@ automation:
   ### Under Bed Select Blue
   - alias: Under Bed Blue
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -111,7 +107,6 @@ automation:
   ### Under Bed Select Cyan
   - alias: Under Bed Cyan
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -134,7 +129,6 @@ automation:
   ### Under Bed Select Crystal
   - alias: Under Bed Crystal
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -157,7 +151,6 @@ automation:
   ### Under Bed Select Green
   - alias: Under Bed Green
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -180,7 +173,6 @@ automation:
   ### Under Bed Select Pink
   - alias: Under Bed Pink
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -203,7 +195,6 @@ automation:
   ### Under Bed Select Red
   - alias: Under Bed Red
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -226,7 +217,6 @@ automation:
   ### Under Bed Select Violet
   - alias: Under Bed Violet
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -249,7 +239,6 @@ automation:
   ### Under Bed Select Yellow
   - alias: Under Bed Yellow
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_color
@@ -272,7 +261,6 @@ automation:
   ### Under Bed Effects -  Color Loop
   - alias: Under Bed Color Loop
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -294,7 +282,6 @@ automation:
   ### Under Bed Effects -  Color Jump
   - alias: Under Bed Color Jump
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -316,7 +303,6 @@ automation:
   ### Under Bed Effects -  Random
   - alias: Under Bed Random
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -338,7 +324,6 @@ automation:
   ### Under Bed Effects -  Red Fade
   - alias: Under Bed Red Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -360,7 +345,6 @@ automation:
   ### Under Bed Effects -  Green Fade
   - alias: Under Bed Green Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -382,7 +366,6 @@ automation:
   ### Under Bed Effects -  Blue Fade
   - alias: Under Bed Blue Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -404,7 +387,6 @@ automation:
   ### Under Bed Effects -  Yellow Fade
   - alias: Under Bed Yellow Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -426,7 +408,6 @@ automation:
   ### Under Bed Effects -  Purple Fade
   - alias: Under Bed Purple Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -448,7 +429,6 @@ automation:
   ### Under Bed Effects -  White Fade
   - alias: Under Bed Cyan Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -470,7 +450,6 @@ automation:
   ### Under Bed Effects -  Red/Green Cross Fade
   - alias: Under Bed RG Cross Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -492,7 +471,6 @@ automation:
   ### Under Bed Effects -  Red/Blue Cross Fade
   - alias: Under Bed RB Cross Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -514,7 +492,6 @@ automation:
   ### Under Bed Effects -  Green/Blue Cross Fade
   - alias: Under Bed GB Cross Fade
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_effect
@@ -536,7 +513,6 @@ automation:
   ### Under Bed Strobe -  Color Strobe
   - alias: Under Bed Color Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -558,7 +534,6 @@ automation:
   ### Under Bed Strobe -  Red Strobe
   - alias: Under Bed Red Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -580,7 +555,6 @@ automation:
   ### Under Bed Strobe -  Green Strobe
   - alias: Under Bed Color Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -602,7 +576,6 @@ automation:
   ### Under Bed Strobe -  Blue Strobe
   - alias: Under Bed Blue Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -624,7 +597,6 @@ automation:
   ### Under Bed Strobe -  Yellow Strobe
   - alias: Under Bed Yellow Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -646,7 +618,6 @@ automation:
   ### Under Bed Strobe -  Cyan Strobe
   - alias: Under Bed Cyan Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -668,7 +639,6 @@ automation:
   ### Under Bed Strobe -  Purple Strobe
   - alias: Under Bed Purple Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe
@@ -690,7 +660,6 @@ automation:
   ### Under Bed Strobe -  White Strobe
   - alias: Under Bed White Strobe
     initial_state: 'on'
-    hide_entity: True
     trigger:
       platform: state
       entity_id: input_select.mbr_under_bed_strobe

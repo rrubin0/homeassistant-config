@@ -31,3 +31,37 @@ script:
     alias: "Driveway PTZ Preset 6"
     sequence:
       - service: shell_command.driveway_ptz_preset_6
+
+
+  ## Nursery PTZ Camera Presets
+  nursery_ptz_1:
+    alias: "Nursery PTZ Preset 1"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_1
+
+  nursery_ptz_2:
+    alias: "Nursery PTZ Preset 2"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_2
+
+  nursery_ptz_3:
+    alias: "Nursery PTZ Preset 3"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_3
+
+
+  ## Nursery Crib (North) PTZ Camera Presets
+  crib_ptz_1:
+    alias: "Crib PTZ Preset 1"
+    sequence:
+      - service: shell_command.crib_ptz_preset_1
+
+  crib_ptz_2:
+    alias: "Crib PTZ Preset 2"
+    sequence:
+      - service: shell_command.crib_ptz_preset_2
+
+  crib_ptz_3:
+    alias: "Crib PTZ Preset 3"
+    sequence:
+      - service: shell_command.crib_ptz_preset_3

@@ -4,26 +4,21 @@
 automation:
   - alias: Kegerator Door Held Open
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: binary_sensor.keg_door_held_open
         to: 'on'
 
     action:
-      - service: media_player.volume_set
-        data:
-          entity_id: media_player.kitchen
-          volume_level: .7
-
       - service: notify.alexa_media
         data:
+          data:
+            type: announce
           target:
             - media_player.kitchen
             - media_player.living_room
           message: "Attention, Please close the Kegerator door!"
-          data:
-            type: announce
+
 
       - service: notify.mobile_app_rip8plus
         data:
@@ -38,7 +33,7 @@ automation:
   ### Kegerator Door Restoral
   - alias: Kegerator Door Restoral
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: binary_sensor.keg_door_held_open

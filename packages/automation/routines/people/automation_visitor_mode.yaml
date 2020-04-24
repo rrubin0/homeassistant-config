@@ -4,7 +4,7 @@
 automation:
   - alias: Enable Visitor Mode
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: template
         value_template: "{{ states('sensor.lock_south_door_status') == 'Unlocked by Dog Sitter' }}"
@@ -26,7 +26,7 @@ automation:
   ### Cancel Visitor Mode when we return home
   - alias: Cancel Visitor Mode
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: group.all_devices
@@ -48,7 +48,7 @@ automation:
   ### Start Away Mode if visitor_mode is turned off
   - alias: Visitor Away
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: input_boolean.visitor_mode

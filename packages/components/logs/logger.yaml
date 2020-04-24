@@ -3,7 +3,7 @@
 #####################################################################
 
 logger:
-  default: warning
+  default: info
   logs:
     root: error
     py.warningings: error
@@ -12,9 +12,8 @@ logger:
     requests.packages.urllib3.connectionpool: critical
     homeassistant.helpers.entity: critical
     homeassistant.exceptions: info
-    homeassistant.helpers.script: info
+    homeassistant.helpers.script: debug
     pyhap: info
-
 
 
     #######################################
@@ -27,6 +26,7 @@ logger:
 #    homeassistant.components.climate: warning
 #    homeassistant.components.cover: debug
 #    homeassistant.components.device_tracker: debug
+    homeassistant.components.discovery: warning
 #    homeassistant.components.group: debug
 #    homeassistant.components.homekit: debug
 #    homeassistant.components.hue: critical
@@ -34,6 +34,7 @@ logger:
 #    homeassistant.components.input_number: debug
 #    homeassistant.components.light: error
     homeassistant.components.media_player: critical
+#    custom_components.alexa_media: debug
 #    homeassistant.components.mqtt: debug
 #    homeassistant.components.notify: debug
 #    homeassistant.components.scene: info
@@ -41,10 +42,7 @@ logger:
 #    homeassistant.components.sensor: debug
 #    homeassistant.components.switch: info
 #    homeassistant.components.timer: info
-#    homeassistant.components.zwave: warning
-
-
-
+    homeassistant.components.zwave: warning
 
 
     #######################################

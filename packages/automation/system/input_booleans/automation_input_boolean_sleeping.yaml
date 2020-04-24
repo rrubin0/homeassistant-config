@@ -4,7 +4,7 @@
 automation:
   - alias: Sleeping Off Weekday
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '9:45:00'
@@ -26,7 +26,7 @@ automation:
 
   - alias: Sleeping Off Weekend
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '11:30:00'

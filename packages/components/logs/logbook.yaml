@@ -19,6 +19,7 @@ logbook:
       - mqtt
       - notify
       - persistent_notification
+      - remote
 #      - scene
 #      - script
       - sensor
@@ -53,7 +54,7 @@ logbook:
       ### SENSORS
       - sensor.bathroom_door_state
       - sensor.downstairs_ac_leak_detector
-      - sensor.front_door_contact_access_control
+      - sensor.front_door_access_control
       - sensor.front_door_state
       - sensor.front_door_tamper
       - sensor.front_entry_motion
@@ -62,21 +63,21 @@ logbook:
       - sensor.guest_room_window_state
       - sensor.kegerator_door_state
       - sensor.kitchen_door_state
-      - sensor.kitchen_door_tamper
+#      - sensor.kitchen_door_tamper
       - sensor.last_boot
       - sensor.living_room_north_window_state
-      - sensor.living_room_north_window_tamper
+#      - sensor.living_room_north_window_tamper
       - sensor.lock_beach_door_status
       - sensor.lock_south_door_status
       - sensor.master_bedroom_northwest_window_state
       - sensor.master_bedroom_southwest_window_state
       - sensor.office_door_state
-      - sensor.office_door_tamper
-      - sensor.rf_switch_five
-      - sensor.rf_switch_four
-      - sensor.rf_switch_one
-      - sensor.rf_switch_three
-      - sensor.rf_switch_two
+#      - sensor.office_door_tamper
+#      - sensor.rf_switch_five
+#      - sensor.rf_switch_four
+#      - sensor.rf_switch_one
+#      - sensor.rf_switch_three
+#      - sensor.rf_switch_two
       - sensor.ring_front_door_last_ding
       - sensor.ring_front_door_last_motion
       - sensor.smoke_downstairs_north

@@ -5,7 +5,7 @@ automation:
   ## Send notification after home assistant has restarted
   - alias: Startup Notification
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: homeassistant
       event: start

@@ -4,7 +4,7 @@
 automation:
   - alias: Master Bedroom Fan Speed State Save
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: state
       entity_id: switch.master_bedroom_fan, switch.master_bedroom_fan_1, switch.master_bedroom_fan_2, switch.master_bedroom_fan_3, switch.master_bedroom_fan_4, switch.master_bedroom_fan_5, switch.master_bedroom_fan_6, switch.master_bedroom_fan_7, switch.master_bedroom_fan_8, switch.master_bedroom_fan_9, switch.master_bedroom_fan_10, switch.master_bedroom_fan_11, switch.master_bedroom_fan_12
@@ -23,7 +23,7 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Speed State Restore
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: homeassistant
       event: start

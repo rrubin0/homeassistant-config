@@ -9,7 +9,10 @@ alert:
     done_message: "The humidor is now in range. Thank you."
     entity_id: binary_sensor.humidor_low
     state: 'on'
-    repeat: 60
+    repeat:
+      - 60
+      - 90
+      - 120
     can_acknowledge: true
     skip_first: true
     notifiers:

@@ -5,7 +5,6 @@
 #  ### Turn off the lamp when OFF is selected
 #  - alias: RGB Select Off
 #    initial_state: 'on'
-#    hide_entity: true
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -25,7 +24,7 @@
 #  ### Reset input selection when lamp is turned off
 #  - alias: RGB Reset Off
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: light.office_desk
@@ -42,7 +41,7 @@
 #  ### RGB Select Cool
 #  - alias: RGB Cool
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -65,7 +64,7 @@
 #  ### RGB Select Warm
 #  - alias: RGB Warm
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -88,7 +87,7 @@
 #  ### RGB Select Warm Dim
 #  - alias: RGB Warm Dim
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -111,7 +110,7 @@
 #  ### RGB Select Blue
 #  - alias: RGB Blue
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -134,7 +133,7 @@
 #  ### RGB Select Cyan
 #  - alias: RGB Cyan
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -157,7 +156,7 @@
 #  ### RGB Select Green
 #  - alias: RGB Green
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -180,7 +179,7 @@
 #  ### RGB Select Pink
 #  - alias: RGB Pink
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -203,7 +202,7 @@
 #  ### RGB Select Red
 #  - alias: RGB Red
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -226,7 +225,7 @@
 #  ### RGB Select Violet
 #  - alias: RGB Violet
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -249,7 +248,7 @@
 #  ### RGB Select Yellow
 #  - alias: RGB Yellow
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light
@@ -272,7 +271,7 @@
 #  ### RGB Select Random
 #  - alias: random_flux_rgb
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: state
 #      entity_id: input_select.rgb_light

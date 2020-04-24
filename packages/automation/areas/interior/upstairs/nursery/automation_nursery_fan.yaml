@@ -5,7 +5,7 @@ automation:
   ### Turn on the nursery fan if it's warm
   - alias: Nursery Fan On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: binary_sensor.nursery_presence
@@ -33,7 +33,7 @@ automation:
   ### Set Nursery Fan Speed Automatically
   - alias: Nursery Fan Auto Speed Select
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time_pattern
         minutes: '/10'

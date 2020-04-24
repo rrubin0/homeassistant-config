@@ -5,7 +5,7 @@ automation:
   ### Turn off the humidifier
   - alias: Nursery Humidifier Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: time
       at: '00:08:00'

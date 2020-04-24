@@ -51,3 +51,74 @@ automation:
         entity_id: media_player.nursery
         data_template:
           volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+  ### Wine Room
+  - alias: Reset Alexa Volume Wine Room
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.wine_room
+        to: 'idle'
+        for:
+          minutes: 1
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.wine_room
+        data_template:
+          volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+  ### Kitchen
+  - alias: Reset Alexa Volume Kitchen
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.kitchen
+        to: 'idle'
+        for:
+          minutes: 1
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.kitchen
+        data_template:
+          volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+  ### Master Bathroom
+  - alias: Reset Alexa Volume Master Bathroom
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.master_bathroom
+        to: 'idle'
+        for:
+          minutes: 1
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.master_bathroom
+        data_template:
+          volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+  ### Master Bedrrom
+  - alias: Reset Alexa Volume Master Bedroom
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: media_player.master_bedroom
+        to: 'idle'
+        for:
+          minutes: 1
+
+    action:
+      - service: media_player.volume_set
+        entity_id: media_player.master_bedroom
+        data_template:
+          volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+

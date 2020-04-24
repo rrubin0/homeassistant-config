@@ -5,7 +5,7 @@ automation:
   ### Bedtime Timer Finish
   - alias: Bedtime Timer Finish
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: event
         event_type: timer.finished
@@ -19,7 +19,7 @@ automation:
   ### Bedtime Timer Reset
   - alias: Bedtime Timer Reset
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: binary_sensor.front_entry_fibaro_multisensor
@@ -43,7 +43,7 @@ automation:
   ### Sun Up Timer Finish
   - alias: Sun Up Timer Finish
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: event
         event_type: timer.finished

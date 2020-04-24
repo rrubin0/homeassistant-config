@@ -16,7 +16,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan On
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: binary_sensor.master_bedroom_presence
@@ -40,7 +39,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Auto
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: time_pattern
         minutes: '/15'
@@ -72,7 +70,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Speed Select
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: input_select.master_bedroom_fan_speed
@@ -109,7 +106,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Off Selected
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: input_select.master_bedroom_fan_speed
@@ -145,7 +141,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Off Triggered
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: binary_sensor.master_bedroom_presence
@@ -185,7 +180,6 @@ automation:
 #####################################################################
   - alias: Master Bedroom Fan Reset Speed
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: switch.master_bedroom_fan

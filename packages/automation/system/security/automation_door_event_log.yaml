@@ -4,14 +4,14 @@
 automation:
   - alias: Record Door Open Events
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id:
-          - sensor.front_door_contact_access_control
-          - sensor.south_door_contact_access_control
-          - sensor.office_door_contact_access_control
-          - sensor.bathroom_door_contact_access_control
+          - sensor.front_door_access_control
+          - sensor.south_door_access_control
+          - sensor.office_door_access_control
+          - sensor.bathroom_door_access_control
           - sensor.kitchen_door_access_control
         to: '22'
 

@@ -5,7 +5,6 @@ automation:
   ### Living Room Onkyo Input Select
   - alias: Living Room Amp Input Select
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: input_select.onkyo_amp_input

@@ -3,9 +3,20 @@
 #    @description      :     shell_commands for Camera PTZ Control
 ############################################################################
 shell_command:
+  ## Driveway PTZ Camera Presets
   driveway_ptz_preset_1: !secret driveway_ptz_1
   driveway_ptz_preset_2: !secret driveway_ptz_2
   driveway_ptz_preset_3: !secret driveway_ptz_3
   driveway_ptz_preset_4: !secret driveway_ptz_4
   driveway_ptz_preset_5: !secret driveway_ptz_5
   driveway_ptz_preset_6: !secret driveway_ptz_6
+
+  ## Nursery (East) PTZ Camera Presets
+  nursery_ptz_preset_1: !secret nursery_ptz_1
+  nursery_ptz_preset_2: !secret nursery_ptz_2
+  nursery_ptz_preset_3: !secret nursery_ptz_3
+
+  ## Nursery (North) PTZ Camera Presets
+  crib_ptz_preset_1: !secret crib_ptz_1
+  crib_ptz_preset_2: !secret crib_ptz_2
+  crib_ptz_preset_3: !secret crib_ptz_3

@@ -4,7 +4,7 @@
 automation:
   - alias: Test iOS Office Desk Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: event
       event_type: ios.notification_action_fired
@@ -18,7 +18,7 @@ automation:
 
   - alias: Test iOS Office Desk On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       platform: event
       event_type: ios.notification_action_fired

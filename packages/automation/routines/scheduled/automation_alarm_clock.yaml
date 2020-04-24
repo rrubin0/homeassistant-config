@@ -1,0 +1,61 @@
+#####################################################################
+### Initiate Morning Sequence based on Alarm Clock (replace time based
+#####################################################################
+automation:
+  - alias: Wake Up (weekday)
+    initial_state: 'on'
+    trigger:
+      - platform: time_pattern
+        minutes: /1
+        seconds: 0
+
+    condition:
+      - condition: state
+        entity_id: input_boolean.alarm_clock_weekday
+        state: 'on'
+
+      - condition: time
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+
+      - condition: template
+        value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_minus_offset.state }}'
+
+    action:
+      - service: script.morning_sequence
+
+## test action
+#      - service: notify.mobile_app_rip8plus
+#        data:
+#          title: "Wake Test"
+#          message: "Success!"
+
+
+
+  - alias: Wake Up (weekend)
+    trigger:
+      - platform: time_pattern
+        minutes: /1
+        seconds: 0
+    condition:
+      - condition: state
+        entity_id: input_boolean.alarm_clock_weekend
+        state: 'on'
+      - condition: time
+        weekday:
+        - sat
+        - sun
+      - condition: template
+        value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_minus_offset.state }}'
+
+    action:
+      - service: script.morning_sequence
+      
+
+## explore this service call format and standardize on one method...      
+#      - data: {}
+#        service: script.morning_sequence

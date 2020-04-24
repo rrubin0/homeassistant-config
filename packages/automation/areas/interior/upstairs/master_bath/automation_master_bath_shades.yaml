@@ -5,7 +5,6 @@ automation:
   ### master bath shade schedule weekdays
   - alias: Master Bath Shade Up Weekday
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: time
         at: '09:00:00'
@@ -27,7 +26,6 @@ automation:
   ### master bath shade schedule weekends
   - alias: Master Bath Shade Up Weekend
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: time
         at: '12:00:00'
@@ -46,7 +44,6 @@ automation:
   ### master bath shade lowered schedule
   - alias: Master Bath Shade Down
     initial_state: 'on'
-    hide_entity: True
     trigger:
       - platform: sun
         event: sunset

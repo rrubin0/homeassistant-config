@@ -5,7 +5,7 @@ automation:
   ### downstairs wipe warmer schedule ON
   - alias: Downstairs Wipe Warmer On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '07:25:00'
@@ -48,7 +48,7 @@ automation:
   ### downstairs wipe warmer schedule OFF
   - alias: Downstairs Wipe Warmer Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: script.bedtime
@@ -73,7 +73,7 @@ automation:
 
   - alias: Upstairs Wipe Warmer On
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '20:00:00'
@@ -116,7 +116,7 @@ automation:
   ### upstairs wipe warmer schedule OFF
   - alias: Upstairs Wipe Warmer Off
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: time
         at: '09:00:59'

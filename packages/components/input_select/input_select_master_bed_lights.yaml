@@ -26,33 +26,25 @@ input_select:
     options:
       - "Select an option..."
       - "Off"
-      - "Color Loop"
-      - "Color Jump"
-      - "Random"
-      - "Red Fade"
-      - "Green Fade"
-      - "Blue Fade"
-      - "Yellow Fade"
-      - "Cyan Fade"
-      - "Purple Fade"
-      - "White Fade"
-      - "RG Cross Fade"
-      - "RB Cross Fade"
-      - "GB Cross Fade"
+      - "0"
+      - "1"
+      - "2"
+      - "3"
+      - "4"
 
-  ### Under Master Bed RGB Strobe
-  mbr_under_bed_strobe:
-    name: Under Bed Strobe
-    initial: "Select an option..."
-    options:
-      - "Select an option..."
-      - "Off"
-      - "Color Strobe"
-      - "Red"
-      - "Green"
-      - "Blue"
-      - "Yellow"
-      - "Cyan"
-      - "Purple"
-      - "White"
+#  ### Under Master Bed RGB Strobe
+#  mbr_under_bed_strobe:
+#    name: Under Bed Strobe
+#    initial: "Select an option..."
+#    options:
+#      - "Select an option..."
+#      - "Off"
+#      - "Color Strobe"
+#      - "Red"
+#      - "Green"
+#      - "Blue"
+#      - "Yellow"
+#      - "Cyan"
+#      - "Purple"
+#      - "White"
 

@@ -6,7 +6,7 @@ automation:
   ### Test iOS
   - alias: Test notifications
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: input_boolean.state_change
@@ -50,7 +50,7 @@ automation:
 
 #  - alias: test action desk light
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      platform: event
 #      event_type: ios.notification_action_fired
@@ -65,7 +65,7 @@ automation:
 #  ### Test Away Mode Trigger
 #  - alias: Test Away Mode
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: input_boolean.state_change
@@ -105,7 +105,7 @@ automation:
 #  ### Test Condition 1
 #  - alias: Test Input Boolean Condition 1
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: input_boolean.state_change
@@ -147,7 +147,7 @@ automation:
 #  ### Test Condition 2
 #  - alias: Test Input Boolean Condition 2
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: input_boolean.state_change
@@ -187,7 +187,7 @@ automation:
 #  ### Test Condition 3
 #  - alias: Test Input Boolean Condition 3
 #    initial_state: 'on'
-#    hide_entity: true
+#     
 #    trigger:
 #      - platform: state
 #        entity_id: input_boolean.state_change

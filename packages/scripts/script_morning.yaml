@@ -5,37 +5,37 @@ script:
   morning_sequence:
     alias: "Morning Sequence"
     sequence:
-    ### 06:35
+    ### Alarm Clock Transition Time Start
     - service: hue.hue_activate_scene
       data:
         group_name: "Master Bathroom"
         scene_name: "Morning"
 
     - delay:
-        minutes: 10
-    ### 06:45
+        minutes: 5
+
     - service: light.turn_on
       data:
         entity_id: light.master_bath_vanity
-        brightness: 50
-        transition: 60
+        brightness: 55
 
     - service: homeassistant.turn_on
       entity_id: group.accent_lights
 
     - delay:
         minutes: 10
-    ### 06:55
+
 #    - service: light.turn_on
 #      data:
 #        entity_id: light.foyer_lights
 #        brightness: 60
 
     - service: light.turn_on
-      data:
+      data_template:
         entity_id: light.entryway
         brightness: 140
-        transition: 30
+        transition: "{{ states('input_number.alarm_clock_offset') | int * 60 }}"
+#        transition: "{{(states('input_number.alarm_clock_offset') | int ) *60}}"
 
     - service: hue.hue_activate_scene
       data:
@@ -44,32 +44,34 @@ script:
 
     - delay:
         minutes: 15
-    ### 07:10
+
     - service: light.turn_on
       data:
         entity_id: light.kitchen_lights
         brightness: 200
 
     - delay:
-        minutes: 30
-    ### 07:40
+        minutes: 20
+
+    ## Return lights to normal state
     - service: hue.hue_activate_scene
       data:
         group_name: "Living Room"
         scene_name: "Normal"
 
+    ## Start turning lights off
     - service: homeassistant.turn_off
       entity_id: group.accent_lights
 
     - delay:
-        minutes: 15
+        minutes: 10
 
     - service: light.turn_off
       entity_id: light.kitchen_lights
 
     - delay:
-        minutes: 15
-    ### 08:10
+        minutes: 10
+
     - service: homeassistant.turn_off
       entity_id: group.living_room_lights
 

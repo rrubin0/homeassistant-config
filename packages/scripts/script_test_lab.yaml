@@ -9,6 +9,7 @@ script:
     - service: light.toggle
       entity_id: light.office_desk
 
+
   ### Testing Flux RGB strip values
   rgb_strip_test:
     alias: "RGB Strip Test"
@@ -19,6 +20,7 @@ script:
         xy_color: [0.151, 0.343]
         brightness: 55
 
+
   alexa_media_test:
     alias: "Alexa Media Test"
     sequence:
@@ -28,6 +30,7 @@ script:
         media_content_id: "Door Bell Playlist"
         media_content_type: "SPOTIFY"
 
+
   alexa_announce_test:
     alias: "Alexa Announce Test"
     sequence:
@@ -36,6 +39,7 @@ script:
         message: "This is just a test, 1, 2, 3"
         data:
           type: announce
+
 
   christmas_time:
     alias: "Christmas Time"
@@ -82,8 +86,6 @@ script:
           push:
             category: "away_override"
             thread-id: "test-notification"
-
-
 
 
   #####################################################################

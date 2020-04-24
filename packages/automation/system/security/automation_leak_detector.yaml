@@ -4,7 +4,7 @@
 automation:
   - alias: Downstairs AC Leak Detector Alarm
     initial_state: 'on'
-    hide_entity: true
+     
     trigger:
       - platform: state
         entity_id: sensor.downstairs_ac_leak_detector

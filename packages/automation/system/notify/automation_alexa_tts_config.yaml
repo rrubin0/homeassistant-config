@@ -15,8 +15,12 @@ automation:
               media_player.living_room
             {% elif is_state('input_select.alexa', 'Master Bedroom') %}
               media_player.master_bedroom
+            {% elif is_state('input_select.alexa', 'Master Bathroom') %}
+              media_player.master_bathroom
             {% elif is_state('input_select.alexa', 'Kitchen') %}
               media_player.kitchen
+            {% elif is_state('input_select.alexa', 'Wine Room') %}
+              media_player.wine_room
             {% elif is_state('input_select.alexa', 'Game Room') %}
               media_player.game_room
             {% elif is_state('input_select.alexa', 'Nursery') %}
@@ -34,8 +38,12 @@ automation:
               media_player.living_room
             {% elif is_state('input_select.alexa', 'Master Bedroom') %}
               media_player.master_bedroom
+            {% elif is_state('input_select.alexa', 'Master Bathroom') %}
+              media_player.master_bathroom
             {% elif is_state('input_select.alexa', 'Kitchen') %}
               media_player.kitchen
+            {% elif is_state('input_select.alexa', 'Wine Room') %}
+              media_player.wine_room
             {% elif is_state('input_select.alexa', 'Game Room') %}
               media_player.game_room
             {% elif is_state('input_select.alexa', 'Nursery') %}
@@ -49,7 +57,7 @@ automation:
           data:
             type: tts
 
-      - delay: '00:00:02'
+#      - delay: '00:00:02'
 
       - service: input_select.select_option
         data:

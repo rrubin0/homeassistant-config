@@ -5,7 +5,6 @@ automation:
   ### Set Presence Detection to ON
   - alias: Downstairs Bathroom Presence Detected
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: binary_sensor.motion_downstairs_bath
@@ -30,10 +29,15 @@ automation:
         to: 'Open'
 
     condition:
-      - condition: time
-### summertime schedule
-        after: '17:00:00'
-        before: '08:00:00'
+      - condition: or
+        conditions:
+          - condition: time
+            after: '17:00:00'
+            before: '08:00:00'
+          
+          - condition: state
+            entity_id: input_boolean.rain
+            state: 'on'
 
       - condition: state
         entity_id: switch.downstairs_bathroom_light
@@ -48,7 +52,6 @@ automation:
   ### Set Presence Detection to OFF
   - alias: Downstairs Bathroom Vacant
     initial_state: 'on'
-    hide_entity: true
     trigger:
       - platform: state
         entity_id: binary_sensor.downstairs_bath_presence
