@@ -5,7 +5,7 @@ input_number:
   ### Summer Temp Threshold
   season_summer:
     name: "Summer"
-    initial: 84
+    initial: 76
     min: 60
     max: 100
     step: 1

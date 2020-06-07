@@ -33,12 +33,15 @@ input_select:
     name: Alexa
     options:
       - None
-      - Office
-      - Living Room
+      - Everywhere
       - Game Room
       - Kitchen
+      - Living Room
+      - Master Bathroom
       - Master Bedroom
       - Nursery
+      - Office
+      - Wine Room
 
     initial: None
     icon: mdi:target

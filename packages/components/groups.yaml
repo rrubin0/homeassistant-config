@@ -29,7 +29,8 @@ group:
       - group.wine_room_lights
       - light.dining_room_chandelier
       - light.kitchen_lights
-      - light.office_desk
+      - light.laundry_room
+      - light.office_desk_lamp
       - light.wine_room_ceiling
       - switch.downstairs_bathroom_light
 

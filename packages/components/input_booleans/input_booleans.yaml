@@ -46,6 +46,10 @@ input_boolean:
     name: Downstairs Bath Presence
     initial: off
 
+  laundry_room_presence:
+    name: Laundry Room Presence
+    initial: off
+
   bbq_alert_high:
     name: BBQ High Temp Alert
     initial: off
@@ -64,7 +68,7 @@ input_boolean:
 
   alarm_clock_weekday:
     name: Weekdays
-    initial: on
+    initial: off
     icon: mdi:calendar
 
   alarm_clock_weekend:

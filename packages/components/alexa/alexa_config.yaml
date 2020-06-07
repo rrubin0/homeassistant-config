@@ -2,25 +2,25 @@
 #    @package          :     alexa_config
 #    @description      :     alexa smarthome config for haaska
 ############################################################################
-alexa_media:
-  accounts:
-    - email: !secret amazon_email
-      password: !secret amazon_pswd
-      url: amazon.com
-      exclude_devices:
-        - "AJ's Fire Tablet Orange"
-        - "Downstairs Fire Tablet"
-        - "Upstairs Fire Tablet Blue"
-        - "Master Bedroom TV"
-        - "Office TV"
-        - "This Device"
-        - "Other TV"
-        - "iPhone 6 Plus Music's Alexa Apps"
-        - "Dash Wand"
-        - "Megan's Alexa Apps"
-        - "Richard's echosim_BETA"
-        - "Richard's Fire TV Stick"
-#        - "Richard's 3rd Fire"
+#alexa_media:
+#  accounts:
+#    - email: !secret amazon_email
+#      password: !secret amazon_pswd
+#      url: amazon.com
+#      exclude_devices:
+#        - "AJ's Fire Tablet Orange"
+#        - "Downstairs Fire Tablet"
+#        - "Upstairs Fire Tablet Blue"
+#        - "Master Bedroom TV"
+#        - "Office TV"
+#        - "This Device"
+#        - "Other TV"
+#        - "iPhone 6 Plus Music's Alexa Apps"
+#        - "Dash Wand"
+#        - "Megan's Alexa Apps"
+#        - "Richard's echosim_BETA"
+#        - "Richard's Fire TV Stick"
+##        - "Richard's 3rd Fire"
 
 
 #####################################################################
@@ -40,12 +40,25 @@ alexa:
         - script.baby_playlist
         - script.bedtime
         - script.bright
+        - script.christmas_time
+        - script.cloudy
         - script.company_mode
         - script.dim
+        - script.ecobee_ds_away
+        - script.ecobee_ds_eco
+        - script.ecobee_ds_home
+        - script.ecobee_ds_normal
+        - script.ecobee_ds_resume
+        - script.ecobee_ds_sleep
+        - script.ecobee_us_away
+        - script.ecobee_us_eco
+        - script.ecobee_us_home
+        - script.ecobee_us_resume
+        - script.ecobee_us_sleep
         - script.evening
         - script.game_time
 #        - script.hue_lr_bright
-        - script.hue_lr_christmas
+#        - script.hue_lr_christmas
         - script.hue_lr_daybreak
         - script.hue_lr_dimmed
         - script.hue_lr_minty
@@ -56,14 +69,10 @@ alexa:
         - script.hue_lr_sunset
         - script.hue_mbath_morning
         - script.master_bedroom_night_time
+        - script.mbr_night_light
         - script.morning_sequence
         - script.movie_time
         - script.nap_time
-        - script.pause_away_timer
-        - script.cancel_away_timer
-        - script.start_bedtime_timer
-        - script.pause_bedtime_timer
-        - script.cancel_bedtime_timer
         - script.play_white_noise
         - script.pool_blue
         - script.pool_caribbean
@@ -77,17 +86,15 @@ alexa:
         - script.pool_royal
         - script.pool_sunset
         - script.pool_white
-        - script.stop_playing
+        - script.start_bedtime_timer
         - script.tv_power_off
         - script.tv_time
         - script.unlock_megs
-
 
       ################################################
       ## Scenes (created within Home Assistant UI)
       ################################################
         - scene.cozy
-
 
       ################################################
       ## Groups
@@ -119,9 +126,10 @@ alexa:
         - light.foyer_lights
         - light.kitchen_night_light
         - light.kitchen_lights
+        - light.laundry_room
         - light.living_room_lamp
         - light.living_room_ceiling
-        - light.master_bathroom_ceiling_ceiling
+        - light.master_bathroom_ceiling
         - light.master_bath_vanity
         - light.master_bed_ceiling
         - light.master_bed_entry
@@ -131,7 +139,8 @@ alexa:
         - light.master_sitting_lamp
         - light.nursery_light
         - light.nursery_wall_light
-        - light.office_desk
+        - light.office_desk_lamp
+        - light.pantry
         - light.bedframe_light
         - light.wine_room_ceiling
 
@@ -150,6 +159,14 @@ alexa:
         - switch.directv_power
         - switch.downstairs_bathroom_light
         - switch.office_spare
+        - switch.fireplace_flame_down
+        - switch.fireplace_flame_up
+        - switch.fireplace_flicker
+        - switch.fireplace_light
+        - switch.fireplace_power
+        - switch.fireplace_temp_down
+        - switch.fireplace_temp_up
+        - switch.fireplace_timer
         - switch.fountains_switch
         - switch.game_room_floodlights
         - switch.living_room_fan

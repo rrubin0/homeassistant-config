@@ -7,7 +7,7 @@ script:
     alias: "Test Script"
     sequence:
     - service: light.toggle
-      entity_id: light.office_desk
+      entity_id: light.office_desk_lamp
 
 
   ### Testing Flux RGB strip values
@@ -135,7 +135,7 @@ script:
 #    sequence:
 #    - service: light.turn_on
 #      data:
-#        entity_id: light.office_desk
+#        entity_id: light.office_desk_lamp
 #        xy_color: [0.151, 0.343]
 #        brightness: 55
 
@@ -162,4 +162,7 @@ script:
 #        entity_id: media_player.office
 #        media_content_id : my_white_noise_playlist
 #        media_content_type: AMAZON_MUSIC
+
+
+
 

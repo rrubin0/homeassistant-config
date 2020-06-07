@@ -16,7 +16,7 @@ automation:
           entity_id: input_boolean.downstairs_bath_presence
 
 
-### Turn on the bathroom lights
+  ### Turn on the bathroom lights
   - alias: Downstairs Bathroom Lights On
     initial_state: 'on'
     trigger:
@@ -74,7 +74,7 @@ automation:
           entity_id: input_boolean.downstairs_bath_presence
 
 
-### Turn off the downstairs bathroom lights
+  ### Turn off the downstairs bathroom lights
   - alias: Downstairs Bathroom Lights Off
     initial_state: 'on'
     trigger:

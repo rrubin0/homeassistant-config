@@ -12,7 +12,7 @@
 #
 #    action:
 #      - service: light.turn_off
-#        entity_id: light.office_desk
+#        entity_id: light.office_desk_lamp
 #
 #      ### Reset the Input Select to "Select an option..."
 #      - service: input_select.select_option
@@ -27,7 +27,7 @@
 #     
 #    trigger:
 #      - platform: state
-#        entity_id: light.office_desk
+#        entity_id: light.office_desk_lamp
 #        from: 'on'
 #        to: 'off'
 #
@@ -50,7 +50,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [255,255,255]
 #
@@ -73,7 +73,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          white_value: 255
 #
@@ -96,7 +96,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 25
 #          white_value: 25
 #
@@ -119,7 +119,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [0,0,255]
 #
@@ -142,7 +142,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [0,255,255]
 #
@@ -165,7 +165,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [0,225,0]
 #
@@ -188,7 +188,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [255,0,255]
 #
@@ -211,7 +211,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [255,0,0]
 #
@@ -234,7 +234,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [125,0,255]
 #
@@ -257,7 +257,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          brightness: 255
 #          rgb_color: [255,255,0]
 #
@@ -280,7 +280,7 @@
 #    action:
 #      - service: light.turn_on
 #        data:
-#          entity_id: light.office_desk
+#          entity_id: light.office_desk_lamp
 #          effect: random
 #
 #      ### Reset the Input Select to "Select an option..."

@@ -3,16 +3,16 @@
 #####################################################################
 amcrest:
   ### NW PTZ
-  - host: !secret north_ptz_host
-    name: NW PTZ
-    username: !secret camera_user
-    password: !secret camera_password
-    port: !secret north_ptz_port
-    resolution: low
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
-    scan_interval: 30
+#  - host: !secret north_ptz_host
+#    name: NW PTZ
+#    username: !secret camera_user
+#    password: !secret camera_password
+#    port: !secret north_ptz_port
+#    resolution: low
+#    stream_source: rtsp
+#    binary_sensors:
+#      - motion_detected
+#    scan_interval: 30
 
   ### NURSERY PTZ
   - host: !secret nursery_ptz_host

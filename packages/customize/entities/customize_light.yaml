@@ -22,106 +22,106 @@ homeassistant:
   ################################################
   ## Chandeliers
   ################################################
-    light.dining_room_chandelier:
-      icon: mdi:ceiling-light
-
-    light.foyer_lights:
-      icon: mdi:ceiling-light
-
-    light.master_bedroom_chandelier:
-      icon: mdi:ceiling-light
+#    light.dining_room_chandelier:
+#      icon: mdi:ceiling-light
+#
+#    light.foyer_lights:
+#      icon: mdi:ceiling-light
+#
+#    light.master_bedroom_chandelier:
+#      icon: mdi:ceiling-light
 
 
   ################################################
   ##  LED Strips
   ################################################
-    light.bedframe_light:
-      icon: mdi:led-on
-
-    light.nursery_wall_light:
-      icon: mdi:led-on
+#    light.bedframe_light:
+#      icon: mdi:led-on
+#
+#    light.nursery_wall_light:
+#      icon: mdi:led-on
 
 
   ################################################
   ## Lamps
   ################################################
-    light.living_room_lamp:
-      icon: mdi:lamp
-
-    light.master_bedside_lamp_megs:
-      icon: mdi:lamp
-
-    light.master_bedside_lamp_rick:
-      icon: mdi:lamp
-
-    light.master_sitting_lamp:
-      icon: mdi:lamp
-
-    light.master_reading_lamp:
-      icon: mdi:lamp
-
-    light.office_desk:
-      icon: mdi:lamp
+#    light.living_room_lamp:
+#      icon: mdi:lamp
+#
+#    light.master_bedside_lamp_megs:
+#      icon: mdi:lamp
+#
+#    light.master_bedside_lamp_rick:
+#      icon: mdi:lamp
+#
+#    light.master_sitting_lamp:
+#      icon: mdi:lamp
+#
+#    light.master_reading_lamp:
+#      icon: mdi:lamp
+#
+#    light.office_desk_lamp:
+#      icon: mdi:lamp
 
 
   ################################################
   ## Ceiling Lights
   ################################################
-    light.kitchen_lights:
-      icon: mdi:white-balance-incandescent
-
-    light.south_entry:
-      icon: mdi:white-balance-incandescent
-
-    light.kitchen_entry:
-      icon: mdi:white-balance-incandescent
-
-    light.center_entry:
-      icon: mdi:white-balance-incandescent
-
-    light.northeast_ceiling:
-      icon: mdi:white-balance-incandescent
-
-    light.northwest_ceiling:
-      icon: mdi:white-balance-incandescent
-
-    light.southeast_ceiling:
-      icon: mdi:white-balance-incandescent
-
-    light.southwest_ceiling:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bath_entry:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bath_sink:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bathtub:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bath_vanity:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bed_ceiling:
-      icon: mdi:white-balance-incandescent
-
-    light.master_bed_entry:
-      icon: mdi:white-balance-incandescent
-
-    light.nursery_light:
-      icon: mdi:white-balance-incandescent
-
-    light.northeast_wine:
-      icon: mdi:white-balance-incandescent
-
-    light.northwest_wine:
-      icon: mdi:white-balance-incandescent
-
-    light.southeast_wine:
-      icon: mdi:white-balance-incandescent
-
-    light.southwest_wine:
-      icon: mdi:white-balance-incandescent
+#    light.kitchen_lights:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.south_entry:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.kitchen_entry:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.center_entry:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.northeast_ceiling:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.northwest_ceiling:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.southeast_ceiling:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.southwest_ceiling:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bath_entry:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bath_sink:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bathtub:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bath_vanity:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bed_ceiling:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.master_bed_entry:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.nursery_light:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.northeast_wine:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.northwest_wine:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.southeast_wine:
+#      icon: mdi:white-balance-incandescent
+#
+#    light.southwest_wine:
+#      icon: mdi:white-balance-incandescent
 
 

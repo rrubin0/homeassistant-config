@@ -230,3 +230,42 @@ switch:
       master_bedroom_fan_12:
         friendly_name: "Master Bedroom Fan 12"
         command_on: 'eAC8AA8eDh8OHw4eDx4PHg8PHh4OHw4QHR8OHg8QHR4PAAFVDh4PHg8eDx4OHw4fDh4PHg8eDx4PHg8eDh8OHg8eDx4PDx4eDx4OEB0fDh4PEB0eDwABVBAdDx4PHg8eDx4OHw4eDx4PHg8eDx4OHw4eDx4PHg8eDw8eHg4fDhAdHg8eDxAdHg8AAVUOHg8eDx4PHg8eDh8OHg8eDx4PHg8eDx4OHg8eDx4PHg8PHh4PHg4QHR8OHg8QHR4PAAXcAAAAAAAAAAAAAAAA'
+
+
+######################################################################
+#### Fireplace
+######################################################################
+      fireplace_power:
+        friendly_name: "Fireplace"
+        command_on: 'JgBoAAABJpQSNxITEhMSExITEhITEhITEhMTNxI3EjgTNxI4ETgTNxITEjgSEhMSEjgTEhITEhMSOBISEzcSOBITEjcSOBM3EgAFHgABJUkTAAxQAAElShMADFAAASRKEgAMUQABI0oTAA0F'
+
+      fireplace_flame_up:
+        friendly_name: "Fireplace Flame Up"
+        command_on: 'JgBYAAABJpQSNxITEhMSExITEhITEhITEhMTNxI4ETgTNxI3EjgSOBISEjgSEhM3EjgSExISExISNxMTEjcTEhIUETgSNxM3EgAFHAABJUoTAAxQAAEmSRMADQU='
+
+      fireplace_flame_down:
+        friendly_name: "Fireplace Flame Down"
+        command_on: 'JgBYAAABJZITNxITEhMSExITEhITEhIUEhITNxI4EjcTNxI4EjcTOBE4EhMSOBEUEhITEhITEhMSExI3ExMROBM3EjgSNxQ2EgAFHgABJUoTAAxQAAElShMADQU='
+
+      fireplace_timer:
+        friendly_name: "Fireplace Timer"
+        command_on: 'JgBQAAABJZQSNxITEhITEhIUEhITEhITEhMSOBI3EjgTNxI4EjcTNxITEhMSNxM4EjcSExISExMSNxM3EhMTEhITEjgSNxM3EwAFHQABJUoTAA0FAAAAAAAAAAA='
+
+      fireplace_light:
+        friendly_name: "Fireplace Light"
+        command_on: 'JgBYAAABJpMSOBITEhMSEhMSEhQSEhMSEhMSOBI3EzcSOBI3EzgSNxITEhMSOBISEzcSExMSEhMSOBE4ExISOBITEjcTOBI3EgAFHQABJkoSAAxRAAElSxIADQU='
+
+      fireplace_temp_up:
+        friendly_name: "Fireplace Temp Up"
+        command_on: 'JgBQAAABJZQSNxMTEhMSEhMSEhMSExMSEhMSOBI3EzcSOBI3EzgSNxI4EhMSNxM3EjgSExISExMSExI3EhMSExMSEjcTOBI3EgAFHQABJksSAA0FAAAAAAAAAAA='
+
+      fireplace_temp_down:
+        friendly_name: "Fireplace Temp Down"
+        command_on: 'JgBYAAABJpMUNhITEhMSExISExISFBISExISOBI4EjcSOBM3EjcSOBM3EhMSExI3EzcSExMSEhMSEhM4EjcSExITEzcSNxI4EwAFHAABJkoSAAxQAAEnSRIADQU='
+
+      fireplace_flicker:
+        friendly_name: "Fireplace Flicker"
+        command_on: 'JgBYAAABJ5MTNhITEhMSExISExISFBISExISOBI4EjYTOBM3EjgROBMSEhMSExI4EjcSFBETExISNxM4EjcSExITEzcSNxI4EwAFHAABJkoSAAxQAAEmSRIADQU='
+
+
+

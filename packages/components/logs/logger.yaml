@@ -19,6 +19,8 @@ logger:
     #######################################
     ### Standard Logging
     #######################################
+#    custom_components.alexa_media: debug
+#    custom_components.alexa_media.helpers: debug
 #    homeassistant.components.alexa: warning
     homeassistant.components.automation: critical
     homeassistant.components.binary_sensor: error
@@ -34,9 +36,9 @@ logger:
 #    homeassistant.components.input_number: debug
 #    homeassistant.components.light: error
     homeassistant.components.media_player: critical
-#    custom_components.alexa_media: debug
 #    homeassistant.components.mqtt: debug
 #    homeassistant.components.notify: debug
+    homeassistant.components.ring: error
 #    homeassistant.components.scene: info
 #    homeassistant.components.script: info
 #    homeassistant.components.sensor: debug

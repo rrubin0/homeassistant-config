@@ -17,6 +17,12 @@ light:
       - light.kitchen_entry
 
   - platform: group
+    name: Laundry Room
+    entities:
+      - light.laundry_1
+      - light.laundry_2
+
+  - platform: group
     name: Living Room Ceiling
     entities:
       - light.northeast_ceiling

@@ -8,7 +8,7 @@ automation:
      
     trigger:
       platform: time
-      at: '00:08:00'
+      at: '08:00:00'
 
     condition:
       - condition: state

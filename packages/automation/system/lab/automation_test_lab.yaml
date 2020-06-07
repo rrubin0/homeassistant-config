@@ -6,7 +6,6 @@ automation:
   ### Test iOS
   - alias: Test notifications
     initial_state: 'on'
-     
     trigger:
       - platform: state
         entity_id: input_boolean.state_change
@@ -14,7 +13,18 @@ automation:
 #        to: 'on'
 
     action:
-#      ### WORKS!
+#    # WORKING (109.6): Test alexa_media announce - multiple echo devices
+#      - service: notify.alexa_media
+#        data:
+#          data:
+#            type: announce
+#          target:
+##            - media_player.kitchen
+#            - media_player.office
+#            - media_player.living_room
+#          message: "Attention, This is only a test"
+
+#    # WORKING (109.6): Test alexa_media announce - single echo device
 #      - service: notify.alexa_media
 #        data_template:
 #          target: media_player.office
@@ -22,23 +32,11 @@ automation:
 #          data:
 #            type: announce
 
-
-      ### working 0.97.2
-#      - service: notify.mobile_app_rip8plus
-#        data:
-#          title: "Test Message"
-#          message: "This is a test"
-#          data:
-#            push:
-#              category: test
-#              sound:
-#                name: default
-
-### test in progress 0.102.3
+    # WORKING (109.6): Test iOS Notification
       - service: notify.mobile_app_rip8plus
         data:
           title: "Testing"
-          message: "Test Started..."
+          message: "iOS Test Notification Successful!"
           data:
             push:
               thread-id: "test"
@@ -46,6 +44,28 @@ automation:
                 name: default
             apns_headers:
               'apns-collapse-id': 'test'
+
+
+    # WORKING (109.6): Actionable Notification
+      - service: script.activate_alexa_actionable_notification
+        data_template:
+          text: 'I see that the office desk lamp is off, would you like it on?'
+          event_id: 'actionable_notification_test'
+          alexa_device: 'media_player.office'
+
+
+  - alias: Alexa Actionable Notification Test
+    initial_state: 'on'
+    trigger:
+      platform: event
+      event_type: alexa_actionable_notification
+      event_data:
+        event_id: actionable_notification_test
+        event_response: ResponseYes
+        
+    action:
+      - service: light.turn_on
+        entity_id: light.office_desk_lamp
 
 
 #  - alias: test action desk light
@@ -59,7 +79,7 @@ automation:
 #
 #    action:
 #      service: light.turn_on
-#      entity_id: light.office_desk
+#      entity_id: light.office_desk_lamp
 
 
 #  ### Test Away Mode Trigger

@@ -9,8 +9,7 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: >-
-          {{ ((float(states.sensor.downstairs_temperature.state) + float(states.sensor.living_room_temperature.state) + float(states.sensor.entryway_temperature.state) + float(states.sensor.office_temperature.state) + float(states.sensor.front_entry_fibaro_multisensor_temperature.state) + float(states.sensor.broadlink_sensor_temperature.state)) / 6) | round(1) | default('unknown') }}
-
+          {{ ((float(states.sensor.downstairs_temperature.state) + float(states.sensor.living_room_temperature.state) + float(states.sensor.entryway_temperature.state) + float(states.sensor.office_temperature.state) + float(states.sensor.front_entry_fibaro_multisensor_temperature.state)) / 5) | round(1) | default('unknown') }}
 
   - platform: template
     sensors:
@@ -64,8 +63,11 @@ sensor:
   ################################################
   ## Sensor - Broadlink RM 2 Pro
   ################################################
-  - platform: broadlink
-    host: !secret broadlink_ip
-    mac: !secret broadlink_mac
-    monitored_conditions:
-      - 'temperature'
+#  - platform: broadlink
+#    host: !secret broadlink_ip
+#    mac: !secret broadlink_mac
+#    monitored_conditions:
+#      - 'temperature'
+
+# for above template:
+#          {{ ((float(states.sensor.downstairs_temperature.state) + float(states.sensor.living_room_temperature.state) + float(states.sensor.entryway_temperature.state) + float(states.sensor.office_temperature.state) + float(states.sensor.front_entry_fibaro_multisensor_temperature.state) + float(states.sensor.broadlink_sensor_temperature.state)) / 6) | round(1) | default('unknown') }}

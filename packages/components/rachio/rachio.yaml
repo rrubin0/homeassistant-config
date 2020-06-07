@@ -2,8 +2,8 @@
 #    @package          :     Rachio
 #    @description      :     Rachio irrigation setup
 #####################################################################
-rachio:
-  api_key: !secret rachio_token
+#rachio:
+#  api_key: !secret rachio_token
 
 
 ####################################################################
