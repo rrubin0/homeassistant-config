@@ -25,7 +25,7 @@ sensor:
               {% endif %}
 
 
-### Upstairs North Smoke & CO detector
+### Downstairs North Smoke & CO detector
   - platform: template
     sensors:
       smoke_downstairs_north:
@@ -42,6 +42,29 @@ sensor:
               {% if is_state("sensor.first_alert_smoke_downstairs_north_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_north_alarm_type", "1")%}
                 mdi:fire
               {% elif is_state("sensor.first_alert_smoke_downstairs_north_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_north_alarm_type", "2")%}
+                mdi:cloud-outline
+              {% else %}
+                mdi:smoke-detector
+              {% endif %}
+
+
+### Downstairs South Smoke & CO detector
+  - platform: template
+    sensors:
+      smoke_downstairs_south:
+            friendly_name: 'Downstairs South Smoke Detector'
+            value_template: >-
+              {% if is_state("sensor.first_alert_smoke_downstairs_south_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_south_alarm_type", "1")%}
+                smoke
+              {% elif is_state("sensor.first_alert_smoke_downstairs_south_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_south_alarm_type", "2")%}
+                CO
+              {% else %}
+                OK
+              {% endif %}
+            icon_template: >-
+              {% if is_state("sensor.first_alert_smoke_downstairs_south_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_south_alarm_type", "1")%}
+                mdi:fire
+              {% elif is_state("sensor.first_alert_smoke_downstairs_south_alarm_level", "255") and is_state("sensor.first_alert_smoke_downstairs_south_alarm_type", "2")%}
                 mdi:cloud-outline
               {% else %}
                 mdi:smoke-detector

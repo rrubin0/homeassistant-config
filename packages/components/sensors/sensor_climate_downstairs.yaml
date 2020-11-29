@@ -9,7 +9,7 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: >-
-          {{ ((float(states.sensor.downstairs_temperature.state) + float(states.sensor.living_room_temperature.state) + float(states.sensor.entryway_temperature.state) + float(states.sensor.office_temperature.state) + float(states.sensor.front_entry_fibaro_multisensor_temperature.state)) / 5) | round(1) | default('unknown') }}
+          {{ ((states('sensor.downstairs_temperature') | float + states('sensor.living_room_temperature') | float + states('sensor.entryway_temperature') | float + states('sensor.office_temperature') | float + states('sensor.front_entry_fibaro_multisensor_temperature') | float) /5) | round(1) | default('unknown') }}
 
   - platform: template
     sensors:
@@ -18,14 +18,12 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.downstairs.attributes|default({})).current_temperature | default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
       ds_climate_preset:
         friendly_name: "Active Preset"
         value_template: "{{ (states.climate.downstairs.attributes|default({})).preset_mode | default('unknown') }}"
-        entity_id: sensor.time
 
 #  - platform: template
 #    sensors:
@@ -41,7 +39,6 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_high | default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
@@ -50,14 +47,12 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_low | default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
       ds_fan_state:
         friendly_name: "Downstairs HVAC Fan"
         value_template: "{{ (states.climate.downstairs.attributes|default({})).fan | default('unknown') }}"
-        entity_id: sensor.time
 
 
   ################################################

@@ -14,7 +14,7 @@ automation:
         entity_id: timer.bedtime
 
 
-  ### Turn on the nightlight when Laundress Dash button is pressed
+  ### Turn on Master Bedroom Night Time scene when Laundress Dash button is pressed
   - alias: Dasher Night Time
     initial_state: 'on'
     trigger:

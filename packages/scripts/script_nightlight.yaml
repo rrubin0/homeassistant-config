@@ -1,0 +1,15 @@
+#####################################################################
+### Night Light
+#####################################################################
+script:
+  nightlight:
+    alias: "Night Light"
+    sequence:
+    - service: light.turn_on
+      entity_id: light.bedframe_light
+
+    - delay:
+        minutes: 7
+
+    - service: light.turn_off
+      entity_id: light.bedframe_light

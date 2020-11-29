@@ -22,14 +22,14 @@ homeassistant:
 
     sensor.ricks_eta_home:
       friendly_name: "Ricks ETA"
-      icon: mdi:timer
+      icon: mdi:timer-outline
 
     sensor.ricks_eta:
-      icon: mdi:timer
+      icon: mdi:timer-outline
 
     sensor.megs_eta_home:
       friendly_name: "Megs ETA"
-      icon: mdi:timer
+      icon: mdi:timer-outline
 
     sensor.megs_eta:
-      icon: mdi:timer
+      icon: mdi:timer-outline

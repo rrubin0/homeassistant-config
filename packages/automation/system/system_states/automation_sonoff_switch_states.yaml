@@ -32,7 +32,7 @@ automation:
       - delay:
           minutes: 1
       - service_template: >
-          {%- if states.sensor.staircase_lamp.state | lower == "on" -%}
+          {%- if states('sensor.staircase_lamp') | lower == "on" -%}
               homeassistant.turn_on
           {%- else -%}
               homeassistant.turn_off
@@ -40,7 +40,7 @@ automation:
         entity_id: switch.staircase_lamp
 
       - service_template: >
-          {%- if states.sensor.wine_room_lamp.state | lower == "on" -%}
+          {%- if states('sensor.wine_room_lamp') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off

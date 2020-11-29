@@ -1,8 +1,8 @@
 #####################################################################
 ### Xiaomi Gateway
 #####################################################################
-xiaomi_aqara:
-  discovery_retry: 99
-  gateways:
-    - mac: !secret xmac
-      key: !secret xkey
+#xiaomi_aqara:
+#  discovery_retry: 99
+#  gateways:
+#    - mac: !secret xmac
+#      key: !secret xkey

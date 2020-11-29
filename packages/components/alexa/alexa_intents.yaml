@@ -34,7 +34,7 @@
           {%- if SensorType.lower() == "temperature" or SensorType.lower() == "temp"-%}
             The average temperature downstairs is {{ states('sensor.ds_avg_temp') }} degrees and upstairs it is {{ states('sensor.us_avg_temp') }} degrees.
           {%- elif SensorType.lower() == "humidity" -%}
-            Downstairs humidity is {{ states.sensor.downstairs_humidity.state }} percent and upstairs humidity is {{ states('sensor.upstairs_humidity') }} percent.
+            Downstairs humidity is {{ states('sensor.downstairs_humidity') }} percent and upstairs humidity is {{ states('sensor.upstairs_humidity') }} percent.
           {%- elif SensorType.lower() == "front door" -%}
             The {{ SensorType }} is {{ states('sensor.front_door_state') }} and the tamper is {{ states('sensor.front_door_tamper') }}.
           {%- elif SensorType.lower() == "side door" -%}
@@ -99,13 +99,13 @@
         type: plain
         text: >
           {%- if User.lower() == "rick" -%}
-            Rick is at {{ states.person.rick.state.replace('_', ' ') }}.
+            Rick is at {{ states('person.rick').replace('_', ' ') }}.
             {%- elif User.lower() == "megan" -%}
-              Megan is at {{ states.person.megs.state.replace('_', ' ') }}.
+              Megan is at {{ states('person.megs').replace('_', ' ') }}.
             {%- elif User.lower() == "meg" -%}
-              Meg is at {{ states.person.megs.state.replace('_', ' ') }}.
+              Meg is at {{ states('person.megs').replace('_', ' ') }}.
             {%- elif User.lower() == "megs" -%}
-              Megs is at {{ states.person.megs.state.replace('_', ' ') }}.
+              Megs is at {{ states('person.megs').replace('_', ' ') }}.
           {%- else -%}
             Sorry. I am unable to locate {{ User }} right now. Do you remember the telephone? I suggest maybe trying to call and ask.
           {%- endif %}

@@ -7,7 +7,7 @@
 ### ZWave
 #####################################################################
 zwave:
-  usb_path: /dev/ttyACM0
+  usb_path: /dev/zwave
   network_key: !secret network_key
 
   ################################################

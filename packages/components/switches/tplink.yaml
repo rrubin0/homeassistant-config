@@ -10,3 +10,7 @@ tplink:
     - host: !secret smartplug_host_4
     - host: !secret smartplug_host_5
     - host: !secret smartplug_host_6
+
+  strip:
+    - host: !secret smartplug_host_7
+

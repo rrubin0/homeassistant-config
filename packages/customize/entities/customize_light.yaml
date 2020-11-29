@@ -35,11 +35,11 @@ homeassistant:
   ################################################
   ##  LED Strips
   ################################################
-#    light.bedframe_light:
-#      icon: mdi:led-on
-#
-#    light.nursery_wall_light:
-#      icon: mdi:led-on
+    light.bedframe_light:
+      icon: mdi:led-strip-variant
+
+    light.nursery_wall_light:
+      icon: mdi:led-strip-variant
 
 
   ################################################

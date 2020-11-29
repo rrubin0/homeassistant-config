@@ -22,4 +22,4 @@ script:
     - service: notify.mobile_app_rip8plus
       data:
         title: "Sun's up. Lights off"
-        message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states.sensor.time_templated_am_pm.state }}"
+        message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states('sensor.time_templated_am_pm') }}"

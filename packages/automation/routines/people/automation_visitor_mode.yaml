@@ -1,8 +1,10 @@
 #####################################################################
 ### Control Visitor Mode for dog sitter
+### Related Automations: automation_away_mode.yaml
 #####################################################################
 automation:
-  - alias: Enable Visitor Mode
+  ### Turn on visitor_mode if door is unlocked by Dog Sitter
+  - alias: Turn On Visitor Mode via Code
     initial_state: 'on'
      
     trigger:
@@ -23,7 +25,7 @@ automation:
         entity_id: input_boolean.visitor_mode
 
 
-  ### Cancel Visitor Mode when we return home
+  ### Turn off Visitor Mode when we return home
   - alias: Cancel Visitor Mode
     initial_state: 'on'
      
@@ -33,7 +35,7 @@ automation:
         from: 'not_home'
         to: 'home'
         for:
-          minutes: 15
+          minutes: 7
 
     condition:
       - condition: state
@@ -45,7 +47,8 @@ automation:
         entity_id: input_boolean.visitor_mode
 
 
-  ### Start Away Mode if visitor_mode is turned off
+  ### Start Away Mode countdown if visitor_mode is turned off and we are not home
+  ### Useful if our house sitter leaves for an extended time and we manually turn off visitor_mode (add automation if you can identify lock from outside)
   - alias: Visitor Away
     initial_state: 'on'
      
@@ -53,6 +56,8 @@ automation:
       - platform: state
         entity_id: input_boolean.visitor_mode
         to: 'off'
+        for:
+          minutes: 5
 
     condition:
       - condition: state
@@ -62,3 +67,42 @@ automation:
     action:
       - service: timer.start
         entity_id: timer.away_mode
+
+
+#####################################################################
+### Handle Away Mode Automations
+#####################################################################
+  ### Disable climate away mode automation when visitor_mode is turned on
+  - alias: Disable away_mode when visitor_mode is on
+    initial_state: 'on'
+     
+    trigger:
+      - platform: state
+        entity_id: input_boolean.visitor_mode
+        to: 'on'
+
+    action:
+      - service: automation.turn_off
+        entity_id: automation.away_mode_countdown
+
+      - service: automation.turn_off
+        entity_id: automation.away_mode_on
+
+
+  ### Enable climate away mode automation when visitor_mode is turned off
+  - alias: Enable away_mode when visitor_mode is off
+    initial_state: 'on'
+     
+    trigger:
+      - platform: state
+        entity_id: input_boolean.visitor_mode
+        to: 'off'
+
+    action:
+      - service: automation.turn_off
+        entity_id: automation.away_mode_countdown
+
+      - service: automation.turn_on
+        entity_id: automation.away_mode_on
+
+

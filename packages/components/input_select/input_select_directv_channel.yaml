@@ -1,0 +1,27 @@
+#####################################################################
+### DirecTV Channel Select
+#####################################################################
+input_select:
+  ### DirecTV Favorite Channels
+  directv_channel:
+    name: DirecTV Favorite Channels
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Bravo"
+      - "Cooking"
+      - "ESPN"
+      - "Food"
+      - "Fox Sports"
+      - "Hallmark"
+      - "HGTV"
+      - "Lifetime"
+      - "Lifetime Movie"
+      - "NFL Network"
+      - "NFL Redzone"
+      - "NFL Mix"
+      - "Nick Jr"
+      - "SEC Network"
+
+
+

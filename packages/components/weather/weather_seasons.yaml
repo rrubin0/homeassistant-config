@@ -8,8 +8,8 @@ sensor:
         friendly_name: "Seasonal Condition"
         value_template: >-
           {% set temperature = states('sensor.dark_sky_temperature')|float(none) %}
-          {% set winter_temp = states.input_number.season_winter.state|default(66)|float %}
-          {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
+          {% set winter_temp = states('input_number.season_winter')|default(66)|float %}
+          {% set summer_temp = states('input_number.season_summer')|default(76)|float %}
           {% if temperature is none %}
             {{ states('sensor.sensor.dark_sky_temperature') }}
           {% elif temperature < winter_temp %}
@@ -19,3 +19,22 @@ sensor:
           {% else %}
             Awesome
           {% endif %}
+
+
+#  - platform: template
+#    sensors:
+#      season:
+#        friendly_name: "Seasonal Condition"
+#        value_template: >-
+#          {% set temperature = states('sensor.dark_sky_temperature')|float(none) %}
+#          {% set winter_temp = states.input_number.season_winter.state|default(66)|float %}
+#          {% set summer_temp = states.input_number.season_summer.state|default(76)|float %}
+#          {% if temperature is none %}
+#            {{ states('sensor.sensor.dark_sky_temperature') }}
+#          {% elif temperature < winter_temp %}
+#            Winter
+#          {% elif temperature > summer_temp %}
+#            Summer
+#          {% else %}
+#            Awesome
+#          {% endif %}

@@ -26,6 +26,6 @@ automation:
         entity_id: group.nursery_lights
 
       - service: switch.turn_off
-        entity_id: switch.upstairs_wipe_warmer
+        entity_id: switch.switch_one
 
 

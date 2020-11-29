@@ -6,11 +6,9 @@ script:
   master_bedroom_night_time:
     alias: "Master Bedroom Night Time"
     sequence:
-    - service: light.turn_on
+    - service: light.turn_off
       data:
         entity_id: light.foyer_lights
-        brightness: 50
-        transition: 5
 
     - service: hue.hue_activate_scene
       data:

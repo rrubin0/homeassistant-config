@@ -9,9 +9,7 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: >-
-          {{ ((float(states.sensor.upstairs_temperature.state) + float(states.sensor.nursery_temperature.state) + float(states.sensor.guest_room_temperature.state)) / 3) | round(1) }}
-        entity_id: sensor.time
-
+          {{ ((states('sensor.upstairs_temperature') | float + states('sensor.nursery_temperature') | float + states('sensor.guest_room_temperature') | float) /3) | round(1) | default('unknown') }}
 
   - platform: template
     sensors:
@@ -20,14 +18,12 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).current_temperature|default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
       us_climate_preset:
         friendly_name: "Active Preset"
         value_template: "{{ (states.climate.upstairs.attributes|default({})).preset_mode|default('unknown') }}"
-        entity_id: sensor.time
 
 #  - platform: template
 #    sensors:
@@ -43,7 +39,6 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_high|default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
@@ -52,13 +47,11 @@ sensor:
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_low|default('unknown') }}"
-        entity_id: sensor.time
 
   - platform: template
     sensors:
       us_fan_state:
         friendly_name: "Upstairs HVAC Fan"
         value_template: "{{ (states.climate.upstairs.attributes|default({})).fan|default('unknown') }}"
-        entity_id: sensor.time
 
 

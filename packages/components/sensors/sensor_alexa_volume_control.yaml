@@ -14,4 +14,3 @@ sensor:
           {% else %}
             0.3
           {% endif %}
-        entity_id: sensor.time

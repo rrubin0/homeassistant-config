@@ -1,6 +1,6 @@
 ############################################################################
 #    @package          :     groups
-#    @description      :     groups to be controlled 
+#    @description      :     don't forget to also check your "light groups"
 #############################################################################
 group:
   #####################################################################
@@ -44,6 +44,8 @@ group:
       - switch.front_yard_outlet
       - switch.patio_light
       - switch.pool_light
+      - switch.outdoor_left_outlet
+      - switch.outdoor_right_outlet
 
 
   #####################################################################
@@ -68,6 +70,7 @@ group:
     entities:
       - switch.wine_room_lamp
       - light.wine_room_ceiling
+      - light.bar_strip_light
 
 
   #####################################################################
@@ -141,7 +144,7 @@ group:
     entities:
       - light.nursery_light
       - light.nursery_wall_light
-      - switch.nursery_lamp
+#      - switch.nursery_lamp
 
 
   #####################################################################
@@ -165,10 +168,10 @@ group:
   #####################################################################
   ### Christmas Lights
   #####################################################################
-#  Christmas Lights:
-#    entities:
-#      - switch.back_yard_outlet
-#      - switch.front_yard_outlet
+  Christmas Lights:
+    entities:
+      - switch.back_yard_outlet
+      - switch.front_yard_outlet
 #      - switch.office_spare
 #      - switch.aquarium
 #      - switch.switch_two # porch christmas lights

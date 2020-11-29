@@ -18,3 +18,44 @@ automation:
         entity_id: automation.evening_scene_schedule
 
 
+#####################################################################
+### Turn on some lights if we arrive home after sundown
+#####################################################################
+  - alias: On Arrival Turn On Lights
+    initial_state: 'on'
+    trigger:
+      platform: state
+      entity_id: group.all_devices
+      from: 'not_home'
+      to: 'home'
+
+    condition:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+
+      - condition: state
+        entity_id: input_boolean.visitor_mode
+        state: 'off'
+
+    action:
+      - service: notify.mobile_app_rip8plus
+        data:
+          title: "Welcome Home"
+          message: "Turning on some lights"
+          data:
+            push:
+              sound: "US-EN-Alexa-Welcome-Home.wav"
+
+      - service: script.turn_on
+        entity_id: script.bright
+
+      - service: homeassistant.turn_on
+        entity_id: group.accent_lights
+
+      - delay:
+          minutes: 5
+
+      - service: script.turn_on
+        entity_id: script.evening
+

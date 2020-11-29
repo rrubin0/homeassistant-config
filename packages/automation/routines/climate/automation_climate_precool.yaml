@@ -6,7 +6,7 @@ automation:
 ### Precool Downstairs
 #######################################
   - alias: Climate Precool Downstairs
-    initial_state: 'on'
+    initial_state: 'off' #disabled
     trigger:
       - platform: time
         at: '14:00:00'
@@ -48,7 +48,7 @@ automation:
 ### Precool Upstairs
 #######################################
   - alias: Climate Precool Upstairs
-    initial_state: 'on'
+    initial_state: 'off' #disabled
     trigger:
       - platform: time
         at: '14:00:00'

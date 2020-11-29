@@ -9,8 +9,10 @@ ux_goodie:
   light-primary-color: "#607D8B"  # user avatar
   accent-color: "#FF9F0A"  # e.g. loader in HACS
   divider-color: "#545454"  # divider in sidebar
-  ch-background: "rgba(10, 10, 10, 0.7)"  # top bar (custom header)
-  
+  ch-background: "rgba(10, 10, 10, 0.65)"  # dashboard top bar (for custom header)
+  app-header-background-color-custom: "rgba(10, 10, 10, 0.65)"  # dashboard top bar (for card-mod-theme styling at the end of this file)
+  codemirror-meta: "var(--primary-text-color)" # code editor – simple styling
+
 
 # BACKGROUND AND SIDEBAR
   primary-background-color: "#2E2E2E"  # main app background mostly
@@ -23,13 +25,14 @@ ux_goodie:
   sidebar-icon-color: "#BDBDBD"
   sidebar-text-color: "#F1F1F1"
 
+  topbar-selected-item-color: "#FFF"
 
 # CARDS AND DIALOGS
   card-background-color: "var(--secondary-background-color)"
-  paper-listbox-background-color: "var(--primary-background-color)"
+  paper-listbox-background-color: "var(--ha-card-background)"
   ha-card-border-radius: "15px"
   ha-card-background: "rgba(10, 10, 10, 0.87)"
-  paper-card-background-color: "var(--ha-card-background)"  # lovelace cards background
+  paper-card-background-color: "var(--ha-card-background)"  # lovelace cards background  # REMOVED IN HA 0.113 <---
   paper-dialog-background-color: "rgba(20, 20, 20, 0.95)"  # entity details background
 
 
@@ -78,10 +81,15 @@ ux_goodie:
   text-primary-color: "#FFF"
   disabled-text-color: "#BDBDBD"
   text-dark-color: "#FFF"
+  markdown-code-background-color: "#1A1A1A"
+
+# SUPERVISOR
+  ha-bar-background-color: "#2E2E2E"
 
 
 ### OTHERS
   error-color: "#FF453A"
+  success-color: "#30D158"
   paper-green-400: "#30D158"
   paper-blue-400: "#0A84FF"
   paper-orange-400: "#FF9F0A"
@@ -95,16 +103,37 @@ ux_goodie:
   mini-media-player-base-color: "white"
   mini-media-player-icon-color: "white"
   
-  mdc-theme-primary: "f5f5f5"  # font on some app-wide buttons
+  mdc-theme-primary: "var(--primary-color)"  # font on some app-wide text buttons; background for big app-wide buttons
+  mdc-theme-on-primary: "#f5f5f5" # font for big app-wide buttons
   mdc-theme-secondary: "#607D8B"  # round floating buttons (app-wide)
+  material-secondary-background-color: "rgba(46, 46, 46, 0.7)" # Comboboxes selected/highlighted item background – unfortunately, not all of them
+  material-divider-color: "rgba(46, 46, 46, 0.7)" # Comboboxes focused item backfround – unfortunately, not all of them
+  mdc-ripple-color: "#cdcdcd" # Quick Bar (and hopefully other mwc-lists) selected/highlighted item background
+  mdc-ripple-hover-opacity: "0.1"
+  mdc-ripple-focus-opacity: "0.15"
   hacs-badge-color: "#FFF"
 
   dark-disabled-opacity: "0.45"
   dark-secondary-opacity: "0.6"
   dark-primary-opacity: "0.9"
   
+  paper-spinner-color: "var(--primary-color)"
+  
   google-red-500: "#FF453A"
   google-blue-500: "#0A84FF"
   google-green-500: "#30D158"
   google-yellow-500: "#FF9F0A"
-  paper-spinner-color: "var(--primary-color)"
+  
+  material-secondary-text-color: "var(--secondary-text-color)"
+  
+
+# HEADER
+  card-mod-theme: ux_goodie
+  # Header
+  card-mod-root-yaml: |
+    .: |
+      /* This forces background-color of dashboard header */
+      .edit-mode, app-header, app-toolbar {
+        background-color: var(--app-header-background-color-custom) !important;
+        color: var(--primary-text-color) !important;
+      }

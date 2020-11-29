@@ -5,7 +5,7 @@ input_number:
   ### Summer Temp Threshold
   season_summer:
     name: "Summer"
-    initial: 76
+    initial: 78
     min: 60
     max: 100
     step: 1
@@ -14,7 +14,7 @@ input_number:
   ### Winter Temp Threshold
   season_winter:
     name: "Winter"
-    initial: 66
+    initial: 65
     min: 40
     max: 80
     step: 1
@@ -49,7 +49,7 @@ input_number:
 
   alarm_clock_hour:
     name: Hours
-    icon: mdi:timer
+    icon: mdi:timer-outline
     initial: 7
     min: 0
     max: 23
@@ -57,7 +57,7 @@ input_number:
   
   alarm_clock_minutes:
     name: Minutes
-    icon: mdi:timer
+    icon: mdi:timer-outline
     initial: 0
     min: 0
     max: 59

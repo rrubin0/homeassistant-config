@@ -8,7 +8,7 @@ input_select:
     options:
       - "Select an option..."
       - "DirecTV"
-      - "FireTV"
+      - "Media"
       - "Chromecast"
 
   onkyo_amp_input:

@@ -1,0 +1,27 @@
+#####################################################################
+### Workaround for turning off all lights "except" x y z
+#####################################################################
+script:
+  lights_off_except:
+    icon: mdi:home-lightbulb
+    fields:
+      exclude_lights:
+        description: 'Excluded lights as list'
+    sequence:
+      - service: logbook.log
+        data_template:
+          entity_id: script.turn_off_lights
+          name: Exclude log
+          message: "Excluding {{ exclude_lights }}"
+      - service: light.turn_off
+        data_template:
+          entity_id: >
+            {%- for device in states.light|rejectattr('entity_id','in', exclude_lights )|rejectattr('state','in','off') %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{%- endfor  %}
+  
+  
+### Call using:
+#    - service: script.lights_off_except
+#      exclude_lights:
+#        - light.light_1
+#        - light.light_2
+#        ...

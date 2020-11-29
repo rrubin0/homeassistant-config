@@ -13,7 +13,6 @@ sensor:
       ha_last_restart:
         friendly_name: "HA Last Restart"
         value_template: '{{ as_timestamp(states.automation.startup_notification.attributes.last_triggered) | timestamp_custom("%b %d %X") }}'
-        entity_id: sensor.time
 
 
   ## Uptime

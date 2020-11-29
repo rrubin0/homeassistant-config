@@ -53,8 +53,8 @@ homekit:
 #################################
 # Switches - enabled
 #################################
-      - switch.amp_power
-      - switch.directv_play
+      - switch.amp
+      - switch.play
       - switch.downstairs_bathroom_light
       - switch.office_spare
 #      - switch.fountains_switch
@@ -76,8 +76,8 @@ homekit:
       - switch.tv_input_chromecast
       - switch.tv_input_directv
       - switch.tv_input_firetv
-      - switch.tv_mute
-      - switch.tv_power
+      - switch.mute
+      - switch.tv
       - switch.wine_room_lamp
       - switch.mini_fridge
 
@@ -168,12 +168,12 @@ homekit:
     switch.outdoor_speakers:
       type: outlet
 
-    switch.tv_power:
+    switch.tv:
       name: TV
 
-    switch.tv_mute:
+    switch.mute:
       name: Mute
 
-    switch.directv_power:
+    switch.directv:
       name: DirecTV
 

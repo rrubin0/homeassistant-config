@@ -11,5 +11,5 @@ binary_sensor:
           minutes: 10
         delay_off:
           minutes: 1
-        entity_id: sensor.sn1_humidity
+#        entity_id: sensor.sn1_humidity
         device_class: moisture

@@ -157,11 +157,11 @@ google_assistant:
       expose: false
     switch.amp_mute:
       expose: false
-    switch.amp_power:
+    switch.amp:
       expose: false
     switch.amp_volume:
       expose: false
-    switch.directv_power:
+    switch.directv:
       expose: false
     switch.downstairs_fire_tablet_do_not_disturb_switch:
       expose: false
@@ -289,7 +289,7 @@ google_assistant:
       expose: false
     switch.tv_input_firetv:
       expose: false
-    switch.tv_power:
+    switch.tv:
       expose: false
     switch.tv_volume:
       expose: false

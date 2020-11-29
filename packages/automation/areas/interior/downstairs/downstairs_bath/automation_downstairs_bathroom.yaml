@@ -10,6 +10,7 @@ automation:
         entity_id: binary_sensor.motion_downstairs_bath
         to: 'on'
 
+    mode: restart
     action:
       - service: input_boolean.turn_on
         data:
@@ -33,7 +34,7 @@ automation:
         conditions:
           - condition: time
             after: '17:00:00'
-            before: '08:00:00'
+            before: '08:30:00'
           
           - condition: state
             entity_id: input_boolean.rain
@@ -57,7 +58,7 @@ automation:
         entity_id: binary_sensor.downstairs_bath_presence
         to: 'off'
         for:
-          minutes: 3
+          minutes: 2
 
       - platform: state
         entity_id: switch.downstairs_bathroom_light

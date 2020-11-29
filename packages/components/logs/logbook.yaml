@@ -28,8 +28,9 @@ logbook:
       - weather
       - zwave
 
-#    entities:
-
+    entities:
+      - script.movie_time
+      - script.movie_paused
 
   include:
     entities:

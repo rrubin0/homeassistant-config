@@ -32,7 +32,7 @@ http:
   ssl_key: !secret ssl_key
   cors_allowed_origins: !secret cors
   ip_ban_enabled: true
-  login_attempts_threshold: 3
+  login_attempts_threshold: 2
 
 mobile_app:
 scene: !include scenes.yaml

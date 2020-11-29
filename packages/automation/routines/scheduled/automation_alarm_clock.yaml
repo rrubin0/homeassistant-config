@@ -23,7 +23,7 @@ automation:
         - fri
 
       - condition: template
-        value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_minus_offset.state }}'
+        value_template: "{{ states('sensor.time') == states('sensor.alarm_clock_time_minus_offset') }}"
 
     action:
       - service: script.morning_sequence
@@ -50,7 +50,7 @@ automation:
         - sat
         - sun
       - condition: template
-        value_template: '{{ states.sensor.time.state == states.sensor.alarm_clock_time_minus_offset.state }}'
+        value_template: "{{ states('sensor.time') == states('sensor.alarm_clock_time_minus_offset') }}"
 
     action:
       - service: script.morning_sequence

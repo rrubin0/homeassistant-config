@@ -5,6 +5,7 @@ automation:
   ### Grill too hot
   - alias: BBQ Grill Alarm High Temp
     initial_state: 'on'
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.grill_temperature
@@ -31,10 +32,14 @@ automation:
             apns_headers:
               'apns-collapse-id': 'bbq_high'
 
+      - delay:
+          seconds: 10
+
 
   ### Grill too cold
   - alias: BBQ Grill Alarm Low Temp
     initial_state: 'on'
+    mode: single
     trigger:
       - platform: state
         entity_id: sensor.grill_temperature
@@ -60,6 +65,9 @@ automation:
                 name: default
             apns_headers:
               'apns-collapse-id': 'bbq_low'
+
+      - delay:
+          seconds: 10
 
 
 

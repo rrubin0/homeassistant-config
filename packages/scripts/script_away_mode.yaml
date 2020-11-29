@@ -51,9 +51,9 @@ script:
         message: "Away mode is ON."
 
     - condition: state
-      entity_id: switch.tv_power
+      entity_id: switch.tv
       state: 'on'
 
     - service: switch.turn_off
-      entity_id: switch.tv_power
+      entity_id: switch.tv
       

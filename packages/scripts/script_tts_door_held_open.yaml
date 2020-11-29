@@ -18,7 +18,7 @@ script:
     - service: media_player.volume_set
       entity_id: media_player.living_room
       data_template:
-        volume_level: "{{ states.sensor.alexa_volume.state }}"
+        volume_level: "{{ states('sensor.alexa_volume') }}"
 
     - service: notify.alexa_media
       data:

@@ -32,35 +32,35 @@ automation:
       - delay:
           minutes: 1
       - service_template: >
-          {%- if states.sensor.rf_switch_one.state | lower == "on" -%}
+          {%- if states('sensor.rf_switch_one') | lower == "on" -%}
               homeassistant.turn_on
           {%- else -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.switch_one
       - service_template: >
-          {%- if states.sensor.rf_switch_two.state | lower == "on" -%}
+          {%- if states('sensor.rf_switch_two') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.switch_two
       - service_template: >
-          {%- if states.sensor.rf_switch_three.state | lower == "on" -%}
+          {%- if states('sensor.rf_switch_three') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.switch_three
       - service_template: >
-          {%- if states.sensor.rf_switch_four.state | lower == "on" -%}
+          {%- if states('sensor.rf_switch_four') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off
           {%- endif -%}    
         entity_id: switch.switch_four
       - service_template: >
-          {%- if states.sensor.rf_switch_five.state | lower == "on" -%}
+          {%- if states('sensor.rf_switch_five') | lower == "on" -%}
               homeassistant.turn_on
           {%- else  -%}
               homeassistant.turn_off

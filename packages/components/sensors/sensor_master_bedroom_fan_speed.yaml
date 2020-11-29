@@ -9,11 +9,11 @@ sensor:
         friendly_name: "Master Bedroom Fan Speed"
         value_template: >-
           {% set temperature = states('sensor.us_avg_temp')|float(none) %}
-          {% if 74 <= temperature <=76.4 %}
+          {% if 74 <= temperature <=76.0 %}
             1
-          {% elif 76.5 <= temperature <=78.4 %}
+          {% elif 76.1 <= temperature <=77.6 %}
             2
-          {% elif 78.5 <= temperature <=81.0 %}
+          {% elif 77.7 <= temperature <=81.0 %}
             4
           {% elif temperature > 81.0 %}
             5

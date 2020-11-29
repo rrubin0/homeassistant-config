@@ -5,6 +5,8 @@ sensor:
   - platform: template
     sensors:
       front_entry_motion:
+        friendly_name: "Front Entry Motion"
+        icon_template: mdi:motion-sensor
         value_template: >-
           {% set state = states('sensor.front_entry_fibaro_multisensor_burglar') %}
           {% if state == '0' %}

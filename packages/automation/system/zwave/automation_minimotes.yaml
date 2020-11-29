@@ -1,6 +1,6 @@
 
   ###################################################################
-  ### Aeotec zwave Minimote #1: zwave.family_room_minimote
+  ### Aeotec zwave Minimote #1: zwave.living_room_minimote
   #####
   ###    short                       long
   ###  1 script.evening    script.bright
@@ -15,7 +15,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 1
 
     action:
@@ -29,7 +29,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 2
 
     action:
@@ -43,7 +43,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 3
 
     action:
@@ -60,7 +60,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 4
 
     action:
@@ -74,7 +74,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 5
 
     action:
@@ -91,7 +91,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 6
 
     action:
@@ -108,7 +108,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 7
 
     action:
@@ -123,7 +123,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.family_room_minimote
+          entity_id: zwave.living_room_minimote
           scene_id: 8
 
     action:
@@ -131,7 +131,7 @@ automation:
 
 
   ###################################################################
-  ### Aeotec zwave Minimote #3: zwave.master_br_minimote
+  ### Aeotec zwave Minimote #3: zwave.master_bedroom_minimote
   #####
   ###    short                       long
   ###  1 mbr dim                    mbr bright
@@ -145,7 +145,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 1
 
     action:
@@ -170,7 +170,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 2
 
     action:
@@ -189,7 +189,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 3
 
     action:
@@ -202,7 +202,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 4
 
     action:
@@ -215,7 +215,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 5
 
     action:
@@ -230,7 +230,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 6
 
 # set fan speed to 2
@@ -247,7 +247,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 7
 
     action:
@@ -262,7 +262,7 @@ automation:
       - platform: event
         event_type: zwave.scene_activated
         event_data:
-          entity_id: zwave.master_br_minimote
+          entity_id: zwave.master_bedroom_minimote
           scene_id: 8
 
     action:

@@ -149,7 +149,7 @@ script:
     - service: media_player.volume_set
       entity_id: media_player.office
       data_template:
-        volume_level: "{{ states.sensor.alexa_volume.state }}"
+        volume_level: "{{ states('sensor.alexa_volume') }}"
 
     - service: media_player.play_media
       data:

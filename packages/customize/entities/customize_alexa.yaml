@@ -4,7 +4,7 @@
 homeassistant:
   customize:
     input_text.alexa_tts:
-      icon: mdi:textbox
+      icon: mdi:form-textbox
 
     input_select.alexa:
       icon: mdi:amazon-alexa

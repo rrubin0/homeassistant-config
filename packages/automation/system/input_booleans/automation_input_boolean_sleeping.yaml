@@ -7,7 +7,7 @@ automation:
      
     trigger:
       - platform: time
-        at: '9:45:00'
+        at: '10:30:00'
 
     condition:
       - condition: time
@@ -29,7 +29,7 @@ automation:
      
     trigger:
       - platform: time
-        at: '11:30:00'
+        at: '11:45:00'
 
     condition:
       - condition: time

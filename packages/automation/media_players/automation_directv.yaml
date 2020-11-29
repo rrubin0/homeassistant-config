@@ -1,25 +1,30 @@
 #####################################################################
-### Automations for Living Room TV input select
+# Set DirecTV Channel
 #####################################################################
 automation:
-  ### Living Room TV Input Select
-  - alias: Living Room TV Select Input
-    initial_state: 'on'
+  - alias: "DirecTV Channel Selection"
+    description: "Change the channel based on selection."
     trigger:
       - platform: state
-        entity_id: input_select.living_room_tv_input
+        entity_id: input_select.directv_channel
 
     condition:
       - condition: template
         value_template: "{{ trigger.to_state.state != 'Select an option...' }}"
-
+        
     action:
-      - service: switch.turn_on
+      - service: script.turn_on
         data_template:
-          entity_id: "switch.{{ trigger.to_state.state|lower }}"
+          entity_id: "script.directv_media_living_room_{{ trigger.to_state.state|lower|replace(' ', '_') }}"
 
-# Reset the Input Select to "Select an option..."
       - service: input_select.select_option
         data_template:
           entity_id: "{{ trigger.to_state.entity_id }}"
-          option: Select an option...
+          option: Select an option...  
+          #input_select.directv_channel
+
+
+
+
+
+

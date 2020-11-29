@@ -1,28 +1,3 @@
-############################################################################
-#    @package          :     alexa_config
-#    @description      :     alexa smarthome config for haaska
-############################################################################
-#alexa_media:
-#  accounts:
-#    - email: !secret amazon_email
-#      password: !secret amazon_pswd
-#      url: amazon.com
-#      exclude_devices:
-#        - "AJ's Fire Tablet Orange"
-#        - "Downstairs Fire Tablet"
-#        - "Upstairs Fire Tablet Blue"
-#        - "Master Bedroom TV"
-#        - "Office TV"
-#        - "This Device"
-#        - "Other TV"
-#        - "iPhone 6 Plus Music's Alexa Apps"
-#        - "Dash Wand"
-#        - "Megan's Alexa Apps"
-#        - "Richard's echosim_BETA"
-#        - "Richard's Fire TV Stick"
-##        - "Richard's 3rd Fire"
-
-
 #####################################################################
 ### Alexa Smarthome Integration
 #####################################################################
@@ -73,6 +48,7 @@ alexa:
         - script.morning_sequence
         - script.movie_time
         - script.nap_time
+        - script.nightlight
         - script.play_white_noise
         - script.pool_blue
         - script.pool_caribbean
@@ -143,10 +119,12 @@ alexa:
         - light.pantry
         - light.bedframe_light
         - light.wine_room_ceiling
+        - light.bar_strip_light
 
       ################################################
       ## Switches
       ################################################
+        - switch.amp
 #        - switch.amp_input_dvd
 #        - switch.amp_input_ipod
 #        - switch.amp_input_movie
@@ -154,21 +132,30 @@ alexa:
 #        - switch.amp_movie_mode
 #        - switch.amp_music_mode
 #        - switch.amp_mute
-        - switch.amp_power
-        - switch.directv_play
+#        - switch.amp_volume
+        - switch.aquarium
+        - switch.back_yard_outlet
+        - switch.chromecast
+        - switch.directv
         - switch.directv_power
         - switch.downstairs_bathroom_light
-        - switch.office_spare
+#        - switch.drip_and_citrus_trees_schedule
+#        - switch.drip_and_citrus_trees_z4
+#        - switch.east_sprinklers_z5
+        - switch.fireplace
         - switch.fireplace_flame_down
         - switch.fireplace_flame_up
         - switch.fireplace_flicker
         - switch.fireplace_light
-        - switch.fireplace_power
         - switch.fireplace_temp_down
         - switch.fireplace_temp_up
         - switch.fireplace_timer
         - switch.fountains_switch
+#        - switch.front_porch_lights_switch
+        - switch.front_yard_outlet
         - switch.game_room_floodlights
+        - switch.irrigation_system_rain_delay
+        - switch.kegerator
         - switch.living_room_fan
         - switch.living_room_fan_high
         - switch.living_room_fan_light
@@ -176,26 +163,38 @@ alexa:
         - switch.living_room_fan_medium
         - switch.master_bedroom_fan
         - switch.master_bedroom_fan_light
+        - switch.media
+        - switch.mini_fridge
+        - switch.mute
+#        - switch.north_sprinklers_z1
+#        - switch.northeast_sprinklers_z3
+#        - switch.northwest_sprinklers_z2
         - switch.nursery_lamp
+#        - switch.office_spare
         - switch.outdoor_speakers
         - switch.patio_light
-        - switch.back_yard_outlet
-        - switch.front_yard_outlet
+        - switch.pause
         - switch.pool_light
-        - switch.aquarium
+#        - switch.rachio_standby_mode
+#        - switch.south_porch_lights_switch
+#        - switch.southeast_sprinklers_z6
+#        - switch.southwest_sprinklers_z7
+#        - switch.sprinklers_schedule
         - switch.staircase_lamp
-        - switch.switch_one
-        - switch.switch_two
-        - switch.switch_three
-        - switch.switch_four
+#        - switch.summer_mid_day_cool_down_schedule
         - switch.switch_five
-        - switch.tv_input_chromecast
-        - switch.tv_input_directv
-        - switch.tv_input_firetv
-        - switch.tv_mute
-        - switch.tv_power
+        - switch.switch_four
+        - switch.switch_one
+        - switch.switch_three
+        - switch.switch_two
+        - switch.tv
+        - switch.tv_volume
         - switch.wine_room_lamp
-        - switch.mini_fridge
+#        - switch.winter_seed_afternoon_schedule
+#        - switch.winter_seed_evening_schedule
+#        - switch.winter_seed_morning_schedule
+#        - switch.winter_seed_night_schedule
+
 
       ################################################
       ## Fans
@@ -272,6 +271,14 @@ alexa:
         name: Auto Unlock Schedule
         description: Automation for arrival unlock
 
+      climate.downstairs:
+        name: Downstairs Thermostat
+        description: Downstairs Thermostat
+
+      climate.upstairs:
+        name: Upstairs Thermostat
+        description: Upstairs Thermostat
+
       input_boolean.bbq_alert_high:
         name: High Temp Alarm
         description: High Temp Alarm for BBQ
@@ -284,4 +291,23 @@ alexa:
         name: Food Temp Alarm
         description: Food Target Temp Alarm for BBQ
 
+      switch.directv_power:
+        name: DirecTV
+        description: DirecTV
+
+      switch.directv:
+        name: Input One
+        description: TV Input One
+
+      switch.media:
+        name: Input Two
+        description: TV Input Two
+
+      switch.chromecast:
+        name: Input Three
+        description: TV Input Three
+
+      switch.irrigation_system_rain_delay:
+        name: Rain Delay
+        description: Rachio Rain Delay
 

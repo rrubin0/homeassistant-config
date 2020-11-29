@@ -54,7 +54,6 @@ sensor:
           {% else %}
             {{ states('sensor.ricks_eta_home') }}
           {% endif %}
-        entity_id: sensor.time
 
       megs_eta:
         friendly_name: "Meg's ETA"
@@ -64,4 +63,3 @@ sensor:
           {% else %}
             {{ states('sensor.megs_eta_home') }}
           {% endif %}
-        entity_id: sensor.time

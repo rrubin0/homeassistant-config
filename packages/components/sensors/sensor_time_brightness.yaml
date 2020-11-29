@@ -22,4 +22,3 @@ sensor:
           {%- else -%}
             64
           {%- endif -%}
-        entity_id: sensor.time

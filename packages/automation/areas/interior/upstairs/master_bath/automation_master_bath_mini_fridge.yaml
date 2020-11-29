@@ -7,7 +7,7 @@ automation:
     initial_state: 'on'
     trigger:
       - platform: time
-        at: '09:45:00'
+        at: '11:15:00'
 
     condition:
       - condition: state
