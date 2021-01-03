@@ -105,6 +105,7 @@ alexa:
         - light.laundry_room
         - light.living_room_lamp
         - light.living_room_ceiling
+        - light.lounge_light
         - light.master_bathroom_ceiling
         - light.master_bath_vanity
         - light.master_bed_ceiling
@@ -115,7 +116,7 @@ alexa:
         - light.master_sitting_lamp
         - light.nursery_light
         - light.nursery_wall_light
-        - light.office_desk_lamp
+#        - light.office_desk_lamp
         - light.pantry
         - light.bedframe_light
         - light.wine_room_ceiling
@@ -170,7 +171,7 @@ alexa:
 #        - switch.northeast_sprinklers_z3
 #        - switch.northwest_sprinklers_z2
         - switch.nursery_lamp
-#        - switch.office_spare
+        - switch.christmas_tree
         - switch.outdoor_speakers
         - switch.patio_light
         - switch.pause
@@ -302,6 +303,10 @@ alexa:
       switch.media:
         name: Input Two
         description: TV Input Two
+        
+      switch.switch_two:
+        name: Stairway Christmas Lights
+        description: Stairway Christmas Lights
 
       switch.chromecast:
         name: Input Three

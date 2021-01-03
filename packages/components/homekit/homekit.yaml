@@ -45,7 +45,7 @@ homekit:
       - light.master_sitting_lamp
       - light.nursery_light
       - light.nursery_wall_light
-      - light.office_desk_lamp
+#      - light.office_desk_lamp
       - light.bedframe_light
       - light.wine_room_ceiling
 

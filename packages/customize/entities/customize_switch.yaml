@@ -10,7 +10,7 @@ homeassistant:
       icon: mdi:power-socket-us
 
     switch.switch_two:
-      friendly_name: "Porch Christmas Lights"
+      friendly_name: "Stairway Christmas Lights"
       assumed_state: false
       icon: mdi:power-socket-us
 
@@ -30,46 +30,19 @@ homeassistant:
       icon: mdi:cup-water
 
 
-## these are subject to change for holidays, etc.
-    switch.office_spare:
-      icon: mdi:power-socket-us
-
-    switch.aquarium:
-      icon: mdi:power-socket-us
-
-
   ##########################################
   ## Switch Icon Customizations
   ##########################################
-    switch.back_yard_outlet:
-      icon: mdi:white-balance-incandescent
-
-    switch.downstairs_bathroom_light:
-      icon: mdi:white-balance-incandescent
-
-    switch.fountains_switch:
-      icon: mdi:beach
-
-    switch.front_porch_lights_switch:
-      icon: mdi:white-balance-incandescent
-
-    switch.front_yard_outlet:
-      icon: mdi:stocking
-
-    switch.game_room_floodlights:
-      icon: mdi:ceiling-light
-
-    switch.kegerator:
-      icon: mdi:power-socket-us
+    switch.fireplace:
+      friendly_name: "Fireplace"
+      assumed_state: true
+      icon: mdi:power
 
     switch.living_room_fan:
       icon: mdi:fan
 
     switch.master_bedroom_fan:
       icon: mdi:fan
-
-    switch.mini_fridge:
-      icon: mdi:power-socket-us
 
     switch.living_room_fan_light:
       assumed_state: false
@@ -79,24 +52,14 @@ homeassistant:
       assumed_state: false
       icon: mdi:ceiling-light
 
-    switch.nursery_lamp:
-      icon: mdi:power-socket-us
-
-    switch.outdoor_speakers:
-      entity_picture: /local/music.ico
-
-    switch.patio_light:
-      icon: mdi:white-balance-incandescent
-
-    switch.pool_light:
-      icon: mdi:pool
-
-    switch.south_porch_lights_switch:
-      icon: mdi:white-balance-incandescent
-
     switch.staircase_lamp:
       icon: mdi:lamp
 
     switch.wine_room_lamp:
       icon: mdi:lamp
+
+#    switch.outdoor_speakers:
+#      entity_picture: /local/music.ico
+
+
 

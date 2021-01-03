@@ -27,28 +27,28 @@ sensor:
         unit_of_measurement: 'kWh'
 
 
-## TP-LINK Outlet Usage: Flower Lamp
+## TP-LINK Outlet Usage: Christmas Tree
   - platform: template
     sensors:
-      office_spare_amps:
-        friendly_name_template: "{{ states.switch.office_spare.name}} Current"
-        value_template: '{{ states.switch.office_spare.attributes["current_a"] | float }}'
+      christmas_tree_amps:
+        friendly_name_template: "{{ states.switch.christmas_tree.name}} Current"
+        value_template: '{{ states.switch.christmas_tree.attributes["current_a"] | float }}'
         unit_of_measurement: 'A'
-      office_spare_watts:
-        friendly_name_template: "{{ states.switch.office_spare.name}} Current Consumption"
-        value_template: '{{ states.switch.office_spare.attributes["current_power_w"] | float }}'
+      christmas_tree_watts:
+        friendly_name_template: "{{ states.switch.christmas_tree.name}} Current Consumption"
+        value_template: '{{ states.switch.christmas_tree.attributes["current_power_w"] | float }}'
         unit_of_measurement: 'W'
-      office_spare_total_kwh:
-        friendly_name_template: "{{ states.switch.office_spare.name}} Total Consumption"
-        value_template: '{{ states.switch.office_spare.attributes["total_energy_kwh"] | float }}'
+      christmas_tree_total_kwh:
+        friendly_name_template: "{{ states.switch.christmas_tree.name}} Total Consumption"
+        value_template: '{{ states.switch.christmas_tree.attributes["total_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
-      office_spare_volts:
-        friendly_name_template: "{{ states.switch.office_spare.name}} Voltage"
-        value_template: '{{ states.switch.office_spare.attributes["voltage"] | float }}'
+      christmas_tree_volts:
+        friendly_name_template: "{{ states.switch.christmas_tree.name}} Voltage"
+        value_template: '{{ states.switch.christmas_tree.attributes["voltage"] | float }}'
         unit_of_measurement: 'V'
-      office_spare_today_kwh:
-        friendly_name_template: "{{ states.switch.office_spare.name}} Today's Consumption"
-        value_template: '{{ states.switch.office_spare.attributes["today_energy_kwh"] | float }}'
+      christmas_tree_today_kwh:
+        friendly_name_template: "{{ states.switch.christmas_tree.name}} Today's Consumption"
+        value_template: '{{ states.switch.christmas_tree.attributes["today_energy_kwh"] | float }}'
         unit_of_measurement: 'kWh'
 
 

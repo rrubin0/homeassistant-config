@@ -8,15 +8,11 @@ sensor:
         friendly_name: "Front Entry Motion"
         icon_template: mdi:motion-sensor
         value_template: >-
-          {% set state = states('sensor.front_entry_fibaro_multisensor_burglar') %}
-          {% if state == '0' %}
+          {% set state = states('binary_sensor.front_entry_fibaro_multisensor') %}
+          {% if state == 'off' %}
             Clear
-          {% elif state == '8' %}
+          {% elif state == 'on' %}
             Detected
-          {% elif state == '3' %}
-            Tamper
-          {% elif state == '254' %}
-            Sleeping
           {% else %}
             {{ state|title }}
           {% endif %}

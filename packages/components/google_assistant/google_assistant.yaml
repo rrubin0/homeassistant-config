@@ -95,6 +95,8 @@ google_assistant:
       expose: false
     light.kitchen_night_light:
       expose: false
+    light.lounge_light:
+      expose: false
     light.master_bath_entry:
       expose: false
     light.master_bath_sink:

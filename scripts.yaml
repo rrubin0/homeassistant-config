@@ -1,0 +1,2663 @@
+#script:
+  #####################################################################
+  ### Alexa Actionable Notifications Template Script
+  #####################################################################
+  activate_alexa_actionable_notification:
+    description: 'Activates an actionable notification on a specific echo device'
+    fields:
+      text:
+        description: 'The text you would like alexa to speak.'
+      event_id:
+        description: 'Correlation ID for event responses'
+      alexa_device: 
+        description: 'Alexa device you want to trigger'
+    sequence:
+      - service: input_text.set_value
+        data_template:
+          entity_id: input_text.alexa_actionable_notification
+          value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
+      - service: media_player.play_media
+        data_template:
+          entity_id: "{{ alexa_device }}"
+          media_content_type: skill
+          media_content_id: !secret amazon_alexa_skill_id
+#          media_content_id: amzn1.ask.skill.a85fd060-7fa9-47b4-ab56-92b4d35c5a8c
+
+
+  unlock_megs:
+    alias: "Unlock Door for Megan"
+    sequence:
+    - service: lock.unlock
+      entity_id: lock.south_entry_locked
+
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Arrived"
+        message: "Megs is home!"
+
+    - delay:
+        minutes: 15
+    - service: lock.lock
+      entity_id: lock.south_entry_locked
+
+
+#####################################################################
+###  Away Mode
+#####################################################################
+  away:
+    alias: "Away Mode"
+    sequence:
+    ### lock the doors
+    - service: lock.lock
+      entity_id: all
+
+    ### turn off all lights (except porch) and devices
+    - service: homeassistant.turn_off
+      entity_id:
+        - fan.patio_fan
+        - group.interior_lights
+#        - group.exterior_lights #disable for christmas
+        - switch.patio_light
+        - switch.pool_light
+#        - group.outlets
+        - switch.mini_fridge
+        - switch.aquarium
+        - switch.office_spare
+      # rf switch upstairs wipe warmer
+        - switch.switch_one
+      # rf switch downstairs wipe warmer
+        - switch.switch_three
+      # rf switch power wheels charger
+        - switch.switch_four
+      # rf switch nursery humidifier
+        - switch.switch_five
+
+    ### set climate away mode
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.downstairs
+        preset_mode: 'Away'
+
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.upstairs
+        preset_mode: 'Away'
+
+    - service: automation.turn_off
+      entity_id: automation.evening_scene_schedule
+
+    ### send notification
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Away Mode ON"
+        message: "Away mode is ON."
+
+    - condition: state
+      entity_id: switch.tv
+      state: 'on'
+
+    - service: switch.turn_off
+      entity_id: switch.tv
+
+
+#####################################################################
+### Bedtime Sequence
+#####################################################################
+  bedtime:
+    alias: "Bedtime"
+    sequence:
+    # lock up
+    - service: lock.lock
+      entity_id: all
+
+    # reset lighting overrides
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.dinner_time
+
+    # turn off the "outdoor speakers and downstairs wipe warmer"
+    - service: switch.turn_off
+      entity_id:
+        - switch.outdoor_speakers
+        - switch.switch_three
+
+    - service: switch.turn_off
+      entity_id: switch.living_room_fan
+
+    - delay:
+        minutes: 3
+
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.exterior_lights
+        - group.interior_lights
+
+    - delay:
+        minutes: 5
+
+    - service: light.turn_off
+      entity_id: light.bedframe_light
+
+
+#####################################################################
+### Camera PTZ Controls
+#####################################################################
+  driveway_ptz_1:
+    alias: "Driveway PTZ Preset 1"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_1
+
+  driveway_ptz_2:
+    alias: "Driveway PTZ Preset 2"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_2
+
+  driveway_ptz_3:
+    alias: "Driveway PTZ Preset 3"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_3
+
+  driveway_ptz_4:
+    alias: "Driveway PTZ Preset 4"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_4
+
+  driveway_ptz_5:
+    alias: "Driveway PTZ Preset 5"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_5
+
+  driveway_ptz_6:
+    alias: "Driveway PTZ Preset 6"
+    sequence:
+      - service: shell_command.driveway_ptz_preset_6
+
+
+  ## Nursery PTZ Camera Presets
+  nursery_ptz_1:
+    alias: "Nursery PTZ Preset 1"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_1
+
+  nursery_ptz_2:
+    alias: "Nursery PTZ Preset 2"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_2
+
+  nursery_ptz_3:
+    alias: "Nursery PTZ Preset 3"
+    sequence:
+      - service: shell_command.nursery_ptz_preset_3
+
+
+  ## Nursery Crib (North) PTZ Camera Presets
+  crib_ptz_1:
+    alias: "Crib PTZ Preset 1"
+    sequence:
+      - service: shell_command.crib_ptz_preset_1
+
+  crib_ptz_2:
+    alias: "Crib PTZ Preset 2"
+    sequence:
+      - service: shell_command.crib_ptz_preset_2
+
+  crib_ptz_3:
+    alias: "Crib PTZ Preset 3"
+    sequence:
+      - service: shell_command.crib_ptz_preset_3
+
+
+  #####################################################################
+  ### Play Christmas Music Inside
+  #####################################################################
+  christmas_music:
+    alias: "Play Christmas Music"
+    sequence:
+#    - service: media_player.volume_set
+#      data:
+#        entity_id: media_player.everywhere
+#        volume_level: .5
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.wine_room
+        media_content_id : holiday classics
+        media_content_type: AMAZON_MUSIC
+
+
+  #####################################################################
+  ### Stop Playing Christmas Music
+  #####################################################################
+  stop_playing_everywhere:
+    alias: "Stop Playing Everywhere"
+    sequence:
+    - service: media_player.media_play_pause
+      data:
+        entity_id: media_player.wine_room
+
+    - service: media_player.volume_set
+      entity_id: media_player.everywhere
+      data_template:
+        volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+#####################################################################
+### Company Mode
+#####################################################################
+  company_mode:
+    alias: "Company Mode"
+    sequence:
+    - service: switch.turn_on
+      entity_id:
+        - switch.outdoor_speakers
+        - switch.game_room_floodlights
+        - switch.pool_light
+
+    - service: scene.turn_on
+      entity_id: scene.bright
+
+    - service: lock.unlock
+      entity_id: all
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights
+        brightness: 130
+
+    - service: light.turn_on
+      data:
+        entity_id: light.dining_room_chandelier
+        brightness: 130
+
+
+#####################################################################
+### Living Room DirecTV Remote Control Commands
+#####################################################################
+  # change channel to Nick Jr. using media_content_type call
+  directv_media_living_room_lifetime:
+    alias: "Lifetime"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 252
+
+
+  directv_media_living_room_lifetime_movie:
+    alias: "Lifetime Movie Network"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 253
+
+
+  directv_media_living_room_hallmark:
+    alias: "Hallmark"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 312
+
+
+  directv_media_living_room_espn:
+    alias: "ESPN"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 206
+
+
+  directv_media_living_room_nfl_network:
+    alias: "NFL Network"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 212
+
+
+  directv_media_living_room_food:
+    alias: "Food Network"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 231
+
+
+  directv_media_living_room_hgtv:
+    alias: "HGTV"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 229
+
+
+  directv_media_living_room_cooking:
+    alias: "Cooking"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 232
+
+
+  directv_media_living_room_bravo:
+    alias: "Bravo"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 237
+
+
+  directv_media_living_room_fox_sports:
+    alias: "FOX Sports"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 686
+
+
+  directv_media_living_room_sec_network:
+    alias: "SEC TV"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 611
+
+
+  directv_media_living_room_nfl_mix:
+    alias: "Sunday Ticket Mix"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 702
+
+
+  directv_media_living_room_nfl_redzone:
+    alias: "Sunday Ticket Redzone"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 704
+
+
+  directv_media_living_room_nick_jr:
+    alias: "Nick Jr."
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.directv_living_room
+        media_content_type: channel
+        media_content_id: 301
+
+
+
+
+
+
+#  # change channel to NFL Network
+#  directv_remote_living_room_nfl:
+#    alias: "NFL Network"
+#    sequence:
+#    - service: remote.send_command
+#      data:
+#        entity_id: remote.directv_living_room
+#        command:
+#          - 2
+#          - 1
+#          - 2
+#          - enter
+
+
+
+# 252 - lifetime
+# 253 - LMN
+# 312 - HALL
+# 206 - ESPN
+# 229 - HGTV
+# 231 - Food
+# 232 - Cooking
+# 237 - Bravo
+# 686 - Fox AZ
+# 702 - NFL Mix
+# 704 - RedZone
+# 611 - SEC
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#####################################################################
+### Kitchen DirecTV Remote Control Commands
+#####################################################################
+
+
+
+
+
+
+#####################################################################
+### Patio DirecTV Remote Control Commands
+#####################################################################
+
+
+
+
+
+
+#####################################################################
+### Office DirecTV Remote Control Commands
+#####################################################################
+
+
+
+
+
+#####################################################################
+### Downstairs Ecobee Thermostat Scripts
+#####################################################################
+  ecobee_ds_home:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Home'
+
+  ecobee_ds_eco:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Eco'
+
+  ecobee_ds_away:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Away'
+
+  ecobee_ds_sleep:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Sleep'
+
+  ecobee_ds_normal:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.downstairs
+          preset_mode: 'Normal'
+
+  ecobee_ds_resume:
+    sequence:
+      - service: ecobee.resume_program
+        data:
+          entity_id: climate.downstairs
+          resume_all: 'true'
+
+
+#####################################################################
+### Upstairs Ecobee Thermostat Scripts
+#####################################################################
+  ecobee_us_home:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Home'
+
+  ecobee_us_eco:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Eco'
+
+  ecobee_us_away:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Away'
+
+  ecobee_us_sleep:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Sleep'
+
+  ecobee_us_resume:
+    sequence:
+      - service: ecobee.resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+
+
+#####################################################################
+### Philips Hue Scenes
+#####################################################################
+  hue_lr_dimmed:
+    alias: "Living Room Dim"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Dimmed"
+
+  hue_lr_nightlight:
+    alias: "Living Room Nightlight"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Nightlight"
+
+  hue_lr_normal:
+    alias: "Normal"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Normal"
+
+  hue_lr_bright:
+    alias: "Bright"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Bright"
+
+  hue_lr_christmas:
+    alias: "Christmas Time"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Christmas"
+
+  hue_lr_movie:
+    alias: "Theater"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Movie"
+
+  hue_lr_sunrise:
+    alias: "Sunrise"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunrise"
+
+  hue_lr_sunset:
+    alias: "Sunset"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Sunset"
+
+  hue_lr_minty:
+    alias: "Minty"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Minty"
+
+  hue_lr_daybreak:
+    alias: "Daybreak"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Living Room"
+          scene_name: "Daybreak"
+
+  hue_mbath_morning:
+    alias: "Master Bathroom Morning"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bathroom"
+          scene_name: "Morning"
+
+  hue_master_bedside_dimmed:
+    alias: "Bedside Lamp Low"
+    sequence:
+      - service: hue.hue_activate_scene
+        data:
+          group_name: "Master Bedside Lamps"
+          scene_name: "Dimmed"
+
+
+#####################################################################
+### Workaround for turning off all lights "except" x y z
+#####################################################################
+  lights_off_except:
+    icon: mdi:home-lightbulb
+    fields:
+      exclude_lights:
+        description: 'Excluded lights as list'
+    sequence:
+      - service: logbook.log
+        data_template:
+          entity_id: script.turn_off_lights
+          name: Exclude log
+          message: "Excluding {{ exclude_lights }}"
+      - service: light.turn_off
+        data_template:
+          entity_id: >
+            {%- for device in states.light|rejectattr('entity_id','in', exclude_lights )|rejectattr('state','in','off') %}{%- if loop.first %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif %}{%- endfor  %}
+  
+  
+### Call using:
+#    - service: script.lights_off_except
+#      exclude_lights:
+#        - light.light_1
+#        - light.light_2
+#        ...
+
+
+#####################################################################
+###  Mailbox Alert - notify if mailbox is opened
+#####################################################################
+  mailbox_alert:
+    alias: "Mailbox Alert"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Mailbox"
+        message: "Someone opened the mailbox"
+        data:
+          push:
+            thread-id: "mailbox"
+            sound:
+              name: default
+
+    - condition: time
+      before: '15:30:00'
+      after: '08:00:00'
+
+    - service: notify.alexa_media
+      data:
+        target: media_player.living_room
+        data:
+          type: tts
+        message: "It looks like the mail has arrived, please go check."
+
+
+#####################################################################
+### Master Bedroom Scripts
+#####################################################################
+  ### Master Bedroom Night Time Mode
+  master_bedroom_night_time:
+    alias: "Master Bedroom Night Time"
+    sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.foyer_lights
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bathroom"
+        scene_name: "Morning"
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bedside Lamps"
+        scene_name: "Tropical twilight"
+
+    - service: light.turn_on
+      data:
+        entity_id: light.bedframe_light
+        brightness: 55
+        rgb_color: [0,55,55]
+
+    - service: switch.turn_on
+      data:
+        entity_id: switch.mini_fridge
+
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.sleeping
+
+
+#    - service: switch.turn_on
+#      entity_id: switch.master_bedroom_fan
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.master_bedroom_fan_speed
+#        option: 4
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_bedroom_chandelier
+#        brightness: 55
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_sitting_lamp
+#        brightness: 50
+#        transition: 3
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.master_bed_entry
+#        brightness: 50
+
+
+  ### Night Light Mode
+  mbr_night_light:
+    alias: "Night Light"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedframe_light
+        brightness: 40
+        rgb_color: [0,60,60]
+
+    - service: light.turn_on
+      data:
+        entity_id: light.master_sitting_lamp
+        brightness: 60
+        transition: 10
+
+    - delay:
+        minutes: 10
+
+    - service: light.turn_off
+      data:
+        entity_id: light.master_sitting_lamp
+        transition: 5
+
+    - delay:
+        minutes: 1
+
+    - service: light.turn_off
+      entity_id: light.bedframe_light
+
+
+#####################################################################
+### Media Players
+#####################################################################
+  tv_power_off:
+    alias: "TV Shutdown"
+    sequence:
+
+    - service: switch.turn_off
+      entity_id: switch.tv
+
+    - service: switch.turn_off
+      entity_id: switch.directv
+
+
+#####################################################################
+### Morning Sequence
+#####################################################################
+  morning_sequence:
+    alias: "Morning Sequence"
+    sequence:
+    ### Alarm Clock Transition Time Start
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Master Bathroom"
+        scene_name: "Morning"
+
+    - delay:
+        minutes: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.master_bath_vanity
+        brightness: 55
+
+    - service: homeassistant.turn_on
+      entity_id: group.accent_lights
+
+    - delay:
+        minutes: 10
+
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.foyer_lights
+#        brightness: 60
+
+    - service: light.turn_on
+      data_template:
+        entity_id: light.entryway
+        brightness: 140
+        transition: "{{ states('input_number.alarm_clock_offset') | int * 60 }}"
+#        transition: "{{(states('input_number.alarm_clock_offset') | int ) *60}}"
+
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Sunrise"
+
+    - delay:
+        minutes: 15
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights
+        brightness: 200
+
+    - delay:
+        minutes: 20
+
+    ## Return lights to normal state
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Normal"
+
+    ## Start turning lights off
+    - service: homeassistant.turn_off
+      entity_id: group.accent_lights
+
+    - delay:
+        minutes: 10
+
+    - service: light.turn_off
+      entity_id: light.kitchen_lights
+
+    - delay:
+        minutes: 10
+
+    - service: homeassistant.turn_off
+      entity_id: group.living_room_lights
+
+    - service: homeassistant.turn_off
+      entity_id: group.entry_lights
+
+
+#####################################################################
+### Nap Time
+#####################################################################
+  nap_time:
+    alias: "Nap Time"
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.upstairs
+          preset_mode: 'Sleep'
+
+      - delay:
+          seconds: 10
+
+      - service: light.turn_off
+        entity_id:
+          - light.nursery_light
+          - light.nursery_wall_light
+
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.sleeping
+
+      - delay:
+          minutes: 120
+
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.sleeping
+
+      - service: ecobee.resume_program
+        data:
+          entity_id: climate.upstairs
+          resume_all: 'true'
+
+
+#####################################################################
+### Night Light
+#####################################################################
+  nightlight:
+    alias: "Night Light"
+    sequence:
+    - service: light.turn_on
+      entity_id: light.bedframe_light
+
+    - delay:
+        minutes: 7
+
+    - service: light.turn_off
+      entity_id: light.bedframe_light
+
+
+  #####################################################################
+  ### Play Baby Playlist on Alexa Dot in Nursery
+  #####################################################################
+  baby_playlist:
+    alias: "Play Baby Playlist"
+    sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.nursery
+        volume_level: .5
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.nursery
+        media_content_id : my_baby_playlist
+        media_content_type: AMAZON_MUSIC
+
+
+  #####################################################################
+  ### Play White Noise on Alexa Dot in Nursery
+  #####################################################################
+  play_white_noise:
+    alias: "Play White Noise"
+    sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.nursery
+        volume_level: .5
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.nursery
+        media_content_id : my_white_noise_playlist
+        media_content_type: AMAZON_MUSIC
+
+
+  #####################################################################
+  ### Stop Playing in Nursery
+  #####################################################################
+  stop_playing_nursery:
+    alias: "Stop Playing Nursery"
+    sequence:
+    - service: media_player.media_play_pause
+      data:
+        entity_id: media_player.nursery
+
+    - service: media_player.volume_set
+      entity_id: media_player.nursery
+      data_template:
+        volume_level: "{{ states('sensor.alexa_volume') }}"
+
+
+#####################################################################
+### Sun Up - lights off
+#####################################################################
+  sun_up:
+    alias: "Turn off lights if sun is up"
+    sequence:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living Room"
+        scene_name: "Bright"
+
+    - delay:
+        minutes: 10
+
+    - service: homeassistant.turn_off
+      entity_id: group.interior_lights
+
+    - service: light.turn_off
+      entity_id: light.kitchen_night_light
+
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Sun's up. Lights off"
+        message: "Sun is {{ states.sun.sun.attributes.elevation }} at {{ states('sensor.time_templated_am_pm') }}"
+
+
+#####################################################################
+### TEST Scripts
+#####################################################################
+
+  ### A simple script used for testing
+#  script_test:
+#    alias: "Test Script"
+#    sequence:
+#    - service: light.toggle
+#      entity_id: light.office_desk_lamp
+
+
+  ### Testing Flux RGB strip values
+#  rgb_strip_test:
+#    alias: "RGB Strip Test"
+#    sequence:
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.bedframe_light
+#        xy_color: [0.151, 0.343]
+#        brightness: 55
+
+
+  alexa_media_test:
+    alias: "Alexa Media Test"
+    sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.office
+        media_content_id: "Door Bell Playlist"
+        media_content_type: "SPOTIFY"
+
+
+  alexa_announce_test:
+    alias: "Alexa Announce Test"
+    sequence:
+    - service: notify.alexa_media_office
+      data:
+        message: "This is just a test, 1, 2, 3"
+        data:
+          type: announce
+
+
+  christmas_time:
+    alias: "Christmas Time"
+    sequence:
+    - service: scene.turn_on
+      data:
+        entity_id: scene.cozy
+
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.multiple
+        volume_level: .6
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.multiple
+        media_content_id : christmas_classic_playlist
+        media_content_type: SPOTIFY
+
+
+  ### Testing Actionable iOS Notifications
+#  test_actionable_office_desk:
+#    alias: "Test iOS Actionable Desk Lamp"
+#    sequence:
+#    - service: notify.mobile_app_rip8plus
+#      data:
+#        title: "Testing Desk Lamp"
+#        message: "This is a test"
+#        data:
+#          push:
+#            category: "office_lamp"
+#            thread-id: "test-notification"
+
+
+  ### Testing Actionable iOS Notifications
+  test_actionable_away:
+    alias: "Test iOS Actionable Away"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Testing Away"
+        message: "Away Detect Test"
+        data:
+          push:
+            category: "away_override"
+            thread-id: "test-notification"
+
+
+  #####################################################################
+  ### Alexa Media Play Sound Testing
+  #####################################################################
+  test_alexa_alarm_sound:
+    alias: "Test Alexa Media Alarm Sound"
+    sequence:
+      - service: media_player.play_media
+        data:
+          entity_id: media_player.office
+          media_content_type: sound
+          media_content_id: box_04
+
+# amzn_sfx_doorbell_chime_01
+# amzn_sfx_cat_meow_1x_02
+# ghosts_demons/ghosts_demons_11
+# sports/box/box_04
+
+
+  #####################################################################
+  ### Master Bedroom Fan Tests
+  #####################################################################
+#  master_br_fan_group_off_test:
+#    sequence:
+#    - service: homeassistant.turn_off
+#      entity_id: group.master_bedroom_fan
+#
+#  master_br_fan_switch_on_test:
+#    sequence:
+#    - service: homeassistant.turn_on
+#      entity_id: switch.master_bedroom_fan
+
+
+
+#  alexa_sound_test:
+#    sequence:
+#    - service: notify.alexa_media_office
+#      data:
+#        message: "<audio src="soundbank://soundlibrary/horror/horror_07"/>"
+#        data:
+#          type: announce
+
+
+  ### Testing Flux RGB desk lamp
+#  desk_lamp_test:
+#    sequence:
+#    - service: light.turn_on
+#      data:
+#        entity_id: light.office_desk_lamp
+#        xy_color: [0.151, 0.343]
+#        brightness: 55
+
+
+  #####################################################################
+  ### Play Baby Playlist (test using office)
+  #####################################################################
+  baby_playlist_test:
+    alias: "Baby Playlist Test"
+    sequence:
+    - service: media_player.volume_set
+      entity_id: media_player.office
+      data_template:
+        volume_level: "{{ states('sensor.alexa_volume') }}"
+
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.office
+        media_content_id : my_baby_playlist
+        media_content_type: AMAZON_MUSIC
+
+#    - service: media_player.play_media
+#      data:
+#        entity_id: media_player.office
+#        media_content_id : my_white_noise_playlist
+#        media_content_type: AMAZON_MUSIC
+
+
+#####################################################################
+### Scripts used for announcements via Alexa TTS
+#####################################################################
+
+  ### Door held open
+  tts_door_held_open:
+    alias: "Door Held Open"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Door Held Open"
+        message: "A door's held open - Away mode activated on Downstairs Ecobee"
+
+    - condition: state
+      entity_id: input_boolean.announce
+      state: 'on'
+
+    - service: media_player.volume_set
+      entity_id: media_player.living_room
+      data_template:
+        volume_level: "{{ states('sensor.alexa_volume') }}"
+
+    - service: notify.alexa_media
+      data:
+        target: media_player.living_room
+        data:
+          type: tts
+        message: "I've detected a door held open for too long so I'm turning off the AC to save energy."
+
+
+#####################################################################
+### Warm Weather announcement via Alexa TTS
+#####################################################################
+
+  ### Warm Weather while door is open
+  tts_warm_weather:
+    alias: "Close the doors when the weather is too warm"
+    sequence:
+    - service: notify.mobile_app_rip8plus
+      data:
+        title: "Warm Weather"
+        message: "Please close doors and windows"
+        data:
+          push:
+            sound:
+              name: default
+
+    - condition: state
+      entity_id: input_boolean.announce
+      state: 'on'
+
+#    - service: media_player.volume_set
+#      data:
+#        entity_id: media_player.living_room
+#        volume_level: .6
+
+    - service: media_player.volume_set
+      entity_id: media_player.living_room
+      data_template:
+        volume_level: "{{ states('sensor.alexa_volume') }}"
+
+    - service: notify.alexa_media
+      data:
+        target: media_player.living_room
+        message: "'You Guys? The weather is warming up. Please close all doors and windows, for the air-conditioner.'"
+        data:
+          type: tts
+
+
+#####################################################################
+###  Script - Timer Controls
+#####################################################################
+
+  ### Away Timers
+  start_away_timer:
+    alias: "Start Away"
+    sequence:
+      - service: timer.start
+        entity_id: timer.away_mode
+
+  pause_away_timer:
+    alias: "Pause Away"
+    sequence:
+      - service: timer.pause
+        entity_id: timer.away_mode
+
+  cancel_away_timer:
+    alias: "Cancel Away"
+    sequence:
+      - service: timer.cancel
+        entity_id: timer.away_mode
+
+  finish_away_timer:
+    alias: "Finish Away"
+    sequence:
+      - service: timer.finish
+        entity_id: timer.away_mode
+
+
+  ### Bedtime Timers
+  start_bedtime_timer:
+    alias: "Start Bedtime"
+    sequence:
+      - service: timer.start
+        entity_id: timer.bedtime
+
+  pause_bedtime_timer:
+    alias: "Pause Bedtime"
+    sequence:
+      - service: timer.pause
+        entity_id: timer.bedtime
+
+  cancel_bedtime_timer:
+    alias: "Cancel Bedtime"
+    sequence:
+      - service: timer.cancel
+        entity_id: timer.bedtime
+
+  finish_bedtime_timer:
+    alias: "Finish Bedtime"
+    sequence:
+      - service: timer.finish
+        entity_id: timer.bedtime
+
+
+  ### Sun Up Timers
+  start_sun_up_timer:
+    alias: "Start Sun Up"
+    sequence:
+      - service: timer.start
+        entity_id: timer.sun_up
+
+  pause_sun_up_timer:
+    alias: "Pause Sun Up"
+    sequence:
+      - service: timer.pause
+        entity_id: timer.sun_up
+
+  cancel_sun_up_timer:
+    alias: "Cancel Sun Up"
+    sequence:
+      - service: timer.cancel
+        entity_id: timer.sun_up
+
+  finish_sun_up_timer:
+    alias: "Finish Sun Up"
+    sequence:
+      - service: timer.finish
+        entity_id: timer.sun_up
+
+
+#########################################################################
+### Script Based Scenes: Because Scenes don't support transition anymore
+#########################################################################
+  bright:
+    alias: "Bright"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 255
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 255
+        transition: 3
+
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.living_room_lights
+        brightness: 255
+        transition: 5
+
+######################
+### Cloudy Scene
+######################
+  cloudy:
+    alias: "Cloudy"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 250
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 90
+        transition: 15
+
+    - service: light.turn_on
+      data:
+        entity_id: group.living_room_lights
+        brightness: 200
+        transition: 15
+
+######################
+### Dim Scene
+######################
+  dim:
+    alias: "Dim"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 60
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 75
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 100
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 50
+        transition: 20
+
+
+######################
+### Evening Scene
+######################
+  evening:
+    alias: "Evening"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 160
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_entry
+        brightness: 200
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.south_entry
+        brightness: 160
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.center_entry
+        brightness: 50
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 255
+        transition: 10
+
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_ceiling
+        transition: 5
+
+
+######################
+### Game Time Scene
+######################
+  game_time:
+    alias: "Game Time"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.billiards
+        brightness: 170
+        transition: 5
+
+    - service: switch.turn_on
+      entity_id: switch.game_room_floodlights
+
+
+######################
+### Morning Scene
+######################
+  morning:
+    alias: "Morning"
+    sequence:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.accent_lights
+
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 60
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.master_bedroom_chandelier
+        brightness: 40
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 254
+        transition: 600
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 140
+        transition: 600
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 140
+        transition: 900
+
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen_lights
+        brightness: 170
+
+
+######################
+### Movie End Scene
+######################
+  movie_end:
+    alias: "Movie Ended"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 180
+        transition: 30
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 225
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 100
+        transition: 30
+
+
+######################
+### Movie Paused Scene
+######################
+  movie_paused:
+    alias: "Movie Paused"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 50
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 75
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_ceiling
+        brightness: 50
+        transition: 15
+
+
+######################
+### Movie Time Scene
+######################
+  movie_time:
+    alias: "Movie Time"
+    sequence:
+    - service: light.turn_off
+      data:
+        entity_id: light.entryway
+        transition: 5
+
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.living_room_lights
+        transition: 10
+
+    - service: light.turn_off
+      entity_id: light.foyer_lights
+
+
+######################
+### TV Time Scene
+######################
+  tv_time:
+    alias: "TV Time"
+    sequence:
+    - service: light.turn_on
+      data:
+        entity_id: light.foyer_lights
+        brightness: 50
+        transition: 5
+
+    - service: light.turn_on
+      data:
+        entity_id: light.entryway
+        brightness: 30
+        transition: 10
+
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_lamp
+        brightness: 65
+        transition: 15
+
+    - service: light.turn_off
+      data:
+        entity_id: light.living_room_ceiling
+        transition: 5
+
+#####################################################################
+### Scripts to control pool light scene selection
+#####################################################################
+
+  #####################################################################
+  ### Pool Light - Cycle Mode; Channel 1
+  pool_cycle:
+    alias: "Pool Colors"
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly to cycle
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Party Mode; Channel 2
+  pool_party:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Romance; Channel 3
+  pool_romance:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Caribbean; Channel 4
+  pool_caribbean:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Patriotic; Channel 5
+  pool_patriotic:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - California Sunset; Channel 6
+  pool_sunset:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Royal Mode; Channel 7
+  pool_royal:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: 1
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+
+
+#####################################################################
+### Scripts to control pool light color selection
+#####################################################################
+
+  #####################################################################
+  ### Pool Light - Solid Blue; Channel 8
+  pool_blue:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Solid Green; Channel 9
+  pool_green:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Solid Red; Channel 10
+  pool_red:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## Set Pool Scene Selection to "None"
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.pool_scene
+        option: "None"
+
+
+  #####################################################################
+  ### Pool Light - Solid White; Channel 11
+  pool_white:
+    sequence:
+
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 11 - White
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+
+  #####################################################################
+  ### Pool Light - Solid Magenta; Channel 12
+  pool_magenta:
+    sequence:
+  ## turn on the light
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+
+  ## wait before initiating the sequence
+    - delay:
+        seconds: 7
+
+  ## initiate sequence - pause briefly between cycles
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 1 - Color Cycle
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 2 - Party Mode
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 3 - Romance
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 4 - Caribbean
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 5 - Patriotic
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 6 - CA Sunset
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 7 - Royal
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 8 - Blue
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 9 - Green
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 10 - Red
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 11 - White
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+    - service: switch.turn_off
+      entity_id: switch.pool_light
+    - delay:
+        seconds: .8
+
+  ## 12 - Magenta
+    - service: switch.turn_on
+      entity_id: switch.pool_light
+

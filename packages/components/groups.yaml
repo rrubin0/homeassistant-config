@@ -30,9 +30,11 @@ group:
       - light.dining_room_chandelier
       - light.kitchen_lights
       - light.laundry_room
-      - light.office_desk_lamp
+#      - light.office_desk_lamp
       - light.wine_room_ceiling
       - switch.downstairs_bathroom_light
+      - switch.christmas_tree
+      - switch.switch_two #Stairway Christmas Lights
 
 
   #####################################################################
@@ -70,6 +72,7 @@ group:
     entities:
       - switch.wine_room_lamp
       - light.wine_room_ceiling
+      - light.lounge_light
       - light.bar_strip_light
 
 
@@ -153,6 +156,7 @@ group:
   Accent Lights:
     entities:
       - switch.staircase_lamp
+      - switch.switch_two #Stairway Christmas Lights
       - switch.wine_room_lamp
 
 
@@ -172,9 +176,10 @@ group:
     entities:
       - switch.back_yard_outlet
       - switch.front_yard_outlet
-#      - switch.office_spare
-#      - switch.aquarium
-#      - switch.switch_two # porch christmas lights
+      - switch.christmas_tree
+      - switch.switch_two #Stairway Christmas Lights
+      - switch.outdoor_left_outlet
+      - switch.outdoor_right_outlet
 
 
   #####################################################################
@@ -187,7 +192,7 @@ group:
       - switch.office_spare
     # rf switch upstairs wipe warmer
       - switch.switch_one
-    # rf switch porch christmas lights
+    # rf switch stairway christmas lights
       - switch.switch_two
     # rf switch downstairs wipe warmer
       - switch.switch_three
