@@ -20,14 +20,14 @@ homeassistant:
       icon: mdi:power-socket-us
 
     switch.switch_four:
-      friendly_name: "Power Wheels Charger"
+      friendly_name: "Humidifier"
       assumed_state: false
       icon: mdi:power-socket-us
 
     switch.switch_five:
-      friendly_name: "Humidifier"
+      friendly_name: "Starlight"
       assumed_state: false
-      icon: mdi:cup-water
+      icon: mdi:weather-night
 
 
   ##########################################

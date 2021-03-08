@@ -32,8 +32,6 @@ alexa:
         - script.ecobee_us_sleep
         - script.evening
         - script.game_time
-#        - script.hue_lr_bright
-#        - script.hue_lr_christmas
         - script.hue_lr_daybreak
         - script.hue_lr_dimmed
         - script.hue_lr_minty
@@ -71,6 +69,8 @@ alexa:
       ## Scenes (created within Home Assistant UI)
       ################################################
         - scene.cozy
+        - scene.lounge
+        - scene.aj_night_time
 
       ################################################
       ## Groups
@@ -116,7 +116,6 @@ alexa:
         - light.master_sitting_lamp
         - light.nursery_light
         - light.nursery_wall_light
-#        - light.office_desk_lamp
         - light.pantry
         - light.bedframe_light
         - light.wine_room_ceiling
@@ -126,23 +125,11 @@ alexa:
       ## Switches
       ################################################
         - switch.amp
-#        - switch.amp_input_dvd
-#        - switch.amp_input_ipod
-#        - switch.amp_input_movie
-#        - switch.amp_input_tv
-#        - switch.amp_movie_mode
-#        - switch.amp_music_mode
-#        - switch.amp_mute
-#        - switch.amp_volume
+        - switch.appletv
         - switch.aquarium
         - switch.back_yard_outlet
         - switch.chromecast
-        - switch.directv
-        - switch.directv_power
         - switch.downstairs_bathroom_light
-#        - switch.drip_and_citrus_trees_schedule
-#        - switch.drip_and_citrus_trees_z4
-#        - switch.east_sprinklers_z5
         - switch.fireplace
         - switch.fireplace_flame_down
         - switch.fireplace_flame_up
@@ -152,8 +139,8 @@ alexa:
         - switch.fireplace_temp_up
         - switch.fireplace_timer
         - switch.fountains_switch
-#        - switch.front_porch_lights_switch
-        - switch.front_yard_outlet
+        - switch.hdmi_3
+        - switch.porch_rope_lights
         - switch.game_room_floodlights
         - switch.irrigation_system_rain_delay
         - switch.kegerator
@@ -167,22 +154,13 @@ alexa:
         - switch.media
         - switch.mini_fridge
         - switch.mute
-#        - switch.north_sprinklers_z1
-#        - switch.northeast_sprinklers_z3
-#        - switch.northwest_sprinklers_z2
         - switch.nursery_lamp
         - switch.christmas_tree
         - switch.outdoor_speakers
         - switch.patio_light
-        - switch.pause
+        - switch.pc
         - switch.pool_light
-#        - switch.rachio_standby_mode
-#        - switch.south_porch_lights_switch
-#        - switch.southeast_sprinklers_z6
-#        - switch.southwest_sprinklers_z7
-#        - switch.sprinklers_schedule
         - switch.staircase_lamp
-#        - switch.summer_mid_day_cool_down_schedule
         - switch.switch_five
         - switch.switch_four
         - switch.switch_one
@@ -191,10 +169,6 @@ alexa:
         - switch.tv
         - switch.tv_volume
         - switch.wine_room_lamp
-#        - switch.winter_seed_afternoon_schedule
-#        - switch.winter_seed_evening_schedule
-#        - switch.winter_seed_morning_schedule
-#        - switch.winter_seed_night_schedule
 
 
       ################################################
@@ -292,26 +266,33 @@ alexa:
         name: Food Temp Alarm
         description: Food Target Temp Alarm for BBQ
 
-      switch.directv_power:
-        name: DirecTV
-        description: DirecTV
+## TV HDMI Inputs via Broadlink
+#      switch.appletv:
+#        name: AppleTV
+#        description: TV HDMI 1
+#
+#      switch.pc:
+#        name: PC
+#        description: TV HDMI 2
+#
+#      switch.hdmi_3:
+#        name: HDMI 3
+#        description: TV HDMI 3
 
-      switch.directv:
-        name: Input One
-        description: TV Input One
-
-      switch.media:
-        name: Input Two
-        description: TV Input Two
-        
+## 433MHz RF Switches via Broadlink        
       switch.switch_two:
         name: Stairway Christmas Lights
         description: Stairway Christmas Lights
 
-      switch.chromecast:
-        name: Input Three
-        description: TV Input Three
+      switch.switch_four:
+        name: Humidifier
+        description: Humidifier
 
+      switch.switch_five:
+        name: Star Light
+        description: Star Light
+
+## Rachio
       switch.irrigation_system_rain_delay:
         name: Rain Delay
         description: Rachio Rain Delay

@@ -17,7 +17,6 @@ sensor:
 
   ## Uptime
   - platform: uptime
-    unit_of_measurement: hours
 
 
   ## System Resources

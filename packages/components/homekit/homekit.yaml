@@ -33,8 +33,10 @@ homekit:
       - light.foyer_lights
       - light.kitchen_night_light
       - light.kitchen_lights
+      - light.laundry_room
       - light.living_room_lamp
       - light.living_room_ceiling
+      - light.lounge_light
       - light.master_bathroom_ceiling
       - light.master_bath_vanity
       - light.master_bed_ceiling
@@ -45,27 +47,50 @@ homekit:
       - light.master_sitting_lamp
       - light.nursery_light
       - light.nursery_wall_light
-#      - light.office_desk_lamp
+      - light.pantry
       - light.bedframe_light
       - light.wine_room_ceiling
+      - light.bar_strip_light
 
 
 #################################
 # Switches - enabled
 #################################
       - switch.amp
-      - switch.play
+      - switch.appletv
+      - switch.aquarium
+      - switch.back_yard_outlet
+      - switch.chromecast
       - switch.downstairs_bathroom_light
-      - switch.office_spare
-#      - switch.fountains_switch
+      - switch.fireplace
+      - switch.fireplace_flame_down
+      - switch.fireplace_flame_up
+      - switch.fireplace_flicker
+      - switch.fireplace_light
+      - switch.fireplace_temp_down
+      - switch.fireplace_temp_up
+      - switch.fireplace_timer
+      - switch.fountains_switch
+      - switch.hdmi_3
+      - switch.porch_rope_lights
       - switch.game_room_floodlights
+      - switch.irrigation_system_rain_delay
+      - switch.kegerator
       - switch.living_room_fan
+      - switch.living_room_fan_high
+      - switch.living_room_fan_light
+      - switch.living_room_fan_low
+      - switch.living_room_fan_medium
       - switch.master_bedroom_fan
+      - switch.master_bedroom_fan_light
+      - switch.media
+      - switch.mini_fridge
+      - switch.mute
       - switch.nursery_lamp
+      - switch.christmas_tree
       - switch.outdoor_speakers
       - switch.patio_light
-      - switch.back_yard_outlet
-      - switch.front_yard_outlet
+      - switch.pc
       - switch.pool_light
       - switch.staircase_lamp
       - switch.switch_five
@@ -73,13 +98,9 @@ homekit:
       - switch.switch_one
       - switch.switch_three
       - switch.switch_two
-      - switch.tv_input_chromecast
-      - switch.tv_input_directv
-      - switch.tv_input_firetv
-      - switch.mute
       - switch.tv
+      - switch.tv_volume
       - switch.wine_room_lamp
-      - switch.mini_fridge
 
 
 #################################
@@ -92,26 +113,43 @@ homekit:
 #################################
 # Scenes - enabled
 #################################
+      - scene.aj_night_time
       - scene.bright
       - scene.cloudy
+      - scene.cozy
       - scene.dim
       - scene.evening
-      - scene.tv_time
       - scene.game_time
+      - scene.lounge
       - scene.morning
       - scene.movie_time
+      - scene.tv_time
 
 
 #################################
 # Scripts - enabled
 #################################
+      - script.away
+      - script.baby_playlist
+      - script.bedtime
+      - script.bright
+      - script.christmas_time
+      - script.cloudy
       - script.company_mode
+      - script.dim
+      - script.ecobee_ds_away
+      - script.ecobee_ds_eco
       - script.ecobee_ds_home
+      - script.ecobee_ds_normal
       - script.ecobee_ds_resume
+      - script.ecobee_ds_sleep
+      - script.ecobee_us_away
+      - script.ecobee_us_eco
       - script.ecobee_us_home
       - script.ecobee_us_resume
-      - script.find_iphone
-      - script.hue_lr_christmas
+      - script.ecobee_us_sleep
+      - script.evening
+      - script.game_time
       - script.hue_lr_daybreak
       - script.hue_lr_dimmed
       - script.hue_lr_minty
@@ -123,10 +161,27 @@ homekit:
       - script.hue_mbath_morning
       - script.master_bedroom_night_time
       - script.mbr_night_light
+      - script.morning_sequence
+      - script.movie_time
       - script.nap_time
+      - script.nightlight
+      - script.play_white_noise
+      - script.pool_blue
+      - script.pool_caribbean
       - script.pool_cycle
+      - script.pool_green
+      - script.pool_magenta
       - script.pool_party
+      - script.pool_patriotic
+      - script.pool_red
+      - script.pool_romance
+      - script.pool_royal
+      - script.pool_sunset
+      - script.pool_white
       - script.start_bedtime_timer
+      - script.tv_power_off
+      - script.tv_time
+      - script.unlock_megs
 
 
 #################################
@@ -173,7 +228,4 @@ homekit:
 
     switch.mute:
       name: Mute
-
-    switch.directv:
-      name: DirecTV
 

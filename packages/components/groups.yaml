@@ -43,7 +43,7 @@ group:
   Exterior Lights:
     entities:
       - switch.back_yard_outlet
-      - switch.front_yard_outlet
+      - switch.porch_rope_lights
       - switch.patio_light
       - switch.pool_light
       - switch.outdoor_left_outlet
@@ -156,7 +156,7 @@ group:
   Accent Lights:
     entities:
       - switch.staircase_lamp
-      - switch.switch_two #Stairway Christmas Lights
+#      - switch.switch_two #Stairway Christmas Lights
       - switch.wine_room_lamp
 
 
@@ -167,6 +167,7 @@ group:
     entities:
       - switch.south_porch_lights_switch
       - switch.front_porch_lights_switch
+      - switch.porch_rope_lights
 
 
   #####################################################################
@@ -175,7 +176,6 @@ group:
   Christmas Lights:
     entities:
       - switch.back_yard_outlet
-      - switch.front_yard_outlet
       - switch.christmas_tree
       - switch.switch_two #Stairway Christmas Lights
       - switch.outdoor_left_outlet
@@ -198,7 +198,7 @@ group:
       - switch.switch_three
     # rf switch power wheels charger
       - switch.switch_four
-    # rf switch nursery humidifier
+    # rf switch nursery starlight
       - switch.switch_five
 
 

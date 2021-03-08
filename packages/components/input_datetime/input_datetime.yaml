@@ -1,0 +1,10 @@
+input_datetime:
+  master_bedroom_lights_turn_on_before_limit:
+    name: 'Bedroom lights will not turn on before this time'
+    has_date: false
+    has_time: true
+
+  master_bedroom_lights_turn_on_after_limit:
+    name: 'Bedroom lights will not turn on after this time'
+    has_date: false
+    has_time: true

@@ -71,4 +71,13 @@ input_number:
     max: 60
     step: 15
 
+  illumination_master_bedroom_low_cutoff:
+    name: 'Illumination bedroom low cutoff value'
+    min: 1
+    max: 100
+    step: 1
 
+  master_bedroom_no_motion_turn_off_delay:
+    name: 'Time in minutes automation waits to turn off bedroom lights after no motion'
+    min: 1
+    max: 120

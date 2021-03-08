@@ -1,25 +1,25 @@
 #####################################################################
 ### Input Select
 #####################################################################
-input_select:
-  ### Desk Lamp RGB Bulb
-  rgb_light:
-    name: RGB Light
-    initial: "Select an option..."
-    options:
-      - "Select an option..."
-      - "Off"
-      - "Random"
-      - "Cool"
-      - "Warm"
-      - "Warm Dim"
-      - "Red"
-      - "Blue"
-      - "Green"
-      - "Cyan"
-      - "Pink"
-      - "Violet"
-      - "Yellow"
+#input_select:
+#  ### Desk Lamp RGB Bulb
+#  rgb_light:
+#    name: RGB Light
+#    initial: "Select an option..."
+#    options:
+#      - "Select an option..."
+#      - "Off"
+#      - "Random"
+#      - "Cool"
+#      - "Warm"
+#      - "Warm Dim"
+#      - "Red"
+#      - "Blue"
+#      - "Green"
+#      - "Cyan"
+#      - "Pink"
+#      - "Violet"
+#      - "Yellow"
 
 
 

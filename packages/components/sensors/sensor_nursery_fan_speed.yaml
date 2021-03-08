@@ -10,11 +10,11 @@ sensor:
         value_template: >-
           {% set temperature = states('sensor.nursery_temperature')|float(none) %}
           {% if 74.0 <= temperature <=76.0 %}
-            low
+            25
           {% elif 76.1 <= temperature <=79.0 %}
-            medium
+            50
           {% elif temperature > 79.0 %}
-            high
+            100
           {% else %}
             off
           {% endif %}

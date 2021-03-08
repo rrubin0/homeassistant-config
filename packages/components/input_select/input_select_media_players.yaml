@@ -7,9 +7,11 @@ input_select:
     initial: "Select an option..."
     options:
       - "Select an option..."
-      - "DirecTV"
-      - "Media"
-      - "Chromecast"
+      - "AppleTV"
+      - "PC"
+      - "HDMI 3"
+
+
 
   onkyo_amp_input:
     name: Onkyo Amp Input

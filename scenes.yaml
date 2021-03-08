@@ -54,3 +54,70 @@
       xy_color:
       - 0.473
       - 0.4
+- id: '1613875970948'
+  name: Lounge
+  entities:
+    group.wine_room_lights:
+      entity_id:
+      - switch.wine_room_lamp
+      - light.wine_room_ceiling
+      - light.lounge_light
+      - light.bar_strip_light
+      order: 5
+      friendly_name: Wine Room Lights
+      state: 'on'
+    light.kitchen_night_light:
+      brightness: 255
+      hs_color:
+      - 284.918
+      - 71.765
+      rgb_color:
+      - 208
+      - 71
+      - 255
+      xy_color:
+      - 0.319
+      - 0.145
+      friendly_name: Kitchen Night Light
+      supported_features: 17
+      state: 'on'
+    light.kitchen_lights:
+      brightness: 26
+      node_id: 33
+      value_index: 0
+      value_instance: 1
+      value_id: '72057594596392961'
+      friendly_name: Kitchen Lights
+      icon: mdi:white-balance-incandescent
+      supported_features: 1
+      state: 'on'
+    light.dining_room_chandelier:
+      node_id: 34
+      value_index: 0
+      value_instance: 1
+      value_id: '72057594613170177'
+      friendly_name: Dining Room Lights
+      icon: mdi:ceiling-light
+      supported_features: 1
+      state: 'off'
+- id: '1613882282365'
+  name: AJ Night Time
+  entities:
+    switch.switch_five:
+      friendly_name: Starlight
+      assumed_state: false
+      icon: mdi:weather-night
+      state: 'on'
+    switch.aquarium:
+      friendly_name: Aquarium
+      icon: mdi:power-socket-us
+      state: 'on'
+    switch.nursery_lamp:
+      current_power_w: '2.98'
+      total_energy_kwh: '11.269'
+      voltage: '121.0'
+      current_a: '0.04'
+      today_energy_kwh: '0.025'
+      friendly_name: Nursery Lamp
+      icon: mdi:power-socket-us
+      state: 'on'
