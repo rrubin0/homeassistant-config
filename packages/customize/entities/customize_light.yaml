@@ -1,127 +1,34 @@
   ################################################
   ## Customize Light Icons and Names
   ################################################
-homeassistant:
-  customize:
+#homeassistant:
+#  customize:
   ################################################
   ## Light Groups
   ################################################
-    light.entryway:
-      icon: mdi:google-circles-communities
-
-    light.living_room_ceiling:
-      icon: mdi:google-circles-communities
-
-    light.master_bathroom_ceiling_ceiling:
-      icon: mdi:google-circles-communities
-
-    light.wine_room_ceiling:
-      icon: mdi:google-circles-communities
-
-
-  ################################################
-  ## Chandeliers
-  ################################################
-#    light.dining_room_chandelier:
-#      icon: mdi:ceiling-light
+#    light.entryway:
+#      icon: mdi:google-circles-communities
 #
-#    light.foyer_lights:
-#      icon: mdi:ceiling-light
+#    light.living_room_ceiling:
+#      icon: mdi:google-circles-communities
 #
-#    light.master_bedroom_chandelier:
-#      icon: mdi:ceiling-light
+#    light.master_bathroom_ceiling_ceiling:
+#      icon: mdi:google-circles-communities
+
+#    light.wine_room_ceiling:
+#      icon: mdi:google-circles-communities
 
 
   ################################################
   ##  LED Strips
   ################################################
-    light.bedframe_light:
-      icon: mdi:led-strip-variant
+#    light.bedframe_light:
+#      icon: mdi:led-strip-variant
 
-    light.nursery_wall_light:
-      icon: mdi:led-strip-variant
-
-
-  ################################################
-  ## Lamps
-  ################################################
-#    light.living_room_lamp:
-#      icon: mdi:lamp
-#
-#    light.master_bedside_lamp_megs:
-#      icon: mdi:lamp
-#
-#    light.master_bedside_lamp_rick:
-#      icon: mdi:lamp
-#
-#    light.master_sitting_lamp:
-#      icon: mdi:lamp
-#
-#    light.master_reading_lamp:
-#      icon: mdi:lamp
-#
-#    light.office_desk_lamp:
-#      icon: mdi:lamp
+#    light.nursery_wall_light:
+#      icon: mdi:led-strip-variant
 
 
-  ################################################
-  ## Ceiling Lights
-  ################################################
-#    light.kitchen_lights:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.south_entry:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.kitchen_entry:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.center_entry:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.northeast_ceiling:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.northwest_ceiling:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.southeast_ceiling:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.southwest_ceiling:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bath_entry:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bath_sink:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bathtub:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bath_vanity:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bed_ceiling:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.master_bed_entry:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.nursery_light:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.northeast_wine:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.northwest_wine:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.southeast_wine:
-#      icon: mdi:white-balance-incandescent
-#
-#    light.southwest_wine:
-#      icon: mdi:white-balance-incandescent
+
 
 

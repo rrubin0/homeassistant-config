@@ -38,6 +38,7 @@ logger:
 #    homeassistant.components.mqtt: debug
 #    homeassistant.components.notify: debug
     homeassistant.components.ring: error
+#    homeassistant.components.rachio: debug
 #    homeassistant.components.scene: info
 #    homeassistant.components.script: info
 #    homeassistant.components.sensor: debug

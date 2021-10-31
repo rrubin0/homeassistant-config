@@ -71,7 +71,9 @@ bedtime:
   alias: Bedtime
   sequence:
   - service: lock.lock
-    entity_id: all
+    data: {}
+    target:
+      entity_id: all
   - service: homeassistant.turn_off
     entity_id: input_boolean.dinner_time
   - service: switch.turn_off
@@ -86,10 +88,7 @@ bedtime:
     entity_id:
     - group.exterior_lights
     - group.interior_lights
-  - delay:
-      minutes: 5
-  - service: light.turn_off
-    entity_id: light.bedframe_light
+  mode: single
 driveway_ptz_1:
   alias: Driveway PTZ Preset 1
   sequence:
@@ -143,7 +142,7 @@ christmas_music:
   sequence:
   - service: media_player.play_media
     data:
-      entity_id: media_player.wine_room
+      entity_id: media_player.bar_dot
       media_content_id: holiday classics
       media_content_type: AMAZON_MUSIC
 stop_playing_everywhere:
@@ -151,7 +150,7 @@ stop_playing_everywhere:
   sequence:
   - service: media_player.media_play_pause
     data:
-      entity_id: media_player.wine_room
+      entity_id: media_player.bar_dot
   - service: media_player.volume_set
     entity_id: media_player.everywhere
     data_template:
@@ -362,7 +361,7 @@ mailbox_alert:
     after: 08:00:00
   - service: notify.alexa_media
     data:
-      target: media_player.living_room
+      target: media_player.living_room_echo
       data:
         type: tts
       message: It looks like the mail has arrived, please go check.
@@ -473,29 +472,16 @@ nap_time:
     data:
       entity_id: climate.upstairs
       resume_all: 'true'
-nightlight:
-  alias: Night Light
-  sequence:
-  - service: light.turn_on
-    entity_id: light.bedframe_light
-  - delay:
-      hours: 0
-      minutes: 10
-      seconds: 0
-      milliseconds: 0
-  - service: light.turn_off
-    entity_id: light.bedframe_light
-  mode: single
 baby_playlist:
   alias: Play Baby Playlist
   sequence:
   - service: media_player.volume_set
     data:
-      entity_id: media_player.nursery
+      entity_id: media_player.nursery_dot
       volume_level: 0.5
   - service: media_player.play_media
     data:
-      entity_id: media_player.nursery
+      entity_id: media_player.nursery_dot
       media_content_id: my_baby_playlist
       media_content_type: AMAZON_MUSIC
 play_white_noise:
@@ -503,11 +489,11 @@ play_white_noise:
   sequence:
   - service: media_player.volume_set
     data:
-      entity_id: media_player.nursery
+      entity_id: media_player.nursery_dot
       volume_level: 0.5
   - service: media_player.play_media
     data:
-      entity_id: media_player.nursery
+      entity_id: media_player.nursery_dot
       media_content_id: my_white_noise_playlist
       media_content_type: AMAZON_MUSIC
 stop_playing_nursery:
@@ -515,9 +501,9 @@ stop_playing_nursery:
   sequence:
   - service: media_player.media_play_pause
     data:
-      entity_id: media_player.nursery
+      entity_id: media_player.nursery_dot
   - service: media_player.volume_set
-    entity_id: media_player.nursery
+    entity_id: media_player.nursery_dot
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
 sun_up:
@@ -543,7 +529,7 @@ alexa_media_test:
   sequence:
   - service: media_player.play_media
     data:
-      entity_id: media_player.office
+      entity_id: media_player.office_dot
       media_content_id: Door Bell Playlist
       media_content_type: SPOTIFY
 alexa_announce_test:
@@ -562,11 +548,11 @@ christmas_time:
       entity_id: scene.cozy
   - service: media_player.volume_set
     data:
-      entity_id: media_player.multiple
+      entity_id: media_player.everywhere
       volume_level: 0.6
   - service: media_player.play_media
     data:
-      entity_id: media_player.multiple
+      entity_id: media_player.everywhere
       media_content_id: christmas_classic_playlist
       media_content_type: SPOTIFY
 test_actionable_away:
@@ -585,19 +571,21 @@ test_alexa_alarm_sound:
   sequence:
   - service: media_player.play_media
     data:
-      entity_id: media_player.office
       media_content_type: sound
       media_content_id: box_04
+    target:
+      entity_id: media_player.office_dot
+  mode: single
 baby_playlist_test:
   alias: Baby Playlist Test
   sequence:
   - service: media_player.volume_set
-    entity_id: media_player.office
+    entity_id: media_player.office_dot
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
   - service: media_player.play_media
     data:
-      entity_id: media_player.office
+      entity_id: media_player.office_dot
       media_content_id: my_baby_playlist
       media_content_type: AMAZON_MUSIC
 tts_door_held_open:
@@ -611,12 +599,12 @@ tts_door_held_open:
     entity_id: input_boolean.announce
     state: 'on'
   - service: media_player.volume_set
-    entity_id: media_player.living_room
+    entity_id: media_player.living_room_echo
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
   - service: notify.alexa_media
     data:
-      target: media_player.living_room
+      target: media_player.living_room_echo
       data:
         type: tts
       message: I've detected a door held open for too long so I'm turning off the
@@ -636,12 +624,12 @@ tts_warm_weather:
     entity_id: input_boolean.announce
     state: 'on'
   - service: media_player.volume_set
-    entity_id: media_player.living_room
+    entity_id: media_player.living_room_echo
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
   - service: notify.alexa_media
     data:
-      target: media_player.living_room
+      target: media_player.living_room_echo
       message: '''You Guys? The weather is warming up. Please close all doors and
         windows, for the air-conditioner.'''
       data:
@@ -1590,3 +1578,68 @@ pool_magenta:
       seconds: 0.8
   - service: switch.turn_on
     entity_id: switch.pool_light
+living_room_appletv_plex:
+  alias: Plex in Living Room
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.appletv_living_room
+    data:
+      command:
+      - home
+  - delay:
+      seconds: 1.5
+  - service: remote.send_command
+    target:
+      entity_id: remote.appletv_living_room
+    data:
+      command:
+      - home
+  mode: single
+alarm_clock_snooze:
+  alias: Alarm Clock Snooze
+  sequence:
+  - service: input_datetime.set_datetime
+    target:
+      entity_id: input_datetime.alarm_clock_time
+    data:
+      time: '{{ (((state_attr(''input_datetime.alarm_clock_time'' , ''timestamp''))
+        + (15 * 60))|timestamp_custom(''%H:%M'', false)) }}'
+  mode: single
+  icon: mdi:sleep
+climate_upstairs_cooldown:
+  sequence:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Precool
+    target:
+      entity_id: climate.upstairs
+  - delay:
+      hours: 2
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: ecobee.resume_program
+    data:
+      entity_id: climate.upstairs
+      resume_all: true
+  mode: single
+  alias: Upstairs Cooldown
+climate_downstairs_cooldown:
+  alias: Downstairs Cooldown
+  sequence:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Precool
+    target:
+      entity_id: climate.downstairs
+  - delay:
+      hours: 2
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: ecobee.resume_program
+    data:
+      entity_id: climate.downstairs
+      resume_all: true
+  mode: single

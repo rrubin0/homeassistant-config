@@ -41,6 +41,8 @@
             The {{ SensorType }} is {{ states('sensor.south_door_state') }} and {{ states('lock.south_entry_locked') }} and the tamper is {{ states('sensor.south_door_tamper') }}.
           {%- elif SensorType.lower() == "kitchen door" -%}
             The {{ SensorType }} is {{ states('sensor.kitchen_door_state') }} and the tamper is {{ states('sensor.kitchen_door_tamper') }}.
+          {%- elif SensorType.lower() == "office door" -%}
+            The {{ SensorType }} is {{ states('sensor.office_door_state') }} and the tamper is {{ states('sensor.office_door_tamper') }}.
           {%- elif SensorType.lower() == "bathroom door" -%}
             The {{ SensorType }} is {{ states('sensor.bathroom_door_state') }} and {{ states('lock.bathroom_entry_locked') }} and the tamper is {{ states('sensor.bathroom_door_tamper') }}.
           {%- elif SensorType.lower() == "guest room balcony door" -%}

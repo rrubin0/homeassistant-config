@@ -1,10 +1,18 @@
 input_datetime:
-  master_bedroom_lights_turn_on_before_limit:
-    name: 'Bedroom lights will not turn on before this time'
+  alarm_clock_time:
+    name: 'Alarm Clock Wake'
     has_date: false
     has_time: true
+    initial: '07:40'
+
+  master_bedroom_lights_turn_on_before_limit:
+    name: 'Night Light only on before'
+    has_date: false
+    has_time: true
+    initial: '07:30'
 
   master_bedroom_lights_turn_on_after_limit:
-    name: 'Bedroom lights will not turn on after this time'
+    name: 'Night Light only on after'
     has_date: false
     has_time: true
+    initial: '19:00'

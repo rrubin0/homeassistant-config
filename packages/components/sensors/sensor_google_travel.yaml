@@ -3,14 +3,14 @@
 #####################################################################
 sensor:
   - platform: google_travel_time
-    scan_interval: 900
+    scan_interval: 1440
     name: Ricks Office Commute
     api_key: !secret google_time_travel_api_key
     origin: Home
     destination: Office
 
   - platform: google_travel_time
-    scan_interval: 900
+    scan_interval: 1440
     name: Ricks Home Commute
     api_key: !secret google_time_travel_api_key
     origin: Office
@@ -31,14 +31,14 @@ sensor:
 #    destination: Home
 
   - platform: google_travel_time
-    scan_interval: 300
+    scan_interval: 900
     name: Megs ETA Home
     api_key: !secret google_time_travel_api_key
     origin: device_tracker.mip8
     destination: Home
 
   - platform: google_travel_time
-    scan_interval: 600
+    scan_interval: 900
     name: Ricks ETA Home
     api_key: !secret google_time_travel_api_key
     origin: device_tracker.rip8plus

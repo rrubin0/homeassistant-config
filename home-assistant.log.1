@@ -1,0 +1,341 @@
+2021-10-27 21:30:31 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration hacs which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-10-27 21:30:31 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration apple_tv which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-10-27 21:30:31 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration alexa_media which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-10-27 21:30:31 WARNING (SyncWorker_0) [homeassistant.loader] We found a custom integration eventsensor which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-10-27 21:30:31 WARNING (SyncWorker_1) [homeassistant.loader] We found a custom integration apple_tv which has not been tested by Home Assistant. This component might cause stability problems, be sure to disable it if you experience issues with Home Assistant
+2021-10-27 21:30:46 ERROR (MainThread) [homeassistant.setup] Setup failed for apple_tv: Unable to import component: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:18 ERROR (MainThread) [homeassistant.components.tplink.config_flow] Failed to import 192.168.11.113: cannot connect
+2021-10-27 21:31:18 ERROR (MainThread) [homeassistant.components.tplink.config_flow] Failed to import 192.168.11.116: cannot connect
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant.config_entries] Error occurred loading configuration flow for integration apple_tv: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:20 ERROR (MainThread) [homeassistant] Error doing job: Task exception was never retrieved
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 709, in async_create_flow
+    integration.get_platform("config_flow")
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 532, in get_platform
+    cache[full_name] = self._import_platform(platform_name)
+  File "/usr/src/homeassistant/homeassistant/loader.py", line 537, in _import_platform
+    return importlib.import_module(f"{self.pkg_path}.{platform_name}")
+  File "/usr/local/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 972, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/config/custom_components/BROKEN__apple_tv_/__init__.py", line 12, in <module>
+    from homeassistant.const import (
+ImportError: cannot import name 'ATTR_CONNECTIONS' from 'homeassistant.const' (/usr/src/homeassistant/homeassistant/const.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 151, in async_init
+    flow, result = await task
+  File "/usr/src/homeassistant/homeassistant/data_entry_flow.py", line 169, in _async_init
+    flow = await self.async_create_flow(handler, context=context, data=data)
+  File "/usr/src/homeassistant/homeassistant/config_entries.py", line 716, in async_create_flow
+    raise data_entry_flow.UnknownHandler
+homeassistant.data_entry_flow.UnknownHandler
+2021-10-27 21:31:23 INFO (MainThread) [pyhap.accessory_driver] Starting accessory Home Assistant Bridge on address 192.168.10.155, port 21063.
+2021-10-27 21:31:26 INFO (MainThread) [pyhap.hap_protocol] ('192.168.10.51', 50887): Connection made to Home Assistant Bridge
+2021-10-27 21:31:26 INFO (MainThread) [pyhap.hap_protocol] ('192.168.10.40', 55266): Connection made to Home Assistant Bridge
+2021-10-27 21:31:26 INFO (MainThread) [pyhap.hap_protocol] ('192.168.10.138', 51043): Connection made to Home Assistant Bridge
+2021-10-27 21:31:26 INFO (MainThread) [pyhap.hap_protocol] ('192.168.10.48', 57552): Connection made to Home Assistant Bridge
+2021-10-27 21:31:27 INFO (MainThread) [pyhap.hap_protocol] ('192.168.10.135', 49239): Connection made to Home Assistant Bridge
+2021-10-27 21:31:58 WARNING (MainThread) [homeassistant.components.zwave] Z-Wave node 50 not ready after 30 seconds, continuing anyway
+2021-10-27 21:31:58 WARNING (MainThread) [homeassistant.components.zwave] Z-Wave node 51 not ready after 30 seconds, continuing anyway
+2021-10-27 21:40:07 INFO (MainThread) [pyhap.accessory_driver] Stopping accessory Home Assistant Bridge on address 192.168.10.155, port 21063.
+2021-10-27 21:40:10 ERROR (Thread-6) [root] Uncaught thread exception
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/threading.py", line 973, in _bootstrap_inner
+    self.run()
+  File "/usr/local/lib/python3.9/threading.py", line 910, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/lib/python3.9/site-packages/xiaomi_gateway/__init__.py", line 180, in _listen_to_msg
+    data, (ip_add, _) = self._mcastsocket.recvfrom(SOCKET_BUFSIZE)
+OSError: [Errno 9] Bad file descriptor

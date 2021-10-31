@@ -16,6 +16,8 @@ alexa:
         - script.bedtime
         - script.bright
         - script.christmas_time
+        - script.climate_downstairs_cooldown
+        - script.climate_upstairs_cooldown
         - script.cloudy
         - script.company_mode
         - script.dim
@@ -41,6 +43,7 @@ alexa:
         - script.hue_lr_sunrise
         - script.hue_lr_sunset
         - script.hue_mbath_morning
+        - script.living_room_appletv_plex
         - script.master_bedroom_night_time
         - script.mbr_night_light
         - script.morning_sequence

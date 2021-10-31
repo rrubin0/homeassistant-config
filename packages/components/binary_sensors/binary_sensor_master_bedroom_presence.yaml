@@ -11,4 +11,4 @@ binary_sensor:
              or is_state('binary_sensor.motion_master_bedroom_bed', 'on')
              or is_state('binary_sensor.upstairs_occupancy', 'on') }}
         delay_off:
-          minutes: 15
+          minutes: 30

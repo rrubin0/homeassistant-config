@@ -3,7 +3,7 @@
 #    @description      :     homekit configuration for apple ios
 #####################################################################
 homekit:
-  auto_start: False
+#  auto_start: False
   ip_address: !secret homekit_ip
 
   filter:

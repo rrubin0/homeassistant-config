@@ -5,6 +5,7 @@ homeassistant:
   elevation: 387
   unit_system: imperial
   time_zone: America/Phoenix
+  external_url: !secret external_url
   packages: !include_dir_named packages
   auth_providers:
    - type: homeassistant

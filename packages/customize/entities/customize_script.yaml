@@ -22,6 +22,10 @@ homeassistant:
       friendly_name: "Ecobee Downstairs Home"
       entity_picture: /local/ecobee.png
 
+    script.climate_downstairs_cooldown:
+      friendly_name: "Ecobee Downstairs Cooldown"
+      entity_picture: /local/ecobee.png
+
     script.ecobee_ds_eco:
       friendly_name: "Ecobee Downstairs Economy"
       entity_picture: /local/ecobee.png
@@ -44,6 +48,10 @@ homeassistant:
 
     script.ecobee_us_home:
       friendly_name: "Ecobee Upstairs Home"
+      entity_picture: /local/ecobee.png
+
+    script.climate_upstairs_cooldown:
+      friendly_name: "Ecobee Uptairs Cooldown"
       entity_picture: /local/ecobee.png
 
     script.ecobee_us_eco:

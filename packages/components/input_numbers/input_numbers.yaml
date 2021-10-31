@@ -47,37 +47,9 @@ input_number:
     step: 1
     mode: box
 
-  alarm_clock_hour:
-    name: Hours
-    icon: mdi:timer-outline
-    initial: 7
-    min: 0
-    max: 23
-    step: 1
-  
-  alarm_clock_minutes:
-    name: Minutes
-    icon: mdi:timer-outline
-    initial: 0
-    min: 0
-    max: 59
-    step: 1
-  
-  alarm_clock_offset:
-    name: Transition
-    icon: mdi:blur-linear
-    initial: 15
-    min: 0
-    max: 60
-    step: 15
-
-  illumination_master_bedroom_low_cutoff:
-    name: 'Illumination bedroom low cutoff value'
-    min: 1
-    max: 100
-    step: 1
-
   master_bedroom_no_motion_turn_off_delay:
-    name: 'Time in minutes automation waits to turn off bedroom lights after no motion'
+    name: 'Night Light Off (min.)'
+    initial: 7
     min: 1
     max: 120
+    mode: box

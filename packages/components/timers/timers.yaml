@@ -6,7 +6,7 @@ timer:
     duration: '00:15:00'
 
   bedtime:
-    duration: '00:10:00'
+    duration: '00:07:00'
 
   nursery_presence:
     duration: '01:00:00'
