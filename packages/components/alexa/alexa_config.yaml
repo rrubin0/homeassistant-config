@@ -3,9 +3,9 @@
 #####################################################################
 alexa:
   smart_home:
-    endpoint: https://api.amazonalexa.com/v3/events
-    client_id: !secret amazon_client_id
-    client_secret: !secret amazon_client_secret
+#    endpoint: "https://api.amazonalexa.com/v3/events"
+#    client_id: !secret amazon_client_id
+#    client_secret: !secret amazon_client_secret
     filter:
       include_entities:
       ################################################
@@ -63,6 +63,7 @@ alexa:
         - script.pool_royal
         - script.pool_sunset
         - script.pool_white
+        - script.pool_pump_quick_clean
         - script.start_bedtime_timer
         - script.tv_power_off
         - script.tv_time
@@ -110,7 +111,7 @@ alexa:
         - light.living_room_ceiling
         - light.lounge_light
         - light.master_bathroom_ceiling
-        - light.master_bath_vanity
+        - light.master_bathroom_vanity
         - light.master_bed_ceiling
         - light.master_bed_entry
         - light.master_bedside_lamps
@@ -119,6 +120,7 @@ alexa:
         - light.master_sitting_lamp
         - light.nursery_light
         - light.nursery_wall_light
+        - light.office_desk_lamp
         - light.pantry
         - light.bedframe_light
         - light.wine_room_ceiling
@@ -131,6 +133,7 @@ alexa:
         - switch.appletv
         - switch.aquarium
         - switch.back_yard_outlet
+        - switch.christmas_tree
         - switch.chromecast
         - switch.downstairs_bathroom_light
         - switch.fireplace
@@ -142,9 +145,8 @@ alexa:
         - switch.fireplace_temp_up
         - switch.fireplace_timer
         - switch.fountains_switch
-        - switch.hdmi_3
-        - switch.porch_rope_lights
         - switch.game_room_floodlights
+        - switch.hdmi_3
         - switch.irrigation_system_rain_delay
         - switch.kegerator
         - switch.living_room_fan
@@ -158,11 +160,12 @@ alexa:
         - switch.mini_fridge
         - switch.mute
         - switch.nursery_lamp
-        - switch.christmas_tree
         - switch.outdoor_speakers
-        - switch.patio_light
+        - switch.patio_lights
         - switch.pc
         - switch.pool_light
+        - switch.pool_pump
+        - switch.porch_rope_lights
         - switch.staircase_lamp
         - switch.switch_five
         - switch.switch_four
@@ -183,7 +186,7 @@ alexa:
       ################################################
       ## Input_Booleans
       ################################################
-        - input_boolean.dinner_time
+        - input_boolean.movie_night
         - input_boolean.holiday
         - input_boolean.rain
         - input_boolean.visitor_mode
@@ -194,8 +197,8 @@ alexa:
       ################################################
       ## Locks
       ################################################
-        - lock.bathroom_entry_locked
-        - lock.south_entry_locked
+        - lock.bathroom_entry
+        - lock.south_entry
 
       ################################################
       ## Sensors (not supported via Alexa Smart Home)
@@ -213,7 +216,7 @@ alexa:
       ################################################
       ## Covers
       ################################################
-        - cover.master_bath_shade
+        - cover.master_bath_shades
         - cover.kitchen_shade
 
       ################################################
@@ -268,6 +271,7 @@ alexa:
       input_boolean.bbq_alert_food:
         name: Food Temp Alarm
         description: Food Target Temp Alarm for BBQ
+
 
 ## TV HDMI Inputs via Broadlink
 #      switch.appletv:

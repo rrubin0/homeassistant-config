@@ -1,9 +1,0 @@
-################################################################
-## Device Tracker - iCloud (possibly deprecated)
-################################################################
-#device_tracker:
-#  - platform: icloud
-#    username: !secret icloud_megs
-#    password: !secret icloud_megs_password
-#    max_interval: 60
-#    gps_accuracy_threshold: 2000

@@ -2,6 +2,7 @@ secrets.yaml
 known_devices.yaml
 ip_bans.yaml
 zwave_device_config.yaml
+docker-compose.yaml
 custom_components
 deps
 icloud
@@ -9,8 +10,13 @@ icloud
 .storage
 panels
 www
+*.1
 *.conf
 *.db
+*.db-shm
+*.db-wal
+*.fault
+*.log
 *.gitignore
 *.HA_VERSION
 *.homekit.state
@@ -21,6 +27,4 @@ www
 *.sqlite
 *.uuid
 *.xml
-*.db-shm
-*.db-wal
 OZW_Log.txt

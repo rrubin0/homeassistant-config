@@ -1,0 +1,16 @@
+#####################################################################
+### Binary Sensor - Downstairs Presence
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      downstairs_presence:
+        friendly_name: "Downstairs Presence"
+        value_template: >-
+          {{ is_state('binary_sensor.motion_kitchen_multisensor', 'on')
+             or is_state('binary_sensor.motion_bar', 'on')
+             or is_state('binary_sensor.entryway_occupancy', 'on')
+             or is_state('binary_sensor.front_entry_multisensor_motion', 'on')
+             or is_state('binary_sensor.living_room_occupancy', 'on') }}
+        delay_off:
+          minutes: 10

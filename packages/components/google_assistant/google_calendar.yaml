@@ -1,0 +1,8 @@
+#####################################################################
+### Google Calendar API Access
+#####################################################################
+google:
+  client_id: !secret google_calendar_client_id
+  client_secret: !secret google_calendar_secret
+  track_new_calendar: true
+  calendar_access: read_only

@@ -1,0 +1,99 @@
+
+- cal_id: ricknmegs@gmail.com
+  entities:
+  - device_id: rick_n_megs
+    ignore_availability: true
+    name: Rick n Megs
+    track: false
+
+- cal_id: rix480@gmail.com
+  entities:
+  - device_id: rick_rubino
+    ignore_availability: true
+    name: Rick Rubino
+    track: false
+
+- cal_id: nfl_20_%4eew+%59ork+%4aets#sports@group.v.calendar.google.com
+  entities:
+  - device_id: new_york_jets
+    ignore_availability: true
+    name: New York Jets
+    track: false
+
+- cal_id: mlb_29_%41rizona+%44iamondbacks#sports@group.v.calendar.google.com
+  entities:
+  - device_id: arizona_diamondbacks
+    ignore_availability: true
+    name: Arizona Diamondbacks
+    track: false
+
+- cal_id: nfl_22_%41rizona+%43ardinals#sports@group.v.calendar.google.com
+  entities:
+  - device_id: arizona_cardinals
+    ignore_availability: true
+    name: Arizona Cardinals
+    track: false
+
+- cal_id: en.usa.official#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_united_states
+    ignore_availability: true
+    name: Holidays in United States
+    track: false
+
+- cal_id: meganstam0@gmail.com
+  entities:
+  - device_id: meganstam0_gmail_com
+    ignore_availability: true
+    name: meganstam0@gmail.com
+    track: false
+
+- cal_id: megsrubino@gmail.com
+  entities:
+  - device_id: megsrubino_gmail_com
+    ignore_availability: true
+    name: megsrubino@gmail.com
+    track: false
+
+- cal_id: jfqljfhoj517hvq107n415ocn8@group.calendar.google.com
+  entities:
+  - device_id: home_assistant_events
+    ignore_availability: true
+    name: Home Assistant Events
+    track: true
+
+  - device_id: seasonal_christmas
+    ignore_availability: true
+    name: Seasonal Christmas
+    track: true
+    search: "#seasonal_christmas"
+
+  - device_id: pool_4_hours #Jan-1 - Jan-31
+    ignore_availability: true
+    name: Pool Pump 4 Hours
+    track: true
+    search: "#pool_4_hours"
+
+  - device_id: pool_6_hours #Feb-1 - Mar-31; Nov-1 - 12-31
+    ignore_availability: true
+    name: Pool Pump 6 Hours
+    track: true
+    search: "#pool_6_hours"
+
+  - device_id: pool_8_hours #Apr-1 - May-31; Sep-15 - Oct-31
+    ignore_availability: true
+    name: Pool Pump 8 Hours
+    track: true
+    search: "#pool_8_hours"
+
+  - device_id: pool_10_hours_day #Jun-1 - Sep-14
+    ignore_availability: true
+    name: Pool Pump 10 Hours Day
+    track: true
+    search: "#pool_10_hours_day"
+
+  - device_id: pool_10_hours_night #Jun-1 - Sep-14
+    ignore_availability: true
+    name: Pool Pump 10 Hours Night
+    track: true
+    search: "#pool_10_hours_night"

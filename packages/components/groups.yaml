@@ -8,9 +8,9 @@ group:
   #####################################################################
   All Devices:
     entities:
-      - device_tracker.rick
+      - device_tracker.iphone_rick
       - device_tracker.rip8plus
-      - device_tracker.megs
+      - device_tracker.iphone_megs
       - device_tracker.mip8
 
 
@@ -44,10 +44,10 @@ group:
     entities:
       - switch.back_yard_outlet
       - switch.porch_rope_lights
-      - switch.patio_light
+      - switch.patio_lights
       - switch.pool_light
-      - switch.outdoor_left_outlet
-      - switch.outdoor_right_outlet
+      - switch.tplink_left_outlet
+      - switch.tplink_right_outlet
 
 
   #####################################################################
@@ -137,7 +137,7 @@ group:
   Master Bathroom Lights:
     entities:
       - light.master_bathroom_ceiling
-      - light.master_bath_vanity
+      - light.master_bathroom_vanity
 
 
   #####################################################################
@@ -156,7 +156,6 @@ group:
   Accent Lights:
     entities:
       - switch.staircase_lamp
-#      - switch.switch_two #Stairway Christmas Lights
       - switch.wine_room_lamp
 
 
@@ -165,21 +164,29 @@ group:
   #####################################################################
   Porch Lights:
     entities:
-      - switch.south_porch_lights_switch
-      - switch.front_porch_lights_switch
+      - switch.front_porch_lights
+      - switch.south_porch_lights
       - switch.porch_rope_lights
 
 
   #####################################################################
   ### Christmas Lights
   #####################################################################
-  Christmas Lights:
+  Outside Christmas Lights:
     entities:
       - switch.back_yard_outlet
+      - switch.tplink_left_outlet
+      - switch.tplink_right_outlet
+      - switch.porch_rope_lights
+
+
+  #####################################################################
+  ### Inside Christmas Lights
+  #####################################################################
+  Inside Christmas Lights:
+    entities:
       - switch.christmas_tree
       - switch.switch_two #Stairway Christmas Lights
-      - switch.outdoor_left_outlet
-      - switch.outdoor_right_outlet
 
 
   #####################################################################
@@ -190,16 +197,11 @@ group:
       - switch.mini_fridge
       - switch.aquarium
       - switch.office_spare
-    # rf switch upstairs wipe warmer
-      - switch.switch_one
-    # rf switch stairway christmas lights
-      - switch.switch_two
-    # rf switch downstairs wipe warmer
-      - switch.switch_three
-    # rf switch power wheels charger
-      - switch.switch_four
-    # rf switch nursery starlight
-      - switch.switch_five
+      - switch.switch_one   # rf switch upstairs wipe warmer
+      - switch.switch_two   # rf switch stairway christmas lights
+      - switch.switch_three # rf switch downstairs wipe warmer
+      - switch.switch_four  # rf switch power wheels charger
+      - switch.switch_five  # rf switch nursery starlight
 
 
 

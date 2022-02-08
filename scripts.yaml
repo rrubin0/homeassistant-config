@@ -3,17 +3,20 @@ activate_alexa_actionable_notification:
   fields:
     text:
       description: The text you would like alexa to speak.
+      example: What would you like the thermostat set to?
     event_id:
       description: Correlation ID for event responses
+      example: ask_for_temperature
     alexa_device:
       description: Alexa device you want to trigger
+      example: media_player.bedroom_echo
   sequence:
   - service: input_text.set_value
-    data_template:
+    data:
       entity_id: input_text.alexa_actionable_notification
       value: '{"text": "{{ text }}", "event": "{{ event_id }}"}'
   - service: media_player.play_media
-    data_template:
+    data:
       entity_id: '{{ alexa_device }}'
       media_content_type: skill
       media_content_id: amzn1.ask.skill.a85fd060-7fa9-47b4-ab56-92b4d35c5a8c
@@ -21,15 +24,14 @@ unlock_megs:
   alias: Unlock Door for Megan
   sequence:
   - service: lock.unlock
-    entity_id: lock.south_entry_locked
+    data: {}
+    target:
+      entity_id: lock.south_entry
   - service: notify.mobile_app_rip8plus
     data:
-      title: Arrived
+      title: Megs has arrived
       message: Megs is home!
-  - delay:
-      minutes: 15
-  - service: lock.lock
-    entity_id: lock.south_entry_locked
+  mode: single
 away:
   alias: Away Mode
   sequence:
@@ -39,7 +41,7 @@ away:
     entity_id:
     - fan.patio_fan
     - group.interior_lights
-    - switch.patio_light
+    - switch.patio_lights
     - switch.pool_light
     - switch.mini_fridge
     - switch.aquarium
@@ -75,7 +77,7 @@ bedtime:
     target:
       entity_id: all
   - service: homeassistant.turn_off
-    entity_id: input_boolean.dinner_time
+    entity_id: input_boolean.movie_night
   - service: switch.turn_off
     entity_id:
     - switch.outdoor_speakers
@@ -145,6 +147,7 @@ christmas_music:
       entity_id: media_player.bar_dot
       media_content_id: holiday classics
       media_content_type: AMAZON_MUSIC
+  mode: single
 stop_playing_everywhere:
   alias: Stop Playing Everywhere
   sequence:
@@ -269,13 +272,6 @@ hue_lr_bright:
     data:
       group_name: Living Room
       scene_name: Bright
-hue_lr_christmas:
-  alias: Christmas Time
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Christmas
 hue_lr_movie:
   alias: Theater
   sequence:
@@ -410,7 +406,7 @@ morning_sequence:
       minutes: 5
   - service: light.turn_on
     data:
-      entity_id: light.master_bath_vanity
+      entity_id: light.master_bathroom_vanity
       brightness: 55
   - service: homeassistant.turn_on
     entity_id: group.accent_lights
@@ -552,9 +548,11 @@ christmas_time:
       volume_level: 0.6
   - service: media_player.play_media
     data:
-      entity_id: media_player.everywhere
-      media_content_id: christmas_classic_playlist
+      media_content_id: christmas_classics_playlist
       media_content_type: SPOTIFY
+    target:
+      entity_id: media_player.everywhere
+  mode: single
 test_actionable_away:
   alias: Test iOS Actionable Away
   sequence:
@@ -1642,4 +1640,117 @@ climate_downstairs_cooldown:
     data:
       entity_id: climate.downstairs
       resume_all: true
+  mode: single
+pool_pump_winter:
+  alias: Pool Pump Winter
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.pool_pump
+  - delay:
+      hours: 6
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    target:
+      entity_id: switch.pool_pump
+  mode: single
+pool_pump_summer:
+  alias: Pool Pump Summer
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.pool_pump
+  - delay:
+      hours: 10
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    target:
+      entity_id: switch.pool_pump
+  mode: single
+pool_pump_quick_clean:
+  alias: Pool Pump Quick Clean
+  sequence:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.pool_pump
+  - delay:
+      hours: 1
+      minutes: 30
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    target:
+      entity_id: switch.pool_pump
+  mode: single
+  icon: mdi:robot-vacuum
+learn_living_room_fan_commands:
+  sequence:
+  - service: remote.learn_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data:
+      device: living_room_fan
+      command:
+      - low
+      - med
+      - high
+      - fan_off
+learn_living_room_fan_light:
+  sequence:
+  - service: remote.learn_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data:
+      device: living_room_fan
+      command: light
+      alternative: true
+living_room_fan_low:
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data:
+      command: b64:sgDaAQ4MDgwODQ0NDgwODA4NDQ0NDQ4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsMGw0NGhsNDRoNGhsMGw0OGRsMGw0bDA4ZDhobDA4aDRobDBsNGg0OGRsMGw0bDBsNGwwbDBsNDRobDA4aGwwOGQ4aDRoOGQ4aDhkOGQ4aDhkOGRsNDhkbDBsNGwwbDRoNGwwbDRoNGwwbDQ0aGwwOAANJDQ0ODA4MDgwODQ0NDgwODA4NDQ0ODA6pHAwbDA4aDRobDBsNDRoOGRsNGwwbDQ0aGwwOGQ4aGwwbDQ0aGwwbDRoNDhkOGRsNDhkOGRsNGwwbDQ0aGwwbDRoNGwwbDBwMGwwOGRwMDhkbDQ0aDhkOGg0aDhkOGg0aDhkOGg4ZGwwOGhsMGw0aDRsMGw0aDRsMGw0aDRsMDhkbDQ0AA0kODQ0NDQ0ODA4MDg0NDQ4MDgwODQ0NDaobDRoNDhkOGhsMGwwOGg0aGwwbDRsMDhkbDQ0aDhkbDRsMDhkbDRsMGwwOGg4ZGwwOGg4ZGw0aDRsMDhoaDRsMGwwbDRsMGw0bDA4ZGw0NGhsMDhoNGg4ZDhoNGg4ZDhoNGg4ZDhobDA4ZGw0bDBsMGw0bDBsNGg0bDBsMGw0OGRsMDgAF3BsNDRoNGhsMGw0OGRsM
+living_room_fan_med:
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data: command:sgByABoNDhkbDQ0aDhkbDRoNDhkbDRoNGw0NGg0aGwwOGg0aGwwbDRsMDhoaDRsMGw0aDRsMGw0aDQ0aGw0NGhsMDhoNGg4ZDhoNGg4ZGw0NGg4aDRoNGg4ZGw0aDRsMGw0aDRsNDRoaDRsMGw0aDRsMDgAF3AAAAAAAAA==
+living_room_fan_high:
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data: command:sgAAAg4ZDhoNGg4ZDhobDBsNGg0bDBsNDRobDBsMGw0bDBsMGw0OAANIDgwODQ0NDgwODA4MDg0NDQ4MDgwODQ2qGw0aDQ4ZDhobDBsNDRoNGhsMGw0bDA4aGg0NGg4ZGw0bDA4ZGw0bDBsMDhoOGRsNDRoOGRsMHAwbDA4aGg0bDBsNGg0bDBsNGg0OGRsNDRobDA4aDRoOGQ4aDRobDA4aDRoOGQ4aDRoOGhoNGwwbDBsNGwwOGhoNGwwbDRoNGwwbDQ0AA0kNDQ4MDg0NDQ0NDgwODQ0NDQ0ODA4NDaobDBsNDRoOGhoNGg0OGQ4aGwwbDBsNDRobDA4aDRobDBsNDRobDBsNGwwOGg0aGwwOGg0aGwwbDRoNDhkbDRoNGwwbDRoNGwwbDQ0aGwwOGhoNDhkOGg0aDhkOGhsMDhkOGg0aDhkOGg0aGwwbDRsMGw0aDQ4ZGwwbDRsMGwwbDRsMDgADSQ0NDQ0ODA4MDg0NDQ4MDgwODA4NDgwOqhsMGwwOGg0aGwwbDQ0aDhkbDRsMGw0NGhsMDhoNGhsMGw0NGhoNGw0aDQ4ZDhoaDQ4ZDhoaDRsMGw0NGhsMGw0aDRsMGw0aDRsMDhoaDQ4ZGw0NGg4ZDhoNGg4ZGw0NGg4ZDhoNGg4ZDhobDBsNGg0bDBsMDhobDBsMGw0bDBsNGg0NAAXcGwwbDRoNGww=
+living_room_fan_off:
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data: command:sgBUAxsNDRobDQ0aGg0OGg0aDhkOGg0aDRoOGQ4aDhkOGg0aGwwbDRoNGwwbDRoNGwwbDRoNGwwbDRoNDhkOAANJDQ0ODA4NDQ0NDQ0NDgwODQ0NDQ0ODA6qGwwbDA4aDRobDRoNDRoOGhoNGwwbDQ0aGg0OGg0aGw0aDQ0aGwwbDBsNDRoOGhoNDhkOGhoNGw0aDQ0aGwwbDRsMGwwbDRsMGw0NGhsMDhoaDQ0aDhoNGg4ZDhoNGg0aDhoNGg4aDRoaDRsMGw0aDRsNGg0aDRsNGg0aDRsMGw0NGg4AA0gODQ0NDQ0ODA4NDQ0NDQ0NDg0NDQ0NDqkbDRsMDhoNGhsMGw0NGg0aGw0aDRsMDhoaDQ4ZDhoaDRsMDhoaDRsMGw0NGg4ZGw0NGg0aGwwbDRsMDhobDBsMGw0aDRsMGw0bDA4aGg0NGhsNDRoNGg4aDRoOGQ4aDRoOGQ4aDRoOGRsNGg0bDBsNGg0bDBsNGg0bDRoNGg0bDA4ZDgADSQ0NDg0NDA4NDgwODA4NDQ0ODA4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsNGg0OGRsNDRoOGRsNGg0OGRsNGg0bDA4ZDhobDA4aDRobDBsNGg0OGRsNGwwbDBsNGwwbDBsNDhkbDQ0aGwwOGQ4aDRoOGQ4aDRoOGg0aDhkOGg0aGwwbDRoNGwwbDRoNGwwbDRoNGwwbDRoNDhoNAAODDgwODQ0NDQ0ODA4MDgwODQ4MDgwODQ2qGw0aDQ4aDRoaDRsMDhoNGhsMGw0aDQ4aGg0NGg4ZGw0aDQ4ZGw0bDBsMDhoNGhsMDhoNGhsMGw0bDA4aGg0bDBsNGg0bDBsNGg0OGRsNDRobDA4aDRoOGQ4aDRoOGRsNDRoOGg0aGg0OGRsNGwwbDBsNGwwbDA4aGwwbDBsNDRobDA4AA0kNDQ4MDgwODQ0NDgwODA4NDQ0NDQ4MDqobDBsNDRoOGRsNGg0OGQ4aGg0bDBsNDRobDQ0aDRobDBsNDRobDBsNGwwOGQ4aGwwOGQ4aGwwbDRoNDRobDBsNGwwbDRoNGwwbDQ0aGwwOGhoNDhkOGg0aDhkOGg0aGwwOGg0aDhkbDQ0aGw0aDRsMGwwbDRsMDhkbDRsMGwwOGhsMDgAF3A0aDhk=
+living_room_fan_light:
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data: command:sgAWAw4NDQ0NDQ4MDgwODA4NDgwODA4NDQ0NqhsMHAwOGQ4aGwwbDA4aDRobDBsNGwwOGRsNDRoOGRsNGwwOGRsNGwwbDQ0aDhkbDQ0aDhkbDRoNGw0NGRsNGwwbDBsNGwwbDRoNDhkbDQ0aGwwOGQ4aDhkbDQ0aDhkOGg0aDhkOGg4ZDhkbDRsMGw0NGhsMGw0aDRsMGwwbDRsMGwwOAANJDgwODA4NDQ0ODA4MDg0NDQ0NDgwODA6qGwwbDQ0aDhkbDRsMDhkOGhsMGwwbDQ0aGwwOGg0aGw0aDQ4ZGw0aDRsMDhoNGhsMDhoNGhsMGw0aDQ4ZGw0aDRsMGw0aDRsMGw0NGhsMDhobDA4ZDhoNGhsMDhoNGg4ZDhoNGg4ZDhoOGRsMGw0bDA4ZGw0bDBsMGw0bDBsNGg0bDA4AA0gODQ0NDgwODA4NDQ0ODA4MDg0NDQ0NDqoaDRsMDhoNGhsMGw0NGg4ZGw0bDBsMDhobDA4ZDhobDBsNDRobDBsNGg0OGQ4aGg0OGQ4aGg0bDBsNDRobDBsNGg0bDBsNGg0bDA4ZGw0OGRsMDhoOGQ4aGwwOGQ4aDRoOGQ4aDRoOGQ4aGwwbDRoNDhkbDRoNGwwbDRoNGwwbDBsNDQADpw4MDgwODA4NDgwODA4MDg0NDQ4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsMGw0NGhsNDRoNGhsMGw0OGRsMGw0bDA4aDRobDA4aDRobDBsMGw0OGRsNGg0bDBsMGw0bDBsMDhobDA4aGwwOGQ4aDRoOGQ4aDRobDA4aDRobDBsNDRobDRoNGwwbDRoNGwwOGRwMGwwOGg0aGwwOAANIDg0NDQ4MDg0NDQ0NDgwODA4NDQ0ODA6qGwwbDA4aDRobDBsNDRoOGRsNGwwbDA4aGwwOGQ4aGwwbDA4aGwwbDBsNDhkOGhoNDhkOGhoNGwwbDA4aGwwbDRoNGwwbDBsNGwwOGRwMDhkbDQ0aDhkOGg0aDhkOGhsMDhkOGhsMGwwOGhsMGw0aDRsMGwwbDQ4ZGw0aDQ4ZDhkbDQ4ABdwbDA==
+kitchen_shade_to_50:
+  alias: Kitchen Shade to 50
+  sequence:
+  - service: cover.close_cover
+    target:
+      entity_id: cover.kitchen_shade
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: cover.stop_cover
+    target:
+      entity_id: cover.kitchen_shade
   mode: single

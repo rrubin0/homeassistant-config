@@ -7,8 +7,8 @@ sensor:
       lock_bathroom_door_status:
         friendly_name: "Bathroom Entry Door Status"
         value_template: >-
-          {% set state = states('sensor.bathroom_entry_alarm_type') %}
-          {% set user = states('sensor.bathroom_entry_alarm_level') %}
+          {% set state = states('sensor.bathroom_entry_lock_alarm_type') %}
+          {% set user = states('sensor.bathroom_entry_lock_alarm_level') %}
 
           {% if state == '19' %}
             {% if user == '1' %}
@@ -40,8 +40,8 @@ sensor:
       lock_south_door_status:
         friendly_name: "South Entry Door Status"
         value_template: >-
-          {% set state = states('sensor.south_entry_alarm_type') %}
-          {% set user = states('sensor.south_entry_alarm_level') %}
+          {% set state = states('sensor.south_entry_lock_alarm_type') %}
+          {% set user = states('sensor.south_entry_lock_alarm_level') %}
 
           {% if state == '19' %}
             {% if user == '1' %}

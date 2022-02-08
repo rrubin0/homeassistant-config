@@ -1,0 +1,12 @@
+#####################################################################
+### Binary Sensor: Freeze Warning
+#####################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      freeze_warning:
+        friendly_name: "Freeze Warning"
+        value_template: >-
+          {{ states.weather.downstairs.attributes.temperature <= 34 }}
+        delay_on:
+          seconds: 30

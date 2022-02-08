@@ -2,37 +2,37 @@
 ### iOS Category Definitions for use with the iOS mobile app
 ### Each Category can contain up to 4 actions
 #####################################################################
-ios:
-  push:
-    categories:
-      - name: Away
-        identifier: 'away_override'
-        actions:
-          - identifier: 'CANCEL_AWAY'
-            title: 'Cancel Away'
-            authenticationRequired: false
-            destructive: true
-
-          - identifier: 'PAUSE_AWAY'
-            title: 'Pause Away'
-            authenticationRequired: false
-
-          - identifier: 'VISITOR'
-            title: 'Visitor Mode'
-            authenticationRequired: false
-
-
-      ### Used for testing
-      - name: Office Lamp
-        identifier: 'office_lamp'
-        actions:
-          - identifier: 'OFFICE_LAMP_OFF'
-            title: 'Lamp Off'
-            authenticationRequired: false
-            destructive: true
-
-          - identifier: 'OFFICE_LAMP_ON'
-            title: 'Lamp On'
-            authenticationRequired: false
+#ios:
+#  push:
+#    categories:
+#      - name: Away
+#        identifier: 'away_override'
+#        actions:
+#          - identifier: 'CANCEL_AWAY'
+#            title: 'Cancel Away'
+#            authenticationRequired: false
+#            destructive: true
+#
+#          - identifier: 'PAUSE_AWAY'
+#            title: 'Pause Away'
+#            authenticationRequired: false
+#
+#          - identifier: 'VISITOR'
+#            title: 'Visitor Mode'
+#            authenticationRequired: false
+#
+#
+#      ### Used for testing
+#      - name: Office Lamp
+#        identifier: 'office_lamp'
+#        actions:
+#          - identifier: 'OFFICE_LAMP_OFF'
+#            title: 'Lamp Off'
+#            authenticationRequired: false
+#            destructive: true
+#
+#          - identifier: 'OFFICE_LAMP_ON'
+#            title: 'Lamp On'
+#            authenticationRequired: false
 
 

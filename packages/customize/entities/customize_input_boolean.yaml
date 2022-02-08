@@ -9,8 +9,8 @@ homeassistant:
     input_boolean.holiday:
       icon: mdi:beach
 
-    input_boolean.dinner_time:
-      icon: mdi:food-fork-drink
+    input_boolean.movie_night:
+      icon: mdi:popcorn
 
     ## name cannot be set via UI
     input_boolean.condition_1:

@@ -1,2 +1,8 @@
 light.wine_room_ceiling:
   icon: mdi:lightbulb-group
+
+cover.kitchen_shade:
+  device_class: shade
+
+cover.master_bath_shades:
+  device_class: shade

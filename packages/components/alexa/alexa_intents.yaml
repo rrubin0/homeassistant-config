@@ -38,15 +38,15 @@
           {%- elif SensorType.lower() == "front door" -%}
             The {{ SensorType }} is {{ states('sensor.front_door_state') }} and the tamper is {{ states('sensor.front_door_tamper') }}.
           {%- elif SensorType.lower() == "side door" -%}
-            The {{ SensorType }} is {{ states('sensor.south_door_state') }} and {{ states('lock.south_entry_locked') }} and the tamper is {{ states('sensor.south_door_tamper') }}.
+            The {{ SensorType }} is {{ states('sensor.south_door_state') }} and {{ states('lock.south_entry') }}. The tamper is {{ states('sensor.south_door_tamper') }}, and the lock battery is at {{ states('sensor.south_entry_lock_battery_level') }} percent.
           {%- elif SensorType.lower() == "kitchen door" -%}
             The {{ SensorType }} is {{ states('sensor.kitchen_door_state') }} and the tamper is {{ states('sensor.kitchen_door_tamper') }}.
           {%- elif SensorType.lower() == "office door" -%}
             The {{ SensorType }} is {{ states('sensor.office_door_state') }} and the tamper is {{ states('sensor.office_door_tamper') }}.
           {%- elif SensorType.lower() == "bathroom door" -%}
-            The {{ SensorType }} is {{ states('sensor.bathroom_door_state') }} and {{ states('lock.bathroom_entry_locked') }} and the tamper is {{ states('sensor.bathroom_door_tamper') }}.
+            The {{ SensorType }} is {{ states('sensor.bathroom_door_state') }} and {{ states('lock.bathroom_entry') }}. The tamper is {{ states('sensor.bathroom_door_tamper') }}, and the lock battery is at {{ states('sensor.bathroom_entry_lock_battery_level') }} percent.
           {%- elif SensorType.lower() == "guest room balcony door" -%}
-            The {{ SensorType }} is {{ states('sensor.guest_room_balcony_door_state') }} and the tamper is {{ states('sensor.guest_room_balcony_door_tamper') }}.
+            The {{ SensorType }} is {{ states('binary_sensor.guest_room_balcony_door_state') }} and the tamper is {{ states('binary_sensor.guest_room_balcony_door_tamper') }}.
           {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
             The Humidor temperature is {{ states('sensor.sn1_temperature') }} degrees and your cigars are currently stored at {{ states('sensor.sn1_humidity') }} percent humidity.
           {%- elif SensorType.lower() == "grill" or SensorType.lower() == "barbecue" or SensorType.lower() == "cook" or SensorType.lower() == "smoker"-%}
@@ -83,13 +83,13 @@
           {{ greeting() }}
 
           {{ ["You can say, turn on Evening to activate the evening lighting scene.", 
-          "You can say, turn on Movie Time to dim the lights just like being in a theater.", 
+          "You can say, turn on Movie Night to dim the lights just like being in a theater.", 
           "To turn all the lights on or off you can say, turn off the interior lights.", 
           "To hear temperature information, say, tell us about the temperature", 
           "To check on the cigars, say, tell us about the humidor", 
           "To hear each door's status, say, tell us about the kitchen door, front door, or bathroom door", 
           "For better accuracy say, turn on or turn off and then the name of the device you are trying to control.", 
-          "To turn on bedtime mode, say, tell us goodnight!" 
+          "To turn on bedtime mode, say, goodnight!" 
           ] | random }}
 
 

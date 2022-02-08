@@ -8,11 +8,11 @@ binary_sensor:
         friendly_name: "All Doors"
         device_class: door
         value_template: >-
-          {{ not is_state('sensor.bathroom_door_access_control', '23')
-             or not is_state('sensor.front_door_access_control', '23')
-             or not is_state('sensor.kitchen_door_access_control', '23')
-             or not is_state('sensor.office_door_access_control', '23')
-             or not is_state('sensor.guest_room_balcony_door', '23')
-             or not is_state('sensor.south_door_access_control', '23') }}
+          {{ not is_state('binary_sensor.bathroom_door_state', 'off')
+             or not is_state('binary_sensor.front_door_state', 'off')
+             or not is_state('binary_sensor.kitchen_door_state', 'off')
+             or not is_state('binary_sensor.office_entry_door_state', 'off')
+             or not is_state('binary_sensor.guest_room_balcony_door_state', 'off')
+             or not is_state('binary_sensor.south_door_state', 'off') }}
         delay_off:
           seconds: 7

@@ -7,8 +7,9 @@ binary_sensor:
       nursery_presence:
         friendly_name: "Nursery Presence"
         value_template: >-
-          {{ is_state('binary_sensor.nursery_ptz_motion_detected', 'on')
+          {{ is_state('binary_sensor.nursery_north_ptz_motion', 'on')
              or is_state('binary_sensor.nursery_occupancy', 'on')
+             or is_state('binary_sensor.nursery_east_ptz_motion', 'on')
              or is_state('binary_sensor.motion_nursery', 'on') }}
         delay_off:
           minutes: 30

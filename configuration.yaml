@@ -25,6 +25,7 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 3
 
+ios:
 mobile_app:
 my:
 scene: !include scenes.yaml

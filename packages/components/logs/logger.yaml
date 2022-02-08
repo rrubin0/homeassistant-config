@@ -73,3 +73,7 @@ logger:
 #    homeassistant.components.switch: critical
 #    homeassistant.components.timer: critical
 #    homeassistant.components.zwave: critical
+
+#  filters:
+#    homeassistant.components.alexa.state_report:
+#      - "INVALID_ACCESS_TOKEN_EXCEPTION"

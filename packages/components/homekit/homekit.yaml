@@ -38,7 +38,7 @@ homekit:
       - light.living_room_ceiling
       - light.lounge_light
       - light.master_bathroom_ceiling
-      - light.master_bath_vanity
+      - light.master_bathroom_vanity
       - light.master_bed_ceiling
       - light.master_bed_entry
       - light.master_bedside_lamps
@@ -89,7 +89,7 @@ homekit:
       - switch.nursery_lamp
       - switch.christmas_tree
       - switch.outdoor_speakers
-      - switch.patio_light
+      - switch.patio_lights
       - switch.pc
       - switch.pool_light
       - switch.staircase_lamp
@@ -201,7 +201,7 @@ homekit:
 #################################
 # Input_Boolean - enabled
 #################################
-      - input_boolean.dinner_time
+      - input_boolean.movie_night
       - input_boolean.holiday
       - input_boolean.rain
       - input_boolean.visitor_mode

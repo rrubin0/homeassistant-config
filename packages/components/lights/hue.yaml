@@ -1,9 +1,0 @@
-#####################################################################
-#    @package          :     light_config
-#    @description      :     configuration for lighting
-#####################################################################
-#hue:
-#  bridges:
-#    - host: !secret hue_host
-#      allow_unreachable: true
-#      allow_hue_groups: false

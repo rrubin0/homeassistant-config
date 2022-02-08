@@ -1,7 +1,7 @@
 #####################################################################
 ### Notify - Push Bullet
 #####################################################################
-notify:
-  - platform: pushbullet
-    name: pushbullet
-    api_key: !secret pushbullet_api_key
+#notify:
+#  - platform: pushbullet
+#    name: pushbullet
+#    api_key: !secret pushbullet_api_key

@@ -1,15 +1,15 @@
 #####################################################################
 ### People
 #####################################################################
-person:
-  - name: Rick
-    id: rick
-    device_trackers:
-      - device_tracker.rick
-      - device_tracker.rip8plus
-
-  - name: Megs
-    id: megs
-    device_trackers:
-      - device_tracker.megs
-      - device_tracker.mip8
+#person:
+#  - name: Rick
+#    id: rick
+#    device_trackers:
+#      - device_tracker.rick
+#      - device_tracker.rip8plus
+#
+#  - name: Megs
+#    id: megs
+#    device_trackers:
+#      - device_tracker.megs
+#      - device_tracker.mip8

@@ -3,14 +3,14 @@
   ################################################
 homeassistant:
   customize:
-    cover.kitchen_roller_shade_level:
+    cover.kitchen_shade:
       device_class: shade
 
-    cover.kitchen_roller_shade_switch:
+#    cover.kitchen_roller_shade_switch:
+#      device_class: shade
+
+    cover.master_bath_shades:
       device_class: shade
 
-    cover.master_bath_roller_shades_level:
-      device_class: shade
-
-    cover.master_bath_roller_shades_switch:
-      device_class: shade
+#    cover.master_bath_roller_shades_switch:
+#      device_class: shade

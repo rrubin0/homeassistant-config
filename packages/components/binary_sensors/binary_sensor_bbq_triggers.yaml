@@ -18,7 +18,6 @@ binary_sensor:
         value_template: "{{ states('sensor.grill_temperature') | float <= states('input_number.bbq_low_temp') | float }}"
         delay_on:
           seconds: 5
-
         device_class: cold
 
   - platform: template

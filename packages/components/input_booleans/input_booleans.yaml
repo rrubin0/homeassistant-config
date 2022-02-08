@@ -10,8 +10,8 @@ input_boolean:
     name: Holiday
     initial: off
 
-  dinner_time:
-    name: Dinner Time
+  movie_night:
+    name: Movie Night
     initial: off
 
   sleeping:
@@ -64,6 +64,10 @@ input_boolean:
 
   party_mode:
     name: Party Mode
+    initial: off
+
+  pool_maintenance:
+    name: Pool Maintenance
     initial: off
 
   alarm_clock_weekday:
