@@ -1,19 +1,36 @@
 #####################################################################
 ### BBQ Temperature Sensors
 #####################################################################
-sensor:
-  ### BBQ Grill Temperature
-  - platform: mqtt
-    state_topic: "bbq"
-    name: "Grill Temperature"
-    unit_of_measurement: "°F"
-    device_class: temperature
-    value_template: '{{ value_json.temperature_2_F | round(1) }}'
+mqtt:
+  sensor: # BBQ Pit Temperature
+    - state_topic: "bbq"
+      name: "Grill Temperature"
+      unit_of_measurement: "°F"
+      device_class: temperature
+      value_template: '{{ value_json.temperature_2_F | round(1) }}'
 
-  ### BBQ Food Probe Temperature
-  - platform: mqtt
-    state_topic: "bbq"
-    name: "Food Temperature"
-    unit_of_measurement: "°F"
-    device_class: temperature
-    value_template: '{{ value_json.temperature_1_F | round(1) }}'
+# BBQ Pit Temperature
+    - state_topic: "bbq"
+      name: "Food Temperature"
+      unit_of_measurement: "°F"
+      device_class: temperature
+      value_template: '{{ value_json.temperature_1_F | round(1) }}'
+
+
+#
+#sensor:
+#  ### BBQ Grill Temperature
+#  - platform: mqtt
+#    state_topic: "bbq"
+#    name: "Grill Temperature"
+#    unit_of_measurement: "°F"
+#    device_class: temperature
+#    value_template: '{{ value_json.temperature_2_F | round(1) }}'
+#
+#  ### BBQ Food Probe Temperature
+#  - platform: mqtt
+#    state_topic: "bbq"
+#    name: "Food Temperature"
+#    unit_of_measurement: "°F"
+#    device_class: temperature
+#    value_template: '{{ value_json.temperature_1_F | round(1) }}'

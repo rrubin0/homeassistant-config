@@ -7,6 +7,7 @@ logbook:
       - alexa
       - automation
       - binary_sensor
+      - blinkpy
       - camera
       - cover
       - fan
@@ -19,13 +20,14 @@ logbook:
       - mqtt
       - notify
       - persistent_notification
-      - remote
+#      - remote
 #      - scene
 #      - script
       - sensor
       - sun
       - switch
       - weather
+      - xiaomi_gateway
       - zwave
 
     entities:

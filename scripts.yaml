@@ -20,36 +20,29 @@ activate_alexa_actionable_notification:
       entity_id: '{{ alexa_device }}'
       media_content_type: skill
       media_content_id: amzn1.ask.skill.a85fd060-7fa9-47b4-ab56-92b4d35c5a8c
+  mode: single
+  alias: 'Alexa: Actionable Notification'
 unlock_megs:
-  alias: Unlock Door for Megan
+  alias: 'Arrival: Unlock South Door for Megs'
   sequence:
   - service: lock.unlock
     data: {}
     target:
       entity_id: lock.south_entry
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Megs has arrived
       message: Megs is home!
   mode: single
 away:
-  alias: Away Mode
+  alias: 'Mode: Away'
   sequence:
+  - service: alarm_control_panel.alarm_arm_away
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_saguaro_estates
   - service: lock.lock
     entity_id: all
-  - service: homeassistant.turn_off
-    entity_id:
-    - fan.patio_fan
-    - group.interior_lights
-    - switch.patio_lights
-    - switch.pool_light
-    - switch.mini_fridge
-    - switch.aquarium
-    - switch.office_spare
-    - switch.switch_one
-    - switch.switch_three
-    - switch.switch_four
-    - switch.switch_five
   - service: climate.set_preset_mode
     data:
       entity_id: climate.downstairs
@@ -60,87 +53,211 @@ away:
       preset_mode: Away
   - service: automation.turn_off
     entity_id: automation.evening_scene_schedule
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Away Mode ON
       message: Away mode is ON.
-  - condition: state
-    entity_id: switch.tv
-    state: 'on'
-  - service: switch.turn_off
-    entity_id: switch.tv
+  - choose:
+    - conditions:
+      - condition: sun
+        before: sunset
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          entity_id:
+          - group.interior_lights
+          - group.inside_christmas_lights
+    - conditions:
+      - condition: sun
+        after: sunset
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          entity_id:
+          - light.living_room_ceiling
+          - light.entryway
+          area_id:
+          - 414aea09a010441783be336559c47f50
+          - fcaa981e07fc4b0d867cd8b6f5801fc9
+          - c422351f189a42449abb2a5bf0152863
+          - 69a3968c0130497e862157a750090907
+          - ade76688dbb34b8d84635f8458b99cda
+          - dee77ca5ef914076a3a097b131a9d642
+          - 506e64eb32a242da91ab8df3a651f083
+          - 3fbc39459ed34527a0e9aa0bfa505140
+          - 0eb62649a6804442ba224d0dbc48ac08
+  mode: single
 bedtime:
-  alias: Bedtime
+  alias: 'Mode: Bedtime'
   sequence:
+  - service: alarm_control_panel.alarm_arm_away
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_saguaro_estates
   - service: lock.lock
     data: {}
     target:
-      entity_id: all
+      device_id:
+      - d49f2b80399778e9fe5777a863d2143e
+      - 963d3ad4a2a2f41de28bab37e966536a
   - service: homeassistant.turn_off
     entity_id: input_boolean.movie_night
-  - service: switch.turn_off
-    entity_id:
-    - switch.outdoor_speakers
-    - switch.switch_three
-  - service: switch.turn_off
-    entity_id: switch.living_room_fan
   - delay:
       minutes: 3
   - service: homeassistant.turn_off
-    entity_id:
-    - group.exterior_lights
-    - group.interior_lights
+    data: {}
+    target:
+      entity_id:
+      - group.exterior_lights
+      - group.interior_lights
+      - group.inside_christmas_lights
+  - service: script.traverse_lock_doors
+    data: {}
   mode: single
 driveway_ptz_1:
-  alias: Driveway PTZ Preset 1
+  alias: 'Camera: Driveway PTZ Preset 1'
   sequence:
   - service: shell_command.driveway_ptz_preset_1
+    data: {}
+  mode: single
 driveway_ptz_2:
-  alias: Driveway PTZ Preset 2
+  alias: 'Camera: Driveway PTZ Preset 2'
   sequence:
   - service: shell_command.driveway_ptz_preset_2
+    data: {}
+  mode: single
 driveway_ptz_3:
-  alias: Driveway PTZ Preset 3
+  alias: 'Camera: Driveway PTZ Preset 3'
   sequence:
   - service: shell_command.driveway_ptz_preset_3
+    data: {}
+  mode: single
 driveway_ptz_4:
-  alias: Driveway PTZ Preset 4
+  alias: 'Camera: Driveway PTZ Preset 4'
   sequence:
   - service: shell_command.driveway_ptz_preset_4
+    data: {}
+  mode: single
 driveway_ptz_5:
-  alias: Driveway PTZ Preset 5
+  alias: 'Camera: Driveway PTZ Preset 5'
   sequence:
   - service: shell_command.driveway_ptz_preset_5
+    data: {}
+  mode: single
 driveway_ptz_6:
-  alias: Driveway PTZ Preset 6
+  alias: 'Camera: Driveway PTZ Preset 6'
   sequence:
   - service: shell_command.driveway_ptz_preset_6
-nursery_ptz_1:
-  alias: Nursery PTZ Preset 1
+    data: {}
+  mode: single
+south_ptz_1:
+  alias: 'Camera: South PTZ Preset 1'
   sequence:
-  - service: shell_command.nursery_ptz_preset_1
-nursery_ptz_2:
-  alias: Nursery PTZ Preset 2
+  - service: shell_command.south_ptz_preset_1
+    data: {}
+  mode: single
+south_ptz_2:
+  alias: 'Camera: South PTZ Preset 2'
   sequence:
-  - service: shell_command.nursery_ptz_preset_2
-nursery_ptz_3:
-  alias: Nursery PTZ Preset 3
+  - service: shell_command.south_ptz_preset_2
+    data: {}
+  mode: single
+south_ptz_3:
+  alias: 'Camera: South PTZ Preset 3'
   sequence:
-  - service: shell_command.nursery_ptz_preset_3
-crib_ptz_1:
-  alias: Crib PTZ Preset 1
+  - service: shell_command.south_ptz_preset_3
+    data: {}
+  mode: single
+south_ptz_4:
+  alias: 'Camera: South PTZ Preset 4'
   sequence:
-  - service: shell_command.crib_ptz_preset_1
-crib_ptz_2:
-  alias: Crib PTZ Preset 2
+  - service: shell_command.south_ptz_preset_4
+    data: {}
+  mode: single
+south_ptz_5:
+  alias: 'Camera: South PTZ Preset 5'
   sequence:
-  - service: shell_command.crib_ptz_preset_2
-crib_ptz_3:
-  alias: Crib PTZ Preset 3
+  - service: shell_command.south_ptz_preset_5
+    data: {}
+  mode: single
+south_ptz_6:
+  alias: 'Camera: South PTZ Preset 6'
   sequence:
-  - service: shell_command.crib_ptz_preset_3
+  - service: shell_command.south_ptz_preset_6
+    data: {}
+  mode: single
+kid_east_ptz_1:
+  alias: 'Camera: Kid Room East PTZ Preset 1'
+  sequence:
+  - service: shell_command.kid_east_ptz_1
+    data: {}
+  mode: single
+kid_east_ptz_2:
+  alias: 'Camera: Kid Room East PTZ Preset 2'
+  sequence:
+  - service: shell_command.kid_east_ptz_2
+    data: {}
+  mode: single
+kid_east_ptz_3:
+  alias: 'Camera: Kid Room East PTZ Preset 3'
+  sequence:
+  - service: shell_command.kid_east_ptz_3
+    data: {}
+  mode: single
+kid_east_ptz_4:
+  alias: 'Camera: Kid Room East PTZ Preset 4'
+  sequence:
+  - service: shell_command.kid_east_ptz_4
+    data: {}
+  mode: single
+kid_north_ptz_1:
+  alias: 'Camera: Kid Room North PTZ Preset 1'
+  sequence:
+  - service: shell_command.kid_north_ptz_1
+    data: {}
+  mode: single
+kid_north_ptz_2:
+  alias: 'Camera: Kid Room North PTZ Preset 2'
+  sequence:
+  - service: shell_command.kid_north_ptz_2
+    data: {}
+  mode: single
+kid_north_ptz_3:
+  alias: 'Camera: Kid Room North PTZ Preset 3'
+  sequence:
+  - service: shell_command.kid_north_ptz_3
+    data: {}
+  mode: single
+kid_north_ptz_4:
+  alias: 'Camera: Kid Room North PTZ Preset 4'
+  sequence:
+  - service: shell_command.kid_north_ptz_4
+    data: {}
+  mode: single
+north_gate_ptz_1:
+  alias: 'Camera: North Gate PTZ Preset 1'
+  sequence:
+  - service: shell_command.north_gate_ptz_1
+    data: {}
+  mode: single
+north_gate_ptz_2:
+  alias: 'Camera: North Gate PTZ Preset 2'
+  sequence:
+  - service: shell_command.north_gate_ptz_2
+    data: {}
+  mode: single
+north_gate_ptz_3:
+  alias: North Gate PTZ Preset 3
+  sequence:
+  - service: shell_command.north_gate_ptz_3
+north_gate_ptz_4:
+  alias: North Gate PTZ Preset 4
+  sequence:
+  - service: shell_command.north_gate_ptz_4
 christmas_music:
-  alias: Play Christmas Music
+  alias: 'Media: Play Christmas Music'
   sequence:
   - service: media_player.play_media
     data:
@@ -149,7 +266,7 @@ christmas_music:
       media_content_type: AMAZON_MUSIC
   mode: single
 stop_playing_everywhere:
-  alias: Stop Playing Everywhere
+  alias: 'Media: Stop Playing Everywhere'
   sequence:
   - service: media_player.media_play_pause
     data:
@@ -158,8 +275,9 @@ stop_playing_everywhere:
     entity_id: media_player.everywhere
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
+  mode: single
 company_mode:
-  alias: Company Mode
+  alias: 'Mode: Company'
   sequence:
   - service: switch.turn_on
     entity_id:
@@ -178,203 +296,136 @@ company_mode:
     data:
       entity_id: light.dining_room_chandelier
       brightness: 130
+  mode: single
 ecobee_ds_home:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Home
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
+  alias: ''
+  mode: single
 ecobee_ds_eco:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
+  alias: ''
+  mode: single
 ecobee_ds_away:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Away
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
+  alias: ''
+  mode: single
 ecobee_ds_sleep:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Sleep
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
+  alias: ''
+  mode: single
 ecobee_ds_normal:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Normal
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
+  alias: ''
+  mode: single
 ecobee_ds_resume:
   sequence:
   - service: ecobee.resume_program
     data:
-      entity_id: climate.downstairs
+      entity_id: climate.ecobee_downstairs
       resume_all: 'true'
+  alias: ''
+  mode: single
 ecobee_us_home:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Home
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
+  alias: ''
+  mode: single
 ecobee_us_eco:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
+  alias: ''
+  mode: single
 ecobee_us_away:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Away
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
+  alias: ''
+  mode: single
 ecobee_us_sleep:
   sequence:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Sleep
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
+  alias: ''
+  mode: single
 ecobee_us_resume:
   sequence:
   - service: ecobee.resume_program
     data:
-      entity_id: climate.upstairs
+      entity_id: climate.ecobee_upstairs
       resume_all: 'true'
-hue_lr_dimmed:
-  alias: Living Room Dim
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Dimmed
-hue_lr_nightlight:
-  alias: Living Room Nightlight
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Nightlight
-hue_lr_normal:
-  alias: Normal
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Normal
-hue_lr_bright:
-  alias: Bright
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Bright
-hue_lr_movie:
-  alias: Theater
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Movie
-hue_lr_sunrise:
-  alias: Sunrise
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Sunrise
-hue_lr_sunset:
-  alias: Sunset
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Sunset
-hue_lr_minty:
-  alias: Minty
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Minty
-hue_lr_daybreak:
-  alias: Daybreak
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Daybreak
+  alias: ''
+  mode: single
 hue_mbath_morning:
-  alias: Master Bathroom Morning
+  alias: 'Scene: Master Bathroom Morning'
   sequence:
-  - service: hue.hue_activate_scene
+  - service: scene.turn_on
     data:
-      group_name: Master Bathroom
-      scene_name: Morning
-hue_master_bedside_dimmed:
-  alias: Bedside Lamp Low
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Dimmed
-lights_off_except:
-  icon: mdi:home-lightbulb
-  fields:
-    exclude_lights:
-      description: Excluded lights as list
-  sequence:
-  - service: logbook.log
-    data_template:
-      entity_id: script.turn_off_lights
-      name: Exclude log
-      message: Excluding {{ exclude_lights }}
-  - service: light.turn_off
-    data_template:
-      entity_id: '{%- for device in states.light|rejectattr(''entity_id'',''in'',
-        exclude_lights )|rejectattr(''state'',''in'',''off'') %}{%- if loop.first
-        %}{%- else %}, {% endif %}{{ device.entity_id }}{%- if loop.last %}{% endif
-        %}{%- endfor  %}
-
-        '
-mailbox_alert:
-  alias: Mailbox Alert
-  sequence:
-  - service: notify.mobile_app_rip8plus
-    data:
-      title: Mailbox
-      message: Someone opened the mailbox
-      data:
-        push:
-          thread-id: mailbox
-          sound:
-            name: default
-  - condition: time
-    before: '15:30:00'
-    after: 08:00:00
-  - service: notify.alexa_media
-    data:
-      target: media_player.living_room_echo
-      data:
-        type: tts
-      message: It looks like the mail has arrived, please go check.
+      transition: 3
+    target:
+      entity_id: scene.master_bathroom_morning
+  mode: single
 master_bedroom_night_time:
-  alias: Master Bedroom Night Time
+  alias: 'Scene: Master Bedroom Night Time'
   sequence:
   - service: light.turn_off
     data:
       entity_id: light.foyer_lights
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bathroom
-      scene_name: Morning
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Tropical twilight
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.master_bathroom_morning
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.master_bedside_lamps_bedtime
   - service: light.turn_on
     data:
       entity_id: light.bedframe_light
@@ -388,26 +439,22 @@ master_bedroom_night_time:
       entity_id: switch.mini_fridge
   - service: input_boolean.turn_on
     entity_id: input_boolean.sleeping
-tv_power_off:
-  alias: TV Shutdown
-  sequence:
-  - service: switch.turn_off
-    entity_id: switch.tv
-  - service: switch.turn_off
-    entity_id: switch.directv
+  mode: single
 morning_sequence:
-  alias: Morning Sequence
+  alias: 'Scene: Morning'
   sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bathroom
-      scene_name: Morning
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.master_bathroom_morning
   - delay:
       minutes: 5
   - service: light.turn_on
     data:
-      entity_id: light.master_bathroom_vanity
       brightness: 55
+      transition: 2
+    target:
+      entity_id: light.master_bathroom_vanity
   - service: homeassistant.turn_on
     entity_id: group.accent_lights
   - delay:
@@ -417,10 +464,10 @@ morning_sequence:
       entity_id: light.entryway
       brightness: 140
       transition: '{{ states(''input_number.alarm_clock_offset'') | int * 60 }}'
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Sunrise
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.living_room_dim
   - delay:
       minutes: 15
   - service: light.turn_on
@@ -429,10 +476,8 @@ morning_sequence:
       brightness: 200
   - delay:
       minutes: 20
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Normal
+  - service: script.scene_living_room_default
+    data: {}
   - service: homeassistant.turn_off
     entity_id: group.accent_lights
   - delay:
@@ -445,29 +490,7 @@ morning_sequence:
     entity_id: group.living_room_lights
   - service: homeassistant.turn_off
     entity_id: group.entry_lights
-nap_time:
-  alias: Nap Time
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.upstairs
-      preset_mode: Sleep
-  - delay:
-      seconds: 10
-  - service: light.turn_off
-    entity_id:
-    - light.nursery_light
-    - light.nursery_wall_light
-  - service: input_boolean.turn_on
-    entity_id: input_boolean.sleeping
-  - delay:
-      minutes: 120
-  - service: input_boolean.turn_off
-    entity_id: input_boolean.sleeping
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.upstairs
-      resume_all: 'true'
+  mode: single
 baby_playlist:
   alias: Play Baby Playlist
   sequence:
@@ -480,20 +503,8 @@ baby_playlist:
       entity_id: media_player.nursery_dot
       media_content_id: my_baby_playlist
       media_content_type: AMAZON_MUSIC
-play_white_noise:
-  alias: Play White Noise
-  sequence:
-  - service: media_player.volume_set
-    data:
-      entity_id: media_player.nursery_dot
-      volume_level: 0.5
-  - service: media_player.play_media
-    data:
-      entity_id: media_player.nursery_dot
-      media_content_id: my_white_noise_playlist
-      media_content_type: AMAZON_MUSIC
 stop_playing_nursery:
-  alias: Stop Playing Nursery
+  alias: 'Media: Stop Playing Nursery'
   sequence:
   - service: media_player.media_play_pause
     data:
@@ -502,46 +513,23 @@ stop_playing_nursery:
     entity_id: media_player.nursery_dot
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
-sun_up:
-  alias: Turn off lights if sun is up
-  sequence:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Living Room
-      scene_name: Bright
-  - delay:
-      minutes: 10
-  - service: homeassistant.turn_off
-    entity_id: group.interior_lights
-  - service: light.turn_off
-    entity_id: light.kitchen_night_light
-  - service: notify.mobile_app_rip8plus
-    data:
-      title: Sun's up. Lights off
-      message: Sun is {{ states.sun.sun.attributes.elevation }} at {{ states('sensor.time_templated_am_pm')
-        }}
+  mode: single
 alexa_media_test:
-  alias: Alexa Media Test
+  alias: 'Alexa: Play Media Test'
   sequence:
   - service: media_player.play_media
     data:
       entity_id: media_player.office_dot
       media_content_id: Door Bell Playlist
       media_content_type: SPOTIFY
-alexa_announce_test:
-  alias: Alexa Announce Test
-  sequence:
-  - service: notify.alexa_media_office
-    data:
-      message: This is just a test, 1, 2, 3
-      data:
-        type: announce
+  mode: single
 christmas_time:
-  alias: Christmas Time
+  alias: 'Mode: Christmas Time'
   sequence:
   - service: scene.turn_on
-    data:
-      entity_id: scene.cozy
+    data: {}
+    target:
+      entity_id: scene.christmas_mood
   - service: media_player.volume_set
     data:
       entity_id: media_player.everywhere
@@ -550,13 +538,14 @@ christmas_time:
     data:
       media_content_id: christmas_classics_playlist
       media_content_type: SPOTIFY
+      enqueue: play
     target:
       entity_id: media_player.everywhere
   mode: single
 test_actionable_away:
-  alias: Test iOS Actionable Away
+  alias: 'iOS Action: Test iOS Actionable Away'
   sequence:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Testing Away
       message: Away Detect Test
@@ -564,18 +553,17 @@ test_actionable_away:
         push:
           category: away_override
           thread-id: test-notification
+  mode: single
 test_alexa_alarm_sound:
-  alias: Test Alexa Media Alarm Sound
+  alias: 'Alexa: Test Alarm Sound'
   sequence:
   - service: media_player.play_media
     data:
       media_content_type: sound
       media_content_id: box_04
-    target:
-      entity_id: media_player.office_dot
   mode: single
 baby_playlist_test:
-  alias: Baby Playlist Test
+  alias: 'Media: Baby Playlist Test'
   sequence:
   - service: media_player.volume_set
     entity_id: media_player.office_dot
@@ -586,13 +574,14 @@ baby_playlist_test:
       entity_id: media_player.office_dot
       media_content_id: my_baby_playlist
       media_content_type: AMAZON_MUSIC
+  mode: single
 tts_door_held_open:
-  alias: Door Held Open
+  alias: 'Watchdog: Door Held Open'
   sequence:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Door Held Open
-      message: A door's held open - Away mode activated on Downstairs Ecobee
+      message: A door's held open - HVAC switching to Eco Mode.
   - condition: state
     entity_id: input_boolean.announce
     state: 'on'
@@ -607,10 +596,11 @@ tts_door_held_open:
         type: tts
       message: I've detected a door held open for too long so I'm turning off the
         AC to save energy.
+  mode: single
 tts_warm_weather:
-  alias: Close the doors when the weather is too warm
+  alias: 'Watchdog: Close the doors when the weather is too warm'
   sequence:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Warm Weather
       message: Please close doors and windows
@@ -632,86 +622,104 @@ tts_warm_weather:
         windows, for the air-conditioner.'''
       data:
         type: tts
+  mode: single
 start_away_timer:
-  alias: Start Away
+  alias: 'Timer: Start Away'
   sequence:
   - service: timer.start
     entity_id: timer.away_mode
+  mode: single
 pause_away_timer:
-  alias: Pause Away
+  alias: 'Timer: Pause Away'
   sequence:
   - service: timer.pause
     entity_id: timer.away_mode
+  mode: single
 cancel_away_timer:
-  alias: Cancel Away
+  alias: 'Mode Cancel: Away'
   sequence:
   - service: timer.cancel
     entity_id: timer.away_mode
+  mode: single
 finish_away_timer:
-  alias: Finish Away
+  alias: 'Timer: Finish Away'
   sequence:
   - service: timer.finish
     entity_id: timer.away_mode
+  mode: single
 start_bedtime_timer:
-  alias: Start Bedtime
+  alias: 'Timer: Start Bedtime'
   sequence:
+  - service: notify.mobile_app_rcom
+    data:
+      message: Bedtime Countdown Started!
+      title: Timer Active
   - service: timer.start
     entity_id: timer.bedtime
+  mode: single
 pause_bedtime_timer:
-  alias: Pause Bedtime
+  alias: 'Timer: Pause Bedtime'
   sequence:
   - service: timer.pause
     entity_id: timer.bedtime
+  mode: single
 cancel_bedtime_timer:
-  alias: Cancel Bedtime
+  alias: 'Timer: Cancel Bedtime'
   sequence:
   - service: timer.cancel
     entity_id: timer.bedtime
+  mode: single
 finish_bedtime_timer:
-  alias: Finish Bedtime
+  alias: 'Timer: Finish Bedtime'
   sequence:
   - service: timer.finish
     entity_id: timer.bedtime
+  mode: single
 start_sun_up_timer:
-  alias: Start Sun Up
+  alias: 'Timer: Start Sun Up'
   sequence:
   - service: timer.start
     entity_id: timer.sun_up
+  mode: single
 pause_sun_up_timer:
-  alias: Pause Sun Up
+  alias: 'Timer: Pause Sun Up'
   sequence:
   - service: timer.pause
     entity_id: timer.sun_up
+  mode: single
 cancel_sun_up_timer:
-  alias: Cancel Sun Up
+  alias: 'Timer: Cancel Sun Up'
   sequence:
   - service: timer.cancel
     entity_id: timer.sun_up
+  mode: single
 finish_sun_up_timer:
-  alias: Finish Sun Up
+  alias: 'Timer: Finish Sun Up'
   sequence:
   - service: timer.finish
     entity_id: timer.sun_up
+  mode: single
 bright:
-  alias: Bright
+  alias: 'Scene: Bright'
   sequence:
   - service: light.turn_on
     data:
-      entity_id: light.entryway
-      brightness: 255
-      transition: 5
+      transition: 3
+      color_temp: 303
+      brightness_pct: 100
+    target:
+      area_id:
+      - e404ae11317c4432a90e1c144fea2e63
+      - dc0c7510c5bc42509ea83f9d5c9c03f9
   - service: light.turn_on
     data:
-      entity_id: light.foyer_lights
-      brightness: 255
-      transition: 3
-  - service: homeassistant.turn_on
-    data:
-      entity_id: group.living_room_lights
-      brightness: 255
       transition: 5
+      brightness_pct: 100
+    target:
+      entity_id: light.foyer_lights
+  mode: single
 cloudy:
-  alias: Cloudy
+  alias: 'Scene: Cloudy'
   sequence:
   - service: light.turn_on
     data:
@@ -728,31 +736,9 @@ cloudy:
       entity_id: group.living_room_lights
       brightness: 200
       transition: 15
-dim:
-  alias: Dim
-  sequence:
-  - service: light.turn_on
-    data:
-      entity_id: light.foyer_lights
-      brightness: 60
-      transition: 5
-  - service: light.turn_on
-    data:
-      entity_id: light.entryway
-      brightness: 75
-      transition: 10
-  - service: light.turn_on
-    data:
-      entity_id: light.living_room_lamp
-      brightness: 100
-      transition: 10
-  - service: light.turn_on
-    data:
-      entity_id: light.living_room_ceiling
-      brightness: 50
-      transition: 20
+  mode: single
 evening:
-  alias: Evening
+  alias: 'Scene: Evening'
   sequence:
   - service: light.turn_on
     data:
@@ -761,30 +747,29 @@ evening:
       transition: 5
   - service: light.turn_on
     data:
-      entity_id: light.kitchen_entry
-      brightness: 200
-      transition: 30
-  - service: light.turn_on
-    data:
-      entity_id: light.south_entry
-      brightness: 160
-      transition: 10
-  - service: light.turn_on
-    data:
-      entity_id: light.center_entry
       brightness: 50
       transition: 10
+      color_temp: 357
+    target:
+      entity_id: light.entryway
   - service: light.turn_on
     data:
-      entity_id: light.living_room_lamp
       brightness: 255
       transition: 10
+      color_temp: 335
+    target:
+      entity_id: light.living_room_lamp
+  - condition: state
+    entity_id: light.living_room_ceiling
+    state: 'on'
   - service: light.turn_off
     data:
+      transition: 10
+    target:
       entity_id: light.living_room_ceiling
-      transition: 5
+  mode: single
 game_time:
-  alias: Game Time
+  alias: 'Scene: Game Time'
   sequence:
   - service: light.turn_on
     data:
@@ -793,8 +778,9 @@ game_time:
       transition: 5
   - service: switch.turn_on
     entity_id: switch.game_room_floodlights
+  mode: single
 morning:
-  alias: Morning
+  alias: 'Scene: Early Morning Wakeup Routine'
   sequence:
   - service: homeassistant.turn_on
     data:
@@ -828,8 +814,9 @@ morning:
     data:
       entity_id: light.kitchen_lights
       brightness: 170
+  mode: single
 movie_end:
-  alias: Movie Ended
+  alias: 'Scene: Movie Ended'
   sequence:
   - service: light.turn_on
     data:
@@ -846,8 +833,9 @@ movie_end:
       entity_id: light.living_room_ceiling
       brightness: 100
       transition: 30
+  mode: single
 movie_paused:
-  alias: Movie Paused
+  alias: 'Scene: Movie Paused'
   sequence:
   - service: light.turn_on
     data:
@@ -864,21 +852,27 @@ movie_paused:
       entity_id: light.living_room_ceiling
       brightness: 50
       transition: 15
+  mode: single
 movie_time:
-  alias: Movie Time
+  alias: 'Scene: Movie Time'
   sequence:
   - service: light.turn_off
     data:
       entity_id: light.entryway
       transition: 5
-  - service: homeassistant.turn_off
-    data:
-      entity_id: group.living_room_lights
-      transition: 10
   - service: light.turn_off
-    entity_id: light.foyer_lights
+    data:
+      transition: 10
+    target:
+      area_id: e404ae11317c4432a90e1c144fea2e63
+  - service: light.turn_off
+    data:
+      transition: 3
+    target:
+      entity_id: light.foyer_lights
+  mode: single
 tv_time:
-  alias: TV Time
+  alias: 'Scene: TV Time'
   sequence:
   - service: light.turn_on
     data:
@@ -899,8 +893,9 @@ tv_time:
     data:
       entity_id: light.living_room_ceiling
       transition: 5
+  mode: single
 pool_cycle:
-  alias: Pool Colors
+  alias: 'Pool Scene: Color Loop'
   sequence:
   - service: switch.turn_on
     entity_id: switch.pool_light
@@ -912,6 +907,7 @@ pool_cycle:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
 pool_party:
   sequence:
   - service: switch.turn_on
@@ -932,6 +928,8 @@ pool_party:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Party'
 pool_romance:
   sequence:
   - service: switch.turn_on
@@ -960,6 +958,8 @@ pool_romance:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Romance'
 pool_caribbean:
   sequence:
   - service: switch.turn_on
@@ -996,6 +996,8 @@ pool_caribbean:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Caribbean'
 pool_patriotic:
   sequence:
   - service: switch.turn_on
@@ -1040,6 +1042,8 @@ pool_patriotic:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Patriotic'
 pool_sunset:
   sequence:
   - service: switch.turn_on
@@ -1092,6 +1096,8 @@ pool_sunset:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Sunset'
 pool_royal:
   sequence:
   - service: switch.turn_on
@@ -1152,6 +1158,8 @@ pool_royal:
       seconds: 1
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Scene: Royal'
 pool_blue:
   sequence:
   - service: switch.turn_on
@@ -1220,6 +1228,8 @@ pool_blue:
       seconds: 0.8
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Light: Blue'
 pool_green:
   sequence:
   - service: switch.turn_on
@@ -1296,6 +1306,8 @@ pool_green:
       seconds: 0.8
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Light: Green'
 pool_red:
   sequence:
   - service: switch.turn_on
@@ -1384,6 +1396,8 @@ pool_red:
     data:
       entity_id: input_select.pool_scene
       option: None
+  mode: single
+  alias: 'Pool Light: Red'
 pool_white:
   sequence:
   - service: switch.turn_on
@@ -1476,6 +1490,8 @@ pool_white:
       seconds: 0.8
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Light: White'
 pool_magenta:
   sequence:
   - service: switch.turn_on
@@ -1576,6 +1592,8 @@ pool_magenta:
       seconds: 0.8
   - service: switch.turn_on
     entity_id: switch.pool_light
+  mode: single
+  alias: 'Pool Light: Magenta'
 living_room_appletv_plex:
   alias: Plex in Living Room
   sequence:
@@ -1595,7 +1613,7 @@ living_room_appletv_plex:
       - home
   mode: single
 alarm_clock_snooze:
-  alias: Alarm Clock Snooze
+  alias: 'Alarm Clock: Snooze'
   sequence:
   - service: input_datetime.set_datetime
     target:
@@ -1605,24 +1623,6 @@ alarm_clock_snooze:
         + (15 * 60))|timestamp_custom(''%H:%M'', false)) }}'
   mode: single
   icon: mdi:sleep
-climate_upstairs_cooldown:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id: climate.upstairs
-  - delay:
-      hours: 2
-      minutes: 0
-      seconds: 0
-      milliseconds: 0
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.upstairs
-      resume_all: true
-  mode: single
-  alias: Upstairs Cooldown
 climate_downstairs_cooldown:
   alias: Downstairs Cooldown
   sequence:
@@ -1630,7 +1630,8 @@ climate_downstairs_cooldown:
     data:
       preset_mode: Precool
     target:
-      entity_id: climate.downstairs
+      entity_id:
+      - climate.ecobee_downstairs
   - delay:
       hours: 2
       minutes: 0
@@ -1638,15 +1639,16 @@ climate_downstairs_cooldown:
       milliseconds: 0
   - service: ecobee.resume_program
     data:
-      entity_id: climate.downstairs
+      entity_id: climate.ecobee_downstairs
       resume_all: true
   mode: single
 pool_pump_winter:
-  alias: Pool Pump Winter
+  alias: 'Pool Pump: Winter'
   sequence:
   - service: switch.turn_on
     target:
       entity_id: switch.pool_pump
+    data: {}
   - delay:
       hours: 6
       minutes: 0
@@ -1655,13 +1657,15 @@ pool_pump_winter:
   - service: switch.turn_off
     target:
       entity_id: switch.pool_pump
+    data: {}
   mode: single
 pool_pump_summer:
-  alias: Pool Pump Summer
+  alias: 'Pool Pump: Summer'
   sequence:
   - service: switch.turn_on
     target:
       entity_id: switch.pool_pump
+    data: {}
   - delay:
       hours: 10
       minutes: 0
@@ -1670,13 +1674,15 @@ pool_pump_summer:
   - service: switch.turn_off
     target:
       entity_id: switch.pool_pump
+    data: {}
   mode: single
 pool_pump_quick_clean:
-  alias: Pool Pump Quick Clean
+  alias: 'Pool Pump: Quick Clean'
   sequence:
   - service: switch.turn_on
     target:
       entity_id: switch.pool_pump
+    data: {}
   - delay:
       hours: 1
       minutes: 30
@@ -1685,6 +1691,7 @@ pool_pump_quick_clean:
   - service: switch.turn_off
     target:
       entity_id: switch.pool_pump
+    data: {}
   mode: single
   icon: mdi:robot-vacuum
 learn_living_room_fan_commands:
@@ -1699,6 +1706,10 @@ learn_living_room_fan_commands:
       - med
       - high
       - fan_off
+      - light
+      alternative: true
+  mode: single
+  alias: 'Remote: Broadlink Learn Fan'
 learn_living_room_fan_light:
   sequence:
   - service: remote.learn_command
@@ -1708,43 +1719,51 @@ learn_living_room_fan_light:
       device: living_room_fan
       command: light
       alternative: true
+  mode: single
+  alias: 'Remote: Broadlink Learn Fan Light'
 living_room_fan_low:
   sequence:
   - service: remote.send_command
-    target:
-      entity_id: remote.broadlink_rm_pro_remote
     data:
-      command: b64:sgDaAQ4MDgwODQ0NDgwODA4NDQ0NDQ4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsMGw0NGhsNDRoNGhsMGw0OGRsMGw0bDA4ZDhobDA4aDRobDBsNGg0OGRsMGw0bDBsNGwwbDBsNDRobDA4aGwwOGQ4aDRoOGQ4aDhkOGQ4aDhkOGRsNDhkbDBsNGwwbDRoNGwwbDRoNGwwbDQ0aGwwOAANJDQ0ODA4MDgwODQ0NDgwODA4NDQ0ODA6pHAwbDA4aDRobDBsNDRoOGRsNGwwbDQ0aGwwOGQ4aGwwbDQ0aGwwbDRoNDhkOGRsNDhkOGRsNGwwbDQ0aGwwbDRoNGwwbDBwMGwwOGRwMDhkbDQ0aDhkOGg0aDhkOGg0aDhkOGg4ZGwwOGhsMGw0aDRsMGw0aDRsMGw0aDRsMDhkbDQ0AA0kODQ0NDQ0ODA4MDg0NDQ4MDgwODQ0NDaobDRoNDhkOGhsMGwwOGg0aGwwbDRsMDhkbDQ0aDhkbDRsMDhkbDRsMGwwOGg4ZGwwOGg4ZGw0aDRsMDhoaDRsMGwwbDRsMGw0bDA4ZGw0NGhsMDhoNGg4ZDhoNGg4ZDhoNGg4ZDhobDA4ZGw0bDBsMGw0bDBsNGg0bDBsMGw0OGRsMDgAF3BsNDRoNGhsMGw0OGRsM
-living_room_fan_med:
-  sequence:
-  - service: remote.send_command
+      command: b64:sgCeAA0NDQ0NDg0NDQ0NDQ0ODA4NDQ0NDQ4MqxoNGg4NGg0aGg4aDQ0bDBsaDRoOGg0NGhoODBsNGhoNGw0NGhoOGg0aDQ0bDRoaDQ0bDRoaDRoNGw0NGhsNGg0aDRsMGw0aDRoNDhoaDQ0bGg0NGg0bDRoNGg0bDRoNGg0bDRoNGhsNDRoaDhoNGg0bDBsNGg0aDRsNGg0aDQ4aGg0NAAXcAAAAAAAAAAAAAA==
+      device: living_room_fan
+      num_repeats: 4
+      delay_secs: 0.4
     target:
       entity_id: remote.broadlink_rm_pro_remote
-    data: command:sgByABoNDhkbDQ0aDhkbDRoNDhkbDRoNGw0NGg0aGwwOGg0aGwwbDRsMDhoaDRsMGw0aDRsMGw0aDQ0aGw0NGhsMDhoNGg4ZDhoNGg4ZGw0NGg4aDRoNGg4ZGw0aDRsMGw0aDRsNDRoaDRsMGw0aDRsMDgAF3AAAAAAAAA==
+  mode: single
+  alias: 'Broadlink: Living Room Fan Low'
+  icon: mdi:fan-speed-1
 living_room_fan_high:
   sequence:
   - service: remote.send_command
     target:
       entity_id: remote.broadlink_rm_pro_remote
-    data: command:sgAAAg4ZDhoNGg4ZDhobDBsNGg0bDBsNDRobDBsMGw0bDBsMGw0OAANIDgwODQ0NDgwODA4MDg0NDQ4MDgwODQ2qGw0aDQ4ZDhobDBsNDRoNGhsMGw0bDA4aGg0NGg4ZGw0bDA4ZGw0bDBsMDhoOGRsNDRoOGRsMHAwbDA4aGg0bDBsNGg0bDBsNGg0OGRsNDRobDA4aDRoOGQ4aDRobDA4aDRoOGQ4aDRoOGhoNGwwbDBsNGwwOGhoNGwwbDRoNGwwbDQ0AA0kNDQ4MDg0NDQ0NDgwODQ0NDQ0ODA4NDaobDBsNDRoOGhoNGg0OGQ4aGwwbDBsNDRobDA4aDRobDBsNDRobDBsNGwwOGg0aGwwOGg0aGwwbDRoNDhkbDRoNGwwbDRoNGwwbDQ0aGwwOGhoNDhkOGg0aDhkOGhsMDhkOGg0aDhkOGg0aGwwbDRsMGw0aDQ4ZGwwbDRsMGwwbDRsMDgADSQ0NDQ0ODA4MDg0NDQ4MDgwODA4NDgwOqhsMGwwOGg0aGwwbDQ0aDhkbDRsMGw0NGhsMDhoNGhsMGw0NGhoNGw0aDQ4ZDhoaDQ4ZDhoaDRsMGw0NGhsMGw0aDRsMGw0aDRsMDhoaDQ4ZGw0NGg4ZDhoNGg4ZGw0NGg4ZDhoNGg4ZDhobDBsNGg0bDBsMDhobDBsMGw0bDBsNGg0NAAXcGwwbDRoNGww=
-living_room_fan_off:
-  sequence:
-  - service: remote.send_command
-    target:
-      entity_id: remote.broadlink_rm_pro_remote
-    data: command:sgBUAxsNDRobDQ0aGg0OGg0aDhkOGg0aDRoOGQ4aDhkOGg0aGwwbDRoNGwwbDRoNGwwbDRoNGwwbDRoNDhkOAANJDQ0ODA4NDQ0NDQ0NDgwODQ0NDQ0ODA6qGwwbDA4aDRobDRoNDRoOGhoNGwwbDQ0aGg0OGg0aGw0aDQ0aGwwbDBsNDRoOGhoNDhkOGhoNGw0aDQ0aGwwbDRsMGwwbDRsMGw0NGhsMDhoaDQ0aDhoNGg4ZDhoNGg0aDhoNGg4aDRoaDRsMGw0aDRsNGg0aDRsNGg0aDRsMGw0NGg4AA0gODQ0NDQ0ODA4NDQ0NDQ0NDg0NDQ0NDqkbDRsMDhoNGhsMGw0NGg0aGw0aDRsMDhoaDQ4ZDhoaDRsMDhoaDRsMGw0NGg4ZGw0NGg0aGwwbDRsMDhobDBsMGw0aDRsMGw0bDA4aGg0NGhsNDRoNGg4aDRoOGQ4aDRoOGQ4aDRoOGRsNGg0bDBsNGg0bDBsNGg0bDRoNGg0bDA4ZDgADSQ0NDg0NDA4NDgwODA4NDQ0ODA4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsNGg0OGRsNDRoOGRsNGg0OGRsNGg0bDA4ZDhobDA4aDRobDBsNGg0OGRsNGwwbDBsNGwwbDBsNDhkbDQ0aGwwOGQ4aDRoOGQ4aDRoOGg0aDhkOGg0aGwwbDRoNGwwbDRoNGwwbDRoNGwwbDRoNDhoNAAODDgwODQ0NDQ0ODA4MDgwODQ4MDgwODQ2qGw0aDQ4aDRoaDRsMDhoNGhsMGw0aDQ4aGg0NGg4ZGw0aDQ4ZGw0bDBsMDhoNGhsMDhoNGhsMGw0bDA4aGg0bDBsNGg0bDBsNGg0OGRsNDRobDA4aDRoOGQ4aDRoOGRsNDRoOGg0aGg0OGRsNGwwbDBsNGwwbDA4aGwwbDBsNDRobDA4AA0kNDQ4MDgwODQ0NDgwODA4NDQ0NDQ4MDqobDBsNDRoOGRsNGg0OGQ4aGg0bDBsNDRobDQ0aDRobDBsNDRobDBsNGwwOGQ4aGwwOGQ4aGwwbDRoNDRobDBsNGwwbDRoNGwwbDQ0aGwwOGhoNDhkOGg0aDhkOGg0aGwwOGg0aDhkbDQ0aGw0aDRsMGwwbDRsMDhkbDRsMGwwOGhsMDgAF3A0aDhk=
+    data:
+      device: living_room_fan
+      command:
+        b64: sgGEAxsMDhkOGhsMGw0NGhsMGw0aDQ4ZDhoaDQ4ZDhobDBsMGw0NGhsMGw0bDBsMGw0bDBsMDhobDA4ZGw0OGQ4aDRoOGQ4aGg0OGQ4aDRoOGQ4aDRobDBsNGg0bDBsNDRobDBsNGwwbDBsNGg0NAANJDg0NDQ0NDgwODQ0NDQ0ODA4MDg0NDQ6pGw0bDA4aDRobDBsNDRoOGRsNGg0bDA4aGg0OGQ4aGg0bDQ0aGg0bDRoNDRoOGhoNDRoOGRsNGwwbDA4aGwwbDBsNGg0bDBsNGwwOGRsNDRobDQ0aDhkOGQ4aDhkbDQ0aDhkOGg0aDhkOGhoNGwwbDBsNGw0NGhoNGwwbDRoNGw0aDQ0AA0kODA4MDg0NDQ4MDgwODQ0NDQ0ODA4NDaobDRoNDRoOGRsNGwwOGg0aGwwbDRoNDhkbDA4aDhkbDRoNDhoaDRoNGwwOGg0aGwwOGg0aGwwbDRoNDhkbDRsMGwwbDRoNGwwbDQ0aGwwOGhsMDhoNGg0aDhkOGhsMDhoNGg4ZDhoNGg4ZGw0aDRoNGw0aDQ4ZGw0aDRsMGw0aDRsMDgADSQ0NDgwODQ0NDQ0NDQ4MDgwODQ0NDgwOqhsMGwwOGg0aGwwbDQ4ZDhkbDRsMGwwOGhsMDhoNGhsNGg0NGhsNGg0aDQ4ZDhkbDQ4ZDhkcDBsMGw0NGhsMGw0bDBsMGw0aDRsMDhobDA4aGg0NGg4ZDhoNGg4ZGw0OGQ4aDRoOGQ4aDRobDBsNGg0bDBsNDRobDBsNGg0bDBsNGg0OAANIDg0NDQ0NDgwODQ0MDg0ODA4MDg0NDQ6pGw0bDA4ZDhobDBsNDRoNGhsMGw0bDA4aGg0OGQ4aGg0bDA4aGg0bDBsNDRoOGhoNDRoOGRsNGg0bDA4aGg0bDBsNGg0bDBsNGwwOGRsNDRobDA4aDhkOGQ4aDRobDQ0aDRoOGg0aDhkOGhoNGwwbDRoNGw0NGhoNGwwbDBsNGw0aDQ0AA0kODA4NDQ0NDQ4MDgwODQ0NDgwODA4NDaobDBsNDRoOGhoNGwwOGQ4aGwwbDRoNDhkbDA4aDhkbDBsNDhkbDRoNGwwOGg0aGwwOGg0aGwwbDRoNDhkbDRoNGwwbDRsMGwwbDQ0aGw0NGhoNDhkOGg0aDhoNGhoNDhoNGg4ZDhoNGg4ZGw0aDRsMGw0aDQ4aGg0aDRsMGw0aDRsNDQAF3AAAAAA=
+  mode: single
+  alias: 'Broadlink: Living Room Fan High'
+  icon: mdi:fan-speed-3
 living_room_fan_light:
   sequence:
   - service: remote.send_command
     target:
       entity_id: remote.broadlink_rm_pro_remote
-    data: command:sgAWAw4NDQ0NDQ4MDgwODA4NDgwODA4NDQ0NqhsMHAwOGQ4aGwwbDA4aDRobDBsNGwwOGRsNDRoOGRsNGwwOGRsNGwwbDQ0aDhkbDQ0aDhkbDRoNGw0NGRsNGwwbDBsNGwwbDRoNDhkbDQ0aGwwOGQ4aDhkbDQ0aDhkOGg0aDhkOGg4ZDhkbDRsMGw0NGhsMGw0aDRsMGwwbDRsMGwwOAANJDgwODA4NDQ0ODA4MDg0NDQ0NDgwODA6qGwwbDQ0aDhkbDRsMDhkOGhsMGwwbDQ0aGwwOGg0aGw0aDQ4ZGw0aDRsMDhoNGhsMDhoNGhsMGw0aDQ4ZGw0aDRsMGw0aDRsMGw0NGhsMDhobDA4ZDhoNGhsMDhoNGg4ZDhoNGg4ZDhoOGRsMGw0bDA4ZGw0bDBsMGw0bDBsNGg0bDA4AA0gODQ0NDgwODA4NDQ0ODA4MDg0NDQ0NDqoaDRsMDhoNGhsMGw0NGg4ZGw0bDBsMDhobDA4ZDhobDBsNDRobDBsNGg0OGQ4aGg0OGQ4aGg0bDBsNDRobDBsNGg0bDBsNGg0bDA4ZGw0OGRsMDhoOGQ4aGwwOGQ4aDRoOGQ4aDRoOGQ4aGwwbDRoNDhkbDRoNGwwbDRoNGwwbDBsNDQADpw4MDgwODA4NDgwODA4MDg0NDQ4MDgwOqhsMGw0NGg4ZGw0bDA4ZDhobDBsMGw0NGhsNDRoNGhsMGw0OGRsMGw0bDA4aDRobDA4aDRobDBsMGw0OGRsNGg0bDBsMGw0bDBsMDhobDA4aGwwOGQ4aDRoOGQ4aDRobDA4aDRobDBsNDRobDRoNGwwbDRoNGwwOGRwMGwwOGg0aGwwOAANIDg0NDQ4MDg0NDQ0NDgwODA4NDQ0ODA6qGwwbDA4aDRobDBsNDRoOGRsNGwwbDA4aGwwOGQ4aGwwbDA4aGwwbDBsNDhkOGhoNDhkOGhoNGwwbDA4aGwwbDRoNGwwbDBsNGwwOGRwMDhkbDQ0aDhkOGg0aDhkOGhsMDhkOGhsMGwwOGhsMGw0aDRsMGwwbDQ4ZGw0aDQ4ZDhkbDQ4ABdwbDA==
+    data:
+      command: b64:sgGEAxoNDhoNGhoNGw0NGhoNGw0aDQ0aDRsaDQ0aDhoaDRoNGw0NGhoNGw0aDRoNGw0aDRoODRoaDQ4aGg0NGg0aDhoaDQ0bDRoNGg0bDRoNGg0bDRoaDRsNGg0NGhsNGg0aDRsNGg0aDRsNGg0NAANJDQ4NDQ0NDQ0NDQ4NDQ0NDQ4MDQ4NDQ2rGg0aDQ0bDRoaDRoODRoNGhoOGg0aDQ0bGg0NGg0bGg0aDQ0bGg0aDhkODRoNGhsNDRoNGxoNGg0aDQ4aGg0bDBsNGg0aDRsNGg0NGhsNDRoaDg0aDRoNGxoNDRoNGg4aDRoNGw0aDRoNGxoNGg0aDg0aGg0bDRoNGg0bDRoNGg0bDQ0AA0kNDQ0NDg0NDQ0NDQ4NDQ0NDQ0NDQ0ODaoaDhoNDRoOGhoNGg0NGw0aGg0aDRsNDRobDA4aDRobDRoNDRoaDhoNGg4MGw0aGg0OGQ4aGg0bDRoNDRobDRoNGg0bDRoNGg0bDQ0aGg4NGhoNDRoOGg0aGg0OGg0aDRoOGg0aDRsNGg0aGw0aDRoNDRsaDRoNGw0aDRoNGw0aDRoNDgADSQ0NDQ0ODA0ODQ0NDQ0NDgwODQ0NDQ0NqxoNGg0OGg0aGg0bDQ0aDRobDRoNGg4NGhoNDRsNGhoNGg4NGhoNGg4aDQ0aDRsaDQ0aDRsaDRoNGw0NGhoNGw0aDRoNGw0aDRoODRoaDQ0bGg0NGg0bDRoaDQ4aDRoNGg0bDRoNGg4aDRoaDRsNGg0NGxoNGg0aDhoNGg0aDRsNGg0NAAOnDQ0ODQ0NDQ0NDQ0ODQ0NDQ0NDQ4NDQ2qGw0aDQ0aDRsaDRoNDRsNGhoOGg0aDQ0aGw0NGg4aGg0aDQ0bGg0aDRsMDhoNGhoODRoNGhsNGg0aDQ0bGg0aDRsNGg0aDRsNGg0NGhsNDRoaDQ4aDRoNGg4aDRoNGxoNDRoNGhsNGg0OGRsNGg0bDRoNGg0bDQ0aGg0bDQ0aDRobDQ0AA0kNDQ4MDg0NDQ0NDQ0ODA4NDQ0NDQ4MDqoaDRsNDRoNGhsNGg0NGg4aGg0aDRsNDRoaDQ4aDRoaDRsNDRoaDhoNGg0OGQ4aGg0OGg0aGg0bDRoNDRobDRoNGg0bDRoNGg0bDQ0aGg0OGhoNDRoOGg0aDRoNGw0aGg0OGg0aGg0bDQ0aGwwbDRoNGg0bDRoNDhkbDRoNDRsNGhoNDQAF3AAAAAA=
+      device: living_room_fan
+  mode: single
+  alias: 'Broadlink: Living Room Fan Light On'
+  icon: mdi:ceiling-fan-light
 kitchen_shade_to_50:
-  alias: Kitchen Shade to 50
+  alias: 'Kitchen Shade: 50'
   sequence:
   - service: cover.close_cover
     target:
       entity_id: cover.kitchen_shade
+    data: {}
   - delay:
       hours: 0
       minutes: 0
@@ -1753,4 +1772,509 @@ kitchen_shade_to_50:
   - service: cover.stop_cover
     target:
       entity_id: cover.kitchen_shade
+    data: {}
+  mode: single
+dim_living_room_test:
+  alias: 'Scene: Dim Living Room Lamp'
+  sequence:
+  - condition: state
+    entity_id: light.living_room_lamp
+    state: 'on'
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.living_room_lamp
+  mode: single
+dim_living_room_ceiling:
+  alias: 'Scene: Dim Living Room Ceiling'
+  sequence:
+  - condition: state
+    entity_id: light.living_room_ceiling
+    state: 'on'
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.living_room_ceiling
+  mode: single
+dim_entryway_lights:
+  alias: 'Scene: Dim Entryway Lights'
+  sequence:
+  - condition: state
+    entity_id: light.entryway
+    state: 'on'
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.entryway
+  mode: single
+brighten_entryway_lights:
+  alias: 'Scene: Brighten Entryway Lights'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id: light.entryway
+  mode: single
+brighten_living_room_ceiling:
+  alias: 'Scene: Brighten Living Room Ceiling'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id: light.living_room_ceiling
+  mode: single
+brighten_living_room_lamp:
+  alias: 'Scene: Brighten Living Room Lamp'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id: light.living_room_lamp
+  mode: single
+scene_living_room_default:
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness: 55
+      transition: 2
+      color_temp: 357
+    target:
+      entity_id: light.entryway
+  - service: light.turn_on
+    data:
+      brightness: 255
+      transition: 3
+      color_temp: 335
+    target:
+      entity_id: light.living_room_lamp
+  - condition: state
+    entity_id: light.living_room_ceiling
+    state: 'on'
+  - service: light.turn_off
+    data:
+      transition: 4
+    target:
+      entity_id: light.living_room_ceiling
+  mode: single
+  alias: 'Scene: Living Room Default'
+broadlink_living_room_fan_medium:
+  alias: 'Broadlink: Living Room Fan Medium'
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data:
+      command: b64:sgAcAhsNGg0aDg0aGg0NGxoNDRoNGw0aDRoNGw0aGg4MGw0aDRoNGw0aGg4aDRoNGg0bDRoNDRsaDRoNGg4aDRoNDQADSgwODQ0NDQ0NDQ4NDQ0NDQ0NDg0NDQ0NqxoNGg4MGw0aGg0aDg0aDRoaDhoNGg0NGxoNDRsMGxoNGg4MGxoNGg4aDQ0aDRsaDQ0bDBsaDRoNGg4MGxoNGg4aDRoNGg4aDRoNDRsaDQ0aGg4NGg0bDBsMGw0aDRsaDQ0bDBsNGg0bDBsaDRoOGg0aDRoNGw0NGhoOGg0aDRoOGg0NAANJDQ4MDg0NDQ0NDgwODQ0NDQ0NDQ4MDg2qGg4aDQ0aDRsaDRoODBsNGhoOGQ4aDQ0aGw0NGg0bGg0aDQ0bGg0aDRoNDhoNGhoODBsNGhoOGg0aDQ0bGg0aDRoOGg0aDRoOGg0NGhoODRoaDQ0bDRoNGg0bDRoNGhoODRoNGwwbDRoNGxoNGg0aDhoNGg0aDgwbGg0aDhoNGg0aDg0AA0kNDQ0NDQ4MDg0NDQ0NDQ0ODQ0NDQ0ODKsaDRoODRoNGhoOGg0NGwwbGg0aDRoODRoaDQ0bDRoaDhoNDRoaDRsNGg0NGg0bGg0NGg0bGg0aDRsNDRoaDRsNGg0aDRsNGg0aDg0aGg0NGhsNDRoNGw0aDRoNGw0aGg0NGw0aDRoNGw0aGg0bDRoNGg4aDRoNDRobDRoNGg4aDRoNDQAF3A0aDRsaDQ0bDBsNGg==
+      device: living_room_fan
+      num_repeats: 4
+      delay_secs: 0.4
+  mode: single
+  icon: mdi:fan-speed-2
+broadlink_living_room_fan_off:
+  alias: 'Broadlink: Living Room Fan Off'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: b64:sgA8AQ0NDg0NDQ0NDQ0ODA4NDQ0NDQ0NDQ4NqhsMGw0NGg4aGg0aDQ0bDRoaDRsMGw0NGhsMDhoNGhsNGg0NGhsNGg0aDQ4aDRoaDg0aDRobDBsNGg0NGxoNGg0bDBsNGg0aDRsNDRobDQ0aGg0OGQ4aDRoOGg0aDRoOGQ4aDRoOGg0aGg0bDRoNGg0bDRoNGg0bDRoNGg0bDRoNDRoOAANJDQ0NDQ0ODQ0NDQ0NDQ0ODQ0NDQ0NDQ6qGg0bDA4aDRobDRoNDRoOGhoNGg0bDQ0aGg0OGg0aGg0bDQ0aGg0bDRoNDRsNGhoNDRoOGhoNGw0aDQ0aGg0bDRoNGw0aDBsNGwwOGhoNDRobDQ0aDhkOGg0aDhoNGg0aDhoNGg0aDhoaDRoNGw0aDRoNGw0aDRoNGw0aDRoNGw0NGg0ABdwAAAAAAAAAAAAAAAA=
+      device: living_room_fan
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+  mode: single
+  icon: mdi:fan-off
+broadlink_living_room_fan_light_off:
+  alias: 'Broadlink: Living Room Fan Light Off'
+  sequence:
+  - service: remote.send_command
+    target:
+      entity_id: remote.broadlink_rm_pro_remote
+    data:
+      command: b64:sgDcAg0aGg4aDRoNDRsNGhoNDRsNGhoNGw0aDQ0aGw0aDRoNGw0aDRoNGw0NGhoNDhoaDQ0aDhoNGhoNDhoNGg0bDRoNGg0bDRoNGhoOGg0aDQ0bGg0aDRsNGg0aDRsNGg0aDQ0AA0oNDQ0NDQ0NDg0NDQ0NDQ0NDg0NDQ0NDasaDRoNDhoNGhoOGg0NGg0bGg0aDRoODRoaDQ0bDRoaDRsNDRoaDRoOGg0NGg0bGg0NGg0bGg0aDRsNDRoaDRsNGg0bDBsNGg0aDQ4aGg0NGxoNDRoNGg4aGg0OGQ4aDRoNGw0aDRoNGw0aGg0aDhoNDRobDRoNGg0bDRoNGg0bDRoNDQADSQ0ODQ0NDQ0NDQ0ODQ0NDQ0NDQ4NDQ0NqhsNGg0NGg4aGg0aDg0aDRoaDRsNGg0NGxoNDRoNGhsNGg0NGxoNGg0bDQ0aDRobDQ0aDRobDRoNGg0OGhoNGg0bDRoNGwwbDRoNDRobDQ0aGg0OGg0aDRsaDQ0aDhoNGg0aDhoNGg0aDRobDRoOGg0NGhoNGw0aDRsMGw0aDRoNGwwOAAOnDQ0NDQ4NDQ0NDQ0NDgwODQ0NDQ0NDQ6qGg0bDQ0aDRobDRoNDRsNGhoNGg4aDQ0aGwwNGw0aGw0aDQ0aGg0bDRoNDRoOGhoNDRoOGhoNGwwbDQ0aGw0aDRoNGg4aDRoNGw0NGhoODRoaDQ0aDRsNGg0bDRoNGhoNDhoNGhsMGw0NGhsMGw0aDRoNGw0aDQ0bGg0aDQ0aDhoaDQ0AA0kODQ0NDQ0ODQ0NDQ0NDQ0NDQ4NDQ0NDasaDRoNDhoNGhoNGw0NGg0bGg0aDRoNDRsaDQ0bDRoaDRsMDhoaDRoNGw0NGg0aGw0NGg0aGw0aDRoNDhoaDRoOGg0aDRoOGg0aDQ0bGg0NGhsNDRoNGg0bDRoNGg0bGg0NGg0bGg0aDQ0bGg0aDRsNGg0aDRsNDRoaDRsNDRoNGhsNDQAF3A0aDhoaDQ0AA0kODQ==
+      device: living_room_fan
+      num_repeats: 10
+  mode: single
+  icon: mdi:ceiling-fan-light
+traverse_lock_doors:
+  alias: 'Traverse: Lock Doors'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: homeassistant/1GNERKKW7KJ270064/command
+      payload: '{"command": "lockDoor"}'
+  mode: single
+  icon: mdi:car-door-lock
+traverse_unlock_doors:
+  alias: 'Traverse: Unlock Doors'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: homeassistant/1GNERKKW7KJ270064/command
+      payload: '{"command": "unlockDoor"}'
+  mode: single
+  icon: mdi:car-door
+traverse_start_vehicle:
+  alias: 'Traverse: Start Vehicle'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: homeassistant/1GNERKKW7KJ270064/command
+      payload: '{"command": "startVehicle"}'
+  mode: single
+  icon: mdi:car-electric-outline
+traverse_cancel_start_vehicle:
+  alias: 'Traverse: Cancel Start'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: homeassistant/1GNERKKW7KJ270064/command
+      payload: '{"command": "cancelStart"}'
+  mode: single
+  icon: mdi:car-off
+brighten_master_bathroom_ceiling:
+  alias: 'Scene: Brighten Master Bathroom Ceiling'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id: light.master_bathroom_ceiling
+  mode: single
+dim_master_bathroom_ceiling:
+  alias: 'Scene: Dim Master Bathroom Ceiling'
+  sequence:
+  - condition: state
+    entity_id: light.master_bathroom_ceiling
+    state: 'on'
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.master_bathroom_ceiling
+  mode: single
+dim_master_bathroom_vanity:
+  alias: 'Scene: Dim Master Bathroom Vanity'
+  sequence:
+  - condition: state
+    entity_id: light.master_bathroom_vanity
+    state: 'on'
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id: light.master_bathroom_vanity
+  mode: single
+brighten_wine_room:
+  alias: 'Scene: Brighten Wine Room'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id:
+      - light.wine_room_ceiling
+      - light.wine_room_lamp
+      - light.lounge_light
+  mode: single
+dim_bar_strip_light:
+  alias: 'Scene: Dim Wine Room'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: -10
+    target:
+      entity_id:
+      - light.bar_strip_light
+      - light.wine_room_ceiling
+      - light.wine_room_lamp
+  mode: single
+traverse_locate_vehicle:
+  alias: 'Traverse: Locate Vehicle'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: homeassistant/1GNERKKW7KJ270064/command
+      payload: '{"command": "getLocation"}'
+  mode: single
+  icon: mdi:map-marker-circle
+blink_east_pool_camera_snapshot:
+  alias: 'Blink: East Pool Camera Snapshot'
+  sequence:
+  - service: blink.trigger_camera
+    target:
+      entity_id: camera.blink_east_pool
+    data: {}
+  - delay: 00:00:05
+  - service: blink.blink_update
+    data: {}
+  - service: camera.snapshot
+    target:
+      entity_id: camera.blink_east_pool
+    data:
+      filename: /snapshots/east_pool_{{ now().strftime('%Y_%m-%d_%H%M') }}.jpg
+blink_east_pool_camera_record:
+  alias: 'Blink: East Pool Camera Record'
+  sequence:
+  - service: blink.save_video
+    data:
+      name: East Pool
+      filename: /nvr/east_pool_{{ now().strftime('%Y_%m-%d_%H%M') }}.mp4
+  mode: single
+routine_wake_up:
+  alias: 'Routine: Wake Up'
+  sequence:
+  - service: alarm_control_panel.alarm_disarm
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_saguaro_estates
+  - service: script.ecobee_ds_home
+    data: {}
+  mode: single
+atv_home_theater_home:
+  alias: 'Home Theater Remote: Home'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home
+    target:
+      entity_id: remote.home_theater
+  mode: single
+atv_home_theater_exit:
+  alias: 'Home Theater Remote: Exit'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home
+      num_repeats: 5
+      delay_secs: 0.4
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_up:
+  alias: 'Home Theater Remote: Up'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: up
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_down:
+  alias: 'Home Theater Remote: Down'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: down
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_left:
+  alias: 'Home Theater Remote: Left'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: left
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_right:
+  alias: 'Home Theater Remote: Right'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: right
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_home_hold:
+  alias: 'Home Theater Remote: Home Hold'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home_hold
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_top_menu:
+  alias: 'Home Theater Remote: Top Menu'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: top_menu
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_home_theater_select:
+  alias: 'Home Theater Remote: Select'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: select
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_atv_bar_tv_down:
+  alias: 'Bar Remote: Down'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: down
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_exit:
+  alias: 'Bar Remote: Exit'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home
+      num_repeats: 5
+      delay_secs: 0.4
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_home:
+  alias: 'Bar Remote: Home'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_home_hold:
+  alias: 'Bar Remote: Home Hold'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: home_hold
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_left:
+  alias: 'Bar Remote: Left'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: left
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_right:
+  alias: 'Bar Remote: Right'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: right
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_up:
+  alias: 'Bar Remote: Up'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: up
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_select:
+  alias: 'Bar Remote: Select'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: select
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_atv_bar_tv_top_menu:
+  alias: 'Bar Remote: Top Menu'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: top_menu
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+remote_home_theater_menu:
+  alias: 'Home Theater Remote: Menu'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: menu
+    target:
+      entity_id: remote.home_theater
+  mode: single
+remote_bar_tv_menu:
+  alias: 'Bar Remote: Menu'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: menu
+    target:
+      entity_id: remote.bar_tv
+  mode: single
+home_theater_remote_skip_30:
+  alias: 'Home Theater Remote: Skip 30'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: right
+      num_repeats: 3
+    target:
+      entity_id: remote.home_theater
+  mode: queued
+home_theater_remote_ad_skip:
+  alias: 'Home Theater Remote: Skip Ads'
+  sequence:
+  - service: remote.send_command
+    data:
+      command: right
+      num_repeats: 12
+    target:
+      entity_id: remote.home_theater
+  mode: queued
+  max: 10
+scene_brighten_wine_room_ceiling:
+  alias: 'Scene: Brighten Wine Room Ceiling'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id:
+      - light.wine_room_ceiling
+  mode: single
+scene_brighten_wine_room_lamp:
+  alias: 'Scene: Brighten Wine Room Lamp'
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_step_pct: 10
+    target:
+      entity_id:
+      - light.wine_room_lamp
+  mode: single
+ecobee_upstairs_cooldown:
+  alias: Ecobee Upstairs Cooldown
+  sequence:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Precool
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
+  - delay:
+      hours: 2
+      minutes: 0
+      seconds: 0
+      milliseconds: 0
+  - service: ecobee.resume_program
+    data:
+      entity_id: climate.ecobee_upstairs
+      resume_all: true
   mode: single

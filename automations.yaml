@@ -23,14 +23,14 @@
   action:
   - service: script.turn_on
     data_template:
-      entity_id: "{% if is_state('input_select.pool_scene', 'Cycle') %}\n  script.pool_cycle\n\
-        {% elif is_state('input_select.pool_scene', 'Party') %}\n  script.pool_party\n\
-        {% elif is_state('input_select.pool_scene', 'Romance') %}\n  script.pool_romance\n\
-        {% elif is_state('input_select.pool_scene', 'Caribbean') %}\n  script.pool_caribbean\n\
-        {% elif is_state('input_select.pool_scene', 'Patriotic') %}\n  script.pool_patriotic\n\
-        {% elif is_state('input_select.pool_scene', 'Sunset') %}\n  script.pool_sunset\n\
-        {% elif is_state('input_select.pool_scene', 'Royal') %}\n  script.pool_royal\n\
-        {% else %}\n  unknown\n{% endif %}"
+      entity_id: "{% if is_state('input_select.pool_scene', 'Cycle') %}\n  script.pool_cycle\n{%
+        elif is_state('input_select.pool_scene', 'Party') %}\n  script.pool_party\n{%
+        elif is_state('input_select.pool_scene', 'Romance') %}\n  script.pool_romance\n{%
+        elif is_state('input_select.pool_scene', 'Caribbean') %}\n  script.pool_caribbean\n{%
+        elif is_state('input_select.pool_scene', 'Patriotic') %}\n  script.pool_patriotic\n{%
+        elif is_state('input_select.pool_scene', 'Sunset') %}\n  script.pool_sunset\n{%
+        elif is_state('input_select.pool_scene', 'Royal') %}\n  script.pool_royal\n{%
+        else %}\n  unknown\n{% endif %}"
   - service: input_select.select_option
     data:
       entity_id: input_select.pool_color
@@ -43,37 +43,49 @@
   action:
   - service: script.turn_on
     data_template:
-      entity_id: "{% if is_state('input_select.pool_color', 'Blue') %}\n  script.pool_blue\n\
-        {% elif is_state('input_select.pool_color', 'Green') %}\n  script.pool_green\n\
-        {% elif is_state('input_select.pool_color', 'Red') %}\n  script.pool_red\n\
-        {% elif is_state('input_select.pool_color', 'White') %}\n  script.pool_white\n\
-        {% elif is_state('input_select.pool_color', 'Magenta') %}\n  script.pool_magenta\n\
-        {% else %}\n  unknown\n{% endif %}"
+      entity_id: "{% if is_state('input_select.pool_color', 'Blue') %}\n  script.pool_blue\n{%
+        elif is_state('input_select.pool_color', 'Green') %}\n  script.pool_green\n{%
+        elif is_state('input_select.pool_color', 'Red') %}\n  script.pool_red\n{%
+        elif is_state('input_select.pool_color', 'White') %}\n  script.pool_white\n{%
+        elif is_state('input_select.pool_color', 'Magenta') %}\n  script.pool_magenta\n{%
+        else %}\n  unknown\n{% endif %}"
   - service: input_select.select_option
     data:
       entity_id: input_select.pool_scene
       option: Select an option...
 - id: porch_lights_on
-  alias: 'Schedule On: Porch Lights'
+  alias: 'Auto On: Porch Lights'
   trigger:
   - platform: sun
     event: sunset
-    offset: 00:10:00
-  action:
-  - service: homeassistant.turn_on
-    entity_id: group.porch_lights
-- id: porch_lights_off
-  alias: 'Schedule Off: Porch Lights'
-  trigger:
+    offset: 00:05:00
+    id: sunset
   - platform: sun
     event: sunrise
     offset: -00:15:00
+    id: sunrise
   action:
-  - service: homeassistant.turn_off
-    entity_id: group.porch_lights
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: sunset
+      sequence:
+      - service: homeassistant.turn_on
+        data: {}
+        target:
+          entity_id:
+          - group.porch_lights
+    - conditions:
+      - condition: trigger
+        id: sunrise
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          entity_id: group.porch_lights
+    default: []
 - id: bbq_alert_high
-  alias: BBQ Grill Alarm High Temp
-  mode: single
+  alias: 'BBQ: Grill Alarm High Temp'
   trigger:
   - platform: state
     entity_id: sensor.grill_temperature
@@ -85,7 +97,7 @@
     entity_id: input_boolean.bbq_alert_high
     state: 'on'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Grill Temp
       message: The grill is {{ states('sensor.grill_temperature') }} degrees. That's
@@ -95,9 +107,13 @@
           sound:
             name: default
             critical: 1
-            volume: 1.0
+            volume: 1
   - delay:
+      hours: 0
+      minutes: 0
       seconds: 10
+      milliseconds: 0
+  mode: queued
 - id: bbq_alert_low
   alias: 'BBQ: Grill Alarm Low Temp'
   trigger:
@@ -111,7 +127,7 @@
     entity_id: input_boolean.bbq_alert_low
     state: 'on'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Grill Temp
       message: The grill is {{ states('sensor.grill_temperature') }} degrees. That's
@@ -123,20 +139,25 @@
             critical: 1
             volume: 1
   - delay:
-      seconds: 10
-  mode: single
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  mode: queued
 - id: bbq_food_ready
   alias: 'BBQ: Food Target Temp'
   trigger:
   - platform: state
-    entity_id: binary_sensor.bbq_food_ready
-    to: 'on'
+    entity_id: sensor.food_temperature
   condition:
   - condition: state
     entity_id: input_boolean.bbq_alert_food
     state: 'on'
+  - condition: state
+    entity_id: binary_sensor.bbq_food_ready
+    state: 'on'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Food Target Temp
       message: Food is at {{ states('sensor.food_temperature') }} degrees. Go check
@@ -145,8 +166,15 @@
         push:
           sound:
             name: default
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  mode: queued
 - id: fountains_on
-  alias: Fountains On
+  alias: 'Auto On: Fountains'
+  description: ''
   trigger:
   - platform: sun
     event: sunrise
@@ -160,7 +188,7 @@
     entity_id: sensor.dark_sky_wind_speed
     below: 10
   - condition: state
-    entity_id: input_boolean.rain
+    entity_id: binary_sensor.weatherflow_is_raining
     state: 'off'
   - condition: sun
     before: sunset
@@ -169,26 +197,6 @@
     state: home
   action:
   - service: switch.turn_on
-    data:
-      entity_id: switch.fountains_switch
-- id: fountains_off
-  alias: Fountains Off
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: 00:05:00
-  - platform: state
-    entity_id: input_boolean.rain
-    from: 'off'
-    to: 'on'
-    for:
-      minutes: 5
-  condition:
-  - condition: state
-    entity_id: switch.fountains_switch
-    state: 'on'
-  action:
-  - service: switch.turn_off
     data:
       entity_id: switch.fountains_switch
 - id: ring_doorbell_motion
@@ -204,117 +212,65 @@
       seconds: 60
   - service: shell_command.driveway_ptz_preset_2
   mode: single
-- id: mailbox_closed
-  alias: Mailbox Door Closed
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.mailbox_door
-    to: 'off'
-    for:
-      seconds: 10
-  action:
-  - service: shell_command.driveway_ptz_preset_2
-- id: mailbox_held_open
-  alias: Mailbox Door Held Open
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.mailbox_door
-    to: 'off'
-    for:
-      minutes: 3
-  action:
-  - service: notify.mobile_app_rip8plus
-    data:
-      title: Mailbox
-      message: Mailbox Door Held Open
-      data:
-        push:
-          sound:
-            name: default
-- id: downstairs_bath_presence
-  alias: Downstairs Bathroom Presence Detected
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_downstairs_bath
-    to: 'on'
-  mode: restart
-  action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.downstairs_bath_presence
 - id: downstairs_bath_lights_on
   alias: 'Auto On: Downstairs Bathroom Lights'
   trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_downstairs_bath
-    to: 'on'
-  - platform: state
+  - type: motion
+    platform: device
+    device_id: 23a51a06fdce76f6eb8c7ea085f93c06
+    entity_id: binary_sensor.downstairs_bath_motion
+    domain: binary_sensor
+  - type: opened
+    platform: device
+    device_id: 025bbb083829461a71ba66e52736892c
     entity_id: binary_sensor.bathroom_door_state
-    to: 'on'
+    domain: binary_sensor
+    id: door
   condition:
   - condition: or
     conditions:
-    - condition: time
-      after: '17:00:00'
-      before: 08:30:00
+    - condition: numeric_state
+      entity_id: sun.sun
+      below: '26'
+      attribute: elevation
     - condition: state
-      entity_id: input_boolean.rain
+      entity_id: binary_sensor.weatherflow_is_raining
       state: 'on'
-  - condition: state
-    entity_id: switch.downstairs_bathroom_light
-    state: 'off'
   action:
-  - service: switch.turn_on
-    data:
-      entity_id: switch.downstairs_bathroom_light
-- id: downstairs_bath_vacant
-  alias: Downstairs Bathroom Vacant
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.downstairs_bath_presence
-    to: 'off'
-    for:
-      minutes: 2
-  - platform: state
+  - type: turn_on
+    device_id: ebf25db50d9b7ba1b32f5cdcb6430878
     entity_id: switch.downstairs_bathroom_light
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: input_boolean.downstairs_bath_presence
-    state: 'on'
-  action:
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.downstairs_bath_presence
-- id: downstairs_bath_lights_off
-  alias: 'Auto Off: Downstairs Bathroom Lights'
-  trigger:
-  - platform: state
-    entity_id: input_boolean.downstairs_bath_presence
-    to: 'off'
-  condition:
-  - condition: state
+    domain: switch
+  - wait_for_trigger:
+    - type: no_motion
+      platform: device
+      device_id: 23a51a06fdce76f6eb8c7ea085f93c06
+      entity_id: binary_sensor.downstairs_bath_motion
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+  - condition: device
+    type: is_on
+    device_id: ebf25db50d9b7ba1b32f5cdcb6430878
     entity_id: switch.downstairs_bathroom_light
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    data:
-      entity_id: switch.downstairs_bathroom_light
+    domain: switch
+  - type: turn_off
+    device_id: ebf25db50d9b7ba1b32f5cdcb6430878
+    entity_id: switch.downstairs_bathroom_light
+    domain: switch
+  mode: restart
 - id: game_room_lights_on
   alias: 'Auto On: Game Room Lights'
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_game_room
+    entity_id: binary_sensor.game_room_motion
     to: 'on'
   condition:
-  - condition: or
-    conditions:
-    - condition: time
-      after: '16:30:00'
-      before: 08:00:00
-    - condition: state
-      entity_id: input_boolean.rain
-      state: 'on'
+  - condition: numeric_state
+    entity_id: sensor.illuminance_game_room
+    below: '22'
   action:
   - service: light.turn_on
     data:
@@ -325,7 +281,7 @@
   alias: 'Auto Off: Game Room Lights'
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_game_room
+    entity_id: binary_sensor.game_room_motion
     to: 'off'
     for:
       minutes: 7
@@ -336,38 +292,6 @@
   action:
   - service: homeassistant.turn_off
     entity_id: group.game_room_lights
-- id: car_charger_off
-  alias: Car Charger Off
-  trigger:
-  - platform: state
-    entity_id: switch.switch_four
-    to: 'on'
-    for:
-      hours: 8
-  condition:
-  - condition: state
-    entity_id: switch.switch_four
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.switch_four
-- id: kegerator_on
-  alias: Kegerator On
-  trigger:
-  - platform: time
-    at: '18:00:00'
-  action:
-  - service: switch.turn_on
-    entity_id: switch.kegerator
-- id: kegerator_off
-  alias: Kegerator Off
-  trigger:
-  - platform: time
-    at: '15:00:00'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.kegerator
-  mode: single
 - id: kegerator_held_open
   alias: Kegerator Door Held Open
   trigger:
@@ -383,7 +307,7 @@
       - media_player.kitchen_dot
       - media_player.living_room_echo
       message: Attention, Please close the Kegerator door!
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Kegerator Door Alarm!
       message: The Kegerator door is held open!
@@ -403,7 +327,7 @@
     entity_id: media_player.kitchen_dot
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Kegerator Restored
       message: Thanks for closing the door.
@@ -411,29 +335,6 @@
         push:
           sound:
             name: default
-- id: kitchen_night_light_on
-  alias: 'Auto On: Kitchen Night Light'
-  trigger:
-  - platform: sun
-    event: sunset
-    offset: 00:10:00
-  condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: group.all_devices
-      state: home
-    - condition: state
-      entity_id: input_boolean.visitor_mode
-      state: 'on'
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.kitchen_night_light
-      brightness: 125
-      hs_color:
-      - 225
-      - 15
 - id: kitchen_night_light_off
   alias: 'Auto Off: Kitchen Night Light'
   trigger:
@@ -455,6 +356,9 @@
   - platform: state
     entity_id: light.kitchen_lights
     to: 'off'
+  - platform: sun
+    event: sunset
+    offset: '5'
   condition:
   - condition: state
     entity_id: light.kitchen_night_light
@@ -464,11 +368,12 @@
   action:
   - service: light.turn_on
     data:
-      entity_id: light.kitchen_night_light
-      brightness: 125
       hs_color:
       - 225
       - 15
+      brightness_pct: 100
+    target:
+      entity_id: light.kitchen_night_light
 - id: kitchen_shades_up
   alias: Kitchen Shade Up
   trigger:
@@ -493,102 +398,62 @@
   alias: 'Auto On: Pantry Light'
   trigger:
   - platform: state
-    entity_id: binary_sensor.pantry_door_contact
+    entity_id: binary_sensor.pantry_door_state
     to: 'on'
+    id: pantry_open
   - platform: state
-    entity_id: binary_sensor.pantry_door_contact
-    from: 'off'
-    to: 'on'
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 1
-  condition:
-  - condition: state
-    entity_id: light.pantry
-    state: 'off'
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.pantry
-- id: pantry_light_off
-  alias: 'Auto Off: Pantry Light'
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.pantry_door_contact
+    entity_id:
+    - binary_sensor.pantry_door_state
     to: 'off'
     for:
       hours: 0
       minutes: 0
       seconds: 0
-  - platform: state
-    entity_id: binary_sensor.pantry_door_contact
-    from: 'on'
-    to: 'off'
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 3
-  condition:
-  - condition: state
-    entity_id: light.pantry
-    state: 'on'
+    id: pantry_closed
+  condition: []
   action:
-  - service: light.turn_off
-    data:
-      entity_id: light.pantry
-- id: laundry_room_presence
-  alias: Laundry Room Presence Detected
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_laundry_room
-    to: 'on'
-  action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.laundry_room_presence
-- id: laundry_room_vacant
-  alias: Laundry Room Vacant
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.motion_laundry_room
-    to: 'off'
-    for:
-      seconds: 30
-  action:
-  - service: input_boolean.turn_off
-    data:
-      entity_id: input_boolean.laundry_room_presence
-- id: laundry_room_lights_on
-  alias: 'Auto On: Laundry Room Lights'
-  trigger:
-  - platform: state
-    entity_id: input_boolean.laundry_room_presence
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: light.laundry_room
-    state: 'off'
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.laundry_room
-- id: laundry_room_lights_off
-  alias: 'Auto Off: Laundry Room Lights'
-  trigger:
-  - platform: state
-    entity_id: input_boolean.laundry_room_presence
-    to: 'off'
-  condition:
-  - condition: state
-    entity_id: light.laundry_room
-    state: 'on'
-  action:
-  - service: light.turn_off
-    data:
-      entity_id: light.laundry_room
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: pantry_open
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+          transition: 1
+        target:
+          entity_id: light.pantry
+    - conditions:
+      - condition: trigger
+        id: pantry_closed
+      sequence:
+      - type: turn_off
+        device_id: 015dd1413d53d2b7bc14d1b8bbb9980f
+        entity_id: light.pantry
+        domain: light
+    - conditions:
+      - type: is_not_open
+        condition: device
+        device_id: f8fcf1657dd9655fd64729e18a3dad4f
+        entity_id: binary_sensor.pantry_door_state
+        domain: binary_sensor
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 5
+      - condition: device
+        type: is_on
+        device_id: 015dd1413d53d2b7bc14d1b8bbb9980f
+        entity_id: light.pantry
+        domain: light
+      sequence:
+      - type: turn_off
+        device_id: 015dd1413d53d2b7bc14d1b8bbb9980f
+        entity_id: light.pantry
+        domain: light
+    default: []
 - id: living_room_fan_speed_select
-  alias: Living Room Ceiling Fan Speed Select
+  alias: 'Dropdown: Living Room Ceiling Fan Speed'
   trigger:
   - platform: state
     entity_id: input_select.living_room_fan_speed
@@ -636,7 +501,7 @@
       brightness: 255
       transition: 60
 - id: living_room_tv_input
-  alias: 'Media: Living Room TV Input Selector'
+  alias: 'Dropdown: Living Room TV Input'
   trigger:
   - platform: state
     entity_id: input_select.living_room_tv_input
@@ -652,7 +517,7 @@
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
 - id: living_room_amp_input
-  alias: 'Media: Onkyo Amp Input Selector'
+  alias: 'Dropdown: Onkyo Amp Input'
   trigger:
   - platform: state
     entity_id: input_select.onkyo_amp_input
@@ -695,7 +560,8 @@
   alias: 'Auto On: Master Bathroom Lights'
   trigger:
   - platform: state
-    entity_id: binary_sensor.master_bedroom_presence
+    entity_id:
+    - binary_sensor.master_bedroom_entry_motion
     to: 'on'
   condition:
   - condition: or
@@ -704,25 +570,25 @@
       after: '17:00:00'
       before: 08:45:00
     - condition: state
-      entity_id: input_boolean.rain
+      entity_id: binary_sensor.weatherflow_is_raining
       state: 'on'
   - condition: numeric_state
-    entity_id: sensor.illumination_master_bedroom
+    entity_id: sensor.illuminance_master_bedroom_entry
     below: '45'
   - condition: state
     entity_id: input_boolean.sleeping
     state: 'off'
   action:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bathroom
-      scene_name: Morning
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.master_bathroom_morning
   mode: single
 - id: master_bathroom_lights_off
   alias: 'Auto Off: Master Bathroom Lights'
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_master_bedroom
+    entity_id: binary_sensor.master_bedroom_entry_motion
     to: 'off'
     for:
       minutes: 30
@@ -735,18 +601,6 @@
     data: {}
     target:
       area_id: 69a3968c0130497e862157a750090907
-- id: mini_fridge_off
-  alias: Mini Fridge OFF
-  trigger:
-  - platform: time
-    at: '11:15:00'
-  condition:
-  - condition: state
-    entity_id: switch.mini_fridge
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.mini_fridge
 - id: master_bath_shade_up_weekday
   alias: Master Bath Shade Up Weekday
   trigger:
@@ -786,176 +640,6 @@
   action:
   - service: cover.close_cover
     entity_id: cover.master_bath_shades
-- id: ricks_left_toggle
-  alias: Ricks Left Toggles Ricks Lamp
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_rick
-      click_type: single
-  action:
-  - service: light.toggle
-    data:
-      entity_id: light.master_bedside_lamp_rick
-- id: ricks_right_toggle
-  alias: Ricks Right Toggles Megs Lamp
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_right_rick
-      click_type: single
-  action:
-  - service: light.toggle
-    data:
-      entity_id: light.master_bedside_lamp_megs
-- id: ricks_both_toggle
-  alias: Ricks Both Toggles Both Lamps
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_both_rick
-      click_type: both
-  action:
-  - service_template: "{% if is_state('light.master_bedside_lamps', 'off') %}\n  homeassistant.turn_on\n\
-      {% else %}\n  homeassistant.turn_off\n{% endif %}"
-    data:
-      entity_id: light.master_bedside_lamps
-- id: ricks_left_double_click
-  alias: Ricks Left Double Turns On Fan
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_rick
-      click_type: double
-  action:
-  - service: switch.turn_on
-    entity_id: switch.master_bedroom_fan
-- id: ricks_right_double_click
-  alias: Ricks Right Double Turns Off Fan
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_right_rick
-      click_type: double
-  action:
-  - service: switch.turn_off
-    entity_id: switch.master_bedroom_fan
-- id: ricks_left_hold
-  alias: Ricks Left Hold Dim
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_rick
-      click_type: long
-  action:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Dimmed
-- id: ricks_right_hold
-  alias: Ricks Right Hold Bright
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_right_rick
-      click_type: long
-  action:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Bright
-- id: megs_left_toggle
-  alias: Megs Left Toggles Megs Lamp
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_megs
-      click_type: single
-  action:
-  - service: light.toggle
-    data:
-      entity_id: light.master_bedside_lamp_megs
-- id: megs_right_toggle
-  alias: Megs Right Toggles Ricks Lamp
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_right_megs
-      click_type: single
-  action:
-  - service: light.toggle
-    data:
-      entity_id: light.master_bedside_lamp_rick
-- id: megs_both_toggle
-  alias: Megs Both Toggles Both Lamps
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_both_megs
-      click_type: both
-  action:
-  - service_template: "{% if is_state('light.master_bedside_lamps', 'off') %}\n  homeassistant.turn_on\n\
-      {% else %}\n  homeassistant.turn_off\n{% endif %}"
-    data:
-      entity_id: light.master_bedside_lamps
-- id: megs_left_double_click
-  alias: Megs Left Double Turns On Fan
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_megs
-      click_type: double
-  action:
-  - service: switch.turn_on
-    entity_id: switch.master_bedroom_fan
-- id: megs_right_double_click
-  alias: Megs Right Double Turns Off Fan
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_megs
-      click_type: double
-  action:
-  - service: switch.turn_off
-    entity_id: switch.master_bedroom_fan
-- id: megs_left_hold
-  alias: Megs Left Hold Dim
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_left_megs
-      click_type: long
-  action:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Dimmed
-- id: megs_right_hold
-  alias: Megs Right Hold Bright
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.master_bedside_right_megs
-      click_type: long
-  action:
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bedside Lamps
-      scene_name: Bright
 - id: master_bedroom_fan_on
   alias: Master Bedroom Fan On
   trigger:
@@ -989,7 +673,7 @@
       entity_id: input_select.master_bedroom_fan_speed
       option: '{{ states(''sensor.master_bedroom_fan_speed'') }}'
 - id: master_bedroom_fan_speed
-  alias: Master Bedroom Fan Speed Select
+  alias: 'Dropdown: Master Bedroom Fan Speed Select'
   trigger:
   - platform: state
     entity_id: input_select.master_bedroom_fan_speed
@@ -1012,7 +696,7 @@
       entity_id: input_select.master_bedroom_fan_speed
       option: '{{ states(''trigger.to_state'') }}'
 - id: master_bedroom_fan_off_selected
-  alias: Master Bedroom Fan Off Selected
+  alias: 'Dropdown Option: Master Bedroom Fan - Off'
   trigger:
   - platform: state
     entity_id: input_select.master_bedroom_fan_speed
@@ -1058,47 +742,20 @@
     data_template:
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
-- id: bedframe_select_off
-  alias: Under Bed Select Off
-  trigger:
-  - platform: state
-    entity_id: input_select.mbr_under_bed_color
-    to: 'Off'
-  - platform: state
-    entity_id: input_select.mbr_under_bed_effect
-    to: 'Off'
-  action:
-  - service: light.turn_off
-    entity_id: light.bedframe_light
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_reset_off
-  alias: Under Bed Reset Off
-  trigger:
-  - platform: state
-    entity_id: light.bedframe_light
-    from: 'on'
-    to: 'off'
-  action:
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.mbr_under_bed_color
-      option: Select an option...
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.mbr_under_bed_effect
-      option: Select an option...
 - id: bedframe_default_crystal
   alias: Under Bed Default Crystal
   trigger:
   - platform: state
-    entity_id: light.bedframe_light
+    entity_id:
+    - light.bedframe_light
     from: 'off'
     to: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
   condition:
-    condition: state
+  - condition: state
     entity_id: input_select.mbr_under_bed_color
     state: Select an option...
   action:
@@ -1110,154 +767,197 @@
     data_template:
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
-- id: bedframe_select_blue
-  alias: Under Bed Blue
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
-    to: Blue
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_cyan
-  alias: Under Bed Cyan
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
-    to: Cyan
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 255
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
 - id: bedframe_select_crystal
-  alias: Under Bed Crystal
+  alias: 'Dropdown: Master Bedroom Bedframe LED Strip'
   trigger:
-    platform: state
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
+    to: Blue
+    id: blue
+  - platform: state
     entity_id: input_select.mbr_under_bed_color
     to: Crystal
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 70
-      rgb_color:
-      - 0
-      - 55
-      - 55
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_green
-  alias: Under Bed Green
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
+    id: crystal
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
+    to: Cyan
+    id: cyan
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
     to: Green
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 225
-      - 0
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_pink
-  alias: Under Bed Pink
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
+    id: green
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
     to: Pink
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_red
-  alias: Under Bed Red
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
+    id: pink
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
     to: Red
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 0
-      - 0
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_violet
-  alias: Under Bed Violet
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
+    id: red
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
     to: Violet
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 125
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: bedframe_select_yellow
-  alias: Under Bed Yellow
-  trigger:
-    platform: state
-    entity_id: input_select.mbr_under_bed_color
+    id: violet
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
     to: Yellow
+    id: yellow
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
+    to: White
+    id: white
+  - platform: state
+    entity_id:
+    - input_select.mbr_under_bed_color
+    to: 'Off'
+    id: 'off'
   action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 255
-      - 0
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: blue
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 0
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: crystal
+      sequence:
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 0
+          - 55
+          - 55
+          brightness_pct: 75
+          transition: 3
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: green
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 0
+          - 255
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: pink
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 255
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: red
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: violet
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 100
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: yellow
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 255
+          - 255
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: cyan
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          rgb_color:
+          - 0
+          - 225
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: white
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          color_temp: 320
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      sequence:
+      - type: turn_off
+        device_id: e64f90065ecd6183db3257294614cff1
+        entity_id: light.bedframe_light
+        domain: light
+    default: []
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
   - service: input_select.select_option
     data_template:
       entity_id: '{{ trigger.to_state.entity_id }}'
@@ -1273,16 +973,16 @@
     entity_id: fan.nursery_fan
     state: 'off'
   - condition: template
-    value_template: '{{ states(''sensor.nursery_fan_speed'') != ''off'' }}'
+    value_template: '{{ states(''sensor.nursery_fan_speed'') != ''0'' }}'
   action:
   - service: fan.turn_on
     entity_id: fan.nursery_fan
   - service: fan.set_percentage
     entity_id: fan.nursery_fan
     data_template:
-      speed: '{{ states(''sensor.nursery_fan_speed'') }}'
+      percentage: '{{ states(''sensor.nursery_fan_speed'') | int}}'
 - id: nursery_fan_auto
-  alias: Nursery Fan Auto Speed Select
+  alias: 'Fan: Nursery Fan Auto Speed Select'
   trigger:
   - platform: time_pattern
     minutes: /10
@@ -1302,19 +1002,7 @@
   - service: fan.set_percentage
     entity_id: fan.nursery_fan
     data_template:
-      speed: '{{ states(''sensor.nursery_fan_speed'') }}'
-- id: nursery_starlight_off
-  alias: 'Auto Off: Nursery Starlight'
-  trigger:
-  - platform: time
-    at: 08:00:00
-  condition:
-  - condition: state
-    entity_id: switch.switch_five
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.switch_five
+      percentage: '{{ states(''sensor.nursery_fan_speed'') | int }}'
 - id: nursery_vacant
   alias: 'Auto Off: Nursery Vacant'
   trigger:
@@ -1326,6 +1014,7 @@
   condition:
   - condition: time
     before: '19:00:00'
+    after: 00:00:00
   action:
   - service: fan.turn_off
     entity_id: fan.nursery_fan
@@ -1333,332 +1022,8 @@
     data: {}
     target:
       area_id: ade76688dbb34b8d84635f8458b99cda
-  - service: switch.turn_off
-    entity_id: switch.switch_one
-- id: nursery_wall_select_off
-  alias: Nursery Wall Select Off
-  trigger:
-  - platform: state
-    entity_id: input_select.nursery_wall_color
-    to: 'Off'
-  - platform: state
-    entity_id: input_select.nursery_wall_effect
-    to: 'Off'
-  action:
-  - service: light.turn_off
-    entity_id: light.nursery_wall_light
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_reset_off
-  alias: Nursery Wall Reset Off
-  trigger:
-  - platform: state
-    entity_id: light.nursery_wall_light
-    from: 'on'
-    to: 'off'
-  action:
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.nursery_wall_color
-      option: Select an option...
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.nursery_wall_effect
-      option: Select an option...
-- id: nursery_wall_blue
-  alias: Nursery Wall Blue
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Blue
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_cyan
-  alias: Nursery Wall Cyan
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Cyan
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 255
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_crystal
-  alias: Nursery Wall Crystal
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Crystal
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      rgb_color:
-      - 0
-      - 55
-      - 55
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_green
-  alias: Nursery Wall Green
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Green
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 0
-      - 225
-      - 0
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_pink
-  alias: Nursery Wall Pink
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Pink
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_red
-  alias: Nursery Wall Red
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Red
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 0
-      - 0
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_violet
-  alias: Nursery Wall Violet
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Violet
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 125
-      - 0
-      - 255
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_yellow
-  alias: Nursery Wall Yellow
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_color
-    to: Yellow
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      brightness: 255
-      rgb_color:
-      - 255
-      - 255
-      - 0
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_loop
-  alias: Nursery Wall Color Loop
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_effect
-    to: Color Loop
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      effect: colorloop
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_color_jump
-  alias: Nursery Wall Color Jump
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_effect
-    to: Color Jump
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      effect: colorjump
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: nursery_wall_random
-  alias: Nursery Wall Random
-  trigger:
-    platform: state
-    entity_id: input_select.nursery_wall_effect
-    to: Random
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.nursery_wall_light
-      effect: random
-  - service: input_select.select_option
-    data_template:
-      entity_id: '{{ trigger.to_state.entity_id }}'
-      option: Select an option...
-- id: downstairs_wipe_warmer_on
-  alias: Downstairs Wipe Warmer On
-  trigger:
-  - platform: time
-    at: 07:25:00
-  - platform: template
-    value_template: '{{ states(''sensor.living_room_temperature'') <= ''77'' }}'
-  - platform: state
-    entity_id: group.all_devices
-    from: not_home
-    to: home
-    for:
-      minutes: 5
-  condition:
-  - condition: state
-    entity_id: sensor.season
-    state: Winter
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: template
-    value_template: '{{ states(''sensor.living_room_temperature'') < ''77.5'' }}'
-  - condition: time
-    before: '21:05:00'
-    after: 07:20:00
-  - condition: state
-    entity_id: switch.switch_three
-    state: 'off'
-  action:
-  - service: switch.turn_on
-    entity_id: switch.switch_three
-- id: downstairs_wipe_warmer_off
-  alias: Downstairs Wipe Warmer Off
-  trigger:
-  - platform: state
-    entity_id: script.bedtime
-    from: 'off'
-    to: 'on'
-  - platform: template
-    value_template: '{{ states(''sensor.living_room_temperature'') > ''78'' }}'
-  - platform: time
-    at: '21:05:59'
-  condition:
-  - condition: state
-    entity_id: switch.switch_three
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.switch_three
-- id: upstairs_wipe_warmer_on
-  alias: Upstairs Wipe Warmer On
-  trigger:
-  - platform: time
-    at: '20:00:00'
-  - platform: template
-    value_template: '{{ states(''sensor.nursery_temperature'') <= ''77'' }}'
-  - platform: state
-    entity_id: script.nap_time
-    to: 'on'
-  - platform: state
-    entity_id: group.all_devices
-    from: not_home
-    to: home
-    for:
-      minutes: 5
-  condition:
-  - condition: state
-    entity_id: sensor.season
-    state: Winter
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: template
-    value_template: '{{ states(''sensor.nursery_temperature'') < ''77.5'' }}'
-  - condition: state
-    entity_id: switch.switch_one
-    state: 'off'
-  action:
-  - service: switch.turn_on
-    entity_id: switch.switch_one
-- id: upstairs_wipe_warmer_off
-  alias: Upstairs Wipe Warmer Off
-  trigger:
-  - platform: time
-    at: 09:00:59
-  - platform: template
-    value_template: '{{ states(''sensor.nursery_temperature'') >= ''78'' }}'
-  condition:
-  - condition: state
-    entity_id: switch.switch_one
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.switch_one
 - id: alexa_volume_reset_living_room
-  alias: 'Alexa: Reset Volume Living Room'
+  alias: 'Alexa: Reset Living Room Volume '
   trigger:
   - platform: state
     entity_id: media_player.living_room_echo
@@ -1749,7 +1114,7 @@
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
 - id: apple_tv_script_select
-  alias: 'Media: Apple TV Lighting Script Selector'
+  alias: 'Scene Control: Home Theater Lighting'
   description: Automatically handles the scripts to change home theater lighting
   trigger:
   - platform: state
@@ -1771,11 +1136,11 @@
   action:
   - service: script.turn_on
     data_template:
-      entity_id: "{% if trigger.to_state.state == \"playing\" or trigger.to_state.state\
-        \ == \"resumed\" %}\n  script.movie_time\n{% elif trigger.to_state.state ==\
-        \ \"paused\" or trigger.to_state.state == \"stopped\" %}\n  script.movie_paused\n\
-        {% elif trigger.to_state.state == \"idle\" and now().strftime('%H%M')|int\
-        \ > 1800 %}\n  script.tv_time\n{% else %}\n  script.evening\n{% endif %}"
+      entity_id: "{% if trigger.to_state.state == \"playing\" or trigger.to_state.state
+        == \"resumed\" %}\n  script.movie_time\n{% elif trigger.to_state.state ==
+        \"paused\" or trigger.to_state.state == \"stopped\" %}\n  script.movie_paused\n{%
+        elif trigger.to_state.state == \"idle\" and now().strftime('%H%M')|int > 1800
+        %}\n  script.tv_time\n{% else %}\n  script.evening\n{% endif %}"
 - id: directv_channel_select
   alias: DirecTV Channel Selection
   description: Change the channel based on selection.
@@ -1796,64 +1161,27 @@
       option: Select an option...
   mode: single
 - id: climate_resume_on_peak
-  alias: Climate Resume On Peak
+  alias: 'Arrival: Climate Resume'
   trigger:
-    platform: state
+  - platform: state
     entity_id: group.all_devices
     from: not_home
     to: home
     for:
       minutes: 2
   condition:
-  - condition: state
-    entity_id: input_boolean.peak_hours
-    state: 'on'
   - condition: template
     value_template: '{{ states.climate.downstairs.attributes.current_temperature >=
       79 }}'
   action:
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.downstairs
-      preset_mode: Home
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.upstairs
-      preset_mode: Home
-  - delay:
-      minutes: 60
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.downstairs
-      resume_all: 'true'
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.upstairs
-      resume_all: 'true'
-- id: climate_resume_off_peak
-  alias: Climate Resume Off Peak
-  trigger:
-    platform: state
-    entity_id: group.all_devices
-    from: not_home
-    to: home
-    for:
-      minutes: 2
-  condition:
-  - condition: state
-    entity_id: input_boolean.peak_hours
-    state: 'off'
-  action:
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.downstairs
-      resume_all: 'true'
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.upstairs
-      resume_all: 'true'
+  - service: script.turn_on
+    data: {}
+    target:
+      entity_id:
+      - script.climate_downstairs_cooldown
+      - script.ecobee_upstairs_cooldown
 - id: climate_sleep_mode
-  alias: Climate Sleep Mode
+  alias: 'Climate: Sleep Mode'
   trigger:
   - platform: state
     entity_id: script.bedtime
@@ -1866,54 +1194,67 @@
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Sleep
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Sleep
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
 - id: climate_door_held_open
-  alias: Climate Away Door Held Open
+  alias: 'Climate: Door Held Open Eco Mode On'
+  description: Turn on Eco mode if a door is detected held open for too long.
   trigger:
   - platform: state
-    entity_id: binary_sensor.door_held_open
+    entity_id:
+    - binary_sensor.door_held_open
     to: 'on'
     for:
-      minutes: 2
+      hours: 0
+      minutes: 4
+      seconds: 0
   condition:
   - condition: state
     entity_id: binary_sensor.hvac_running
     state: 'on'
+  - condition: state
+    entity_id: input_boolean.hvac_maintenance
+    state: 'off'
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
   - service: script.tts_door_held_open
+    data: {}
 - id: climate_resume_door_restored
-  alias: Climate Resume Door Restore
+  alias: 'Climate: Resume on Door Restoral'
   trigger:
   - platform: state
     entity_id: binary_sensor.door_held_open
     to: 'off'
     for:
       minutes: 1
-  condition:
-  - condition: state
-    entity_id: binary_sensor.hvac_running
-    state: 'on'
+  condition: []
   action:
   - service: ecobee.resume_program
     data:
-      entity_id: climate.upstairs
+      entity_id: climate.ecobee_upstairs
       resume_all: 'true'
   - service: ecobee.resume_program
     data:
-      entity_id: climate.downstairs
+      entity_id: climate.ecobee_downstairs
       resume_all: 'true'
 - id: climate_hvac_fan_summer
   alias: Set HVAC fan runtime summer
@@ -1922,14 +1263,14 @@
     entity_id: sensor.season
     to: Summer
   action:
-  - service: climate.ecobee_set_fan_min_on_time
+  - service: ecobee.set_fan_min_on_time
     data:
       entity_id: climate.downstairs
-      fan_min_on_time: '15'
-  - service: climate.ecobee_set_fan_min_on_time
+      fan_min_on_time: 15
+  - service: ecobee.set_fan_min_on_time
     data:
       entity_id: climate.upstairs
-      fan_min_on_time: '30'
+      fan_min_on_time: 30
 - id: climate_hvac_fan_winter
   alias: Set HVAC fan runtime winter
   trigger:
@@ -1940,14 +1281,13 @@
     entity_id: sensor.season
     to: Awesome
   action:
-  - service: climate.ecobee_set_fan_min_on_time
+  - service: ecobee.set_fan_min_on_time
     data:
       entity_id: climate.downstairs
-      fan_min_on_time: '5'
-  - service: climate.ecobee_set_fan_min_on_time
+      fan_min_on_time: 5
+  - service: ecobee.set_fan_min_on_time
     data:
-      entity_id: climate.upstairs
-      fan_min_on_time: '5'
+      fan_min_on_time: 5
 - id: climate_eco_awesome
   alias: Set Eco Mode if weather is nice
   trigger:
@@ -1964,14 +1304,18 @@
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Eco
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
 - id: climate_precool_downstairs
-  alias: Climate Precool Downstairs
+  alias: 'Climate: Downstairs Precool '
   trigger:
   - platform: time
     at: '14:00:00'
@@ -1994,19 +1338,23 @@
     - wed
     - thu
     - fri
+    before: 00:00:00
+    after: 00:00:00
   - condition: template
-    value_template: '{{ state_attr(''climate.downstairs'',''preset_mode'') != ''Away''
-      }}'
+    value_template: '{{ state_attr(''climate.ecobee_downstairs'',''preset_mode'')
+      != ''Away'' }}'
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.downstairs
       preset_mode: Precool
+    target:
+      entity_id:
+      - climate.ecobee_downstairs
 - id: climate_precool_upstairs
-  alias: Climate Precool Upstairs
+  alias: 'Climate: Upstairs Precool '
   trigger:
   - platform: time
-    at: '14:00:00'
+    at: '18:05:00'
   condition:
   - condition: state
     entity_id: sensor.season
@@ -2019,21 +1367,13 @@
     - condition: state
       entity_id: input_boolean.visitor_mode
       state: 'on'
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  - condition: template
-    value_template: '{{ state_attr(''climate.upstairs'',''preset_mode'') != ''Away''
-      }}'
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Precool
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
 - id: accent_lights_on
   alias: 'Schedule On: Accent Lights'
   description: Turn the accent lights on at sunset
@@ -2042,19 +1382,43 @@
     event: sunset
     offset: -00:05:00
   action:
-  - service: homeassistant.turn_on
-    entity_id: group.accent_lights
+  - service: light.turn_on
+    data:
+      rgb_color:
+      - 255
+      - 173
+      - 252
+      brightness_pct: 100
+      transition: 5
+    target:
+      entity_id: light.large_staircase_lamp
+  - service: light.turn_on
+    data:
+      rgb_color:
+      - 133
+      - 218
+      - 255
+      brightness_pct: 100
+      transition: 5
+    target:
+      entity_id: light.small_staircase_lamp
+  - service: light.turn_on
+    data:
+      rgb_color:
+      - 246
+      - 193
+      - 139
+      brightness_pct: 100
+      transition: 5
+    target:
+      entity_id: light.wine_room_lamp
 - id: evening_scene_schedule
   alias: Evening Scene Schedule
   trigger:
   - platform: sun
     event: sunset
-    offset: -00:10:00
+    offset: -00:17:00
   condition:
-  - condition: time
-    before: '20:00:00'
-  - condition: template
-    value_template: '{{ states(''media_player.home_theater'') != ''playing'' }}'
   - condition: or
     conditions:
     - condition: state
@@ -2066,53 +1430,25 @@
   action:
   - service: script.turn_on
     entity_id: script.evening
-- id: living_room_lights_off_morning
-  alias: Living Room Off Morning
-  trigger:
-  - platform: numeric_state
-    entity_id: sun.sun
-    value_template: '{{ state.attributes.elevation }}'
-    above: 12
-  condition:
-  - condition: state
-    entity_id: group.interior_lights
-    state: 'on'
-  - condition: time
-    before: 09:00:00
-  - condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.holiday
-    state: 'off'
-  action:
-  - service: timer.start
-    data:
-      duration: '0'
-    target:
-      entity_id: timer.sun_up
-  - service: notify.mobile_app_rip8plus
-    data:
-      title: Suns Up
-      message: Lights off in 15 min...
-      data:
-        push:
-          sound:
-            name: default
 - id: living_room_lights_on_cloudy
   alias: 'Auto On: Cloudy Scene'
   description: Turn on Cloudy Scene if raining
   trigger:
   - platform: state
-    entity_id: input_boolean.rain
+    entity_id:
+    - binary_sensor.weatherflow_is_raining
     from: 'off'
     to: 'on'
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
   - platform: template
-    value_template: "{% if is_state('sensor.dark_sky_summary', 'Rain') %}\n  'true'\n\
-      {% elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}\n  'true'\n{%\
-      \ elif is_state('sensor.dark_sky_summary', 'Showers') %}\n  'true'\n{% elif\
-      \ is_state('sensor.dark_sky_summary', 'Drizzle') %}\n  'true'\n{% elif is_state('sensor.dark_sky_summary',\
-      \ 'Mostly Cloudy') %}\n  'true'\n{% else %}\n  'false'\n{% endif %}"
+    value_template: "{% if is_state('sensor.dark_sky_summary', 'Rain') %}\n  'true'\n{%
+      elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}\n  'true'\n{% elif
+      is_state('sensor.dark_sky_summary', 'Showers') %}\n  'true'\n{% elif is_state('sensor.dark_sky_summary',
+      'Drizzle') %}\n  'true'\n{% elif is_state('sensor.dark_sky_summary', 'Mostly
+      Cloudy') %}\n  'true'\n{% else %}\n  'false'\n{% endif %}"
   - platform: numeric_state
     entity_id: sensor.dark_sky_precip_intensity
     above: '1'
@@ -2127,7 +1463,7 @@
     entity_id: sensor.dark_sky_cloud_coverage
     above: '69'
   - condition: numeric_state
-    entity_id: sensor.illumination_front_entry
+    entity_id: sensor.front_entry_multisensor_illuminance
     below: '125'
   - condition: template
     value_template: '{{ states.media_player.home_theater.state != ''playing'' }}'
@@ -2135,7 +1471,7 @@
   - service: script.turn_on
     entity_id: script.cloudy
 - id: enable_automations_on_arrival
-  alias: Enable Automations On Arrival
+  alias: 'Arrival: Enable Evening Scene Automation'
   trigger:
   - platform: state
     entity_id: group.all_devices
@@ -2145,9 +1481,11 @@
       minutes: 5
   action:
   - service: automation.turn_on
-    entity_id: automation.evening_scene_schedule
+    data: {}
+    target:
+      entity_id: automation.evening_scene_schedule
 - id: lights_on_arrival
-  alias: 'Auto On: Lights On Upon Arriving Home'
+  alias: 'Arrival: Lights On After Dark'
   trigger:
   - platform: state
     entity_id: group.all_devices
@@ -2161,7 +1499,7 @@
     entity_id: input_boolean.visitor_mode
     state: 'off'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Welcome Home
       message: Turning on some lights
@@ -2192,25 +1530,19 @@
   action:
   - service: timer.start
     entity_id: timer.away_mode
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Away Detected
       message: Counting down...
       data:
-        push:
-          sound:
-            name: default
         actions:
         - action: CANCEL_AWAY
           title: Cancel Away
-          authenticationRequired: false
           destructive: true
         - action: PAUSE_AWAY
           title: Pause Away
-          authenticationRequired: false
         - action: VISITOR
           title: Visitor Mode
-          authenticationRequired: false
 - id: away_mode_on
   alias: Away Mode On
   trigger:
@@ -2233,7 +1565,7 @@
   action:
   - service: timer.cancel
     entity_id: timer.away_mode
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Away Mode Canceled
       message: Away mode canceled.
@@ -2296,14 +1628,19 @@
   - service: automation.turn_off
     entity_id: automation.away_mode_on
 - id: visitor_mode_off_away_mode_on
-  alias: Enable away_mode when visitor_mode is off
+  alias: 'Automation Control: Away Mode On if Visitor Mode Off'
+  description: Only enable away mode automation when visitor mode is turned off.
   trigger:
   - platform: state
-    entity_id: input_boolean.visitor_mode
+    entity_id:
+    - input_boolean.visitor_mode
     to: 'off'
+    from: 'on'
   action:
-  - service: automation.turn_off
-    entity_id: automation.away_mode_countdown
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.away_mode_countdown
   - service: automation.turn_on
     entity_id: automation.away_mode_on
 - id: after_hours_shutdown
@@ -2323,10 +1660,10 @@
       - fan.patio_fan
       - group.exterior_lights
       - group.interior_lights
-      - switch.fountains_switch
       - switch.outdoor_speakers
+    data: {}
 - id: alarm_clock_weekday
-  alias: Alarm Clock Wake Up (weekday)
+  alias: 'Alarm Clock: Wake Up (weekday)'
   trigger:
   - platform: template
     value_template: '{{ states(''sensor.time'') == states(''input_datetime.alarm_clock_time'')[0:5]
@@ -2342,11 +1679,13 @@
     - wed
     - thu
     - fri
+    before: 00:00:00
   action:
   - service: script.morning_sequence
+    data: {}
   mode: single
 - id: alarm_clock_weekend
-  alias: Alarm Clock Wake Up (weekend)
+  alias: 'Alarm Clock: Wake Up (weekend)'
   trigger:
   - platform: template
     value_template: '{{ states(''sensor.time'') == states(''input_datetime.alarm_clock_time'')[0:5]
@@ -2359,94 +1698,11 @@
     weekday:
     - sat
     - sun
+    before: 00:00:00
   action:
   - service: script.morning_sequence
-  mode: single
-- id: christmas_lights_on
-  alias: 'Schedule On: Christmas Lights'
-  description: follows the porch lights
-  trigger:
-  - platform: state
-    entity_id: switch.front_porch_lights
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: calendar.seasonal_christmas
-    state: 'on'
-  action:
-  - service: homeassistant.turn_on
     data: {}
-    target:
-      entity_id:
-      - group.outside_christmas_lights
-      - group.inside_christmas_lights
-- id: christmas_lights_off_weekday
-  alias: 'Schedule Off: Christmas Lights Weekdays'
-  trigger:
-  - platform: time
-    at: 00:00:00
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  - condition: state
-    entity_id: group.outside_christmas_lights
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    entity_id: group.outside_christmas_lights
-- id: christmas_lights_off_weekend
-  alias: 'Schedule Off: Christmas Lights Weekends'
-  trigger:
-  - platform: time
-    at: 01:00:00
-  condition:
-  - condition: time
-    weekday:
-    - sat
-    - sun
-  - condition: state
-    entity_id: group.outside_christmas_lights
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    entity_id: group.outside_christmas_lights
-- id: dasher_bedtime_timer
-  alias: Dasher Bedtime Timer
-  trigger:
-    platform: event
-    event_type: timer_bedtime
-  action:
-  - service: timer.start
-    entity_id: timer.bedtime
-- id: dasher_night_time
-  alias: Dasher Night Time
-  trigger:
-    platform: event
-    event_type: script_night_time
-  action:
-  - service: script.turn_on
-    entity_id: script.master_bedroom_night_time
-- id: dasher_baby_playlist
-  alias: Dasher Baby Playlist
-  trigger:
-    platform: event
-    event_type: script_baby_playlist
-  action:
-  - service: script.turn_on
-    entity_id: script.baby_playlist
-- id: dasher_test
-  alias: Dasher Test
-  trigger:
-    platform: event
-    event_type: script_test
-  action:
-  - service: script.turn_on
-    entity_id: script.script_test
+  mode: single
 - id: after_hours_on
   alias: 'Schedule On: After Hours Sensor'
   trigger:
@@ -2467,7 +1723,7 @@
     data:
       entity_id: input_boolean.after_hours
 - id: peak_hours_on
-  alias: Peak Hours On
+  alias: 'Auto On: Peak Hours'
   trigger:
   - platform: time
     at: '15:00:00'
@@ -2487,7 +1743,7 @@
     data:
       entity_id: input_boolean.peak_hours
 - id: peak_hours_off
-  alias: Peak Hours Off
+  alias: 'Auto Off: Peak Hours'
   trigger:
   - platform: time
     at: '18:00:00'
@@ -2535,35 +1791,35 @@
     data:
       entity_id: input_boolean.sleeping
 - id: alexa_tts
-  alias: 'Alexa: Text to Speech - TTS'
+  alias: 'Dropdown: Alexa Text to Speech - TTS'
   trigger:
   - platform: state
     entity_id: input_select.alexa
   action:
   - service: media_player.volume_set
     data_template:
-      entity_id: "{% if is_state('input_select.alexa', 'Living Room') %}\n  media_player.living_room_echo\n\
-        {% elif is_state('input_select.alexa', 'Master Bedroom') %}\n  media_player.master_bedroom_dot\n\
-        {% elif is_state('input_select.alexa', 'Master Bathroom') %}\n  media_player.master_bathroom_dot\n\
-        {% elif is_state('input_select.alexa', 'Kitchen') %}\n  media_player.kitchen_dot\n\
-        {% elif is_state('input_select.alexa', 'Bar') %}\n  media_player.bar_dot\n\
-        {% elif is_state('input_select.alexa', 'Game Room') %}\n  media_player.game_room_echo\n\
-        {% elif is_state('input_select.alexa', 'Nursery') %}\n  media_player.nursery_dot\n\
-        {% elif is_state('input_select.alexa', 'Office') %}\n  media_player.office_dot\n\
-        {% elif is_state('input_select.alexa', 'Guest Room') %}\n  media_player.guest_room_dot\n\
-        {% elif is_state('input_select.alexa', 'None') %}\n  false\n{% endif %}\n"
+      entity_id: "{% if is_state('input_select.alexa', 'Living Room') %}\n  media_player.living_room_echo\n{%
+        elif is_state('input_select.alexa', 'Master Bedroom') %}\n  media_player.master_bedroom\n{%
+        elif is_state('input_select.alexa', 'Master Bathroom') %}\n  media_player.master_bathroom_dot\n{%
+        elif is_state('input_select.alexa', 'Kitchen') %}\n  media_player.kitchen_dot\n{%
+        elif is_state('input_select.alexa', 'Bar') %}\n  media_player.bar_echo_show\n{%
+        elif is_state('input_select.alexa', 'Game Room') %}\n  media_player.game_room_echo\n{%
+        elif is_state('input_select.alexa', 'Nursery') %}\n  media_player.nursery_dot\n{%
+        elif is_state('input_select.alexa', 'Office') %}\n  media_player.office_dot\n{%
+        elif is_state('input_select.alexa', 'Guest Room') %}\n  media_player.guest_room_dot\n{%
+        elif is_state('input_select.alexa', 'None') %}\n  false\n{% endif %}\n"
       volume_level: '{{ states.input_number.alexa_volume.state | float /10 }}'
   - service: notify.alexa_media
     data_template:
-      target: "{% if is_state('input_select.alexa', 'Living Room') %}\n  media_player.living_room_echo\n\
-        {% elif is_state('input_select.alexa', 'Master Bedroom') %}\n  media_player.master_bedroom_dot\n\
-        {% elif is_state('input_select.alexa', 'Master Bathroom') %}\n  media_player.master_bathroom_dot\n\
-        {% elif is_state('input_select.alexa', 'Kitchen') %}\n  media_player.kitchen_dot\n\
-        {% elif is_state('input_select.alexa', 'Wine Room') %}\n  media_player.bar_dot\n\
-        {% elif is_state('input_select.alexa', 'Game Room') %}\n  media_player.game_room_echo\n\
-        {% elif is_state('input_select.alexa', 'Nursery') %}\n  media_player.nursery_dot\n\
-        {% elif is_state('input_select.alexa', 'Office') %}\n  media_player.office_dot\n\
-        {% elif is_state('input_select.alexa', 'None') %}\n  false\n{% endif %}\n"
+      target: "{% if is_state('input_select.alexa', 'Living Room') %}\n  media_player.living_room_echo\n{%
+        elif is_state('input_select.alexa', 'Master Bedroom') %}\n  media_player.master_bedroom_dot\n{%
+        elif is_state('input_select.alexa', 'Master Bathroom') %}\n  media_player.master_bathroom_dot\n{%
+        elif is_state('input_select.alexa', 'Kitchen') %}\n  media_player.kitchen_dot\n{%
+        elif is_state('input_select.alexa', 'Bar') %}\n  media_player.bar_dot\n{%
+        elif is_state('input_select.alexa', 'Game Room') %}\n  media_player.game_room_echo\n{%
+        elif is_state('input_select.alexa', 'Nursery') %}\n  media_player.nursery_dot\n{%
+        elif is_state('input_select.alexa', 'Office') %}\n  media_player.office_dot\n{%
+        elif is_state('input_select.alexa', 'None') %}\n  false\n{% endif %}\n"
       message: '{{  states(''input_text.alexa_tts'') }}'
       data:
         type: tts
@@ -2572,7 +1828,7 @@
       entity_id: input_select.alexa
       option: None
 - id: alexa_announce_rick
-  alias: Announce Rick On Arrival
+  alias: 'Announce: Rick Is Almost Home'
   trigger:
   - platform: numeric_state
     entity_id: proximity.rick
@@ -2651,17 +1907,24 @@
   action:
   - service: script.tts_warm_weather
 - id: notify_awesome_weather
-  alias: Notify if Awesome Weather
+  alias: 'Notify: Awesome Weather'
   trigger:
   - platform: state
     entity_id: sensor.season
     to: Awesome
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
   condition:
   - condition: time
     after: 08:00:00
     before: '22:00:00'
+  - condition: state
+    entity_id: binary_sensor.all_doors
+    state: 'off'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Awesome Weather
       message: It's {{ states('sensor.dark_sky_temperature')|round }} degrees outside.
@@ -2674,7 +1937,7 @@
   alias: iOS Cancel Away
   trigger:
     platform: event
-    event_type: ios.notification_action_fired
+    event_type: mobile_app_notification_action
     event_data:
       action: CANCEL_AWAY
   action:
@@ -2684,7 +1947,7 @@
   alias: iOS Pause Away
   trigger:
     platform: event
-    event_type: ios.notification_action_fired
+    event_type: mobile_app_notification_action
     event_data:
       action: PAUSE_AWAY
   action:
@@ -2694,7 +1957,7 @@
   alias: iOS Visitor Mode
   trigger:
     platform: event
-    event_type: ios.notification_action_fired
+    event_type: mobile_app_notification_action
     event_data:
       action: VISITOR
   action:
@@ -2708,7 +1971,7 @@
     platform: homeassistant
     event: start
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Home Assistant Startup
       message: Home Assistant is up and running.
@@ -2727,7 +1990,7 @@
     entity_id: group.all_devices
     state: not_home
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Home Assistant Alert
       message: Master Bedroom Lights On
@@ -2736,12 +1999,12 @@
           sound:
             name: default
 - id: notify_watchdog_door_opened
-  alias: Notify if away and door is opened
+  alias: 'Notify: Door Opened While Away'
   trigger:
   - platform: state
     entity_id: binary_sensor.front_door_state, binary_sensor.south_door_state, binary_sensor.kitchen_door_state,
-      binary_sensor.bathroom_door_state, binary_sensor.office_door_state, binary_sensor.guest_room_balcony_door_state,
-      binary_sensor.office_interior_door
+      binary_sensor.bathroom_door_state, binary_sensor.office_entry_door_state, binary_sensor.guest_room_balcony_door_state,
+      binary_sensor.office_interior_door_state
     from: 'off'
     to: 'on'
   condition:
@@ -2749,7 +2012,7 @@
     entity_id: group.all_devices
     state: not_home
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Exterior Door Opened
       message: Someone opened the {{ trigger.to_state.attributes.friendly_name }}.
@@ -2767,8 +2030,8 @@
   - service: climate.set_hvac_mode
     data:
       entity_id: climate.downstairs
-      operation_mode: 'off'
-  - service: notify.mobile_app_rip8plus
+      hvac_mode: 'off'
+  - service: notify.mobile_app_rcom
     data:
       title: Leak Detected
       message: HVAC overflow detected downstairs! - AC turned off
@@ -2777,9 +2040,9 @@
           sound:
             name: default
             critical: 1
-            volume: 1.0
+            volume: 1
 - id: unlock_south_door_megs_arrival
-  alias: South Door Unlock On Arrival
+  alias: 'Arrival: Unlock South Door'
   trigger:
   - platform: state
     entity_id: person.megs
@@ -2790,6 +2053,7 @@
     value_template: '{{ is_state(''lock.south_entry'', ''locked'') or false }}'
   action:
   - service: script.unlock_megs
+    data: {}
 - id: notify_unlock_south_door
   alias: South Door Unlock By User
   trigger:
@@ -2797,7 +2061,7 @@
     entity_id: sensor.south_entry_lock_alarm_type
     to: '19'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Door Unlocked
       message: South Door {{ states('sensor.lock_south_door_status') }}
@@ -2805,7 +2069,7 @@
         push:
           sound:
             name: default
-  - service: notify.mobile_app_mip8
+  - service: notify.mobile_app_mip12
     data:
       title: Door Unlocked
       message: South Door {{ states('sensor.lock_south_door_status') }}
@@ -2814,121 +2078,142 @@
           sound:
             name: default
 - id: button_living_room_single_press
-  alias: 'Button: Living Room Smart Button Single Press'
+  alias: 'Button: Living Room Smart Button'
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_living_room
-      click_type: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: single
+    id: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: double
+    id: double
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: triple
+    id: triple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: quadruple
+    id: quadruple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: hold
+    id: hold
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Living Room/action
+    payload: many
+    id: many
   action:
-  - service: timer.start
-    data:
-      duration: '0'
-    target:
-      entity_id: timer.bedtime
-  - service: media_player.volume_set
-    entity_id: media_player.living_room_echo
-    data_template:
-      volume_level: '{{ states(''sensor.alexa_volume'') }}'
-  - service: notify.alexa_media
-    data:
-      target: media_player.living_room_echo
-      message: Goodnight. See you in the morning.
-      data:
-        type: tts
-- id: button_living_room_double_press
-  alias: 'Button: Living Room Smart Button Double Press'
-  trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_living_room
-      click_type: double
-  action:
-  - service: timer.cancel
-    entity_id: timer.bedtime
-- id: button_living_room_long_press
-  alias: 'Button: Living Room Smart Button Long Press'
-  trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_living_room
-      click_type: long_click_press
-  action:
-  - service: script.turn_on
-    entity_id: script.master_bedroom_night_time
-- id: button_master_bedroom_single_press
-  alias: Master Bedroom Smart Button Single Press
-  trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_master_bedroom
-      click_type: single
-  action:
-  - service: light.turn_on
-    data:
-      brightness: 250
-    target:
-      entity_id: light.bedframe_light
-  mode: single
-- id: button_master_bedroom_double_press
-  alias: Master Bedroom Smart Button Double Press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_master_bedroom
-      click_type: double
-  action:
-  - service: timer.start
-    entity_id: timer.bedtime
-- id: button_master_bedroom_long_press
-  alias: Master Bedroom Smart Button Long Press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_master_bedroom
-      click_type: long_click_press
-  action:
-  - service: timer.cancel
-    entity_id: timer.bedtime
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single
+      - condition: time
+        before: 00:00:00
+        after: '21:30:00'
+      sequence:
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+      - service: media_player.volume_set
+        entity_id: media_player.living_room_echo
+        data_template:
+          volume_level: '{{ states(''sensor.alexa_volume'') }}'
+      - service: notify.alexa_media
+        data:
+          message: Goodnight. See you in the morning.
+          target: media_player.living_room_echo
+          data:
+            type: tts
+    - conditions:
+      - condition: trigger
+        id: double
+      - condition: time
+        before: 00:00:00
+        after: '20:00:00'
+      sequence:
+      - service: script.master_bedroom_night_time
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: triple
+      sequence:
+      - service: timer.cancel
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: quadruple
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.cozy
+        metadata: {}
+    default: []
 - id: button_office_single_press
-  alias: Office Smart Button Single Press
+  alias: 'Button: Office Smart Button'
   trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_office
-      click_type: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: single
+    id: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: double
+    id: double
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: triple
+    id: triple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: quadruple
+    id: quadruple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: hold
+    id: hold
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: many
+    id: many
   action:
-  - service: script.turn_on
-    entity_id: script.master_bedroom_night_time
-- id: button_office_double_press
-  alias: Office Smart Button Double Press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_office
-      click_type: double
-  action:
-  - service: timer.start
-    entity_id: timer.bedtime
-- id: button_office_long_press
-  alias: Office Smart Button Long Press
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.smart_button_office
-      click_type: long_click_press
-  action:
-  - service: timer.cancel
-    entity_id: timer.bedtime
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single
+      sequence:
+      - service: script.master_bedroom_night_time
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: double
+      - condition: time
+        before: 00:00:00
+        after: '21:30:00'
+      sequence:
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: triple
+      sequence:
+      - service: timer.cancel
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: quadruple
+      sequence:
+      - service: script.bright
+        data: {}
+    default: []
 - id: state_master_bedroom_fan_speed
   alias: Master Bedroom Fan Speed State Save
   trigger:
@@ -2945,78 +2230,8 @@
       retain: true
       qos: 1
       payload: '{{ trigger.to_state.state }}'
-- id: state_rf_switch
-  alias: RF Switches State Save
-  trigger:
-    platform: state
-    entity_id: switch.switch_one, switch.switch_two, switch.switch_three, switch.switch_four,
-      switch.switch_five
-  action:
-    service: mqtt.publish
-    data_template:
-      topic: /home/rfswitches/{{ trigger.entity_id.split('.')[1] }}
-      retain: true
-      qos: 1
-      payload: '{{ trigger.to_state.state }}'
-- id: state_rf_switch_restore
-  alias: RF Switch State Restore
-  trigger:
-    platform: homeassistant
-    event: start
-  action:
-  - delay:
-      minutes: 1
-  - service_template: "{%- if states('sensor.rf_switch_one') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.switch_one
-  - service_template: "{%- if states('sensor.rf_switch_two') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else  -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.switch_two
-  - service_template: "{%- if states('sensor.rf_switch_three') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else  -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.switch_three
-  - service_template: "{%- if states('sensor.rf_switch_four') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else  -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.switch_four
-  - service_template: "{%- if states('sensor.rf_switch_five') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else  -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}\n"
-    data:
-      entity_id: switch.switch_five
-- id: state_sonoff_switch
-  alias: Sonoff Switches State Save
-  trigger:
-    platform: state
-    entity_id: switch.staircase_lamp, switch.wine_room_lamp
-  action:
-    service: mqtt.publish
-    data_template:
-      topic: /home/sonoffs/{{ trigger.entity_id.split('.')[1] }}
-      retain: true
-      qos: 1
-      payload: '{{ trigger.to_state.state }}'
-- id: state_sonoff_switch_restore
-  alias: Sonoff Switch State Restore
-  trigger:
-    platform: homeassistant
-    event: start
-  action:
-  - delay:
-      minutes: 1
-  - service_template: "{%- if states('sensor.staircase_lamp') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.staircase_lamp
-  - service_template: "{%- if states('sensor.wine_room_lamp') | lower == \"on\" -%}\n\
-      \    homeassistant.turn_on\n{%- else  -%}\n    homeassistant.turn_off\n{%- endif\
-      \ -%}    \n"
-    entity_id: switch.wine_room_lamp
 - id: timer_bedtime_finish
-  alias: Bedtime Timer Finish
+  alias: 'Timer: Bedtime Timer Finished'
   trigger:
   - platform: event
     event_type: timer.finished
@@ -3024,27 +2239,7 @@
       entity_id: timer.bedtime
   action:
   - service: script.bedtime
-- id: timer_bedtime_reset
-  alias: Bedtime Timer Reset
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.front_entry_multisensor_motion
-    to: 'on'
-  condition:
-  - condition: template
-    value_template: '{{ states(''timer.bedtime'') != ''idle''}}'
-  action:
-  - service: timer.pause
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 3
-      milliseconds: 0
-  - service: timer.start
-    target:
-      entity_id: timer.bedtime
     data: {}
-  mode: single
 - id: timer_sun_up_finish
   alias: Sun Up Timer Finish
   trigger:
@@ -3054,229 +2249,256 @@
       entity_id: timer.sun_up
   action:
   - service: script.sun_up
-- id: weather_rain_sensor
-  alias: rain sensor
-  trigger:
-  - platform: state
-    entity_id: weather.downstairs
-  action:
-  - service_template: "{% if is_state('sensor.dark_sky_summary', 'Rain') %}\n  homeassistant.turn_on\n\
-      {% elif is_state('sensor.dark_sky_summary', 'Light Rain') %}\n  homeassistant.turn_on\n\
-      {% elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}\n  homeassistant.turn_on\n\
-      {% elif is_state('sensor.dark_sky_summary', 'Showers') %}\n  homeassistant.turn_on\n\
-      {% elif is_state('sensor.dark_sky_summary', 'Drizzle') %}\n  homeassistant.turn_on\n\
-      {% else %}\n  homeassistant.turn_off\n{% endif %}"
-    data:
-      entity_id: input_boolean.rain
 - id: minimote_1_b1_short
-  alias: Minimote 1 Button 1 Short
+  alias: 'Minimote 1: Downstairs'
   trigger:
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 1
-  action:
-  - service: light.turn_on
-    target:
-      entity_id: light.office_desk_lamp
-    data:
-      brightness: 255
-      color_temp: 220
-- id: minimote_1_b1_long
-  alias: Minimote 1 Button 1 Long
-  trigger:
+    id: b1_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 2
-  action:
-  - service: light.turn_off
-    entity_id: light.office_desk_lamp
-- id: minimote_1_b2_short
-  alias: Minimote 1 Button 2 Short
-  trigger:
+    id: b1_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 3
-  action:
-  - service: light.turn_on
-    target:
-      entity_id: light.office_desk_lamp
-    data:
-      brightness: 255
-      hs_color:
-      - 294
-      - 9
-- id: minimote_1_b2_long
-  alias: Minimote 1 Button 2 Long
-  trigger:
+    id: b2_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 4
-  action:
-  - service: script.turn_on
-    entity_id: script.dim
-- id: minimote_1_b3_short
-  alias: Minimote 1 Button 3 Short
-  trigger:
+    id: b2_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 5
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.kitchen_lights
-      transition: 5
-      brightness: 150
-- id: minimote_1_b3_long
-  alias: Minimote 1 Button 3 Long
-  trigger:
+    id: b3_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 6
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.kitchen_lights
-      transition: 5
-      brightness: 255
-- id: minimote_1_b4_short
-  alias: Minimote 1 Button 4 Short
-  trigger:
+    id: b3_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 7
-  action:
-  - service: light.turn_off
-    data:
-      entity_id: light.kitchen_lights
-- id: minimote_1_b4_long
-  alias: Minimote 1 Button 4 Long
-  trigger:
+    id: b4_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 30
       value: 8
+    id: b4_long
   action:
-  - service: script.bedtime
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: b1_short
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness: 255
+          color_temp: 200
+        target:
+          entity_id: light.office_desk_lamp
+    - conditions:
+      - condition: trigger
+        id: b1_long
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.office_desk_lamp
+    - conditions:
+      - condition: trigger
+        id: b2_short
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness: 255
+          rgb_color:
+          - 255
+          - 183
+          - 255
+        target:
+          entity_id: light.office_desk_lamp
+    - conditions:
+      - condition: trigger
+        id: b2_long
+      sequence:
+      - type: turn_off
+        device_id: 031d7d7a52294ea15545c0f18087742c
+        entity_id: light.kitchen_lights
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: b3_short
+      sequence:
+      - service: script.evening
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b3_long
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.daybreak
+    - conditions:
+      - condition: trigger
+        id: b4_short
+      sequence:
+      - service: script.tv_time
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b4_long
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          area_id:
+          - e404ae11317c4432a90e1c144fea2e63
+          - dc0c7510c5bc42509ea83f9d5c9c03f9
+          - fcaa981e07fc4b0d867cd8b6f5801fc9
+    default: []
 - id: minimote_3_b1_short
-  alias: Minimote 3 Button 1 Short
+  alias: 'Minimote 3: Upstairs'
   trigger:
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
       value: 1
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.bedframe_light
-  - service: hue.hue_activate_scene
-    data:
-      group_name: Master Bathroom
-      scene_name: Morning
-  - service: light.turn_on
-    data:
-      entity_id: light.foyer_lights
-      brightness: 50
-- id: minimote_3_b1_long
-  alias: Minimote 3 Button 1 Long
-  trigger:
+    id: b1_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: light.turn_off
-    data:
-      entity_id: light.master_bedroom_chandelier
-  - service: light.turn_off
-    data:
-      entity_id: light.bedframe_light
-- id: minimote_3_b2_short
-  alias: Minimote 3 Button 2 Short
-  trigger:
+      value: 2
+    id: b1_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: script.mbr_night_light
-- id: minimote_3_b2_long
-  alias: Minimote 3 Button 2 Long
-  trigger:
+      value: 5
+    id: b3_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: script.bedtime
-- id: minimote_3_b3_short
-  alias: Minimote 3 Button 3 Short
-  trigger:
+      value: 6
+    id: b3_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: switch.turn_on
-    data:
-      entity_id: switch.master_bedroom_fan
-- id: minimote_3_b3_long
-  alias: Minimote 3 Button 3 Long
-  trigger:
+      value:
+    id: b4_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.master_bedroom_fan_speed
-      option: 2
-- id: minimote_3_b4_short
-  alias: Minimote 3 Button 4 Short
-  trigger:
+      value: 8
+    id: b4_long
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
-  action:
-  - service: switch.turn_off
-    data:
-      entity_id: switch.master_bedroom_fan
-- id: minimote_3_b4_long
-  alias: Minimote 3 Button 4 Long
-  trigger:
+      value: 3
+    id: b2_short
   - platform: event
     event_type: zwave_js_value_notification
     event_data:
       node_id: 48
+      value: 4
+    id: b2_long
+  condition: []
   action:
-  - service: script.turn_on
-    data:
-      entity_id: script.morning
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: b1_short
+      sequence:
+      - service: script.master_bedroom_night_time
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b1_long
+      sequence:
+      - service: light.turn_off
+        data:
+          transition: 5
+        target:
+          area_id:
+          - c422351f189a42449abb2a5bf0152863
+          - 69a3968c0130497e862157a750090907
+    - conditions:
+      - condition: trigger
+        id: b2_short
+      sequence:
+      - service: input_select.select_option
+        data:
+          option: '4'
+        target:
+          entity_id: input_select.master_bedroom_fan_speed
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.master_fan_hold
+    - conditions:
+      - condition: trigger
+        id: b2_long
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.master_fan_hold
+    - conditions:
+      - condition: trigger
+        id: b4_short
+      sequence:
+      - service: script.climate_upstairs_cooldown
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b4_long
+      sequence:
+      - service: script.ecobee_us_resume
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b3_long
+      sequence:
+      - service: script.start_bedtime_timer
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: b3_short
+      sequence:
+      - service: timer.cancel
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    default: []
 - id: test_ios_notifications
-  alias: Test notifications
+  alias: 'TEST: Notifications'
   trigger:
   - platform: state
     entity_id: input_boolean.state_change
-    to:
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Testing
       message: iOS Test Notification Successful!
@@ -3300,7 +2522,7 @@
     path: networkingcat/yet_another_motion_automation.yaml
     input:
       time_scene_night: 00:00:00
-      motion_entity: binary_sensor.motion_master_bedroom
+      motion_entity: binary_sensor.master_bedroom_entry_motion
       light_target:
         entity_id: light.bedframe_light
       no_motion_wait: 120
@@ -3324,12 +2546,13 @@
       state: 'on'
   action:
   - scene: scene.aj_night_time
-  - service: switch.turn_on
+  - service: light.turn_on
+    data: {}
     target:
-      entity_id: switch.mini_fridge
+      entity_id: light.nursery_wall_light
   mode: single
 - id: '1619991785170'
-  alias: smoke alarm notify
+  alias: 'Notify: Smoke Alarm'
   description: ''
   trigger:
   - platform: state
@@ -3343,7 +2566,7 @@
     entity_id: group.all_devices
     state: not_home
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: Smoke Alarm!
       message: '{{ trigger.to_state.state }} alarm detected on {{ trigger.entity_id
@@ -3354,7 +2577,7 @@
             name: default
   mode: single
 - id: '1620358929402'
-  alias: Climate Post Cool Upstairs
+  alias: 'Climate: Upstairs Post-Cool'
   description: ''
   trigger:
   - platform: time
@@ -3377,8 +2600,10 @@
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Precool
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
   mode: single
 - id: '1622171964857'
   alias: Nursery Vacant Daytime
@@ -3413,9 +2638,12 @@
   - service: ecobee.resume_program
     data:
       resume_all: true
+  - service: notify.mobile_app_rcom
+    data:
+      message: All doors closed. Thank you!
   mode: single
 - id: '1624029858566'
-  alias: Notify if Ring Doorbell has Low Battery
+  alias: 'Notify: Ring Doorbell Low Battery'
   description: Low battery alert for side door Ring Doorbell
   trigger:
   - platform: template
@@ -3423,7 +2651,7 @@
       }}'
   condition: []
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       message: Please recharge the side door Ring Doorbell
       title: Ring Doorbell Low Battery
@@ -3433,7 +2661,7 @@
             name: default
   mode: single
 - id: '1629255888600'
-  alias: Climate Precool Upstairs Evening
+  alias: 'Climate: Upstairs Precool Evening'
   description: ''
   trigger:
   - platform: time
@@ -3453,11 +2681,13 @@
   action:
   - service: climate.set_preset_mode
     data:
-      entity_id: climate.upstairs
       preset_mode: Precool
+    target:
+      entity_id:
+      - climate.ecobee_upstairs
   mode: single
 - id: '1635830339816'
-  alias: climate_downstairs_ac_on_door_open
+  alias: 'Notify: AC Running with Doors Open'
   description: Alert if the Downstairs AC kicks on while a door is open.
   trigger:
   - platform: state
@@ -3469,7 +2699,7 @@
     entity_id: binary_sensor.all_doors
     state: 'on'
   action:
-  - service: notify.mobile_app_rip8plus
+  - service: notify.mobile_app_rcom
     data:
       title: AC Running - Door Open
       message: The AC is running. Please close all doors.
@@ -3554,10 +2784,10 @@
     after: sunrise
   action:
   - service: light.turn_off
+    data:
+      transition: 10
     target:
-      entity_id:
-      - light.bedframe
-      - light.bedframe_light
+      entity_id: light.bedframe_light
   mode: single
 - id: '1641444082447'
   alias: 'Auto Off: Master Bedroom Lights'
@@ -3579,29 +2809,6 @@
   - service: light.turn_off
     target:
       area_id: c422351f189a42449abb2a5bf0152863
-  mode: single
-- id: '1642097470336'
-  alias: 'Auto On: Nursery Lights On for Housekeeper'
-  description: Automate lights for housekeeper until switch is replaced.
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.nursery_presence
-    to: 'on'
-  condition:
-  - condition: time
-    weekday:
-    - thu
-    after: 09:15:00
-    before: '13:00:00'
-  - condition: state
-    entity_id: light.nursery_light
-    state: 'off'
-  action:
-  - service: light.turn_on
-    target:
-      entity_id: light.nursery_light
-    data:
-      brightness: 255
   mode: single
 - id: '1643067473001'
   alias: 'Auto Off: Pool Pump'
@@ -3631,40 +2838,57 @@
     target:
       entity_id: switch.pool_pump
   mode: single
-- id: '1643160724353'
-  alias: 'Notify: Low Battery Detected'
-  description: Low battery detection & notification for all battery sensors
-  use_blueprint:
-    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
-    input:
-      exclude:
-        entity_id:
-        - sensor.mip8_battery_level
-        - sensor.rip8plus_battery_level
-      day: 6
-      actions:
-      - service: notify.mobile_app_rip8plus
-        data:
-          message: 'Low battery on: {{sensors}}'
-          title: Low Battery
 - id: '1643870105040'
   alias: 'Auto On: Pool Pump if Freezing'
   description: Run the pool pump if temperatures drop to freezing
   trigger:
   - platform: state
-    entity_id: binary_sensor.freeze_warning
+    entity_id:
+    - binary_sensor.weatherflow_is_freezing
     to: 'on'
-  condition:
-  - condition: state
-    entity_id: switch.pool_pump
-    state: 'off'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    id: freezing
+  - platform: state
+    entity_id:
+    - binary_sensor.weatherflow_is_freezing
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+    id: not_freezing
+    from: 'on'
+  condition: []
   action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.pool_pump
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: freezing
+      - condition: state
+        entity_id: switch.pool_pump
+        state: 'off'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.pool_pump
+    - conditions:
+      - condition: trigger
+        id: not_freezing
+      - condition: state
+        entity_id: switch.pool_pump
+        state: 'on'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.pool_pump
   mode: single
 - id: '1643870501069'
-  alias: 'Auto Off: Pool Pump if Freezing'
+  alias: 'Auto Off: Pool Pump Freeze Warning End'
   description: Turn off the pool pump once temps return to normal
   trigger:
   - platform: state
@@ -3681,8 +2905,1668 @@
     state: 'on'
   - condition: time
     before: 06:00:00
+    after: 00:00:00
   action:
   - service: switch.turn_off
     target:
       entity_id: switch.pool_pump
+    data: {}
+  mode: single
+- id: '1645479236226'
+  alias: 'Watch Dog: Exterior Lights'
+  description: Turn off the exterior lights if they are turned on during the day.
+  trigger:
+  - platform: state
+    entity_id: group.exterior_lights
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  - platform: state
+    entity_id: group.porch_lights
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  condition:
+  - condition: time
+    after: 08:00:00
+    before: '17:00:00'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.exterior_lights
+  mode: single
+- id: '1645480372200'
+  alias: 'Auto Off: Peak Hours Lighting'
+  description: Turn off some lights during peak hours
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.peak_hours
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: state
+    entity_id: group.interior_lights
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.interior_lights
+  mode: single
+- id: '1648765194908'
+  alias: 'Notify: Safe Bottom Door'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.safe_bottom_door_state
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - service: notify.mobile_app_rcom
+    data:
+      message: Lower Safe Door Opened!
+      title: Safe Opened!
+  mode: single
+- id: '1649133344773'
+  alias: 'Climate: Precool Automation Control'
+  description: Enables or disables precool automation based on month.
+  trigger:
+  - platform: state
+    entity_id: sensor.date
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.climate_precool
+        state: 'on'
+      sequence:
+      - service: automation.turn_on
+        data: {}
+        target:
+          entity_id:
+          - automation.climate_precool_downstairs
+          - automation.climate_precool_upstairs
+    default:
+    - service: automation.turn_off
+      data: {}
+      target:
+        entity_id:
+        - automation.climate_precool_downstairs
+        - automation.climate_precool_upstairs
+  mode: single
+- id: '1650746129837'
+  alias: 'Notify: Sun Elevation Testing'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '-10'
+  condition: []
+  action:
+  - service: notify.mobile_app_rcom
+    data:
+      message: The sun elevation is under -10. Test IR Illuminator
+      title: Sun Elevation
+  mode: single
+- id: '1650824122961'
+  alias: 'Hue Remote: Living Room'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_on_press
+    to: on_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_off_press
+    to: off_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_on_hold
+    to: on_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_off_hold
+    to: off_hold_release
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_up_press
+    to: up_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_up_hold
+    to: up_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_down_press
+    to: down_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_living_room_action
+    id: hue_remote_down_hold
+    to: down_hold
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_press
+      sequence:
+      - service: script.scene_living_room_default
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_press
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          area_id: e404ae11317c4432a90e1c144fea2e63
+          entity_id: light.entryway
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_hold
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+      - service: scene.turn_on
+        target:
+          entity_id: scene.daybreak
+        metadata: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_hold
+      - condition: time
+        before: 00:00:00
+        after: '21:59:00'
+      sequence:
+      - service: notify.alexa_media_living_room_echo
+        data:
+          message: Have a great night.
+          data:
+            type: tts
+          target: media_player.living_room_echo
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_press
+      sequence:
+      - service: script.brighten_living_room_ceiling
+        data: {}
+      - service: script.brighten_living_room_lamp
+        data: {}
+      - service: script.brighten_entryway_lights
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_press
+      sequence:
+      - service: script.dim_living_room_test
+        data: {}
+      - service: script.dim_living_room_ceiling
+        data: {}
+      - service: script.dim_living_room_ceiling
+        data: {}
+      - service: script.dim_entryway_lights
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_hold
+      sequence:
+      - service: script.movie_time
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_hold
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.daybreak
+        metadata: {}
+    default: []
+  mode: single
+- id: '1651806554724'
+  alias: 'Climate: Downstairs Precool Evening'
+  description: ''
+  trigger:
+  - platform: time
+    at: '18:00:00'
+  condition:
+  - condition: state
+    entity_id: sensor.season
+    state: Summer
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+    - condition: state
+      entity_id: input_boolean.visitor_mode
+      state: 'on'
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    before: 00:00:00
+    after: 00:00:00
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: Precool
+    target:
+      entity_id: climate.ecobee_downstairs
+  mode: single
+- id: '1652625668660'
+  alias: 'Auto Off: Guest Room Lights'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.guest_room_occupancy
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 8185273699b17bef766f90d6189c4dee
+    entity_id: light.guest_room_lights
+    domain: light
+  action:
+  - type: turn_off
+    device_id: 8185273699b17bef766f90d6189c4dee
+    entity_id: light.guest_room_lights
+    domain: light
+  - device_id: db4c46aff2f47a69663704ae9709b152
+    domain: fan
+    entity_id: fan.guest_room_fan
+    type: turn_off
+  mode: single
+- id: '1654227289547'
+  alias: 'Notify: Guest Room Balcony Door Opened'
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 5765a82aff1038088d06791dee6837e5
+    entity_id: binary_sensor.guest_room_balcony_door_state
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.mobile_app_rcom
+    data:
+      message: Guest Room Balcony Door Opened!
+      title: Guest Room Balcony
+  mode: single
+- id: '1656275812750'
+  alias: Turn on sleep mode when light turns on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.master_bedside_lamp_rick
+    to: 'on'
+  condition:
+  - condition: time
+    before: 00:00:00
+    after: '21:00:00'
+  - condition: state
+    entity_id: input_boolean.sleeping
+    state: 'off'
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.sleeping
+  mode: single
+- id: '1658971028660'
+  alias: 'Hue Remote: Master Bathroom'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_on_press
+    to: on_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_off_press
+    to: off_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_on_hold
+    to: on_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_off_hold
+    to: off_hold_release
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_up_press
+    to: up_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_up_hold
+    to: up_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_down_press
+    to: down_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_master_bathroom_action
+    id: hue_remote_down_hold
+    to: down_hold
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_press
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.master_bathroom_morning
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_press
+      sequence:
+      - service: light.turn_off
+        data:
+          transition: 2
+        target:
+          area_id: 69a3968c0130497e862157a750090907
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_hold
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.master_bathroom_bright
+        metadata: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_hold
+      sequence:
+      - service: notify.alexa_media_master_bathroom_dot
+        data:
+          message: Goodnight!
+          target: media_player.master_bathroom_dot
+          data:
+            type: tts
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_press
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: light.master_bathroom_ceiling
+            state: 'off'
+          sequence:
+          - service: light.turn_on
+            data:
+              brightness: 180
+            target:
+              entity_id: light.master_bathroom_ceiling
+        default:
+        - service: script.brighten_master_bathroom_ceiling
+          data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_hold
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          brightness: 255
+        target:
+          area_id: 69a3968c0130497e862157a750090907
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_press
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: light.master_bathroom_ceiling
+            state: 'off'
+          sequence:
+          - service: light.turn_on
+            data:
+              transition: 3
+              brightness_pct: 25
+            target:
+              entity_id: light.master_bathroom_ceiling
+          - choose:
+            - conditions:
+              - condition: state
+                entity_id: light.master_bathroom_vanity
+                state: 'on'
+              sequence:
+              - service: script.dim_master_bathroom_vanity
+                data: {}
+            default: []
+        default:
+        - service: script.dim_master_bathroom_ceiling
+          data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_hold
+      sequence:
+      - service: light.turn_off
+        data:
+          transition: 10
+        target:
+          area_id: 69a3968c0130497e862157a750090907
+    default: []
+  mode: single
+- id: '1659116297062'
+  alias: 'Bedside Switch: Megs'
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: single_right
+    id: single_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: single_left
+    id: single_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: double_right
+    id: double_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: double_left
+    id: double_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: hold_right
+    id: hold_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: hold_left
+    id: hold_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Megs/action
+    payload: single_both
+    id: single_both
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single_right
+      sequence:
+      - type: toggle
+        device_id: a11381bf23938d722f74b5f1e8f5e3d4
+        entity_id: light.master_bedside_lamp_rick
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: single_left
+      sequence:
+      - type: toggle
+        device_id: 28d49f7f23b083e1e96afa32af54711e
+        entity_id: light.master_bedside_lamp_megs
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: double_right
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.master_bedroom_fan
+    - conditions:
+      - condition: trigger
+        id: double_left
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.master_bedroom_fan
+    - conditions:
+      - condition: trigger
+        id: hold_right
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 5
+          color_temp: 342
+          brightness: 255
+        target:
+          entity_id: light.master_bedside_lamps
+    - conditions:
+      - condition: trigger
+        id: hold_left
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          color_temp: 375
+          brightness_pct: 20
+        target:
+          entity_id: light.master_bedside_lamps
+    - conditions:
+      - condition: trigger
+        id: single_both
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: light.master_bedside_lamps
+            state: 'on'
+          sequence:
+          - service: light.turn_off
+            data: {}
+            target:
+              entity_id: light.master_bedside_lamps
+        default:
+        - service: light.turn_on
+          data: {}
+          target:
+            entity_id: light.master_bedside_lamps
+    default: []
+  mode: single
+- id: '1659147374881'
+  alias: 'Bedside Switch: Rick'
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: single_right
+    id: single_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: single_left
+    id: single_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: double_right
+    id: double_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: double_left
+    id: double_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: hold_right
+    id: hold_right
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: hold_left
+    id: hold_left
+  - platform: mqtt
+    topic: zigbee2mqtt/Master Bedside Switch Rick/action
+    payload: single_both
+    id: single_both
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single_right
+      sequence:
+      - type: toggle
+        device_id: 28d49f7f23b083e1e96afa32af54711e
+        entity_id: light.master_bedside_lamp_megs
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: single_left
+      sequence:
+      - type: toggle
+        device_id: a11381bf23938d722f74b5f1e8f5e3d4
+        entity_id: light.master_bedside_lamp_rick
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: double_right
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.master_bedroom_fan
+    - conditions:
+      - condition: trigger
+        id: double_left
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.master_bedroom_fan
+    - conditions:
+      - condition: trigger
+        id: hold_right
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 5
+          color_temp: 342
+          brightness: 255
+        target:
+          entity_id: light.master_bedside_lamps
+    - conditions:
+      - condition: trigger
+        id: hold_left
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 3
+          color_temp: 375
+          brightness_pct: 20
+        target:
+          entity_id: light.master_bedside_lamps
+    - conditions:
+      - condition: trigger
+        id: single_both
+      sequence:
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    default: []
+  mode: single
+- id: '1659152320169'
+  alias: 'Hue Remote: Living Room Counter'
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 3b5d102784be447d571e93638db7fc67
+    type: action
+    subtype: on_press
+    discovery_id: 0x001788011033d61f action_on_press
+  condition: []
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.counter_living_room_button_press
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - condition: numeric_state
+    entity_id: counter.counter_living_room_button_press
+    above: '0'
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id: counter.counter_living_room_button_press
+  mode: restart
+- id: '1659153174240'
+  alias: 'Hue Remote: Living Room Multi-Press Action'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - counter.counter_living_room_button_press
+    id: 2_press
+    to: '2'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+  - platform: state
+    entity_id:
+    - counter.counter_living_room_button_press
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+    to: '3'
+    id: 3_press
+  - platform: numeric_state
+    entity_id: counter.counter_living_room_button_press
+    id: reset_counter
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+    above: '3'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 2_press
+      sequence:
+      - service: scene.turn_on
+        data:
+          transition: 3
+        target:
+          entity_id: scene.cozy
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    - conditions:
+      - condition: trigger
+        id: 3_press
+      sequence:
+      - service: scene.turn_on
+        data:
+          transition: 2
+        target:
+          entity_id: scene.daybreak
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    - conditions:
+      - condition: trigger
+        id: reset_counter
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    default: []
+  mode: single
+- id: '1659917055651'
+  alias: 'Auto On: Laundry Room Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 1ee8c1f24bf815c201cba012d9cc84cd
+    entity_id: binary_sensor.laundry_room_motion
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      transition: 2
+      brightness_pct: 100
+    target:
+      area_id: 12555a99046855490103cd6d3193ee22
+  - wait_for_trigger:
+    - type: no_motion
+      platform: device
+      device_id: 1ee8c1f24bf815c201cba012d9cc84cd
+      entity_id: binary_sensor.laundry_room_motion
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 45
+  - condition: state
+    entity_id: light.laundry_room
+    state: 'on'
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id: 12555a99046855490103cd6d3193ee22
+  mode: restart
+- id: '1659995064470'
+  alias: 'Dropdown: Nursery Wall LED Strip'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_select.nursery_wall_color
+    to: Blue
+    id: blue
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Crystal
+    id: crystal
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Cyan
+    id: cyan
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Green
+    id: green
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Pink
+    id: pink
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Red
+    id: red
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Violet
+    id: violet
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: Yellow
+    id: yellow
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: White
+    id: white
+  - platform: state
+    entity_id:
+    - input_select.nursery_wall_color
+    to: 'Off'
+    id: 'off'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: blue
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 0
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: crystal
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 0
+          - 55
+          - 55
+          brightness_pct: 70
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: cyan
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 0
+          - 255
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: green
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 0
+          - 255
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: pink
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 255
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: red
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 255
+          - 0
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: violet
+      sequence:
+      - service: light.turn_on
+        data:
+          rgb_color:
+          - 100
+          - 0
+          - 255
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: yellow
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          rgb_color:
+          - 255
+          - 255
+          - 0
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: white
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 2
+          color_temp: 311
+          brightness_pct: 100
+        target:
+          entity_id: light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      sequence:
+      - type: turn_off
+        device_id: 9b73fc070aca70a2aea303dd8651ee34
+        entity_id: light.nursery_wall_light
+        domain: light
+    default: []
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: input_select.select_option
+    data_template:
+      entity_id: '{{ trigger.to_state.entity_id }}'
+      option: Select an option...
+  mode: single
+- id: '1660085239729'
+  alias: 'Button: Kids Room Smart Button'
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: single
+    id: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: double
+    id: double
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: triple
+    id: triple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: quadruple
+    id: quadruple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: hold
+    id: hold
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Nursery/action
+    payload: many
+    id: many
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single
+      sequence:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.nursery_light
+    - conditions:
+      - condition: trigger
+        id: double
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          area_id: ade76688dbb34b8d84635f8458b99cda
+    - conditions:
+      - condition: trigger
+        id: triple
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+        target:
+          entity_id:
+          - light.nursery_light
+          - light.nursery_wall_light
+    - conditions:
+      - condition: trigger
+        id: quadruple
+      sequence:
+      - service: light.turn_on
+        data:
+          effect: Random
+          brightness_pct: 25
+        target:
+          entity_id: light.nursery_wall_light
+    default: []
+  mode: single
+- id: '1660085416524'
+  alias: 'Button: Master Bedroom Smart Button'
+  description: ''
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Master Bedroom/action
+    payload: single
+    id: single
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: double
+    id: double
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: triple
+    id: triple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: quadruple
+    id: quadruple
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: hold
+    id: hold
+  - platform: mqtt
+    topic: zigbee2mqtt/Smart Button Office/action
+    payload: many
+    id: many
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: single
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+        target:
+          entity_id: light.bedframe_light
+    - conditions:
+      - condition: trigger
+        id: double
+      - condition: time
+        before: 00:00:00
+        after: '21:30:00'
+      sequence:
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: triple
+      sequence:
+      - service: timer.cancel
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: quadruple
+      sequence:
+      - service: script.bedtime
+        data: {}
+    default: []
+  mode: single
+- id: '1660526414304'
+  alias: 'Arrival: Disarm Blink Cameras'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - group.all_devices
+    to: home
+    from: not_home
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.blink_saguaro_estates
+    state: armed
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_saguaro_estates
+  mode: single
+- id: '1662409933772'
+  alias: 'Notify: North Gate Open'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.north_gate_state
+    to: 'on'
+    from: 'off'
+  condition:
+  - condition: state
+    entity_id: input_boolean.north_gate_shunt
+    state: 'off'
+  action:
+  - choose:
+    - conditions:
+      - condition: time
+        before: '17:00:00'
+        weekday:
+        - thu
+        after: 06:00:00
+      sequence:
+      - service: notify.mobile_app_rcom
+        data:
+          message: The gate was opened!
+          title: North Gate
+          data:
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1
+      - service: notify.alexa_media_office_dot
+        data:
+          message: Attention! The landscapers are here. Please secure the dogs!
+          title: Landscaping
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.north_gate_shunt
+    default:
+    - condition: state
+      entity_id: input_boolean.north_gate_shunt
+      state: 'off'
+    - repeat:
+        until:
+        - condition: state
+          entity_id: binary_sensor.north_gate_state
+          state: 'off'
+          for:
+            hours: 0
+            minutes: 0
+            seconds: 3
+        sequence:
+        - service: notify.mobile_app_rcom
+          data:
+            message: The gate is open!
+            title: North Gate
+            data:
+              push:
+                sound:
+                  name: default
+                  critical: 1
+                  volume: 1
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 45
+            milliseconds: 0
+  mode: single
+- id: '1662410031085'
+  alias: 'Notify: North Gate Closed'
+  description: ''
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 5bac223422c821c9f294f72b7ce2e71e
+    entity_id: binary_sensor.north_gate_state
+    domain: binary_sensor
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
+  condition: []
+  action:
+  - service: notify.mobile_app_rcom
+    data:
+      message: The Gate is now closed. Thank you!
+      title: North Gate
+  mode: single
+- id: '1665251087123'
+  alias: 'Rearm: North Gate'
+  description: Rearm the N. Gate sensor if shunted for one hour.
+  trigger:
+  - platform: time
+    at: '20:00:00'
+  - platform: state
+    entity_id:
+    - binary_sensor.north_gate_state
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  - platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: input_boolean.north_gate_shunt
+    state: 'on'
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.north_gate_shunt
+  - service: notify.mobile_app_rcom
+    data:
+      message: The gate sensor has been rearmed.
+      title: North Gate
+  mode: single
+- id: '1665890271088'
+  alias: 'Hue Remote: Wine Room'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_on_press
+    to: on_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_off_press
+    to: off_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_on_hold
+    to: on_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_off_hold
+    to: off_hold_release
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_up_press
+    to: up_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_up_hold
+    to: up_hold
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_down_press
+    to: down_press
+  - platform: state
+    entity_id:
+    - sensor.hue_remote_wine_room_action
+    id: hue_remote_down_hold
+    to: down_hold
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_press
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.lounge
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_press
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id:
+          - light.wine_room_ceiling
+          - light.bar_strip_light
+          - light.lounge_light
+      - condition: state
+        entity_id: binary_sensor.bar_motion
+        state: 'on'
+      - wait_for_trigger:
+        - platform: state
+          entity_id:
+          - binary_sensor.bar_motion
+          to: 'off'
+          for:
+            hours: 0
+            minutes: 1
+            seconds: 0
+        timeout:
+          hours: 0
+          minutes: 2
+          seconds: 0
+          milliseconds: 0
+      - service: light.turn_off
+        data:
+          transition: 5
+        target:
+          entity_id: light.wine_room_lamp
+    - conditions:
+      - condition: trigger
+        id: hue_remote_on_hold
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_wine_room_button_press
+      - service: scene.turn_on
+        target:
+          entity_id: scene.bar_bright
+        metadata: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_off_hold
+      - condition: time
+        before: 00:00:00
+        after: '21:59:00'
+      sequence:
+      - service: notify.alexa_media_bar_echo_show
+        data:
+          message: Goodnight, I hope you sleep well.
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.bedtime
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_press
+      sequence:
+      - service: script.brighten_wine_room
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_press
+      sequence:
+      - service: script.dim_bar_strip_light
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: hue_remote_down_hold
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.wine_room_movie
+    - conditions:
+      - condition: trigger
+        id: hue_remote_up_hold
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.bar_bright
+        metadata: {}
+    default: []
+  mode: single
+- id: '1665891053299'
+  alias: 'Hue Remote: Wine Room Counter'
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 81788be2b272906e05ccc6576479892c
+    type: action
+    subtype: on_press
+    discovery_id: 0x0017880104ee90a7 action_on_press
+  condition: []
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id:
+      - counter.counter_wine_room_button_press
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - condition: numeric_state
+    entity_id: counter.counter_wine_room_button_press
+    above: '0'
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id:
+      - counter.counter_wine_room_button_press
+  mode: restart
+- id: '1665891420567'
+  alias: 'Hue Remote: Wine Room Multi-Press Action'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - counter.counter_wine_room_button_press
+    id: 2_press
+    to: '2'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+  - platform: state
+    entity_id:
+    - counter.counter_wine_room_button_press
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+    to: '3'
+    id: 3_press
+  - platform: numeric_state
+    entity_id: counter.counter_wine_room_button_press
+    id: reset_counter
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+    above: '3'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 2_press
+      sequence:
+      - service: scene.turn_on
+        data:
+          transition: 1
+        target:
+          entity_id:
+          - scene.wine_room_minty
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 2
+          milliseconds: 0
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    - conditions:
+      - condition: trigger
+        id: 3_press
+      sequence:
+      - service: scene.turn_on
+        data:
+          transition: 2
+        target:
+          entity_id: scene.bar_bright
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    - conditions:
+      - condition: trigger
+        id: reset_counter
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.counter_living_room_button_press
+    default: []
+  mode: single
+- id: '1668491414887'
+  alias: 'Auto On: Christmas Lights'
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:00:00'
+    id: 10pm
+  - platform: time
+    at: '23:00:00'
+    id: 11pm
+  - platform: time
+    at: '17:35:00'
+    id: 535pm
+  - platform: time
+    at: 08:00:00
+    id: 0800
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 535pm
+      - condition: state
+        entity_id: calendar.seasonal_christmas
+        state: 'on'
+      sequence:
+      - service: homeassistant.turn_on
+        data: {}
+        target:
+          entity_id: group.outside_christmas_lights
+    - conditions:
+      - condition: trigger
+        id: 10pm
+      - condition: time
+        before: 00:00:00
+        weekday:
+        - sun
+        - mon
+        - tue
+        - wed
+        - thu
+        after: 00:00:00
+      - condition: state
+        entity_id: group.outside_christmas_lights
+        state: 'on'
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          entity_id:
+          - group.outside_christmas_lights
+    - conditions:
+      - condition: trigger
+        id: 11pm
+      - condition: time
+        before: 00:00:00
+        weekday:
+        - fri
+        - sat
+        after: 00:00:00
+      - condition: state
+        entity_id: group.outside_christmas_lights
+        state: 'on'
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          entity_id: group.outside_christmas_lights
+    - conditions:
+      - condition: trigger
+        id: 0800
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: group.all_devices
+          state: home
+        - condition: state
+          entity_id: input_boolean.visitor_mode
+          state: 'on'
+      - condition: state
+        entity_id: calendar.seasonal_christmas
+        state: 'on'
+      sequence:
+      - service: homeassistant.turn_on
+        data: {}
+        target:
+          entity_id: group.inside_christmas_lights
+    default: []
   mode: single

@@ -1,12 +1,10 @@
 #####################################################################
-### Binary Sensor: Freeze Warning
+### Binary Sensor: turn precool automation on or off based on date
 #####################################################################
 binary_sensor:
   - platform: template
     sensors:
-      freeze_warning:
-        friendly_name: "Freeze Warning"
+      climate_precool:
+        friendly_name: "Climate Precool"
         value_template: >-
-          {{ states.weather.downstairs.attributes.temperature <= 34 }}
-        delay_on:
-          seconds: 30
+          {{ strptime(states('sensor.date'), '%Y-%m-%d').month < 11 }}

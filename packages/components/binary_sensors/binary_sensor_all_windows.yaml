@@ -9,10 +9,8 @@ binary_sensor:
         value_template: >-
           {{ not is_state('binary_sensor.guest_room_window_state', 'off')
              or not is_state('binary_sensor.living_room_north_window_state', 'off')
-             or not is_state('binary_sensor.master_window_northwest', 'off')
-             or not is_state('binary_sensor.guest_room_window_state', 'off')
-             or not is_state('binary_sensor.master_window_northwest', 'off')
-             or not is_state('binary_sensor.master_window_southwest', 'off') }}
+             or not is_state('binary_sensor.nw_master_window_state', 'off')
+             or not is_state('binary_sensor.sw_master_window_state', 'off') }}
         entity_picture_template: >-
           {% if is_state('binary_sensor.all_windows', 'on') %}
             /local/red_shield.png

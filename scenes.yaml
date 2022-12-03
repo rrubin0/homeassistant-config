@@ -57,67 +57,1587 @@
 - id: '1613875970948'
   name: Lounge
   entities:
-    group.wine_room_lights:
-      entity_id:
-      - switch.wine_room_lamp
-      - light.wine_room_ceiling
-      - light.lounge_light
-      - light.bar_strip_light
-      order: 5
-      friendly_name: Wine Room Lights
-      state: 'on'
     light.kitchen_night_light:
+      supported_color_modes:
+      - hs
+      color_mode: hs
       brightness: 255
       hs_color:
-      - 284.918
-      - 71.765
+      - 284.757
+      - 72.549
       rgb_color:
       - 208
-      - 71
+      - 70
       - 255
       xy_color:
       - 0.319
       - 0.145
       friendly_name: Kitchen Night Light
-      supported_features: 17
+      supported_features: 0
       state: 'on'
     light.kitchen_lights:
-      brightness: 26
-      node_id: 33
-      value_index: 0
-      value_instance: 1
-      value_id: '72057594596392961'
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 52
+      icon: mdi:light-recessed
       friendly_name: Kitchen Lights
-      icon: mdi:white-balance-incandescent
-      supported_features: 1
+      supported_features: 32
       state: 'on'
     light.dining_room_chandelier:
-      node_id: 34
-      value_index: 0
-      value_instance: 1
-      value_id: '72057594613170177'
-      friendly_name: Dining Room Lights
-      icon: mdi:ceiling-light
-      supported_features: 1
+      supported_color_modes:
+      - brightness
+      icon: mdi:chandelier
+      friendly_name: Dining Room Chandelier
+      supported_features: 32
       state: 'off'
+    light.northeast_wine:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 123
+      hs_color:
+      - 321.111
+      - 21.176
+      rgb_color:
+      - 255
+      - 201
+      - 236
+      xy_color:
+      - 0.3596
+      - 0.2882
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Northeast Wine
+      supported_features: 40
+      state: 'on'
+    light.northwest_wine:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 123
+      hs_color:
+      - 263.448
+      - 34.118
+      rgb_color:
+      - 202
+      - 168
+      - 255
+      xy_color:
+      - 0.292
+      - 0.2251
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Northwest Wine
+      supported_features: 40
+      state: 'on'
+    light.southeast_wine:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 123
+      hs_color:
+      - 27.458
+      - 69.412
+      rgb_color:
+      - 255
+      - 159
+      - 78
+      xy_color:
+      - 0.5433
+      - 0.3851
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Southeast Wine
+      supported_features: 40
+      state: 'on'
+    light.southwest_wine:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 123
+      hs_color:
+      - 263.448
+      - 34.118
+      rgb_color:
+      - 202
+      - 168
+      - 255
+      xy_color:
+      - 0.292
+      - 0.2251
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Southwest Wine
+      supported_features: 40
+      state: 'on'
+    light.bar_strip_light:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 38
+      hs_color:
+      - 249.474
+      - 44.706
+      rgb_color:
+      - 159
+      - 141
+      - 255
+      xy_color:
+      - 0.2449
+      - 0.1818
+      mode: normal
+      dynamics: none
+      icon: mdi:led-strip-variant
+      friendly_name: Bar Strip Light
+      supported_features: 40
+      state: 'on'
+    light.wine_room_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 215
+      hs_color:
+      - 30
+      - 43.137
+      rgb_color:
+      - 255
+      - 200
+      - 145
+      xy_color:
+      - 0.443
+      - 0.379
+      icon: mdi:lamp
+      friendly_name: Wine Room Lamp
+      supported_features: 63
+      state: 'on'
+    light.lounge_light:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      icon: hass:ceiling-light
+      friendly_name: Lounge Light
+      supported_features: 40
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 21.207
+      - 45.49
+      rgb_color:
+      - 255
+      - 180
+      - 139
+      xy_color:
+      - 0.4674
+      - 0.3608
+      state: 'on'
+  metadata:
+    light.northeast_wine:
+      entity_only: true
+    light.northwest_wine:
+      entity_only: true
+    light.southeast_wine:
+      entity_only: true
+    light.southwest_wine:
+      entity_only: true
+    light.bar_strip_light:
+      entity_only: true
+    light.wine_room_lamp:
+      entity_only: true
+    light.lounge_light:
+      entity_only: true
 - id: '1613882282365'
   name: AJ Night Time
   entities:
-    switch.switch_five:
-      friendly_name: Starlight
-      assumed_state: false
-      icon: mdi:weather-night
-      state: 'on'
     switch.aquarium:
+      icon: mdi:fishbowl
       friendly_name: Aquarium
-      icon: mdi:power-socket-us
       state: 'on'
     switch.nursery_lamp:
-      current_power_w: '2.98'
-      total_energy_kwh: '11.269'
-      voltage: '121.0'
-      current_a: '0.04'
-      today_energy_kwh: '0.025'
+      icon: mdi:lamp
       friendly_name: Nursery Lamp
-      icon: mdi:power-socket-us
       state: 'on'
+    light.nursery_wall_light:
+      effect_list:
+      - Solid
+      - Wake up
+      - Cycle up
+      - Cycle down
+      - Random
+      supported_color_modes:
+      - hs
+      icon: mdi:led-strip-variant
+      friendly_name: Nursery Wall Light
+      supported_features: 36
+      color_mode: hs
+      brightness: 23
+      hs_color:
+      - 220
+      - 57
+      rgb_color:
+      - 109
+      - 158
+      - 255
+      xy_color:
+      - 0.192
+      - 0.194
+      effect: Solid
+      state: 'on'
+  metadata:
+    light.nursery_wall_light:
+      entity_only: true
+- id: '1649612916998'
+  name: Daylight
+  entities:
+    light.living_room_lamp:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      mode: normal
+      dynamics: none
+      icon: mdi:lamp
+      friendly_name: Living Room Lamp
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 220
+      hs_color:
+      - 26.736
+      - 25.803
+      rgb_color:
+      - 255
+      - 218
+      - 189
+      xy_color:
+      - 0.391
+      - 0.356
+      state: 'on'
+    light.southwest_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Southwest Ceiling
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 235
+      hs_color:
+      - 26.732
+      - 30.439
+      rgb_color:
+      - 255
+      - 211
+      - 177
+      xy_color:
+      - 0.407
+      - 0.36
+      state: 'on'
+    light.northwest_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Northwest Ceiling
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 235
+      hs_color:
+      - 26.732
+      - 30.439
+      rgb_color:
+      - 255
+      - 211
+      - 177
+      xy_color:
+      - 0.407
+      - 0.36
+      state: 'on'
+    light.entryway:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway
+      supported_features: 40
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 245
+      hs_color:
+      - 26.779
+      - 33.423
+      rgb_color:
+      - 255
+      - 207
+      - 169
+      xy_color:
+      - 0.416
+      - 0.363
+      state: 'on'
+    light.southeast_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Southeast Ceiling
+      supported_features: 40
+      state: 'off'
+    light.northeast_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Northeast Ceiling
+      supported_features: 40
+      state: 'off'
+- id: '1658968822261'
+  name: Master Bathroom Morning
+  entities:
+    light.master_bath_sink:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Master Bath Sink
+      supported_features: 45
+      icon: mdi:light-recessed
+      color_mode: brightness
+      brightness: 64
+      state: 'on'
+    light.master_bathtub:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      friendly_name: Master Bathtub
+      supported_features: 63
+      icon: mdi:light-recessed
+      color_mode: xy
+      hs_color:
+      - 15.178
+      - 99.216
+      rgb_color:
+      - 255
+      - 66
+      - 2
+      xy_color:
+      - 0.677
+      - 0.319
+      brightness: 127
+      state: 'on'
+    light.master_bath_entry:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      friendly_name: Master Bath Entry
+      supported_features: 45
+      icon: mdi:light-recessed
+      color_mode: brightness
+      brightness: 64
+      state: 'on'
+  metadata:
+    light.master_bath_sink:
+      entity_only: true
+    light.master_bathtub:
+      entity_only: true
+    light.master_bath_entry:
+      entity_only: true
+- id: '1658981354433'
+  name: 'Master Bathroom: Bright'
+  entities:
+    light.master_bathroom_vanity:
+      supported_color_modes:
+      - brightness
+      icon: mdi:vanity-light
+      friendly_name: Master Bathroom Vanity
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.master_bath_entry:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      icon: mdi:light-recessed
+      friendly_name: Master Bath Entry
+      supported_features: 45
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.master_bath_sink:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - brightness
+      icon: mdi:light-recessed
+      friendly_name: Master Bath Sink
+      supported_features: 45
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.master_bathtub:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:light-recessed
+      friendly_name: Master Bathtub
+      supported_features: 63
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 27.226
+      - 45.916
+      rgb_color:
+      - 255
+      - 191
+      - 137
+      xy_color:
+      - 0.458
+      - 0.376
+      color_temp: 290
+      state: 'on'
+  metadata:
+    light.master_bathroom_vanity:
+      entity_only: true
+    light.master_bath_entry:
+      entity_only: true
+    light.master_bath_sink:
+      entity_only: true
+    light.master_bathtub:
+      entity_only: true
+- id: '1659075875505'
+  name: 'Master Bedside Lamps Bedtime '
+  entities:
+    light.master_bedside_lamp_rick:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lamp
+      friendly_name: Master Bedside Lamp Rick
+      supported_features: 63
+      color_mode: xy
+      brightness: 51
+      hs_color:
+      - 315.833
+      - 28.235
+      rgb_color:
+      - 255
+      - 183
+      - 236
+      xy_color:
+      - 0.368
+      - 0.269
+      state: 'on'
+    light.master_bedside_lamp_megs:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lamp
+      friendly_name: Master Bedside Lamp Megs
+      supported_features: 63
+      color_mode: xy
+      brightness: 51
+      hs_color:
+      - 331.233
+      - 28.627
+      rgb_color:
+      - 255
+      - 182
+      - 217
+      xy_color:
+      - 0.386
+      - 0.286
+      state: 'on'
+  icon: mdi:bed-king
+  metadata:
+    light.master_bedside_lamp_rick:
+      entity_only: true
+    light.master_bedside_lamp_megs:
+      entity_only: true
+- id: '1659148343292'
+  name: 'Living Room: Night Light'
+  entities:
+    light.living_room_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      entity_id:
+      - light.northeast_ceiling
+      - light.northwest_ceiling
+      - light.southeast_ceiling
+      - light.southwest_ceiling
+      icon: mdi:lightbulb-group
+      friendly_name: Living Room Ceiling
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 26
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      state: 'on'
+    light.living_room_lamp:
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 26
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      icon: mdi:floor-lamp-torchiere
+      friendly_name: Living Room Lamp
+      supported_features: 47
+      state: 'on'
+    light.entryway:
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 26
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      entity_id:
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway
+      supported_features: 44
+      state: 'on'
+    light.foyer_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:chandelier
+      friendly_name: Foyer Lights
+      supported_features: 32
+      state: 'off'
+    light.kitchen_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Lights
+      supported_features: 32
+      state: 'off'
+  icon: mdi:lightbulb-on-10
+  metadata:
+    light.living_room_ceiling:
+      entity_only: true
+    light.living_room_lamp:
+      entity_only: true
+    light.entryway:
+      entity_only: true
+    light.foyer_lights:
+      entity_only: true
+    light.kitchen_lights:
+      entity_only: true
+- id: '1659148406514'
+  name: 'Living Room: Dim'
+  entities:
+    light.living_room_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      entity_id:
+      - light.northeast_ceiling
+      - light.northwest_ceiling
+      - light.southeast_ceiling
+      - light.southwest_ceiling
+      icon: mdi:lightbulb-group
+      friendly_name: Living Room Ceiling
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      state: 'on'
+    light.living_room_lamp:
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      icon: mdi:floor-lamp-torchiere
+      friendly_name: Living Room Lamp
+      supported_features: 47
+      state: 'on'
+    light.entryway:
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp: 420
+      hs_color:
+      - 29.21
+      - 77.052
+      rgb_color:
+      - 255
+      - 154
+      - 58
+      xy_color:
+      - 0.56
+      - 0.39
+      entity_id:
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway
+      supported_features: 44
+      state: 'on'
+    light.foyer_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:chandelier
+      friendly_name: Foyer Lights
+      supported_features: 32
+      state: 'off'
+    light.kitchen_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Lights
+      supported_features: 32
+      state: 'off'
+  icon: mdi:lightbulb-on-20
+  metadata:
+    light.living_room_ceiling:
+      entity_only: true
+    light.living_room_lamp:
+      entity_only: true
+    light.entryway:
+      entity_only: true
+    light.foyer_lights:
+      entity_only: true
+    light.kitchen_lights:
+      entity_only: true
+- id: '1665888483898'
+  name: Wine Room Bright
+  entities:
+    light.wine_room_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lamp
+      friendly_name: Wine Room Lamp
+      supported_features: 63
+      color_mode: xy
+      brightness: 213
+      hs_color:
+      - 30
+      - 43.137
+      rgb_color:
+      - 255
+      - 200
+      - 145
+      xy_color:
+      - 0.443
+      - 0.379
+      state: 'on'
+    light.wine_room_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      entity_id:
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+      icon: mdi:lightbulb-group
+      friendly_name: Wine Room Ceiling
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 212
+      hs_color:
+      - 26.792
+      - 23.244
+      rgb_color:
+      - 255
+      - 222
+      - 195
+      xy_color:
+      - 0.384
+      - 0.354
+      state: 'on'
+    light.lounge_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 26.792
+      - 23.244
+      rgb_color:
+      - 255
+      - 222
+      - 195
+      xy_color:
+      - 0.384
+      - 0.354
+      icon: mdi:globe-light
+      friendly_name: Lounge Light
+      supported_features: 63
+      color_temp: 212
+      state: 'on'
+    light.bar_strip_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:led-strip-variant
+      friendly_name: Bar Strip Light
+      supported_features: 63
+      color_mode: color_temp
+      brightness: 38
+      hs_color:
+      - 26.792
+      - 23.244
+      rgb_color:
+      - 255
+      - 222
+      - 195
+      xy_color:
+      - 0.384
+      - 0.354
+      color_temp: 212
+      state: 'on'
+  metadata:
+    light.wine_room_lamp:
+      entity_only: true
+    light.wine_room_ceiling:
+      entity_only: true
+    light.lounge_light:
+      entity_only: true
+    light.bar_strip_light:
+      entity_only: true
+- id: '1665889793028'
+  name: Wine Room Movie
+  entities:
+    light.wine_room_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      entity_id:
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+      icon: mdi:lightbulb-group
+      friendly_name: Wine Room Ceiling
+      supported_features: 44
+      state: 'off'
+    light.wine_room_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lamp
+      friendly_name: Wine Room Lamp
+      supported_features: 63
+      color_mode: xy
+      brightness: 46
+      hs_color:
+      - 240.337
+      - 69.804
+      rgb_color:
+      - 78
+      - 77
+      - 255
+      xy_color:
+      - 0.164
+      - 0.083
+      state: 'on'
+    light.lounge_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 56
+      hs_color:
+      - 240.337
+      - 69.804
+      rgb_color:
+      - 78
+      - 77
+      - 255
+      xy_color:
+      - 0.164
+      - 0.083
+      icon: mdi:globe-light
+      friendly_name: Lounge Light
+      supported_features: 63
+      state: 'on'
+    light.kitchen_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:google-circles-communities
+      friendly_name: Kitchen Lights
+      supported_features: 32
+      state: 'off'
+    light.bar_strip_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:led-strip-variant
+      friendly_name: Bar Strip Light
+      supported_features: 63
+      color_mode: xy
+      brightness: 10
+      hs_color:
+      - 255.422
+      - 97.647
+      rgb_color:
+      - 70
+      - 6
+      - 255
+      xy_color:
+      - 0.157
+      - 0.05
+      state: 'on'
+  metadata:
+    light.wine_room_ceiling:
+      entity_only: true
+    light.wine_room_lamp:
+      entity_only: true
+    light.lounge_light:
+      entity_only: true
+    light.kitchen_lights:
+      entity_only: true
+- id: '1665892138003'
+  name: Wine Room Minty
+  entities:
+    light.wine_room_lamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lamp
+      friendly_name: Wine Room Lamp
+      supported_features: 63
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 119.455
+      - 43.137
+      rgb_color:
+      - 146
+      - 255
+      - 145
+      xy_color:
+      - 0.259
+      - 0.507
+      state: 'on'
+    light.wine_room_ceiling:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      entity_id:
+      - light.northeast_wine
+      - light.northwest_wine
+      - light.southeast_wine
+      - light.southwest_wine
+      icon: mdi:lightbulb-group
+      friendly_name: Wine Room Ceiling
+      supported_features: 44
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 151.546
+      - 38.039
+      rgb_color:
+      - 158
+      - 255
+      - 209
+      xy_color:
+      - 0.2445
+      - 0.40075
+      state: 'on'
+    light.lounge_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:globe-light
+      friendly_name: Lounge Light
+      supported_features: 63
+      color_mode: color_temp
+      brightness: 255
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      color_temp: 153
+      state: 'on'
+    light.bar_strip_light:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:led-strip-variant
+      friendly_name: Bar Strip Light
+      supported_features: 63
+      color_mode: xy
+      brightness: 97
+      hs_color:
+      - 149.882
+      - 100
+      rgb_color:
+      - 0
+      - 255
+      - 127
+      xy_color:
+      - 0.164
+      - 0.591
+      state: 'on'
+    light.kitchen_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:google-circles-communities
+      friendly_name: Kitchen Lights
+      supported_features: 32
+      color_mode: brightness
+      brightness: 52
+      state: 'on'
+  metadata:
+    light.wine_room_ceiling:
+      entity_only: true
+    light.lounge_light:
+      entity_only: true
+    light.bar_strip_light:
+      entity_only: true
+    light.kitchen_lights:
+      entity_only: true
+- id: '1666662996773'
+  name: Halloween Foyer
+  entities:
+    light.foyer_lights:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 41
+      icon: mdi:chandelier
+      friendly_name: Foyer Lights
+      supported_features: 32
+      state: 'on'
+    light.small_staircase_lamp:
+      min_mireds: 153
+      max_mireds: 400
+      supported_color_modes:
+      - brightness
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 255
+      hs_color:
+      - 120
+      - 100
+      rgb_color:
+      - 0
+      - 255
+      - 0
+      xy_color:
+      - 0.172
+      - 0.747
+      icon: mdi:lamps
+      friendly_name: Small Staircase Lamp
+      supported_features: 32
+      state: 'on'
+    light.large_staircase_lamp:
+      min_mireds: 153
+      max_mireds: 400
+      supported_color_modes:
+      - brightness
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 255
+      hs_color:
+      - 276
+      - 86
+      rgb_color:
+      - 167
+      - 35
+      - 255
+      xy_color:
+      - 0.267
+      - 0.107
+      icon: mdi:lamps
+      friendly_name: Large Staircase Lamp
+      supported_features: 32
+      state: 'on'
+  icon: mdi:halloween
+  metadata:
+    light.foyer_lights:
+      entity_only: true
+    light.small_staircase_lamp:
+      entity_only: true
+    light.large_staircase_lamp:
+      entity_only: true
+- id: '1669513475666'
+  name: Christmas Mood
+  entities:
+    light.small_staircase_lamp:
+      min_color_temp_kelvin: 2500
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 400
+      supported_color_modes:
+      - brightness
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 255
+      hs_color:
+      - 360
+      - 85
+      rgb_color:
+      - 255
+      - 38
+      - 38
+      xy_color:
+      - 0.678
+      - 0.301
+      icon: mdi:lamps
+      friendly_name: Small Staircase Lamp
+      supported_features: 32
+      state: 'on'
+    light.large_staircase_lamp:
+      min_color_temp_kelvin: 2500
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 400
+      supported_color_modes:
+      - brightness
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 166
+      hs_color:
+      - 135
+      - 85
+      rgb_color:
+      - 38
+      - 255
+      - 92
+      xy_color:
+      - 0.177
+      - 0.652
+      icon: mdi:lamps
+      friendly_name: Large Staircase Lamp
+      supported_features: 32
+      state: 'on'
+    group.inside_christmas_lights:
+      entity_id:
+      - switch.christmas_tree
+      - switch.switch_two
+      order: 15
+      friendly_name: Inside Christmas Lights
+      state: 'on'
+    light.foyer_lights:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 77
+      icon: mdi:chandelier
+      friendly_name: Foyer Lights
+      supported_features: 32
+      state: 'on'
+    light.entryway:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4081
+      color_temp: 245
+      hs_color:
+      - 26.779
+      - 33.423
+      rgb_color:
+      - 255
+      - 207
+      - 169
+      xy_color:
+      - 0.416
+      - 0.363
+      entity_id:
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway
+      supported_features: 44
+      state: 'on'
+    light.southwest_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 206
+      hs_color:
+      - 14.795
+      - 28.627
+      rgb_color:
+      - 255
+      - 200
+      - 182
+      xy_color:
+      - 0.41
+      - 0.342
+      icon: mdi:light-recessed
+      friendly_name: Southwest Ceiling
+      supported_features: 44
+      state: 'on'
+    light.southeast_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 165
+      hs_color:
+      - 195.249
+      - 70.98
+      rgb_color:
+      - 74
+      - 209
+      - 255
+      xy_color:
+      - 0.166
+      - 0.269
+      icon: mdi:light-recessed
+      friendly_name: Southeast Ceiling
+      supported_features: 44
+      state: 'on'
+    light.northwest_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 226
+      hs_color:
+      - 15.413
+      - 42.745
+      rgb_color:
+      - 255
+      - 174
+      - 146
+      xy_color:
+      - 0.466
+      - 0.347
+      icon: mdi:light-recessed
+      friendly_name: Northwest Ceiling
+      supported_features: 44
+      state: 'on'
+    light.northeast_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 150.137
+      - 85.882
+      rgb_color:
+      - 36
+      - 255
+      - 146
+      xy_color:
+      - 0.169
+      - 0.548
+      icon: mdi:light-recessed
+      friendly_name: Northeast Ceiling
+      supported_features: 44
+      state: 'on'
+  icon: mdi:gift
+  metadata:
+    light.small_staircase_lamp:
+      entity_only: true
+    light.large_staircase_lamp:
+      entity_only: true
+    group.inside_christmas_lights:
+      entity_only: true
+    light.foyer_lights:
+      entity_only: true
+    light.entryway:
+      entity_only: true
+    light.southwest_ceiling:
+      entity_only: true
+    light.southeast_ceiling:
+      entity_only: true
+    light.northwest_ceiling:
+      entity_only: true
+    light.northeast_ceiling:
+      entity_only: true

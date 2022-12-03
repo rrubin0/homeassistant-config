@@ -2,36 +2,44 @@
 ### Amcrest
 #####################################################################
 amcrest:
-  ### NW PTZ
-#  - host: !secret north_ptz_host
-#    name: NW PTZ
-#    username: !secret camera_user
-#    password: !secret camera_password
-#    port: !secret north_ptz_port
-#    resolution: low
-#    stream_source: rtsp
-#    binary_sensors:
-#      - motion_detected
-#    scan_interval: 30
-
-  ### NURSERY PTZ
-  - host: !secret nursery_ptz_host
-    name: Nursery PTZ
+  ### North Gate PTZ
+  - host: !secret north_ptz_host
+    name: North Gate PTZ
     username: !secret camera_user
     password: !secret camera_password
-    port: !secret nursery_ptz_port
+    resolution: high
+    stream_source: rtsp
+    binary_sensors:
+      - motion_detected
+    scan_interval: 30
+
+  ### Front Porch Fixed Camera
+  - host: !secret front_porch_host
+    name: Front Porch
+    username: !secret camera_user
+    password: !secret camera_password
+    resolution: high
+    stream_source: rtsp
+    binary_sensors:
+      - motion_detected
+    scan_interval: 15
+
+  ### Kids Room East PTZ
+  - host: !secret kids_east_ptz_host
+    name: Kids Room East PTZ
+    username: !secret camera_user
+    password: !secret camera_password
     resolution: low
     stream_source: rtsp
     binary_sensors:
       - motion_detected
     scan_interval: 30
 
-  ### CRIB PTZ
-  - host: !secret nursery_crib_host
-    name: Nursery Crib
+  ### Kids Room North PTZ
+  - host: !secret kids_north_ptz_host
+    name: Kids Room North PTZ
     username: !secret camera_user
     password: !secret camera_password
-    port: !secret nursery_crib_port
     resolution: low
     stream_source: rtsp
     binary_sensors:
@@ -43,7 +51,6 @@ amcrest:
 #    name: Test PTZ
 #    username: !secret camera_user
 #    password: !secret camera_password
-##    port: !secret test_ptz_port
 #    resolution: low
 #    stream_source: rtsp
 #    binary_sensors:

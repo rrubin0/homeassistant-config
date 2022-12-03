@@ -2,17 +2,24 @@
 ### LOGGER
 #####################################################################
 logger:
-  default: info
+  default: warning
   logs:
-    root: error
-    py.warningings: error
-    aiohttp.access: critical
-    aiohttp.server: critical
+    blinkpy.camera: critical
+    blinkpy.auth: critical
+    blinkpy.sync_module: critical
     requests.packages.urllib3.connectionpool: critical
-    homeassistant.helpers.entity: critical
-    homeassistant.exceptions: info
-    homeassistant.helpers.script: debug
-    pyhap: info
+    homeassistant.components.mqtt.light.schema_json: critical
+    homeassistant.util.yaml.loader: critical
+#    root: error
+#    py.warnings: error
+#    aiohttp.access: critical
+#    aiohttp.server: critical
+#    homeassistant.helpers.entity: critical
+#    homeassistant.exceptions: info
+#    homeassistant.helpers.script: debug
+#    blinkpy: critical
+#    pyhap: info
+    
 
 
     #######################################
@@ -21,30 +28,30 @@ logger:
 #    custom_components.alexa_media: debug
 #    custom_components.alexa_media.helpers: debug
 #    homeassistant.components.alexa: warning
-    homeassistant.components.automation: critical
-    homeassistant.components.binary_sensor: error
-    homeassistant.components.camera: critical
+#    homeassistant.components.automation: critical
+#    homeassistant.components.binary_sensor: error
+#    homeassistant.components.camera: critical
 #    homeassistant.components.climate: warning
 #    homeassistant.components.cover: debug
 #    homeassistant.components.device_tracker: debug
-    homeassistant.components.discovery: warning
+#    homeassistant.components.discovery: warning
 #    homeassistant.components.group: debug
 #    homeassistant.components.homekit: debug
 #    homeassistant.components.hue: critical
 #    homeassistant.components.input_boolean: critical
 #    homeassistant.components.input_number: debug
 #    homeassistant.components.light: error
-    homeassistant.components.media_player: critical
+#    homeassistant.components.media_player: critical
 #    homeassistant.components.mqtt: debug
 #    homeassistant.components.notify: debug
-    homeassistant.components.ring: error
+#    homeassistant.components.ring: error
 #    homeassistant.components.rachio: debug
 #    homeassistant.components.scene: info
 #    homeassistant.components.script: info
 #    homeassistant.components.sensor: debug
 #    homeassistant.components.switch: info
 #    homeassistant.components.timer: info
-    homeassistant.components.zwave: warning
+#    homeassistant.components.zwave: warning
 
 
     #######################################
@@ -74,6 +81,21 @@ logger:
 #    homeassistant.components.timer: critical
 #    homeassistant.components.zwave: critical
 
-#  filters:
-#    homeassistant.components.alexa.state_report:
-#      - "INVALID_ACCESS_TOKEN_EXCEPTION"
+  filters:
+    homeassistant.helpers.template_entity:
+      - "sensor.ha_last_restart"
+      
+    homeassistant.components.alexa.state_report:
+      - "INVALID_ACCESS_TOKEN_EXCEPTION"
+
+    homeassistant.components.alexa.auth:
+      - "Error calling LWA"
+
+    homeassistant.components.tplink.coordinator:
+      - "Unable to connect to the device:"
+
+    homeassistant.components.ssdp:
+      - "Failed to callback info:" 
+
+    homeassistant.util.logging:
+      - "Exception in state_received when handling msg on 'home/sensornode1'"

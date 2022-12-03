@@ -89,9 +89,9 @@ google_assistant:
       expose: false
     light.billiards_3:
       expose: false
-    light.center_entry:
+    light.center_entryway:
       expose: false
-    light.kitchen_entry:
+    light.kitchen_entryway:
       expose: false
     light.kitchen_night_light:
       expose: false
@@ -125,7 +125,7 @@ google_assistant:
       expose: false
     light.sn1_led:
       expose: false
-    light.south_entry:
+    light.south_entryway:
       expose: false
     light.southeast_ceiling:
       expose: false

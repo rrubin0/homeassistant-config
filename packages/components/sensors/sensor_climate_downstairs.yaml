@@ -23,7 +23,7 @@ sensor:
     sensors:
       ds_climate_preset:
         friendly_name: "Active Preset"
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).preset_mode | default('unknown') }}"
+        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).preset_mode | default('unknown') }}"
 
 #  - platform: template
 #    sensors:
@@ -52,7 +52,7 @@ sensor:
     sensors:
       ds_fan_state:
         friendly_name: "Downstairs HVAC Fan"
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).fan | default('unknown') }}"
+        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).fan | default('unknown') }}"
 
 
   ################################################

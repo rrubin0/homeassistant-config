@@ -10,7 +10,7 @@ binary_sensor:
           {{ is_state('binary_sensor.bathroom_door_state', 'on')
              or is_state('binary_sensor.front_door_state', 'on')
              or is_state('binary_sensor.kitchen_door_state', 'on')
-             or is_state('binary_sensor.office_door_state', 'on')
+             or is_state('binary_sensor.office_entry_door_state', 'on')
              or is_state('binary_sensor.guest_room_balcony_door_state', 'on')
              or is_state('binary_sensor.south_door_state', 'on') }}
 #        entity_picture_template: >-

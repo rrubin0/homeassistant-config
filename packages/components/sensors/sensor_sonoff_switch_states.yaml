@@ -1,15 +1,15 @@
 #####################################################################
 #  Sensor
 #####################################################################
-sensor:
-  - platform: mqtt
-    state_topic: "/home/sonoffs/staircase_lamp"
-    name: "Staircase Lamp"
-    value_template: "{{ value }}"
+#sensor:
+#  - platform: mqtt
+#    state_topic: "/home/sonoffs/staircase_lamp"
+#    name: "Staircase Lamp"
+#    value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/sonoffs/wine_room_lamp"
-    name: "Wine Room Lamp"
-    value_template: "{{ value }}"
+#  - platform: mqtt
+#    state_topic: "/home/sonoffs/sonoff_strip_cord"
+#    name: "Strip Cord"
+#    value_template: "{{ value }}"
 
 

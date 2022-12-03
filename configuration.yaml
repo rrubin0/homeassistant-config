@@ -11,27 +11,30 @@ homeassistant:
    - type: homeassistant
    - type: trusted_networks
      trusted_networks:
-       - !secret network_1
+       - !secret trusted_network
+  allowlist_external_dirs:
+    - '/nvr'
+    - '/snapshots'
 
-config:
+default_config:
 discovery:
 frontend:
   themes: !include_dir_merge_named themes
 
-history:
+## new nginx config; allow docker default ip ranges (may not need but will allow at first and test)
+
+
+
 http:
+#  use_x_forwarded_for: true
+#  trusted_proxies:
+#    - 172.16.0.0/12
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   ip_ban_enabled: true
   login_attempts_threshold: 3
 
 ios:
-mobile_app:
-my:
 scene: !include scenes.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
-stream:
-sun:
-system_health:
-zeroconf:

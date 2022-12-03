@@ -3,54 +3,121 @@
 #####################################################################
 alexa:
   smart_home:
-#    endpoint: "https://api.amazonalexa.com/v3/events"
-#    client_id: !secret amazon_client_id
-#    client_secret: !secret amazon_client_secret
+    endpoint: https://api.amazonalexa.com/v3/events
+    client_id: !secret alexa_media_client_id
+    client_secret: !secret alexa_media_client_secret
+
     filter:
+      include_domains:
+        - climate
+        - cover
+        - fan
+        - group
+        - input_boolean
+        - input_number
+        - light
+        - lock
+        - scene
+
+
+      include_entity_globs:
+        - script.ecobee_*
+        - binary_sensor.all_*
+        - binary_sensor.*_armed
+        - binary_sensor.*_state
+        - sensor.us_*
+        - sensor.ds_*
+        - switch.fireplace_*
+
+
+#      exclude_entity_globs:
+#        - sensor.dark_sky*
+
+
+      exclude_entities:
+        - group.all_devices
+        - group.alarm_clock
+        - group.master_bedroom_fan
+        - input_number.alexa_volume
+        - light.b_table_1
+        - light.b_table_2
+        - light.b_table_3
+        - light.center_entryway
+        - light.kitchen_entryway
+        - light.laundry_1
+        - light.laundry_2
+        - light.master_bath_entry
+        - light.master_bath_sink
+        - light.sn1_led
+        - light.south_entryway
+        - sensor.traverse_engine_coolant_temp_f
+
+
       include_entities:
-      ################################################
-      ## Scripts
-      ################################################
+        - automation.climate_downstairs_door_held_open
+        - automation.doorbell_pressed
+        - automation.south_door_unlock_on_arrival
+        - binary_sensor.all_doors
+        - binary_sensor.all_windows
+        - binary_sensor.irrigation_system_rain_sensor
+        - climate.downstairs
+        - climate.upstairs
+        - input_boolean.bbq_alert_food
+        - input_boolean.bbq_alert_high
+        - input_boolean.bbq_alert_low
+        - input_boolean.holiday
+        - input_boolean.hvac_maintenance
+        - input_boolean.master_fan_hold
+        - input_boolean.movie_night
+        - input_boolean.north_gate_shunt
+        - input_boolean.nursery_fan_hold
+        - input_boolean.party_mode
+        - input_boolean.pool_maintenance
+        - input_boolean.sleeping
+        - input_boolean.visitor_mode
+        - media_player.backyard_speaker
+        - media_player.home_theater
+        - media_player.bar_tv
+#        - media_player.everywhere
+#        - media_player.game_room
+#        - media_player.bar_echo_show
+#        - media_player.kitchen_dot
+#        - media_player.living_room_echo
+#        - media_player.master_bedroom_dot
+#        - media_player.master_bathroom_dot
+#        - media_player.master_bedside_dot
+#        - media_player.nursery_dot
+#        - media_player.office_dot
+        - script.alarm_clock_snooze
         - script.away
-        - script.baby_playlist
         - script.bedtime
         - script.bright
+        - script.broadlink_living_room_fan_light_off
+        - script.broadlink_living_room_fan_medium
+        - script.broadlink_living_room_fan_off
+        - script.cancel_away_timer
+        - script.cancel_bedtime_timer
+        - script.christmas_music
         - script.christmas_time
         - script.climate_downstairs_cooldown
         - script.climate_upstairs_cooldown
         - script.cloudy
         - script.company_mode
-        - script.dim
-        - script.ecobee_ds_away
-        - script.ecobee_ds_eco
-        - script.ecobee_ds_home
-        - script.ecobee_ds_normal
-        - script.ecobee_ds_resume
-        - script.ecobee_ds_sleep
-        - script.ecobee_us_away
-        - script.ecobee_us_eco
-        - script.ecobee_us_home
-        - script.ecobee_us_resume
-        - script.ecobee_us_sleep
         - script.evening
         - script.game_time
-        - script.hue_lr_daybreak
-        - script.hue_lr_dimmed
-        - script.hue_lr_minty
-        - script.hue_lr_movie
-        - script.hue_lr_nightlight
-        - script.hue_lr_normal
-        - script.hue_lr_sunrise
-        - script.hue_lr_sunset
+        - script.home_theater_remote_ad_skip
+        - script.home_theater_remote_skip_30
         - script.hue_mbath_morning
-        - script.living_room_appletv_plex
+        - script.kitchen_shade_to_50
+        - script.living_room_fan_high
+        - script.living_room_fan_light
+        - script.living_room_fan_low
         - script.master_bedroom_night_time
-        - script.mbr_night_light
+        - script.morning
         - script.morning_sequence
         - script.movie_time
-        - script.nap_time
-        - script.nightlight
-        - script.play_white_noise
+        - script.pause_away_timer
+        - script.pause_bedtime_timer
         - script.pool_blue
         - script.pool_caribbean
         - script.pool_cycle
@@ -58,77 +125,39 @@ alexa:
         - script.pool_magenta
         - script.pool_party
         - script.pool_patriotic
+        - script.pool_pump_quick_clean
         - script.pool_red
         - script.pool_romance
         - script.pool_royal
         - script.pool_sunset
         - script.pool_white
-        - script.pool_pump_quick_clean
+        - script.routine_wake_up
+        - script.scene_living_room_default
         - script.start_bedtime_timer
-        - script.tv_power_off
+        - script.traverse_cancel_start_vehicle
+        - script.traverse_lock_doors
+        - script.traverse_start_vehicle
+        - script.traverse_unlock_doors
         - script.tv_time
         - script.unlock_megs
-
-      ################################################
-      ## Scenes (created within Home Assistant UI)
-      ################################################
-        - scene.cozy
-        - scene.lounge
-        - scene.aj_night_time
-
-      ################################################
-      ## Groups
-      ################################################
-        - group.accent_lights
-        - group.entry_lights
-        - group.exterior_lights
-        - group.game_room_lights
-        - group.interior_lights
-        - group.living_room_lights
-        - group.master_bedroom_lights
-        - group.master_bathroom_lights
-        - group.porch_lights
-        - group.wine_room_lights
-        - group.christmas_lights
-
-      ################################################
-      ## Climate
-      ################################################
-        - climate.downstairs
-        - climate.upstairs
-
-      ################################################
-      ## Lights
-      ################################################
-        - light.billiards
-        - light.dining_room_chandelier
-        - light.entryway
-        - light.foyer_lights
-        - light.kitchen_night_light
-        - light.kitchen_lights
-        - light.laundry_room
-        - light.living_room_lamp
-        - light.living_room_ceiling
-        - light.lounge_light
-        - light.master_bathroom_ceiling
-        - light.master_bathroom_vanity
-        - light.master_bed_ceiling
-        - light.master_bed_entry
-        - light.master_bedside_lamps
-        - light.master_bedroom_chandelier
-        - light.master_reading_lamp
-        - light.master_sitting_lamp
-        - light.nursery_light
-        - light.nursery_wall_light
-        - light.office_desk_lamp
-        - light.pantry
-        - light.bedframe_light
-        - light.wine_room_ceiling
-        - light.bar_strip_light
-
-      ################################################
-      ## Switches
-      ################################################
+        - sensor.sonarr_upcoming
+        - sensor.traverse_fuel_level_gal
+        - sensor.traverse_gas_range_mi
+        - sensor.traverse_oil_life
+        - sensor.blink_east_pool_temperature
+        - sensor.broadlink_rm_pro_temperature
+        - sensor.downstairs_temperature
+        - sensor.entryway_temperature
+        - sensor.food_temperature
+        - sensor.front_entry_multisensor_temperature
+        - sensor.motion_game_room_device_temperature
+        - sensor.grill_temperature
+        - sensor.guest_room_temperature
+        - sensor.humidor_temperature
+        - sensor.temperature_kitchen_multisensor
+        - sensor.living_room_temperature
+        - sensor.nursery_temperature
+        - sensor.upstairs_temperature
         - switch.amp
         - switch.appletv
         - switch.aquarium
@@ -136,19 +165,14 @@ alexa:
         - switch.christmas_tree
         - switch.chromecast
         - switch.downstairs_bathroom_light
+        - switch.downstairs_christmas_lights
+        - switch.upstairs_christmas_lights
+        - switch.drip_and_citrus_trees_schedule
         - switch.fireplace
-        - switch.fireplace_flame_down
-        - switch.fireplace_flame_up
-        - switch.fireplace_flicker
-        - switch.fireplace_light
-        - switch.fireplace_temp_down
-        - switch.fireplace_temp_up
-        - switch.fireplace_timer
-        - switch.fountains_switch
+        - switch.fountains
         - switch.game_room_floodlights
-        - switch.hdmi_3
+        - switch.hdmi_three
         - switch.irrigation_system_rain_delay
-        - switch.kegerator
         - switch.living_room_fan
         - switch.living_room_fan_high
         - switch.living_room_fan_light
@@ -157,87 +181,33 @@ alexa:
         - switch.master_bedroom_fan
         - switch.master_bedroom_fan_light
         - switch.media
-        - switch.mini_fridge
         - switch.mute
         - switch.nursery_lamp
         - switch.outdoor_speakers
+        - switch.tplink_outlet_1
+        - switch.tplink_outlet_2
         - switch.patio_lights
         - switch.pc
         - switch.pool_light
         - switch.pool_pump
         - switch.porch_rope_lights
         - switch.staircase_lamp
-        - switch.switch_five
-        - switch.switch_four
-        - switch.switch_one
-        - switch.switch_three
-        - switch.switch_two
+        - switch.rf_switch_1
+        - switch.rf_switch_2
+        - switch.rf_switch_3
+        - switch.rf_switch_4
+        - switch.rf_switch_5
         - switch.tv
         - switch.tv_volume
-        - switch.wine_room_lamp
-
-
-      ################################################
-      ## Fans
-      ################################################
-        - fan.patio_fan
-        - fan.nursery_fan
-
-      ################################################
-      ## Input_Booleans
-      ################################################
-        - input_boolean.movie_night
-        - input_boolean.holiday
-        - input_boolean.rain
-        - input_boolean.visitor_mode
-        - input_boolean.bbq_alert_high
-        - input_boolean.bbq_alert_low
-        - input_boolean.bbq_alert_food
-
-      ################################################
-      ## Locks
-      ################################################
-        - lock.bathroom_entry
-        - lock.south_entry
-
-      ################################################
-      ## Sensors (not supported via Alexa Smart Home)
-      ################################################
-#        - sensor.broadlink_sensor_temperature
-#        - sensor.downstairs_temperature
-#        - sensor.entryway_temperature
-#        - sensor.front_entry_fibaro_multisensor_temperature
-#        - sensor.guest_room_temperature
-#        - sensor.living_room_temperature
-#        - sensor.nursery_temperature
-#        - sensor.office_temperature
-#        - sensor.upstairs_temperature
-
-      ################################################
-      ## Covers
-      ################################################
-        - cover.master_bath_shades
-        - cover.kitchen_shade
-
-      ################################################
-      ## Automations
-      ################################################
-        - automation.climate_downstairs_door_held_open
-        - automation.doorbell_pressed
-        - automation.fountains_on
-        - automation.south_door_unlock_on_arrival
-
-
-      include_domains:
-        - image_processing
-
+        - timer.bedtime
+        
 
 ################################################
 ## Custom Names
 ################################################
     entity_config:
       automation.climate_downstairs_door_held_open:
-        name: Open Door Schedule
+        name: Door Held Open Alarm
         description: Automation for door held open
 
       automation.doorbell_pressed:
@@ -249,7 +219,7 @@ alexa:
         description: Automation for fountains
 
       automation.south_door_unlock_on_arrival:
-        name: Auto Unlock Schedule
+        name: Auto Unlock
         description: Automation for arrival unlock
 
       climate.downstairs:
@@ -287,20 +257,27 @@ alexa:
 #        description: TV HDMI 3
 
 ## 433MHz RF Switches via Broadlink        
-      switch.switch_two:
-        name: Stairway Christmas Lights
-        description: Stairway Christmas Lights
+      switch.rf_switch_1:
+        name: Outlet 1
+        description: 433MHz RF Outlet 1
 
-      switch.switch_four:
-        name: Humidifier
-        description: Humidifier
+      switch.rf_switch_2:
+        name: Outlet 2
+        description: 433MHz RF Outlet 2
 
-      switch.switch_five:
-        name: Star Light
-        description: Star Light
+      switch.rf_switch_3:
+        name: Outlet 3
+        description: 433MHz RF Outlet 3
+
+      switch.rf_switch_4:
+        name: Outlet 4
+        description: 433MHz RF Outlet 3
+
+      switch.rf_switch_5:
+        name: Outlet 5
+        description: 433MHz RF Outlet 3
 
 ## Rachio
       switch.irrigation_system_rain_delay:
         name: Rain Delay
         description: Rachio Rain Delay
-

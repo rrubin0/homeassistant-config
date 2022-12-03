@@ -23,7 +23,7 @@ sensor:
     sensors:
       us_climate_preset:
         friendly_name: "Active Preset"
-        value_template: "{{ (states.climate.upstairs.attributes|default({})).preset_mode|default('unknown') }}"
+        value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).preset_mode|default('unknown') }}"
 
 #  - platform: template
 #    sensors:
@@ -52,6 +52,6 @@ sensor:
     sensors:
       us_fan_state:
         friendly_name: "Upstairs HVAC Fan"
-        value_template: "{{ (states.climate.upstairs.attributes|default({})).fan|default('unknown') }}"
+        value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).fan|default('unknown') }}"
 
 

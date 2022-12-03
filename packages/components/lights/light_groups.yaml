@@ -4,6 +4,7 @@
 light:
   - platform: group
     name: Billiards
+    unique_id: rar-id-billiards-light
     entities:
       - light.b_table_1
       - light.b_table_2
@@ -11,19 +12,22 @@ light:
 
   - platform: group
     name: Entryway
+    unique_id: rar-id-entryway-lights
     entities:
-      - light.south_entry
-      - light.center_entry
-      - light.kitchen_entry
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
 
   - platform: group
     name: Laundry Room
+    unique_id: rar-id-laundry-room-lights
     entities:
       - light.laundry_1
       - light.laundry_2
 
   - platform: group
     name: Living Room Ceiling
+    unique_id: rar-id-living-room-ceiling-lights
     entities:
       - light.northeast_ceiling
       - light.northwest_ceiling
@@ -32,6 +36,7 @@ light:
 
   - platform: group
     name: Master Bathroom Ceiling
+    unique_id: rar-id-master-bath-ceiling-lights
     entities:
       - light.master_bath_entry
       - light.master_bath_sink
@@ -39,12 +44,14 @@ light:
 
   - platform: group
     name: Master Bedside Lamps
+    unique_id: rar-id-master-bedside-lamps
     entities:
       - light.master_bedside_lamp_megs
       - light.master_bedside_lamp_rick
 
   - platform: group
     name: Wine Room Ceiling
+    unique_id: rar-id-wine-room-ceiling-lights
     entities:
       - light.northeast_wine
       - light.northwest_wine

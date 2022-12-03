@@ -7,7 +7,7 @@ proximity:
       - ricks_office
       - megs_work
     devices:
-      - device_tracker.mip8
+      - device_tracker.mip12
       - device_tracker.rip8plus
     tolerance: 50
     unit_of_measurement: mi

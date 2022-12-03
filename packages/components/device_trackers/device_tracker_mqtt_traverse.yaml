@@ -1,0 +1,4 @@
+device_tracker:
+  - platform: mqtt_json
+    devices:
+      chevy_traverse: homeassistant/device_tracker/1GNERKKW7KJ270064/getlocation/state

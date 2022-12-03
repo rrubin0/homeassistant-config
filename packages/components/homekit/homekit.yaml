@@ -3,19 +3,19 @@
 #    @description      :     homekit configuration for apple ios
 #####################################################################
 homekit:
-#  auto_start: False
   ip_address: !secret homekit_ip
-
   filter:
     include_entities:
 #################################
 # Device Tracker
 #################################
-#      - device_tracker.rip8plus
-#      - device_tracker.mip8
       - person.rick
       - person.megs
 
+#################################
+# Fans - enabled
+#################################
+      - group.porch_lights
 
 #################################
 # Climate - enabled
@@ -23,89 +23,79 @@ homekit:
       - climate.downstairs
       - climate.upstairs
 
-
 #################################
 # Lights - enabled
 #################################
+      - light.bar_strip_light
+      - light.bedframe_light
       - light.billiards
       - light.dining_room_chandelier
       - light.entryway
       - light.foyer_lights
-      - light.kitchen_night_light
+      - light.guest_room_lights
       - light.kitchen_lights
+      - light.large_staircase_lamp
       - light.laundry_room
-      - light.living_room_lamp
       - light.living_room_ceiling
+      - light.living_room_lamp
       - light.lounge_light
       - light.master_bathroom_ceiling
       - light.master_bathroom_vanity
       - light.master_bed_ceiling
       - light.master_bed_entry
-      - light.master_bedside_lamps
       - light.master_bedroom_chandelier
+      - light.master_bedside_lamp_megs
+      - light.master_bedside_lamp_rick
       - light.master_reading_lamp
       - light.master_sitting_lamp
       - light.nursery_light
       - light.nursery_wall_light
+      - light.office_desk_lamp
       - light.pantry
-      - light.bedframe_light
+      - light.small_staircase_lamp
       - light.wine_room_ceiling
-      - light.bar_strip_light
+      - light.wine_room_lamp
 
 
 #################################
 # Switches - enabled
 #################################
       - switch.amp
-      - switch.appletv
+      - switch.amp_mute
       - switch.aquarium
       - switch.back_yard_outlet
-      - switch.chromecast
       - switch.downstairs_bathroom_light
       - switch.fireplace
-      - switch.fireplace_flame_down
-      - switch.fireplace_flame_up
-      - switch.fireplace_flicker
-      - switch.fireplace_light
-      - switch.fireplace_temp_down
-      - switch.fireplace_temp_up
-      - switch.fireplace_timer
-      - switch.fountains_switch
-      - switch.hdmi_3
-      - switch.porch_rope_lights
+      #- switch.fireplace_flame
+      #- switch.fireplace_flicker
+      #- switch.fireplace_light
+      #- switch.fireplace_temp
+      #- switch.fireplace_timer
+      #- switch.fountains
       - switch.game_room_floodlights
+      #- switch.irrigation_system_in_standby_mode
       - switch.irrigation_system_rain_delay
-      - switch.kegerator
-      - switch.living_room_fan
-      - switch.living_room_fan_high
-      - switch.living_room_fan_light
-      - switch.living_room_fan_low
-      - switch.living_room_fan_medium
       - switch.master_bedroom_fan
-      - switch.master_bedroom_fan_light
-      - switch.media
-      - switch.mini_fridge
       - switch.mute
       - switch.nursery_lamp
-      - switch.christmas_tree
-      - switch.outdoor_speakers
+      #- switch.outdoor_speakers
       - switch.patio_lights
-      - switch.pc
       - switch.pool_light
-      - switch.staircase_lamp
-      - switch.switch_five
-      - switch.switch_four
-      - switch.switch_one
-      - switch.switch_three
-      - switch.switch_two
+      - switch.pool_pump
+      - switch.porch_rope_lights
+      - switch.starlight
+      #- switch.rf_switch_1
+      #- switch.rf_switch_2
+      #- switch.rf_switch_3
+      #- switch.rf_switch_4
+      #- switch.rf_switch_5
       - switch.tv
-      - switch.tv_volume
-      - switch.wine_room_lamp
 
 
 #################################
 # Fans - enabled
 #################################
+      - fan.guest_room_fan
       - fan.patio_fan
       - fan.nursery_fan
 
@@ -114,29 +104,27 @@ homekit:
 # Scenes - enabled
 #################################
       - scene.aj_night_time
-      - scene.bright
-      - scene.cloudy
       - scene.cozy
-      - scene.dim
-      - scene.evening
-      - scene.game_time
+      - scene.daybreak
+      - scene.living_room_dim
+      - scene.living_room_night_light
       - scene.lounge
-      - scene.morning
-      - scene.movie_time
-      - scene.tv_time
-
+      - scene.master_bathroom_bright
+      - scene.master_bathroom_morning
+      - scene.master_bedside_lamps_bedtime
+      
 
 #################################
 # Scripts - enabled
 #################################
-      - script.away
-      - script.baby_playlist
-      - script.bedtime
       - script.bright
+      - script.cancel_away_timer
+      - script.cancel_bedtime_timer
       - script.christmas_time
+      - script.climate_downstairs_cooldown
+      - script.climate_upstairs_cooldown
       - script.cloudy
       - script.company_mode
-      - script.dim
       - script.ecobee_ds_away
       - script.ecobee_ds_eco
       - script.ecobee_ds_home
@@ -149,53 +137,67 @@ homekit:
       - script.ecobee_us_resume
       - script.ecobee_us_sleep
       - script.evening
-      - script.game_time
-      - script.hue_lr_daybreak
-      - script.hue_lr_dimmed
-      - script.hue_lr_minty
-      - script.hue_lr_movie
-      - script.hue_lr_nightlight
-      - script.hue_lr_normal
-      - script.hue_lr_sunrise
-      - script.hue_lr_sunset
-      - script.hue_mbath_morning
       - script.master_bedroom_night_time
-      - script.mbr_night_light
       - script.morning_sequence
-      - script.movie_time
-      - script.nap_time
-      - script.nightlight
-      - script.play_white_noise
-      - script.pool_blue
-      - script.pool_caribbean
+      - script.pause_away_timer
+      - script.pause_bedtime_timer
       - script.pool_cycle
-      - script.pool_green
-      - script.pool_magenta
       - script.pool_party
       - script.pool_patriotic
-      - script.pool_red
-      - script.pool_romance
-      - script.pool_royal
-      - script.pool_sunset
+      - script.pool_pump_quick_clean
       - script.pool_white
+      - script.scene_living_room_default
       - script.start_bedtime_timer
-      - script.tv_power_off
+      - script.traverse_cancel_start_vehicle
+      - script.traverse_lock_doors
+      - script.traverse_start_vehicle
+      - script.traverse_unlock_doors
       - script.tv_time
-      - script.unlock_megs
 
 
 #################################
 # Sensors - enabled
 #################################
-      - sensor.broadlink_sensor_temperature
+      - sensor.bathroom_door_state
+      - sensor.bathroom_entry_lock_battery
+      - sensor.downstairs_humidity
+      - sensor.downstairs_north_smoke_detector_battery
       - sensor.downstairs_temperature
-      - sensor.entryway_temperature
-      - sensor.front_entry_fibaro_multisensor_temperature
+      - sensor.ds_avg_temp
+      - sensor.food_temperature
+      - sensor.grill_temperature
       - sensor.guest_room_temperature
+      - sensor.humidor_humidity
+      - sensor.humidor_temperature
+      - sensor.kitchen_door_state
       - sensor.living_room_temperature
       - sensor.nursery_temperature
       - sensor.office_temperature
+      - sensor.ring_side_door_battery
+      - sensor.south_door_state
+      - sensor.upstairs_humidity
+      - sensor.upstairs_south_smoke_detector_battery
       - sensor.upstairs_temperature
+      - sensor.us_avg_temp
+
+
+#################################
+# Binary Sensors - enabled
+#################################
+      - binary_sensor.all_doors
+      - binary_sensor.all_windows
+      - binary_sensor.downstairs_ac_leak_detector_state
+      - binary_sensor.front_door_state
+      - binary_sensor.guest_room_balcony_door_state
+      - binary_sensor.guest_room_window_state
+      - binary_sensor.kitchen_door_state
+      - binary_sensor.living_room_north_window_state
+      - binary_sensor.north_gate_state
+      - binary_sensor.nw_master_window_state
+      - binary_sensor.office_entry_door_state
+      - binary_sensor.safe_bottom_door_state
+      - binary_sensor.south_door_state
+      - binary_sensor.sw_master_window_state
 
 
 #################################
@@ -203,29 +205,31 @@ homekit:
 #################################
       - input_boolean.movie_night
       - input_boolean.holiday
-      - input_boolean.rain
       - input_boolean.visitor_mode
       - input_boolean.bbq_alert_high
       - input_boolean.bbq_alert_low
       - input_boolean.bbq_alert_food
 
 
+####################################
+# Media Players (AppleTV) - enabled
+####################################
+      - media_player.bar_tv
+      - media_player.home_theater
+
+
 ################################################
 ## Entity Configuration - Customize Devices
 ################################################
   entity_config:
-    switch.office_spare:
-      type: outlet
-
+#    switch.office_spare:
+#      type: outlet
     switch.aquarium:
       type: outlet
-
-    switch.outdoor_speakers:
-      type: outlet
-
+#    switch.outdoor_speakers:
+#      type: outlet
     switch.tv:
       name: TV
-
     switch.mute:
       name: Mute
 

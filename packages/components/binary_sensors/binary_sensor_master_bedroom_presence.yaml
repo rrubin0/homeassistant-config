@@ -7,8 +7,8 @@ binary_sensor:
       master_bedroom_presence:
         friendly_name: "Master Bedroom Presence"
         value_template: >-
-          {{ is_state('binary_sensor.motion_master_bedroom', 'on')
-             or is_state('binary_sensor.motion_master_bedroom_bed', 'on')
+          {{ is_state('binary_sensor.master_bedroom_entry_motion', 'on')
+             or is_state('binary_sensor.master_bedroom_bed_motion', 'on')
              or is_state('binary_sensor.upstairs_occupancy', 'on') }}
         delay_off:
-          minutes: 30
+          minutes: 20

@@ -6,7 +6,7 @@ binary_sensor:
     sensors:
       bbq_grill_high:
         friendly_name: "BBQ Temp High"
-        value_template: "{{ states('sensor.grill_temperature') | float >= states('input_number.bbq_high_temp') | float }}"
+        value_template: "{{ states('sensor.grill_temperature') | float(0) >= states('input_number.bbq_high_temp') | float(0) }}"
         delay_on:
           seconds: 5
         device_class: heat
@@ -15,7 +15,7 @@ binary_sensor:
     sensors:
       bbq_grill_low:
         friendly_name: "BBQ Temp Low"
-        value_template: "{{ states('sensor.grill_temperature') | float <= states('input_number.bbq_low_temp') | float }}"
+        value_template: "{{ states('sensor.grill_temperature') | float(0) <= states('input_number.bbq_low_temp') | float(0) }}"
         delay_on:
           seconds: 5
         device_class: cold
@@ -24,7 +24,7 @@ binary_sensor:
     sensors:
       bbq_food_ready:
         friendly_name: "Food Target Reached"
-        value_template: "{{ states('sensor.food_temperature') | float >= states('input_number.bbq_food_temp') | float }}"
+        value_template: "{{ states('sensor.food_temperature') | float(0) >= states('input_number.bbq_food_temp') | float(0) }}"
         delay_on:
           seconds: 3
         device_class: moving

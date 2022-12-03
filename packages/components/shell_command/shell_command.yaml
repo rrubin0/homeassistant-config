@@ -11,12 +11,28 @@ shell_command:
   driveway_ptz_preset_5: !secret driveway_ptz_5
   driveway_ptz_preset_6: !secret driveway_ptz_6
 
-  ## Nursery (East) PTZ Camera Presets
-  nursery_ptz_preset_1: !secret nursery_ptz_1
-  nursery_ptz_preset_2: !secret nursery_ptz_2
-  nursery_ptz_preset_3: !secret nursery_ptz_3
+  ## South PTZ Camera Presets
+  south_ptz_preset_1: !secret south_ptz_1
+  south_ptz_preset_2: !secret south_ptz_2
+  south_ptz_preset_3: !secret south_ptz_3
+  south_ptz_preset_4: !secret south_ptz_4
+  south_ptz_preset_5: !secret south_ptz_5
+  south_ptz_preset_6: !secret south_ptz_6
 
-  ## Nursery (North) PTZ Camera Presets
-  crib_ptz_preset_1: !secret crib_ptz_1
-  crib_ptz_preset_2: !secret crib_ptz_2
-  crib_ptz_preset_3: !secret crib_ptz_3
+  ## Kid Room (East) PTZ Camera Presets
+  kid_east_ptz_1: !secret kid_east_ptz_1
+  kid_east_ptz_2: !secret kid_east_ptz_2
+  kid_east_ptz_3: !secret kid_east_ptz_3
+  kid_east_ptz_4: !secret kid_east_ptz_4
+
+  ## Kid Room (North) PTZ Camera Presets
+  kid_north_ptz_1: !secret kid_north_ptz_1
+  kid_north_ptz_2: !secret kid_north_ptz_2
+  kid_north_ptz_3: !secret kid_north_ptz_3
+  kid_north_ptz_4: !secret kid_north_ptz_4
+
+  ## North Gate PTZ Camera Presets
+  north_gate_ptz_1: !secret north_gate_ptz_1
+  north_gate_ptz_2: !secret north_gate_ptz_2
+  north_gate_ptz_3: !secret north_gate_ptz_3
+  north_gate_ptz_4: !secret north_gate_ptz_4

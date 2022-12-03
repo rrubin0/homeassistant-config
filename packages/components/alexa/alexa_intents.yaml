@@ -48,7 +48,7 @@
           {%- elif SensorType.lower() == "guest room balcony door" -%}
             The {{ SensorType }} is {{ states('binary_sensor.guest_room_balcony_door_state') }} and the tamper is {{ states('binary_sensor.guest_room_balcony_door_tamper') }}.
           {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
-            The Humidor temperature is {{ states('sensor.sn1_temperature') }} degrees and your cigars are currently stored at {{ states('sensor.sn1_humidity') }} percent humidity.
+            The Humidor temperature is {{ states('sensor.humidor_temperature') }} degrees and your cigars are currently stored at {{ states('sensor.humidor_humidity') }} percent humidity.
           {%- elif SensorType.lower() == "grill" or SensorType.lower() == "barbecue" or SensorType.lower() == "cook" or SensorType.lower() == "smoker"-%}
             The grill temperature is {{ states('sensor.grill_temperature') }} degrees and the food probe is reading {{ states('sensor.food_temperature') }} degrees.
           {%- endif -%}

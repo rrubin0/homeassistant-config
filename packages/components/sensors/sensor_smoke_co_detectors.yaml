@@ -8,8 +8,8 @@ sensor:
       smoke_upstairs_south:
         friendly_name: 'Upstairs South Smoke Detector'
         value_template: >
-          {% set alarm = states('sensor.upstairs_south_smoke_detector_alarm_type') | float %}
-          {% set level = states('sensor.upstairs_south_smoke_detector_alarm_level') | float %}
+          {% set alarm = states('sensor.upstairs_south_smoke_detector_alarm_type') | float(0) %}
+          {% set level = states('sensor.upstairs_south_smoke_detector_alarm_level') | float(0) %}
           {% if alarm == 13 and level == 255 %}
             OK
           {% elif alarm == 1 and level == 255 %}
@@ -22,8 +22,8 @@ sensor:
             Unknown
           {% endif %}
         icon_template: >
-          {% set alarm = states('sensor.upstairs_south_smoke_detector_alarm_type') | float %}
-          {% set level = states('sensor.upstairs_south_smoke_detector_alarm_level') | float %}
+          {% set alarm = states('sensor.upstairs_south_smoke_detector_alarm_type') | float(0) %}
+          {% set level = states('sensor.upstairs_south_smoke_detector_alarm_level') | float(0) %}
           {% if alarm == 13 and level == 255 %}
             mdi:smoke-detector
           {% elif alarm == 1 and level == 255 %}
@@ -43,8 +43,8 @@ sensor:
       smoke_downstairs_north:
         friendly_name: 'Downstairs North Smoke Detector'
         value_template: >
-          {% set alarm = states('sensor.downstairs_north_smoke_detector_alarm_type') | float %}
-          {% set level = states('sensor.downstairs_north_smoke_detector_alarm_level') | float %}
+          {% set alarm = states('sensor.downstairs_north_smoke_detector_alarm_type') | float(0) %}
+          {% set level = states('sensor.downstairs_north_smoke_detector_alarm_level') | float(0) %}
           {% if alarm == 13 and level == 255 %}
             OK
           {% elif alarm == 1 and level == 255 %}
@@ -57,8 +57,8 @@ sensor:
             Unknown
           {% endif %}
         icon_template: >
-          {% set alarm = states('sensor.downstairs_north_smoke_detector_alarm_type') | float %}
-          {% set level = states('sensor.downstairs_north_smoke_detector_alarm_level') | float %}
+          {% set alarm = states('sensor.downstairs_north_smoke_detector_alarm_type') | float(0) %}
+          {% set level = states('sensor.downstairs_north_smoke_detector_alarm_level') | float(0) %}
           {% if alarm == 13 and level == 255 %}
             mdi:smoke-detector
           {% elif alarm == 1 and level == 255 %}

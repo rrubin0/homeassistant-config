@@ -1,9 +1,0 @@
-#####################################################################
-### MQTT
-#####################################################################
-#mqtt:
-#  broker: !secret broker
-#  port: 1883
-#  username: !secret mqtt_user
-#  password: !secret mqtt_password
-#  discovery: true

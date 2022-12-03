@@ -8,10 +8,10 @@ group:
   #####################################################################
   All Devices:
     entities:
+      - device_tracker.rcom
       - device_tracker.iphone_rick
-      - device_tracker.rip8plus
       - device_tracker.iphone_megs
-      - device_tracker.mip8
+      - device_tracker.mip12
 
 
   #####################################################################
@@ -28,13 +28,12 @@ group:
       - group.nursery_lights
       - group.wine_room_lights
       - light.dining_room_chandelier
+      - light.guest_room_lights
       - light.kitchen_lights
-      - light.laundry_room
-#      - light.office_desk_lamp
+      - light.office_desk_lamp
       - light.wine_room_ceiling
       - switch.downstairs_bathroom_light
-      - switch.christmas_tree
-      - switch.switch_two #Stairway Christmas Lights
+
 
 
   #####################################################################
@@ -46,8 +45,8 @@ group:
       - switch.porch_rope_lights
       - switch.patio_lights
       - switch.pool_light
-      - switch.tplink_left_outlet
-      - switch.tplink_right_outlet
+      - switch.tplink_outlet_1
+      - switch.tplink_outlet_2
 
 
   #####################################################################
@@ -70,7 +69,7 @@ group:
   #####################################################################
   Wine Room Lights:
     entities:
-      - switch.wine_room_lamp
+      - light.wine_room_lamp
       - light.wine_room_ceiling
       - light.lounge_light
       - light.bar_strip_light
@@ -112,6 +111,7 @@ group:
       - input_boolean.alarm_clock_weekday
       - input_boolean.alarm_clock_weekend
 
+
   #####################################################################
   ### Master Bedroom Ceiling Fan
   #####################################################################
@@ -147,7 +147,8 @@ group:
     entities:
       - light.nursery_light
       - light.nursery_wall_light
-#      - switch.nursery_lamp
+      - switch.nursery_lamp
+      - switch.starlight
 
 
   #####################################################################
@@ -155,8 +156,9 @@ group:
   #####################################################################
   Accent Lights:
     entities:
-      - switch.staircase_lamp
-      - switch.wine_room_lamp
+      - light.large_staircase_lamp
+      - light.small_staircase_lamp
+      - light.wine_room_lamp
 
 
   #####################################################################
@@ -166,7 +168,6 @@ group:
     entities:
       - switch.front_porch_lights
       - switch.south_porch_lights
-      - switch.porch_rope_lights
 
 
   #####################################################################
@@ -174,10 +175,11 @@ group:
   #####################################################################
   Outside Christmas Lights:
     entities:
-      - switch.back_yard_outlet
-      - switch.tplink_left_outlet
-      - switch.tplink_right_outlet
+      #- switch.back_yard_outlet
+      - light.smart_flood_lights
       - switch.porch_rope_lights
+      - switch.tplink_outlet_1
+      - switch.tplink_outlet_2
 
 
   #####################################################################
@@ -186,22 +188,7 @@ group:
   Inside Christmas Lights:
     entities:
       - switch.christmas_tree
-      - switch.switch_two #Stairway Christmas Lights
-
-
-  #####################################################################
-  ### Smart Outlets - non-light devices controlled by smart outlets
-  #####################################################################
-  Outlets:
-    entities:
-      - switch.mini_fridge
-      - switch.aquarium
-      - switch.office_spare
-      - switch.switch_one   # rf switch upstairs wipe warmer
-      - switch.switch_two   # rf switch stairway christmas lights
-      - switch.switch_three # rf switch downstairs wipe warmer
-      - switch.switch_four  # rf switch power wheels charger
-      - switch.switch_five  # rf switch nursery starlight
-
-
-
+      - switch.mini_christmas_tree
+      - switch.upstairs_christmas_lights
+      - switch.downstairs_christmas_lights
+      

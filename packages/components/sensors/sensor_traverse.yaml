@@ -1,0 +1,19 @@
+#####################################################################
+#  Sensor for converting liters to gallons for fuel (used with alternate traverse docker image)
+#####################################################################
+#sensor:
+#  - platform: template
+#    sensors:
+#      traverse_gas_gallons:
+#        friendly_name: "Remaining Fuel Gallons" 
+#        value_template: >
+#          {% set tbgp = states('sensor.fuel_level_in_gal') %}
+#          {% set value = tbgp | multiply(1) / 3.785  %} 
+#          {{ value | round(1) }}
+#        unit_of_measurement: "Gallons"
+#        icon_template: >-
+#          {% if is_state('sensor.traverse_gas_gallons', '0') %}
+#             mdi:help-rhombus
+#          {% else %}
+#            mdi:speedometer
+#          {% endif %}

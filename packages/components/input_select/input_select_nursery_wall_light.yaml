@@ -16,20 +16,21 @@ input_select:
       - "Cyan"
       - "Pink"
       - "Violet"
+      - "White"
       - "Yellow"
 
-  ### Nursery Wall RGB Effects
-  nursery_wall_effect:
-    name: Nursery Wall Effect
-    initial: "Select an option..."
-    options:
-      - "Select an option..."
-      - "Off"
-      - "0"
-      - "1"
-      - "2"
-      - "3"
-      - "4"
+#  ### Nursery Wall RGB Effects
+#  nursery_wall_effect:
+#    name: Nursery Wall Effect
+#    initial: "Select an option..."
+#    options:
+#      - "Select an option..."
+#      - "Off"
+#      - "0"
+#      - "1"
+#      - "2"
+#      - "3"
+#      - "4"
 
 #  ### Nursery Wall RGB Strobe
 #  nursery_wall_strobe:

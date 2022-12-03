@@ -1,0 +1,32 @@
+#####################################################################
+#  Sensor for custom HACS Feed Parser to read RSS feed data
+#####################################################################
+sensor:
+  - platform: feedparser
+    name: Ecobee Cloud Status
+    feed_url: "https://status.ecobee.com/history.rss"
+    date_format: "%a, %b %d %I:%M %p"
+    scan_interval:
+      hours: 0.25
+    show_topn: 1
+    inclusions:
+      - title
+      - summary
+    exclusions:
+      - summary_detail
+
+
+## Engineering Example
+#  - platform: feedparser
+#    name: Engineering Feed
+#    feed_url: 'https://www.sciencedaily.com/rss/matter_energy/engineering.xml'
+#    date_format: '%a, %d %b %Y %H:%M:%S %Z'
+#    scan_interval:
+#      hours: 3
+#    inclusions:
+#      - title
+#      - link
+#      - image
+#      - pubDate
+#    exclusions:
+#      - language

@@ -1,55 +1,55 @@
 #####################################################################
 ### Input Number - Season Selections
 #####################################################################
-input_number:
+#input_number:
   ### Summer Temp Threshold
-  season_summer:
-    name: "Summer"
-    initial: 78
-    min: 60
-    max: 100
-    step: 1
-    mode: slider
-
-  ### Winter Temp Threshold
-  season_winter:
-    name: "Winter"
-    initial: 65
-    min: 40
-    max: 80
-    step: 1
-    mode: slider
-
-  ### BBQ Low Temp
-  bbq_low_temp:
-    name: "BBQ Low Temp"
-    initial: 180
-    min: 70
-    max: 500
-    step: 1
-    mode: box
-
-  ### BBQ High Temp
-  bbq_high_temp:
-    name: "BBQ High Temp"
-    initial: 250
-    min: 70
-    max: 500
-    step: 1
-    mode: box
-
-  ### BBQ Food Temp
-  bbq_food_temp:
-    name: "Food Target Temp"
-    initial: 202
-    min: 50
-    max: 300
-    step: 1
-    mode: box
-
-  master_bedroom_no_motion_turn_off_delay:
-    name: 'Night Light Off (min.)'
-    initial: 7
-    min: 1
-    max: 120
-    mode: box
+#  season_summer:
+#    name: "Summer"
+#    initial: 78
+#    min: 60
+#    max: 100
+#    step: 1
+#    mode: slider
+#
+#  ### Winter Temp Threshold
+#  season_winter:
+#    name: "Winter"
+#    initial: 65
+#    min: 40
+#    max: 80
+#    step: 1
+#    mode: slider
+#
+#  ### BBQ Low Temp
+#  bbq_low_temp:
+#    name: "BBQ Low Temp"
+#    initial: 180
+#    min: 70
+#    max: 500
+#    step: 1
+#    mode: box
+#
+#  ### BBQ High Temp
+#  bbq_high_temp:
+#    name: "BBQ High Temp"
+#    initial: 250
+#    min: 70
+#    max: 500
+#    step: 1
+#    mode: box
+#
+#  ### BBQ Food Temp
+#  bbq_food_temp:
+#    name: "Food Target Temp"
+#    initial: 202
+#    min: 50
+#    max: 300
+#    step: 1
+#    mode: box
+#
+#  master_bedroom_no_motion_turn_off_delay:
+#    name: 'Night Light Off (min.)'
+#    initial: 7
+#    min: 1
+#    max: 120
+#    mode: box

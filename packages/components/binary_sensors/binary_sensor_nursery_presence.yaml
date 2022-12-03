@@ -10,9 +10,9 @@ binary_sensor:
           {{ is_state('binary_sensor.nursery_north_ptz_motion', 'on')
              or is_state('binary_sensor.nursery_occupancy', 'on')
              or is_state('binary_sensor.nursery_east_ptz_motion', 'on')
-             or is_state('binary_sensor.motion_nursery', 'on') }}
+             or is_state('binary_sensor.nursery_motion', 'on') }}
         delay_off:
-          minutes: 30
+          minutes: 15
 
 
           ### original values: camera motions are too sensitive

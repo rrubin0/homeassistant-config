@@ -1,68 +1,136 @@
 #####################################################################
 #  Sensor
 #####################################################################
-sensor:
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan"
-    name: "Master Bedroom Fan"
-    value_template: "{{ value }}"
+mqtt:
+  sensor: # Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan"
+      name: "Master Bedroom Fan"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_1"
-    name: "Master Bedroom Fan 1"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_1"
+      name: "Master Bedroom Fan 1"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_2"
-    name: "Master Bedroom Fan 2"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_2"
+      name: "Master Bedroom Fan 2"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_3"
-    name: "Master Bedroom Fan 3"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_3"
+      name: "Master Bedroom Fan 3"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_4"
-    name: "Master Bedroom Fan 4"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_4"
+      name: "Master Bedroom Fan 4"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_5"
-    name: "Master Bedroom Fan 5"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_5"
+      name: "Master Bedroom Fan 5"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_6"
-    name: "Master Bedroom Fan 6"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_6"
+      name: "Master Bedroom Fan 6"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_7"
-    name: "Master Bedroom Fan 7"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_7"
+      name: "Master Bedroom Fan 7"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_8"
-    name: "Master Bedroom Fan 8"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_8"
+      name: "Master Bedroom Fan 8"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_9"
-    name: "Master Bedroom Fan 9"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_9"
+      name: "Master Bedroom Fan 9"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_10"
-    name: "Master Bedroom Fan 10"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_10"
+      name: "Master Bedroom Fan 10"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_11"
-    name: "Master Bedroom Fan 11"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_11"
+      name: "Master Bedroom Fan 11"
+      value_template: "{{ value }}"
 
-  - platform: mqtt
-    state_topic: "/home/mbrfanspeed/master_bedroom_fan_12"
-    name: "Master Bedroom Fan 12"
-    value_template: "{{ value }}"
+# Master Bedroom Fan
+    - state_topic: "/home/mbrfanspeed/master_bedroom_fan_12"
+      name: "Master Bedroom Fan 12"
+      value_template: "{{ value }}"
+
+
+#
+#sensor:
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan"
+#    name: "Master Bedroom Fan"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_1"
+#    name: "Master Bedroom Fan 1"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_2"
+#    name: "Master Bedroom Fan 2"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_3"
+#    name: "Master Bedroom Fan 3"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_4"
+#    name: "Master Bedroom Fan 4"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_5"
+#    name: "Master Bedroom Fan 5"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_6"
+#    name: "Master Bedroom Fan 6"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_7"
+#    name: "Master Bedroom Fan 7"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_8"
+#    name: "Master Bedroom Fan 8"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_9"
+#    name: "Master Bedroom Fan 9"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_10"
+#    name: "Master Bedroom Fan 10"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_11"
+#    name: "Master Bedroom Fan 11"
+#    value_template: "{{ value }}"
+#
+#  - platform: mqtt
+#    state_topic: "/home/mbrfanspeed/master_bedroom_fan_12"
+#    name: "Master Bedroom Fan 12"
+#    value_template: "{{ value }}"

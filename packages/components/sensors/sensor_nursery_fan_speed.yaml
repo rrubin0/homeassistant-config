@@ -16,5 +16,5 @@ sensor:
           {% elif temperature > 79.0 %}
             100
           {% else %}
-            off
+            0
           {% endif %}
