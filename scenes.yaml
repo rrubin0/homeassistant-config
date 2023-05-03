@@ -299,9 +299,6 @@
       - Random
       supported_color_modes:
       - hs
-      icon: mdi:led-strip-variant
-      friendly_name: Nursery Wall Light
-      supported_features: 36
       color_mode: hs
       brightness: 23
       hs_color:
@@ -315,9 +312,18 @@
       - 0.192
       - 0.194
       effect: Solid
+      icon: mdi:led-strip-variant
+      friendly_name: Nursery Wall Light
+      supported_features: 36
+      state: 'on'
+    switch.starlight:
+      icon: mdi:weather-night
+      friendly_name: Starlight
       state: 'on'
   metadata:
     light.nursery_wall_light:
+      entity_only: true
+    switch.starlight:
       entity_only: true
 - id: '1649612916998'
   name: Daylight
@@ -1448,7 +1454,9 @@
     group.inside_christmas_lights:
       entity_id:
       - switch.christmas_tree
-      - switch.switch_two
+      - switch.mini_christmas_tree
+      - switch.upstairs_christmas_lights
+      - switch.downstairs_christmas_lights
       order: 15
       friendly_name: Inside Christmas Lights
       state: 'on'
@@ -1476,19 +1484,19 @@
       supported_color_modes:
       - color_temp
       color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4081
-      color_temp: 245
+      brightness: 177
+      color_temp_kelvin: 2816
+      color_temp: 355
       hs_color:
-      - 26.779
-      - 33.423
+      - 28.156
+      - 62.138
       rgb_color:
       - 255
-      - 207
-      - 169
+      - 170
+      - 96
       xy_color:
-      - 0.416
-      - 0.363
+      - 0.515
+      - 0.385
       entity_id:
       - light.south_entryway
       - light.center_entryway
@@ -1513,7 +1521,7 @@
       - color_temp
       - xy
       color_mode: xy
-      brightness: 206
+      brightness: 205
       hs_color:
       - 14.795
       - 28.627
@@ -1544,7 +1552,7 @@
       - color_temp
       - xy
       color_mode: xy
-      brightness: 165
+      brightness: 164
       hs_color:
       - 195.249
       - 70.98
@@ -1575,7 +1583,7 @@
       - color_temp
       - xy
       color_mode: xy
-      brightness: 226
+      brightness: 162
       hs_color:
       - 15.413
       - 42.745
@@ -1640,4 +1648,207 @@
     light.northwest_ceiling:
       entity_only: true
     light.northeast_ceiling:
+      entity_only: true
+- id: '1676828797862'
+  name: AJ Party
+  entities:
+    light.northeast_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 0
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      xy_color:
+      - 0.701
+      - 0.299
+      icon: mdi:light-recessed
+      friendly_name: Northeast Ceiling
+      supported_features: 44
+      state: 'on'
+    light.northwest_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 314.824
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 192
+      xy_color:
+      - 0.477
+      - 0.196
+      icon: mdi:light-recessed
+      friendly_name: Northwest Ceiling
+      supported_features: 44
+      state: 'on'
+    light.southeast_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 120
+      - 100
+      rgb_color:
+      - 0
+      - 255
+      - 0
+      xy_color:
+      - 0.172
+      - 0.747
+      icon: mdi:light-recessed
+      friendly_name: Southeast Ceiling
+      supported_features: 44
+      state: 'on'
+    light.southwest_ceiling:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      hs_color:
+      - 180.33
+      - 71.373
+      rgb_color:
+      - 73
+      - 254
+      - 255
+      xy_color:
+      - 0.167
+      - 0.341
+      icon: mdi:light-recessed
+      friendly_name: Southwest Ceiling
+      supported_features: 44
+      state: 'on'
+    light.entryway:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - channel_change
+      - finish_effect
+      - okay
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.south_entryway
+      - light.center_entryway
+      - light.kitchen_entryway
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 92
+      color_temp_kelvin: 5847
+      color_temp: 171
+      hs_color:
+      - 29.496
+      - 8.81
+      rgb_color:
+      - 255
+      - 243
+      - 232
+      xy_color:
+      - 0.344
+      - 0.339
+      state: 'on'
+    light.living_room_lamp:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6666
+      min_mireds: 150
+      max_mireds: 500
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      icon: mdi:floor-lamp-torchiere
+      friendly_name: Living Room Lamp
+      supported_features: 44
+      state: 'off'
+    light.foyer_lights:
+      supported_color_modes:
+      - brightness
+      icon: mdi:chandelier
+      friendly_name: Foyer Lights
+      supported_features: 32
+      state: 'off'
+  metadata:
+    light.northeast_ceiling:
+      entity_only: true
+    light.northwest_ceiling:
+      entity_only: true
+    light.southeast_ceiling:
+      entity_only: true
+    light.southwest_ceiling:
+      entity_only: true
+    light.entryway:
+      entity_only: true
+    light.living_room_lamp:
+      entity_only: true
+    light.foyer_lights:
       entity_only: true

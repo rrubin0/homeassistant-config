@@ -2,9 +2,9 @@
 #    @package          :     Influx DB
 #    @description      :     Data connection for trending analysis
 #####################################################################
-influxdb:
-  host: !secret broker
-  include:
-    domains:
-      - sensor
-      - binary_sensor
+#influxdb:
+#  host: !secret broker
+#  include:
+#    domains:
+#      - sensor
+#      - binary_sensor

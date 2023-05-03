@@ -1,7 +1,243 @@
 #####################################################################
-### Input Number - Season Selections
+### Input Number 
 #####################################################################
-#input_number:
+input_number:
+  hvac_ds_cool_home:
+    name: "HVAC Downstairs Cool Home"
+    initial: 77
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_heat_home:
+    name: "HVAC Downstairs Heat Home"
+    initial: 72
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_cool_away:
+    name: "HVAC Downstairs Cool Away"
+    initial: 81
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_heat_away:
+    name: "HVAC Downstairs Heat Away"
+    initial: 68
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_cool_sleep:
+    name: "HVAC Downstairs Cool Sleep"
+    initial: 80
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_heat_sleep:
+    name: "HVAC Downstairs Heat Sleep"
+    initial: 69
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_ds_cool_precool:
+    name: "HVAC Downstairs Cool Precool"
+    initial: 75
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+
+## UPSTAIRS ##
+  hvac_us_cool_home:
+    name: "HVAC Upstairs Cool Home"
+    initial: 80
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_heat_home:
+    name: "HVAC Upstairs Heat Home"
+    initial: 70
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_cool_away:
+    name: "HVAC Upstairs Cool Away"
+    initial: 84
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_heat_away:
+    name: "HVAC Upstairs Heat Away"
+    initial: 68
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_cool_sleep:
+    name: "HVAC Upstairs Cool Sleep"
+    initial: 77
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_heat_sleep:
+    name: "HVAC Upstairs Heat Sleep"
+    initial: 71
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+  hvac_us_cool_precool:
+    name: "HVAC Upstairs Cool Precool"
+    initial: 75
+    min: 65
+    max: 85
+    step: 1
+    mode: box
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   ### Summer Temp Threshold
 #  season_summer:
 #    name: "Summer"

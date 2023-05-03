@@ -35,24 +35,33 @@ unlock_megs:
       message: Megs is home!
   mode: single
 away:
-  alias: 'Mode: Away'
+  alias: '(TEST) Mode: Away'
   sequence:
+  - service: lock.lock
+    entity_id: all
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.space_heater
   - service: alarm_control_panel.alarm_arm_away
     data: {}
     target:
       entity_id: alarm_control_panel.blink_saguaro_estates
-  - service: lock.lock
-    entity_id: all
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.downstairs
-      preset_mode: Away
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.upstairs
-      preset_mode: Away
   - service: automation.turn_off
-    entity_id: automation.evening_scene_schedule
+    data:
+      stop_actions: true
+    target:
+      entity_id: automation.evening_scene_schedule
+  - service: script.arm_interior_cameras
+    data: {}
+  - service: script.arm_backyard_cameras
+    data: {}
+  - service: script.blink_arm_porch_cameras
+    data: {}
+  - service: script.climate_downstairs_away
+    data: {}
+  - service: script.climate_upstairs_away
+    data: {}
   - service: notify.mobile_app_rcom
     data:
       title: Away Mode ON
@@ -67,7 +76,12 @@ away:
         target:
           entity_id:
           - group.interior_lights
-          - group.inside_christmas_lights
+          - fan.guest_room_fan
+          - fan.nursery_fan
+          - switch.master_bedroom_fan
+          area_id:
+          - back_yard
+          - 0eb62649a6804442ba224d0dbc48ac08
     - conditions:
       - condition: sun
         after: sunset
@@ -76,26 +90,19 @@ away:
         data: {}
         target:
           entity_id:
-          - light.living_room_ceiling
-          - light.entryway
+          - group.interior_lights
+          - fan.guest_room_fan
+          - fan.nursery_fan
+          - switch.master_bedroom_fan
           area_id:
-          - 414aea09a010441783be336559c47f50
-          - fcaa981e07fc4b0d867cd8b6f5801fc9
-          - c422351f189a42449abb2a5bf0152863
-          - 69a3968c0130497e862157a750090907
-          - ade76688dbb34b8d84635f8458b99cda
-          - dee77ca5ef914076a3a097b131a9d642
-          - 506e64eb32a242da91ab8df3a651f083
-          - 3fbc39459ed34527a0e9aa0bfa505140
+          - back_yard
           - 0eb62649a6804442ba224d0dbc48ac08
+      - service: script.scene_living_room_default
+        data: {}
   mode: single
 bedtime:
   alias: 'Mode: Bedtime'
   sequence:
-  - service: alarm_control_panel.alarm_arm_away
-    data: {}
-    target:
-      entity_id: alarm_control_panel.blink_saguaro_estates
   - service: lock.lock
     data: {}
     target:
@@ -113,7 +120,14 @@ bedtime:
       - group.exterior_lights
       - group.interior_lights
       - group.inside_christmas_lights
+      - switch.space_heater
   - service: script.traverse_lock_doors
+    data: {}
+  - service: script.arm_backyard_cameras
+    data: {}
+  - service: script.arm_interior_cameras
+    data: {}
+  - service: script.blink_arm_porch_cameras
     data: {}
   mode: single
 driveway_ptz_1:
@@ -296,111 +310,31 @@ company_mode:
     data:
       entity_id: light.dining_room_chandelier
       brightness: 130
-  mode: single
-ecobee_ds_home:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Home
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  alias: ''
+  - service: script.blink_disarm_backyard_cameras
+    data: {}
+  - service: script.blink_disarm_interior_cameras
+    data: {}
+  - service: script.blink_disarm_porch_cameras
+    data: {}
   mode: single
 ecobee_ds_eco:
   sequence:
-  - service: climate.set_preset_mode
+  - service: climate.set_temperature
     data:
-      preset_mode: Eco
+      target_temp_high: 80
+      target_temp_low: 68
     target:
-      entity_id:
-      - climate.ecobee_downstairs
-  alias: ''
-  mode: single
-ecobee_ds_away:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Away
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  alias: ''
-  mode: single
-ecobee_ds_sleep:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Sleep
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  alias: ''
-  mode: single
-ecobee_ds_normal:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Normal
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  alias: ''
-  mode: single
-ecobee_ds_resume:
-  sequence:
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_downstairs
-      resume_all: 'true'
-  alias: ''
-  mode: single
-ecobee_us_home:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Home
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
+      entity_id: climate.downstairs
   alias: ''
   mode: single
 ecobee_us_eco:
   sequence:
-  - service: climate.set_preset_mode
+  - service: climate.set_temperature
     data:
-      preset_mode: Eco
+      target_temp_high: 81
+      target_temp_low: 68
     target:
-      entity_id:
-      - climate.ecobee_upstairs
-  alias: ''
-  mode: single
-ecobee_us_away:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Away
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
-  alias: ''
-  mode: single
-ecobee_us_sleep:
-  sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Sleep
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
-  alias: ''
-  mode: single
-ecobee_us_resume:
-  sequence:
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_upstairs
-      resume_all: 'true'
+      entity_id: climate.upstairs
   alias: ''
   mode: single
 hue_mbath_morning:
@@ -1624,24 +1558,22 @@ alarm_clock_snooze:
   mode: single
   icon: mdi:sleep
 climate_downstairs_cooldown:
-  alias: Downstairs Cooldown
+  alias: 'Climate: Downstairs Cooldown'
   sequence:
-  - service: climate.set_preset_mode
+  - service: climate.set_temperature
     data:
-      preset_mode: Precool
+      target_temp_high: 75
+      target_temp_low: 72
     target:
-      entity_id:
-      - climate.ecobee_downstairs
+      entity_id: climate.downstairs
   - delay:
       hours: 2
       minutes: 0
       seconds: 0
       milliseconds: 0
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_downstairs
-      resume_all: true
-  mode: single
+  - service: script.climate_downstairs_resume_temp
+    data: {}
+  mode: restart
 pool_pump_winter:
   alias: 'Pool Pump: Winter'
   sequence:
@@ -2027,11 +1959,9 @@ blink_east_pool_camera_record:
 routine_wake_up:
   alias: 'Routine: Wake Up'
   sequence:
-  - service: alarm_control_panel.alarm_disarm
+  - service: script.blink_disarm_interior_cameras
     data: {}
-    target:
-      entity_id: alarm_control_panel.blink_saguaro_estates
-  - service: script.ecobee_ds_home
+  - service: script.blink_disarm_backyard_cameras
     data: {}
   mode: single
 atv_home_theater_home:
@@ -2259,22 +2189,362 @@ scene_brighten_wine_room_lamp:
       entity_id:
       - light.wine_room_lamp
   mode: single
-ecobee_upstairs_cooldown:
-  alias: Ecobee Upstairs Cooldown
+arm_interior_cameras:
+  alias: Arm Interior Cameras
   sequence:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
+  - repeat:
+      count: 2
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - service: camera.enable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - f7fd39de1d9f808a6a1073f932195b06
+          - 922dc0f91dc64a3711212446372a2d3b
+  mode: single
+  icon: mdi:cctv
+arm_backyard_cameras:
+  alias: Arm Backyard Cameras
+  sequence:
+  - repeat:
+      count: 2
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - service: camera.enable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - 5dd4f0fcf37771850c91e4feeae0787f
+          - 5d9081406a416906795f833ac6b28377
+          - d8843935dc8751d0159f3cd1a5b1dc33
+  mode: single
+  icon: mdi:cctv
+blink_disarm_living_room:
+  alias: 'Blink: Disarm Living Room'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
     target:
-      entity_id:
-      - climate.ecobee_upstairs
+      device_id: 922dc0f91dc64a3711212446372a2d3b
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_office:
+  alias: 'Blink: Disarm Office'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - f7fd39de1d9f808a6a1073f932195b06
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_north_floodlight:
+  alias: 'Blink: Disarm North Floodlight'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - 5d9081406a416906795f833ac6b28377
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_playground_camera:
+  alias: 'Blink: Disarm Playground'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - 5dd4f0fcf37771850c91e4feeae0787f
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_east_pool:
+  alias: 'Blink: Disarm East Pool'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - d8843935dc8751d0159f3cd1a5b1dc33
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_porch_north:
+  alias: 'Blink: Disarm Porch North'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - cbc391739dee34193ad1ec7bda3a9184
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_porch_south:
+  alias: 'Blink: Disarm Porch South'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - 5caa022b504130c190fc9a8b79c48073
+  mode: single
+  icon: mdi:cctv-off
+blink_arm_east_pool_duplicate:
+  alias: 'Blink: Arm East Pool'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: d8843935dc8751d0159f3cd1a5b1dc33
+  mode: single
+  icon: mdi:cctv
+blink_arm_living_room:
+  alias: 'Blink: Arm Living Room'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: 922dc0f91dc64a3711212446372a2d3b
+  mode: single
+  icon: mdi:cctv
+blink_arm_north_floodlight:
+  alias: 'Blink: Arm North Floodlight'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: 5d9081406a416906795f833ac6b28377
+  mode: single
+  icon: mdi:cctv
+blink_arm_office:
+  alias: 'Blink: Arm Office'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: f7fd39de1d9f808a6a1073f932195b06
+  mode: single
+  icon: mdi:cctv
+blink_arm_playground:
+  alias: 'Blink: Arm Playground'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: 5dd4f0fcf37771850c91e4feeae0787f
+  mode: single
+  icon: mdi:cctv
+blink_arm_porch_north:
+  alias: 'Blink: Arm Porch North'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id: cbc391739dee34193ad1ec7bda3a9184
+  mode: single
+  icon: mdi:cctv
+blink_arm_porch_south:
+  alias: 'Blink: Arm Porch South'
+  sequence:
+  - service: camera.enable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - 5caa022b504130c190fc9a8b79c48073
+  mode: single
+  icon: mdi:cctv
+blink_disarm_porch_cameras:
+  alias: 'Blink: Disarm Porch Cameras'
+  sequence:
+  - service: camera.disable_motion_detection
+    data: {}
+    target:
+      device_id:
+      - cbc391739dee34193ad1ec7bda3a9184
+      - 5caa022b504130c190fc9a8b79c48073
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_interior_cameras:
+  alias: 'Blink: Disarm Interior Cameras'
+  sequence:
+  - repeat:
+      count: '3'
+      sequence:
+      - service: camera.disable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - 922dc0f91dc64a3711212446372a2d3b
+      - service: camera.disable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - f7fd39de1d9f808a6a1073f932195b06
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+  mode: single
+  icon: mdi:cctv-off
+blink_disarm_backyard_cameras:
+  alias: 'Blink: Disarm Backyard Cameras'
+  sequence:
+  - repeat:
+      count: '3'
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - service: camera.disable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - d8843935dc8751d0159f3cd1a5b1dc33
+          - 5d9081406a416906795f833ac6b28377
+          - 5dd4f0fcf37771850c91e4feeae0787f
+  mode: single
+  icon: mdi:cctv-off
+blink_arm_porch_cameras:
+  alias: 'Blink: Arm Porch Cameras'
+  sequence:
+  - repeat:
+      count: 2
+      sequence:
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 5
+          milliseconds: 0
+      - service: camera.enable_motion_detection
+        data: {}
+        target:
+          device_id:
+          - 5caa022b504130c190fc9a8b79c48073
+          - cbc391739dee34193ad1ec7bda3a9184
+  mode: single
+  icon: mdi:cctv
+iphone_find_my_phone:
+  alias: 'iPhone: Find Megs Phone'
+  sequence:
+  - service: icloud.play_sound
+    data:
+      account: mailr2@proton.me
+      device_name: Mip12
+  mode: single
+  icon: mdi:cellphone-sound
+climate_downstairs_resume_temp:
+  alias: 'Climate: Downstairs Resume'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      target_temp_high: "{% if states('sensor.downstairs_hvac_preset') == 'away' %}\n
+        \ {{ states('input_number.hvac_ds_cool_away') }}\n{% elif states('sensor.downstairs_hvac_preset')
+        == 'sleep' %}\n  {{ states('input_number.hvac_ds_cool_sleep') }}\n{% else
+        %}\n  {{ states('input_number.hvac_ds_cool_home') }}\n{% endif %}\n"
+      target_temp_low: "{% if states('sensor.downstairs_hvac_preset') == 'away' %}\n
+        \ {{ states('input_number.hvac_ds_heat_away') }}\n{% elif states('sensor.downstairs_hvac_preset')
+        == 'sleep' %}\n  {{ states('input_number.hvac_ds_heat_sleep') }}\n{% else
+        %}\n  {{ states('input_number.hvac_ds_heat_home') }}\n{% endif %}\n"
+      hvac_mode: heat_cool
+    target:
+      entity_id: climate.downstairs
+  mode: single
+climate_upstairs_resume:
+  alias: 'Climate: Upstairs Resume'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      target_temp_high: "{% if states('sensor.upstairs_hvac_preset') == 'away' %}\n
+        \ {{ states('input_number.hvac_us_cool_away') }}\n{% elif states('sensor.upstairs_hvac_preset')
+        == 'sleep' %}\n  {{ states('input_number.hvac_us_cool_sleep') }}\n{% else
+        %}\n  {{ states('input_number.hvac_us_cool_home') }}\n{% endif %}\n"
+      target_temp_low: "{% if states('sensor.upstairs_hvac_preset') == 'away' %}\n
+        \ {{ states('input_number.hvac_us_heat_away') }}\n{% elif states('sensor.upstairs_hvac_preset')
+        == 'sleep' %}\n  {{ states('input_number.hvac_us_heat_sleep') }}\n{% else
+        %}\n  {{ states('input_number.hvac_us_heat_home') }}\n{% endif %}\n"
+      hvac_mode: heat_cool
+    target:
+      entity_id: climate.upstairs
+  mode: single
+climate_downstairs_away:
+  alias: 'Climate: Downstairs Away'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.downstairs
+      target_temp_low: '{{ states(''input_number.hvac_ds_heat_away'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_ds_cool_away'') }}'
+  mode: single
+climate_downstairs_home:
+  alias: 'Climate: Downstairs Home'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.downstairs
+      target_temp_low: '{{ states(''input_number.hvac_ds_heat_home'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_ds_cool_home'') }}'
+  mode: single
+climate_downstairs_sleep:
+  alias: 'Climate: Downstairs Sleep'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.downstairs
+      target_temp_low: '{{ states(''input_number.hvac_ds_heat_sleep'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_ds_cool_sleep'') }}'
+  mode: single
+climate_upstairs_home:
+  alias: 'Climate: Upstairs Home'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.upstairs
+      target_temp_low: '{{ states(''input_number.hvac_us_heat_home'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_us_cool_home'') }}'
+  mode: single
+climate_upstairs_away:
+  alias: 'Climate: Upstairs Away'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.upstairs
+      target_temp_low: '{{ states(''input_number.hvac_us_heat_away'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_us_cool_away'') }}'
+  mode: single
+climate_upstairs_sleep:
+  alias: 'Climate: Upstairs Sleep'
+  sequence:
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.upstairs
+      target_temp_low: '{{ states(''input_number.hvac_us_heat_sleep'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_us_cool_sleep'') }}'
+  mode: single
+upstairs_cooldown:
+  alias: 'Climate: Upstairs Cooldown'
+  sequence:
+  - service: climate.set_temperature
+    data:
+      target_temp_high: 75
+      target_temp_low: 72
+    target:
+      entity_id: climate.upstairs
   - delay:
       hours: 2
       minutes: 0
       seconds: 0
       milliseconds: 0
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_upstairs
-      resume_all: true
-  mode: single
+  - service: script.climate_upstairs_resume
+    data: {}
+  mode: restart

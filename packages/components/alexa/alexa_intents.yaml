@@ -34,7 +34,7 @@
           {%- if SensorType.lower() == "temperature" or SensorType.lower() == "temp"-%}
             The average temperature downstairs is {{ states('sensor.ds_avg_temp') }} degrees and upstairs it is {{ states('sensor.us_avg_temp') }} degrees.
           {%- elif SensorType.lower() == "humidity" -%}
-            Downstairs humidity is {{ states('sensor.downstairs_humidity') }} percent and upstairs humidity is {{ states('sensor.upstairs_humidity') }} percent.
+            Downstairs humidity is {{ states('sensor.downstairs_humidity') | float }} percent and upstairs humidity is {{ states('sensor.upstairs_humidity') | float }} percent.
           {%- elif SensorType.lower() == "front door" -%}
             The {{ SensorType }} is {{ states('sensor.front_door_state') }} and the tamper is {{ states('sensor.front_door_tamper') }}.
           {%- elif SensorType.lower() == "side door" -%}
@@ -48,9 +48,9 @@
           {%- elif SensorType.lower() == "guest room balcony door" -%}
             The {{ SensorType }} is {{ states('binary_sensor.guest_room_balcony_door_state') }} and the tamper is {{ states('binary_sensor.guest_room_balcony_door_tamper') }}.
           {%- elif SensorType.lower() == "humidor" or SensorType.lower() == "cigars"-%}
-            The Humidor temperature is {{ states('sensor.humidor_temperature') }} degrees and your cigars are currently stored at {{ states('sensor.humidor_humidity') }} percent humidity.
+            The Humidor temperature is {{ states('sensor.humidor_temperature') | float }} degrees and your cigars are currently stored at {{ states('sensor.humidor_humidity') | float }} percent humidity.
           {%- elif SensorType.lower() == "grill" or SensorType.lower() == "barbecue" or SensorType.lower() == "cook" or SensorType.lower() == "smoker"-%}
-            The grill temperature is {{ states('sensor.grill_temperature') }} degrees and the food probe is reading {{ states('sensor.food_temperature') }} degrees.
+            The grill temperature is {{ states('sensor.grill_temperature') | float }} degrees and the food probe is reading {{ states('sensor.food_temperature') | float }} degrees.
           {%- endif -%}
 
       card:

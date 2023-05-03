@@ -4,54 +4,81 @@
 sensor:
   - platform: template
     sensors:
+      upstairs_hvac_preset:
+        friendly_name: "Upstairs Active Preset Summer"
+        value_template: >-
+          {% if states('schedule.upstairs_hvac_sleep') == 'on' %}
+            sleep
+          {% elif states('schedule.upstairs_hvac_away') == 'on' %}
+            away
+          {% else %}
+            home
+          {% endif %}
+
+  - platform: template
+    sensors:
       us_avg_temp:
         friendly_name: "Upstairs Average Temperature"
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: >-
-          {{ ((states('sensor.upstairs_temperature') | float + states('sensor.nursery_temperature') | float + states('sensor.guest_room_temperature') | float) /3) | round(1) | default('unknown') }}
+          {{ ((states('sensor.upstairs_temperature') | float(80.0) + states('sensor.nursery_temperature') | float(80.0) + states('sensor.guest_room_temperature') | float(80.0)) /3) | round(1) }}
 
-  - platform: template
-    sensors:
-      us_climate_current_temp:
-        friendly_name: "Upstairs AC Temperature"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.upstairs.attributes|default({})).current_temperature|default('unknown') }}"
 
-  - platform: template
-    sensors:
-      us_climate_preset:
-        friendly_name: "Active Preset"
-        value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).preset_mode|default('unknown') }}"
-
+#  - platform: template
+#    sensors:
+#      upstairs_hvac_preset_winter:
+#        friendly_name: "Upstairs Active Preset Winter"
+#        value_template: >-
+#          {% if states('schedule.upstairs_hvac_sleep_winter') == 'on' %}
+#            sleep
+#          {% elif states('schedule.upstairs_hvac_away_winter') == 'on' %}
+#            away
+#          {% else %}
+#            home
+#          {% endif %}
+#
+# - platform: template
+#   sensors:
+#     us_climate_current_temp:
+#       friendly_name: "Upstairs AC Temperature"
+#       unit_of_measurement: "°F"
+#       device_class: temperature
+#       value_template: "{{ (states.climate.upstairs.attributes|default({})).current_temperature|default('unknown') }}"
+#
+# - platform: template
+#   sensors:
+#     us_climate_preset:
+#       friendly_name: "Active Preset"
+#       value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).preset_mode|default('unknown') }}"
+#
 #  - platform: template
 #    sensors:
 #      us_climate_mode:
 #        friendly_name: "Active Schedule"
 #        value_template: "{{ (states.climate.upstairs.attributes|default({})).climate_mode|default('unknown') }}"
 #        entity_id: sensor.time
-
-  - platform: template
-    sensors:
-      us_climate_target_high:
-        friendly_name: "Upstairs AC Setpoint"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_high|default('unknown') }}"
-
-  - platform: template
-    sensors:
-      us_climate_target_low:
-        friendly_name: "Upstairs Heat Setpoint"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_low|default('unknown') }}"
-
-  - platform: template
-    sensors:
-      us_fan_state:
-        friendly_name: "Upstairs HVAC Fan"
-        value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).fan|default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      us_climate_target_high:
+#        friendly_name: "Upstairs AC Setpoint"
+#        unit_of_measurement: "°F"
+#        device_class: temperature
+#        value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_high|default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      us_climate_target_low:
+#        friendly_name: "Upstairs Heat Setpoint"
+#        unit_of_measurement: "°F"
+#        device_class: temperature
+#        value_template: "{{ (states.climate.upstairs.attributes|default({})).target_temp_low|default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      us_fan_state:
+#        friendly_name: "Upstairs HVAC Fan"
+#        value_template: "{{ (states.climate.ecobee_upstairs.attributes|default({})).fan|default('unknown') }}"
 
 

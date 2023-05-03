@@ -3,233 +3,256 @@
 #    @description      :     homekit configuration for apple ios
 #####################################################################
 homekit:
-  ip_address: !secret homekit_ip
-  filter:
-    include_entities:
-#################################
-# Device Tracker
-#################################
-      - person.rick
-      - person.megs
-
-#################################
-# Fans - enabled
-#################################
-      - group.porch_lights
-
-#################################
-# Climate - enabled
-#################################
-      - climate.downstairs
-      - climate.upstairs
-
-#################################
-# Lights - enabled
-#################################
-      - light.bar_strip_light
-      - light.bedframe_light
-      - light.billiards
-      - light.dining_room_chandelier
-      - light.entryway
-      - light.foyer_lights
-      - light.guest_room_lights
-      - light.kitchen_lights
-      - light.large_staircase_lamp
-      - light.laundry_room
-      - light.living_room_ceiling
-      - light.living_room_lamp
-      - light.lounge_light
-      - light.master_bathroom_ceiling
-      - light.master_bathroom_vanity
-      - light.master_bed_ceiling
-      - light.master_bed_entry
-      - light.master_bedroom_chandelier
-      - light.master_bedside_lamp_megs
-      - light.master_bedside_lamp_rick
-      - light.master_reading_lamp
-      - light.master_sitting_lamp
-      - light.nursery_light
-      - light.nursery_wall_light
-      - light.office_desk_lamp
-      - light.pantry
-      - light.small_staircase_lamp
-      - light.wine_room_ceiling
-      - light.wine_room_lamp
-
-
-#################################
-# Switches - enabled
-#################################
-      - switch.amp
-      - switch.amp_mute
-      - switch.aquarium
-      - switch.back_yard_outlet
-      - switch.downstairs_bathroom_light
-      - switch.fireplace
-      #- switch.fireplace_flame
-      #- switch.fireplace_flicker
-      #- switch.fireplace_light
-      #- switch.fireplace_temp
-      #- switch.fireplace_timer
-      #- switch.fountains
-      - switch.game_room_floodlights
-      #- switch.irrigation_system_in_standby_mode
-      - switch.irrigation_system_rain_delay
-      - switch.master_bedroom_fan
-      - switch.mute
-      - switch.nursery_lamp
-      #- switch.outdoor_speakers
-      - switch.patio_lights
-      - switch.pool_light
-      - switch.pool_pump
-      - switch.porch_rope_lights
-      - switch.starlight
-      #- switch.rf_switch_1
-      #- switch.rf_switch_2
-      #- switch.rf_switch_3
-      #- switch.rf_switch_4
-      #- switch.rf_switch_5
-      - switch.tv
-
-
-#################################
-# Fans - enabled
-#################################
-      - fan.guest_room_fan
-      - fan.patio_fan
-      - fan.nursery_fan
-
-
-#################################
-# Scenes - enabled
-#################################
-      - scene.aj_night_time
-      - scene.cozy
-      - scene.daybreak
-      - scene.living_room_dim
-      - scene.living_room_night_light
-      - scene.lounge
-      - scene.master_bathroom_bright
-      - scene.master_bathroom_morning
-      - scene.master_bedside_lamps_bedtime
+  - filter:
+      include_domains:
+        - cover
+        - fan
+        - person
+        - scene
       
+      include_entity_globs:
+        - binary_sensor.all_*
+        - binary_sensor.*_state
+      
+#      exclude_entity_globs:
+      
+#      exclude_entities:
+      
+      include_entities:
+#        - climate.downstairs
+#        - climate.upstairs
+        - input_boolean.bbq_alert_food
+        - input_boolean.bbq_alert_high
+        - input_boolean.bbq_alert_low
+        - input_boolean.dinner_time
+        - input_boolean.holiday
+        - input_boolean.hvac_maintenance
+        - input_boolean.movie_night
+        - input_boolean.north_gate_shunt
+        - input_boolean.party_mode
+        - input_boolean.pool_maintenance
+        - input_boolean.sleeping
+        - input_boolean.visitor_mode
+        - sensor.food_temperature
+        - sensor.grill_temperature
+        - sensor.humidor_humidity
+        - sensor.humidor_temperature
+        - switch.amp_mute
+        - timer.bedtime
 
-#################################
-# Scripts - enabled
-#################################
-      - script.bright
-      - script.cancel_away_timer
-      - script.cancel_bedtime_timer
-      - script.christmas_time
-      - script.climate_downstairs_cooldown
-      - script.climate_upstairs_cooldown
-      - script.cloudy
-      - script.company_mode
-      - script.ecobee_ds_away
-      - script.ecobee_ds_eco
-      - script.ecobee_ds_home
-      - script.ecobee_ds_normal
-      - script.ecobee_ds_resume
-      - script.ecobee_ds_sleep
-      - script.ecobee_us_away
-      - script.ecobee_us_eco
-      - script.ecobee_us_home
-      - script.ecobee_us_resume
-      - script.ecobee_us_sleep
-      - script.evening
-      - script.master_bedroom_night_time
-      - script.morning_sequence
-      - script.pause_away_timer
-      - script.pause_bedtime_timer
-      - script.pool_cycle
-      - script.pool_party
-      - script.pool_patriotic
-      - script.pool_pump_quick_clean
-      - script.pool_white
-      - script.scene_living_room_default
-      - script.start_bedtime_timer
-      - script.traverse_cancel_start_vehicle
-      - script.traverse_lock_doors
-      - script.traverse_start_vehicle
-      - script.traverse_unlock_doors
-      - script.tv_time
+  - name: Homekit Switches
+    port: 21057
+    filter:
+      include_entities:
+        - switch.back_yard_outlet
+        - switch.christmas_tree
+        - switch.downstairs_christmas_lights
+        - switch.fireplace
+        - switch.game_room_floodlights
+        - switch.master_bedroom_fan
+        - switch.mute
+        - switch.patio_lights
+        - switch.pool_light
+        - switch.pool_pump
+        - switch.porch_rope_lights
+        - switch.space_heater
+        - switch.starlight
+        - switch.front_house_lights
+        - switch.tplink_outlet_2
+        - switch.tv
+        - switch.upstairs_christmas_lights
 
+  - name: Homekit Scripts
+    port: 21058
+    filter:
+      include_entities:
+        - script.bright
+        - script.cancel_away_timer
+        - script.cancel_bedtime_timer
+        - script.climate_downstairs_cooldown
+        - script.climate_upstairs_cooldown
+        - script.ecobee_ds_eco
+        - script.ecobee_ds_resume
+        - script.ecobee_us_eco
+        - script.ecobee_us_resume
+        - script.evening
+        - script.master_bedroom_night_time
+        - script.pause_away_timer
+        - script.pause_bedtime_timer
+        - script.pool_cycle
+        - script.pool_party
+        - script.pool_patriotic
+        - script.pool_pump_quick_clean
+        - script.pool_white
+        - script.scene_living_room_default
+        - script.start_bedtime_timer
+        - script.traverse_cancel_start_vehicle
+        - script.traverse_lock_doors
+        - script.traverse_start_vehicle
+        - script.traverse_unlock_doors
+        - script.tv_time
 
-#################################
-# Sensors - enabled
-#################################
-      - sensor.bathroom_door_state
-      - sensor.bathroom_entry_lock_battery
-      - sensor.downstairs_humidity
-      - sensor.downstairs_north_smoke_detector_battery
-      - sensor.downstairs_temperature
-      - sensor.ds_avg_temp
-      - sensor.food_temperature
-      - sensor.grill_temperature
-      - sensor.guest_room_temperature
-      - sensor.humidor_humidity
-      - sensor.humidor_temperature
-      - sensor.kitchen_door_state
-      - sensor.living_room_temperature
-      - sensor.nursery_temperature
-      - sensor.office_temperature
-      - sensor.ring_side_door_battery
-      - sensor.south_door_state
-      - sensor.upstairs_humidity
-      - sensor.upstairs_south_smoke_detector_battery
-      - sensor.upstairs_temperature
-      - sensor.us_avg_temp
+  - name: Homekit Lights
+    port: 21059
+    filter:
+      include_entities:
+        - light.bar_strip_light
+        - light.bedframe_light
+        - light.billiards
+        - light.dining_room_chandelier
+        - light.entryway
+        - light.foyer_lights
+        - light.guest_room_lights
+        - light.kitchen_lights
+        - light.large_staircase_lamp
+        - light.laundry_room
+        - light.living_room_ceiling
+        - light.living_room_lamp
+        - light.lounge_light
+        - light.master_bathroom_ceiling
+        - light.master_bathroom_vanity
+        - light.master_bathtub
+        - light.master_bed_ceiling
+        - light.master_bed_entry
+        - light.master_bedroom_chandelier
+        - light.master_bedside_lamp_megs
+        - light.master_bedside_lamp_rick
+        - light.master_bedside_lamps
+        - light.master_reading_lamp
+        - light.master_sitting_lamp
+        - light.northeast_ceiling
+        - light.nursery_light
+        - light.nursery_wall_light
+        - light.office_desk_lamp
+        - light.pantry
+        - light.small_staircase_lamp
+        - light.smart_flood_lights
+        - light.wine_room_ceiling
+        - light.wine_room_lamp
 
+  - name: blink East Pool
+    port: 21060
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_east_pool
 
-#################################
-# Binary Sensors - enabled
-#################################
-      - binary_sensor.all_doors
-      - binary_sensor.all_windows
-      - binary_sensor.downstairs_ac_leak_detector_state
-      - binary_sensor.front_door_state
-      - binary_sensor.guest_room_balcony_door_state
-      - binary_sensor.guest_room_window_state
-      - binary_sensor.kitchen_door_state
-      - binary_sensor.living_room_north_window_state
-      - binary_sensor.north_gate_state
-      - binary_sensor.nw_master_window_state
-      - binary_sensor.office_entry_door_state
-      - binary_sensor.safe_bottom_door_state
-      - binary_sensor.south_door_state
-      - binary_sensor.sw_master_window_state
+  - name: blink Floodlight
+    port: 21061
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_floodlight
 
+  - name: blink Living Room
+    port: 21062
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_living_room
 
-#################################
-# Input_Boolean - enabled
-#################################
-      - input_boolean.movie_night
-      - input_boolean.holiday
-      - input_boolean.visitor_mode
-      - input_boolean.bbq_alert_high
-      - input_boolean.bbq_alert_low
-      - input_boolean.bbq_alert_food
+  - name: blink Office
+    port: 21064
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_office_camera
 
+  - name: blink Playground
+    port: 21065
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_playground_north_pool
 
-####################################
-# Media Players (AppleTV) - enabled
-####################################
-      - media_player.bar_tv
-      - media_player.home_theater
+  - name: blink Porch North
+    port: 21066
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_porch_north
 
+  - name: blink Porch South
+    port: 21067
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.blink_porch_south
 
-################################################
-## Entity Configuration - Customize Devices
-################################################
-  entity_config:
-#    switch.office_spare:
-#      type: outlet
-    switch.aquarium:
-      type: outlet
-#    switch.outdoor_speakers:
-#      type: outlet
-    switch.tv:
-      name: TV
-    switch.mute:
-      name: Mute
+  - name: Driveway PTZ
+    port: 21068
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.driveway
 
+  - name: Front Porch Camera
+    port: 21069
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.front_porch
+    entity_config:
+      camera.front_porch:
+        linked_doorbell_sensor: binary_sensor.ring_front_door_motion
+        stream_source: !secret front_porch_cam_auth
+
+  - name: Kids Room East PTZ
+    port: 21070
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.kids_room_east
+
+  - name: Kids Room North PTZ
+    port: 21071
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.kids_room_north
+
+  - name: North Yard PTZ
+    port: 21072
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.north_yard_ptz
+
+  - name: Front Doorbell
+    port: 21073
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.ring_front_door
+
+  - name: Side Doorbell
+    port: 21074
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.ring_side_door
+
+  - name: South Porch PTZ
+    port: 21075
+    mode: accessory
+    filter:
+      include_entities:
+        - camera.south_porch_ptz
+    entity_config:
+      camera.south_porch_ptz:
+        linked_doorbell_sensor: binary_sensor.ring_side_door_motion
+        stream_source: !secret side_porch_cam_auth
+
+  - name: Bathroom Entry Lock
+    port: 21076
+    mode: accessory
+    filter:
+      include_entities:
+        - lock.bathroom_entry
+
+  - name: South Entry Lock
+    port: 21077
+    mode: accessory
+    filter:
+      include_entities:
+        - lock.south_entry

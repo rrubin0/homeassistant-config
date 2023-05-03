@@ -1,20 +1,20 @@
 #####################################################################
 ### Alerts
 #####################################################################
-alert:
-  refill_humidor:
-    name: Refill Humidor
-    title: "Humidor Alert"
-    message: "The humidor is down to {{ states('sensor.humidor_humidity') }}% humidity. Add water!"
-    done_message: "The humidor is now in range. Thank you."
-    entity_id: binary_sensor.humidor_low
-    state: 'on'
-    repeat:
-      - 60
-      - 90
-      - 120
-    can_acknowledge: true
-    skip_first: true
-    notifiers:
-      - mobile_app_rip8plus
+#alert:
+#  refill_humidor:
+#    name: Refill Humidor
+#    title: "Humidor Alert"
+#    message: "The humidor is down to {{ states('sensor.humidor_humidity') }}% humidity. Add water!"
+#    done_message: "The humidor is now in range. Thank you."
+#    entity_id: binary_sensor.humidor_low
+#    state: 'on'
+#    repeat:
+#      - 60
+#      - 90
+#      - 120
+#    can_acknowledge: true
+#    skip_first: true
+#    notifiers:
+#      - mobile_app_rip8plus
 

@@ -4,17 +4,20 @@
 binary_sensor:
   - platform: template
     sensors:
-      hvac_running:
-        friendly_name: "HVAC Running"
+      downstairs_hvac_running:
+        friendly_name: "Downstairs HVAC Running"
+        value_template: >-
+          {{ states.climate.downstairs.attributes.hvac_action != 'fan' and
+             states.climate.downstairs.attributes.hvac_action != 'idle' }}
+        delay_off:
+          minutes: 1
+
+  - platform: template
+    sensors:
+      upstairs_hvac_running:
+        friendly_name: "Upstairs HVAC Running"
         value_template: >-
           {{ states.climate.upstairs.attributes.hvac_action != 'fan' and
-             states.climate.upstairs.attributes.hvac_action != 'idle' or
-             states.climate.downstairs.attributes.hvac_action != 'fan' and
-             states.climate.downstairs.attributes.hvac_action != 'idle' }}
-
-## original values
-#          {{ states.climate.upstairs.attributes.hvac_action != 'idle' or
-#             states.climate.downstairs.attributes.hvac_action != 'idle' }}
-
+             states.climate.upstairs.attributes.hvac_action != 'idle' }}
         delay_off:
           minutes: 1

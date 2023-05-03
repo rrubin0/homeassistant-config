@@ -2,119 +2,34 @@
 ### HISTORY
 #####################################################################
 history:
-  use_include_order: true
   include:
-    entities:
-      # FRONT DOOR
-      - sensor.ring_front_door_last_ding
-      - sensor.ring_front_door_last_motion
-      - sensor.front_door_state
+    domains:
+      - lock    
 
-      # LIVING ROOM
-      - binary_sensor.entryway_occupancy
-      - binary_sensor.living_room_occupancy
-      - sensor.living_room_north_window_state
+    entity_globs:
+      - binary_sensor.*_armed
+      - binary_sensor.*_door_state
+      - binary_sensor.downstairs_ac_leak_detector_*
+      - binary_sensor.*_held_open
+      - binary_sensor.*_motion_detected
+      - binary_sensor.*_occupancy
+      - binary_sensor.*_tamper
+      - binary_sensor.nursery_*
+      - binary_sensor.ring_*
+      - sensor.*_avg_temp
+      - sensor.*_door_state
+      - sensor.*_fan_state
+      - sensor.*_temperature
+      - sensor.*_window_state
+      - sensor.smoke_*
 
-      # SOUTH ENTRY
-      - lock.south_entry_locked
-      - sensor.south_door_state
-#      - sensor.lock_south_door_status
 
-      # BATHROOM ENTRY
-      - lock.bathroom_entry_locked
-      - sensor.bathroom_door_state
-#      - sensor.lock_beach_door_status
-
-      # KITCHEN ENTRY
-      - sensor.kitchen_door_state
-
-      # OFFICE
-      - binary_sensor.office_occupancy
-      - sensor.office_door_state
-
-      # MASTER BEDROOM
-      - binary_sensor.master_bedroom_presence
-      - sensor.master_bedroom_northwest_window_state
-      - sensor.master_bedroom_southwest_window_state
-
-      # NURSERY
-      - binary_sensor.nursery_presence
-
-      # GUEST ROOM
-      - binary_sensor.guest_room_occupancy
-      - sensor.guest_room_balcony_door_state
-      - sensor.guest_room_window_state
-
-      # ENERGY
-      - switch.mini_fridge
-      - binary_sensor.kegerator_door
-
-      # CLIMATE
-#      - binary_sensor.hvac_running
-      - sensor.ds_avg_temp
-#      - sensor.ds_climate_current_temp
-      - sensor.living_room_temperature
-      - sensor.entryway_temperature
-      - sensor.broadlink_sensor_temperature
-      - sensor.downstairs_temperature
-      - sensor.office_temperature
-      - sensor.ds_fan_state
-      - sensor.us_avg_temp
-      - sensor.upstairs_temperature
-#      - sensor.us_climate_current_temp
-      - sensor.nursery_temperature
-      - sensor.guest_room_temperature
-      - sensor.us_fan_state
-      - sensor.ds_fan_state
+#   Entity listed in entities include: include
+#   Otherwise, entity listed in entities exclude: exclude
+#   Otherwise, entity matches glob include: include
+#   Otherwise, entity matches glob exclude: exclude
+#   Otherwise, entity matches domain include: include
+#   Otherwise: exclude
 
 
 
-#      - script.away
-#      - script.bedtime
-#      - script.cancel_away_timer
-#      - script.ecobee_ds_away
-#      - script.ecobee_ds_eco
-#      - script.ecobee_ds_home
-#      - script.ecobee_ds_normal
-#      - script.ecobee_ds_resume
-#      - script.ecobee_ds_sleep
-#      - script.ecobee_us_away
-#      - script.ecobee_us_eco
-#      - script.ecobee_us_home
-#      - script.ecobee_us_resume
-#      - script.ecobee_us_sleep
-#      - script.morning_sequence
-#      - script.nap_time
-#      - script.unlock_megs
-
-
-
-
-
-### REFERENCE ###
-## the complete list of domains ##
-#      - automation
-#      - binary_sensor
-#      - climate
-#      - conversation
-#      - device_tracker
-#      - group
-#      - homeassistant
-#      - ifttt
-#      - input_boolean
-#      - input_select
-#      - input_number
-#      - light
-#      - lock
-#      - logbook
-#      - media_player
-#      - mqtt
-#      - notify
-#      - persistent_notification
-#      - scene
-#      - script
-#      - sensor
-#      - switch
-#      - updater
-#      - weblink
-#      - zwave

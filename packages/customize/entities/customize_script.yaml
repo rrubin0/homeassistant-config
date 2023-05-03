@@ -18,58 +18,6 @@ homeassistant:
       friendly_name: "Stop Playing"
       icon: mdi:stop-circle
 
-    script.ecobee_ds_home:
-      friendly_name: "Ecobee Downstairs Home"
-      entity_picture: /local/ecobee.png
-
-    script.climate_downstairs_cooldown:
-      friendly_name: "Ecobee Downstairs Cooldown"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_ds_eco:
-      friendly_name: "Ecobee Downstairs Economy"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_ds_away:
-      friendly_name: "Ecobee Downstairs Away"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_ds_sleep:
-      friendly_name: "Ecobee Downstairs Sleep"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_ds_normal:
-      friendly_name: "Ecobee Downstairs Normal"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_ds_resume:
-      friendly_name: "Ecobee Downstairs Resume"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_us_home:
-      friendly_name: "Ecobee Upstairs Home"
-      entity_picture: /local/ecobee.png
-
-    script.climate_upstairs_cooldown:
-      friendly_name: "Ecobee Uptairs Cooldown"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_us_eco:
-      friendly_name: "Ecobee Upstairs Economy"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_us_away:
-      friendly_name: "Ecobee Upstairs Away"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_us_sleep:
-      friendly_name: "Ecobee Upstairs Sleep"
-      entity_picture: /local/ecobee.png
-
-    script.ecobee_us_resume:
-      friendly_name: "Ecobee Upstairs Resume"
-      entity_picture: /local/ecobee.png
-
     script.mbr_night_light:
       icon: mdi:weather-night
 
@@ -78,3 +26,55 @@ homeassistant:
 
     script.tv_power_off:
       icon: mdi:power
+
+#    script.ecobee_ds_home:
+#      friendly_name: "Ecobee Downstairs Home"
+#      entity_picture: /local/ecobee.png
+#
+#    script.climate_downstairs_cooldown:
+#      friendly_name: "Ecobee Downstairs Cooldown"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_ds_eco:
+#      friendly_name: "Ecobee Downstairs Economy"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_ds_away:
+#      friendly_name: "Ecobee Downstairs Away"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_ds_sleep:
+#      friendly_name: "Ecobee Downstairs Sleep"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_ds_normal:
+#      friendly_name: "Ecobee Downstairs Normal"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_ds_resume:
+#      friendly_name: "Ecobee Downstairs Resume"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_us_home:
+#      friendly_name: "Ecobee Upstairs Home"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_upstairs_cooldown:
+#      friendly_name: "Ecobee Uptairs Cooldown"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_us_eco:
+#      friendly_name: "Ecobee Upstairs Economy"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_us_away:
+#      friendly_name: "Ecobee Upstairs Away"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_us_sleep:
+#      friendly_name: "Ecobee Upstairs Sleep"
+#      entity_picture: /local/ecobee.png
+#
+#    script.ecobee_us_resume:
+#      friendly_name: "Ecobee Upstairs Resume"
+#      entity_picture: /local/ecobee.png

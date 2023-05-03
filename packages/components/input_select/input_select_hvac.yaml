@@ -1,0 +1,26 @@
+#####################################################################
+### Input Select
+#####################################################################
+input_select:
+  ### HVAC Presets
+  climate_downstairs_preset:
+    name: Downstairs Preset
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Home"
+      - "Away"
+      - "Sleep"
+      - "Resume"
+      - "Precool"
+
+  climate_upstairs_preset:
+    name: Upstairs Preset
+    initial: "Select an option..."
+    options:
+      - "Select an option..."
+      - "Home"
+      - "Away"
+      - "Sleep"
+      - "Resume"
+      - "Precool"

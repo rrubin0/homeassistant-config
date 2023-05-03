@@ -1,10 +1,10 @@
 #####################################################################
 ### Binary Sensor: turn precool automation on or off based on date
 #####################################################################
-binary_sensor:
-  - platform: template
-    sensors:
-      climate_precool:
-        friendly_name: "Climate Precool"
-        value_template: >-
-          {{ strptime(states('sensor.date'), '%Y-%m-%d').month < 11 }}
+#binary_sensor:
+#  - platform: template
+#    sensors:
+#      climate_precool:
+#        friendly_name: "Climate Precool"
+#        value_template: >-
+#          {{ 4 <= now().month < 10 }}

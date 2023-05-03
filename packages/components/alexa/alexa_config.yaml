@@ -17,22 +17,16 @@ alexa:
         - input_number
         - light
         - lock
+        - person
         - scene
 
-
       include_entity_globs:
-        - script.ecobee_*
         - binary_sensor.all_*
         - binary_sensor.*_armed
         - binary_sensor.*_state
-        - sensor.us_*
-        - sensor.ds_*
-        - switch.fireplace_*
-
+        - script.ecobee_*
 
 #      exclude_entity_globs:
-#        - sensor.dark_sky*
-
 
       exclude_entities:
         - group.all_devices
@@ -48,46 +42,31 @@ alexa:
         - light.laundry_2
         - light.master_bath_entry
         - light.master_bath_sink
+        - light.party_lights
         - light.sn1_led
         - light.south_entryway
-        - sensor.traverse_engine_coolant_temp_f
-
 
       include_entities:
         - automation.climate_downstairs_door_held_open
         - automation.doorbell_pressed
         - automation.south_door_unlock_on_arrival
-        - binary_sensor.all_doors
-        - binary_sensor.all_windows
-        - binary_sensor.irrigation_system_rain_sensor
-        - climate.downstairs
-        - climate.upstairs
-        - input_boolean.bbq_alert_food
-        - input_boolean.bbq_alert_high
-        - input_boolean.bbq_alert_low
-        - input_boolean.holiday
-        - input_boolean.hvac_maintenance
-        - input_boolean.master_fan_hold
-        - input_boolean.movie_night
-        - input_boolean.north_gate_shunt
-        - input_boolean.nursery_fan_hold
-        - input_boolean.party_mode
-        - input_boolean.pool_maintenance
-        - input_boolean.sleeping
-        - input_boolean.visitor_mode
-        - media_player.backyard_speaker
+#        - input_boolean.bbq_alert_food
+#        - input_boolean.bbq_alert_high
+#        - input_boolean.bbq_alert_low
+#        - input_boolean.holiday
+#        - input_boolean.hvac_maintenance
+#        - input_boolean.master_fan_hold
+#        - input_boolean.movie_night
+#        - input_boolean.north_gate_shunt
+#        - input_boolean.nursery_fan_hold
+#        - input_boolean.party_mode
+#        - input_boolean.pool_maintenance
+#        - input_boolean.sleeping
+#        - input_boolean.visitor_mode
         - media_player.home_theater
         - media_player.bar_tv
-#        - media_player.everywhere
-#        - media_player.game_room
-#        - media_player.bar_echo_show
-#        - media_player.kitchen_dot
-#        - media_player.living_room_echo
-#        - media_player.master_bedroom_dot
-#        - media_player.master_bathroom_dot
-#        - media_player.master_bedside_dot
-#        - media_player.nursery_dot
-#        - media_player.office_dot
+
+## scripts
         - script.alarm_clock_snooze
         - script.away
         - script.bedtime
@@ -107,11 +86,11 @@ alexa:
         - script.game_time
         - script.home_theater_remote_ad_skip
         - script.home_theater_remote_skip_30
-        - script.hue_mbath_morning
+        - script.iphone_find_megs_phone
         - script.kitchen_shade_to_50
-        - script.living_room_fan_high
-        - script.living_room_fan_light
-        - script.living_room_fan_low
+#        - script.living_room_fan_high
+#        - script.living_room_fan_light
+#        - script.living_room_fan_low
         - script.master_bedroom_night_time
         - script.morning
         - script.morning_sequence
@@ -140,33 +119,22 @@ alexa:
         - script.traverse_unlock_doors
         - script.tv_time
         - script.unlock_megs
-        - sensor.sonarr_upcoming
-        - sensor.traverse_fuel_level_gal
-        - sensor.traverse_gas_range_mi
-        - sensor.traverse_oil_life
-        - sensor.blink_east_pool_temperature
-        - sensor.broadlink_rm_pro_temperature
-        - sensor.downstairs_temperature
-        - sensor.entryway_temperature
+
+## sensors
         - sensor.food_temperature
-        - sensor.front_entry_multisensor_temperature
-        - sensor.motion_game_room_device_temperature
         - sensor.grill_temperature
-        - sensor.guest_room_temperature
+        - sensor.humidor_humidity
         - sensor.humidor_temperature
-        - sensor.temperature_kitchen_multisensor
-        - sensor.living_room_temperature
-        - sensor.nursery_temperature
-        - sensor.upstairs_temperature
+
+## switches
         - switch.amp
         - switch.appletv
         - switch.aquarium
-        - switch.back_yard_outlet
+        - switch.back_yard_outlet # Party Lights switch
         - switch.christmas_tree
         - switch.chromecast
         - switch.downstairs_bathroom_light
         - switch.downstairs_christmas_lights
-        - switch.upstairs_christmas_lights
         - switch.drip_and_citrus_trees_schedule
         - switch.fireplace
         - switch.fountains
@@ -180,25 +148,29 @@ alexa:
         - switch.living_room_fan_medium
         - switch.master_bedroom_fan
         - switch.master_bedroom_fan_light
-        - switch.media
         - switch.mute
         - switch.nursery_lamp
-        - switch.outdoor_speakers
-        - switch.tplink_outlet_1
-        - switch.tplink_outlet_2
         - switch.patio_lights
         - switch.pc
         - switch.pool_light
         - switch.pool_pump
         - switch.porch_rope_lights
+        - switch.space_heater
         - switch.staircase_lamp
-        - switch.rf_switch_1
-        - switch.rf_switch_2
-        - switch.rf_switch_3
-        - switch.rf_switch_4
-        - switch.rf_switch_5
+        - switch.starlight
+        - switch.front_house_lights # switch.tplink_outlet_1
+        - switch.tplink_outlet_2
         - switch.tv
         - switch.tv_volume
+        - switch.upstairs_christmas_lights
+#        - switch.outdoor_speakers
+#        - switch.rf_switch_1
+#        - switch.rf_switch_2
+#        - switch.rf_switch_3
+#        - switch.rf_switch_4
+#        - switch.rf_switch_5
+
+## timers
         - timer.bedtime
         
 
@@ -242,6 +214,10 @@ alexa:
         name: Food Temp Alarm
         description: Food Target Temp Alarm for BBQ
 
+## Rachio
+      switch.irrigation_system_rain_delay:
+        name: Rain Delay
+        description: Rachio Rain Delay
 
 ## TV HDMI Inputs via Broadlink
 #      switch.appletv:
@@ -256,28 +232,23 @@ alexa:
 #        name: HDMI 3
 #        description: TV HDMI 3
 
-## 433MHz RF Switches via Broadlink        
-      switch.rf_switch_1:
-        name: Outlet 1
-        description: 433MHz RF Outlet 1
-
-      switch.rf_switch_2:
-        name: Outlet 2
-        description: 433MHz RF Outlet 2
-
-      switch.rf_switch_3:
-        name: Outlet 3
-        description: 433MHz RF Outlet 3
-
-      switch.rf_switch_4:
-        name: Outlet 4
-        description: 433MHz RF Outlet 3
-
-      switch.rf_switch_5:
-        name: Outlet 5
-        description: 433MHz RF Outlet 3
-
-## Rachio
-      switch.irrigation_system_rain_delay:
-        name: Rain Delay
-        description: Rachio Rain Delay
+### 433MHz RF Switches via Broadlink        
+#      switch.rf_switch_1:
+#        name: Outlet 1
+#        description: 433MHz RF Outlet 1
+#
+#      switch.rf_switch_2:
+#        name: Outlet 2
+#        description: 433MHz RF Outlet 2
+#
+#      switch.rf_switch_3:
+#        name: Outlet 3
+#        description: 433MHz RF Outlet 3
+#
+#      switch.rf_switch_4:
+#        name: Outlet 4
+#        description: 433MHz RF Outlet 3
+#
+#      switch.rf_switch_5:
+#        name: Outlet 5
+#        description: 433MHz RF Outlet 3

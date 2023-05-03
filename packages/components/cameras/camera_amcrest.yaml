@@ -1,54 +1,43 @@
 #####################################################################
 ### Amcrest
 #####################################################################
-amcrest:
-  ### North Gate PTZ
-  - host: !secret north_ptz_host
-    name: North Gate PTZ
-    username: !secret camera_user
-    password: !secret camera_password
-    resolution: high
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
-    scan_interval: 30
-
-  ### Front Porch Fixed Camera
-  - host: !secret front_porch_host
-    name: Front Porch
-    username: !secret camera_user
-    password: !secret camera_password
-    resolution: high
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
-    scan_interval: 15
-
-  ### Kids Room East PTZ
-  - host: !secret kids_east_ptz_host
-    name: Kids Room East PTZ
-    username: !secret camera_user
-    password: !secret camera_password
-    resolution: low
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
-    scan_interval: 30
-
-  ### Kids Room North PTZ
-  - host: !secret kids_north_ptz_host
-    name: Kids Room North PTZ
-    username: !secret camera_user
-    password: !secret camera_password
-    resolution: low
-    stream_source: rtsp
-    binary_sensors:
-      - motion_detected
-    scan_interval: 30
-
-#  ### TEST PTZ
-#  - host: !secret test_ptz_host
-#    name: Test PTZ
+#amcrest:
+#  ### North Gate PTZ
+#  - host: !secret north_ptz_host
+#    name: North Gate PTZ
+#    username: !secret camera_user
+#    password: !secret camera_password
+#    resolution: high
+#    stream_source: rtsp
+#    binary_sensors:
+#      - motion_detected
+#    scan_interval: 30
+#
+#  ### Front Porch Fixed Camera
+#  - host: !secret front_porch_host
+#    name: Front Porch
+#    username: !secret camera_user
+#    password: !secret camera_password
+#    resolution: high
+#    stream_source: rtsp
+#    binary_sensors:
+#      - motion_detected
+#    scan_interval: 30
+#
+#  ### Kids Room North PTZ
+#  - host: !secret kids_north_ptz_host
+#    name: Kids Room North PTZ
+#    username: !secret camera_user
+#    password: !secret camera_password
+#    resolution: high
+#    stream_source: rtsp
+#    binary_sensors:
+#      - motion_detected
+#    scan_interval: 30
+#
+#  ### Kids Room East PTZ
+#  - host: !secret kids_east_ptz_host
+#    name: Kids Room East PTZ
 #    username: !secret camera_user
 #    password: !secret camera_password
 #    resolution: low
@@ -56,3 +45,16 @@ amcrest:
 #    binary_sensors:
 #      - motion_detected
 #    scan_interval: 30
+#
+#
+#
+##  ### TEST PTZ
+##  - host: !secret test_ptz_host
+##    name: Test PTZ
+##    username: !secret camera_user
+##    password: !secret camera_password
+##    resolution: low
+##    stream_source: rtsp
+##    binary_sensors:
+##      - motion_detected
+##    scan_interval: 30

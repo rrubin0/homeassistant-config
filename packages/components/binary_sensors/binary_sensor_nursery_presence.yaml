@@ -7,16 +7,8 @@ binary_sensor:
       nursery_presence:
         friendly_name: "Nursery Presence"
         value_template: >-
-          {{ is_state('binary_sensor.nursery_north_ptz_motion', 'on')
-             or is_state('binary_sensor.nursery_occupancy', 'on')
-             or is_state('binary_sensor.nursery_east_ptz_motion', 'on')
+          {{ is_state('binary_sensor.nursery_occupancy', 'on')
              or is_state('binary_sensor.nursery_motion', 'on') }}
+        availability_template: "{{ not 'unavailable' in [states('binary_sensor.nursery_occupancy'), states('binary_sensor.nursery_motion')] and not 'unknown' in [states('binary_sensor.nursery_occupancy'), states('binary_sensor.nursery_motion')] and not 'none' in [states('binary_sensor.nursery_occupancy'), states('binary_sensor.nursery_motion')] }}"
         delay_off:
           minutes: 15
-
-
-          ### original values: camera motions are too sensitive
-#          {{ is_state('binary_sensor.nursery_crib_motion_detected', 'on')
-#             or is_state('binary_sensor.nursery_ptz_motion_detected', 'on')
-#             or is_state('binary_sensor.nursery_occupancy', 'on')
-#             or is_state('binary_sensor.motion_nursery', 'on') }}

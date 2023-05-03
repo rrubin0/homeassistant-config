@@ -1,10 +1,10 @@
 #####################################################################
 #   Climate Customizations
 #####################################################################
-homeassistant:
-  customize:
-    climate.downstairs:
-      icon: mdi:thermostat
-
-    climate.upstairs:
-      icon: mdi:thermostat
+#homeassistant:
+#  customize:
+#    climate.downstairs:
+#      icon: mdi:thermostat
+#
+#    climate.upstairs:
+#      icon: mdi:thermostat

@@ -8,9 +8,6 @@ timer:
   bedtime:
     duration: '00:07:00'
 
-  nursery_presence:
-    duration: '01:00:00'
-
   sun_up:
     duration: '00:15:00'
 

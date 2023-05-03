@@ -45,7 +45,7 @@ group:
       - switch.porch_rope_lights
       - switch.patio_lights
       - switch.pool_light
-      - switch.tplink_outlet_1
+      - switch.front_house_lights
       - switch.tplink_outlet_2
 
 
@@ -176,9 +176,9 @@ group:
   Outside Christmas Lights:
     entities:
       #- switch.back_yard_outlet
-      - light.smart_flood_lights
+#      - light.smart_flood_lights
       - switch.porch_rope_lights
-      - switch.tplink_outlet_1
+      - switch.front_house_lights
       - switch.tplink_outlet_2
 
 

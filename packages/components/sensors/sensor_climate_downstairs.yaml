@@ -4,55 +4,82 @@
 sensor:
   - platform: template
     sensors:
+      downstairs_hvac_preset:
+        friendly_name: "Downstairs Active Preset"
+        value_template: >-
+          {% if states('schedule.downstairs_hvac_sleep') == 'on' %}
+            sleep
+          {% elif states('schedule.downstairs_hvac_away') == 'on' %}
+            away
+          {% else %}
+            home
+          {% endif %}
+
+#  - platform: template
+#    sensors:
+#      downstairs_hvac_preset_summer:
+#        friendly_name: "Downstairs Active Preset Summer"
+#        value_template: >-
+#          {% if states('schedule.downstairs_hvac_sleep_summer') == 'on' %}
+#            sleep
+#          {% elif states('schedule.downstairs_hvac_away_summer') == 'on' %}
+#            away
+#          {% else %}
+#            home
+#          {% endif %}
+
+
+  - platform: template
+    sensors:
       ds_avg_temp:
         friendly_name: "Downstairs Average Temperature"
         unit_of_measurement: "°F"
         device_class: temperature
         value_template: >-
-          {{ ((states('sensor.downstairs_temperature') | float + states('sensor.living_room_temperature') | float + states('sensor.entryway_temperature') | float + states('sensor.office_temperature') | float + states('sensor.front_entry_multisensor_temperature') | float) /5) | round(1) | default('unknown') }}
+          {{ ((states('sensor.downstairs_temperature') | float(79.0) + states('sensor.living_room_temperature') | float(79.0) + states('sensor.entryway_temperature') | float(79.0) + states('sensor.office_temperature') | float(79.0) + states('sensor.front_entry_multisensor_temperature') | float(79.0)) /5) | round(1) }}
 
-  - platform: template
-    sensors:
-      ds_climate_current_temp:
-        friendly_name: "Downstairs AC Temperature"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).current_temperature | default('unknown') }}"
-
-  - platform: template
-    sensors:
-      ds_climate_preset:
-        friendly_name: "Active Preset"
-        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).preset_mode | default('unknown') }}"
-
+#  - platform: template
+#    sensors:
+#      ds_climate_current_temp:
+#        friendly_name: "Downstairs AC Temperature"
+#        unit_of_measurement: "°F"
+#        device_class: temperature
+#        value_template: "{{ (states.climate.downstairs.attributes|default({})).current_temperature | default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      ds_climate_preset:
+#        friendly_name: "Active Preset"
+#        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).preset_mode | default('unknown') }}"
+#
 #  - platform: template
 #    sensors:
 #      ds_climate_mode:
 #        friendly_name: "Active Schedule"
 #        value_template: "{{ (states.climate.downstairs.attributes|default({})).climate_mode | default('unknown') }}"
 #        entity_id: sensor.time
-
-  - platform: template
-    sensors:
-      ds_climate_target_high:
-        friendly_name: "Downstairs AC Setpoint"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_high | default('unknown') }}"
-
-  - platform: template
-    sensors:
-      ds_climate_target_low:
-        friendly_name: "Downstairs Heat Setpoint"
-        unit_of_measurement: "°F"
-        device_class: temperature
-        value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_low | default('unknown') }}"
-
-  - platform: template
-    sensors:
-      ds_fan_state:
-        friendly_name: "Downstairs HVAC Fan"
-        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).fan | default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      ds_climate_target_high:
+#        friendly_name: "Downstairs AC Setpoint"
+#        unit_of_measurement: "°F"
+#        device_class: temperature
+#        value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_high | default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      ds_climate_target_low:
+#        friendly_name: "Downstairs Heat Setpoint"
+#        unit_of_measurement: "°F"
+#        device_class: temperature
+#        value_template: "{{ (states.climate.downstairs.attributes|default({})).target_temp_low | default('unknown') }}"
+#
+#  - platform: template
+#    sensors:
+#      ds_fan_state:
+#        friendly_name: "Downstairs HVAC Fan"
+#        value_template: "{{ (states.climate.ecobee_downstairs.attributes|default({})).fan | default('unknown') }}"
 
 
   ################################################

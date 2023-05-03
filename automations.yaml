@@ -58,7 +58,7 @@
   trigger:
   - platform: sun
     event: sunset
-    offset: 00:05:00
+    offset: 00:10:00
     id: sunset
   - platform: sun
     event: sunrise
@@ -75,6 +75,8 @@
         target:
           entity_id:
           - group.porch_lights
+          - switch.porch_rope_lights
+          - switch.front_house_lights
     - conditions:
       - condition: trigger
         id: sunrise
@@ -185,7 +187,7 @@
     to: home
   condition:
   - condition: numeric_state
-    entity_id: sensor.dark_sky_wind_speed
+    entity_id: sensor.weatherflow_wind_speed
     below: 10
   - condition: state
     entity_id: binary_sensor.weatherflow_is_raining
@@ -200,7 +202,8 @@
     data:
       entity_id: switch.fountains_switch
 - id: ring_doorbell_motion
-  alias: Ring Doorbell Motion Triggered
+  alias: 'Camera PTZ: Front Door Ring Doorbell Motion'
+  description: PTZ preset when motion is detected at front door.
   trigger:
   - platform: state
     entity_id: binary_sensor.ring_front_door_motion
@@ -208,9 +211,11 @@
     to: 'on'
   action:
   - service: shell_command.driveway_ptz_preset_3
+    data: {}
   - delay:
       seconds: 60
   - service: shell_command.driveway_ptz_preset_2
+    data: {}
   mode: single
 - id: downstairs_bath_lights_on
   alias: 'Auto On: Downstairs Bathroom Lights'
@@ -261,37 +266,6 @@
     entity_id: switch.downstairs_bathroom_light
     domain: switch
   mode: restart
-- id: game_room_lights_on
-  alias: 'Auto On: Game Room Lights'
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.game_room_motion
-    to: 'on'
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.illuminance_game_room
-    below: '22'
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.billiards
-      brightness: 185
-      transition: 5
-- id: game_room_lights_off
-  alias: 'Auto Off: Game Room Lights'
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.game_room_motion
-    to: 'off'
-    for:
-      minutes: 7
-  condition:
-  - condition: state
-    entity_id: group.game_room_lights
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    entity_id: group.game_room_lights
 - id: kegerator_held_open
   alias: Kegerator Door Held Open
   trigger:
@@ -532,75 +506,6 @@
     data_template:
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
-- id: humidor_low
-  alias: Humidor Low
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.humidor_low
-    to: 'on'
-  action:
-  - service: light.turn_on
-    entity_id: light.sn1_led
-    data:
-      brightness: 255
-      color_name: red
-- id: humidor_ok
-  alias: Humidor OK
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.humidor_low
-    to: 'off'
-  action:
-  - service: light.turn_on
-    entity_id: light.sn1_led
-    data:
-      brightness: 255
-      color_name: green
-- id: master_bathroom_lights_on
-  alias: 'Auto On: Master Bathroom Lights'
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.master_bedroom_entry_motion
-    to: 'on'
-  condition:
-  - condition: or
-    conditions:
-    - condition: time
-      after: '17:00:00'
-      before: 08:45:00
-    - condition: state
-      entity_id: binary_sensor.weatherflow_is_raining
-      state: 'on'
-  - condition: numeric_state
-    entity_id: sensor.illuminance_master_bedroom_entry
-    below: '45'
-  - condition: state
-    entity_id: input_boolean.sleeping
-    state: 'off'
-  action:
-  - service: scene.turn_on
-    data: {}
-    target:
-      entity_id: scene.master_bathroom_morning
-  mode: single
-- id: master_bathroom_lights_off
-  alias: 'Auto Off: Master Bathroom Lights'
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.master_bedroom_entry_motion
-    to: 'off'
-    for:
-      minutes: 30
-  condition:
-  - condition: state
-    entity_id: light.master_bathroom_ceiling
-    state: 'on'
-  action:
-  - service: light.turn_off
-    data: {}
-    target:
-      area_id: 69a3968c0130497e862157a750090907
 - id: master_bath_shade_up_weekday
   alias: Master Bath Shade Up Weekday
   trigger:
@@ -673,7 +578,8 @@
       entity_id: input_select.master_bedroom_fan_speed
       option: '{{ states(''sensor.master_bedroom_fan_speed'') }}'
 - id: master_bedroom_fan_speed
-  alias: 'Dropdown: Master Bedroom Fan Speed Select'
+  alias: 'Menu: Master Bedroom Fan Speed Select'
+  description: ''
   trigger:
   - platform: state
     entity_id: input_select.master_bedroom_fan_speed
@@ -696,7 +602,8 @@
       entity_id: input_select.master_bedroom_fan_speed
       option: '{{ states(''trigger.to_state'') }}'
 - id: master_bedroom_fan_off_selected
-  alias: 'Dropdown Option: Master Bedroom Fan - Off'
+  alias: 'Menu: Master Bedroom Fan - Off'
+  description: ''
   trigger:
   - platform: state
     entity_id: input_select.master_bedroom_fan_speed
@@ -768,7 +675,8 @@
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
 - id: bedframe_select_crystal
-  alias: 'Dropdown: Master Bedroom Bedframe LED Strip'
+  alias: 'Menu: Master Bedroom Bedframe LED Strip'
+  description: ''
   trigger:
   - platform: state
     entity_id:
@@ -962,25 +870,6 @@
     data_template:
       entity_id: '{{ trigger.to_state.entity_id }}'
       option: Select an option...
-- id: nursery_fan_on
-  alias: Nursery Fan On
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.nursery_presence
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: fan.nursery_fan
-    state: 'off'
-  - condition: template
-    value_template: '{{ states(''sensor.nursery_fan_speed'') != ''0'' }}'
-  action:
-  - service: fan.turn_on
-    entity_id: fan.nursery_fan
-  - service: fan.set_percentage
-    entity_id: fan.nursery_fan
-    data_template:
-      percentage: '{{ states(''sensor.nursery_fan_speed'') | int}}'
 - id: nursery_fan_auto
   alias: 'Fan: Nursery Fan Auto Speed Select'
   trigger:
@@ -990,38 +879,14 @@
   - condition: state
     entity_id: input_boolean.nursery_fan_hold
     state: 'off'
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.nursery_presence
-      state: 'on'
-    - condition: time
-      after: '19:30:00'
-      before: 08:30:00
+  - condition: state
+    entity_id: fan.nursery_fan
+    state: 'on'
   action:
   - service: fan.set_percentage
     entity_id: fan.nursery_fan
     data_template:
       percentage: '{{ states(''sensor.nursery_fan_speed'') | int }}'
-- id: nursery_vacant
-  alias: 'Auto Off: Nursery Vacant'
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.nursery_presence
-    to: 'off'
-    for:
-      minutes: 5
-  condition:
-  - condition: time
-    before: '19:00:00'
-    after: 00:00:00
-  action:
-  - service: fan.turn_off
-    entity_id: fan.nursery_fan
-  - service: homeassistant.turn_off
-    data: {}
-    target:
-      area_id: ade76688dbb34b8d84635f8458b99cda
 - id: alexa_volume_reset_living_room
   alias: 'Alexa: Reset Living Room Volume '
   trigger:
@@ -1046,19 +911,6 @@
   action:
   - service: media_player.volume_set
     entity_id: media_player.game_room_echo
-    data_template:
-      volume_level: '{{ states(''sensor.alexa_volume'') }}'
-- id: alexa_volume_reset_nursery
-  alias: Reset Alexa Volume Nursery
-  trigger:
-  - platform: state
-    entity_id: media_player.nursery_dot
-    to: idle
-    for:
-      minutes: 1
-  action:
-  - service: media_player.volume_set
-    entity_id: media_player.nursery_dot
     data_template:
       volume_level: '{{ states(''sensor.alexa_volume'') }}'
 - id: alexa_volume_reset_wine_room
@@ -1161,52 +1013,72 @@
       option: Select an option...
   mode: single
 - id: climate_resume_on_peak
-  alias: 'Arrival: Climate Resume'
+  alias: Arrival Sequence
+  description: Resume HVAC, lights, and disarm cameras.
   trigger:
   - platform: state
-    entity_id: group.all_devices
+    entity_id:
+    - group.all_devices
     from: not_home
     to: home
     for:
-      minutes: 2
+      hours: 0
+      minutes: 0
+      seconds: 0
   condition:
+  - condition: state
+    entity_id: input_boolean.visitor_mode
+    state: 'off'
+  action:
+  - choose:
+    - conditions:
+      - condition: sun
+        after: sunset
+      sequence:
+      - service: notify.mobile_app_rcom
+        data:
+          message: Turning on some lights
+          title: Welcome Home
+          data:
+            push:
+              sound: US-EN-Alexa-Welcome-Home.wav
+      - service: script.turn_on
+        data: {}
+        target:
+          entity_id: script.bright
+      - service: homeassistant.turn_on
+        data: {}
+        target:
+          entity_id: group.accent_lights
+      - delay:
+          hours: 0
+          minutes: 5
+          seconds: 0
+          milliseconds: 0
+      - service: script.turn_on
+        data: {}
+        target:
+          entity_id: script.evening
+    - conditions:
+      - condition: sun
+        before: sunset
+      sequence:
+      - service: script.blink_disarm_backyard_cameras
+        data: {}
+  - service: script.blink_disarm_interior_cameras
+    data: {}
   - condition: template
     value_template: '{{ states.climate.downstairs.attributes.current_temperature >=
       79 }}'
-  action:
   - service: script.turn_on
     data: {}
     target:
       entity_id:
       - script.climate_downstairs_cooldown
-      - script.ecobee_upstairs_cooldown
-- id: climate_sleep_mode
-  alias: 'Climate: Sleep Mode'
-  trigger:
-  - platform: state
-    entity_id: script.bedtime
-    from: 'off'
-    to: 'on'
-  - platform: state
-    entity_id: input_boolean.after_hours
-    from: 'off'
-    to: 'on'
-  action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Sleep
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Sleep
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
+      - script.upstairs_cooldown
 - id: climate_door_held_open
-  alias: 'Climate: Door Held Open Eco Mode On'
-  description: Turn on Eco mode if a door is detected held open for too long.
+  alias: 'Climate: Door Held Open Away Mode On'
+  description: Turn on Away mode if a door is detected held open for too long.
   trigger:
   - platform: state
     entity_id:
@@ -1214,106 +1086,41 @@
     to: 'on'
     for:
       hours: 0
-      minutes: 4
+      minutes: 5
       seconds: 0
   condition:
-  - condition: state
-    entity_id: binary_sensor.hvac_running
-    state: 'on'
   - condition: state
     entity_id: input_boolean.hvac_maintenance
     state: 'off'
   action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Eco
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Eco
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
+  - service: climate.set_temperature
+    data_template:
+      entity_id: climate.downstairs
+      target_temp_low: '{{ states(''input_number.hvac_ds_heat_away'') }}'
+      target_temp_high: '{{ states(''input_number.hvac_ds_cool_away'') }}'
   - service: script.tts_door_held_open
     data: {}
 - id: climate_resume_door_restored
   alias: 'Climate: Resume on Door Restoral'
   trigger:
   - platform: state
-    entity_id: binary_sensor.door_held_open
+    entity_id:
+    - binary_sensor.door_held_open
     to: 'off'
     for:
-      minutes: 1
-  condition: []
-  action:
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_upstairs
-      resume_all: 'true'
-  - service: ecobee.resume_program
-    data:
-      entity_id: climate.ecobee_downstairs
-      resume_all: 'true'
-- id: climate_hvac_fan_summer
-  alias: Set HVAC fan runtime summer
-  trigger:
-  - platform: state
-    entity_id: sensor.season
-    to: Summer
-  action:
-  - service: ecobee.set_fan_min_on_time
-    data:
-      entity_id: climate.downstairs
-      fan_min_on_time: 15
-  - service: ecobee.set_fan_min_on_time
-    data:
-      entity_id: climate.upstairs
-      fan_min_on_time: 30
-- id: climate_hvac_fan_winter
-  alias: Set HVAC fan runtime winter
-  trigger:
-  - platform: state
-    entity_id: sensor.season
-    to: Winter
-  - platform: state
-    entity_id: sensor.season
-    to: Awesome
-  action:
-  - service: ecobee.set_fan_min_on_time
-    data:
-      entity_id: climate.downstairs
-      fan_min_on_time: 5
-  - service: ecobee.set_fan_min_on_time
-    data:
-      fan_min_on_time: 5
-- id: climate_eco_awesome
-  alias: Set Eco Mode if weather is nice
-  trigger:
-  - platform: state
-    entity_id: sensor.season
-    to: Awesome
+      hours: 0
+      minutes: 3
+      seconds: 0
   condition:
-  - condition: template
-    value_template: '{{ states.climate.downstairs.attributes.current_temperature <=
-      80 }}'
-  - condition: template
-    value_template: '{{ states.climate.upstairs.attributes.current_temperature <=
-      82 }}'
+  - condition: state
+    entity_id: input_boolean.peak_hours
+    state: 'off'
   action:
-  - service: climate.set_preset_mode
+  - service: script.climate_downstairs_resume_temp
+    data: {}
+  - service: notify.mobile_app_rcom
     data:
-      preset_mode: Eco
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Eco
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
+      message: All doors closed. Thank you!
 - id: climate_precool_downstairs
   alias: 'Climate: Downstairs Precool '
   trigger:
@@ -1331,6 +1138,9 @@
     - condition: state
       entity_id: input_boolean.visitor_mode
       state: 'on'
+  - condition: template
+    value_template: '{{ states.climate.downstairs.attributes.current_temperature >=
+      80 }}'
   - condition: time
     weekday:
     - mon
@@ -1340,16 +1150,9 @@
     - fri
     before: 00:00:00
     after: 00:00:00
-  - condition: template
-    value_template: '{{ state_attr(''climate.ecobee_downstairs'',''preset_mode'')
-      != ''Away'' }}'
   action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id:
-      - climate.ecobee_downstairs
+  - service: script.climate_downstairs_cooldown
+    data: {}
 - id: climate_precool_upstairs
   alias: 'Climate: Upstairs Precool '
   trigger:
@@ -1367,13 +1170,12 @@
     - condition: state
       entity_id: input_boolean.visitor_mode
       state: 'on'
+  - condition: template
+    value_template: '{{ states.climate.upstairs.attributes.current_temperature >=
+      81 }}'
   action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
+  - service: script.upstairs_cooldown
+    data: {}
 - id: accent_lights_on
   alias: 'Schedule On: Accent Lights'
   description: Turn the accent lights on at sunset
@@ -1444,14 +1246,11 @@
       minutes: 3
       seconds: 0
   - platform: template
-    value_template: "{% if is_state('sensor.dark_sky_summary', 'Rain') %}\n  'true'\n{%
-      elif is_state('sensor.dark_sky_summary', 'Thunderstorm') %}\n  'true'\n{% elif
-      is_state('sensor.dark_sky_summary', 'Showers') %}\n  'true'\n{% elif is_state('sensor.dark_sky_summary',
-      'Drizzle') %}\n  'true'\n{% elif is_state('sensor.dark_sky_summary', 'Mostly
-      Cloudy') %}\n  'true'\n{% else %}\n  'false'\n{% endif %}"
-  - platform: numeric_state
-    entity_id: sensor.dark_sky_precip_intensity
-    above: '1'
+    value_template: "{% if is_state('sensor.pirateweather_summary', 'Rain') %}\n  'true'\n{%
+      elif is_state('sensor.pirateweather_summary', 'Thunderstorm') %}\n  'true'\n{%
+      elif is_state('sensor.pirateweather_summary', 'Showers') %}\n  'true'\n{% elif
+      is_state('sensor.pirateweather_summary', 'Drizzle') %}\n  'true'\n{% elif is_state('sensor.pirateweather_summary',
+      'Mostly Cloudy') %}\n  'true'\n{% else %}\n  'false'\n{% endif %}"
   condition:
   - condition: time
     after: 08:00:00
@@ -1459,9 +1258,6 @@
   - condition: state
     entity_id: group.all_devices
     state: home
-  - condition: numeric_state
-    entity_id: sensor.dark_sky_cloud_coverage
-    above: '69'
   - condition: numeric_state
     entity_id: sensor.front_entry_multisensor_illuminance
     below: '125'
@@ -1484,36 +1280,6 @@
     data: {}
     target:
       entity_id: automation.evening_scene_schedule
-- id: lights_on_arrival
-  alias: 'Arrival: Lights On After Dark'
-  trigger:
-  - platform: state
-    entity_id: group.all_devices
-    from: not_home
-    to: home
-  condition:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  - condition: state
-    entity_id: input_boolean.visitor_mode
-    state: 'off'
-  action:
-  - service: notify.mobile_app_rcom
-    data:
-      title: Welcome Home
-      message: Turning on some lights
-      data:
-        push:
-          sound: US-EN-Alexa-Welcome-Home.wav
-  - service: script.turn_on
-    entity_id: script.bright
-  - service: homeassistant.turn_on
-    entity_id: group.accent_lights
-  - delay:
-      minutes: 5
-  - service: script.turn_on
-    entity_id: script.evening
 - id: away_mode_countdown
   alias: Away Mode Countdown
   trigger:
@@ -1680,6 +1446,10 @@
     - thu
     - fri
     before: 00:00:00
+    after: 00:00:00
+  - condition: state
+    entity_id: calendar.pto
+    state: 'off'
   action:
   - service: script.morning_sequence
     data: {}
@@ -1843,6 +1613,9 @@
   - condition: time
     before: '19:00:00'
     after: '14:00:00'
+  - condition: state
+    entity_id: calendar.pto
+    state: 'off'
   action:
   - service: media_player.volume_set
     entity_id: media_player.living_room_echo
@@ -1895,7 +1668,7 @@
   alias: Reminder Close Doors When Weather is Warm
   trigger:
   - platform: numeric_state
-    entity_id: sensor.dark_sky_temperature
+    entity_id: sensor.weatherflow_feels_like_temperature
     above: 84.5
   condition:
   - condition: state
@@ -1906,33 +1679,7 @@
     state: home
   action:
   - service: script.tts_warm_weather
-- id: notify_awesome_weather
-  alias: 'Notify: Awesome Weather'
-  trigger:
-  - platform: state
-    entity_id: sensor.season
-    to: Awesome
-    for:
-      hours: 0
-      minutes: 30
-      seconds: 0
-  condition:
-  - condition: time
-    after: 08:00:00
-    before: '22:00:00'
-  - condition: state
-    entity_id: binary_sensor.all_doors
-    state: 'off'
-  action:
-  - service: notify.mobile_app_rcom
-    data:
-      title: Awesome Weather
-      message: It's {{ states('sensor.dark_sky_temperature')|round }} degrees outside.
-        Time to open up the house!
-      data:
-        push:
-          sound:
-            name: default
+    data: {}
 - id: notify_ios_cancel_away
   alias: iOS Cancel Away
   trigger:
@@ -1966,9 +1713,10 @@
   - service: timer.cancel
     entity_id: timer.away_mode
 - id: notify_ha_startup
-  alias: Startup Notification
+  alias: 'Notify: Home Assistant Started'
+  description: ''
   trigger:
-    platform: homeassistant
+  - platform: homeassistant
     event: start
   action:
   - service: notify.mobile_app_rcom
@@ -2045,15 +1793,22 @@
   alias: 'Arrival: Unlock South Door'
   trigger:
   - platform: state
-    entity_id: person.megs
-    from: not_home
+    entity_id:
+    - person.megs
     to: home
-  condition:
-  - condition: template
-    value_template: '{{ is_state(''lock.south_entry'', ''locked'') or false }}'
+    from: not_home
+    id: megs
+  condition: []
   action:
-  - service: script.unlock_megs
-    data: {}
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: megs
+      - condition: template
+        value_template: '{{ is_state(''lock.south_entry'', ''locked'') or false }}'
+      sequence:
+      - service: script.unlock_megs
+        data: {}
 - id: notify_unlock_south_door
   alias: South Door Unlock By User
   trigger:
@@ -2240,15 +1995,6 @@
   action:
   - service: script.bedtime
     data: {}
-- id: timer_sun_up_finish
-  alias: Sun Up Timer Finish
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.sun_up
-  action:
-  - service: script.sun_up
 - id: minimote_1_b1_short
   alias: 'Minimote 1: Downstairs'
   trigger:
@@ -2576,72 +2322,6 @@
           sound:
             name: default
   mode: single
-- id: '1620358929402'
-  alias: 'Climate: Upstairs Post-Cool'
-  description: ''
-  trigger:
-  - platform: time
-    at: '17:30:00'
-  condition:
-  - condition: state
-    entity_id: sensor.season
-    state: Summer
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: group.all_devices
-      state: home
-    - condition: state
-      entity_id: input_boolean.visitor_mode
-      state: 'on'
-  - condition: template
-    value_template: '{{ state_attr(''climate.upstairs'',''preset_mode'') != ''Away''
-      }}'
-  action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
-  mode: single
-- id: '1622171964857'
-  alias: Nursery Vacant Daytime
-  description: additional automation to handle the nightlight lamps so they don't
-    get turned off at night
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.nursery_presence
-    to: 'off'
-    for: 00:05:00
-  condition:
-  - condition: time
-    after: '11:30:00'
-  action:
-  - service: homeassistant.turn_off
-    data: {}
-    target:
-      entity_id:
-      - switch.nursery_lamp
-  mode: single
-- id: '1622870457071'
-  alias: Door Held Open Restoral
-  description: Place the HVAC back after door held open is clear.
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.door_held_open
-    from: 'on'
-    to: 'off'
-    for: 00:00:05
-  condition: []
-  action:
-  - service: ecobee.resume_program
-    data:
-      resume_all: true
-  - service: notify.mobile_app_rcom
-    data:
-      message: All doors closed. Thank you!
-  mode: single
 - id: '1624029858566'
   alias: 'Notify: Ring Doorbell Low Battery'
   description: Low battery alert for side door Ring Doorbell
@@ -2659,32 +2339,6 @@
         push:
           sound:
             name: default
-  mode: single
-- id: '1629255888600'
-  alias: 'Climate: Upstairs Precool Evening'
-  description: ''
-  trigger:
-  - platform: time
-    at: '19:15:00'
-  condition:
-  - condition: state
-    entity_id: sensor.season
-    state: Summer
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: group.all_devices
-      state: home
-    - condition: state
-      entity_id: input_boolean.visitor_mode
-      state: 'on'
-  action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id:
-      - climate.ecobee_upstairs
   mode: single
 - id: '1635830339816'
   alias: 'Notify: AC Running with Doors Open'
@@ -2752,21 +2406,56 @@
       entity_id: switch.pool_pump
   mode: single
 - id: '1640634316387'
-  alias: 'Watch Dog: Sleeping'
+  alias: 'Watch Dog: Sleeping On'
   description: This watches for the bedtime timer to start and automatically turns
     on input boolean sleeping, if not on
   trigger:
   - platform: state
     entity_id: timer.bedtime
     to: active
-  condition:
-  - condition: state
-    entity_id: input_boolean.sleeping
-    state: 'off'
+    id: bedtime
+  - platform: time
+    at: '10:00:00'
+    id: weekday
+  - platform: time
+    at: '11:00:00'
+    id: weekend
+  condition: []
   action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.sleeping
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: bedtime
+      - condition: state
+        entity_id: input_boolean.sleeping
+        state: 'off'
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.sleeping
+    - conditions:
+      - condition: trigger
+        id: weekday
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.sleeping
+    - conditions:
+      - condition: trigger
+        id: weekend
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'off'
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.sleeping
   mode: single
 - id: '1641367177504'
   alias: 'Watch Dog: Master Bedroom LED Strip'
@@ -2779,9 +2468,7 @@
       hours: 0
       minutes: 3
       seconds: 0
-  condition:
-  - condition: sun
-    after: sunrise
+  condition: []
   action:
   - service: light.turn_off
     data:
@@ -2975,34 +2662,6 @@
       message: Lower Safe Door Opened!
       title: Safe Opened!
   mode: single
-- id: '1649133344773'
-  alias: 'Climate: Precool Automation Control'
-  description: Enables or disables precool automation based on month.
-  trigger:
-  - platform: state
-    entity_id: sensor.date
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: binary_sensor.climate_precool
-        state: 'on'
-      sequence:
-      - service: automation.turn_on
-        data: {}
-        target:
-          entity_id:
-          - automation.climate_precool_downstairs
-          - automation.climate_precool_upstairs
-    default:
-    - service: automation.turn_off
-      data: {}
-      target:
-        entity_id:
-        - automation.climate_precool_downstairs
-        - automation.climate_precool_upstairs
-  mode: single
 - id: '1650746129837'
   alias: 'Notify: Sun Elevation Testing'
   description: ''
@@ -3150,40 +2809,6 @@
           entity_id: scene.daybreak
         metadata: {}
     default: []
-  mode: single
-- id: '1651806554724'
-  alias: 'Climate: Downstairs Precool Evening'
-  description: ''
-  trigger:
-  - platform: time
-    at: '18:00:00'
-  condition:
-  - condition: state
-    entity_id: sensor.season
-    state: Summer
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: group.all_devices
-      state: home
-    - condition: state
-      entity_id: input_boolean.visitor_mode
-      state: 'on'
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-    before: 00:00:00
-    after: 00:00:00
-  action:
-  - service: climate.set_preset_mode
-    data:
-      preset_mode: Precool
-    target:
-      entity_id: climate.ecobee_downstairs
   mode: single
 - id: '1652625668660'
   alias: 'Auto Off: Guest Room Lights'
@@ -4088,25 +3713,6 @@
         data: {}
     default: []
   mode: single
-- id: '1660526414304'
-  alias: 'Arrival: Disarm Blink Cameras'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - group.all_devices
-    to: home
-    from: not_home
-  condition:
-  - condition: state
-    entity_id: alarm_control_panel.blink_saguaro_estates
-    state: armed
-  action:
-  - service: alarm_control_panel.alarm_disarm
-    data: {}
-    target:
-      entity_id: alarm_control_panel.blink_saguaro_estates
-  mode: single
 - id: '1662409933772'
   alias: 'Notify: North Gate Open'
   description: ''
@@ -4147,49 +3753,89 @@
         data: {}
         target:
           entity_id: input_boolean.north_gate_shunt
-    default:
-    - condition: state
-      entity_id: input_boolean.north_gate_shunt
-      state: 'off'
-    - repeat:
-        until:
-        - condition: state
-          entity_id: binary_sensor.north_gate_state
-          state: 'off'
-          for:
-            hours: 0
-            minutes: 0
-            seconds: 3
-        sequence:
-        - service: notify.mobile_app_rcom
-          data:
-            message: The gate is open!
-            title: North Gate
+      - service: script.blink_disarm_porch_cameras
+        data: {}
+      - service: script.blink_disarm_backyard_cameras
+        data: {}
+    - conditions:
+      - condition: sun
+        after: sunset
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.back_yard_outlet
+      - condition: state
+        entity_id: input_boolean.north_gate_shunt
+        state: 'off'
+      - repeat:
+          until:
+          - condition: state
+            entity_id: binary_sensor.north_gate_state
+            state: 'off'
+            for:
+              hours: 0
+              minutes: 0
+              seconds: 3
+          sequence:
+          - service: notify.mobile_app_rcom
             data:
-              push:
-                sound:
-                  name: default
-                  critical: 1
-                  volume: 1
-        - delay:
-            hours: 0
-            minutes: 0
-            seconds: 45
-            milliseconds: 0
-  mode: single
+              message: The gate is open!
+              title: North Gate
+              data:
+                push:
+                  sound:
+                    name: default
+                    critical: 1
+                    volume: 1
+          - delay:
+              hours: 0
+              minutes: 0
+              seconds: 45
+              milliseconds: 0
+    default: []
+  - repeat:
+      until:
+      - condition: state
+        entity_id: binary_sensor.north_gate_state
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 3
+      sequence:
+      - condition: state
+        entity_id: input_boolean.north_gate_shunt
+        state: 'off'
+      - service: notify.mobile_app_rcom
+        data:
+          message: The gate is open!
+          title: North Gate
+          data:
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 45
+          milliseconds: 0
+  mode: restart
 - id: '1662410031085'
   alias: 'Notify: North Gate Closed'
   description: ''
   trigger:
-  - type: not_opened
-    platform: device
-    device_id: 5bac223422c821c9f294f72b7ce2e71e
-    entity_id: binary_sensor.north_gate_state
-    domain: binary_sensor
+  - platform: state
+    entity_id:
+    - binary_sensor.north_gate_state
+    from: 'on'
+    to: 'off'
     for:
       hours: 0
       minutes: 0
-      seconds: 10
+      seconds: 5
   condition: []
   action:
   - service: notify.mobile_app_rcom
@@ -4226,6 +3872,8 @@
     data:
       message: The gate sensor has been rearmed.
       title: North Gate
+  - service: script.blink_arm_porch_cameras
+    data: {}
   mode: single
 - id: '1665890271088'
   alias: 'Hue Remote: Wine Room'
@@ -4486,34 +4134,45 @@
   description: ''
   trigger:
   - platform: time
-    at: '22:00:00'
-    id: 10pm
-  - platform: time
     at: '23:00:00'
-    id: 11pm
+    id: weekday
   - platform: time
-    at: '17:35:00'
-    id: 535pm
+    at: '23:59:59'
+    id: weekend
   - platform: time
     at: 08:00:00
-    id: 0800
+    id: morning
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: below_horizon
+    id: sunset
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
   condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
-        id: 535pm
+        id: sunset
       - condition: state
         entity_id: calendar.seasonal_christmas
         state: 'on'
+        enabled: false
       sequence:
       - service: homeassistant.turn_on
         data: {}
         target:
           entity_id: group.outside_christmas_lights
+      - service: notify.alexa_media_living_room_echo
+        data:
+          message: Time to turn on the Christmas projector!
+        enabled: false
     - conditions:
       - condition: trigger
-        id: 10pm
+        id: weekday
       - condition: time
         before: 00:00:00
         weekday:
@@ -4534,7 +4193,7 @@
           - group.outside_christmas_lights
     - conditions:
       - condition: trigger
-        id: 11pm
+        id: weekend
       - condition: time
         before: 00:00:00
         weekday:
@@ -4551,7 +4210,7 @@
           entity_id: group.outside_christmas_lights
     - conditions:
       - condition: trigger
-        id: 0800
+        id: morning
       - condition: or
         conditions:
         - condition: state
@@ -4569,4 +4228,906 @@
         target:
           entity_id: group.inside_christmas_lights
     default: []
+  mode: single
+- id: '1670305140561'
+  alias: 'Notify: Mailbox Opened'
+  description: Mailbox monitor.
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.mailbox
+    to: 'on'
+    id: mailbox_open
+  condition:
+  - condition: state
+    entity_id: input_boolean.mailbox_shunt
+    state: 'off'
+  action:
+  - service: counter.increment
+    data: {}
+    target:
+      entity_id: counter.mail_delivered
+  - repeat:
+      until:
+      - condition: state
+        entity_id: binary_sensor.mailbox
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 3
+      sequence:
+      - service: notify.mobile_app_rcom
+        data:
+          message: The mailbox is open!
+          title: Mailbox
+          data:
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1
+      - delay:
+          hours: 0
+          minutes: 1
+          seconds: 0
+          milliseconds: 0
+        enabled: true
+  mode: restart
+- id: '1670349344488'
+  alias: 'Auto Off: Space Heater'
+  description: 'Turn off space heater if on too long. '
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.space_heater
+    to: 'on'
+    for:
+      hours: 3
+      minutes: 0
+      seconds: 0
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.space_heater
+  mode: single
+- id: '1671064221168'
+  alias: 'Notify: Mailbox Closed'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.mailbox
+    to: 'off'
+    from: 'on'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 2
+  condition: []
+  action:
+  - service: notify.mobile_app_rcom
+    data:
+      message: The Mailbox is closed.
+      title: Mailbox
+  mode: single
+- id: '1671077456406'
+  alias: 'Traverse: Cold Weather Start'
+  description: Start the car when it's cold in the morning
+  trigger:
+  - platform: time
+    at: 07:16:00
+  condition:
+  - condition: state
+    entity_id: calendar.aj_school
+    state: 'on'
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.weatherflow_air_temperature
+      below: 55
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+  action:
+  - service: script.traverse_lock_doors
+    data: {}
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - service: script.traverse_start_vehicle
+    data: {}
+  mode: single
+- id: '1671080387589'
+  alias: 'Mailbox: Delivery Counter'
+  description: Controls counter to determine mail delivery vs mail checking
+  trigger:
+  - platform: state
+    entity_id:
+    - counter.mail_delivered
+    to: '1'
+    id: 1_count
+  - platform: state
+    entity_id:
+    - counter.mail_delivered
+    to: '2'
+    id: 2_count
+  - platform: numeric_state
+    entity_id: counter.mail_delivered
+    above: 2
+    id: reset_counter
+  - platform: state
+    entity_id:
+    - input_boolean.mailbox_shunt
+    id: shunt_state
+  - platform: time
+    at: 07:00:00
+    id: next_morning
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 1_count
+      - condition: time
+        before: '15:30:00'
+        after: '10:00:00'
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+        - sat
+      sequence:
+      - service: notify.alexa_media_office_dot
+        data:
+          title: Mail
+          message: The mail has been delivered. Don't forget to go check.
+      - service: notify.mobile_app_rcom
+        data:
+          title: Mailbox
+          message: You've got mail!
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.mail_delivered
+    - conditions:
+      - condition: trigger
+        id: 2_count
+      - condition: state
+        entity_id: input_boolean.mailbox_shunt
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.mail_delivered
+        state: 'on'
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.mail_delivered
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.mail_delivered
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: reset_counter
+        - condition: trigger
+          id: shunt_state
+      sequence:
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.mail_delivered
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.mail_delivered
+    - conditions:
+      - condition: trigger
+        id: next_morning
+      - condition: state
+        entity_id: input_boolean.mail_delivered
+        state: 'on'
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.mail_delivered
+      - service: counter.reset
+        data: {}
+        target:
+          entity_id: counter.mail_delivered
+  mode: single
+- id: '1671683716650'
+  alias: 'Notify: Calendar Event - Home'
+  description: Notify any time a calendar event is started.
+  trigger:
+  - platform: calendar
+    event: start
+    entity_id: calendar.home
+  action:
+  - service: persistent_notification.create
+    data:
+      message: Event {{ trigger.calendar_event.summary }} @ {{ trigger.calendar_event.start
+        }}
+  mode: queued
+- id: '1673321537231'
+  alias: Auto Off Front Accent Lights
+  description: turn off porch rope lights and up lighting at night (turned on with
+    porch lights)
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.porch_rope_lights
+      - switch.front_house_lights
+  mode: single
+- id: '1676682329114'
+  alias: 'Climate: School Day Heat'
+  description: Warm up downstairs on cold school days
+  trigger:
+  - platform: time
+    at: 06:30:00
+  condition:
+  - condition: state
+    entity_id: calendar.aj_school
+    state: 'on'
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.weatherflow_air_temperature
+      below: 55
+    - condition: state
+      entity_id: group.all_devices
+      state: home
+  action:
+  - service: climate.set_temperature
+    data:
+      target_temp_high: 79
+      target_temp_low: 73
+    target:
+      entity_id: climate.downstairs
+  mode: single
+- id: '1677810805629'
+  alias: 'Schedule: Blink Floodlight'
+  description: Arm/Disarm the floodlight camera.
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: '-10'
+    id: sunset
+  - platform: sun
+    event: sunrise
+    offset: '5'
+    id: sunrise
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: sunset
+      sequence:
+      - service: script.blink_arm_north_floodlight
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: sunrise
+      sequence:
+      - service: script.blink_disarm_north_floodlight
+        data: {}
+  mode: single
+- id: '1678579259741'
+  alias: 'Auto On: Master Bath Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 21a69519f12caba2d0d808667cb1f3db
+    entity_id: binary_sensor.master_bathroom_motion
+    domain: binary_sensor
+  condition:
+  - condition: or
+    conditions:
+    - condition: time
+      after: '17:00:00'
+      before: 08:45:00
+    - condition: state
+      entity_id: binary_sensor.weatherflow_is_raining
+      state: 'on'
+  - condition: numeric_state
+    entity_id: sensor.illuminance_master_bedroom_entry
+    below: 45
+  - condition: state
+    entity_id: input_boolean.sleeping
+    state: 'off'
+  action:
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.master_bathroom_morning
+  - wait_for_trigger:
+    - type: no_motion
+      platform: device
+      device_id: 21a69519f12caba2d0d808667cb1f3db
+      entity_id: binary_sensor.master_bathroom_motion
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+  - condition: state
+    entity_id: light.master_bathroom_ceiling
+    state: 'on'
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id: 69a3968c0130497e862157a750090907
+  mode: restart
+- id: '1678593165159'
+  alias: 'Blink: Update Image'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /15
+  condition: []
+  action:
+  - service: blink.trigger_camera
+    data: {}
+    target:
+      entity_id:
+      - camera.blink_east_pool
+      - camera.blink_office_camera
+      - camera.blink_playground_north_pool
+      - camera.blink_floodlight
+      - camera.blink_porch_north
+      - camera.blink_porch_south
+      - camera.blink_living_room
+  mode: single
+- id: '1678640482823'
+  alias: 'Auto On: Game Room Lights'
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 4ca889a3c6b5ed8107947ed0158b4e3d
+    entity_id: binary_sensor.game_room_motion
+    domain: binary_sensor
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.illuminance_game_room
+    below: 22
+  action:
+  - service: light.turn_on
+    data:
+      transition: 5
+      brightness: 185
+    target:
+      entity_id: light.billiards
+  - wait_for_trigger:
+    - type: no_motion
+      platform: device
+      device_id: 4ca889a3c6b5ed8107947ed0158b4e3d
+      entity_id: binary_sensor.game_room_motion
+      domain: binary_sensor
+      for:
+        hours: 0
+        minutes: 2
+        seconds: 0
+  - condition: state
+    entity_id: light.billiards
+    state: 'on'
+  - service: light.turn_off
+    data: {}
+    target:
+      area_id: 506e64eb32a242da91ab8df3a651f083
+  mode: restart
+- id: '1681277223136'
+  alias: 'Climate: Downstairs HVAC Schedule On'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.downstairs_hvac_away
+    to: 'on'
+    id: away
+  - platform: state
+    entity_id:
+    - schedule.downstairs_hvac_sleep
+    to: 'on'
+    id: sleep
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: away
+      sequence:
+      - service: script.climate_downstairs_away
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: sleep
+      sequence:
+      - service: script.climate_downstairs_sleep
+        data: {}
+  mode: single
+- id: '1681277811977'
+  alias: 'Climate: Downstairs HVAC Schedule Off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.downstairs_hvac_away
+    to: 'off'
+    id: away_off
+  - platform: state
+    entity_id:
+    - schedule.downstairs_hvac_sleep
+    to: 'off'
+    id: sleep_off
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: away_off
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: group.all_devices
+          state: home
+        - condition: state
+          entity_id: input_boolean.visitor_mode
+          state: 'on'
+      - condition: template
+        value_template: '{{ states.climate.downstairs.attributes.current_temperature
+          >=80 }}'
+      sequence:
+      - service: script.climate_downstairs_cooldown
+        data: {}
+    default:
+    - service: script.climate_downstairs_resume_temp
+      data: {}
+  mode: single
+- id: '1681606575996'
+  alias: 'Presence: Kids Room'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.nursery_presence
+    from: 'on'
+    to: 'off'
+    id: presence_off
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+  - platform: state
+    entity_id:
+    - binary_sensor.nursery_presence
+    from: 'off'
+    to: 'on'
+    id: presence_on
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: presence_on
+      - condition: state
+        entity_id: fan.nursery_fan
+        state: 'off'
+      sequence:
+      - service: fan.turn_on
+        data: {}
+        target:
+          entity_id: fan.nursery_fan
+    - conditions:
+      - condition: trigger
+        id: presence_off
+      - condition: state
+        entity_id: input_boolean.sleeping
+        state: 'off'
+      sequence:
+      - service: homeassistant.turn_off
+        data: {}
+        target:
+          device_id:
+          - 9b73fc070aca70a2aea303dd8651ee34
+          - c401cd7c13ac474c9564cb7463d83522
+          - 772650c5e6eaadbea6703ee8ff09efd4
+          - 6e39e8ee15931b3eb8393ead9b9172b3
+          - 4f526e48e95b1a69649f5f740be6f918
+          - 440689e8372d2add9be2d45a5bb17303
+  mode: restart
+- id: '1681611640758'
+  alias: 'Notify: Humidor Low'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.humidor_humidity
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.humidor_humidity
+    below: 69
+  - condition: state
+    entity_id: input_boolean.humidor_shunt
+    state: 'off'
+  action:
+  - repeat:
+      until:
+      - condition: numeric_state
+        entity_id: sensor.humidor_humidity
+        above: 68
+      sequence:
+      - service: notify.mobile_app_rcom
+        data:
+          message: '"The humidor is down to {{ states(''sensor.humidor_humidity'')
+            }}% humidity. Add water!"'
+      - delay:
+          hours: 0
+          minutes: 10
+          seconds: 0
+          milliseconds: 0
+  mode: single
+- id: '1681835272696'
+  alias: 'Watch Dog: Sleeping Off Kids Room'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.sleeping
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.nursery_presence
+    state: 'off'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: fan.nursery_fan
+      state: 'on'
+    - condition: state
+      entity_id: group.nursery_lights
+      state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      device_id:
+      - 440689e8372d2add9be2d45a5bb17303
+      - 6e39e8ee15931b3eb8393ead9b9172b3
+      - c401cd7c13ac474c9564cb7463d83522
+      - 772650c5e6eaadbea6703ee8ff09efd4
+      - 4f526e48e95b1a69649f5f740be6f918
+      entity_id: light.nursery_wall_light
+  mode: single
+- id: '1681835443748'
+  alias: 'Watch Dog: Sleeping Off Master Bedroom'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.sleeping
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 3
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.master_bedroom_presence
+    state: 'off'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.master_bedroom_fan
+      state: 'on'
+    - condition: state
+      entity_id: group.master_bedroom_lights
+      state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id: group.master_bedroom_lights
+  mode: single
+- id: '1682489039935'
+  alias: 'Climate: Downstairs Preset'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_select.hvac
+    to: Blue
+    id: blue
+  - platform: state
+    entity_id:
+    - input_select.climate_downstairs_preset
+    to: Home
+    id: home
+  - platform: state
+    entity_id:
+    - input_select.climate_downstairs_preset
+    to: Away
+    id: away
+  - platform: state
+    entity_id:
+    - input_select.climate_downstairs_preset
+    to: Sleep
+    id: sleep
+  - platform: state
+    entity_id:
+    - input_select.climate_downstairs_preset
+    to: Precool
+    id: precool
+  - platform: state
+    entity_id:
+    - input_select.climate_downstairs_preset
+    to: Resume
+    id: resume
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: input_select.select_option
+    data_template:
+      entity_id: '{{ trigger.to_state.entity_id }}'
+      option: Select an option...
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: home
+      sequence:
+      - service: script.climate_downstairs_home
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: away
+      sequence:
+      - service: script.climate_downstairs_away
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: sleep
+      sequence:
+      - service: script.climate_downstairs_sleep
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: precool
+      sequence:
+      - service: script.climate_downstairs_cooldown
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: resume
+      sequence:
+      - service: script.climate_downstairs_resume_temp
+        data: {}
+  mode: single
+- id: '1682491208551'
+  alias: 'Climate: Upstairs Preset'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_select.hvac
+    to: Blue
+    id: blue
+  - platform: state
+    entity_id:
+    - input_select.climate_upstairs_preset
+    to: Home
+    id: home
+  - platform: state
+    entity_id:
+    - input_select.climate_upstairs_preset
+    to: Away
+    id: away
+  - platform: state
+    entity_id:
+    - input_select.climate_upstairs_preset
+    to: Sleep
+    id: sleep
+  - platform: state
+    entity_id:
+    - input_select.climate_upstairs_preset
+    to: Precool
+    id: precool
+  - platform: state
+    entity_id:
+    - input_select.climate_upstairs_preset
+    to: Resume
+    id: resume
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+  - service: input_select.select_option
+    data_template:
+      entity_id: '{{ trigger.to_state.entity_id }}'
+      option: Select an option...
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: home
+      sequence:
+      - service: script.climate_upstairs_home
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: away
+      sequence:
+      - service: script.climate_upstairs_away
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: sleep
+      sequence:
+      - service: script.climate_upstairs_sleep
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: precool
+      sequence:
+      - service: script.upstairs_cooldown
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: resume
+      sequence:
+      - service: script.climate_upstairs_resume
+        data: {}
+  mode: single
+- id: '1682565728187'
+  alias: 'Climate: Upstairs HVAC Schedule Off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.upstairs_hvac_away
+    to: 'off'
+    id: away_off
+  - platform: state
+    entity_id:
+    - schedule.upstairs_hvac_sleep
+    to: 'off'
+    id: sleep_off
+  - platform: state
+    entity_id:
+    - input_boolean.sleeping
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    id: awake
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: away_off
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: group.all_devices
+          state: home
+        - condition: state
+          entity_id: input_boolean.visitor_mode
+          state: 'on'
+      - condition: template
+        value_template: '{{ states.climate.upstairs.attributes.current_temperature
+          >=80 }}'
+      sequence:
+      - service: script.upstairs_cooldown
+        data: {}
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: awake
+        - condition: trigger
+          id: sleep_off
+      sequence:
+      - service: script.climate_upstairs_away
+        data: {}
+    default:
+    - service: script.climate_upstairs_resume
+      data: {}
+  mode: single
+- id: '1682565908555'
+  alias: 'Climate: Upstairs HVAC Schedule On'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - schedule.upstairs_hvac_away
+    to: 'on'
+    id: away
+  - platform: state
+    entity_id:
+    - schedule.upstairs_hvac_sleep
+    to: 'on'
+    id: sleep
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: away
+      sequence:
+      - service: script.climate_upstairs_away
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: sleep
+      sequence:
+      - service: script.climate_upstairs_sleep
+        data: {}
+  mode: single
+- id: '1682661453526'
+  alias: 'Climate: Awesome Weather'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.season
+    to: Awesome
+    for:
+      hours: 1
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: script.climate_downstairs_away
+    data: {}
+  - condition: template
+    value_template: '{{ states.climate.upstairs.attributes.current_temperature <=
+      79 }}'
+  - service: script.climate_upstairs_away
+    data: {}
+  - condition: time
+    after: 09:00:00
+    before: '21:00:00'
+  - service: notify.mobile_app_rcom
+    data:
+      title: Awesome Weather
+      message: It's {{ states('sensor.weatherflow_feels_like_temperature')|round }}
+        degrees outside. Time to open up the house!
+      data:
+        push:
+          sound:
+            name: default
   mode: single

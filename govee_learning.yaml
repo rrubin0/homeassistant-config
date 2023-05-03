@@ -3,3 +3,8 @@
   get_brightness_max: 100
   before_set_brightness_turn_on: false
   config_offline_is_off: false
+8B:CF:D5:32:38:31:71:32:
+  set_brightness_max:
+  get_brightness_max: 100
+  before_set_brightness_turn_on: false
+  config_offline_is_off: false

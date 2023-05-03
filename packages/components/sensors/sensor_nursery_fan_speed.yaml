@@ -8,7 +8,7 @@ sensor:
       nursery_fan_speed:
         friendly_name: "Nursery Fan Speed"
         value_template: >-
-          {% set temperature = states('sensor.nursery_temperature')|float(none) %}
+          {% set temperature = states('sensor.nursery_temperature') | float(76.2) %}
           {% if 74.0 <= temperature <=76.0 %}
             25
           {% elif 76.1 <= temperature <=79.0 %}

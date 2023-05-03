@@ -1,15 +1,15 @@
 #####################################################################
 ### Binary Sensor Humidor Triggers
 #####################################################################
-binary_sensor:
-  - platform: template
-    sensors:
-      humidor_low:
-        friendly_name: "Humidor Low"
-        value_template: "{{ states('sensor.humidor_humidity') < '70' }}"
-        delay_on:
-          minutes: 10
-        delay_off:
-          minutes: 1
-#        entity_id: sensor.humidor_humidity
-        device_class: moisture
+#binary_sensor:
+#  - platform: template
+#    sensors:
+#      humidor_low:
+#        friendly_name: "Humidor Ok"
+#        value_template: "{{ states('sensor.humidor_humidity') > '69' }}"
+#        delay_on:
+#          minutes: 1
+#        delay_off:
+#          minutes: 1
+##        entity_id: sensor.humidor_humidity
+#        device_class: moisture
